@@ -1,0 +1,447 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Structuring CSS - state of play in 2012 - Fabrizio (Fritz) Stelluto</title>
+	<meta name="author" content="">
+
+	
+	<meta name="description" content="There seem to be a growing consensus that some of CSS best practices are actually detrimental. Here&#8217;s a roundup of some discussions on the &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="Fabrizio (Fritz) Stelluto" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.ico" rel="shortcut icon">
+	<link rel="icon" href="/favicon.gif" type="image/gif" />
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	
+</head>
+
+
+<body ontouchstart="">
+
+  <header id="header" class="inner">
+<nav id="main-nav"><div>
+  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+  <a href="/">home</a>
+  <a href="/blog/">blog</a>
+</div></nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><div>
+  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+  <a href="/">home</a>
+  <a href="/blog/">blog</a>
+</div></div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="http://google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:gotofritz.net">
+			</form>
+		</div>
+	</div>
+</nav>
+
+<nav id="sub-nav" class="alignright">
+	<form class="search" action="http://google.com/search" method="get">
+		<input class="alignright" type="text" name="q" results="0">
+		<input type="hidden" name="q" value="site:gotofritz.net">
+	</form>
+</nav>
+
+</header>
+	
+		
+	
+	<div id="content" class="inner">
+    
+    <article class="post">
+	<h1 class="title">Structuring CSS - State of Play in 2012</h1>
+	<div>
+		<div class="meta">
+			<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-04-30T14:01:06+02:00" pubdate data-updated="true">2012-04-30, Mon</time></div>
+			<div class="tags">
+
+
+	<a class='category' href='/blog/cat/geekery/'>Geekery</a>
+
+
+</div>
+			
+				<span class="comments"><a href="/blog/geekery/structuring-css#disqus_thread">Comments</a></span>
+			
+		</div>
+		<div class="entry-content"><p>There seem to be a growing consensus that some of CSS best practices are actually detrimental. Here&#8217;s a roundup of some discussions on the issue.</p>
+
+<!--more-->
+
+
+<p>Structuring CSS has long been a struggle, due the limitations of the language. There seem to be a growing consensus that some of the best practices, particularly the admonition against &#8220;classitis&#8221; and introducing non-semantic elements, are actually detrimental. Here&#8217;s a round-up of some discussions on the issue.</p>
+
+<p>Before looking at semantics, a couple of reminders from back in the day about performance.</p>
+
+<h3>Performance Impact of CSS Selectors</h3>
+
+<dl class="code-breakdown">
+  <dt><a href="http://www.stevesouders.com/" title="[new window] Steve Souders - High Performance Web Sites" target="_blank">Steve Souders</a></dt>
+  <dd><a href="http://www.stevesouders.com/blog/2009/03/10/performance-impact-of-css-selectors/">Performance Impact of CSS Selectors</a><br>
+<a href="http://www.stevesouders.com/blog/2009/06/18/simplifying-css-selectors/">Simplifying CSS Selectors</a>
+</dd>
+</dl>
+
+
+<p>Two conclusions:</p>
+
+<blockquote><ul>
+<li><p>Based on these tests I have the following hypothesis: For most web sites, the possible performance gains from optimizing CSS selectors will be small, and are not worth the costs. There are some types of CSS rules and interactions with JavaScript that can make a page noticeably slower. This is where the focus should be</p></li>
+<li><p>The key to optimizing CSS selectors is to focus on the rightmost selector, also called the key selector</p></li>
+</ul>
+</blockquote>
+
+<h3>Writing efficient CSS</h3>
+
+<dl class="code-breakdown">
+  <dt>David Hyatt</dt>
+  <dd><a href="https://developer.mozilla.org/en-US/docs/CSS/Writing_Efficient_CSS" title="[new window] Writing efficient CSS - CSS | MDN" target="_blank">Writing efficient CSS</a></dd>
+</dl>
+
+
+<p>Main points (bear in mind, this is rather old):</p>
+
+<ul>
+<li><p>Matching rules are split into families - either tags, IDs, classes, universal. It&#8217;s more efficient if each selectors is in just one of these categories.</p></li>
+<li><p>Don&#8217;t qualify ids or classes with tag names - <code>a#home</code> or <code>a.sidebar</code>
+better: <code>#home</code> or <code>.sidebar</code></p></li>
+<li><p>Use the child selector instead of the descendant, but not for tags
+<code>.sidebar &gt; .home</code> but not <code>div &gt; a</code></p></li>
+<li><p>some rules are inherited by elements (e.g., list-style-image, font-size), make use of that</p></li>
+</ul>
+
+
+<p>And now, for some modern stuff.</p>
+
+<h3>CSS Selector Performance has changed! (For the better)</h3>
+
+<dl class="code-breakdown">
+  <dt><a href="http://www.stubbornella.org/content/" title="[new window] Stubbornella" target="_blank">Nicole Sullivan</a></dt>
+  <dd><a href="http://calendar.perfplanet.com/2011/css-selector-performance-has-changed-for-the-better/" title="[new window] Performance Calendar » CSS Selector Performance has changed! (For the better)" target="_blank">CSS Selector Performance has changed! (For the better)</a></dd>
+</dl>
+
+
+<p>Main points:</p>
+
+<ul>
+<li>Forget what David Hyatt said. That was a long time ago. CSS engine have now been optimized to the point where it makes no difference.</li>
+</ul>
+
+
+<h3>Profiling CSS for fun and profit. Optimization notes</h3>
+
+<dl class="code-breakdown">
+  <dt><a href="https://twitter.com/kangax/" title="[new window] kangax (kangax) on Twitter" target="_blank">Juriy Zaytsev</a></dt>
+  <dd><a href="http://perfectionkills.com/profiling-css-for-fun-and-profit-optimization-notes/" title="[new window] Perfection kills » Profiling CSS for fun and profit. Optimization notes." target="_blank">Profiling CSS for fun and profit. Optimization notes.</a></dd>
+</dl>
+
+
+<p>Main points:</p>
+
+<ul>
+<li><p>There are now tools to profile CSS in Opera and Webkit.</p></li>
+<li><p>Some selectors <em>are</em> slower than others - universal selectors, multiple classes and others</p></li>
+<li><p>The whole post is a summary of main points, no point in me summarizing it.</p></li>
+</ul>
+
+
+<h3>CSS for Grown Ups: Maturing Best Practices</h3>
+
+<p>This is my favourite of the lot.</p>
+
+<dl class="code-breakdown">
+  <dt><a href="http://andyhume.net/" title="[new window] Andy Hume" target="_blank">Andy Hume</a></dt>
+  <dd><a href="http://schedule.sxsw.com/2012/events/event_IAP9410" title="[new window] CSS for Grown Ups: Maturing Best Practices" target="_blank">CSS for Grown Ups: Maturing Best Practices (audio)</a><br>
+  <a href="https://speakerdeck.com/andyhume/css-for-grown-ups-maturing-best-practises" title="[new window] CSS for grown ups: maturing best practises // Speaker Deck" target="_blank">CSS for grown ups: maturing best practises (slides)</a></dd>
+</dl>
+
+
+<p>His main points:</p>
+
+<ul>
+<li><p>nothing wrong with &#8220;classitis&#8221; if it allows us to decouple the CSS from the HTML markup.</p></li>
+<li><p>the fewer tags in the CSS - the better. E.g., .social .link is better than .social a, because it is not reliant on specific <a href="http://www.w3.org/TR/CSS2/selector.html#type-selectors">type selectors</a></p></li>
+<li><p><a href="http://sass-lang.com/">Sass</a> / <a href="http://lesscss.org/">LESS</a> / <a href="http://learnboost.github.com/stylus/">Stylus</a> are all good tools, but are an extra step and can&#8217;t be removed easily from the stack if the problem they were trying to solve has gone away</p></li>
+<li><p><a href="http://oocss.org/">OOCSS</a> / <a href="http://smacss.com/">SMACSS</a> / <a href="http://csslint.net/">CSS Lint</a> are better, because they are approaches</p></li>
+<li><p>he advocates a multi-layered approach similar to SMACSS with layout, module, base, and document layers (missing the states and theme layers). The document layer is the HTML code.</p></li>
+<li><p>He advocates thinking more in term of modules and using CSS cascade rules to avoid too complex selectors. He uses a double slash convention to signify a selector should appear after another, e.g.</p></li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nc">.promo-box</span> <span class="p">{</span> <span class="o">....</span> <span class="p">}</span>
+</span><span class='line'><span class="nc">.promo-box--eco</span> <span class="p">{</span> <span class="c">/* need to be after promo-box */</span><span class="o">...</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li><p>advocates prefixing all selectors introduced by JavaScript with .js-</p></li>
+<li><p>A selector like <code>.promo-box h3</code> is bad because it mixes the module layer (.promo-box) with the document layer (h3). He&#8217;d replace it with <code>promo-box .promo-box-h</code></p></li>
+<li><p><code>h1 { font-size : 2em; } h2 { ... etc</code> is also bad - this mixes base and document. He suggests either using custom classes like <code>.h1 { ...</code> or something more typographic like <code>.masthead { ... }</code></p></li>
+<li><p>modules variations shouldn&#8217;t be associated with IDs of elements - e.g., <code>#sidebar .promo-box</code> is bad, better use <code>.promo-box { ... } .promo-box-light { ... }</code>. The same holds for page specific styles, i.e. when adding a class to the body element to signify a different page</p></li>
+<li><p>He doesn&#8217;t like the syntax for media queries for the same reason. Therefore he created <a href="https://github.com/ahume/selector-queries">selector-queries</a>, a JS tool to allow him to restructure his CSS more semantically</p></li>
+<li><p>He doesn&#8217;t mind small presentational classes such as <code>.margin-top { ... }, .gutter-left { ... }</code> etc.</p></li>
+<li><p>It&#8217;s a good idea to add extra semantic elements in the document when needed. For example, small icons like comment icons on blogs, instead of of being added to the container <code>&lt;p class="icon icon-comment"&gt;</code> should have their own semantic tag, and the icon style applied to that. Twitter bootstrap has made <em>i</em> a popular choice.</p></li>
+<li><p>He advocates writing online style guides with code samples. Good examples are <a href="https://github.com/twitter/bootstrap/">Twitter Bootstrap</a>, and <a href="http://paulrobertlloyd.com/about/styleguide/">Paul Robert Lloyd&#8217;s styleguide</a>. Plus he shows one he&#8217;s been working on, which looks quite good.</p></li>
+</ul>
+
+
+<h3>Our Best Practices Are Killing Us</h3>
+
+<dl class="code-breakdown">
+  <dt><a href="http://www.stubbornella.org/content/" title="[new window] Stubbornella" target="_blank">Nicole Sullivan</a></dt>
+  <dd>
+    <a href="http://talks.webstock.org.nz/speakers/nicole-sullivan/css-tools-massive-websites/" title="[new window] Nicole Sullivan - CSS Tools for Massive Websites" target="_blank">CSS Tools for Massive Websites (video)</a>
+    <br>
+    <a href="http://www.slideshare.net/stubbornella/our-best-practices-are-killing-us" title="[new window] Our Best Practices Are Killing Us" target="_blank">Our Best Practices Are Killing Us (slides)</a>
+  </dd>
+</dl>
+
+
+<p>Her main points:</p>
+
+<ul>
+<li><p>A little bit of classitis is not bad</p></li>
+<li><p>Counting specificity rules. For each CSS selector, count the number each of inline, IDs, classes (and pseudo classes), and elements (and pseudo elements), in that order. For example,
+<code>#sidebar ul li a.myclass:hover {}</code>  has: 1 ID, 2 classes, 3 elements, whereas
+<code>* {}</code>  has: 0 ID, 0 classes, 0 elements, hence it &#8216;loses&#8217;</p></li>
+<li><p>!important adds another stack of ID, classes, elements to the left of everything, so the specificity stack becomes:
+ID !important, classes !important, element !important, inline, ID, classes, important, element.</p></li>
+<li><p>Not keen on preprocessors, but there are some good ideas in there that are becoming part of the CSS Working Group</p></li>
+</ul>
+
+
+<h3>Top 5 Mistakes of Massive CSS</h3>
+
+<dl class="code-breakdown">
+  <dt style="white-space:normal"><a href="http://www.stubbornella.org/content/" title="[new window] Stubbornella" target="_blank">Nicole Sullivan</a><br>
+  <a href="http://www.phpied.com/" title="[new window] Stoyan's web dev blog: phpied.com" target="_blank">Stoyan Stephanov</a></dt>
+  <dd><a href="http://www.stubbornella.org/content/2010/07/01/top-5-mistakes-of-massive-css/" title="[new window] Stubbornella » Blog Archive » Top 5 Mistakes of Massive CSS" target="_blank">Top 5 Mistakes of Massive CSS (video)</a></dd>
+</dl>
+
+
+<p>Their main points:</p>
+
+<ul>
+<li><p>Print style sheets often slow down rendering even though they are not used</p></li>
+<li><p>Used a small PHP script to open files in IE. The script creates a new COM( &#8220;InternetExplorer.Application&#8221; );</p></li>
+<li><p>A lot of sites neither GZip, nor minify nor combine CSS files.</p></li>
+<li><p>Serving CSS files (and images) with cookies is pointless</p></li>
+<li><p>Advocates Object Oriented CSS. Basically abstract UI elements into patterns. Note that CSS objects != JS or backend objects.</p></li>
+<li><p>Use star and underscores hack, if you have to</p></li>
+<li><p>Avoid IDs, style classes only</p></li>
+<li><p>Avoid !important, although they are ok for mixins -  but not too many</p></li>
+<li><p>When optimizing existing CSS, use grep to look out for:</p>
+
+<ul>
+<li><p>floats - too many is a symptom of a bad grid</p></li>
+<li><p>margin / padding - they can often be abstracted</p></li>
+<li><p>font-size - there are only a few readable font-size actually used on a site, and nobody notices 1px differences</p></li>
+</ul>
+</li>
+</ul>
+
+
+<h3>Help! My Stylesheets are a Mess!</h3>
+
+<dl class="code-breakdown">
+  <dt><a href="https://twitter.com/chriseppstein" title="[new window] Chris Eppstein (chriseppstein) on Twitter" target="_blank">Chris Eppstein</a></dt>
+  <dd><a href="https://speakerdeck.com/chriseppstein/help-my-stylesheets-are-a-mess" title="[new window] Help! My Stylesheets are a Mess! // Speaker Deck" target="_blank">Help! My Stylesheets are a Mess! (slides)</a></dd>
+</dl>
+
+
+<p>He says&#8230;</p>
+
+<ul>
+<li><p>Classitis is not so bad after all</p></li>
+<li><p>Advocates no less many layers: grid, layout, background, container, spacers, typography, foreground, margin / padding, widgets, theming</p></li>
+<li><p>Advocates naming styles together with designers</p></li>
+</ul>
+
+
+<h3>About HTML semantics and front-end architecture</h3>
+
+<dl class="code-breakdown">
+  <dt><a href="http://nicolasgallagher.com/about/" title="[new window] About – Nicolas Gallagher" target="_blank">Nicolas Gallagher</a></dt>
+  <dd><a href="http://nicolasgallagher.com/about-html-semantics-front-end-architecture/" title="[new window] About HTML semantics and front-end architecture – Nicolas Gallagher" target="_blank">About HTML semantics and front-end architecture</a></dd>
+</dl>
+
+
+<p>His main points:</p>
+
+<ul>
+<li><p>Pretty much echoes what Andy Hume said</p></li>
+<li><p>advocates prefixing all selectors introduced by JavaScript with .js-</p></li>
+<li><p>finds the Twitter Bootstrap practice of using universal CSS selectors, e.g. <code>[class*="btn-"] {</code> risky. Instead he prefers multiple classes, e.g. <code>.btn .btn-close {</code></p></li>
+<li><p>long class names or multiple selectors don&#8217;t really matter after CSS files are minimized and GZipped. Removing 30000 class names from a file only removed 1.6k after compression</p></li>
+<li><p>he advocates <a href="https://gist.github.com/1309546">structured class names</a>, somewhat similar to <a href="http://bem.github.com/bem-method/pages/beginning/beginning.en.html">BEM</a></p></li>
+</ul>
+
+
+<h3>Measuring and sizing UIs, 2011-style</h3>
+
+<dl class="code-breakdown">
+  <dt><a href="https://twitter.com/csswizardry" title="[new window] Harry Roberts (csswizardry) on Twitter" target="_blank">Harry Roberts</a></dt>
+  <dd><a href="http://csswizardry.com/2011/12/measuring-and-sizing-uis-2011-style/" title="[new window] Measuring and sizing UIs, 2011-style (and beyond) – CSS Wizardry – CSS, OOCSS, front-end architecture, performance and more, by Harry Roberts" target="_blank">Measuring and sizing UIs, 2011-style (and beyond)</a></dd>
+</dl>
+
+
+<p>His main points:</p>
+
+<ul>
+<li><p>Use percentages for main layout sections</p></li>
+<li><p>Use no units on any module / widget</p></li>
+<li><p>Use rems with a pixel fallback for fonts</p></li>
+<li><p><a href="http://meyerweb.com/eric/thoughts/2006/02/08/unitless-line-heights/">Unitless line-heights</a></p></li>
+<li><p>pixels only for external icons and the like</p></li>
+</ul>
+
+
+<h3>BEM</h3>
+
+<dl class="code-breakdown">
+  <dt>Yandex</dt>
+  <dd><a href="http://bem.info/" title="[new window] BEM: Methodology of Effective Site Development" target="_blank">BEM</a><br>
+  <a href="http://coding.smashingmagazine.com/2012/04/16/a-new-front-end-methodology-bem/" title="[new window] A New Front-End Methodology: BEM | Smashing Coding" target="_blank">A New Front-End Methodology: BEM</a></dd>
+</dl>
+
+
+<p>I think BEM is taking things way too far, but it may make sense in some scenarios.</p>
+</div>
+	</div>
+</article>
+
+<article class="archives">
+  <div class="related-posts">
+    <h2>Related Posts</h2>
+    
+      <article>
+        <h3 class="title"><a href="/blog/link/links-2012-03-12">Links, 2012-03-12</a></h3>
+        <div class="meta">
+          <span class="tags">
+
+
+	<a class='category' href='/blog/cat/link/'>Link</a>
+
+
+</span>
+            
+          <time datetime="2012-04-30T14:01:06+02:00" pubdate>2012-04-30</time>
+            
+        </div>
+      </article>
+    
+      <article>
+        <h3 class="title"><a href="/blog/geekery/javscript-performance-mythbuster-summary">Javscript Performance Mythbuster summary</a></h3>
+        <div class="meta">
+          <span class="tags">
+
+
+	<a class='category' href='/blog/cat/geekery/'>Geekery</a>
+
+
+</span>
+            
+          <time datetime="2012-04-30T14:01:06+02:00" pubdate>2012-04-30</time>
+            
+        </div>
+      </article>
+    
+      <article>
+        <h3 class="title"><a href="/blog/geekery/storing-ids-manually-is-faster-than-getelementbyid">Storing IDs manually is faster than getElementById</a></h3>
+        <div class="meta">
+          <span class="tags">
+
+
+	<a class='category' href='/blog/cat/geekery/'>Geekery</a>
+
+
+</span>
+            
+          <time datetime="2012-04-30T14:01:06+02:00" pubdate>2012-04-30</time>
+            
+        </div>
+      </article>
+    
+  </div>
+</article>
+
+
+<section id="comment">
+    <h1 class="title">Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+
+    
+  </div>
+	<footer id="footer" class="inner">Copyright &copy; 2014
+
+    Fabrizio (Fritz) Stelluto
+
+</footer>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="/javascripts/slash.js"></script>
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'goto-fritz';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://gotofritz.net/blog/geekery/structuring-css';
+        var disqus_url = 'http://gotofritz.net/blog/geekery/structuring-css';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-11254155-2']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,240 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Install a specific version of a tool on OS X with Homebrew - Fabrizio (Fritz) Stelluto</title>
+	<meta name="author" content="">
+
+	
+	<meta name="description" content="Sometimes you need to install an older version of a package with Homebrew. Here&#8217;s how I installed version 1.7.10 of Subversion. Why? I couldn&# &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="Fabrizio (Fritz) Stelluto" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.ico" rel="shortcut icon">
+	<link rel="icon" href="/favicon.gif" type="image/gif" />
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	
+</head>
+
+
+<body ontouchstart="">
+
+  <header id="header" class="inner">
+<nav id="main-nav"><div>
+  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+  <a href="/">home</a>
+  <a href="/blog/">blog</a>
+</div></nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><div>
+  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+  <a href="/">home</a>
+  <a href="/blog/">blog</a>
+</div></div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="http://google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:gotofritz.net">
+			</form>
+		</div>
+	</div>
+</nav>
+
+<nav id="sub-nav" class="alignright">
+	<form class="search" action="http://google.com/search" method="get">
+		<input class="alignright" type="text" name="q" results="0">
+		<input type="hidden" name="q" value="site:gotofritz.net">
+	</form>
+</nav>
+
+</header>
+	
+		
+	
+	<div id="content" class="inner">
+    
+    <article class="post">
+	<h1 class="title">Install a Specific Version of a Tool on OS X With Homebrew</h1>
+	<div>
+		<div class="meta">
+			<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-17T12:40:00+02:00" pubdate data-updated="true">2013-07-17, Wed</time></div>
+			<div class="tags">
+
+
+	<a class='category' href='/blog/cat/geekery/'>Geekery</a>
+
+
+</div>
+			
+				<span class="comments"><a href="/blog/geekery/install-specific-version-homebrew/#disqus_thread">Comments</a></span>
+			
+		</div>
+		<div class="entry-content"><p>Sometimes you need to install an older version of a package with <a href="http://mxcl.github.io/homebrew/" title="[new window] Homebrew — MacPorts driving you to drink? Try Homebrew!" target="_blank">Homebrew</a>. Here&#8217;s how I installed version 1.7.10 of Subversion.</p>
+
+<!--more-->
+
+
+<h2>Why?</h2>
+
+<p>I couldn&#8217;t connect to my company&#8217;s repository using the latest 1.8.0 - svn failed with the message <code>svn: E120171: Error running context: An error occurred during SSL communication</code>. A quick <a href="https://duckduckgo.com/" title="[new window] Search DuckDuckGo - they respect your privacy, unlike google" target="_blank">DuckDuckGo</a> (gosh that&#8217;s a mouthful) took me to <a href="https://groups.google.com/forum/#!topic/subversion-development/13KWf3N2myk" title="[new window] RE: svn commit: r1501049 - in /subversion/trunk/subversion: include/svn_error_codes.h libsvn_ra_serf/util_error.c - Google Groups" target="_blank">some mail group where Subversion developers bicker among themselves</a>, but no solution. So I went down to a known stabler version.</p>
+
+<p>All the information here comes from <a href="http://stackoverflow.com/questions/3987683/homebrew-install-specific-version-of-formula" title="[new window] Homebrew install specific version of formula? - Stack Overflow" target="_blank">this SO answer</a>.</p>
+
+<h2>Uninstall the previous version</h2>
+
+<p>Make sure you don&#8217;t have an old version of the package installed:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>brew uninstall svn
+</span><span class='line'><span class="nv">$ </span>sudo mv /usr/bin/svn /usr/bin/svn1.6
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In the case of svn, I also needed to remove the version that comes by default with OS X, as Homebrew is not able to unlink the two.</p>
+
+<h2>Find out how old versions are called</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>brew search subversion
+</span><span class='line'>subversion
+</span><span class='line'>homebrew/versions/subversion16  homebrew/versions/subversion17
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The above tells you what svn packages are available. Note that searching for <code>svn</code> instead of <code>subversion</code> returns the current version only for some reason.
+So that tells me that svn 1.7.something is called <code>subversion17</code> in Homebrew world, and it can be found into <code>versions</code></p>
+
+<h2>Install old versions</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>brew tap homebrew/versions
+</span><span class='line'>Cloning into <span class="s1">&#39;/usr/local/Library/Taps/homebrew-versions&#39;</span>...
+</span><span class='line'>remote: Counting objects: 1022, <span class="k">done</span>.
+</span><span class='line'>remote: Compressing objects: 100% <span class="o">(</span>566/566<span class="o">)</span>, <span class="k">done</span>.
+</span><span class='line'>remote: Total 1022 <span class="o">(</span>delta 585<span class="o">)</span>, reused 873 <span class="o">(</span>delta 456<span class="o">)</span>
+</span><span class='line'>Receiving objects: 100% <span class="o">(</span>1022/1022<span class="o">)</span>, 250.05 KiB | 428 KiB/s, <span class="k">done</span>.
+</span><span class='line'>Resolving deltas: 100% <span class="o">(</span>585/585<span class="o">)</span>, <span class="k">done</span>.
+</span><span class='line'>Tapped 98 formula
+</span><span class='line'>
+</span><span class='line'><span class="nv">$ </span>brew install <span class="nv">subversion17</span>
+</span><span class='line'><span class="o">==</span>&gt; Downloading http://www.apache.org/dyn/closer.cgi?path<span class="o">=</span>subversion/subversion-1.7.10.tar.bz2
+</span><span class='line'>Already downloaded: /Library/Caches/Homebrew/subversion17-1.7.10.tar.bz2
+</span><span class='line'><span class="o">==</span>&gt; ./configure --prefix<span class="o">=</span>/usr/local/Cellar/subversion17/1.7.10 --with-apr<span class="o">=</span>/usr/bin --with-ssl --with-zlib<span class="o">=</span>/usr --with-sqlite<span class="o">=</span>/usr/local/opt/sqlite --with-serf<span class="o">=</span>/usr/local/opt/serf --disable-neon-version-check --disable-mod-activation --disable-nls --without-apache-libexecdir --without-berkel
+</span><span class='line'><span class="o">==</span>&gt; <span class="nv">make</span>
+</span><span class='line'><span class="o">==</span>&gt; make <span class="nv">install</span>
+</span><span class='line'><span class="o">==</span>&gt; make <span class="nv">tools</span>
+</span><span class='line'><span class="o">==</span>&gt; make install-tools
+</span><span class='line'><span class="o">==</span>&gt; Caveats
+</span><span class='line'>Bash completion has been installed to:
+</span><span class='line'>  /usr/local/etc/bash_completion.d
+</span><span class='line'><span class="o">==</span>&gt; Summary
+</span><span class='line'>/usr/local/Cellar/subversion17/1.7.10: 106 files, 7.7M, built in 3.1 minutes
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Before you install a version you need to enable the whole &#8220;getting old versions&#8221; thing - you do that with the <code>tap</code> command. Afterwards, it&#8217;s just a matter of installing the package I found earlier.</p>
+
+<h2>That&#8217;s it</h2>
+
+<p>Job done.</p>
+</div>
+	</div>
+</article>
+
+
+<section id="comment">
+    <h1 class="title">Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+
+    
+  </div>
+	<footer id="footer" class="inner">Copyright &copy; 2014
+
+    Fabrizio (Fritz) Stelluto
+
+</footer>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="/javascripts/slash.js"></script>
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'goto-fritz';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://gotofritz.net/blog/geekery/install-specific-version-homebrew/';
+        var disqus_url = 'http://gotofritz.net/blog/geekery/install-specific-version-homebrew/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-11254155-2']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+</body>
+</html>

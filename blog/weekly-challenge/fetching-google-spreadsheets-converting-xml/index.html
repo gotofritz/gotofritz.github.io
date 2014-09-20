@@ -1,0 +1,940 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Fetching Google Spreadsheets as XML - Fabrizio (Fritz) Stelluto</title>
+	<meta name="author" content="">
+
+	
+	<meta name="description" content="The challenge this week: using python to fetch Google Spreadsheets and converting them to XML. Other posts in this series part 1: Managing XML Files &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="Fabrizio (Fritz) Stelluto" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.ico" rel="shortcut icon">
+	<link rel="icon" href="/favicon.gif" type="image/gif" />
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	
+</head>
+
+
+<body ontouchstart="">
+
+  <header id="header" class="inner">
+<nav id="main-nav"><div>
+  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+  <a href="/">home</a>
+  <a href="/blog/">blog</a>
+</div></nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><div>
+  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+  <a href="/">home</a>
+  <a href="/blog/">blog</a>
+</div></div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="http://google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:gotofritz.net">
+			</form>
+		</div>
+	</div>
+</nav>
+
+<nav id="sub-nav" class="alignright">
+	<form class="search" action="http://google.com/search" method="get">
+		<input class="alignright" type="text" name="q" results="0">
+		<input type="hidden" name="q" value="site:gotofritz.net">
+	</form>
+</nav>
+
+</header>
+	
+		
+	
+	<div id="content" class="inner">
+    
+    <article class="post">
+	<h1 class="title">Fetching Google Spreadsheets as XML</h1>
+	<div>
+		<div class="meta">
+			<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-03-09T13:17:35+01:00" pubdate data-updated="true">2012-03-09, Fri</time></div>
+			<div class="tags">
+
+
+	<a class='category' href='/blog/cat/weekly-challenge/'>Weekly Challenge</a>
+
+
+</div>
+			
+				<span class="comments"><a href="/blog/weekly-challenge/fetching-google-spreadsheets-converting-xml#disqus_thread">Comments</a></span>
+			
+		</div>
+		<div class="entry-content"><p>The challenge this week: using python to fetch Google Spreadsheets and converting them to XML.</p>
+
+<!--more-->
+
+
+<p><nav class="related-posts" id="multipart" markdown="1">
+  <h2>Other posts in this series</h2></p>
+
+<ul>
+<li><a href="/blog/weekly-challenge/managing-xml-files-sublime-text-2/">part 1</a>: Managing XML Files With Sublime Text 2</li>
+<li><a href="/blog/weekly-challenge/fetching-google-spreadsheets-converting-xml/">part 2</a>: Fetching Google Spreadsheets as XML</li>
+<li><a href="/blog/weekly-challenge/fetching-google-spreadsheets-converting-xml/">part 3</a>: Transforming plists into XML</li>
+<li><a href="/blog/weekly-challenge/restful-python-api-bottle/">part 4</a>: creating a RESTful Python API With Bottle
+</nav></li>
+</ul>
+
+
+<h2>About the challenge</h2>
+
+<p>This is part of an ongoing project, a simple <a href="#multipart" title="jump down to list of all the parts in the series">recipe manager</a>. So far I have a bunch of recipes, saved as XML on a local machine. I can serve them to a browser on my local machine and use XSLT to make them printable. Now I want to convert some recipes from other formats and locations to the same XML schema and local folder.</p>
+
+<p>The final script is <a href="https://github.com/gotofritz/Weekly-Challenges/tree/master/weekly-challenge-14_recipes_googlecl">available on GitHub</a>.</p>
+
+<h2>Converting Google Spreadsheets to XML</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='gherkin'><span class='line'><span class="k">Feature:</span><span class="nf"> Converting Google Spreadsheets to XML</span>
+</span><span class='line'><span class="nf">    In order to consolidate recipe data</span>
+</span><span class='line'><span class="nf">    As a geeky recipe author</span>
+</span><span class='line'><span class="nf">    I need to fetch recipes from Google Docs and convert them</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>First stop, Google Spreadsheets then.</p>
+
+<h3>Fetching a bunch of Google spreadsheets with googlecl</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='gherkin'><span class='line'><span class="k">Scenario:</span><span class="nf"> Fetching a bunch of Google spreadsheets with googlecl</span>
+</span><span class='line'><span class="k">    Given </span><span class="nf">that I have googlecl installed</span>
+</span><span class='line'><span class="nf">    </span><span class="k">And </span><span class="nf">I have </span><span class="nv">&lt;spreadsheets&gt;</span><span class="nf"> in </span><span class="nv">&lt;folder&gt;</span><span class="nf"> in </span><span class="nv">&lt;Google Docs account&gt;</span><span class="nf"></span>
+</span><span class='line'><span class="nf">    </span><span class="k">When </span><span class="nf">I start up googlecl</span>
+</span><span class='line'><span class="nf">    </span><span class="k">And </span><span class="nf">run coomand &quot;</span><span class="s">docs get --folder </span><span class="nv">&lt;folder&gt;</span><span class="s"> --dest </span><span class="nv">&lt;destination&gt;</span><span class="s"> --format </span><span class="nv">&lt;format&gt;</span><span class="nf">&quot;</span>
+</span><span class='line'><span class="nf">    </span><span class="k">Then </span><span class="nv">&lt;destination&gt;</span><span class="nf"> on my local machine should include </span><span class="nv">&lt;downloaded&gt;</span><span class="nf"></span>
+</span><span class='line'>
+</span><span class='line'><span class="k">Examples:</span>
+</span><span class='line'><span class="k">    |</span><span class="nv"> spreadsheets</span><span class="k">               |</span><span class="nv"> folder</span><span class="k">  |</span><span class="nv"> destination</span><span class="k">    |</span><span class="nv"> format</span><span class="k"> |</span><span class="nv"> downloaded</span><span class="k">                                |</span><span class="nf"></span>
+</span><span class='line'><span class="k">    |</span><span class="s"> Tuna, Pasta, Cornish Pasty</span><span class="k"> |</span><span class="s"> Recipes</span><span class="k"> |</span><span class="s"> ~/Recipes_ods</span><span class="k">  |</span><span class="s"> ods</span><span class="k">    |</span><span class="s"> Tuna.ods, Pasta.ods, Cornish Pasty.ods</span><span class="k">    |</span><span class="nf"></span>
+</span><span class='line'><span class="k">    |</span><span class="s"> Tuna, Pasta, Cornish Pasty</span><span class="k"> |</span><span class="s"> Recipes</span><span class="k"> |</span><span class="s"> ~/Recipes_csv</span><span class="k">  |</span><span class="s"> csv</span><span class="k">    |</span><span class="s"> Tuna.csv, Pasta.csv, Cornish Pasty.csv</span><span class="k">    |</span><span class="nf"></span>
+</span><span class='line'><span class="k">    |</span><span class="s"> Tuna, Pasta, Cornish Pasty</span><span class="k"> |</span><span class="s"> Recipes</span><span class="k"> |</span><span class="s"> ~/Recipes_html</span><span class="k"> |</span><span class="s"> html</span><span class="k">   |</span><span class="s"> Tuna.html, Pasta.html, Cornish Pasty.html</span><span class="k"> |</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><a href="http://code.google.com/p/googlecl/wiki/Manual#Docs">googlecl</a> is a very useful command line tool built in Python to perform basic actions on Google services (Docs, Picasa, Calendar, etc). I had already installed that using easy_install as per the instructions, and it survived my upgrade to Python 2.7.2.</p>
+
+<p>googlecl can download documents either by name, or by folder name, so I needed to make sure they were in the same folder. That was easily done by searching through all my docs for the word &#8216;ingredient&#8217; and moving the results to a single folder called, strangely enough, &#8216;Recipes&#8217;.</p>
+
+<p>Next I needed to decide on a download format. The <a href="http://support.google.com/docs/bin/answer.py?hl=en&amp;answer=49115">supported Google Docs export formats</a> are CSV, HTML, ODS, PDF, XLS, TXT, which in practice  meant a choice between CSV, HTML, and ODS. I downloaded them in all three formats, in three different folders, using the commands <code>google #</code> to start off googlecl</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='gherkin'><span class='line'><span class="nf">$ google</span>
+</span><span class='line'><span class="nf">&gt; docs get --folder Recipes --dest ~/Recipes_ods --format ods</span>
+</span><span class='line'><span class="nf">&gt; docs get --folder Recipes --dest ~/Recipes_csv --format csv</span>
+</span><span class='line'><span class="nf">&gt; docs get --folder Recipes --dest ~/Recipes_html --format html</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Generating simple XML from spreadsheet data</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='gherkin'><span class='line'><span class="k">Scenario:</span><span class="nf"> Generating simple XML from spreadsheet data</span>
+</span><span class='line'><span class="k">    Given </span><span class="nf">that I have downloaded </span><span class="nv">&lt;file&gt;</span><span class="nf"></span>
+</span><span class='line'><span class="nf">    </span><span class="k">And </span><span class="nf">the file contains a </span><span class="nv">&lt;row of lines&gt;</span><span class="nf"></span>
+</span><span class='line'><span class="nf">    </span><span class="k">When </span><span class="nf">I parse it with the python script</span>
+</span><span class='line'><span class="nf">    </span><span class="k">Then </span><span class="nv">&lt;xmlsfile&gt;</span><span class="nf"> should be created in the recipes folder</span>
+</span><span class='line'><span class="nf">    </span><span class="k">And </span><span class="nf">it should have the following structure</span>
+</span><span class='line'><span class="nf">    </span><span class="k">&quot;&quot;&quot;</span><span class="s"></span>
+</span><span class='line'><span class="s">    </span><span class="nv">&lt;recipe lang=&quot;en-uk&quot;&gt;</span><span class="s"></span>
+</span><span class='line'><span class="s">        </span><span class="nv">&lt;![CDATA[</span>
+</span><span class='line'><span class="nv">            &lt;row of lines&gt;</span><span class="s"></span>
+</span><span class='line'><span class="s">        ]]&gt;</span>
+</span><span class='line'><span class="s">    </span><span class="nv">&lt;/recipe&gt;</span><span class="s"></span>
+</span><span class='line'><span class="s">    </span><span class="k">&quot;&quot;&quot;</span><span class="nf"></span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now for the conversion. First step, prove I can read the data, and include it in a valid XML document. I have three possible input formats to choose from.</p>
+
+<p>HTML looks like an interesting format - assuming it is well formed (in the XML sense), in theory I could simply XSL-transform it to the same XML schema as the other recipes. But it turns out Google Docs use HTML 5 and not XHTML5, as some attributes have no quotation marks. So they are not valid XML and there is no quick fix there.</p>
+
+<p>ODS is another option. It is nothing but a zip file, unzip it and it turns out to be a folder. Conveniently, the data is in a document called content.xml at the top level. Not so conveniently, the data structure is quite involved, and not something I&#8217;d like to tackle for a quick job.</p>
+
+<p>So in the end I settled on CSV. It is easily handled by Python, that comes with a CSV module built in. CSV has one main drawback, namely it only export the first sheet, but the first sheet is where most of my recipe data is, so that&#8217;s ok. Almost.</p>
+
+<p>The script below will use the csv module to read the file, and then simply create an XML file by the same name.</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="c">#! /usr/bin/env python</span>
+</span><span class='line'>
+</span><span class='line'><span class="kn">import</span> <span class="nn">csv</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">re</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">os</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">csv</span><span class="o">.</span><span class="n">register_dialect</span><span class="p">(</span><span class="s">&#39;custom&#39;</span><span class="p">,</span>
+</span><span class='line'>                     <span class="n">delimiter</span><span class="o">=</span><span class="s">&#39;,&#39;</span><span class="p">,</span>
+</span><span class='line'>                     <span class="n">doublequote</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+</span><span class='line'>                     <span class="n">escapechar</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+</span><span class='line'>                     <span class="n">quotechar</span><span class="o">=</span><span class="s">&#39;&quot;&#39;</span><span class="p">,</span>
+</span><span class='line'>                     <span class="n">quoting</span><span class="o">=</span><span class="n">csv</span><span class="o">.</span><span class="n">QUOTE_MINIMAL</span><span class="p">,</span>
+</span><span class='line'>                     <span class="n">skipinitialspace</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">input_directory</span>  <span class="o">=</span> <span class="s">&quot;/PTH/TO/in&quot;</span>
+</span><span class='line'><span class="n">output_directory</span> <span class="o">=</span> <span class="s">&#39;/PTH/TO/out&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">def</span> <span class="nf">main</span><span class="p">(</span> <span class="n">input_dir</span><span class="p">,</span> <span class="n">output_dir</span> <span class="p">):</span>
+</span><span class='line'>    <span class="sd">&quot;&quot;&quot;Processes all the csv files in a directory, and generates an XML file for each of them.</span>
+</span><span class='line'>
+</span><span class='line'><span class="sd">    Keyword arguments:</span>
+</span><span class='line'><span class="sd">    input_dir   -- where to get the input csv files from</span>
+</span><span class='line'><span class="sd">    output_dir  -- where to save the output xml files to</span>
+</span><span class='line'>
+</span><span class='line'><span class="sd">    &quot;&quot;&quot;</span>
+</span><span class='line'>    <span class="n">postfix</span> <span class="o">=</span> <span class="s">&quot;csv&quot;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">for</span> <span class="n">csv_file</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span> <span class="n">input_dir</span> <span class="p">):</span>
+</span><span class='line'>        <span class="k">if</span> <span class="ow">not</span> <span class="n">csv_file</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span> <span class="n">postfix</span> <span class="p">):</span>
+</span><span class='line'>            <span class="k">continue</span>
+</span><span class='line'>        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span> <span class="n">input_dir</span> <span class="p">,</span> <span class="n">csv_file</span> <span class="p">),</span> <span class="s">&#39;rb&#39;</span> <span class="p">)</span> <span class="k">as</span> <span class="n">file_obj</span><span class="p">:</span>
+</span><span class='line'>            <span class="n">xml_content</span> <span class="o">=</span> <span class="n">spreadsheet_read</span><span class="p">(</span> <span class="n">file_obj</span> <span class="p">)</span>
+</span><span class='line'>            <span class="n">xml_file</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span> <span class="s">r&#39;\.</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">postfix</span><span class="p">,</span> <span class="s">&quot;.xml&quot;</span><span class="p">,</span> <span class="n">csv_file</span> <span class="p">)</span>
+</span><span class='line'>        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span> <span class="n">output_dir</span> <span class="p">,</span> <span class="n">xml_file</span> <span class="p">)</span> <span class="p">,</span><span class="s">&#39;wb&#39;</span> <span class="p">)</span> <span class="k">as</span> <span class="n">file_obj</span><span class="p">:</span>
+</span><span class='line'>            <span class="n">file_obj</span><span class="o">.</span><span class="n">write</span><span class="p">(</span> <span class="n">recipe_print</span><span class="p">(</span> <span class="n">xml_content</span> <span class="p">)</span> <span class="p">)</span>
+</span><span class='line'>    <span class="k">return</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="k">def</span> <span class="nf">spreadsheet_read</span><span class="p">(</span> <span class="n">spreadsheet_file</span> <span class="p">):</span>
+</span><span class='line'>    <span class="sd">&quot;&quot;&quot;Extract metadata, ingredient list, and directions from a csv file</span>
+</span><span class='line'>
+</span><span class='line'><span class="sd">    Keyword arguments:</span>
+</span><span class='line'><span class="sd">    spreadsheet_file --  a file handler</span>
+</span><span class='line'>
+</span><span class='line'><span class="sd">    return a copy of the input</span>
+</span><span class='line'>
+</span><span class='line'><span class="sd">    &quot;&quot;&quot;</span>
+</span><span class='line'>    <span class="n">recipe</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>                              <span class="c">#the steps, returned</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">spreadsheet</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictReader</span><span class="p">(</span><span class="n">spreadsheet_file</span><span class="p">,</span> <span class="n">dialect</span><span class="o">=</span><span class="s">&#39;custom&#39;</span><span class="p">)</span>
+</span><span class='line'>    <span class="c">#oreoprocesses data</span>
+</span><span class='line'>    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">spreadsheet</span><span class="p">:</span>
+</span><span class='line'>        <span class="n">recipe</span> <span class="o">+=</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span>
+</span><span class='line'>        <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">row</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+</span><span class='line'>            <span class="n">recipe</span> <span class="o">+=</span> <span class="n">k</span> <span class="o">+</span> <span class="s">&quot;: &quot;</span> <span class="o">+</span> <span class="p">(</span> <span class="n">v</span> <span class="ow">or</span> <span class="s">&quot;-&quot;</span> <span class="p">)</span> <span class="o">+</span> <span class="s">&quot;</span><span class="se">\t</span><span class="s">&quot;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">return</span> <span class="n">recipe</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="k">def</span> <span class="nf">recipe_print</span><span class="p">(</span> <span class="n">content</span> <span class="p">):</span>
+</span><span class='line'>    <span class="sd">&quot;&quot;&quot;The string wrapped into an XML document.</span>
+</span><span class='line'>
+</span><span class='line'><span class="sd">    Keyword arguments:</span>
+</span><span class='line'><span class="sd">    content  -- a string</span>
+</span><span class='line'>
+</span><span class='line'><span class="sd">    return a copy of the input</span>
+</span><span class='line'>
+</span><span class='line'><span class="sd">    &quot;&quot;&quot;</span>
+</span><span class='line'>    <span class="nb">str</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;yes&quot;?&gt;</span>
+</span><span class='line'><span class="s">&lt;?xml-stylesheet type=&quot;text/xsl&quot; href=&quot;_assets/recipe.xsl&quot;?&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="s">&lt;recipe lang=&quot;en-uk&quot;&gt;&quot;&quot;&quot;</span>
+</span><span class='line'>    <span class="nb">str</span> <span class="o">+=</span>  <span class="s">&quot;&lt;![CDATA[&quot;</span> <span class="o">+</span> <span class="n">content</span> <span class="o">+</span> <span class="s">&quot;]]&gt;</span><span class="se">\n</span><span class="s">&quot;</span>
+</span><span class='line'>    <span class="nb">str</span> <span class="o">+=</span>  <span class="s">&quot;&lt;/recipe&gt;&quot;</span>
+</span><span class='line'>    <span class="k">return</span> <span class="nb">str</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&quot;__main__&quot;</span><span class="p">:</span>
+</span><span class='line'>    <span class="n">main</span><span class="p">(</span> <span class="n">input_directory</span><span class="p">,</span> <span class="n">output_directory</span> <span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The script runs a function called main - the <strong>name</strong> == &#8221;<strong>main</strong>&#8221; at the bottom allows the script to be run standalone or imported as a module in another script (not that that&#8217;s relevant here, but still). main loops over the csv files in input_directory,  runs spreadsheet_read on it to fetch and process its contents, and then passes those contents to recipe_print to create an XML file of it.</p>
+
+<p>spreadsheet_read fetches each row of the spreadsheet in turn as a dictionary object, and serializes it the fastest possible way to show it works. recipe_print does nothing more than wrap a string in a CDATA node.</p>
+
+<h3>Converting CSV data to XML</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='gherkin'><span class='line'><span class="k">Scenario:</span><span class="nf"> Converting CSV data to XML</span>
+</span><span class='line'><span class="k">    Given </span><span class="nf">that I have </span><span class="nv">&lt;XML schema&gt;</span><span class="nf"></span>
+</span><span class='line'><span class="nf">    </span><span class="k">When </span><span class="nf">I call recipe_print passing dictionaries </span><span class="nv">&lt;meta&gt;</span><span class="nf">, </span><span class="nv">&lt;ingredients&gt;</span><span class="nf">, </span><span class="nv">&lt;directions&gt;</span><span class="nf"></span>
+</span><span class='line'><span class="nf">    </span><span class="k">Then </span><span class="nv">&lt;xmlsfile&gt;</span><span class="nf"> should be created in the recipes folder</span>
+</span><span class='line'><span class="nf">    </span><span class="k">And </span><span class="nf">it should be compatible with the schema</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now that I know I can convert data from CSV to XML, I focus on generating the right kind of XML. There is a slight issue here as due to a botched Python upgrade I seem to be unable to install 2.7.2 modules, so using the <a href="http://lxml.de/">lxml Python library</a> is not an option. Therefore I couldn&#8217;t create the XML by creating an XML tree and adding nodes to it. Instead, I had to create functions to create the type of nodes I needed as strings. I ended up creating functions to format nodes as string.</p>
+
+<p>The functions below will gnerate various XML tags.</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">TAB</span> <span class="o">=</span> <span class="s">&quot;   &quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">def</span> <span class="nf">el_CData</span><span class="p">(</span> <span class="n">nodeName</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">tabs</span><span class="o">=</span><span class="mi">1</span> <span class="p">):</span>
+</span><span class='line'>    <span class="sd">&quot;&quot;&quot;Format nodeName as a CData element with optional tabs and return it.&quot;&quot;&quot;</span>
+</span><span class='line'>    <span class="k">return</span> <span class="n">TAB</span> <span class="o">*</span> <span class="n">tabs</span> <span class="o">+</span> <span class="s">&quot;&lt;&quot;</span><span class="o">+</span><span class="n">nodeName</span><span class="o">+</span><span class="s">&quot;&gt;&lt;![CDATA[&quot;</span> <span class="o">+</span> <span class="nb">str</span> <span class="o">+</span> <span class="s">&quot;]]&gt;&lt;/&quot;</span> <span class="o">+</span> <span class="n">nodeName</span> <span class="o">+</span> <span class="s">&quot;&gt;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">def</span> <span class="nf">el_node</span><span class="p">(</span> <span class="n">nodeName</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">tabs</span><span class="o">=</span><span class="mi">1</span> <span class="p">):</span>
+</span><span class='line'>    <span class="sd">&quot;&quot;&quot;Crete a node nodeName with content str and optional tabs and return it.&quot;&quot;&quot;</span>
+</span><span class='line'>    <span class="n">nodeName</span> <span class="o">=</span> <span class="p">(</span> <span class="n">nodeName</span> <span class="ow">or</span> <span class="s">&quot;preparation&quot;</span> <span class="p">)</span>
+</span><span class='line'>    <span class="nb">str</span> <span class="o">=</span> <span class="p">(</span> <span class="nb">str</span> <span class="ow">or</span> <span class="s">&quot;&quot;</span> <span class="p">)</span>
+</span><span class='line'>    <span class="k">return</span> <span class="n">TAB</span> <span class="o">*</span> <span class="n">tabs</span> <span class="o">+</span> <span class="s">&quot;&lt;&quot;</span><span class="o">+</span><span class="n">nodeName</span><span class="o">+</span><span class="s">&quot;&gt;&quot;</span> <span class="o">+</span> <span class="nb">str</span> <span class="o">+</span> <span class="s">&quot;&lt;/&quot;</span> <span class="o">+</span> <span class="n">nodeName</span> <span class="o">+</span> <span class="s">&quot;&gt;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">def</span> <span class="nf">el_parent_open</span><span class="p">(</span> <span class="n">nodeName</span><span class="p">,</span> <span class="n">tabs</span><span class="o">=</span><span class="mi">1</span> <span class="p">):</span>
+</span><span class='line'>    <span class="sd">&quot;&quot;&quot;Format nodeName as an opening tag with optional tabs and return it.&quot;&quot;&quot;</span>
+</span><span class='line'>    <span class="k">return</span> <span class="n">TAB</span> <span class="o">*</span> <span class="n">tabs</span> <span class="o">+</span> <span class="s">&quot;&lt;&quot;</span><span class="o">+</span><span class="n">nodeName</span><span class="o">+</span><span class="s">&quot;&gt;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">def</span> <span class="nf">el_parent_close</span><span class="p">(</span> <span class="n">nodeName</span><span class="p">,</span> <span class="n">tabs</span><span class="o">=</span><span class="mi">1</span> <span class="p">):</span>
+</span><span class='line'>    <span class="sd">&quot;&quot;&quot;Format nodeName as a closing tag with optional tabs and return it.&quot;&quot;&quot;</span>
+</span><span class='line'>    <span class="k">return</span> <span class="n">TAB</span> <span class="o">*</span> <span class="n">tabs</span> <span class="o">+</span> <span class="s">&quot;&lt;/&quot;</span><span class="o">+</span><span class="n">nodeName</span><span class="o">+</span><span class="s">&quot;&gt;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Then printing the XML is just a matter of calling those functions in the right sequence to reproduce the target XML. To make things easier the method now takes three dictionaries as input, one for metadata, one for the ingredients, and one for directions.</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">def</span> <span class="nf">recipe_print</span><span class="p">(</span> <span class="n">meta</span><span class="p">,</span> <span class="n">ingredients</span><span class="p">,</span> <span class="n">directions</span> <span class="p">):</span>
+</span><span class='line'>    <span class="sd">&quot;&quot;&quot;Returns an XML document given some metadata, ingredients list, and directions.</span>
+</span><span class='line'>
+</span><span class='line'><span class="sd">    Keyword arguments:</span>
+</span><span class='line'><span class="sd">    meta        -- a dictionary of meta information, simple key value pair</span>
+</span><span class='line'><span class="sd">    ingredients -- a list of ingredient groups. Each group is dictionary including a name and list of ingredients, and each is a ingredient is itslef a tuple</span>
+</span><span class='line'><span class="sd">    directions  -- a list of steps strings</span>
+</span><span class='line'>
+</span><span class='line'><span class="sd">    &quot;&quot;&quot;</span>
+</span><span class='line'>    <span class="nb">str</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;yes&quot;?&gt;</span>
+</span><span class='line'><span class="s">&lt;?xml-stylesheet type=&quot;text/xsl&quot; href=&quot;_assets/recipe.xsl&quot;?&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="s">&lt;recipe lang=&quot;en-uk&quot;&gt;&quot;&quot;&quot;</span>
+</span><span class='line'>    <span class="nb">str</span> <span class="o">+=</span>  <span class="n">el_CData</span><span class="p">(</span> <span class="s">&quot;title&quot;</span><span class="p">,</span> <span class="n">meta</span><span class="p">[</span><span class="s">&#39;title&#39;</span><span class="p">]</span> <span class="p">)</span>
+</span><span class='line'>    <span class="nb">str</span> <span class="o">+=</span>  <span class="n">el_CData</span><span class="p">(</span> <span class="s">&quot;description&quot;</span><span class="p">,</span> <span class="n">meta</span><span class="p">[</span><span class="s">&#39;description&#39;</span><span class="p">]</span> <span class="p">)</span>
+</span><span class='line'>    <span class="nb">str</span> <span class="o">+=</span>  <span class="n">el_CData</span><span class="p">(</span> <span class="s">&quot;source&quot;</span><span class="p">,</span> <span class="n">meta</span><span class="p">[</span><span class="s">&#39;source&#39;</span><span class="p">]</span> <span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nb">str</span> <span class="o">+=</span>  <span class="n">el_parent_open</span><span class="p">(</span> <span class="s">&quot;cuisine&quot;</span> <span class="p">)</span>
+</span><span class='line'>    <span class="nb">str</span> <span class="o">+=</span>  <span class="n">el_node</span><span class="p">(</span> <span class="s">&quot;style&quot;</span><span class="p">,</span> <span class="n">meta</span><span class="p">[</span><span class="s">&#39;style&#39;</span><span class="p">],</span> <span class="mi">2</span> <span class="p">)</span>
+</span><span class='line'>    <span class="nb">str</span> <span class="o">+=</span>  <span class="n">el_node</span><span class="p">(</span> <span class="s">&quot;region&quot;</span><span class="p">,</span> <span class="n">meta</span><span class="p">[</span><span class="s">&#39;region&#39;</span><span class="p">],</span> <span class="mi">2</span> <span class="p">)</span>
+</span><span class='line'>    <span class="nb">str</span> <span class="o">+=</span>  <span class="n">el_node</span><span class="p">(</span> <span class="s">&quot;approach&quot;</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">,</span> <span class="mi">2</span> <span class="p">)</span>
+</span><span class='line'>    <span class="nb">str</span> <span class="o">+=</span>  <span class="n">el_parent_close</span><span class="p">(</span> <span class="s">&quot;cuisine&quot;</span> <span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nb">str</span> <span class="o">+=</span>  <span class="n">el_parent_open</span><span class="p">(</span> <span class="s">&quot;tags&quot;</span> <span class="p">)</span>
+</span><span class='line'>    <span class="nb">str</span> <span class="o">+=</span>  <span class="n">el_node</span><span class="p">(</span> <span class="s">&quot;tag&quot;</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">,</span> <span class="mi">2</span> <span class="p">)</span>
+</span><span class='line'>    <span class="nb">str</span> <span class="o">+=</span>  <span class="n">el_parent_close</span><span class="p">(</span> <span class="s">&quot;tags&quot;</span> <span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c">#steps</span>
+</span><span class='line'>    <span class="nb">str</span> <span class="o">+=</span>  <span class="n">el_parent_open</span><span class="p">(</span> <span class="s">&quot;directions&quot;</span> <span class="p">)</span>
+</span><span class='line'>    <span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="n">directions</span><span class="p">:</span>
+</span><span class='line'>        <span class="k">if</span> <span class="n">step</span><span class="p">:</span>
+</span><span class='line'>            <span class="nb">str</span> <span class="o">+=</span>  <span class="n">el_CData</span><span class="p">(</span> <span class="s">&quot;step&quot;</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="mi">2</span> <span class="p">)</span>
+</span><span class='line'>    <span class="nb">str</span> <span class="o">+=</span>  <span class="n">el_parent_close</span><span class="p">(</span> <span class="s">&quot;directions&quot;</span> <span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c">#ingredients</span>
+</span><span class='line'>    <span class="nb">str</span> <span class="o">+=</span>  <span class="n">el_parent_open</span><span class="p">(</span> <span class="s">&quot;ingredients&quot;</span> <span class="p">)</span>
+</span><span class='line'>    <span class="nb">str</span> <span class="o">+=</span>  <span class="n">el_node</span><span class="p">(</span> <span class="s">&quot;serves&quot;</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">,</span> <span class="mi">2</span> <span class="p">)</span>
+</span><span class='line'>    <span class="k">for</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">ingredients</span><span class="p">:</span>
+</span><span class='line'>        <span class="k">if</span> <span class="n">group</span><span class="p">[</span><span class="s">&#39;list&#39;</span><span class="p">]:</span>
+</span><span class='line'>            <span class="nb">str</span> <span class="o">+=</span>  <span class="n">el_parent_open</span><span class="p">(</span> <span class="s">&quot;group&quot;</span><span class="p">,</span> <span class="mi">2</span> <span class="p">)</span>
+</span><span class='line'>            <span class="k">if</span> <span class="n">group</span><span class="p">[</span><span class="s">&#39;name&#39;</span><span class="p">]:</span>
+</span><span class='line'>                <span class="nb">str</span> <span class="o">+=</span>  <span class="n">el_node</span><span class="p">(</span> <span class="s">&quot;name&quot;</span><span class="p">,</span> <span class="n">group</span><span class="p">[</span><span class="s">&#39;name&#39;</span><span class="p">],</span> <span class="mi">3</span> <span class="p">)</span>
+</span><span class='line'>            <span class="k">for</span> <span class="n">ingredient</span> <span class="ow">in</span> <span class="n">group</span><span class="p">[</span><span class="s">&#39;list&#39;</span><span class="p">]:</span>
+</span><span class='line'>                <span class="nb">str</span> <span class="o">+=</span>  <span class="n">el_parent_open</span><span class="p">(</span> <span class="s">&quot;ingredient&quot;</span><span class="p">,</span> <span class="mi">3</span> <span class="p">)</span>
+</span><span class='line'>                <span class="nb">str</span> <span class="o">+=</span>  <span class="n">el_node</span><span class="p">(</span> <span class="s">&quot;quantity&quot;</span><span class="p">,</span> <span class="n">ingredient</span><span class="p">[</span><span class="s">&#39;quantity&#39;</span><span class="p">],</span> <span class="mi">4</span> <span class="p">)</span>
+</span><span class='line'>                <span class="nb">str</span> <span class="o">+=</span>  <span class="n">el_node</span><span class="p">(</span> <span class="s">&quot;measurement&quot;</span><span class="p">,</span> <span class="n">ingredient</span><span class="p">[</span><span class="s">&#39;measurement&#39;</span><span class="p">],</span> <span class="mi">4</span> <span class="p">)</span>
+</span><span class='line'>                <span class="nb">str</span> <span class="o">+=</span>  <span class="n">el_node</span><span class="p">(</span> <span class="s">&quot;name&quot;</span><span class="p">,</span> <span class="n">ingredient</span><span class="p">[</span><span class="s">&#39;name&#39;</span><span class="p">],</span> <span class="mi">4</span> <span class="p">)</span>
+</span><span class='line'>                <span class="nb">str</span> <span class="o">+=</span>  <span class="n">el_node</span><span class="p">(</span> <span class="s">&quot;preparation&quot;</span><span class="p">,</span> <span class="n">ingredient</span><span class="p">[</span><span class="s">&#39;preparation&#39;</span><span class="p">],</span> <span class="mi">4</span> <span class="p">)</span>
+</span><span class='line'>                <span class="nb">str</span> <span class="o">+=</span>  <span class="n">el_parent_close</span><span class="p">(</span> <span class="s">&quot;ingredient&quot;</span><span class="p">,</span> <span class="mi">3</span> <span class="p">)</span>
+</span><span class='line'>            <span class="nb">str</span> <span class="o">+=</span>  <span class="n">el_parent_close</span><span class="p">(</span> <span class="s">&quot;group&quot;</span><span class="p">,</span> <span class="mi">2</span> <span class="p">)</span>
+</span><span class='line'>    <span class="nb">str</span> <span class="o">+=</span>  <span class="n">el_parent_close</span><span class="p">(</span> <span class="s">&quot;ingredients&quot;</span> <span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nb">str</span> <span class="o">+=</span>  <span class="n">el_parent_close</span><span class="p">(</span> <span class="s">&quot;recipe&quot;</span><span class="p">,</span> <span class="mi">0</span> <span class="p">)</span>
+</span><span class='line'>    <span class="k">return</span> <span class="nb">str</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Parsing CSV data</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='gherkin'><span class='line'><span class="k">Scenario:</span><span class="nf"> Parsing CSV data</span>
+</span><span class='line'><span class="k">    Given </span><span class="nf">that script is parsing </span><span class="nv">&lt;CSV file&gt;</span><span class="nf"></span>
+</span><span class='line'><span class="nf">    </span><span class="k">When </span><span class="nv">&lt;line1&gt;</span><span class="nf"> is encountered</span>
+</span><span class='line'><span class="nf">    </span><span class="k">And </span><span class="nv">&lt;line2&gt;</span><span class="nf"> is next</span>
+</span><span class='line'><span class="nf">    </span><span class="k">Then </span><span class="nf">it should create dictionaries </span><span class="nv">&lt;ingredients&gt;</span><span class="nf">, and </span><span class="nv">&lt;steps&gt;</span><span class="nf"></span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>As the final step, I will now include real information from the CSV into the XML. The format of the CSV file follows a quite complex grammar, which splits ingrdients and groups  and tried to minimize the amount of typing - it was a proof of concept for the interface I will be building. What the converter needs to do is read in lines such as</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='gherkin'><span class='line'><span class="nf">| group name</span><span class="k"> |</span><span class="s"> amount</span><span class="k"> |</span><span class="s"> unit</span><span class="k"> |</span><span class="s"> ingredient name</span><span class="k"> |</span><span class="s"> notes</span><span class="k">   |</span><span class="s"> step</span><span class="k">   |</span><span class="nf"></span>
+</span><span class='line'><span class="nf">| sauce</span><span class="k">      |</span><span class="s"> 100</span><span class="k">    |</span><span class="s"> g</span><span class="k">    |</span><span class="s"> flour, white</span><span class="k">    |         |        |</span><span class="nf"></span>
+</span><span class='line'><span class="nf">|</span><span class="k">            |</span><span class="s"> 20</span><span class="k">     |</span><span class="s"> ml</span><span class="k">   |</span><span class="s"> butter</span><span class="k">          |         |</span><span class="s"> mix {}</span><span class="k"> |</span><span class="nf"></span>
+</span><span class='line'><span class="nf">| filling</span><span class="k">    |</span><span class="s"> 100</span><span class="k">    |</span><span class="s"> g</span><span class="k">    |</span><span class="s"> onion</span><span class="k">           |</span><span class="s"> chopped</span><span class="k"> |</span><span class="s"> sauté</span><span class="k">  |</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>into dictionaries such as</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+</pre></td><td class='code'><pre><code class='json'><span class='line'><span class="err">ingredients:</span>
+</span><span class='line'><span class="p">{</span>   <span class="err">sauce:</span> <span class="err">[</span>
+</span><span class='line'>        <span class="err">{</span>
+</span><span class='line'>            <span class="err">quantity:</span> <span class="err">100,</span>
+</span><span class='line'>            <span class="err">measurement:</span> <span class="nt">&quot;g&quot;</span><span class="p">,</span>
+</span><span class='line'>            <span class="err">name:</span> <span class="nt">&quot;white flour&quot;</span>
+</span><span class='line'>            <span class="err">preparation</span><span class="p">:</span> <span class="s2">&quot;&quot;</span>
+</span><span class='line'>        <span class="p">}</span><span class="err">,</span>
+</span><span class='line'>        <span class="p">{</span>
+</span><span class='line'>            <span class="err">quantity:</span> <span class="err">20,</span>
+</span><span class='line'>            <span class="err">measurement:</span> <span class="nt">&quot;ml&quot;</span><span class="p">,</span>
+</span><span class='line'>            <span class="err">name:</span> <span class="nt">&quot;butter&quot;</span>
+</span><span class='line'>            <span class="err">preparation</span><span class="p">:</span> <span class="s2">&quot;&quot;</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="err">],</span>
+</span><span class='line'>    <span class="err">filling:</span> <span class="p">[</span>
+</span><span class='line'>        <span class="p">{</span>
+</span><span class='line'>            <span class="err">quantity:</span> <span class="err">100,</span>
+</span><span class='line'>            <span class="err">measurement:</span> <span class="nt">&quot;g&quot;</span><span class="p">,</span>
+</span><span class='line'>            <span class="err">name:</span> <span class="nt">&quot;onion&quot;</span>
+</span><span class='line'>            <span class="err">preparation</span><span class="p">:</span> <span class="s2">&quot;chopped&quot;</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">]</span>
+</span><span class='line'><span class="err">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">steps:</span>
+</span><span class='line'><span class="p">[</span>
+</span><span class='line'>    <span class="s2">&quot;Mix flour and butter&quot;</span><span class="p">,</span>
+</span><span class='line'>    <span class="s2">&quot;Sauté onion&quot;</span>
+</span><span class='line'><span class="p">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The functions below do just that.</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">def</span> <span class="nf">spreadsheet_read</span><span class="p">(</span> <span class="n">spreadsheet_file</span><span class="p">,</span> <span class="n">filename</span> <span class="p">):</span>
+</span><span class='line'>    <span class="sd">&quot;&quot;&quot;Extract metadata, ingredient list, and directions from a csv file</span>
+</span><span class='line'>
+</span><span class='line'><span class="sd">    Keyword arguments:</span>
+</span><span class='line'><span class="sd">    spreadsheet_file --  a file handler</span>
+</span><span class='line'><span class="sd">    filename         --  the name of the file</span>
+</span><span class='line'>
+</span><span class='line'><span class="sd">    return metadata, ingredient list, and directions dictionaries</span>
+</span><span class='line'>
+</span><span class='line'><span class="sd">    &quot;&quot;&quot;</span>
+</span><span class='line'>    <span class="n">ingGroup</span> <span class="o">=</span> <span class="mi">0</span>                            <span class="c">#pointer to active ingredient group</span>
+</span><span class='line'>    <span class="n">lastIngs</span> <span class="o">=</span> <span class="p">[]</span>                           <span class="c">#stack of ingredients to be used in a single step</span>
+</span><span class='line'>    <span class="n">meta</span> <span class="o">=</span> <span class="p">{</span> <span class="s">&#39;title&#39;</span> <span class="p">:</span> <span class="n">filename</span> <span class="p">}</span>           <span class="c">#the meta info, returned</span>
+</span><span class='line'>    <span class="n">ings</span> <span class="o">=</span> <span class="p">[</span> <span class="p">{</span> <span class="s">&#39;name&#39;</span> <span class="p">:</span> <span class="s">&#39;&#39;</span><span class="p">,</span> <span class="s">&#39;list&#39;</span> <span class="p">:</span> <span class="p">[]</span> <span class="p">}</span> <span class="p">]</span> <span class="c">#the ingredient groups, returned</span>
+</span><span class='line'>    <span class="n">steps</span> <span class="o">=</span> <span class="p">[]</span>                              <span class="c">#the steps, returned</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">spreadsheet</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictReader</span><span class="p">(</span><span class="n">spreadsheet_file</span><span class="p">,</span> <span class="n">dialect</span><span class="o">=</span><span class="s">&#39;custom&#39;</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c">#oreoprocesses data</span>
+</span><span class='line'>    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">spreadsheet</span><span class="p">:</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="c">#the Group cell is only filled in when the group change</span>
+</span><span class='line'>        <span class="c">#when that happens, a new group is added to list</span>
+</span><span class='line'>        <span class="k">if</span> <span class="n">row</span><span class="p">[</span><span class="s">&#39;Group&#39;</span><span class="p">]:</span>
+</span><span class='line'>            <span class="n">ings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="p">{</span> <span class="s">&#39;name&#39;</span> <span class="p">:</span> <span class="n">row</span><span class="p">[</span><span class="s">&#39;Group&#39;</span><span class="p">],</span> <span class="s">&#39;list&#39;</span> <span class="p">:</span> <span class="p">[]</span> <span class="p">}</span> <span class="p">)</span>
+</span><span class='line'>            <span class="n">ingGroup</span> <span class="o">+=</span> <span class="mi">1</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="c">#preparation has no key in the original, so we add one</span>
+</span><span class='line'>        <span class="n">cells</span> <span class="o">=</span> <span class="p">{}</span>
+</span><span class='line'>        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">row</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+</span><span class='line'>            <span class="n">k</span> <span class="o">=</span> <span class="n">k</span> <span class="ow">or</span> <span class="s">&#39;preparation&#39;</span>
+</span><span class='line'>            <span class="n">cells</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="c">#collects ingredients</span>
+</span><span class='line'>        <span class="n">ing</span> <span class="o">=</span> <span class="p">{}</span>
+</span><span class='line'>        <span class="k">if</span> <span class="n">cells</span><span class="p">[</span><span class="s">&#39;ingredient&#39;</span><span class="p">]:</span>
+</span><span class='line'>            <span class="c">#ingredients are listed as &#39;oil, olive&#39;, so we need to swap them around to get &quot;olive oil&quot;</span>
+</span><span class='line'>            <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span> <span class="s">&quot;,&quot;</span><span class="p">,</span> <span class="n">cells</span><span class="p">[</span><span class="s">&#39;ingredient&#39;</span><span class="p">]</span> <span class="p">):</span>
+</span><span class='line'>                <span class="n">ing</span><span class="p">[</span><span class="s">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span> <span class="s">&quot;^(.+?), (.+)$&quot;</span><span class="p">,</span> <span class="s">r&quot;\2 \1&quot;</span><span class="p">,</span> <span class="n">cells</span><span class="p">[</span><span class="s">&#39;ingredient&#39;</span><span class="p">]</span> <span class="p">)</span>
+</span><span class='line'>            <span class="k">else</span><span class="p">:</span>
+</span><span class='line'>                <span class="n">ing</span><span class="p">[</span><span class="s">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cells</span><span class="p">[</span><span class="s">&#39;ingredient&#39;</span><span class="p">]</span>
+</span><span class='line'>            <span class="n">ing</span><span class="p">[</span><span class="s">&#39;measurement&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cells</span><span class="p">[</span><span class="s">&#39;unit&#39;</span><span class="p">]</span>
+</span><span class='line'>            <span class="n">ing</span><span class="p">[</span><span class="s">&#39;preparation&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cells</span><span class="p">[</span><span class="s">&#39;preparation&#39;</span><span class="p">]</span>
+</span><span class='line'>            <span class="n">ing</span><span class="p">[</span><span class="s">&#39;quantity&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cells</span><span class="p">[</span><span class="s">&#39;amount&#39;</span><span class="p">]</span>
+</span><span class='line'>            <span class="n">ings</span><span class="p">[</span><span class="n">ingGroup</span><span class="p">][</span><span class="s">&#39;list&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">ing</span> <span class="p">)</span>
+</span><span class='line'>            <span class="c">#some rows contain ingredients but not actions</span>
+</span><span class='line'>            <span class="c">#those ingredients are collected into a list and used for the first action</span>
+</span><span class='line'>            <span class="c">#ingredients are listed as &#39;oil, olive&#39;, so that we can extract just &#39;oil&#39; easily</span>
+</span><span class='line'>            <span class="n">lastIngs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span> <span class="s">&#39;,.*$&#39;</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">cells</span><span class="p">[</span><span class="s">&#39;ingredient&#39;</span><span class="p">]</span> <span class="p">)</span> <span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="c">#collect steps</span>
+</span><span class='line'>        <span class="n">step</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+</span><span class='line'>        <span class="k">if</span>  <span class="n">cells</span><span class="p">[</span><span class="s">&#39;action&#39;</span><span class="p">]:</span>
+</span><span class='line'>            <span class="c">#actions  can contain the string {} to refer to the ingredient - e.g., &quot;add the {} and stir&quot;</span>
+</span><span class='line'>            <span class="n">step</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span> <span class="s">r&#39;{}&#39;</span><span class="p">,</span> <span class="s">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span> <span class="n">lastIngs</span> <span class="p">),</span> <span class="n">row</span><span class="p">[</span><span class="s">&#39;action&#39;</span><span class="p">]</span> <span class="p">)</span>
+</span><span class='line'>            <span class="c">#the rest of the information is quite granular, but we ignore that and just return the one string</span>
+</span><span class='line'>            <span class="k">if</span> <span class="n">cells</span><span class="p">[</span><span class="s">&#39;medium&#39;</span><span class="p">]:</span>
+</span><span class='line'>                <span class="n">step</span> <span class="o">+=</span> <span class="s">&quot; in&quot;</span>
+</span><span class='line'>                <span class="k">if</span> <span class="n">cells</span><span class="p">[</span><span class="s">&#39;amount medium&#39;</span><span class="p">]:</span>
+</span><span class='line'>                    <span class="n">step</span> <span class="o">+=</span> <span class="s">&quot; &quot;</span> <span class="o">+</span> <span class="n">cells</span><span class="p">[</span><span class="s">&#39;amount medium&#39;</span><span class="p">]</span>
+</span><span class='line'>                <span class="k">if</span> <span class="n">cells</span><span class="p">[</span><span class="s">&#39;unit medium&#39;</span><span class="p">]:</span>
+</span><span class='line'>                    <span class="n">step</span> <span class="o">+=</span> <span class="s">&quot; &quot;</span> <span class="o">+</span> <span class="n">cells</span><span class="p">[</span><span class="s">&#39;unit medium&#39;</span><span class="p">]</span>
+</span><span class='line'>                <span class="n">step</span> <span class="o">+=</span> <span class="s">&quot; &quot;</span> <span class="o">+</span> <span class="n">cells</span><span class="p">[</span><span class="s">&#39;medium&#39;</span><span class="p">]</span>
+</span><span class='line'>            <span class="k">if</span> <span class="n">cells</span><span class="p">[</span><span class="s">&#39;temperature&#39;</span><span class="p">]:</span>
+</span><span class='line'>                <span class="n">step</span> <span class="o">+=</span> <span class="s">&quot; on &quot;</span> <span class="o">+</span> <span class="n">cells</span><span class="p">[</span><span class="s">&#39;temperature&#39;</span><span class="p">]</span>
+</span><span class='line'>            <span class="k">if</span> <span class="n">cells</span><span class="p">[</span><span class="s">&#39;ready when&#39;</span><span class="p">]:</span>
+</span><span class='line'>                <span class="n">step</span> <span class="o">+=</span> <span class="s">&quot; until &quot;</span> <span class="o">+</span> <span class="n">cells</span><span class="p">[</span><span class="s">&#39;ready when&#39;</span><span class="p">]</span>
+</span><span class='line'>            <span class="k">if</span> <span class="n">cells</span><span class="p">[</span><span class="s">&#39;estimated time&#39;</span><span class="p">]:</span>
+</span><span class='line'>                <span class="n">step</span> <span class="o">+=</span> <span class="s">&quot;, &quot;</span> <span class="o">+</span> <span class="n">cells</span><span class="p">[</span><span class="s">&#39;estimated time&#39;</span><span class="p">]</span>
+</span><span class='line'>            <span class="n">lastIngs</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span class='line'>            <span class="n">steps</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">step</span> <span class="p">)</span>
+</span><span class='line'>    <span class="k">return</span> <span class="n">meta</span><span class="p">,</span> <span class="n">ings</span><span class="p">,</span> <span class="n">steps</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Dealing with meta information</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='gherkin'><span class='line'><span class="k">Scenario:</span><span class="nf"> Dealing with meta information</span>
+</span><span class='line'><span class="k">    Given </span><span class="nf">that meta information is stored in the second sheet of a spreadsheet</span>
+</span><span class='line'><span class="nf">    </span><span class="k">And </span><span class="nf">that I have </span><span class="s">83</span><span class="nf"> recipes to convert</span>
+</span><span class='line'><span class="nf">    </span><span class="k">When </span><span class="nf">I conert the recipes</span>
+</span><span class='line'><span class="nf">    </span><span class="k">Then </span><span class="nf">that information should be part of it</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>CSV files only include the first sheet of the spreadsheet, so what is missing is three things - the recipe name, the source, and the style (e.g. Italian, Chinese, Modern British, etc). The recipe name I can also fetch from the file name, so all it leaves is a couple of words per recipes, i.e. about 200 words. Rather than trying to fetch them from the other formats and find ways to merge them with the already generated XML files, I decided it would be much easier to copy them over manually.</p>
+
+<h2>Challenge 100% complete</h2>
+
+<p>The recipes were successfully fetched and converted. The final script is <a href="https://github.com/gotofritz/Weekly-Challenges/tree/master/weekly-challenge-14_recipes_googlecl">available on GitHub</a>.</p>
+
+<p><nav class="related-posts" id="multipart" markdown="1">
+  <h2>Other posts in this series</h2></p>
+
+<ul>
+<li><a href="/blog/weekly-challenge/managing-xml-files-sublime-text-2/">part 1</a>: Managing XML Files With Sublime Text 2</li>
+<li><a href="/blog/weekly-challenge/fetching-google-spreadsheets-converting-xml/">part 2</a>: Fetching Google Spreadsheets as XML</li>
+<li><a href="/blog/weekly-challenge/fetching-google-spreadsheets-converting-xml/">part 3</a>: Transforming plists into XML</li>
+<li><a href="/blog/weekly-challenge/restful-python-api-bottle/">part 4</a>: creating a RESTful Python API With Bottle
+</nav></li>
+</ul>
+
+</div>
+	</div>
+</article>
+
+<article class="archives">
+  <div class="related-posts">
+    <h2>Related Posts</h2>
+    
+      <article>
+        <h3 class="title"><a href="/blog/weekly-challenge/google-api-php-json">Json to Google Tasks with the PHP API library</a></h3>
+        <div class="meta">
+          <span class="tags">
+
+
+	<a class='category' href='/blog/cat/weekly-challenge/'>Weekly Challenge</a>
+
+
+</span>
+            
+          <time datetime="2012-03-09T13:17:35+01:00" pubdate>2012-03-09</time>
+            
+        </div>
+      </article>
+    
+      <article>
+        <h3 class="title"><a href="/blog/weekly-challenge/transforming-plists-to-xml">Transforming OS X plists into XML</a></h3>
+        <div class="meta">
+          <span class="tags">
+
+
+	<a class='category' href='/blog/cat/weekly-challenge/'>Weekly Challenge</a>
+
+
+</span>
+            
+          <time datetime="2012-03-09T13:17:35+01:00" pubdate>2012-03-09</time>
+            
+        </div>
+      </article>
+    
+      <article>
+        <h3 class="title"><a href="/blog/weekly-challenge/managing-xml-files-sublime-text-2">Managing XML files with Sublime Text 2</a></h3>
+        <div class="meta">
+          <span class="tags">
+
+
+	<a class='category' href='/blog/cat/weekly-challenge/'>Weekly Challenge</a>
+
+
+</span>
+            
+          <time datetime="2012-03-09T13:17:35+01:00" pubdate>2012-03-09</time>
+            
+        </div>
+      </article>
+    
+  </div>
+</article>
+
+
+<section id="comment">
+    <h1 class="title">Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+
+    
+  </div>
+	<footer id="footer" class="inner">Copyright &copy; 2014
+
+    Fabrizio (Fritz) Stelluto
+
+</footer>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="/javascripts/slash.js"></script>
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'goto-fritz';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://gotofritz.net/blog/weekly-challenge/fetching-google-spreadsheets-converting-xml';
+        var disqus_url = 'http://gotofritz.net/blog/weekly-challenge/fetching-google-spreadsheets-converting-xml';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-11254155-2']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+</body>
+</html>

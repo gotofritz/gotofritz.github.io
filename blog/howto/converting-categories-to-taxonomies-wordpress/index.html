@@ -1,0 +1,231 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Converting a category to a taxonomy in WordPress - Fabrizio (Fritz) Stelluto</title>
+	<meta name="author" content="">
+
+	
+	<meta name="description" content="Here is some code to create a new taxonomy term for each post of a given category. Taxonomies, post formats, post types&#8230; oh my!! WordPress is &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="Fabrizio (Fritz) Stelluto" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.ico" rel="shortcut icon">
+	<link rel="icon" href="/favicon.gif" type="image/gif" />
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	
+</head>
+
+
+<body ontouchstart="">
+
+  <header id="header" class="inner">
+<nav id="main-nav"><div>
+  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+  <a href="/">home</a>
+  <a href="/blog/">blog</a>
+</div></nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><div>
+  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+  <a href="/">home</a>
+  <a href="/blog/">blog</a>
+</div></div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="http://google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:gotofritz.net">
+			</form>
+		</div>
+	</div>
+</nav>
+
+<nav id="sub-nav" class="alignright">
+	<form class="search" action="http://google.com/search" method="get">
+		<input class="alignright" type="text" name="q" results="0">
+		<input type="hidden" name="q" value="site:gotofritz.net">
+	</form>
+</nav>
+
+</header>
+	
+		
+	
+	<div id="content" class="inner">
+    
+    <article class="post">
+	<h1 class="title">Converting a Category to a Taxonomy in WordPress</h1>
+	<div>
+		<div class="meta">
+			<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-07-03T15:47:50+02:00" pubdate data-updated="true">2011-07-03, Sun</time></div>
+			<div class="tags">
+
+
+	<a class='category' href='/blog/cat/howto/'>HowTo</a>
+
+
+</div>
+			
+				<span class="comments"><a href="/blog/howto/converting-categories-to-taxonomies-wordpress#disqus_thread">Comments</a></span>
+			
+		</div>
+		<div class="entry-content"><p>Here is some code to create a new taxonomy term for each post of a given category.</p>
+
+<!--more-->
+
+
+<h2>Taxonomies, post formats, post types&#8230; oh my!!</h2>
+
+<p>WordPress is beginning to smell more and more of Drupal with every release - at the time of writing you have post categories, post tags, post taxonomies, post types, the pointless post formats (created because &#8217;<a href="http://ottopress.com/2010/post-types-and-formats-and-taxonomies-oh-my/">people were using post types wrong</a>&#8217; apparently). No doubt in the next releases we can expect post flavours, post genres, post breeds, post ilks&#8230; but I digress.</p>
+
+<h2>First step: create a taxonomy</h2>
+
+<p>Still taxonomies and post types are very useful, but sadly there isn&#8217;t an easy way to convert from categories or tags to them. Here&#8217;s a little bit of code to help. It assumes you have already created your taxonomy - if you don&#8217;t know how, check out <a href="http://justintadlock.com/archives/2010/08/20/linking-terms-to-a-specific-post">Justin Tadlock&#8217;s excellent tutorials</a> to find out how.</p>
+
+<h2>Code snippet to convert categories to a taxonomy</h2>
+
+<p>Once you have a taxonomy, put the code below in your functions.php. Amend the variables as required ($gt_taxonomy would be the name of your taxonomy, and $gt_cat you can find out by looking at the link in the Admin > Posts > Categories page). Load any page or admin screen, once, and it should do the job.</p>
+
+<p>Comment out the last line, gt_catToTaxonomyConversion, and have a look at your taxonomy in WordPress to see whether everything went ok. If it did, you can now delete the code from function.php, and delete the category manually. If not, you have to manually delete any newly created taxonomy term, fix the code, and try again. Let me know if there are any issues with the code.</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="x">function gt_catToTaxonomyConversion()</span>
+</span><span class='line'><span class="x">  #AMEND AS REQUIRED</span>
+</span><span class='line'><span class="x">  $gt_taxonomy   = &#39;my_taxonomy&#39;;</span>
+</span><span class='line'><span class="x">  $gt_cat   = 49;</span>
+</span><span class='line'>
+</span><span class='line'><span class="x">  //get all posts of category $gt_cat</span>
+</span><span class='line'><span class="x">  $gt_posts  = query_posts( array( &#39;post_type&#39;=&gt; &#39;post&#39;, &#39;cat&#39;=&gt; $gt_cat, &#39;nopaging&#39; =&gt; true ) );</span>
+</span><span class='line'>
+</span><span class='line'><span class="x">  //creaate a new taxonomy for each post</span>
+</span><span class='line'><span class="x">  if( !empty( $gt_posts ) ){</span>
+</span><span class='line'><span class="x">    foreach( $gt_posts as  $gt_post ){</span>
+</span><span class='line'>
+</span><span class='line'><span class="x">      //create taxonomy term and associate post in one go</span>
+</span><span class='line'><span class="x">      wp_set_object_terms( $gt_post-&gt;ID, $gt_post-&gt;post_name, $gt_taxonomy, false );</span>
+</span><span class='line'>
+</span><span class='line'><span class="x">      //wp_set_object_terms doesn&#39;t have enough options - need to revisit the term and flesh it out a bit</span>
+</span><span class='line'><span class="x">      $gt_term = get_the_terms( $gt_post-&gt;ID, $gt_taxonomy );</span>
+</span><span class='line'><span class="x">      $gt_termId  = $gt_term[0]-&gt;term_id;</span>
+</span><span class='line'><span class="x">      if( $gt_termId ) {</span>
+</span><span class='line'><span class="x">          wp_update_term( $gt_termId, $gt_taxonomy, array(</span>
+</span><span class='line'><span class="x">                             &#39;description&#39;    =&gt; $gt_post-&gt;post_content,</span>
+</span><span class='line'><span class="x">                             &#39;slug&#39; =&gt; $gt_post-&gt;post_name,</span>
+</span><span class='line'><span class="x">                             &#39;name&#39; =&gt; $gt_post-&gt;post_title</span>
+</span><span class='line'><span class="x">                             ));</span>
+</span><span class='line'><span class="x">      }</span>
+</span><span class='line'><span class="x">    }</span>
+</span><span class='line'><span class="x">  }</span>
+</span><span class='line'><span class="x">}</span>
+</span><span class='line'><span class="x">//comment this out when you run the function once</span>
+</span><span class='line'><span class="x">gt_catToTaxonomyConversion())</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+</div>
+	</div>
+</article>
+
+
+<section id="comment">
+    <h1 class="title">Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+
+    
+  </div>
+	<footer id="footer" class="inner">Copyright &copy; 2014
+
+    Fabrizio (Fritz) Stelluto
+
+</footer>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="/javascripts/slash.js"></script>
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'goto-fritz';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://gotofritz.net/blog/howto/converting-categories-to-taxonomies-wordpress';
+        var disqus_url = 'http://gotofritz.net/blog/howto/converting-categories-to-taxonomies-wordpress';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-11254155-2']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+</body>
+</html>

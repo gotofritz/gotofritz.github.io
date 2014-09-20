@@ -1,0 +1,372 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Fixing iTunes when it forgets the hard disk with all your music - Fabrizio (Fritz) Stelluto</title>
+	<meta name="author" content="">
+
+	
+	<meta name="description" content="I have all my music on a hard disk, and occasionally iTunes resets the music library location to my home folder - just like that, without asking. So &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="Fabrizio (Fritz) Stelluto" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.ico" rel="shortcut icon">
+	<link rel="icon" href="/favicon.gif" type="image/gif" />
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	
+</head>
+
+
+<body ontouchstart="">
+
+  <header id="header" class="inner">
+<nav id="main-nav"><div>
+  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+  <a href="/">home</a>
+  <a href="/blog/">blog</a>
+</div></nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><div>
+  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+  <a href="/">home</a>
+  <a href="/blog/">blog</a>
+</div></div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="http://google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:gotofritz.net">
+			</form>
+		</div>
+	</div>
+</nav>
+
+<nav id="sub-nav" class="alignright">
+	<form class="search" action="http://google.com/search" method="get">
+		<input class="alignright" type="text" name="q" results="0">
+		<input type="hidden" name="q" value="site:gotofritz.net">
+	</form>
+</nav>
+
+</header>
+	
+		
+	
+	<div id="content" class="inner">
+    
+    <article class="post">
+	<h1 class="title">Fixing iTunes When It Forgets the Hard Disk With All Your Music</h1>
+	<div>
+		<div class="meta">
+			<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-14T12:14:53+02:00" pubdate data-updated="true">2012-08-14, Tue</time></div>
+			<div class="tags">
+
+
+	<a class='category' href='/blog/cat/howto/'>HowTo</a>
+
+
+</div>
+			
+				<span class="comments"><a href="/blog/howto/fixing-itunes-cannot-find-music#disqus_thread">Comments</a></span>
+			
+		</div>
+		<div class="entry-content"><p>I have all my music on a hard disk, and occasionally iTunes resets the music library location to my home folder - just like that, without asking. So once again I find myself having to fix iTunes, because it can&#8217;t find the songs and it shows me the dreaded exclamation marks instead. Here&#8217;s what I do to fix it.</p>
+
+<!--more-->
+
+
+<p><strong>Disclaimer:</strong> If you follow the instructions on this post, you do so at your own risk. I suggest you backup all the files involved.</p>
+
+<h2>Reset the iTunes Library</h2>
+
+<p> Open the iTunes music folder in Finder ( it&#8217;s in your home folder / Music / iTunes) and drag iTunes Music Library.xml and iTunes Library.itl out on the desktop. This will reset iTunes next time you start it, but don&#8217;t start it yet. We&#8217;ll be working on the xml file, whilte the itl file is just there for backup.</p>
+
+<h2>Change the location of where iTunes keeps the music</h2>
+
+<p>Has iTunes changed the location from your hard disk to your home folder? Bastard. In the iTunes preferences > Advanced, click on &#8220;change&#8221; next to the &#8220;iTunes music folder location&#8221;, and select your hard disk. I leep &#8220;Keep music folder organized&#8221; unticked.</p>
+
+<h2>Look inside iTunes Liberary to see what the problem is</h2>
+
+<p>If your iTunes library is huge, it&#8217;s a good idea to use Terminal to look at the first few lines, which you can do easily with</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>head -n100 /Users/ME/Desktop/iTunes<span class="se">\ </span>Music<span class="se">\ </span>Library.xml
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>(you can just type &#8220;head -n100 &#8221; and drag the file onto Terminal to let OS X type out the name for you)</p>
+
+<p>The output will be something along the lines of</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>&lt;?xml <span class="nv">version</span><span class="o">=</span><span class="s2">&quot;1.0&quot;</span> <span class="nv">encoding</span><span class="o">=</span><span class="s2">&quot;UTF-8&quot;</span>?&gt;
+</span><span class='line'>&lt;!DOCTYPE plist PUBLIC <span class="s2">&quot;-//Apple Computer//DTD PLIST 1.0//EN&quot;</span> <span class="s2">&quot;http://www.apple.com/DTDs/PropertyList-1.0.dtd&quot;</span>&gt;
+</span><span class='line'>&lt;plist <span class="nv">version</span><span class="o">=</span><span class="s2">&quot;1.0&quot;</span>&gt;
+</span><span class='line'>&lt;dict&gt;
+</span><span class='line'>  &lt;key&gt;Major Version&lt;/key&gt;&lt;integer&gt;1&lt;/integer&gt;
+</span><span class='line'>  &lt;key&gt;Minor Version&lt;/key&gt;&lt;integer&gt;1&lt;/integer&gt;
+</span><span class='line'>  &lt;key&gt;Date&lt;/key&gt;&lt;date&gt;2012-08-13T21:09:21Z&lt;/date&gt;
+</span><span class='line'>  &lt;key&gt;Application Version&lt;/key&gt;&lt;string&gt;10.6.3&lt;/string&gt;
+</span><span class='line'>  &lt;key&gt;Features&lt;/key&gt;&lt;integer&gt;5&lt;/integer&gt;
+</span><span class='line'>  &lt;key&gt;Music Folder&lt;/key&gt;&lt;string&gt;file://localhost/Volumes/HD1T/Music/&lt;/string&gt;
+</span><span class='line'>  &lt;key&gt;Library Persistent ID&lt;/key&gt;&lt;string&gt;C326B89DCF4457DF&lt;/string&gt;
+</span><span class='line'>  &lt;key&gt;Tracks&lt;/key&gt;
+</span><span class='line'>  &lt;dict&gt;
+</span><span class='line'>      &lt;key&gt;41557&lt;/key&gt;
+</span><span class='line'>      &lt;dict&gt;
+</span><span class='line'>          &lt;key&gt;Track ID&lt;/key&gt;&lt;integer&gt;41557&lt;/integer&gt;
+</span><span class='line'>          &lt;key&gt;Name&lt;/key&gt;&lt;string&gt;Fifths <span class="o">(</span>Jazzanova 6 Sickth Mix<span class="o">)</span>&lt;/string&gt;
+</span><span class='line'>          &lt;key&gt;Artist&lt;/key&gt;&lt;string&gt;Ski&lt;/string&gt;
+</span><span class='line'>          &lt;key&gt;Album&lt;/key&gt;&lt;string&gt;Jazzanova: The Remixes, 1997-2000&lt;/string&gt;
+</span><span class='line'>          &lt;key&gt;Grouping&lt;/key&gt;&lt;string&gt;where:de&lt;/string&gt;
+</span><span class='line'>          &lt;key&gt;Genre&lt;/key&gt;&lt;string&gt;ambient-synth-90s&lt;/string&gt;
+</span><span class='line'>          &lt;key&gt;Kind&lt;/key&gt;&lt;string&gt;MPEG audio file&lt;/string&gt;
+</span><span class='line'>          &lt;key&gt;Size&lt;/key&gt;&lt;integer&gt;19718194&lt;/integer&gt;
+</span><span class='line'>          &lt;key&gt;Total Time&lt;/key&gt;&lt;integer&gt;482925&lt;/integer&gt;
+</span><span class='line'>          &lt;key&gt;Disc Number&lt;/key&gt;&lt;integer&gt;2&lt;/integer&gt;
+</span><span class='line'>          &lt;key&gt;Disc Count&lt;/key&gt;&lt;integer&gt;2&lt;/integer&gt;
+</span><span class='line'>          &lt;key&gt;Track Number&lt;/key&gt;&lt;integer&gt;1&lt;/integer&gt;
+</span><span class='line'>          &lt;key&gt;Track Count&lt;/key&gt;&lt;integer&gt;10&lt;/integer&gt;
+</span><span class='line'>          &lt;key&gt;Year&lt;/key&gt;&lt;integer&gt;2000&lt;/integer&gt;
+</span><span class='line'>          &lt;key&gt;Date Modified&lt;/key&gt;&lt;date&gt;2008-12-05T14:26:06Z&lt;/date&gt;
+</span><span class='line'>          &lt;key&gt;Date Added&lt;/key&gt;&lt;date&gt;2012-07-14T07:42:37Z&lt;/date&gt;
+</span><span class='line'>          &lt;key&gt;Bit Rate&lt;/key&gt;&lt;integer&gt;320&lt;/integer&gt;
+</span><span class='line'>          &lt;key&gt;Sample Rate&lt;/key&gt;&lt;integer&gt;44100&lt;/integer&gt;
+</span><span class='line'>          &lt;key&gt;Play Count&lt;/key&gt;&lt;integer&gt;12&lt;/integer&gt;
+</span><span class='line'>          &lt;key&gt;Play Date&lt;/key&gt;&lt;integer&gt;3321087305&lt;/integer&gt;
+</span><span class='line'>          &lt;key&gt;Play Date UTC&lt;/key&gt;&lt;date&gt;2009-03-28T10:15:05Z&lt;/date&gt;
+</span><span class='line'>          &lt;key&gt;Rating&lt;/key&gt;&lt;integer&gt;80&lt;/integer&gt;
+</span><span class='line'>          &lt;key&gt;Album Rating&lt;/key&gt;&lt;integer&gt;80&lt;/integer&gt;
+</span><span class='line'>          &lt;key&gt;Album Rating Computed&lt;/key&gt;&lt;<span class="nb">true</span>/&gt;
+</span><span class='line'>          &lt;key&gt;Artwork Count&lt;/key&gt;&lt;integer&gt;1&lt;/integer&gt;
+</span><span class='line'>          &lt;key&gt;Persistent ID&lt;/key&gt;&lt;string&gt;E5B52C3DE807B7DC&lt;/string&gt;
+</span><span class='line'>          &lt;key&gt;Track Type&lt;/key&gt;&lt;string&gt;File&lt;/string&gt;
+</span><span class='line'>          &lt;key&gt;File Type&lt;/key&gt;&lt;integer&gt;1297106739&lt;/integer&gt;
+</span><span class='line'>          &lt;key&gt;Location&lt;/key&gt;&lt;string&gt;file://localhost/Users/ME/Music/iTunes/iTunes%20Media/Music/Ski/Jazzanova_%20The%20Remixes,%201997-2000/Fifths%20<span class="o">(</span>Jazzanova%206%20Sickth%20Mix<span class="o">)</span>.mp3&lt;/string&gt;
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You need to look out for the file:// bit of the xml. Here it is telling me that it is looking into /Users/ME/Music/, i.e. my home folder instead of my external hard disk. Bastard.</p>
+
+<h2>Use sed to fix the path and create a new xml file</h2>
+
+<p><a href="http://www.grymoire.com/Unix/Sed.html">sed</a> is a nifty unix utility which you can use from Terminal. It can open a file, go through it line by line, change things on each line, and then put the result in another file. At least, that&#8217;s how I am using it here.</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sed <span class="s1">&#39;s/file:\/\/localhost\/Users\/ME\/Music\/iTunes\/iTunes%20Media\//file:\/\/localhost\/Volumes\/HD1T\//&#39;</span>  &lt; /Users/ME/Desktop/iTunes<span class="se">\ </span>Music<span class="se">\ </span>Library.xml  &gt; /Users/ME/Music/iTunes/iTunes<span class="se">\ </span>Music<span class="se">\ </span>Library.xml
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Here&#8217;s a breakdown of what the command does.</p>
+
+<dl class="code-breakdown">
+  <dt>sed</dt>
+  <dd>calls the sed command - it stands for <b>S</b>tream <b>ED</b>itor</dd>
+
+  <dt>&#8217;s/&#8230;/&#8230;./&#8217;</dt>
+  <dd>sed will itself need instructions, which are strings hence the &#8217; (apostrophe). s/a/b/ means &#8220;if you find an a, substitue it with b&#8221;</dd>
+
+  <dt class="long-line">file:\/\/localhost\/Users\/ME&#8230;</dt>
+  <dd class="long-line">this is the string we are looking for. Note that given that forward slashes are used by sed for s/&#8230;/&#8230;/,  if you need them in the string you have to escape them with backward slashes</dd>
+
+  <dt class="long-line">file:\/\/localhost\/Volumes\/HD1T\/</dt>
+  <dd class="long-line">the string we are replacing with</dd>
+
+  <dt class="long-line">&lt; /Users/ME/Desktop/iTunes\ Music\ Library.xml</dt>
+  <dd class="long-line">The less than sign means &#8220;use this file as input&#8221; - in this case, the xml file I had dragged to the Desktop</dd>
+
+  <dt class="long-line">&gt;  /Users/ME/Music/iTunes/iTunes\ Music\ Library.xml</dt>
+  <dd class="long-line">and this means &#8220;create this file as output&#8221;. We are asking sed to recreate the xml library file from the one on the desktop, but changing some bits around as it does so</dd>
+
+</dl>
+
+
+<h2>Create a broken iTunes library</h2>
+
+<p>Now this is important - if you just start iTunes now, with the new .xml file there and no .itl file there, nothing will happen. iTunes will ignore  the xml file, and just reset to an empty library. But if iTunes finds a broken .itl file, it will use the .xml file we just fiddled with to recreate the .itl file.  The easiest way to create a broken .itl file is from terminal:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>touch /Users/ME/Music/iTunes/iTunes<span class="se">\ </span>Library.itl
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>which will create an empty file - broken enough for iTunes.</p>
+
+<h2>Restart iTunes</h2>
+
+<p>Now iTunes will finally pay attention to the xml file - it will show a dialog saying &#8216;Importing &#8216;iTunes Music  Library.xml&#8217;&#8230;&#8221;
+This may take a while, even though it isn&#8217;t actually copying mp3 files around.</p>
+</div>
+	</div>
+</article>
+
+<article class="archives">
+  <div class="related-posts">
+    <h2>Related Posts</h2>
+    
+      <article>
+        <h3 class="title"><a href="/blog/geekery/itunes-playlist-copy-files/">Copying files from an iTunes playlist to a folder</a></h3>
+        <div class="meta">
+          <span class="tags">
+
+
+	<a class='category' href='/blog/cat/geekery/'>Geekery</a>
+
+
+</span>
+            
+          <time datetime="2012-08-14T12:14:53+02:00" pubdate>2012-08-14</time>
+            
+        </div>
+      </article>
+    
+      <article>
+        <h3 class="title"><a href="/blog/howto/nested-conditionals-itunes-smart-playlists">Nested conditionals in iTunes smart playlists have gone?</a></h3>
+        <div class="meta">
+          <span class="tags">
+
+
+	<a class='category' href='/blog/cat/howto/'>HowTo</a>
+
+
+</span>
+            
+          <time datetime="2012-08-14T12:14:53+02:00" pubdate>2012-08-14</time>
+            
+        </div>
+      </article>
+    
+      <article>
+        <h3 class="title"><a href="/blog/weekly-challenge/manipulating-xml-itunes-library-ruby">Manipulating XML iTunes library files with Ruby</a></h3>
+        <div class="meta">
+          <span class="tags">
+
+
+	<a class='category' href='/blog/cat/weekly-challenge/'>Weekly Challenge</a>
+
+
+</span>
+            
+          <time datetime="2012-08-14T12:14:53+02:00" pubdate>2012-08-14</time>
+            
+        </div>
+      </article>
+    
+  </div>
+</article>
+
+
+<section id="comment">
+    <h1 class="title">Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+
+    
+  </div>
+	<footer id="footer" class="inner">Copyright &copy; 2014
+
+    Fabrizio (Fritz) Stelluto
+
+</footer>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="/javascripts/slash.js"></script>
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'goto-fritz';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://gotofritz.net/blog/howto/fixing-itunes-cannot-find-music';
+        var disqus_url = 'http://gotofritz.net/blog/howto/fixing-itunes-cannot-find-music';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-11254155-2']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+</body>
+</html>

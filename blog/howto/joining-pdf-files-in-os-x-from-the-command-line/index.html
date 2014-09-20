@@ -1,0 +1,254 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Joining PDF files in OS X from the command line - Fabrizio (Fritz) Stelluto</title>
+	<meta name="author" content="">
+
+	
+	<meta name="description" content="In OS X, PDF files can be concatenated manually using Preview. But if you are happy using Terminal there&#8217;s an easier way, thanks to a Python &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="Fabrizio (Fritz) Stelluto" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.ico" rel="shortcut icon">
+	<link rel="icon" href="/favicon.gif" type="image/gif" />
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	
+</head>
+
+
+<body ontouchstart="">
+
+  <header id="header" class="inner">
+<nav id="main-nav"><div>
+  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+  <a href="/">home</a>
+  <a href="/blog/">blog</a>
+</div></nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><div>
+  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+  <a href="/">home</a>
+  <a href="/blog/">blog</a>
+</div></div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="http://google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:gotofritz.net">
+			</form>
+		</div>
+	</div>
+</nav>
+
+<nav id="sub-nav" class="alignright">
+	<form class="search" action="http://google.com/search" method="get">
+		<input class="alignright" type="text" name="q" results="0">
+		<input type="hidden" name="q" value="site:gotofritz.net">
+	</form>
+</nav>
+
+</header>
+	
+		
+	
+	<div id="content" class="inner">
+    
+    <article class="post">
+	<h1 class="title">Joining PDF Files in OS X From the Command Line</h1>
+	<div>
+		<div class="meta">
+			<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-07-13T13:05:03+02:00" pubdate data-updated="true">2010-07-13, Tue</time></div>
+			<div class="tags">
+
+
+	<a class='category' href='/blog/cat/howto/'>HowTo</a>
+
+
+</div>
+			
+				<span class="comments"><a href="/blog/howto/joining-pdf-files-in-os-x-from-the-command-line#disqus_thread">Comments</a></span>
+			
+		</div>
+		<div class="entry-content"><p>In OS X, PDF files can be concatenated manually  using Preview. But if you are happy using Terminal there&#8217;s an easier way, thanks to a Python script installed by default in /System/Library/Automator</p>
+
+<!--more-->
+
+
+<h2>Combining PDF files manually using Preview</h2>
+
+<p>Preview allows PDF files to be combined by dragging and dropping, as long as you are careful when do it - or it won&#8217;t work.</p>
+
+<p>First of all, open the first PDF file in Preview as per normal. Then drag each of the other PDFs in turn, over the last page thumbnail in the drawer. This is where you need to be careful - you need to drop the document <em>over</em> the thumbnail of the previous document last page, not underneath it. Otherwise Preview will treat them as separate document and won&#8217;t merge them. The difference is quite easy to spot - when doing it right Preview will show a border around the thumbnail in the sidebar, instead of a line underneath it - see image below.</p>
+
+<p><img src="/a/2010-07-13-joining-pdf-files-in-os-x-from-the-command-line/joining-pdf.jpg" alt="How to spot whether Preview will merge PDF documents or treat them as separate files" />
+Also, if you read &#8220;NAME OF YOUR FILE.pdf (1 Document)&#8221; in Preview&#8217;s title bar, you are good to go, and you can start dragging the next file, until they are all done. Then you need to save the file, perhaps with a new name.</p>
+
+<p>So that works well - slightly laborious but easy for everyone to understand.</p>
+
+<h2>Combining PDF files on the command line in OSX</h2>
+
+<p>It turns out that from Tiger onwards, OSX ships with a Python script that does exactly what you need. The script is already executable, and Python is pre-installed on OS X, so all you need to do to run it is opening the Terminal and typing</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="s2">&quot;/System/Library/Automator/Combine PDF Pages.action/Contents/Resources/join.py&quot;</span> -o PATH/TO/YOUR/MERGED/FILE.pdf /PATH/TO/ORIGINAL/1.pdf /PATH/TO/ANOTHER/2.pdf /PATH/TO/A/WHOLE/DIR/*.pdf
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><a href="http://www.cs.cmu.edu/~benhdj/Mac/unix.html#joinPDF">Benjamin Han</a> recommends setting up a <a href="http://is.gd/dqddx">symbolic link</a> to make typing easier. I prefer putting the link in /usr/local/bin, as it is in the $PATH and therefore I can run the command from anywhere. To setup the link, you need to navigate to the directory where you want the link.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">cd</span> /usr/local/bin
+</span><span class='line'>sudo ln <span class="s2">&quot;/System/Library/Automator/Combine PDF Pages.action/Contents/Resources/join.py&quot;</span> PDFconcat
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Terminal will ask you for your password (you need Admin rights to do this). After the command is run, you will be able to concatenate PDF files anywhere on Terminal by typing</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>PDFconcat -o PATH/TO/YOUR/MERGED/FILE.pdf /PATH/TO/ORIGINAL/1.pdf /PATH/TO/ANOTHER/2.pdf /PATH/TO/A/WHOLE/DIR/*.pdf
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You can even pass a &#8216;shuffle&#8217; argument to make the script take one page per document in turn instead:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>PDFconcat -s -o PATH/TO/YOUR/MERGED/FILE.pdf  /PATH/TO/DIR/*.pdf
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Combining PDF files on the command line using ghostscript</h2>
+
+<p>Ghostscript is a command line postscript viewer. Preview is able to convert all postscript based format like EPS into PDF, therefore making ghostcript obsolete. However, ghostscript is useful for batch processing text files, including PDF files -  and that includes merging them. There is <a href="http://www.macosxhints.com/article.php?story=20030223192653618">a discussion on how to merge PDF files using ghostscript on Mac OSX Hints</a>.</p>
+</div>
+	</div>
+</article>
+
+<article class="archives">
+  <div class="related-posts">
+    <h2>Related Posts</h2>
+    
+      <article>
+        <h3 class="title"><a href="/blog/geekery/cannot-install-xcode-3-2-6-snow-leopard">Cannot install Xcode 3.2.6 on Snow Leopard</a></h3>
+        <div class="meta">
+          <span class="tags">
+
+
+	<a class='category' href='/blog/cat/geekery/'>Geekery</a>
+
+
+</span>
+            
+          <time datetime="2010-07-13T13:05:03+02:00" pubdate>2010-07-13</time>
+            
+        </div>
+      </article>
+    
+      <article>
+        <h3 class="title"><a href="/blog/geekery/os-x-extended-attibutes">Dealing with extended attributes on OS X</a></h3>
+        <div class="meta">
+          <span class="tags">
+
+
+	<a class='category' href='/blog/cat/geekery/'>Geekery</a>
+
+
+</span>
+            
+          <time datetime="2010-07-13T13:05:03+02:00" pubdate>2010-07-13</time>
+            
+        </div>
+      </article>
+    
+      <article>
+        <h3 class="title"><a href="/blog/howto/simple-voice-recording-mac">Making a simple voice recording on a Mac</a></h3>
+        <div class="meta">
+          <span class="tags">
+
+
+	<a class='category' href='/blog/cat/howto/'>HowTo</a>
+
+
+</span>
+            
+          <time datetime="2010-07-13T13:05:03+02:00" pubdate>2010-07-13</time>
+            
+        </div>
+      </article>
+    
+  </div>
+</article>
+
+
+<section id="comment">
+    <h1 class="title">Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+
+    
+  </div>
+	<footer id="footer" class="inner">Copyright &copy; 2014
+
+    Fabrizio (Fritz) Stelluto
+
+</footer>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="/javascripts/slash.js"></script>
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'goto-fritz';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://gotofritz.net/blog/howto/joining-pdf-files-in-os-x-from-the-command-line';
+        var disqus_url = 'http://gotofritz.net/blog/howto/joining-pdf-files-in-os-x-from-the-command-line';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-11254155-2']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+</body>
+</html>

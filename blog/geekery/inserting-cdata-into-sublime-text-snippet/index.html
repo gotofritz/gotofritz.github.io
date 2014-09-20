@@ -1,0 +1,241 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Inserting CDATA into a Sublime Text snippet - Fabrizio (Fritz) Stelluto</title>
+	<meta name="author" content="">
+
+	
+	<meta name="description" content="Sublime Text Snippets are XML documents, with the body of the snippet is inside a CDATA node. So what happens if you need the body of the snippet to &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="Fabrizio (Fritz) Stelluto" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.ico" rel="shortcut icon">
+	<link rel="icon" href="/favicon.gif" type="image/gif" />
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	
+</head>
+
+
+<body ontouchstart="">
+
+  <header id="header" class="inner">
+<nav id="main-nav"><div>
+  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+  <a href="/">home</a>
+  <a href="/blog/">blog</a>
+</div></nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><div>
+  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+  <a href="/">home</a>
+  <a href="/blog/">blog</a>
+</div></div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="http://google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:gotofritz.net">
+			</form>
+		</div>
+	</div>
+</nav>
+
+<nav id="sub-nav" class="alignright">
+	<form class="search" action="http://google.com/search" method="get">
+		<input class="alignright" type="text" name="q" results="0">
+		<input type="hidden" name="q" value="site:gotofritz.net">
+	</form>
+</nav>
+
+</header>
+	
+		
+	
+	<div id="content" class="inner">
+    
+    <article class="post">
+	<h1 class="title">Inserting CDATA Into a Sublime Text Snippet</h1>
+	<div>
+		<div class="meta">
+			<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-01-05T18:20:00+01:00" pubdate data-updated="true">2014-01-05, Sun</time></div>
+			<div class="tags">
+
+
+	<a class='category' href='/blog/cat/geekery/'>Geekery</a>
+
+
+</div>
+			
+				<span class="comments"><a href="/blog/geekery/inserting-cdata-into-sublime-text-snippet/#disqus_thread">Comments</a></span>
+			
+		</div>
+		<div class="entry-content"><p><a href="https://sublime-text-unofficial-documentation.readthedocs.org/en/latest/reference/snippets.html" title="[new window] Snippets — Sublime Text Unofficial Documentation" target="_blank">Sublime Text Snippets</a> are XML documents, with the body of the snippet is inside a CDATA node. So what happens if you need the body of the snippet to have a CDATA of its own?</p>
+
+<!--more-->
+
+
+<p>XML documents cannot have nested CDATA blocks, so any CDATA you put in there is illegal. The problem is not the opening tag itself, the <code>&lt;![CDATA[</code>, which is just treated as part of the data, i.e. ignored. The problem is the closing tag, the <code>]]&gt;</code> - it will close the CDATA before you need to, so any XML after that will likely be invalid.</p>
+
+<h2>Sublime insertion points</h2>
+
+<p>Snippets can have insertion points: <code>${1}</code> is where the cursor will be when you create the snippet, <code>${2}</code> is where it will go to when you tab, and so on. Incidentally, <code>${1:DEFAULT}</code> will select the word &#8220;DEFAULT&#8221; and leave the cursor there, so you can just tab away or type something to overwrite it. Anyway.</p>
+
+<p>It turns out you can use the insertion point <code>${-1}</code> too. It does absolutely nothing at all, which is just what we need - something that can be used to break up the <code>]]&gt;</code> without doing anything at all.</p>
+
+<p>Let&#8217;s say we want to create a snippet with this body, and we want &#8220;TITLE&#8221; to be selectable, with one insertion point in each CDATA</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;yes&quot;?&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;title&gt;</span><span class="cp">&lt;![CDATA[TITLE]]&gt;</span><span class="nt">&lt;/title&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;description&gt;</span><span class="cp">&lt;![CDATA[]]&gt;</span><span class="nt">&lt;/description&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;source&gt;</span><span class="cp">&lt;![CDATA[]]&gt;</span><span class="nt">&lt;/source&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Here&#8217;s how to use the <code>${-1}</code> trick to break up the CDATA blocks - note how it goes in between the <code>]]</code> and the closing <code>&gt;</code></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;snippet&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;content&gt;</span><span class="cp">&lt;![CDATA[&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;yes&quot;?&gt;</span>
+</span><span class='line'><span class="cp">  &lt;title&gt;&lt;![CDATA[${1:TITLE}]]${-1}&gt;&lt;/title&gt;</span>
+</span><span class='line'><span class="cp">  &lt;description&gt;&lt;![CDATA[$2]]${-1}&gt;&lt;/description&gt;</span>
+</span><span class='line'><span class="cp">  &lt;source&gt;&lt;![CDATA[$3]]${-1}&gt;&lt;/source&gt;</span>
+</span><span class='line'><span class="cp">]]&gt;</span><span class="nt">&lt;/content&gt;</span>
+</span><span class='line'>    <span class="c">&lt;!-- Optional: Set a tabTrigger to define how to trigger the snippet --&gt;</span>
+</span><span class='line'>    <span class="c">&lt;!-- &lt;tabTrigger&gt;hello&lt;/tabTrigger&gt; --&gt;</span>
+</span><span class='line'>    <span class="c">&lt;!-- Optional: Set a scope to limit where the snippet will trigger --&gt;</span>
+</span><span class='line'>    <span class="c">&lt;!-- &lt;scope&gt;source.python&lt;/scope&gt; --&gt;</span>
+</span><span class='line'><span class="nt">&lt;/snippet&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>That&#8217;s rather simple once you know how.</p>
+</div>
+	</div>
+</article>
+
+<article class="archives">
+  <div class="related-posts">
+    <h2>Related Posts</h2>
+    
+      <article>
+        <h3 class="title"><a href="/blog/weekly-challenge/managing-xml-files-sublime-text-2">Managing XML files with Sublime Text 2</a></h3>
+        <div class="meta">
+          <span class="tags">
+
+
+	<a class='category' href='/blog/cat/weekly-challenge/'>Weekly Challenge</a>
+
+
+</span>
+            
+          <time datetime="2014-01-05T18:20:00+01:00" pubdate>2014-01-05</time>
+            
+        </div>
+      </article>
+    
+      <article>
+        <h3 class="title"><a href="/blog/geekery/howto-create-sublime-text-2-snippet">How to create a Sublime Text 2 snippet</a></h3>
+        <div class="meta">
+          <span class="tags">
+
+
+	<a class='category' href='/blog/cat/geekery/'>Geekery</a>
+
+
+</span>
+            
+          <time datetime="2014-01-05T18:20:00+01:00" pubdate>2014-01-05</time>
+            
+        </div>
+      </article>
+    
+  </div>
+</article>
+
+
+<section id="comment">
+    <h1 class="title">Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+
+    
+  </div>
+	<footer id="footer" class="inner">Copyright &copy; 2014
+
+    Fabrizio (Fritz) Stelluto
+
+</footer>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="/javascripts/slash.js"></script>
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'goto-fritz';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://gotofritz.net/blog/geekery/inserting-cdata-into-sublime-text-snippet/';
+        var disqus_url = 'http://gotofritz.net/blog/geekery/inserting-cdata-into-sublime-text-snippet/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-11254155-2']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,661 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>A script to take screenshots at regular intervals - Fabrizio (Fritz) Stelluto</title>
+	<meta name="author" content="">
+
+	
+	<meta name="description" content="This week&#8217;s challenge: a Python shell script that calls webkit2png repeatedly to take screenshots of a website at various intervals. The script &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="Fabrizio (Fritz) Stelluto" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.ico" rel="shortcut icon">
+	<link rel="icon" href="/favicon.gif" type="image/gif" />
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	
+</head>
+
+
+<body ontouchstart="">
+
+  <header id="header" class="inner">
+<nav id="main-nav"><div>
+  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+  <a href="/">home</a>
+  <a href="/blog/">blog</a>
+</div></nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><div>
+  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+  <a href="/">home</a>
+  <a href="/blog/">blog</a>
+</div></div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="http://google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:gotofritz.net">
+			</form>
+		</div>
+	</div>
+</nav>
+
+<nav id="sub-nav" class="alignright">
+	<form class="search" action="http://google.com/search" method="get">
+		<input class="alignright" type="text" name="q" results="0">
+		<input type="hidden" name="q" value="site:gotofritz.net">
+	</form>
+</nav>
+
+</header>
+	
+		
+	
+	<div id="content" class="inner">
+    
+    <article class="post">
+	<h1 class="title">A Script to Take Screenshots at Regular Intervals</h1>
+	<div>
+		<div class="meta">
+			<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-12-05T16:18:23+01:00" pubdate data-updated="true">2011-12-05, Mon</time></div>
+			<div class="tags">
+
+
+	<a class='category' href='/blog/cat/weekly-challenge/'>Weekly Challenge</a>
+
+
+</div>
+			
+				<span class="comments"><a href="/blog/weekly-challenge/script-screeshots-intervals-python#disqus_thread">Comments</a></span>
+			
+		</div>
+		<div class="entry-content"><p>This week&#8217;s challenge: a Python shell script that calls webkit2png repeatedly to take screenshots of a website at various intervals. The script will be called webkit2loop.</p>
+
+<!--more-->
+
+
+<h2>About the challenge</h2>
+
+<p><a href="https://github.com/paulhammond/webkit2png/">webkit2png</a> is a nice little Python script by Paul Hammond that lets you take screenshots of websites from your Terminal on a Mac. Very handy, but sometimes with dynamic sites I need to take screenshots at various intervals. I thought writing a wrapper that calls webkit2png in a loop, passing different delays to it, would be a good way to start learning Python.</p>
+
+<p>This <a href="https://github.com/gotofritz/Weekly-Challenges/tree/master/weekly-challenge-03_webkit2loop">simple script is available on GitHub</a>.</p>
+
+<h3>webkit2png options</h3>
+
+<p>For reference, here are the webkit2png command line options</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>  --version             show program<span class="s1">&#39;s version number and exit</span>
+</span><span class='line'><span class="s1">  -h, --help            show this help message and exit</span>
+</span><span class='line'><span class="s1">  -W WIDTH, --width=WIDTH</span>
+</span><span class='line'><span class="s1">                        initial (and minimum) width of browser (default: 800)</span>
+</span><span class='line'><span class="s1">  -H HEIGHT, --height=HEIGHT</span>
+</span><span class='line'><span class="s1">                        initial (and minimum) height of browser (default: 600)</span>
+</span><span class='line'><span class="s1">  --clipwidth=WIDTH     width of clipped thumbnail (default: 200)</span>
+</span><span class='line'><span class="s1">  --clipheight=HEIGHT   height of clipped thumbnail (default: 150)</span>
+</span><span class='line'><span class="s1">  -z ZOOM, --zoom=ZOOM  full page zoom of browser (default: 1.0)</span>
+</span><span class='line'><span class="s1">  -s SCALE, --scale=SCALE</span>
+</span><span class='line'><span class="s1">                        scale factor for thumbnails (default: 0.25)</span>
+</span><span class='line'><span class="s1">  -m, --md5             use md5 hash for filename (like del.icio.us)</span>
+</span><span class='line'><span class="s1">  -o NAME, --filename=NAME</span>
+</span><span class='line'><span class="s1">                        save images as NAME-full.png,NAME-thumb.png etc</span>
+</span><span class='line'><span class="s1">  -F, --fullsize        only create fullsize screenshot</span>
+</span><span class='line'><span class="s1">  -T, --thumb           only create thumbnail sreenshot</span>
+</span><span class='line'><span class="s1">  -C, --clipped         only create clipped thumbnail screenshot</span>
+</span><span class='line'><span class="s1">  -d, --datestamp       include date in filename</span>
+</span><span class='line'><span class="s1">  -D DIR, --dir=DIR     directory to place images into</span>
+</span><span class='line'><span class="s1">  --delay=DELAY         delay between page load finishing and screenshot</span>
+</span><span class='line'><span class="s1">  --noimages            don&#39;</span>t load images
+</span><span class='line'>  --transparent         render output on a transparent background <span class="o">(</span>be sure to
+</span><span class='line'>                        have a transparent background defined in the html<span class="o">)</span>
+</span><span class='line'>  --nojs                disable JavaScript support
+</span><span class='line'>  --js<span class="o">=</span>JS               JavaScript to execute when the window finishes loading
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>User story</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='gherkin'><span class='line'><span class="k">Feature:</span><span class="nf"> webkit2loop</span>
+</span><span class='line'><span class="nf">    In order to take screenshots of sites that change over time</span>
+</span><span class='line'><span class="nf">    As a Mac geek</span>
+</span><span class='line'><span class="nf">    I need to call webkit2png in a loop with different delay values</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Passing options through</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='gherkin'><span class='line'><span class="k">Scenario:</span><span class="nf"> passing options to webkit2png</span>
+</span><span class='line'><span class="k">    Given </span><span class="nf">that I have webkit</span><span class="s">2</span><span class="nf">png in my path</span>
+</span><span class='line'><span class="nf">    </span><span class="k">When </span><span class="nf">I call webkit</span><span class="s">2</span><span class="nf">loop with any of these webkit</span><span class="s">2</span><span class="nf">png options: [ &quot;</span><span class="s">width</span><span class="nf">&quot;, &quot;</span><span class="s">height</span><span class="nf">&quot;, &quot;</span><span class="s">zoom</span><span class="nf">&quot;, &quot;</span><span class="s">filename</span><span class="nf">&quot;, &quot;</span><span class="s">dir</span><span class="nf">&quot;]</span>
+</span><span class='line'><span class="nf">    </span><span class="k">Then </span><span class="nf">webkit</span><span class="s">2</span><span class="nf">png should be called with the very same options</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>For my first attempt I simply pass on whatever options the script is called with, except for a few that wouldn&#8217;t make sense.</p>
+
+<p>First step was to upgrade to Python 2.7.2, as the new argparse module was introduced for it. That was standard procedure, go to the Python site, get the installer, follow instructions.</p>
+
+<p>First iteration simply called webkit2png with some hard coded variables</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">import</span> <span class="nn">subprocess</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">def</span> <span class="nf">webkit2png</span><span class="p">():</span>
+</span><span class='line'>    <span class="n">subprocess</span><span class="o">.</span><span class="n">call</span><span class="p">(</span> <span class="s">&quot;webkit2png -F -d -D ~/Desktop/webkit2png_images/ -o 06 --delay 1.65 http://soulwire.co.uk/hello&quot;</span><span class="o">.</span><span class="n">split</span><span class="p">()</span> <span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&quot;__main__&quot;</span><span class="p">:</span>
+</span><span class='line'>    <span class="n">webkit2png</span><span class="p">()</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Turns out subprocess.call doesn&#8217;t like the tilde at the start of ~/Desktop - changed it to an absolute path for now to make it work.</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="c">#!/usr/bin/env python</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">subprocess</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">argparse</span>
+</span><span class='line'>
+</span><span class='line'><span class="kn">import</span> <span class="nn">sys</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">def</span> <span class="nf">webkit2png</span><span class="p">(</span> <span class="n">stack</span><span class="o">=</span><span class="p">[]</span> <span class="p">):</span>
+</span><span class='line'>    <span class="k">if</span> <span class="mi">0</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span> <span class="n">stack</span> <span class="p">):</span>
+</span><span class='line'>        <span class="k">print</span> <span class="s">&quot;function webkit2png called with no arguments&quot;</span>
+</span><span class='line'>        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span> <span class="mi">1</span> <span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c">#hardcoded options, and the command</span>
+</span><span class='line'>    <span class="n">stack</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span> <span class="mi">0</span><span class="p">,</span> <span class="s">&quot;-F&quot;</span> <span class="p">)</span>
+</span><span class='line'>    <span class="n">stack</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span> <span class="mi">0</span><span class="p">,</span> <span class="s">&quot;webkit2png&quot;</span> <span class="p">)</span>
+</span><span class='line'>    <span class="n">subprocess</span><span class="o">.</span><span class="n">call</span><span class="p">(</span> <span class="n">stack</span> <span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+</span><span class='line'>    <span class="n">stack</span> <span class="o">=</span> <span class="p">[]</span> <span class="c">#collects options</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c">#sets up command</span>
+</span><span class='line'>    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s">&quot;Wrapper around webkit2png. Allows it to be called in a loop&quot;</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span> <span class="s">&quot;url&quot;</span><span class="p">,</span>
+</span><span class='line'>                    <span class="n">action</span><span class="o">=</span><span class="s">&quot;store&quot;</span><span class="p">,</span>
+</span><span class='line'>                    <span class="n">help</span><span class="o">=</span><span class="s">&quot;the url of the site to take screenshots of&quot;</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span> <span class="s">&quot;-W&quot;</span><span class="p">,</span> <span class="s">&quot;--width&quot;</span><span class="p">,</span>
+</span><span class='line'>                    <span class="n">action</span><span class="o">=</span><span class="s">&quot;store&quot;</span><span class="p">,</span>
+</span><span class='line'>                    <span class="n">help</span><span class="o">=</span><span class="s">&quot;initial (and minimum) width of browser (default: 800)&quot;</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span> <span class="s">&quot;-H&quot;</span><span class="p">,</span> <span class="s">&quot;--height&quot;</span><span class="p">,</span>
+</span><span class='line'>                    <span class="n">action</span><span class="o">=</span><span class="s">&quot;store&quot;</span><span class="p">,</span>
+</span><span class='line'>                    <span class="n">help</span><span class="o">=</span><span class="s">&quot;initial (and minimum) height of browser (default: 600)&quot;</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span> <span class="s">&quot;-z&quot;</span><span class="p">,</span> <span class="s">&quot;--zoom&quot;</span><span class="p">,</span>
+</span><span class='line'>                    <span class="n">action</span><span class="o">=</span><span class="s">&quot;store&quot;</span><span class="p">,</span>
+</span><span class='line'>                    <span class="n">help</span><span class="o">=</span><span class="s">&quot;full page zoom of browser (default: 1.0)&quot;</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span> <span class="s">&quot;-o&quot;</span><span class="p">,</span> <span class="s">&quot;--filename&quot;</span><span class="p">,</span>
+</span><span class='line'>                    <span class="n">action</span><span class="o">=</span><span class="s">&quot;store&quot;</span><span class="p">,</span>
+</span><span class='line'>                    <span class="n">help</span><span class="o">=</span><span class="s">&quot;save images as NAME-full.png,NAME-thumb.png etc&quot;</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span> <span class="s">&quot;-D&quot;</span><span class="p">,</span> <span class="s">&quot;--dir&quot;</span><span class="p">,</span>
+</span><span class='line'>                    <span class="n">action</span><span class="o">=</span><span class="s">&quot;store&quot;</span><span class="p">,</span>
+</span><span class='line'>                    <span class="n">help</span><span class="o">=</span><span class="s">&quot;save images as NAME-full.png,NAME-thumb.png etc&quot;</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c">#collects options - can fix any issues here</span>
+</span><span class='line'>    <span class="c">#TODO</span>
+</span><span class='line'>    <span class="c">#subprocess.call doesnt&#39; like paths starting with a ~ it would be nice to substitute that</span>
+</span><span class='line'>    <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="p">[</span> <span class="s">&quot;width&quot;</span><span class="p">,</span> <span class="s">&quot;height&quot;</span><span class="p">,</span> <span class="s">&quot;zoom&quot;</span><span class="p">,</span> <span class="s">&quot;filename&quot;</span><span class="p">,</span> <span class="s">&quot;dir&quot;</span><span class="p">]:</span>
+</span><span class='line'>        <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">__dict__</span><span class="p">[</span><span class="n">a</span><span class="p">]:</span>
+</span><span class='line'>            <span class="n">stack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="s">&quot;--&quot;</span> <span class="o">+</span> <span class="n">a</span> <span class="p">)</span>
+</span><span class='line'>            <span class="n">stack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">args</span><span class="o">.</span><span class="n">__dict__</span><span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="p">)</span>
+</span><span class='line'>    <span class="n">stack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">args</span><span class="o">.</span><span class="n">url</span> <span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">webkit2png</span><span class="p">(</span> <span class="n">stack</span> <span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&quot;__main__&quot;</span><span class="p">:</span>
+</span><span class='line'>    <span class="n">main</span><span class="p">()</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Using the argparser module to run the command. No fancy stuff, just collecting options and sticking them in a an array.
+Wanting to avoid to have an if: clause for every option I tried to write an iterator, but parser.parse_args returns a Namespace object which is not iterable. Eventually I found out about <strong>dict</strong>, which can be used to iterate through a Namespace object. The options are collected in an array then passed to the webkit2png command.</p>
+
+<h3>Taking screenshots at regular intervals</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='gherkin'><span class='line'><span class="k">Scenario:</span><span class="nf"> taking screenshots at regular intervals</span>
+</span><span class='line'><span class="k">    Given </span><span class="nf">that I can call webkit</span><span class="s">2</span><span class="nf">png from webkit</span><span class="s">2</span><span class="nf">loop</span>
+</span><span class='line'><span class="nf">    </span><span class="k">When </span><span class="nf">I pass the option -i or --interval followed by a floating number</span>
+</span><span class='line'><span class="nf">    </span><span class="k">And </span><span class="nf">I pass the option -s or --start followed by a floating number</span>
+</span><span class='line'><span class="nf">    </span><span class="k">And </span><span class="nf">I pass the option -n or --iterations followed by an integer less than </span><span class="s">101</span><span class="nf"></span>
+</span><span class='line'><span class="nf">    </span><span class="k">Then </span><span class="nf">webkit</span><span class="s">2</span><span class="nf">png should be called -n times, each time with a delay equal to -n * -i + -s</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This scenario describes three new options to take screenshot at regular intervals: the length of the interval, an initial offset, and the max number of screenshots to take (capped to 100). For brevity I didn&#8217;t include  a scenario which describes what the default values should be, nor how to handle file naming.</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+<span class='line-number'>87</span>
+<span class='line-number'>88</span>
+<span class='line-number'>89</span>
+<span class='line-number'>90</span>
+<span class='line-number'>91</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="c">#!/usr/bin/env python</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">subprocess</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">argparse</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">sys</span><span class="o">,</span> <span class="nn">os</span>
+</span><span class='line'>
+</span><span class='line'><span class="sd">&quot;&quot;&quot;calls the webkit2png</span>
+</span><span class='line'><span class="sd">    stack is an array of arrays, each array contains the options for a call to webkit2png&quot;&quot;&quot;</span>
+</span><span class='line'><span class="k">def</span> <span class="nf">webkit2png</span><span class="p">(</span> <span class="n">stack</span><span class="o">=</span><span class="bp">None</span> <span class="p">):</span>
+</span><span class='line'>    <span class="k">if</span> <span class="n">stack</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+</span><span class='line'>        <span class="k">print</span> <span class="s">&quot;No stack passed to webkit2pnt&quot;</span>
+</span><span class='line'>        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">stack</span><span class="p">)):</span>
+</span><span class='line'>        <span class="n">substack</span> <span class="o">=</span> <span class="n">stack</span><span class="p">[</span><span class="n">i</span><span class="p">][:]</span>
+</span><span class='line'>        <span class="n">substack</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span> <span class="mi">0</span><span class="p">,</span> <span class="s">&quot;-F&quot;</span> <span class="p">)</span>
+</span><span class='line'>        <span class="n">substack</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span> <span class="mi">0</span><span class="p">,</span> <span class="s">&quot;webkit2png&quot;</span> <span class="p">)</span>
+</span><span class='line'>        <span class="n">subprocess</span><span class="o">.</span><span class="n">call</span><span class="p">(</span> <span class="n">substack</span> <span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+</span><span class='line'>    <span class="n">sharedStack</span> <span class="o">=</span> <span class="p">[]</span> <span class="c">#shared options among all calls (if more than one)</span>
+</span><span class='line'>    <span class="n">singleStack</span> <span class="o">=</span> <span class="p">[]</span> <span class="c">#current command</span>
+</span><span class='line'>    <span class="n">cmdStack</span> <span class="o">=</span> <span class="p">[]</span>    <span class="c">#collection of all commands</span>
+</span><span class='line'>    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s">&quot;Wrapper around webkit2png. Allows it to be called in a loop&quot;</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span> <span class="s">&quot;url&quot;</span><span class="p">,</span>
+</span><span class='line'>                    <span class="n">action</span><span class="o">=</span><span class="s">&quot;store&quot;</span><span class="p">,</span>
+</span><span class='line'>                    <span class="n">help</span><span class="o">=</span><span class="s">&quot;the url of the site to take screenshots of&quot;</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span> <span class="s">&quot;-i&quot;</span><span class="p">,</span> <span class="s">&quot;--interval&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span>
+</span><span class='line'>                    <span class="n">action</span><span class="o">=</span><span class="s">&quot;store&quot;</span><span class="p">,</span>
+</span><span class='line'>                    <span class="n">help</span><span class="o">=</span><span class="s">&quot;interval between regular screenshots&quot;</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span> <span class="s">&quot;-s&quot;</span><span class="p">,</span> <span class="s">&quot;--start&quot;</span><span class="p">,</span>
+</span><span class='line'>                    <span class="n">action</span><span class="o">=</span><span class="s">&quot;store&quot;</span><span class="p">,</span>
+</span><span class='line'>                    <span class="n">help</span><span class="o">=</span><span class="s">&quot;initial offest before starting to take regular screenshots&quot;</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span> <span class="s">&quot;-n&quot;</span><span class="p">,</span> <span class="s">&quot;--iterations&quot;</span><span class="p">,</span>
+</span><span class='line'>                    <span class="n">action</span><span class="o">=</span><span class="s">&quot;store&quot;</span><span class="p">,</span>
+</span><span class='line'>                    <span class="n">help</span><span class="o">=</span><span class="s">&quot;number of regular screenshots (max 100, default 3)&quot;</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span> <span class="s">&quot;-W&quot;</span><span class="p">,</span> <span class="s">&quot;--width&quot;</span><span class="p">,</span>
+</span><span class='line'>                    <span class="n">action</span><span class="o">=</span><span class="s">&quot;store&quot;</span><span class="p">,</span>
+</span><span class='line'>                    <span class="n">help</span><span class="o">=</span><span class="s">&quot;initial (and minimum) width of browser (default: 800)&quot;</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span> <span class="s">&quot;-H&quot;</span><span class="p">,</span> <span class="s">&quot;--height&quot;</span><span class="p">,</span>
+</span><span class='line'>                    <span class="n">action</span><span class="o">=</span><span class="s">&quot;store&quot;</span><span class="p">,</span>
+</span><span class='line'>                    <span class="n">help</span><span class="o">=</span><span class="s">&quot;initial (and minimum) height of browser (default: 600)&quot;</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span> <span class="s">&quot;-z&quot;</span><span class="p">,</span> <span class="s">&quot;--zoom&quot;</span><span class="p">,</span>
+</span><span class='line'>                    <span class="n">action</span><span class="o">=</span><span class="s">&quot;store&quot;</span><span class="p">,</span>
+</span><span class='line'>                    <span class="n">help</span><span class="o">=</span><span class="s">&quot;full page zoom of browser (default: 1.0)&quot;</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span> <span class="s">&quot;-o&quot;</span><span class="p">,</span> <span class="s">&quot;--filename&quot;</span><span class="p">,</span>
+</span><span class='line'>                    <span class="n">action</span><span class="o">=</span><span class="s">&quot;store&quot;</span><span class="p">,</span>
+</span><span class='line'>                    <span class="n">help</span><span class="o">=</span><span class="s">&quot;save images as NAME-full.png,NAME-thumb.png etc&quot;</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span> <span class="s">&quot;-D&quot;</span><span class="p">,</span> <span class="s">&quot;--dir&quot;</span><span class="p">,</span>
+</span><span class='line'>                    <span class="n">action</span><span class="o">=</span><span class="s">&quot;store&quot;</span><span class="p">,</span>
+</span><span class='line'>                    <span class="n">help</span><span class="o">=</span><span class="s">&quot;save images as NAME-full.png,NAME-thumb.png etc&quot;</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="sd">&quot;&quot;&quot;collects the shared options to be passed on to webkit2png - as they are or with some collection&quot;&quot;&quot;</span>
+</span><span class='line'>    <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="p">[</span> <span class="s">&quot;width&quot;</span><span class="p">,</span> <span class="s">&quot;height&quot;</span><span class="p">,</span> <span class="s">&quot;zoom&quot;</span><span class="p">,</span> <span class="s">&quot;dir&quot;</span><span class="p">]:</span>
+</span><span class='line'>        <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">__dict__</span><span class="p">[</span><span class="n">a</span><span class="p">]:</span>
+</span><span class='line'>            <span class="n">sharedStack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="s">&quot;--&quot;</span> <span class="o">+</span> <span class="n">a</span> <span class="p">)</span>
+</span><span class='line'>            <span class="n">sharedStack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">args</span><span class="o">.</span><span class="n">__dict__</span><span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="p">)</span>
+</span><span class='line'>    <span class="c">#subprocess.call doesn&#39;t like arguments starting with ~, so make sure there aren&#39;t any here</span>
+</span><span class='line'>    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">dir</span><span class="p">:</span>
+</span><span class='line'>        <span class="n">sharedStack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="s">&quot;--dir&quot;</span> <span class="p">)</span>
+</span><span class='line'>        <span class="n">sharedStack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span> <span class="n">args</span><span class="o">.</span><span class="n">dir</span> <span class="p">)</span> <span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">interval</span><span class="p">:</span>
+</span><span class='line'>        <span class="n">s</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span> <span class="n">args</span><span class="o">.</span><span class="n">start</span> <span class="p">)</span> <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">start</span> <span class="k">else</span> <span class="mi">0</span>
+</span><span class='line'>        <span class="n">d</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">interval</span>
+</span><span class='line'>        <span class="n">n</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">iterations</span> <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">iterations</span> <span class="k">else</span> <span class="mi">3</span>
+</span><span class='line'>        <span class="n">n</span> <span class="o">=</span> <span class="n">n</span> <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;=</span> <span class="mi">100</span> <span class="k">else</span> <span class="mi">100</span>
+</span><span class='line'>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span> <span class="mi">0</span><span class="p">,</span> <span class="n">n</span> <span class="p">):</span>
+</span><span class='line'>            <span class="n">singleStack</span> <span class="o">=</span> <span class="n">sharedStack</span><span class="p">[:]</span>
+</span><span class='line'>            <span class="n">singleStack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="s">&quot;--delay&quot;</span> <span class="p">)</span>
+</span><span class='line'>            <span class="n">singleStack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="nb">str</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="p">)</span>
+</span><span class='line'>            <span class="n">singleStack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="s">&quot;--filename&quot;</span> <span class="p">)</span>
+</span><span class='line'>            <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">filename</span><span class="p">:</span>
+</span><span class='line'>                <span class="n">singleStack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="s">&#39;</span><span class="si">%(stem)s</span><span class="s">-</span><span class="si">%(number)03d</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">{</span> <span class="s">&quot;stem&quot;</span> <span class="p">:</span> <span class="n">args</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span> <span class="s">&quot;number&quot;</span> <span class="p">:</span> <span class="n">i</span> <span class="p">}</span> <span class="p">)</span>
+</span><span class='line'>            <span class="k">else</span><span class="p">:</span>
+</span><span class='line'>                <span class="n">singleStack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="s">&#39;</span><span class="si">%(number)03d</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">{</span> <span class="s">&quot;number&quot;</span> <span class="p">:</span> <span class="n">i</span> <span class="p">}</span> <span class="p">)</span>
+</span><span class='line'>            <span class="n">singleStack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">args</span><span class="o">.</span><span class="n">url</span> <span class="p">)</span>
+</span><span class='line'>            <span class="n">cmdStack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">singleStack</span> <span class="p">)</span>
+</span><span class='line'>            <span class="n">s</span> <span class="o">=</span> <span class="n">s</span> <span class="o">+</span> <span class="n">d</span>
+</span><span class='line'>    <span class="k">else</span><span class="p">:</span>
+</span><span class='line'>        <span class="n">singleStack</span> <span class="o">=</span> <span class="n">sharedStack</span><span class="p">[:]</span>
+</span><span class='line'>        <span class="c">#special case - filename needs to change for multiple images</span>
+</span><span class='line'>        <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">filename</span><span class="p">:</span>
+</span><span class='line'>            <span class="n">sharedStack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="s">&quot;--filename&quot;</span> <span class="p">)</span>
+</span><span class='line'>            <span class="n">sharedStack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">args</span><span class="o">.</span><span class="n">filename</span> <span class="p">)</span>
+</span><span class='line'>        <span class="n">singleStack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">args</span><span class="o">.</span><span class="n">url</span> <span class="p">)</span>
+</span><span class='line'>        <span class="n">cmdStack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">singleStack</span> <span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">webkit2png</span><span class="p">(</span> <span class="n">cmdStack</span> <span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&quot;__main__&quot;</span><span class="p">:</span>
+</span><span class='line'>    <span class="n">main</span><span class="p">()</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In webkit2png:</p>
+
+<ul>
+<li><p>Changed the default to webkit2png call to None, as an empty variable is sticky and ended up having problems</p></li>
+<li><p>Changed the function to take an array of arrays, where each array contains the parameters for a call to webkit2png. Obviously this is not an elegant way of doing it, but it&#8217;s my first script and will have to do for now</p></li>
+</ul>
+
+
+<p>In main:</p>
+
+<ul>
+<li><p>Added the three new options</p></li>
+<li><p>Fixed issue with subprocess.call not liking arguments starting with ~, using os.path.expanduser</p></li>
+<li><p>set default of 3 for the number of loops, and 0 for start</p></li>
+<li><p>used a formatter to make the name of each file made up of filename followed by a dash (if filename was passed) then followed by a zero padded index</p></li>
+</ul>
+
+
+<h2>Challenge 100% complete</h2>
+
+<p>This was a small challenge, as I didn&#8217;t have that much time to spend on it. I didn&#8217;t add a timeline argument to pass a list of arbitrary delays, nor did I extend the original script as I intended to do. Still, it works, and I learned a bit of Python.</p>
+</div>
+	</div>
+</article>
+
+<article class="archives">
+  <div class="related-posts">
+    <h2>Related Posts</h2>
+    
+      <article>
+        <h3 class="title"><a href="/blog/weekly-challenge/generate-boilerplate-python">Generate Boilerplate project folders with Python</a></h3>
+        <div class="meta">
+          <span class="tags">
+
+
+	<a class='category' href='/blog/cat/weekly-challenge/'>Weekly Challenge</a>
+
+
+</span>
+            
+          <time datetime="2011-12-05T16:18:23+01:00" pubdate>2011-12-05</time>
+            
+        </div>
+      </article>
+    
+      <article>
+        <h3 class="title"><a href="/blog/weekly-challenge/restful-python-api-bottle">Creating a RESTful Python API with Bottle</a></h3>
+        <div class="meta">
+          <span class="tags">
+
+
+	<a class='category' href='/blog/cat/weekly-challenge/'>Weekly Challenge</a>
+
+
+</span>
+            
+          <time datetime="2011-12-05T16:18:23+01:00" pubdate>2011-12-05</time>
+            
+        </div>
+      </article>
+    
+      <article>
+        <h3 class="title"><a href="/blog/weekly-challenge/fetching-google-spreadsheets-converting-xml">Fetching Google Spreadsheets as XML</a></h3>
+        <div class="meta">
+          <span class="tags">
+
+
+	<a class='category' href='/blog/cat/weekly-challenge/'>Weekly Challenge</a>
+
+
+</span>
+            
+          <time datetime="2011-12-05T16:18:23+01:00" pubdate>2011-12-05</time>
+            
+        </div>
+      </article>
+    
+  </div>
+</article>
+
+
+<section id="comment">
+    <h1 class="title">Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+
+    
+  </div>
+	<footer id="footer" class="inner">Copyright &copy; 2014
+
+    Fabrizio (Fritz) Stelluto
+
+</footer>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="/javascripts/slash.js"></script>
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'goto-fritz';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://gotofritz.net/blog/weekly-challenge/script-screeshots-intervals-python';
+        var disqus_url = 'http://gotofritz.net/blog/weekly-challenge/script-screeshots-intervals-python';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-11254155-2']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+</body>
+</html>

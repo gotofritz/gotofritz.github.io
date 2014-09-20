@@ -1,0 +1,271 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Generating skewed random numbers - Fabrizio (Fritz) Stelluto</title>
+	<meta name="author" content="">
+
+	
+	<meta name="description" content="A quick and dirty way to generate skewed random numbers from when I needed test data for a game. Skewing random numbers with quadratics and &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="Fabrizio (Fritz) Stelluto" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.ico" rel="shortcut icon">
+	<link rel="icon" href="/favicon.gif" type="image/gif" />
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	
+</head>
+
+
+<body ontouchstart="">
+
+  <header id="header" class="inner">
+<nav id="main-nav"><div>
+  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+  <a href="/">home</a>
+  <a href="/blog/">blog</a>
+</div></nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><div>
+  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+  <a href="/">home</a>
+  <a href="/blog/">blog</a>
+</div></div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="http://google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:gotofritz.net">
+			</form>
+		</div>
+	</div>
+</nav>
+
+<nav id="sub-nav" class="alignright">
+	<form class="search" action="http://google.com/search" method="get">
+		<input class="alignright" type="text" name="q" results="0">
+		<input type="hidden" name="q" value="site:gotofritz.net">
+	</form>
+</nav>
+
+</header>
+	
+		
+	
+	<div id="content" class="inner">
+    
+    <article class="post">
+	<h1 class="title">Generating Skewed Random Numbers</h1>
+	<div>
+		<div class="meta">
+			<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-19T12:44:36+01:00" pubdate data-updated="true">2013-03-19, Tue</time></div>
+			<div class="tags">
+
+
+	<a class='category' href='/blog/cat/howto/'>HowTo</a>
+
+
+</div>
+			
+				<span class="comments"><a href="/blog/howto/skewing-random-numbers-towards-0#disqus_thread">Comments</a></span>
+			
+		</div>
+		<div class="entry-content"><p>A quick and dirty way to generate skewed random numbers from when I needed test data for a game.</p>
+
+<!--more-->
+
+
+<h2>Skewing random numbers with quadratics and exponentials</h2>
+
+<p>A quick way to skew random numbers towards 0, i.e. to make lower numbers more likely, is to raise the random numbers to a power - the higher the power, the higher the skew. To skew the other way, i.e. to make higher numbers more likely, just subract from 1</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">x</span><span class="o">^</span><span class="mi">2</span>      <span class="o">-&gt;</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">pow</span><span class="p">(</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">(),</span> <span class="mi">2</span> <span class="p">);</span>
+</span><span class='line'><span class="mi">1</span><span class="o">-</span><span class="nx">x</span><span class="o">^</span><span class="mi">2</span>    <span class="o">-&gt;</span> <span class="mi">1</span> <span class="o">-</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">pow</span><span class="p">(</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">(),</span> <span class="mi">2</span> <span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Or you could use an exponential for more drastic curves.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">e</span><span class="o">^</span><span class="p">(</span><span class="mi">4</span><span class="nx">x</span><span class="o">-</span><span class="mi">4</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">pow</span><span class="p">(</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">E</span><span class="p">,</span> <span class="mi">4</span> <span class="o">*</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span> <span class="o">-</span> <span class="mi">4</span> <span class="p">);</span>
+</span><span class='line'><span class="mi">1</span><span class="o">-</span><span class="nx">e</span><span class="o">^</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="nx">x</span><span class="p">)</span><span class="o">-&gt;</span> <span class="mi">1</span><span class="o">-</span><span class="nb">Math</span><span class="p">.</span><span class="nx">pow</span><span class="p">(</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">E</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span> <span class="o">*</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span> <span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Obviously not the most efficient way of generating random numbers, but could be useful in certain occasions where performance is not an issue.</p>
+
+<h2>A basic class to generate skewed random numbers</h2>
+
+<p><a href="https://gist.github.com/gotofritz/5201188" title="[new window] github gist: A basic class to generate skewed random numbers" target="_blank">This gist</a> is a rough and ready class to test random numbers. It takes a map functions, generates 10 numbers, and pretty prints them to the console.</p>
+
+<script src="https://gist.github.com/gotofritz/5201188.js"></script>
+
+
+<p>Here&#8217;s the output of a run. Not very conclusive, I have only printed 10 numbers because of space.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">RND</span> <span class="mf">0.075</span> <span class="o">-</span> <span class="mf">0.339</span> <span class="o">-</span> <span class="mf">0.363</span> <span class="o">-</span> <span class="mf">0.434</span> <span class="o">-</span> <span class="mf">0.435</span> <span class="o">-</span> <span class="mf">0.563</span> <span class="o">-</span> <span class="mf">0.669</span> <span class="o">-</span> <span class="mf">0.739</span> <span class="o">-</span> <span class="mf">0.808</span> <span class="o">-</span> <span class="mf">0.874</span>
+</span><span class='line'><span class="nx">RND</span> <span class="mf">0.037</span> <span class="o">-</span> <span class="mf">0.069</span> <span class="o">-</span> <span class="mf">0.158</span> <span class="o">-</span> <span class="mf">0.258</span> <span class="o">-</span> <span class="mf">0.266</span> <span class="o">-</span> <span class="mf">0.424</span> <span class="o">-</span> <span class="mf">0.501</span> <span class="o">-</span> <span class="mf">0.551</span> <span class="o">-</span> <span class="mf">0.933</span> <span class="o">-</span> <span class="mf">0.994</span>
+</span><span class='line'><span class="nx">PW2</span> <span class="mf">0.002</span> <span class="o">-</span> <span class="mf">0.024</span> <span class="o">-</span> <span class="mf">0.031</span> <span class="o">-</span> <span class="mf">0.033</span> <span class="o">-</span> <span class="mf">0.113</span> <span class="o">-</span> <span class="mf">0.140</span> <span class="o">-</span> <span class="mf">0.369</span> <span class="o">-</span> <span class="mf">0.540</span> <span class="o">-</span> <span class="mf">0.576</span> <span class="o">-</span> <span class="mf">0.679</span>
+</span><span class='line'><span class="nx">PW2</span> <span class="mf">0.008</span> <span class="o">-</span> <span class="mf">0.227</span> <span class="o">-</span> <span class="mf">0.760</span> <span class="o">-</span> <span class="mf">0.821</span> <span class="o">-</span> <span class="mf">0.821</span> <span class="o">-</span> <span class="mf">0.853</span> <span class="o">-</span> <span class="mf">0.874</span> <span class="o">-</span> <span class="mf">0.874</span> <span class="o">-</span> <span class="mf">0.999</span> <span class="o">-</span> <span class="mf">1.000</span>
+</span><span class='line'><span class="nx">PW4</span> <span class="mf">0.000</span> <span class="o">-</span> <span class="mf">0.000</span> <span class="o">-</span> <span class="mf">0.001</span> <span class="o">-</span> <span class="mf">0.004</span> <span class="o">-</span> <span class="mf">0.004</span> <span class="o">-</span> <span class="mf">0.052</span> <span class="o">-</span> <span class="mf">0.151</span> <span class="o">-</span> <span class="mf">0.435</span> <span class="o">-</span> <span class="mf">0.498</span> <span class="o">-</span> <span class="mf">0.501</span>
+</span><span class='line'><span class="nx">PW4</span> <span class="mf">0.030</span> <span class="o">-</span> <span class="mf">0.079</span> <span class="o">-</span> <span class="mf">0.370</span> <span class="o">-</span> <span class="mf">0.875</span> <span class="o">-</span> <span class="mf">0.967</span> <span class="o">-</span> <span class="mf">0.977</span> <span class="o">-</span> <span class="mf">0.986</span> <span class="o">-</span> <span class="mf">0.993</span> <span class="o">-</span> <span class="mf">0.994</span> <span class="o">-</span> <span class="mf">0.998</span>
+</span><span class='line'><span class="nx">EXP</span> <span class="mf">0.020</span> <span class="o">-</span> <span class="mf">0.025</span> <span class="o">-</span> <span class="mf">0.028</span> <span class="o">-</span> <span class="mf">0.033</span> <span class="o">-</span> <span class="mf">0.038</span> <span class="o">-</span> <span class="mf">0.044</span> <span class="o">-</span> <span class="mf">0.166</span> <span class="o">-</span> <span class="mf">0.171</span> <span class="o">-</span> <span class="mf">0.352</span> <span class="o">-</span> <span class="mf">0.462</span>
+</span><span class='line'><span class="nx">EXP</span> <span class="mf">0.247</span> <span class="o">-</span> <span class="mf">0.376</span> <span class="o">-</span> <span class="mf">0.429</span> <span class="o">-</span> <span class="mf">0.448</span> <span class="o">-</span> <span class="mf">0.703</span> <span class="o">-</span> <span class="mf">0.752</span> <span class="o">-</span> <span class="mf">0.820</span> <span class="o">-</span> <span class="mf">0.850</span> <span class="o">-</span> <span class="mf">0.862</span> <span class="o">-</span> <span class="mf">0.909</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Visualizing distribution with Canvas</h2>
+
+<p>Just for a laugh (stop sniggering at the back), I thought I&#8217;d try some primitive HTML Canvas visualizations. The CodePen below runs the same code on 1000 sample points, and uses vertical lines to show their distribution.</p>
+
+<pre class="codepen" data-height="330" data-type="result" data-href="zpgje" data-user="gotofritz" data-safe="true"><code></code><a href="http://codepen.io/gotofritz/pen/zpgje">Check out this Pen!</a></pre>
+
+
+<script async src="http://codepen.io/assets/embed/ei.js"></script>
+
+
+<h2>That&#8217;s all folks</h2>
+
+<p>Nothing too exciting.</p>
+</div>
+	</div>
+</article>
+
+<article class="archives">
+  <div class="related-posts">
+    <h2>Related Posts</h2>
+    
+      <article>
+        <h3 class="title"><a href="/blog/geekery/finding-max-min-array-js">Finding max or min in Array in Javascript</a></h3>
+        <div class="meta">
+          <span class="tags">
+
+
+	<a class='category' href='/blog/cat/geekery/'>Geekery</a>
+
+
+</span>
+            
+          <time datetime="2013-03-19T12:44:36+01:00" pubdate>2013-03-19</time>
+            
+        </div>
+      </article>
+    
+      <article>
+        <h3 class="title"><a href="/blog/link/2012-04-07">Links, 2012-04-07</a></h3>
+        <div class="meta">
+          <span class="tags">
+
+
+	<a class='category' href='/blog/cat/link/'>Link</a>
+
+
+</span>
+            
+          <time datetime="2013-03-19T12:44:36+01:00" pubdate>2013-03-19</time>
+            
+        </div>
+      </article>
+    
+      <article>
+        <h3 class="title"><a href="/blog/code-snippets/escaping-in-replace-strings-in-javascript">Escaping $ in replace strings in Javascript</a></h3>
+        <div class="meta">
+          <span class="tags">
+
+
+	<a class='category' href='/blog/cat/code-snippets/'>Code Snippets</a>, <a class='category' href='/blog/cat/geekery/'>Geekery</a>
+
+
+</span>
+            
+          <time datetime="2013-03-19T12:44:36+01:00" pubdate>2013-03-19</time>
+            
+        </div>
+      </article>
+    
+  </div>
+</article>
+
+
+<section id="comment">
+    <h1 class="title">Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+
+    
+  </div>
+	<footer id="footer" class="inner">Copyright &copy; 2014
+
+    Fabrizio (Fritz) Stelluto
+
+</footer>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="/javascripts/slash.js"></script>
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'goto-fritz';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://gotofritz.net/blog/howto/skewing-random-numbers-towards-0';
+        var disqus_url = 'http://gotofritz.net/blog/howto/skewing-random-numbers-towards-0';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-11254155-2']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+</body>
+</html>

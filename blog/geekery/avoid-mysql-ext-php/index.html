@@ -1,0 +1,234 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Avoid the mysql extension in PHP - Fabrizio (Fritz) Stelluto</title>
+	<meta name="author" content="">
+
+	
+	<meta name="description" content="There are a few different ways of handling MySQL in in PHP. Ext/mysql, i.e. the functions that start with mysql_xxx, is the oldest and most well &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="Fabrizio (Fritz) Stelluto" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.ico" rel="shortcut icon">
+	<link rel="icon" href="/favicon.gif" type="image/gif" />
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	
+</head>
+
+
+<body ontouchstart="">
+
+  <header id="header" class="inner">
+<nav id="main-nav"><div>
+  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+  <a href="/">home</a>
+  <a href="/blog/">blog</a>
+</div></nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><div>
+  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+  <a href="/">home</a>
+  <a href="/blog/">blog</a>
+</div></div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="http://google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:gotofritz.net">
+			</form>
+		</div>
+	</div>
+</nav>
+
+<nav id="sub-nav" class="alignright">
+	<form class="search" action="http://google.com/search" method="get">
+		<input class="alignright" type="text" name="q" results="0">
+		<input type="hidden" name="q" value="site:gotofritz.net">
+	</form>
+</nav>
+
+</header>
+	
+		
+	
+	<div id="content" class="inner">
+    
+    <article class="post">
+	<h1 class="title">Avoid the Mysql Extension in PHP</h1>
+	<div>
+		<div class="meta">
+			<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-07-17T14:09:10+02:00" pubdate data-updated="true">2011-07-17, Sun</time></div>
+			<div class="tags">
+
+
+	<a class='category' href='/blog/cat/geekery/'>Geekery</a>
+
+
+</div>
+			
+				<span class="comments"><a href="/blog/geekery/avoid-mysql-ext-php#disqus_thread">Comments</a></span>
+			
+		</div>
+		<div class="entry-content"><p>There are a few different ways of handling MySQL in in PHP.</p>
+
+<!--more-->
+
+
+<p>Ext/mysql, i.e. the functions that start with mysql_xxx, is the oldest and most well known. It is also insecure, doesn&#8217;t use all the database features, and will be phased out and in future releases. Use mysqli instead, or at least pdo_mysql.</p>
+
+<h2>The PHP mysql extension both obsolete and insecure</h2>
+
+<p>Even if not as bad as <a href="http://php.net/manual/en/function.mysql-escape-string.php">mysql_escape_string</a>, the function <a href="http://php.net/manual/en/function.mysql-real-escape-string.php">mysql_real_escape_string</a> doesn&#8217;t escape data properly and therefore leave your queries potentially open to SQL injection.</p>
+
+<p>Also importantly, that extension don&#8217;t use the full MySQL features, such as stored procedures / prepared statements, encryption, etc. It is an old extension, created for MySQL 3.2, and it&#8217;s going to be phased out in future, as you can see in <a href="http://php.net/manual/en/book.mysql.php#104926">this comment in the PHP manual</a>. The only reason it hasn&#8217;t been so far is that it is so widely used the PHP Group are wary of removing it too quickly and breaking all those websites. But the process has started.</p>
+
+<h2>Use mysqli instead of mysql, or at least pdo_mysql</h2>
+
+<p>The <a href="http://php.net/manual/en/book.pdo.php">PHP Data Object (PDO)</a> is an abstraction layer designed to make your code independent of the actual database behind your application. It is a good alternative to mysql, but not the best, as explained in <a href="http://marc.info/?l=php-internals&amp;m=131073409831187&amp;w=2">this thread</a>:</p>
+
+<blockquote><p>I&#8217;m not sure the current PDO is &#8220;the&#8221; alternative. We (= MySQL/ORACLE)
+focus mostly on mysqli, that&#8217;s the extension providing access to all
+current and future features of MySQL. True, many features could be added
+to PDO but there are two design decision in PDO which make this bad:</p>
+
+<pre><code>  * The parser used for identifying statement place holders is very
+    basic, as it is implemented in PDO core, not the drivers, which
+    leads to FRs like #54929 or the famous LIKE issue[1]
+  * driver-specific functions are implemented by using __call()
+    which means there is no good introspection mechanism to check
+    whether a feature is available or not in the current setup.
+</code></pre></blockquote>
+
+<p>So as you can see from the above, <a href="http://de2.php.net/manual/en/book.mysqli.php">mysqli</a> is the best option. The &#8220;i&#8221; does stand for &#8220;improved&#8221;, after all.</p>
+</div>
+	</div>
+</article>
+
+<article class="archives">
+  <div class="related-posts">
+    <h2>Related Posts</h2>
+    
+      <article>
+        <h3 class="title"><a href="/blog/weekly-challenge/building-scalable-php-mysql-websites">Building scalable PHP / MySQL websites</a></h3>
+        <div class="meta">
+          <span class="tags">
+
+
+	<a class='category' href='/blog/cat/weekly-challenge/'>Weekly Challenge</a>
+
+
+</span>
+            
+          <time datetime="2011-07-17T14:09:10+02:00" pubdate>2011-07-17</time>
+            
+        </div>
+      </article>
+    
+      <article>
+        <h3 class="title"><a href="/blog/geekery/happy-birthday-php">Happy birthday, PHP.</a></h3>
+        <div class="meta">
+          <span class="tags">
+
+
+	<a class='category' href='/blog/cat/geekery/'>Geekery</a>
+
+
+</span>
+            
+          <time datetime="2011-07-17T14:09:10+02:00" pubdate>2011-07-17</time>
+            
+        </div>
+      </article>
+    
+      <article>
+        <h3 class="title"><a href="/blog/geekery/installing-apache-2.2-php-5.4-os-x">Installing Apache 2.2 and PHP 5.4 on OS X</a></h3>
+        <div class="meta">
+          <span class="tags">
+
+
+	<a class='category' href='/blog/cat/geekery/'>Geekery</a>
+
+
+</span>
+            
+          <time datetime="2011-07-17T14:09:10+02:00" pubdate>2011-07-17</time>
+            
+        </div>
+      </article>
+    
+  </div>
+</article>
+
+
+<section id="comment">
+    <h1 class="title">Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+
+    
+  </div>
+	<footer id="footer" class="inner">Copyright &copy; 2014
+
+    Fabrizio (Fritz) Stelluto
+
+</footer>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="/javascripts/slash.js"></script>
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'goto-fritz';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://gotofritz.net/blog/geekery/avoid-mysql-ext-php';
+        var disqus_url = 'http://gotofritz.net/blog/geekery/avoid-mysql-ext-php';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-11254155-2']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+</body>
+</html>

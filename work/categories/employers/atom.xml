@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Employers | Fabrizio (Fritz) Stelluto]]></title>
+  <link href="http://gotofritz.net/categories/employers/atom.xml" rel="self"/>
+  <link href="http://gotofritz.net/"/>
+  <updated>2012-10-14T00:26:33+02:00</updated>
+  <id>http://gotofritz.net/</id>
+  <author>
+    <name><![CDATA[]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[AKQA, Berlin]]></title>
+    <link href="http://gotofritz.network/employers/akqa-berlin"/>
+    <updated>2010-09-24T23:10:04+02:00</updated>
+    <id>http://gotofritz.network/employers/akqa-berlin</id>
+    <content type="html"><![CDATA[<p>I joined AKQA's Berlin office in October 2010 as a Senior Web Developer</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[ioko 365]]></title>
+    <link href="http://gotofritz.network/employers/ioko"/>
+    <updated>2010-04-15T23:57:40+02:00</updated>
+    <id>http://gotofritz.network/employers/ioko</id>
+    <content type="html"><![CDATA[<blockquote><p>ioko specializes in designing, building and running world-class IT platforms on behalf of large Telecommunications, Media &amp; Entertainment enterprises around the world.</p></blockquote>
+
+<p><em>From <a href="http://www.ioko.com/">their site</a>'s blurb</em></p>
+
+<p>A full on technical agency with  and strong methodologies and a slant on media broadcasting. I worked as front end developer for the <a href="/projects/seesaw/">SeeSaw</a> project, both delivery of the current system and scoping and R&amp;D for the next phase.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[The Team]]></title>
+    <link href="http://gotofritz.network/employers/theteam"/>
+    <updated>2010-01-21T23:46:35+01:00</updated>
+    <id>http://gotofritz.network/employers/theteam</id>
+    <content type="html"><![CDATA[<p>An up and coming agency in lovely Borough Market. They do work for the government and blue chip companies, and hired for front end <a href="/tags/drupal/">Drupal</a> development and to work on <a href="/tags/jquery/">JQuery</a> widgets.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Grand Union]]></title>
+    <link href="http://gotofritz.network/employers/grand-union"/>
+    <updated>2009-09-17T00:34:32+02:00</updated>
+    <id>http://gotofritz.network/employers/grand-union</id>
+    <content type="html"><![CDATA[<p>Hired as interim technical director at Grand Union for four months from the last quarter of 2009.</p>
+
+<p>A list of my duties include:</p>
+
+<ul>
+<li><p>Technical architecture and scoping</p></li>
+<li><p>Drafting technical documents</p></li>
+<li><p><a href="http://work.gotofritz.net%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20/skills/team-leading/">Leading teams of developers</a></p></li>
+<li><p>Liaising with clients and third parties during pitching, scoping, and deployment</p></li>
+<li><p>Hands-on <a href="http://work.gotofritz.net%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20/skills/javascript-ajax/">DHTML</a>, <a href="http://work.gotofritz.net%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20/skills/actionscript">Actionscript</a>, <a href="http://work.gotofritz.net%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20/skills/php/">PHP</a>, <a href="http://work.gotofritz.net%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20/skills/sql">SQL</a> development</p></li>
+<li><p>Brain storming and pitch preparation</p></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Billington Cartmell]]></title>
+    <link href="http://gotofritz.network/employers/billington-cartmell"/>
+    <updated>2009-09-14T15:05:09+02:00</updated>
+    <id>http://gotofritz.network/employers/billington-cartmell</id>
+    <content type="html"><![CDATA[<p>An integrated agency in deeper West London. Worked a couple of weeks providing holiday cover for the technical director, on various projects for <a href="/clients/unilever/">Unilever</a>.</p>
+]]></content>
+  </entry>
+  
+</feed>

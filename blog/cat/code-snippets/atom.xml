@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Code Snippets | Fabrizio (Fritz) Stelluto]]></title>
+  <link href="http://gotofritz.net/blog/cat/code-snippets/atom.xml" rel="self"/>
+  <link href="http://gotofritz.net/"/>
+  <updated>2014-03-27T22:00:28+01:00</updated>
+  <id>http://gotofritz.net/</id>
+  <author>
+    <name><![CDATA[]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Escaping $ in replace strings in Javascript]]></title>
+    <link href="http://gotofritz.net/blog/code-snippets/escaping-in-replace-strings-in-javascript"/>
+    <updated>2012-03-28T20:52:30+02:00</updated>
+    <id>http://gotofritz.net/blog/code-snippets/escaping-in-replace-strings-in-javascript</id>
+    <content type="html"><![CDATA[<p>To have a $ in your replace strings in Javascript regular expressions, it needs to be escaped with another $</p>
+
+<!--more-->
+
+
+<p>I.e., <code>$$</code>, not <code>\$</code>. In other words, the escape character for the RegExp "language" is $, even within Javascript, not the standard slash .</p>
+
+<p><div><script src='https://gist.github.com/2507631.js?file=js-tips-escaped-dollar.js'></script>
+<noscript><pre><code>&quot;I &lt;feeling&gt; that&quot;.replace( /&lt;(.+?)&gt;/g, &quot;\$$1&quot; );
+//won't work - will produce &quot;&quot;I $1 that&quot;&quot;
+&quot;I &lt;feeling&gt; that&quot;.replace( /&lt;(.+?)&gt;/g, &quot;$$$1&quot; );
+//works - &quot;I $feeling that&quot;</code></pre></noscript></div>
+</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Days between two dates in Javascript]]></title>
+    <link href="http://gotofritz.net/blog/code-snippets/days-between-two-dates-javascript"/>
+    <updated>2012-03-07T11:42:55+01:00</updated>
+    <id>http://gotofritz.net/blog/code-snippets/days-between-two-dates-javascript</id>
+    <content type="html"><![CDATA[<p>To quickly find the number of days between two dates, you can type this in the JS console</p>
+
+<!--more-->
+
+
+<p><div><script src='https://gist.github.com/2507682.js?file=difference-in-days-between-dates.js'></script>
+<noscript><pre><code>( ( new Date( &quot;2012-02-04&quot; ) - new Date( &quot;2012-02-03&quot; ) ) / 24 / 3600000 ) &gt;&gt; 0
+
+//or, for the difference between a date and today
+( ( new Date() - new Date( &quot;2013-03-31&quot; ) ) / 24 / 3600000 ) &gt;&gt; 0</code></pre></noscript></div>
+</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Capitalizing words in Javascript with RegExes]]></title>
+    <link href="http://gotofritz.net/blog/code-snippets/capitalizing-words-in-javascript-with-regexes"/>
+    <updated>2012-02-21T14:44:09+01:00</updated>
+    <id>http://gotofritz.net/blog/code-snippets/capitalizing-words-in-javascript-with-regexes</id>
+    <content type="html"><![CDATA[<p>An example of how to use functions in JS regular expressions is to imitate the /e flag other languages have.</p>
+
+<!--more-->
+
+
+<p><code>js
+"abb Cdd-Eff.ghh 1AAA".toLowerCase().replace(  /(^|[^a-z0-9-])([a-z])/g , function(m,m1,m2,p){ return m1+m2.toUpperCase(); } );
+//output: Abb Cdd-eff.Ghh 1aaa
+</code>
+Breaking it down:</p>
+
+<ul class="code-breakdown">
+<dt>"abb Cdd-Eff.ghh 1AAA"</dt>
+<dd>an anonymous string literal I am using on the console to test</dd>
+
+<dt>.toLowerCase()</dt>
+<dd>make it all lower case first. Normal string methods apply even to anonymous strings not initialised with new String( "blah" );</dd>
+
+<dt>.replace(</dt>
+<dd>start the regular expression fun</dd>
+
+<dt>/ .... /g</dt>
+<dd>replace takes either a regular expression or a string (which will be transformed into a regular expression) as first argument. Here a regular expression with the flag g, global, is used, meaning the regular expression wil be run until the end of the string and all matches collected</dd>
+
+<dt>(^</dt>
+<dd>match whatever is before the beginning of a word - the start of the string...</dd>
+
+<dt>|</dt>
+<dd>...or...</dd>
+
+<dt>[^a-z0-9-])</dt>
+<dd>a character which is neither a letter, a digit, nor the dash. Note that the dash between a-z and 0-9 represents a range, while the one at the very end is just a dash</dd>
+
+<dt>, function(</dt>
+<dd>the second arguments to replace is often a string, but it can also be a function. As the RegExp was created with the g flag, this function will be called for every match - i.e., in this case, for every word.</dd>
+
+<dt>m,</dt>
+<dd>the arguments passed to the function are similar to those returned by the match method. The first one is the complete matched string (not used in this function)</dd>
+
+<dt>m1, m2</dt>
+<dd>these are matches - i.e. the expression inside the parentheses, i.e. the character before the start of a word and the first character of the word respectively</dd>
+
+<dt>p)</dt>
+<dd>the last argument is the position in the string where the match start - not used in this function</dd>
+
+<dt class="long-line">{ return m1 + m2.toUpperCase(); }</dt>
+<dd class="long-line">the body of the function puts strings back into the initial, anonymous strings with some manipulation. m1 is puts back where it was found,  and m2 is capitalized before putting it back. The remaining characters were not matched therefore will not be touched.
+
+
+
+Note that this regular expression is not UTF safe, i.e. special characters such as umlauts etc will not be treated correctly.
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Converting a collection to a JScript object in ASP]]></title>
+    <link href="http://gotofritz.net/blog/code-snippets/converting-collection-to-jscript-object-classic-asp"/>
+    <updated>2006-05-30T15:04:38+02:00</updated>
+    <id>http://gotofritz.net/blog/code-snippets/converting-collection-to-jscript-object-classic-asp</id>
+    <content type="html"><![CDATA[<p>Some Classic ASP code snippets in JScript for dealing with form data.</p>
+
+<!--more-->
+
+
+<p>Enumerators are collections of data that can be iterated through. Although useful, they are <a href="http://msdn2.microsoft.com/en-us/library/894hfyb4.aspx"> not compliant</a> with <a href="http://www.ecma-international.org/publications/standards/Ecma-262.htm">ECMAScript </a> standards, and therefore I prefer not to use them. Some objects in the ASP environment however, such as Request.Form, are provided as Enumerators, and need to be converted them to standard JScript objects. Here's a couple of routines to do so.</p>
+
+<h3>Converting A Collection To A Plain JScript Object</h3>
+
+<p>I keep all the functions below in a generic include, coll2obj.asp, and use it across projects.  This is a generic collection-to-object conversion, which doesn't seem to work on some built-in collections.
+<div><script src='https://gist.github.com/2507749.js?file=coll2obj.asp'></script>
+<noscript><pre><code>/**  coll2obj
+ * transforms a VB collection thing in a JS-friendly object
+ * @return {Object}
+ */
+function coll2obj( coll ) {
+  var enm = new Enumerator( coll )
+    , obj = {}
+    ;
+
+  while( !enm.atEnd() ) {
+    obj[enm.item().name]  = enm.item().value;
+    enm.moveNext();
+  }
+
+  return obj;
+}</code></pre></noscript></div>
+</p>
+
+<h3>Converting Request.ServerVariables To JScript Object In Classic ASP</h3>
+
+<p>I'm not quite sure why the function above won't work on Request.ServerVariables, but it doesn't, so here's a function for that specific collection.
+<div><script src='https://gist.github.com/2507749.js?file=env2obj.asp'></script>
+<noscript><pre><code>/**  
+ * transforms Request.ServerVariables VB collection 
+ * in a JS-friendly object
+ * @return {Object}
+ */
+function env2obj() {
+  var enm = new Enumerator(Request.ServerVariables)
+    , obj = new Object()
+    , ei, en
+    ;
+
+  while(!enm.atEnd()) {
+    ei  = enm.item();
+
+    if( Request.ServerVariables.Item( ei ).Count &gt; 1 ){      
+      obj[ei] = new Array();
+      en  = new Enumerator( Request.ServerVariables( ei );
+      while( !en.atEnd() )
+      {
+        obj[ei][ obj[ei].length ] = en.item();
+        en.moveNext();
+      }
+      en  = null;
+
+    } else {      
+      obj[ei] = new String( Request.ServerVariables( ei ) );
+
+    }
+    enm.moveNext();
+  }
+  return obj;
+}</code></pre></noscript></div>
+</p>
+
+<h3>Converting Post Variables To JScript Object In Classic ASP</h3>
+
+<p>The same holds for post variables...
+<div><script src='https://gist.github.com/2507749.js?file=post2obj.asp'></script>
+<noscript><pre><code>/*  post2obj
+ *  transforms Request.Form VB collection into a JS-friendly object
+ * @return {Object}
+ *
+ */
+function post2obj() {
+  var enm = new Enumerator( Request.Form )
+    , obj = new Object()
+    , ei, en
+    ;
+
+  while( !enm.atEnd() ) {
+    ei  = enm.item();
+
+    if(  Request.Form.Item( ei ).Count &gt; 1 ) {
+      obj[ei] = new Array();
+      en  = new Enumerator(Request.Form( ei ));
+
+      while( !en.atEnd() ){
+        obj[ei][ obj[ei].length ] = en.item();
+        en.moveNext();
+      }
+
+      en  = null;
+
+    } else {
+      obj[ei] = new String(Request.Form( ei ) );
+      obj[ei] = obj[ei].replace( /^s+|s+$/, '' );
+    }
+
+    enm.moveNext();
+  }
+
+  return obj;
+}</code></pre></noscript></div>
+</p>
+
+<h3>Converting Post Variables To JScript Object In Classic ASP</h3>
+
+<p>...and query string variables.
+<div><script src='https://gist.github.com/2507749.js?file=query2obj.asp'></script>
+<noscript><pre><code>/*  
+ * transforms Request.QueryString VB collection thing in a JS-friendly object
+ * @return {Object}
+ */
+function query2obj() {
+  var enm = new Enumerator( Request.QueryString )
+    , obj = new Object(
+    , ei, en
+    ;
+
+  while( !enm.atEnd() ) {
+    ei  = enm.item();
+
+    if(  Request.QueryString.Item( ei ).Count &gt; 1 ) {
+      obj[ei] = new Array();
+      en  = new Enumerator(Request.QueryString( ei ));
+
+      while( !en.atEnd() ) {
+        obj[ei][ obj[ei].length ] = en.item();
+        en.moveNext();
+      }
+
+      en  = null;
+
+    } else {
+      obj[ei] = new String(Request.QueryString( ei ) );
+      obj[ei] = obj[ei].replace( /^s+|s+$/, '' );
+    }
+
+    enm.moveNext();
+  }
+
+  return obj;
+}</code></pre></noscript></div>
+</p>
+]]></content>
+  </entry>
+  
+</feed>

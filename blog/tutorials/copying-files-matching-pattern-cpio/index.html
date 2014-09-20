@@ -1,0 +1,329 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Copying sourcefiles without .svn folders with cpio - Fabrizio (Fritz) Stelluto</title>
+	<meta name="author" content="">
+
+	
+	<meta name="description" content="Sometimes you need to copy your local version of a project under subversion to a new location, perhaps because you want to add it to a different &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="Fabrizio (Fritz) Stelluto" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.ico" rel="shortcut icon">
+	<link rel="icon" href="/favicon.gif" type="image/gif" />
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	
+</head>
+
+
+<body ontouchstart="">
+
+  <header id="header" class="inner">
+<nav id="main-nav"><div>
+  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+  <a href="/">home</a>
+  <a href="/blog/">blog</a>
+</div></nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><div>
+  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+  <a href="/">home</a>
+  <a href="/blog/">blog</a>
+</div></div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="http://google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:gotofritz.net">
+			</form>
+		</div>
+	</div>
+</nav>
+
+<nav id="sub-nav" class="alignright">
+	<form class="search" action="http://google.com/search" method="get">
+		<input class="alignright" type="text" name="q" results="0">
+		<input type="hidden" name="q" value="site:gotofritz.net">
+	</form>
+</nav>
+
+</header>
+	
+		
+	
+	<div id="content" class="inner">
+    
+    <article class="post">
+	<h1 class="title">Copying Sourcefiles Without .svn Folders With Cpio</h1>
+	<div>
+		<div class="meta">
+			<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-23T10:23:14+01:00" pubdate data-updated="true">2013-03-23, Sat</time></div>
+			<div class="tags">
+
+
+	<a class='category' href='/blog/cat/tutorials/'>Tutorials</a>
+
+
+</div>
+			
+				<span class="comments"><a href="/blog/tutorials/copying-files-matching-pattern-cpio#disqus_thread">Comments</a></span>
+			
+		</div>
+		<div class="entry-content"><p>Sometimes you need to copy your local version of a project under subversion to a new location, perhaps because you want to add it to a different repository. Here&#8217;s a couple of ways of doing it.</p>
+
+<!--more-->
+
+
+
+
+<div><script src='https://gist.github.com/2589861.js?file=find-without-svn.sh'></script>
+<noscript><pre><code>cd DIR_FROM
+find .  \! \( -name . -or -name &quot;.svn&quot; -or -path &quot;*/.svn/*&quot; \) -print  | cpio -padv PTH_TO</code></pre></noscript></div>
+
+
+<h2>Finding files matching a set of conditions</h2>
+
+<p>The shell command to find files matching certain conditions is called, unsurprisingly, <a href="http://unixhelp.ed.ac.uk/CGI/man-cgi?find">find</a>, a powerful command. It includes &#8216;actions&#8217; which can be performed on the found files. The command below finds all the files we want to copy and ignores the rest.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>find DIR_FROM \! \( -path "*/.svn/*" -or -name ".svn" \) -print</span></code></pre></td></tr></table></div></figure>
+
+
+<p>It breaks down as</p>
+
+<dl class="code-breakdown">
+<dt>find DIR_FROM</dt>
+<dd>run the find command, searching in DIR_FROM (in OS X, you can just drag DIR_FROM from the Finder to the Terminal window instead of typing it all out)</dd>
+
+<dt>\!</dt>
+<dd>since we are ignoring files, use ! (negative) to find files which do NOT match the pattern. The slash is needed, because esclamation marks mean something to Terminal, and we want Terminal to ignore that</dd>
+
+<dt>\( </dt>
+<dd>the parenthesis groups conditions together, since we have more than one. Again, the slash is needed because we want Terminal to ignore its special meaning</dd>
+
+<dt>-path &#8220;*/.svn/*&#8221;</dt>
+<dd>this is the condition &#8220;the path includes &#8216;/.svn&#8217; anywhere in it&#8221;</dd>
+
+<dt>-or</dt>
+<dd>adds conditions together, matching any of them</dd>
+
+<dt>-name &#8220;.svn&#8221;</dt>
+<dd>this is the condition &#8220;the name of the files is exactly &#8216;.svn&#8217;</dd>
+
+<dt>\)</dt>
+<dd>ends the group of condition. The negative ! applies to all of them.</dd>
+
+<dt>-print</dt>
+<dd>At this stage, just prints the names out on the terminal. Always safe to run this first, to double check the results are as expected.</dd>
+</dl>
+
+
+<h2>Delete all .svn directories from a project</h2>
+
+<p>In an ideal world, I&#8217;d run the find command above with &#8220;-print&#8221;, check it&#8217;s ok, then I&#8217;d run it again with &#8220;-copy&#8221;. Except that there is no &#8220;-copy&#8221; action, so it&#8217;s back to <code>man find</code> to work out an action that will help.</p>
+
+<p>It turns out the simplest way is to copy all files first, then find the .svn ones and use the &#8216;-delete&#8217; action to get rid of them.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>cp -R DIR_FROM DIR_TO
+</span><span class='line'>find DIR_FROM <span class="se">\(</span> -path <span class="s2">&quot;*/.svn/*&quot;</span> -or -name <span class="s2">&quot;.svn&quot;</span> <span class="se">\)</span> -delete
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<dl class="code-breakdown">
+<dt>cp -R DIR_FROM DIR_TO</dt>
+<dd>this is how you copy a directory in Terminal. cp is the command to copy files on the shell, but it won&#8217;t do directories. cp -R is used to copy directories. R stands for &#8220;recursive&#8221;, it is common to many other shell commands</dd>
+
+<dt class="long-line">find DIR_TO \( -path &#8220;*/.svn/*&#8221; -or -name &#8220;.svn&#8221; \)</dt>
+<dd class="long-line">almost as before - but note there is no \! this time. That&#8217;s because we want to find the files we don&#8217;t need, rather than ignore them.</dd>
+
+<dt>-delete</dt>
+<dd>deletes the files it finds. I suggest to try it with -print first, just to double check</dd>
+</dl>
+
+
+<p>The above works fine, but read on for another way of doing it.</p>
+
+<h2>Finding files and passimg them to the cp command</h2>
+
+<p>My initial approach when trying to move files across was to use find with the &#8216;-exec&#8217; action and the cp command, like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>find DIR_FROM <span class="se">\!</span> <span class="se">\(</span> -path <span class="s2">&quot;*/.svn/*&quot;</span> -or -name <span class="s2">&quot;.svn&quot;</span> <span class="se">\)</span> -exec cp <span class="o">{}</span> DIR_TO <span class="se">\;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This looks good at first, but there&#8217;s a problem - it finds and copies the files, but it doesn&#8217;t preserve the directory structure, and the files end up all in the same directory. Apparently on Linux you can tell cp to preserve the directory structure with the -b &#8211;parent option, but this doesn&#8217;t work on OS X.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>find DIR_FROM <span class="se">\!</span> <span class="se">\(</span> -path <span class="s2">&quot;*/.svn/*&quot;</span> -or -name <span class="s2">&quot;.svn&quot;</span> <span class="se">\)</span> -exec cp -b --parent <span class="o">{}</span> DIR_TO <span class="se">\;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Using cpio to copy files</h2>
+
+<p><a href="http://en.wikipedia.org/wiki/Cpio">cpio</a> is an archiving utility similar to tar, but it has an important difference - it can copy files into and archive and then out again to a different location, without actually creating an archive in between. In other words, it copies directory structures. The only snag is that you have to cd to the directory where you are copying from.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">cd </span>DIR_FROM
+</span><span class='line'>find .  <span class="se">\!</span> <span class="se">\(</span> -name . -or -name <span class="s2">&quot;.svn&quot;</span> -or -path <span class="s2">&quot;*/.svn/*&quot;</span> <span class="se">\)</span> -print  | cpio -padv PTH_TO
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<dl class="code-breakdown">
+<dt>cd DIR_FROM</dt>
+<dd>move to the directory you are copying - this is where the directory structure will be calculated from</dd>
+
+<dt class="long-line">find . \! \(  -name . -or -path &#8220;*/.svn/*&#8221; -or -name &#8220;.svn&#8221; \)</dt>
+<dd class="long-line">similar to the previous find command, but note how DIR_FROM is replaced with &#8216;.&#8217;, which means &#8216;here&#8217;. Also, there is an extra condition, `-name .`, without which empty .svn directories would be created.</dd>
+
+<dt>-print </dt>
+<dd>prints out the filename</dd>
+
+<dt>|</dt>
+<dd>pass the results of the command on the left (find) to the one on the right (cpio)</dd>
+
+<dt>cpio -padv PTH_TO</dt>
+<dd>run the cpio command in &#8216;move files across&#8217; mode (p) with options d (create directory structure) -a (reset access time on copied files) -v (verbose, i.e., show me what you are doing)</dd>
+</dl>
+
+
+<p>And that&#8217;s that - exciting Unix fun.</p>
+</div>
+	</div>
+</article>
+
+<article class="archives">
+  <div class="related-posts">
+    <h2>Related Posts</h2>
+    
+      <article>
+        <h3 class="title"><a href="/blog/geekery/version-control-feature-branching-vs-trunk">Enterprise vs. Startups: different branching strategies</a></h3>
+        <div class="meta">
+          <span class="tags">
+
+
+	<a class='category' href='/blog/cat/geekery/'>Geekery</a>
+
+
+</span>
+            
+          <time datetime="2013-03-23T10:23:14+01:00" pubdate>2013-03-23</time>
+            
+        </div>
+      </article>
+    
+      <article>
+        <h3 class="title"><a href="/blog/weekly-challenge/continuos-integration-jenkins-wordpress">Installing Jenkins on OS X and Ubuntu</a></h3>
+        <div class="meta">
+          <span class="tags">
+
+
+	<a class='category' href='/blog/cat/weekly-challenge/'>Weekly Challenge</a>
+
+
+</span>
+            
+          <time datetime="2013-03-23T10:23:14+01:00" pubdate>2013-03-23</time>
+            
+        </div>
+      </article>
+    
+      <article>
+        <h3 class="title"><a href="/blog/howto/svn-status-codes">SVN status codes</a></h3>
+        <div class="meta">
+          <span class="tags">
+
+
+	<a class='category' href='/blog/cat/howto/'>HowTo</a>
+
+
+</span>
+            
+          <time datetime="2013-03-23T10:23:14+01:00" pubdate>2013-03-23</time>
+            
+        </div>
+      </article>
+    
+  </div>
+</article>
+
+
+<section id="comment">
+    <h1 class="title">Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+
+    
+  </div>
+	<footer id="footer" class="inner">Copyright &copy; 2014
+
+    Fabrizio (Fritz) Stelluto
+
+</footer>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="/javascripts/slash.js"></script>
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'goto-fritz';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://gotofritz.net/blog/tutorials/copying-files-matching-pattern-cpio';
+        var disqus_url = 'http://gotofritz.net/blog/tutorials/copying-files-matching-pattern-cpio';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-11254155-2']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+</body>
+</html>

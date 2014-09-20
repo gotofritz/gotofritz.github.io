@@ -1,0 +1,289 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>JSTestDriver boilerplate - Fabrizio (Fritz) Stelluto</title>
+	<meta name="author" content="">
+
+	
+	<meta name="description" content="Before abandoning JsTestDriver (hello Karma!), here&#8217;s a summary of my setup and a boilerplate for future reference. Why use JsTestDriver (JSTD &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="Fabrizio (Fritz) Stelluto" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.ico" rel="shortcut icon">
+	<link rel="icon" href="/favicon.gif" type="image/gif" />
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	
+</head>
+
+
+<body ontouchstart="">
+
+  <header id="header" class="inner">
+<nav id="main-nav"><div>
+  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+  <a href="/">home</a>
+  <a href="/blog/">blog</a>
+</div></nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><div>
+  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+  <a href="/">home</a>
+  <a href="/blog/">blog</a>
+</div></div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="http://google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:gotofritz.net">
+			</form>
+		</div>
+	</div>
+</nav>
+
+<nav id="sub-nav" class="alignright">
+	<form class="search" action="http://google.com/search" method="get">
+		<input class="alignright" type="text" name="q" results="0">
+		<input type="hidden" name="q" value="site:gotofritz.net">
+	</form>
+</nav>
+
+</header>
+	
+		
+	
+	<div id="content" class="inner">
+    
+    <article class="post">
+	<h1 class="title">JSTestDriver Boilerplate</h1>
+	<div>
+		<div class="meta">
+			<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-17T00:03:00+02:00" pubdate data-updated="true">2013-10-17, Thu</time></div>
+			<div class="tags">
+
+
+	<a class='category' href='/blog/cat/geekery/'>Geekery</a>
+
+
+</div>
+			
+				<span class="comments"><a href="/blog/geekery/jstestdriver-boilerplate/#disqus_thread">Comments</a></span>
+			
+		</div>
+		<div class="entry-content"><p>Before abandoning <a href="https://code.google.com/p/js-test-driver/" title="[new window] js-test-driver - Remote javascript console - Google Project Hosting" target="_blank">JsTestDriver</a> (hello <a href="http://karma-runner.github.io/0.10/index.html" title="[new window] Karma - Spectacular Test Runner for Javascript" target="_blank">Karma</a>!), here&#8217;s a summary of my setup and <a href="https://github.com/gotofritz/jstestdriver-boilerplate" title="[new window] gotofritz/jstestdriver-boilerplate" target="_blank">a boilerplate</a> for future reference.</p>
+
+<!--more-->
+
+
+<h2>Why use JsTestDriver (JSTD), anyway?</h2>
+
+<p>For a couple of years JSTD was the best option in town for running JS unit tests. The best thing about it: it is just a jar file, so it runs everywhere - all the more modern alternatives require node.js, which is not always feasible. So JSTD remains my Plan B in those cases. And it is very nifty, it does pretty much everything all the shinier hipster tools do.</p>
+
+<h2>Why give up on JsTestDriver?</h2>
+
+<p>JSTD is not dead, but it may as well be so. It was made by Google, and it&#8217;s maintained by a single guy who apparently doesn&#8217;t have a Windows machine. As a result, the code coverage plugin hasn&#8217;t worked for Windows for at least two years. And we all know what happens at Google when only one guy is assigned part time on a project, right? Besides, it&#8217;s much slower than its node competitors, and it often time outs when you have too many tests. In other words, it is getting old and creaky.</p>
+
+<h2>Folder structure</h2>
+
+<p>The folder structure I use for JSTD is not dissimilar to that of any unit test framework:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">test</span>
+</span><span class='line'> +--/bin              <span class="c"># jar files and executables</span>
+</span><span class='line'>      +--/JsTestDriver-1.3.5.jar
+</span><span class='line'>      +--/coverage-1.3.5.jar
+</span><span class='line'> +--/coverage         <span class="c"># svn:ignore, for coverage reports</span>
+</span><span class='line'> +--/fixtures         <span class="c"># static html and json files</span>
+</span><span class='line'> +--/lib              <span class="c"># javascript libraries which are not part of the app</span>
+</span><span class='line'>       +--/jasmine-jquery.js
+</span><span class='line'>       +--/jasmine-jstd-adapter.js
+</span><span class='line'>       +--/jasmine-sinon.js
+</span><span class='line'>       +--/jasmine
+</span><span class='line'>       +--/phantomjs-jstd.js
+</span><span class='line'>       +--/sinon.js
+</span><span class='line'>  +--/mocks           <span class="c"># mocking application&#39;s classes</span>
+</span><span class='line'>  +--/tests           <span class="c"># the actual tests</span>
+</span><span class='line'>  jstd.conf           <span class="c"># configuration file</span>
+</span><span class='line'>  jstd-runner.sh   <span class="c"># runner</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The <code>bin</code> folder may or may not be under subversion, this depends on the team&#8217;s philosophy (many object to the idea in principle, but it&#8217;s only a couple of rarely changing jars).</p>
+
+<p>I use JSTD with Jasmine, partly because of the useful <code>jasmine-jquery</code> plugin, which, among other things, allow fixtures to be served easily. I also like sinon for extra mocking power. Also, decoupling the runner from the test library allows me to switch from JSTD to, say, Karma easily.</p>
+
+<h2>The JSTD configuration file, jstd.conf</h2>
+
+<p>The config file <a href="https://github.com/gotofritz/jstestdriver-boilerplate/blob/master/test/jstd.conf">jstd.cong</a> is written in YAML, which is much nicer than XML. Nothing exciting here - <code>load</code> is for the under test files, <code>test</code> is for test libraries and the tests itself, and <code>serve</code> is for fixtures. Note that the coverage plugin is commented out because broken.</p>
+
+<h2>The JSTD runner script</h2>
+
+<p>Normally one runs two instances of JSTD in two terminal tabs - one as a server, and one as a test runner against the server. To make that easier, I wrapped the JSTD command (<code>java -jar … etc</code>) with a Bash script, <a href="https://github.com/gotofritz/jstestdriver-boilerplate/blob/master/test/js-test-driver.sh">js-test-driver.sh</a>  (sorry Windows users) which allows everything to be controlled from one place. And that includes running the tests both against a &#8220;physical&#8221; browser, and a headless one (i.e., <a href="http://phantomjs.org/" title="[new window] PhantomJS: Headless WebKit with JavaScript API" target="_blank">PhantomJS</a>)</p>
+
+<p>After making the script executable with <code>chmod 775 jstd-runner.sh</code>, you run in one of the following ways</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>./jstd-runner.sh <span class="nb">local </span>start  <span class="c"># will start the server then quit</span>
+</span><span class='line'>                              <span class="c"># (no need to start another tab)</span>
+</span><span class='line'>./jstd-runner.sh <span class="nb">local </span>run    <span class="c"># will run the tests</span>
+</span><span class='line'>./jstd-runner.sh <span class="nb">local </span>stop   <span class="c"># will stop the server when finished for</span>
+</span><span class='line'>                              <span class="c"># the day</span>
+</span><span class='line'>./jstd-runner.sh headless     <span class="c"># will start the server, run the tests with</span>
+</span><span class='line'>                              <span class="c"># PhantomJS, and stop the server</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The script is improved a little  bit with every project - the next improvement would be to run <code>start</code> automatically if there is no server running and you type <code>run</code>, and also to allow to pass extra arguments in the command to the jar.</p>
+
+<h2>Code to be tested</h2>
+
+<p>The source code is a single JS file with a minimalistic object, <a href="https://github.com/gotofritz/jstestdriver-boilerplate/blob/master/src/js/example.js">example.js</a>.</p>
+
+<h2>HTML and JSON Fixtures</h2>
+
+<p>In the fixtures directory there is an HTML fixture, <a href="https://github.com/gotofritz/jstestdriver-boilerplate/blob/master/test/fixtures/example.html">example.html</a> and a JSON one, <a href="https://github.com/gotofritz/jstestdriver-boilerplate/blob/master/test/fixtures/example.json">example.json</a>. They can be used to mimic server response, different config files, and HTML fragments. Again, nothing too exciting</p>
+
+<h2>The Jasmine test file</h2>
+
+<p><a href="https://github.com/gotofritz/jstestdriver-boilerplate/blob/master/test/tests/example-test.js">example-test.js</a> is where the fun happens - this has the Jasmine tests. I have included a vanilla test (&#8220;version&#8221;), a test for HTML (&#8220;removeHeader&#8221;) and JSON (&#8220;loadData&#8221;) fixtures, the former using the <a href="https://github.com/velesin/jasmine-jquery">jasmine-jquery plugin</a>, and the simplest usage of a sinon spy and the <a href="https://github.com/froots/jasmine-sinon">jasmine-sinon</a> plugin,</p>
+
+<h2>Conclusion</h2>
+
+<p>So <a href="https://github.com/gotofritz/jstestdriver-boilerplate" title="[new window] gotofritz/jstestdriver-boilerplate" target="_blank">the boilerplate is on github</a>, all documented in case I ever need it again, but so far I am much happier with karma.</p>
+</div>
+	</div>
+</article>
+
+<article class="archives">
+  <div class="related-posts">
+    <h2>Related Posts</h2>
+    
+      <article>
+        <h3 class="title"><a href="/blog/geekery/ensure-explicit-number-expectations-within-spec-jasmine/">Ensure an explicit number of expectations within a spec in Jasmine</a></h3>
+        <div class="meta">
+          <span class="tags">
+
+
+	<a class='category' href='/blog/cat/geekery/'>Geekery</a>
+
+
+</span>
+            
+          <time datetime="2013-10-17T00:03:00+02:00" pubdate>2013-10-17</time>
+            
+        </div>
+      </article>
+    
+      <article>
+        <h3 class="title"><a href="/blog/weekly-challenge/manipulating-xml-itunes-library-ruby">Manipulating XML iTunes library files with Ruby</a></h3>
+        <div class="meta">
+          <span class="tags">
+
+
+	<a class='category' href='/blog/cat/weekly-challenge/'>Weekly Challenge</a>
+
+
+</span>
+            
+          <time datetime="2013-10-17T00:03:00+02:00" pubdate>2013-10-17</time>
+            
+        </div>
+      </article>
+    
+  </div>
+</article>
+
+
+<section id="comment">
+    <h1 class="title">Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+
+    
+  </div>
+	<footer id="footer" class="inner">Copyright &copy; 2014
+
+    Fabrizio (Fritz) Stelluto
+
+</footer>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="/javascripts/slash.js"></script>
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'goto-fritz';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://gotofritz.net/blog/geekery/jstestdriver-boilerplate/';
+        var disqus_url = 'http://gotofritz.net/blog/geekery/jstestdriver-boilerplate/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-11254155-2']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+</body>
+</html>

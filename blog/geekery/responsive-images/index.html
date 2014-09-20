@@ -1,0 +1,209 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>On responsive images - Fabrizio (Fritz) Stelluto</title>
+	<meta name="author" content="">
+
+	
+	<meta name="description" content="The new iPad launch caused a flurry of activity as web developers are trying to get to get grips with the Retina display. Responsive Images: How they &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="Fabrizio (Fritz) Stelluto" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.ico" rel="shortcut icon">
+	<link rel="icon" href="/favicon.gif" type="image/gif" />
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	
+</head>
+
+
+<body ontouchstart="">
+
+  <header id="header" class="inner">
+<nav id="main-nav"><div>
+  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+  <a href="/">home</a>
+  <a href="/blog/">blog</a>
+</div></nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><div>
+  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+  <a href="/">home</a>
+  <a href="/blog/">blog</a>
+</div></div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="http://google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:gotofritz.net">
+			</form>
+		</div>
+	</div>
+</nav>
+
+<nav id="sub-nav" class="alignright">
+	<form class="search" action="http://google.com/search" method="get">
+		<input class="alignright" type="text" name="q" results="0">
+		<input type="hidden" name="q" value="site:gotofritz.net">
+	</form>
+</nav>
+
+</header>
+	
+		
+	
+	<div id="content" class="inner">
+    
+    <article class="post">
+	<h1 class="title">On Responsive Images</h1>
+	<div>
+		<div class="meta">
+			<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-04-10T13:04:32+02:00" pubdate data-updated="true">2012-04-10, Tue</time></div>
+			<div class="tags">
+
+
+	<a class='category' href='/blog/cat/geekery/'>Geekery</a>
+
+
+</div>
+			
+				<span class="comments"><a href="/blog/geekery/responsive-images#disqus_thread">Comments</a></span>
+			
+		</div>
+		<div class="entry-content"><p>The new iPad launch caused a flurry of activity as web developers are trying to get to get grips with the Retina display.</p>
+
+<!--more-->
+
+
+<dl class="normal">
+  <dt>
+<a href="http://alistapart.com/article/responsive-images-how-they-almost-worked-and-what-we-need" title="[new window] Responsive Images: How they Almost Worked and What We Need · An A List Apart Article" target="_blank">Responsive Images: How they Almost Worked and What We Need</a></dt>
+<dd>
+From A List Apart, well worth reading as always. The article was written by a developer on the groundbreaking <a href="http://readwrite.com/2011/12/25/redux_how_the_boston_globe_pulled_off_html5_responsive_d" title="[new window] How the Boston Globe Pulled Off HTML5 Responsive Design – ReadWrite" target="_blank">Boston Globe responsive redesign</a> team.
+</dd>
+
+<dt>
+    <a href="http://www.slideshare.net/yiibu/pragmatic-responsive-design" title="[new window] Pragmatic responsive design" target="_blank">Pragmatic responsive design</a>
+</dt>
+<dd>
+A very good slideshow from Stephanie Rieger. She suggests using a small number of stylesheets and media queries targeting max-device-width (rather than device-pixel-ratio). then having in-line media queries in individual stylesheet like
+<br><br>
+ Because Android hi-DPI devices return window.devicePixelRatio > 1, to correctly detect Retina make sure the value is  >= 2.
+Also worth using image@2x.png naming convention because it is the standard used in native iOS development.
+</dd>
+
+  <dt>
+    <a href="http://retinajs.com/" title="[new window] Retina.js | Retina graphics for your website" target="_blank">retina.js</a>
+</dt>
+<dd>
+&#8220;retina.js is an open source script that makes it easy to serve high-resolution images to devices with retina displays&#8221;
+</dd>
+
+  <dt>
+    <a href="http://blog.cloudfour.com/how-apple-com-will-serve-retina-images-to-new-ipads/" title="[new window] » How Apple.com will serve retina images to new iPads Cloud Four Blog" target="_blank">How Apple.com will serve retina images to new iPads</a>
+</dt>
+<dd>
+Cloud four analyses the approach Apple themselves take on their website. &#8220;Screw the bandwidth&#8221; seems to be their approach.
+</dd>
+
+  <dt>
+    <a href="http://blog.cloudfour.com/responsive-imgs/" title="[new window] » Responsive IMGs — Part 1 Cloud Four Blog" target="_blank">Responsive IMGs — Part 1</a>
+</dt>
+<dd>
+From the same site, some thoughts and techniques.
+</dd>
+
+  <dt>
+    <a href="http://adactio.com/journal/5208/" title="[new window] Adactio: Journal—Image-y nation" target="_blank">Image-y nation</a>
+</dt>
+<dd>
+Jeremy Keith uses a technique similar to the ancient lowsrc. I like this approach. <a href="https://github.com/joshje/Responsive-Enhance" title="[new window] joshje/Responsive-Enhance · GitHub" target="_blank">Here&#8217;s the script</a>
+</dd>
+
+  <dt>
+<a href="http://www.w3.org/community/respimg/" title="[new window] Responsive Images Community Group" target="_blank">W3C Responsive Images Community Group</a>
+</dt>
+<dd>
+an attempt to bring some sanity to the matter.
+</dd>
+
+  </dl>
+
+
+
+</div>
+	</div>
+</article>
+
+
+<section id="comment">
+    <h1 class="title">Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+
+    
+  </div>
+	<footer id="footer" class="inner">Copyright &copy; 2014
+
+    Fabrizio (Fritz) Stelluto
+
+</footer>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="/javascripts/slash.js"></script>
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'goto-fritz';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://gotofritz.net/blog/geekery/responsive-images';
+        var disqus_url = 'http://gotofritz.net/blog/geekery/responsive-images';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-11254155-2']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+</body>
+</html>

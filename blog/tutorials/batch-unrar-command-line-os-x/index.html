@@ -1,0 +1,366 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Batch unrar from the command line on Mac OS X - Fabrizio (Fritz) Stelluto</title>
+	<meta name="author" content="">
+
+	
+	<meta name="description" content="Rar is a popular archive format on the web. When I need to unarchive several rar files at once, I use RarLab&#8217;s command line tool. Here&#8217;s &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="Fabrizio (Fritz) Stelluto" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.ico" rel="shortcut icon">
+	<link rel="icon" href="/favicon.gif" type="image/gif" />
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	
+</head>
+
+
+<body ontouchstart="">
+
+  <header id="header" class="inner">
+<nav id="main-nav"><div>
+  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+  <a href="/">home</a>
+  <a href="/blog/">blog</a>
+</div></nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><div>
+  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+  <a href="/">home</a>
+  <a href="/blog/">blog</a>
+</div></div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="http://google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:gotofritz.net">
+			</form>
+		</div>
+	</div>
+</nav>
+
+<nav id="sub-nav" class="alignright">
+	<form class="search" action="http://google.com/search" method="get">
+		<input class="alignright" type="text" name="q" results="0">
+		<input type="hidden" name="q" value="site:gotofritz.net">
+	</form>
+</nav>
+
+</header>
+	
+		
+	
+	<div id="content" class="inner">
+    
+    <article class="post">
+	<h1 class="title">Batch Unrar From the Command Line on Mac OS X</h1>
+	<div>
+		<div class="meta">
+			<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-02-12T03:59:11+01:00" pubdate data-updated="true">2009-02-12, Thu</time></div>
+			<div class="tags">
+
+
+	<a class='category' href='/blog/cat/tutorials/'>Tutorials</a>
+
+
+</div>
+			
+				<span class="comments"><a href="/blog/tutorials/batch-unrar-command-line-os-x#disqus_thread">Comments</a></span>
+			
+		</div>
+		<div class="entry-content"><p>Rar is a popular archive format on the web. When I need to unarchive several rar files at once, I use <a href="http://www.rarlab.com/download.htm">RarLab&#8217;s command line tool</a>. Here&#8217;s how.</p>
+
+<!--more-->
+
+
+<p>Unlike its cousins .zip or .tar, to handle .rar archives you still need a third party app such as <a href="http://www.unrarx.com/">UnRarX</a>, <a href="http://www.zipeg.com/">Zipeg</a>, or <a href="http://shop.smithmicro.com/">Stuffit</a>. Rarlab offers the two freeware command line tools.</p>
+
+<h2>Downloading rar and unrar</h2>
+
+<p>After you <a href="http://www.rarlab.com/download.htm">download rar from RarLab</a>&#8217;s download section, you should find a file called something like rarosx-3.8.0.tar.gz depending on the version you downloaded. If you double click on it, OS X will unarchive and create a folder called rar, which contains three &#8220;Unix executable files&#8221;, and a bunch of text / html files. The executables are the command line rar and unrar, plus a support file used for installation. Rar is a demo that expires after 40 days, so don&#8217;t bother installing it unless you are planning to buy the licence (instructions are in one of the html files in the folder). Luckily unrar is freeware and you can just use it.</p>
+
+<h2>Installing unrar on OS X</h2>
+
+<p>To install unrar, open the Terminal application (Applications/Utilties/Terminal) and  navigate to the rar folder. If you don&#8217;t know how, the easiest way is to type &#8216;cd &#8217; with a space after it, then drag the rar folder onto the terminal window - Terminal will type out the path to the folder for you. Typicall on OS X Leopard it would be
+<code>cd Downloads/rar</code></p>
+
+<p>Once in that folder, type the following command</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo install -c -o  SHORTNAME unrar /usr/local/bin</span></code></pre></td></tr></table></div></figure>
+
+
+<p>where SHORTNAME is the short version of your user name. If you are not sure what it is, just type
+<code>whoami</code> and Terminal will tell you.</p>
+
+<p>Breaking down the command:</p>
+
+<dl class="code-breakdown">
+<dt>sudo</dt>
+<dd>runs this command in administrator mode, a security measure to prevent viruses installing software at will; you will be asked for your password when you type return</dd>
+
+<dt>install</dt>
+<dd>call the &#8216;install&#8217; utility, which does just what it says on the tin</dd>
+
+<dt>-c</dt>
+<dd>tells the install utility to copy the unrar file to its destination</dd>
+
+<dt>-o SHORTNAME</dt>
+<dd>tells the install utility to make you the owner of the binary, so that you won&#8217;t have to type a password every time you want to use it</dd>
+
+<dt>unrar</dt>
+<dd>the file to install - if you want to install rar instead, replace unrar with rar here</dd>
+
+<dt>/usr/local/bin</dt>
+<dd>the place where this will be installed - the /usr/local/bin folder is a common Unix location for binaries</dt>
+</dl>
+
+
+<p>After pressing ENTER and typing your password, you will be able to use unrar on the command line. To test it, type the following followed by ENTER:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd
+</span><span class='line'>unrar</span></code></pre></td></tr></table></div></figure>
+
+
+<p>where</p>
+
+<dl class="code-breakdown">
+<dt>cd</dt>
+<dd>takes you out of the rar folder and back to your home folder, because we want to test this will work from any location, and this is the fastest way to move out of the rar folder</dd>
+
+<dt>unrar</dt>
+<dd>this will run unrar, and since you haven&#8217;t passed any parameters, it should just print out instructions on how to use it.</dd>
+</dl>
+
+
+<h2>Using unrar on the command line on Mac OS X</h2>
+
+<p>Using unrar is very simple - in the Terminal window (Applicatons/Utilities/Terminal) you simply navigate to the folder where you want the archive to be <em>extracted to</em>. If you are not sure how to do that, the simplest way would be to type &#8216;cd &#8216;, including the space at the end, then drag the folder you want to navigate to onto the window, and Terminal will type its path for you. Then you type the unrar command, for example:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd ~/Documents/extracted_files
+</span><span class='line'>unrar x ~/Downloads/test-archive.rar</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Here&#8217;s what the example above does:</p>
+
+<dl class="code-breakdown">
+<dt>cd ~/Documents</dt>
+<dd>navigate to the Documents folder</dd>
+
+<dt>unrar</dt>
+<dd>calls the unrar utility</dd>
+
+<dt>x</dt>
+<dd>runs command &#8216;x&#8217; within the unrar utility; this will extract files maintaining the directory structure within the archive. If you type &#8216;e&#8217;, instead, all files will be extracted without enclosing folders</dd>
+
+<dt>~/test-archive.rar</dt>
+<dd>this is the location of the archive - again, the easiest way to do that is to drag the actual file onto the Terminal window</dd>
+</dl>
+
+
+<p>That was the simplest way to use the utilities. In fact, unrar offers several options, which you can discover by typing &#8216;unrar&#8217; followed by return on the terminal, and reading the instructions. As an example, the following</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>unrar x -pSECRET -y archive.rar</span></code></pre></td></tr></table></div></figure>
+
+
+<p>can be broken down as</p>
+
+<dl class="code-breakdown">
+<dt>unrar x</dt>
+<dd>tells unrar to run the &#8216;x&#8217; command, which is &#8216;extract files to current directory maintaining directory structure&#8217;</dd>
+
+<dt>-pSECRET</dt>
+<dd>use option -p, password, and passes the string SECRET as the password - yes, without a space in between</dd>
+
+<dt>-y</dt>
+<dd>uses option -y, &#8216;assumes yes on all queries&#8217;</dd>
+
+<dt>archive.rar</dt>
+<dd>the name of the file to be extracted</dd>
+</dl>
+
+
+<h2>Using unrar on the command line to unarchive a batch of files</h2>
+
+<p>This is where the command line version of unrar comes into its own - try and uncompress a bunch of password protected archives with any other utility, and see what I mean. To unarchive a batch of files, we&#8217;ll use the &#8216;find&#8217; command (which does exactly what it says), and pass its results to unrar.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd ~/Documents/
+</span><span class='line'>find ~/Downloads/ -name "*.rar" -exec unrar -pSECRET -y -ad x {} \;</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<dl class="code-breakdown">
+<dt>cd ~/Documents/</dt>
+<dd>navigate to the Documents folder</dd>
+
+<dt>find</dt>
+<dd>starts the find utility</dd>
+
+<dt>~/Downloads/</dt>
+<dd>tells the find utility to look for files in the Downloads directory within your home (that&#8217;s what ~ stands for). If your rar files are somewhere else, just replace the folder name with the one you need. If the rar files are in the same directory, you can just type a dot, &#8216;.&#8217;, which in Unix means &#8216;the current directory&#8217;</dd>
+
+<dt>-name &#8220;*.rar&#8221;</dt>
+<dd>tells find to look for files which ends in .rar - the * before it means &#8216;anything&#8217;. If you want, say, to look for all files which start with b and end in .rar, you&#8217;d type &#8220;b*.rar&#8221; instead</dd>
+
+<dt>-exec unrar</dt>
+<dd>tells find to pass the results to unrar. If you want to test before you start extracting, replace this with -print, and don&#8217;t type the following commands. This will just print a list of files.</dd>
+
+<dt>-pSECRET</dt>
+<dd>passes password SECRET to unrar; ignore if you don&#8217;t need it</dd>
+
+<dt>-y</dt>
+<dd>tells unrar to answer &#8216;yes&#8217; to all queries, so it won&#8217;t hang waiting for you to type it in manually</dd>
+
+<dt>-ad</dt>
+<dd>for each archive, this will create a folder of the same name as the archive, and save all files in it. This is very useful, otherwise if your archives do not have any folders inside them, all files would be mixed together</dd>
+
+<dt>x</dt>
+<dd>tells unrar which command to run</dd>
+
+<dt>{} \;</dt>
+<dd>this is used by find, {} menas the file you just found and \; ends it all</dd>
+</dl>
+
+
+<p>Now you can go make yourself a cup of tea, and all the archives will be magically extracted when you come back. Well not always <em>all</em> - occasionally there are quirks and unrar fails. I always check the Terminal window for errors (APPLE-F for find, and then look for word &#8216;error&#8217;) and if there were any errors, I will re-extract that particular archive again with a different utility. But errors don&#8217;t happen too often, and using the command line tool saves a lot of time.</p>
+</div>
+	</div>
+</article>
+
+<article class="archives">
+  <div class="related-posts">
+    <h2>Related Posts</h2>
+    
+      <article>
+        <h3 class="title"><a href="/blog/geekery/os-x-extended-attibutes">Dealing with extended attributes on OS X</a></h3>
+        <div class="meta">
+          <span class="tags">
+
+
+	<a class='category' href='/blog/cat/geekery/'>Geekery</a>
+
+
+</span>
+            
+          <time datetime="2009-02-12T03:59:11+01:00" pubdate>2009-02-12</time>
+            
+        </div>
+      </article>
+    
+      <article>
+        <h3 class="title"><a href="/blog/howto/a-place-for-unix-scripts-osx">A good place for scripts in OSX</a></h3>
+        <div class="meta">
+          <span class="tags">
+
+
+	<a class='category' href='/blog/cat/howto/'>HowTo</a>
+
+
+</span>
+            
+          <time datetime="2009-02-12T03:59:11+01:00" pubdate>2009-02-12</time>
+            
+        </div>
+      </article>
+    
+      <article>
+        <h3 class="title"><a href="/blog/howto/finding-files-inside-archive">Finding files inside an archive with Terminal</a></h3>
+        <div class="meta">
+          <span class="tags">
+
+
+	<a class='category' href='/blog/cat/howto/'>HowTo</a>
+
+
+</span>
+            
+          <time datetime="2009-02-12T03:59:11+01:00" pubdate>2009-02-12</time>
+            
+        </div>
+      </article>
+    
+  </div>
+</article>
+
+
+<section id="comment">
+    <h1 class="title">Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+
+    
+  </div>
+	<footer id="footer" class="inner">Copyright &copy; 2014
+
+    Fabrizio (Fritz) Stelluto
+
+</footer>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="/javascripts/slash.js"></script>
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'goto-fritz';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://gotofritz.net/blog/tutorials/batch-unrar-command-line-os-x';
+        var disqus_url = 'http://gotofritz.net/blog/tutorials/batch-unrar-command-line-os-x';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-11254155-2']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+</body>
+</html>

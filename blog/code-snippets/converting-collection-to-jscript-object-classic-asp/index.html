@@ -1,0 +1,301 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Converting a collection to a JScript object in ASP - Fabrizio (Fritz) Stelluto</title>
+	<meta name="author" content="">
+
+	
+	<meta name="description" content="Some Classic ASP code snippets in JScript for dealing with form data. Enumerators are collections of data that can be iterated through. Although &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="Fabrizio (Fritz) Stelluto" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.ico" rel="shortcut icon">
+	<link rel="icon" href="/favicon.gif" type="image/gif" />
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	
+</head>
+
+
+<body ontouchstart="">
+
+  <header id="header" class="inner">
+<nav id="main-nav"><div>
+  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+  <a href="/">home</a>
+  <a href="/blog/">blog</a>
+</div></nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><div>
+  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+  <a href="/">home</a>
+  <a href="/blog/">blog</a>
+</div></div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="http://google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:gotofritz.net">
+			</form>
+		</div>
+	</div>
+</nav>
+
+<nav id="sub-nav" class="alignright">
+	<form class="search" action="http://google.com/search" method="get">
+		<input class="alignright" type="text" name="q" results="0">
+		<input type="hidden" name="q" value="site:gotofritz.net">
+	</form>
+</nav>
+
+</header>
+	
+		
+	
+	<div id="content" class="inner">
+    
+    <article class="post">
+	<h1 class="title">Converting a Collection to a JScript Object in ASP</h1>
+	<div>
+		<div class="meta">
+			<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2006-05-30T15:04:38+02:00" pubdate data-updated="true">2006-05-30, Tue</time></div>
+			<div class="tags">
+
+
+	<a class='category' href='/blog/cat/code-snippets/'>Code Snippets</a>
+
+
+</div>
+			
+				<span class="comments"><a href="/blog/code-snippets/converting-collection-to-jscript-object-classic-asp#disqus_thread">Comments</a></span>
+			
+		</div>
+		<div class="entry-content"><p>Some Classic ASP code snippets in JScript for dealing with form data.</p>
+
+<!--more-->
+
+
+<p>Enumerators are collections of data that can be iterated through. Although useful, they are <a href="http://msdn2.microsoft.com/en-us/library/894hfyb4.aspx"> not compliant</a> with <a href="http://www.ecma-international.org/publications/standards/Ecma-262.htm">ECMAScript </a> standards, and therefore I prefer not to use them. Some objects in the ASP environment however, such as Request.Form, are provided as Enumerators, and need to be converted them to standard JScript objects. Here&#8217;s a couple of routines to do so.</p>
+
+<h3>Converting A Collection To A Plain JScript Object</h3>
+
+<p>I keep all the functions below in a generic include, coll2obj.asp, and use it across projects.  This is a generic collection-to-object conversion, which doesn&#8217;t seem to work on some built-in collections.</p>
+
+<div><script src='https://gist.github.com/2507749.js?file=coll2obj.asp'></script>
+<noscript><pre><code>/**  coll2obj
+ * transforms a VB collection thing in a JS-friendly object
+ * @return {Object}
+ */
+function coll2obj( coll ) {
+  var enm = new Enumerator( coll )
+    , obj = {}
+    ;
+
+  while( !enm.atEnd() ) {
+    obj[enm.item().name]  = enm.item().value;
+    enm.moveNext();
+  }
+
+  return obj;
+}</code></pre></noscript></div>
+
+
+<h3>Converting Request.ServerVariables To JScript Object In Classic ASP</h3>
+
+<p>I&#8217;m not quite sure why the function above won&#8217;t work on Request.ServerVariables, but it doesn&#8217;t, so here&#8217;s a function for that specific collection.</p>
+
+<div><script src='https://gist.github.com/2507749.js?file=env2obj.asp'></script>
+<noscript><pre><code>/**  
+ * transforms Request.ServerVariables VB collection 
+ * in a JS-friendly object
+ * @return {Object}
+ */
+function env2obj() {
+  var enm = new Enumerator(Request.ServerVariables)
+    , obj = new Object()
+    , ei, en
+    ;
+
+  while(!enm.atEnd()) {
+    ei  = enm.item();
+
+    if( Request.ServerVariables.Item( ei ).Count &gt; 1 ){      
+      obj[ei] = new Array();
+      en  = new Enumerator( Request.ServerVariables( ei );
+      while( !en.atEnd() )
+      {
+        obj[ei][ obj[ei].length ] = en.item();
+        en.moveNext();
+      }
+      en  = null;
+
+    } else {      
+      obj[ei] = new String( Request.ServerVariables( ei ) );
+
+    }
+    enm.moveNext();
+  }
+  return obj;
+}</code></pre></noscript></div>
+
+
+<h3>Converting Post Variables To JScript Object In Classic ASP</h3>
+
+<p>The same holds for post variables&#8230;</p>
+
+<div><script src='https://gist.github.com/2507749.js?file=post2obj.asp'></script>
+<noscript><pre><code>/*  post2obj
+ *  transforms Request.Form VB collection into a JS-friendly object
+ * @return {Object}
+ *
+ */
+function post2obj() {
+  var enm = new Enumerator( Request.Form )
+    , obj = new Object()
+    , ei, en
+    ;
+
+  while( !enm.atEnd() ) {
+    ei  = enm.item();
+
+    if(  Request.Form.Item( ei ).Count &gt; 1 ) {
+      obj[ei] = new Array();
+      en  = new Enumerator(Request.Form( ei ));
+
+      while( !en.atEnd() ){
+        obj[ei][ obj[ei].length ] = en.item();
+        en.moveNext();
+      }
+
+      en  = null;
+
+    } else {
+      obj[ei] = new String(Request.Form( ei ) );
+      obj[ei] = obj[ei].replace( /^s+|s+$/, '' );
+    }
+
+    enm.moveNext();
+  }
+
+  return obj;
+}</code></pre></noscript></div>
+
+
+<h3>Converting Post Variables To JScript Object In Classic ASP</h3>
+
+<p>&#8230;and query string variables.</p>
+
+<div><script src='https://gist.github.com/2507749.js?file=query2obj.asp'></script>
+<noscript><pre><code>/*  
+ * transforms Request.QueryString VB collection thing in a JS-friendly object
+ * @return {Object}
+ */
+function query2obj() {
+  var enm = new Enumerator( Request.QueryString )
+    , obj = new Object(
+    , ei, en
+    ;
+
+  while( !enm.atEnd() ) {
+    ei  = enm.item();
+
+    if(  Request.QueryString.Item( ei ).Count &gt; 1 ) {
+      obj[ei] = new Array();
+      en  = new Enumerator(Request.QueryString( ei ));
+
+      while( !en.atEnd() ) {
+        obj[ei][ obj[ei].length ] = en.item();
+        en.moveNext();
+      }
+
+      en  = null;
+
+    } else {
+      obj[ei] = new String(Request.QueryString( ei ) );
+      obj[ei] = obj[ei].replace( /^s+|s+$/, '' );
+    }
+
+    enm.moveNext();
+  }
+
+  return obj;
+}</code></pre></noscript></div>
+
+
+
+</div>
+	</div>
+</article>
+
+
+<section id="comment">
+    <h1 class="title">Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+
+    
+  </div>
+	<footer id="footer" class="inner">Copyright &copy; 2014
+
+    Fabrizio (Fritz) Stelluto
+
+</footer>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="/javascripts/slash.js"></script>
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'goto-fritz';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://gotofritz.net/blog/code-snippets/converting-collection-to-jscript-object-classic-asp';
+        var disqus_url = 'http://gotofritz.net/blog/code-snippets/converting-collection-to-jscript-object-classic-asp';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-11254155-2']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+</body>
+</html>

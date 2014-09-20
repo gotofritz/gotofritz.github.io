@@ -1,0 +1,327 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Ensure an explicit number of expectations within a spec in Jasmine - Fabrizio (Fritz) Stelluto</title>
+	<meta name="author" content="">
+
+	
+	<meta name="description" content="QUnit and js-test-driver have ways of specifying how many assertions will be executed in a test case (expect and expectAsserts respectively) but &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="Fabrizio (Fritz) Stelluto" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.ico" rel="shortcut icon">
+	<link rel="icon" href="/favicon.gif" type="image/gif" />
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	
+</head>
+
+
+<body ontouchstart="">
+
+  <header id="header" class="inner">
+<nav id="main-nav"><div>
+  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+  <a href="/">home</a>
+  <a href="/blog/">blog</a>
+</div></nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><div>
+  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+  <a href="/">home</a>
+  <a href="/blog/">blog</a>
+</div></div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="http://google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:gotofritz.net">
+			</form>
+		</div>
+	</div>
+</nav>
+
+<nav id="sub-nav" class="alignright">
+	<form class="search" action="http://google.com/search" method="get">
+		<input class="alignright" type="text" name="q" results="0">
+		<input type="hidden" name="q" value="site:gotofritz.net">
+	</form>
+</nav>
+
+</header>
+	
+		
+	
+	<div id="content" class="inner">
+    
+    <article class="post">
+	<h1 class="title">Ensure an Explicit Number of Expectations Within a Spec in Jasmine</h1>
+	<div>
+		<div class="meta">
+			<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-22T23:36:00+01:00" pubdate data-updated="true">2014-02-22, Sat</time></div>
+			<div class="tags">
+
+
+	<a class='category' href='/blog/cat/geekery/'>Geekery</a>
+
+
+</div>
+			
+				<span class="comments"><a href="/blog/geekery/ensure-explicit-number-expectations-within-spec-jasmine/#disqus_thread">Comments</a></span>
+			
+		</div>
+		<div class="entry-content"><p>QUnit and js-test-driver have ways of specifying how many assertions will be executed in a test case (<a href="http://api.qunitjs.com/expect/" title="[new window] expect() | QUnit API Documentation" target="_blank">expect</a> and <a href="https://code.google.com/p/js-test-driver/wiki/TestCase#expectAsserts(count)" title="[new window] TestCase - js-test-driver - Everything you need to know about writing tests. - Remote javascript console - Google Project Hosting" target="_blank">expectAsserts</a> respectively) but Jasmine doesn&#8217;t. But it can still be done - here&#8217;s how.</p>
+
+<!--more-->
+
+
+<h2>Why would anyone want to count the number of expectations in a test</h2>
+
+<p>Normally Jasmine specs are pretty straightforward (assuming <code>systemUnderTest</code> is defined somewhere else):</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">it</span><span class="p">(</span><span class="s2">&quot;does something really simple&quot;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">actual</span> <span class="o">=</span> <span class="nx">systemUnderTest</span><span class="p">.</span><span class="nx">methodToTest</span><span class="p">(</span><span class="nx">arg</span><span class="p">);</span>
+</span><span class='line'>  <span class="nx">expect</span><span class="p">(</span><span class="nx">actual</span><span class="p">).</span><span class="nx">not</span><span class="p">.</span><span class="nx">toBe</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>There are no branches, and you know Jasmine is going to run through all the expectations, one after the other. But it gets more complicated when loops, or async specs are involved. For example</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">it</span><span class="p">(</span><span class="s2">&quot;throws exceptions for all wrong arguments&quot;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">methodWrapper</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">arg</span><span class="p">)</span> <span class="p">{</span> <span class="nx">systemUnderTest</span><span class="p">.</span><span class="nx">methodToTest</span><span class="p">(</span><span class="nx">arg</span><span class="p">);</span> <span class="p">}</span>
+</span><span class='line'>    <span class="p">,</span> <span class="nx">wrongArgs</span> <span class="o">=</span> <span class="p">[</span><span class="k">new</span> <span class="nb">Date</span><span class="p">(),</span>
+</span><span class='line'>                   <span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">(),</span>
+</span><span class='line'>                   <span class="kc">false</span><span class="p">,</span>
+</span><span class='line'>                   <span class="kc">null</span><span class="p">,</span>
+</span><span class='line'>                   <span class="p">{</span><span class="nx">a</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">b</span><span class="o">:</span> <span class="mi">2</span><span class="p">},</span>
+</span><span class='line'>                   <span class="s2">&quot;a string&quot;</span><span class="p">,</span>
+</span><span class='line'>                   <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+</span><span class='line'>                   <span class="kc">undefined</span><span class="p">,</span>
+</span><span class='line'>                   <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="mi">123</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'>                   <span class="p">]</span>
+</span><span class='line'>    <span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nx">wrongArgs</span>
+</span><span class='line'>  <span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">arg</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">expect</span><span class="p">(</span><span class="nx">methodWrapper</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="nx">arg</span><span class="p">)).</span><span class="nx">toThrow</span><span class="p">();</span>
+</span><span class='line'>  <span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Here there is an array of arguments, each of which should cause the method <code>systemUnderTest.methodToTest</code> to throw an exception. So we loop through the array of arguments, and run an expectation for each of them.
+We have to wrap the call to <code>methodToTest</code> in a function, because it&#8217;s going to throw an exception - the function <code>methodWrapper</code> is a partial used by <code>.bind</code> to generate such a function. So each iteration of the loop will have a new version of <code>methodWrapper</code>, with <code>arg</code> already plugged in. Then <code>expect</code> can run it, catch the exception, and pass the test.</p>
+
+<p>This is still simple enough, there is only one loop with one statement in it. But you can see how this could easily get out of hand. What if the code was a little more complex, and for some reason the expectations in the loop are not executed? It will look like the test has passed, and you will never know the difference.</p>
+
+<p>The js-test-driver page gives another example, using workers (adapted to Jasmine)</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">it</span><span class="p">(</span><span class="s2">&quot;shows what could go wrong&quot;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">worker</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Worker</span><span class="p">(),</span>
+</span><span class='line'>    <span class="p">,</span> <span class="nx">doSomething</span> <span class="o">=</span> <span class="p">{}</span>
+</span><span class='line'>    <span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nx">worker</span><span class="p">.</span><span class="nx">listener</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">work</span><span class="p">){</span>
+</span><span class='line'>    <span class="nx">expect</span><span class="p">(</span><span class="nx">work</span><span class="p">).</span><span class="nx">toBe</span><span class="p">(</span><span class="nx">doSomething</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">};</span>
+</span><span class='line'>  <span class="nx">worker</span><span class="p">.</span><span class="nx">perform</span><span class="p">(</span><span class="nx">doSomething</span><span class="p">);</span>
+</span><span class='line'><span class="p">};</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If the worker doesn&#8217;t call the callback function, then the expectation will not be run, and once again, it will look like the test has passed when it hasn&#8217;t.</p>
+
+<h2>Defining the number of expected assertions in Jasmine</h2>
+
+<p>Jasmine doesn&#8217;t have a simple way to tell how many assertions have run, but digging into the code I found where to get the information - in version 1.3 at least: <code>this.env.currentSpec.results_.passedCount</code></p>
+
+<p>Therefore the examples above can be rewritten as</p>
+
+<figure class='code'><figcaption><span>mark:20</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">it</span><span class="p">(</span><span class="s2">&quot;throws exceptions for all wrong arguments&quot;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">methodWrapper</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">arg</span><span class="p">)</span> <span class="p">{</span> <span class="nx">systemUnderTest</span><span class="p">.</span><span class="nx">methodToTest</span><span class="p">(</span><span class="nx">arg</span><span class="p">);</span> <span class="p">}</span>
+</span><span class='line'>    <span class="p">,</span> <span class="nx">wrongArgs</span> <span class="o">=</span> <span class="p">[</span><span class="k">new</span> <span class="nb">Date</span><span class="p">(),</span>
+</span><span class='line'>                   <span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">(),</span>
+</span><span class='line'>                   <span class="kc">false</span><span class="p">,</span>
+</span><span class='line'>                   <span class="kc">null</span><span class="p">,</span>
+</span><span class='line'>                   <span class="p">{</span><span class="nx">a</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">b</span><span class="o">:</span> <span class="mi">2</span><span class="p">},</span>
+</span><span class='line'>                   <span class="s2">&quot;a string&quot;</span><span class="p">,</span>
+</span><span class='line'>                   <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+</span><span class='line'>                   <span class="kc">undefined</span><span class="p">,</span>
+</span><span class='line'>                   <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="mi">123</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'>                   <span class="p">]</span>
+</span><span class='line'>    <span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nx">wrongArgs</span>
+</span><span class='line'>  <span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">arg</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">expect</span><span class="p">(</span><span class="nx">methodWrapper</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="nx">arg</span><span class="p">)).</span><span class="nx">toThrow</span><span class="p">();</span>
+</span><span class='line'>  <span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nx">expect</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">currentSpec</span><span class="p">.</span><span class="nx">results_</span><span class="p">.</span><span class="nx">passedCount</span><span class="p">).</span><span class="nx">toEqual</span><span class="p">(</span><span class="nx">wrongArgs</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>and</p>
+
+<figure class='code'><figcaption><span>mark:10</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">it</span><span class="p">(</span><span class="s2">&quot;shows what could go wrong&quot;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">worker</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Worker</span><span class="p">(),</span>
+</span><span class='line'>    <span class="p">,</span> <span class="nx">doSomething</span> <span class="o">=</span> <span class="p">{}</span>
+</span><span class='line'>    <span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nx">worker</span><span class="p">.</span><span class="nx">listener</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">work</span><span class="p">){</span>
+</span><span class='line'>    <span class="nx">expect</span><span class="p">(</span><span class="nx">work</span><span class="p">).</span><span class="nx">toBe</span><span class="p">(</span><span class="nx">doSomething</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">};</span>
+</span><span class='line'>  <span class="nx">worker</span><span class="p">.</span><span class="nx">perform</span><span class="p">(</span><span class="nx">doSomething</span><span class="p">);</span>
+</span><span class='line'>  <span class="nx">expect</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">currentSpec</span><span class="p">.</span><span class="nx">results_</span><span class="p">.</span><span class="nx">passedCount</span><span class="p">).</span><span class="nx">toBe</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+</span><span class='line'><span class="p">};</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>A note on compatibility</h2>
+
+<p>This will work, but only in version 1.3 - with the new 2.0 version <a href="https://groups.google.com/forum/#!topic/jasmine-js/IyZt7cPmBWo" title="[new window] Removing .currentSpec from env breaks tests in jasmine 2.0 (since rc5) - Google Groups" target="_blank"><code>currentSpec</code> remains private</a>.
+There was a plugin, <a href="https://github.com/dfkaye/jasmine-intercept" title="[new window] dfkaye/jasmine-intercept" target="_blank">jasmine-intercept</a>,  that used to take care of that, but apparently it has now been superseded by <a href="https://github.com/dfkaye/where.js" title="[new window] dfkaye/where.js" target="_blank">where.js</a>. I haven&#8217;t had a chance to look into that yet, for now I&#8217;ll stick to my quick and dirty workaround.</p>
+</div>
+	</div>
+</article>
+
+
+<section id="comment">
+    <h1 class="title">Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+
+    
+  </div>
+	<footer id="footer" class="inner">Copyright &copy; 2014
+
+    Fabrizio (Fritz) Stelluto
+
+</footer>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="/javascripts/slash.js"></script>
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'goto-fritz';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://gotofritz.net/blog/geekery/ensure-explicit-number-expectations-within-spec-jasmine/';
+        var disqus_url = 'http://gotofritz.net/blog/geekery/ensure-explicit-number-expectations-within-spec-jasmine/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-11254155-2']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+</body>
+</html>

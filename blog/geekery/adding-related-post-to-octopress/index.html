@@ -1,0 +1,371 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Adding Related Post to Octopress - Fabrizio (Fritz) Stelluto</title>
+	<meta name="author" content="">
+
+	
+	<meta name="description" content="These are the simple steps I followed to add a &#8220;related posts&#8221; block to posts in my Octopress blog. Changing the template Jekyll has &# &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="Fabrizio (Fritz) Stelluto" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.ico" rel="shortcut icon">
+	<link rel="icon" href="/favicon.gif" type="image/gif" />
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	
+</head>
+
+
+<body ontouchstart="">
+
+  <header id="header" class="inner">
+<nav id="main-nav"><div>
+  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+  <a href="/">home</a>
+  <a href="/blog/">blog</a>
+</div></nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><div>
+  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+  <a href="/">home</a>
+  <a href="/blog/">blog</a>
+</div></div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="http://google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:gotofritz.net">
+			</form>
+		</div>
+	</div>
+</nav>
+
+<nav id="sub-nav" class="alignright">
+	<form class="search" action="http://google.com/search" method="get">
+		<input class="alignright" type="text" name="q" results="0">
+		<input type="hidden" name="q" value="site:gotofritz.net">
+	</form>
+</nav>
+
+</header>
+	
+		
+	
+	<div id="content" class="inner">
+    
+    <article class="post">
+	<h1 class="title">Adding Related Post to Octopress</h1>
+	<div>
+		<div class="meta">
+			<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-10-07T00:58:00+02:00" pubdate data-updated="true">2012-10-07, Sun</time></div>
+			<div class="tags">
+
+
+	<a class='category' href='/blog/cat/geekery/'>Geekery</a>
+
+
+</div>
+			
+				<span class="comments"><a href="/blog/geekery/adding-related-post-to-octopress/#disqus_thread">Comments</a></span>
+			
+		</div>
+		<div class="entry-content"><p>These are the <del>simple</del> steps I followed to add a &#8220;related posts&#8221; block to posts in my Octopress blog.</p>
+
+<!--more-->
+
+
+<h2>Changing the template</h2>
+
+<p>Jekyll has &#8216;related posts&#8217; functionality already, all I needed to do was to use it in the template. The code below, adapted from the blog index, displays the block if there are at least two related posts. I added it to post.html.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'>{% if site.related_posts.size &gt; 1 %}
+</span><span class='line'><span class="nt">&lt;article</span> <span class="na">class=</span><span class="s">&quot;archives&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;related-posts&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;h2&gt;</span>Related Posts<span class="nt">&lt;/h2&gt;</span>
+</span><span class='line'>    {% for post in site.related_posts limit:site.recent_posts %}
+</span><span class='line'>      <span class="nt">&lt;article&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;h3</span> <span class="na">class=</span><span class="s">&quot;title&quot;</span><span class="nt">&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;{{ root_url }}{{ post.url }}&quot;</span><span class="nt">&gt;</span>{{post.title}}<span class="nt">&lt;/a&gt;&lt;/h3&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;meta&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>          <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">&quot;tags&quot;</span><span class="nt">&gt;</span>{% include post/categories.html %}<span class="nt">&lt;/span&gt;</span>
+</span><span class='line'>            {% if site.disqus_short_name and post.comments == true and site.disqus_show_comment_count == true %}
+</span><span class='line'>          <span class="nt">&lt;time</span> <span class="na">datetime=</span><span class="s">&quot;{{ date | datetime | date_to_xmlschema }}&quot;</span> <span class="na">pubdate</span><span class="err">{%</span> <span class="na">if</span> <span class="na">post</span><span class="err">.</span><span class="na">updated</span> <span class="err">%}</span> <span class="na">data-updated=</span><span class="s">&quot;true&quot;</span><span class="err">{%</span> <span class="na">endif</span> <span class="err">%}</span><span class="nt">&gt;</span>{{ date | date: &quot;%F&quot; }}<span class="nt">&lt;/time&gt;</span>
+</span><span class='line'>            {% endif %}
+</span><span class='line'>        <span class="nt">&lt;/div&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;/article&gt;</span>
+</span><span class='line'>    {% endfor %}
+</span><span class='line'>  <span class="nt">&lt;/div&gt;</span>
+</span><span class='line'><span class="nt">&lt;/article&gt;</span>
+</span><span class='line'>{% endif %}
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Did the necessary SASS amends, generated the blog, and it was all there. Except that the related posts where simply the latest posts. For a better list, I needed to run jekyll with lsi.</p>
+
+<h2>Enabling related posts in Jekyll and Octopress</h2>
+
+<p>The &#8211;lsi option performs a proper statistical analysis of the posts to determine the best related posts. Turns out Octopress can already tell Jekyll to turn lsi on - it&#8217;s just a matter of adding a new property somewhere in the _config.yml file</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="nn">...</span>
+</span><span class='line'><span class="l-Scalar-Plain">lsi</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">true</span>
+</span><span class='line'><span class="nn">...</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I regenerated the blog and&#8230; after an hour it <i>still</i> hadn&#8217;t generated the site. Not good. Time to try and install gsl.</p>
+
+<h2>Install GSL</h2>
+
+<p>GSL is a scientific maths library which Ruby can use to speed up the calculations. Hopefully that will save the day.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>brew install <span class="nv">gsl</span>
+</span><span class='line'><span class="o">==</span>&gt; Downloading http://ftpmirror.gnu.org/gsl/gsl-1.15.tar.gz
+</span><span class='line'><span class="c">######################################################################## 100.0%</span>
+</span><span class='line'><span class="o">==</span>&gt; ./configure --prefix<span class="o">=</span>/usr/local/Cellar/gsl/1.15
+</span><span class='line'><span class="o">==</span>&gt; <span class="nv">make</span>
+</span><span class='line'><span class="o">==</span>&gt; make install
+</span><span class='line'>Warning: m4 macros were installed to <span class="s2">&quot;share/aclocal&quot;</span>.
+</span><span class='line'>Homebrew does not append <span class="s2">&quot;/usr/local/share/aclocal&quot;</span>
+</span><span class='line'>to <span class="s2">&quot;/usr/share/aclocal/dirlist&quot;</span>. If an autoconf script you use
+</span><span class='line'>requires these m4 macros, you<span class="s1">&#39;ll need to add this path manually.</span>
+</span><span class='line'><span class="s1">Warning: Could not link gsl. Unlinking...</span>
+</span><span class='line'><span class="s1">Error: The `brew link` step did not complete successfully</span>
+</span><span class='line'><span class="s1">The formula built, but is not symlinked into /usr/local</span>
+</span><span class='line'><span class="s1">You can try again using `brew link gsl&#39;</span>
+</span><span class='line'><span class="o">==</span>&gt; Summary
+</span><span class='line'>/usr/local/Cellar/gsl/1.15: 237 files, 7.1M, built in 88 seconds
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So homebrew wasn&#8217;t happy - well, it never is. A bit of tweaking and googling produced the following</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>sudo chmod 775 /usr/local/include
+</span><span class='line'><span class="nv">$ </span>brew link gsl
+</span><span class='line'>Linking /usr/local/Cellar/gsl/1.15... 18 symlinks created
+</span><span class='line'><span class="nv">$ </span>sudo gem install gsl
+</span><span class='line'>Building native extensions.  This could take a <span class="k">while</span>...
+</span><span class='line'>ERROR:  Error installing gsl:
+</span><span class='line'>    ERROR: Failed to build gem native extension.
+</span><span class='line'>    ....<span class="o">(</span>more stuf<span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now gsl is installed, but the gem is not happy. A bit of research revealed the problem is that the ruby gem is not compatible with the latest version of gsl, which is what homebrew installs. To downgrade it, I followed the <a href="http://hi.baidu.com/rainchen/item/e9f24fc009c227340831c6a2" title="[new window] how to install gem gsl -v '1.14.7' on Mac OS_卧得罚_百度空间" target="_blank">instructions on this post</a> and it seemd to work (kinda)</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>brew uninstall gsl
+</span><span class='line'><span class="nv">$ </span>brew update
+</span><span class='line'><span class="nv">$ </span>brew edit gsl
+</span><span class='line'><span class="c"># pasted code in</span>
+</span><span class='line'><span class="nv">$ </span>brew install gsl
+</span><span class='line'><span class="nv">$ </span>sudo gem install gsl -v <span class="s1">&#39;1.14.7&#39;</span>
+</span><span class='line'>Password:
+</span><span class='line'>Building native extensions.  This could take a <span class="k">while</span>...
+</span><span class='line'>Successfully installed gsl-1.14.7
+</span><span class='line'>1 gem installed
+</span><span class='line'>Installing ri documentation <span class="k">for </span>gsl-1.14.7...
+</span><span class='line'>unable to convert <span class="s2">&quot;\x81&quot;</span> from ASCII-8BIT to UTF-8 <span class="k">for </span>rdoc/fit.rdoc, skipping
+</span><span class='line'>unable to convert <span class="s2">&quot;\x81&quot;</span> from ASCII-8BIT to UTF-8 <span class="k">for </span>rdoc/ndlinear.rdoc, skipping
+</span><span class='line'>Installing RDoc documentation <span class="k">for </span>gsl-1.14.7...
+</span><span class='line'>unable to convert <span class="s2">&quot;\x81&quot;</span> from ASCII-8BIT to UTF-8 <span class="k">for </span>rdoc/fit.rdoc, skipping
+</span><span class='line'>unable to convert <span class="s2">&quot;\x81&quot;</span> from ASCII-8BIT to UTF-8 <span class="k">for </span>rdoc/ndlinear.rdoc, skipping
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Well, look reasonable enough (who cares about manuals, right). Typing <code>gsl-config</code> on the command line also returned a a command, showing gsl was installed correctly. But then when generating the site&#8230;</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>rake generate
+</span><span class='line'><span class="c">## Generating Site with Jekyll</span>
+</span><span class='line'>unchanged sass/screen.scss
+</span><span class='line'>/Users/ME/.rvm/gems/ruby-1.9.3-p194/gems/maruku-0.6.0/lib/maruku/input/parse_doc.rb:22:in <span class="sb">`</span>&lt;top <span class="o">(</span>required<span class="o">)</span>&gt;<span class="err">&#39;</span>: iconv will be deprecated in the future, use String#encode instead.
+</span><span class='line'>Configuration from /Users/ME/work/octopress/_config.yml
+</span><span class='line'>Notice: <span class="k">for </span>10x faster LSI support, please install http://rb-gsl.rubyforge.org/
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So that was a waste of time. I <a href="https://github.com/mojombo/jekyll/issues/652" title="[new window] Jekyll --lsi unable to find gsl even though it is installed · Issue #652 · mojombo/jekyll" target="_blank">filed a bug report</a> and left it at that.</p>
+
+<h2>A Related Posts plugin</h2>
+
+<p>Lawrence Woodman has created a simpler <a href="http://techtinkering.com/2011/08/17/improving-related-posts-on-jekyll/" title="[new window] Improving the related_posts feature of jekyll" target="_blank">related_posts plugin</a> which looks at tags instead of doing complex analysis. I downloaded that simple file to my plugin directory, regenerated the site, and that was that. A lot of the posts do not have tags at all, but the template doesn&#8217;t print any &#8220;related posts&#8221; HTML at all unless there are at least two of them, so that&#8217;s alright. I actually like this system better than lsi, because I can control what&#8217;s related to what by creating tags.</p>
+</div>
+	</div>
+</article>
+
+<article class="archives">
+  <div class="related-posts">
+    <h2>Related Posts</h2>
+    
+      <article>
+        <h3 class="title"><a href="/blog/weekly-challenge/hosting-octopress-nginx/">Hosting Octopress on nginx</a></h3>
+        <div class="meta">
+          <span class="tags">
+
+
+	<a class='category' href='/blog/cat/weekly-challenge/'>Weekly Challenge</a>
+
+
+</span>
+            
+          <time datetime="2012-10-07T00:58:00+02:00" pubdate>2012-10-07</time>
+            
+        </div>
+      </article>
+    
+      <article>
+        <h3 class="title"><a href="/blog/weekly-challenge/migrating-wordpress-blogs-to-octopress">Migrating Wordpress blogs to Octopress</a></h3>
+        <div class="meta">
+          <span class="tags">
+
+
+	<a class='category' href='/blog/cat/weekly-challenge/'>Weekly Challenge</a>
+
+
+</span>
+            
+          <time datetime="2012-10-07T00:58:00+02:00" pubdate>2012-10-07</time>
+            
+        </div>
+      </article>
+    
+  </div>
+</article>
+
+
+<section id="comment">
+    <h1 class="title">Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+
+    
+  </div>
+	<footer id="footer" class="inner">Copyright &copy; 2014
+
+    Fabrizio (Fritz) Stelluto
+
+</footer>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="/javascripts/slash.js"></script>
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'goto-fritz';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://gotofritz.net/blog/geekery/adding-related-post-to-octopress/';
+        var disqus_url = 'http://gotofritz.net/blog/geekery/adding-related-post-to-octopress/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-11254155-2']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+</body>
+</html>

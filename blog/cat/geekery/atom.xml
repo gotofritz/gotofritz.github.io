@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Geekery | Fabrizio (Fritz) Stelluto]]></title>
+  <link href="http://gotofritz.net/blog/cat/geekery/atom.xml" rel="self"/>
+  <link href="http://gotofritz.net/"/>
+  <updated>2014-03-27T22:00:28+01:00</updated>
+  <id>http://gotofritz.net/</id>
+  <author>
+    <name><![CDATA[]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Injecting local IP Address into a file with bash]]></title>
+    <link href="http://gotofritz.net/blog/geekery/injecting-local-ip-address-into-a-file-with-bash/"/>
+    <updated>2014-03-03T14:24:00+01:00</updated>
+    <id>http://gotofritz.net/blog/geekery/injecting-local-ip-address-into-a-file-with-bash</id>
+    <content type="html"><![CDATA[<p>Sometimes there are some config file on which you have no control for which you need to change an IP address to that of your current dev machine. Here's how I fix that with a bash script.</p>
+
+<!--more-->
+
+
+<h2>A good place to put bash scripts</h2>
+
+<p>I have a <code>bin</code> folder inside my user folder. It is in the <code>$PATH</code>, meaning every script file in there can be executed as a script from anywhere. In there I create a text file called <code>fix-config-PROJECT</code>. Yes, I make one per project, because I hard code the paths of the files to change. This could evolve into something more complex if the need arises, but the setup I have so far has served me well so far.</p>
+
+<p><code>bash
+nano ~/bin/fix-config-PROJECT
+</code></p>
+
+<h2>The script file</h2>
+
+<p>``` bash</p>
+
+<h1>!/bin/bash</h1>
+
+<p>IP=<code>ifconfig  | grep inet | grep -v inet6 | tail -n1 | awk '{print $2}'</code>
+for file in "launchpad/src/main/tomcat/conf/context.xml" "path/to/etc.xml"
+do
+  svn revert $file
+  sed -i "" "s/localhost/$IP/g" $file
+done
+```</p>
+
+<h2>Script breakdown</h2>
+
+<dl class="code-breakdown">
+  <dt class="long-line">IP=`ifconfig  | grep inet | grep -v inet6 | tail -n1 | awk '{print $2}'`</dt>
+  <dd class="long-line">This runs a series of commands one after the other, using <code>|</code> to pass the result of each command to the next. The ` at the beginning and end put the result into a variable <code>$IP</code></dd>
+
+  <dt>ifconfig</dt>
+  <dd>From the manpage: "The ifconfig utility is used to assign an address to a network interface and/or configure network interface parameters". Used without parameters, it returns a big chunk of text with current settings. The IP address is in there somewhere.</dd>
+
+  <dt>grep inet</dt>
+  <dt>grep -v inet6</dt>
+  <dd>extracts the lines from that chunk of text which have "inet" in it, but not "inet6"</dd>
+
+  <dt>tail -n1</dt>
+  <dd>take the last of these lines</dd>
+
+  <dt>awk '{print $2}'</dt>
+  <dd>At this point we have a string like <code>inet 192.168.2.108 netmask 0xffffff00 broadcast 192.168.2.255</code>. Awk can be used to extract the 192... from it. Awk is a utilities that processes a line of text by splitting into fields where blank spaces are - it is used for handling database dumps etc. In this case, it is basically saying that after it's split the line into fields (which it does automatically), it should print out the second field and throw away the rest.</dd>
+
+  <dt class="long-line">for file in "launchpad/src/main/tomcat/conf/context.xml" "path/to/etc.xml"</dt>
+  <dd class="long-line">The files I need to process are listed out one after the other. This is good enough for my use case. Note that the paths are not absolute, so that I can use the same command in different svn branches. What this line does is looping through each file</dd>
+
+  <dt class="long-line">svn revert $file</dt>
+  <dt class="long-line">sed -i "" "s/localhost/$IP/g" $file</dt>
+  <dd class="long-line">First I revert the latest changes, then I make new ones. This time using sed, a utility which processes text a line at the time, transforming it on the way. The <code>-i ""</code> means to process the file in place (as opposed to create a copy), without creating a backup. The substitution is simple, I simply change all occurrences of <code>locahost</code> with the IP address from earlier</dd>
+</dl>
+
+
+<h2>Running the script</h2>
+
+<p>I can now run the script from anywhere on my machine, usually as
+<code>bash
+cd PROJECT/branch_x
+fix-config-PROJECT
+</code>
+and then all the config files are changed as required, and I can access my local version site from tablets etc using the IP address.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Ensure an explicit number of expectations within a spec in Jasmine]]></title>
+    <link href="http://gotofritz.net/blog/geekery/ensure-explicit-number-expectations-within-spec-jasmine/"/>
+    <updated>2014-02-22T23:36:00+01:00</updated>
+    <id>http://gotofritz.net/blog/geekery/ensure-an-explicit-number-of-expectations-within-a-spec-in-jasmine</id>
+    <content type="html"><![CDATA[<p>QUnit and js-test-driver have ways of specifying how many assertions will be executed in a test case (<a href="http://api.qunitjs.com/expect/" title="[new window] expect() | QUnit API Documentation" target="_blank">expect</a> and <a href="https://code.google.com/p/js-test-driver/wiki/TestCase#expectAsserts(count)" title="[new window] TestCase - js-test-driver - Everything you need to know about writing tests. - Remote javascript console - Google Project Hosting" target="_blank">expectAsserts</a> respectively) but Jasmine doesn't. But it can still be done - here's how.</p>
+
+<!--more-->
+
+
+<h2>Why would anyone want to count the number of expectations in a test</h2>
+
+<p>Normally Jasmine specs are pretty straightforward (assuming <code>systemUnderTest</code> is defined somewhere else):</p>
+
+<p><code>js
+it("does something really simple", function () {
+  var actual = systemUnderTest.methodToTest(arg);
+  expect(actual).not.toBe(true);
+});
+</code>
+There are no branches, and you know Jasmine is going to run through all the expectations, one after the other. But it gets more complicated when loops, or async specs are involved. For example</p>
+
+<p>``` js
+it("throws exceptions for all wrong arguments", function () {
+  var methodWrapper = function (arg) { systemUnderTest.methodToTest(arg); }</p>
+
+<pre><code>, wrongArgs = [new Date(),
+               Math.random(),
+               false,
+               null,
+               {a: 1, b: 2},
+               "a string",
+               [1, 2],
+               undefined,
+               function () { return 123; }
+               ]
+;
+</code></pre>
+
+<p>  wrongArgs
+  .forEach(function (arg) {</p>
+
+<pre><code>expect(methodWrapper.bind(null, arg)).toThrow();
+</code></pre>
+
+<p>  });</p>
+
+<p>});
+```</p>
+
+<p>Here there is an array of arguments, each of which should cause the method <code>systemUnderTest.methodToTest</code> to throw an exception. So we loop through the array of arguments, and run an expectation for each of them.
+We have to wrap the call to <code>methodToTest</code> in a function, because it's going to throw an exception - the function <code>methodWrapper</code> is a partial used by <code>.bind</code> to generate such a function. So each iteration of the loop will have a new version of <code>methodWrapper</code>, with <code>arg</code> already plugged in. Then <code>expect</code> can run it, catch the exception, and pass the test.</p>
+
+<p>This is still simple enough, there is only one loop with one statement in it. But you can see how this could easily get out of hand. What if the code was a little more complex, and for some reason the expectations in the loop are not executed? It will look like the test has passed, and you will never know the difference.</p>
+
+<p>The js-test-driver page gives another example, using workers (adapted to Jasmine)
+``` js
+it("shows what could go wrong", function () {
+  var worker = new Worker(),</p>
+
+<pre><code>, doSomething = {}
+;
+</code></pre>
+
+<p>  worker.listener = function (work){</p>
+
+<pre><code>expect(work).toBe(doSomething);
+</code></pre>
+
+<p>  };
+  worker.perform(doSomething);
+};
+```</p>
+
+<p>If the worker doesn't call the callback function, then the expectation will not be run, and once again, it will look like the test has passed when it hasn't.</p>
+
+<h2>Defining the number of expected assertions in Jasmine</h2>
+
+<p>Jasmine doesn't have a simple way to tell how many assertions have run, but digging into the code I found where to get the information - in version 1.3 at least: <code>this.env.currentSpec.results_.passedCount</code></p>
+
+<p>Therefore the examples above can be rewritten as</p>
+
+<p>``` js mark:20
+it("throws exceptions for all wrong arguments", function () {
+  var methodWrapper = function (arg) { systemUnderTest.methodToTest(arg); }</p>
+
+<pre><code>, wrongArgs = [new Date(),
+               Math.random(),
+               false,
+               null,
+               {a: 1, b: 2},
+               "a string",
+               [1, 2],
+               undefined,
+               function () { return 123; }
+               ]
+;
+</code></pre>
+
+<p>  wrongArgs
+  .forEach(function (arg) {</p>
+
+<pre><code>expect(methodWrapper.bind(null, arg)).toThrow();
+</code></pre>
+
+<p>  });</p>
+
+<p>  expect(this.env.currentSpec.results_.passedCount).toEqual(wrongArgs.length)
+});
+```
+and</p>
+
+<p>``` js mark:10
+it("shows what could go wrong", function () {
+  var worker = new Worker(),</p>
+
+<pre><code>, doSomething = {}
+;
+</code></pre>
+
+<p>  worker.listener = function (work){</p>
+
+<pre><code>expect(work).toBe(doSomething);
+</code></pre>
+
+<p>  };
+  worker.perform(doSomething);
+  expect(this.env.currentSpec.results_.passedCount).toBe(1);
+};
+```</p>
+
+<h2>A note on compatibility</h2>
+
+<p>This will work, but only in version 1.3 - with the new 2.0 version <a href="https://groups.google.com/forum/#!topic/jasmine-js/IyZt7cPmBWo" title="[new window] Removing .currentSpec from env breaks tests in jasmine 2.0 (since rc5) - Google Groups" target="_blank"><code>currentSpec</code> remains private</a>.
+There was a plugin, <a href="https://github.com/dfkaye/jasmine-intercept" title="[new window] dfkaye/jasmine-intercept" target="_blank">jasmine-intercept</a>,  that used to take care of that, but apparently it has now been superseded by <a href="https://github.com/dfkaye/where.js" title="[new window] dfkaye/where.js" target="_blank">where.js</a>. I haven't had a chance to look into that yet, for now I'll stick to my quick and dirty workaround.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Inserting CDATA into a Sublime Text snippet]]></title>
+    <link href="http://gotofritz.net/blog/geekery/inserting-cdata-into-sublime-text-snippet/"/>
+    <updated>2014-01-05T18:20:00+01:00</updated>
+    <id>http://gotofritz.net/blog/geekery/inserting-cdata-into-a-sublime-text-snippet</id>
+    <content type="html"><![CDATA[<p><a href="https://sublime-text-unofficial-documentation.readthedocs.org/en/latest/reference/snippets.html" title="[new window] Snippets — Sublime Text Unofficial Documentation" target="_blank">Sublime Text Snippets</a> are XML documents, with the body of the snippet is inside a CDATA node. So what happens if you need the body of the snippet to have a CDATA of its own?</p>
+
+<!--more-->
+
+
+<p>XML documents cannot have nested CDATA blocks, so any CDATA you put in there is illegal. The problem is not the opening tag itself, the <code>&lt;![CDATA[</code>, which is just treated as part of the data, i.e. ignored. The problem is the closing tag, the <code>]]&gt;</code> - it will close the CDATA before you need to, so any XML after that will likely be invalid.</p>
+
+<h2>Sublime insertion points</h2>
+
+<p>Snippets can have insertion points: <code>${1}</code> is where the cursor will be when you create the snippet, <code>${2}</code> is where it will go to when you tab, and so on. Incidentally, <code>${1:DEFAULT}</code> will select the word "DEFAULT" and leave the cursor there, so you can just tab away or type something to overwrite it. Anyway.</p>
+
+<p>It turns out you can use the insertion point <code>${-1}</code> too. It does absolutely nothing at all, which is just what we need - something that can be used to break up the <code>]]&gt;</code> without doing anything at all.</p>
+
+<p>Let's say we want to create a snippet with this body, and we want "TITLE" to be selectable, with one insertion point in each CDATA</p>
+
+<p><code>xml
+&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+  &lt;title&gt;&lt;![CDATA[TITLE]]&gt;&lt;/title&gt;
+  &lt;description&gt;&lt;![CDATA[]]&gt;&lt;/description&gt;
+  &lt;source&gt;&lt;![CDATA[]]&gt;&lt;/source&gt;
+</code></p>
+
+<p>Here's how to use the <code>${-1}</code> trick to break up the CDATA blocks - note how it goes in between the <code>]]</code> and the closing <code>&gt;</code></p>
+
+<p>``` xml
+<snippet></p>
+
+<pre><code>&lt;content&gt;&lt;![CDATA[&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+</code></pre>
+
+<p>  <title>&lt;![CDATA[${1:TITLE}]]${-1}></title>
+  <description>&lt;![CDATA[$2]]${-1}></description>
+  <source>&lt;![CDATA[$3]]${-1}></source>
+]]&gt;</content></p>
+
+<pre><code>&lt;!-- Optional: Set a tabTrigger to define how to trigger the snippet --&gt;
+&lt;!-- &lt;tabTrigger&gt;hello&lt;/tabTrigger&gt; --&gt;
+&lt;!-- Optional: Set a scope to limit where the snippet will trigger --&gt;
+&lt;!-- &lt;scope&gt;source.python&lt;/scope&gt; --&gt;
+</code></pre>
+
+<p></snippet>
+```</p>
+
+<p>That's rather simple once you know how.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Creating a DVD with a Play All button in iDVD]]></title>
+    <link href="http://gotofritz.net/blog/geekery/creating-dvd-play-all-button-idvd/"/>
+    <updated>2013-12-29T01:46:00+01:00</updated>
+    <id>http://gotofritz.net/blog/geekery/creating-a-dvd-with-a-play-all-button-in-idvd</id>
+    <content type="html"><![CDATA[<p>iDVD? Yeah, so passè, it doesn't even ship with Mountain Lion anymore. Still, if you are lucky enough to have an older version of OS X, here's how to add a "Play All" button to a DVD created with iDVD.</p>
+
+<!--more-->
+
+
+<h2>Use iMovie, not iDVD to create your movie</h2>
+
+<p>The simple truth is that iDVD does not have the ability to add a "Play all" button to a DVD. Strange but true. And don't expect that to change any time soon - Apple is phasing out iDVD altogether (DVD are soooo 2000s, aren't they?) in fact Mountain Lion doesn't ship with it.</p>
+
+<p>Luckily, iDVD can read iMovie's chapter markers, and when it sees them it will automagically create a "Play all" and a "Select scene" buttons. Therefore, you need to work with iMovie.</p>
+
+<h2>Use MPEG Streamclip to get your videos into iMovie</h2>
+
+<p>If you have problems importing videos into iMovie, for example the movies are greyed out in the file dialog that comes up when you try <code>Import &gt; Movies...</code>, it's probably because of the wrong codec. Even if the clip is a .mov file, it may still use a codec that is not supported (.mov is a container for all sort of movie formats, rather than a format of its own).</p>
+
+<p>The best thing to do in those cases is to use a video converter such as <a href="http://www.squared5.com/svideo/mpeg-streamclip-mac.html" title="[new window] Squared 5 - MPEG Streamclip video converter for Mac OS X" target="_blank">MPEG Streamclip</a> to convert the videos first. I like using MPEG streamclip to do some initial clean up of clips as well, as you can use the arrow keys to move one frame at the time.</p>
+
+<h2>Setup iMovie to use the Chapter Markers</h2>
+
+<p>Chapter markers are not enabled by default in iMovie, you need to go into the Preferences and tick "Show Advanced Tools" for some reason. Then you'll see two tiny orange boxes in the top right corner of the timeline panel. The rightmost one is the markers button. Note that it is not a button as such, it is more like a constant supply of markers that you need to drag to wherever you need it on the timeline. Normally that would be at the beginning of each of the clip.</p>
+
+<p>Experienced users suggests you don't use a marker for the very beginning of the movie (one will be generated for you, and if you do it will confuse iDVD), nor inside a fade between clips.</p>
+
+<h2>Export the movie for iDVD</h2>
+
+<p>After you are done with editing the video and adding markers wherever you need them, select <code>Share &gt; Media Browser...</code> and tick on "large". This is supposed to give better results than just sharing to iDVD directly.</p>
+
+<h2>Import the movie into iDVD</h2>
+
+<p>iMovie is an odd program, it doesn't have a "Save" menu entry, and when you share a movie it doesn't even allow you to name it or decide where to put it. So, where does iMovie store the media browser files? They go inside the project file itself, which you'll find in your Movies folder inside <code>iMovie Projects</code>. The project file in there (of type .rcproject, if you have Show File Suffix enabled in OS X) is actually a folder in disguise. To open it as a folder, right click on it, select <code>Show Package Contents</code>, and a Finder window will open there. The movie you are looking for is inside the <code>Movies</code> folder, called <code>large.m4v</code>.</p>
+
+<p>Now you can open iDVD, set up your project (make sure the aspect ration, 4:3 or 16:9, is the same as you have set in iMovie!), and choose <code>Import &gt; Movies</code>. When the file dialog is open, go to Finder, and drag the large.m4v file onto the iDVD file dialog.</p>
+
+<p>Now you have your DVD setup with all the buttons you need, which you can rename and move about as required.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Adding useful text shortcuts to the clipboard with Alfred]]></title>
+    <link href="http://gotofritz.net/blog/geekery/adding-text-shortcuts-clipboard-alfred/"/>
+    <updated>2013-12-15T17:30:00+01:00</updated>
+    <id>http://gotofritz.net/blog/geekery/adding-useful-test-shortcuts-to-the-clipboard-with-alfred</id>
+    <content type="html"><![CDATA[<p><a href="http://support.alfredapp.com/workflows" title="[new window] Workflows - Alfred v2 Support" target="_blank">Alfred Worflows</a> can be useful in creating strings and pushing them immediately to the clipboard, so that they are available without moving the hands from the keyboard.</p>
+
+<!--more-->
+
+
+<h2>Pushing formatted date into the clipboard</h2>
+
+<p>For example, I often use dates in the format <code>[yyyy-mm-dd]</code> in various documents and homemade apps. Since it is something I do quite regularly, an Alfred workflow may be a good idea. Something simple, something that works out a date and puts it in the clipboard, and pastes it in the frontmost app if it can.</p>
+
+<h2>Creating the a workflow</h2>
+
+<p>In Alfred, in the workflows tab, I clicked on the <code>+</code> button at the bottom of the <abbr title="Left Hand Side">LHS</a> panel (1), and selected <code>blank workflow</code>. I filled in some details and clicked <code>save</code></p>
+
+<p>Then I clicked on the plus button at the top of the <abbr title="Right Hand Side">RHS</a> panel (2), and selected from 'inputs' a 'keyword', from 'actions' a 'run script', and from 'outputs' a 'copy to clipboard'. I dragged from the kink in 'keyword' to 'run script' to connect them, then did the same to connect 'copy to clipboard'. Then I double clicked on each in turn to edit.</p>
+
+<p><img src="/images/adding-text-shortcuts-clipboard-alfred.png" width="800" height="522" title="[screenshot of the alfred workflow]" ></p>
+
+<h2>The Keyword object</h2>
+
+<p>The <code>keyword</code> argument is the actual keyword that you type in Alfred to run the command, I used "today". I also ticked "with space" and selected "argument optional" from the dropdown next to it. This means that I can call the argument as "today +2" or "today y" for example, to get the date two days from now or yesterday. "With space" ensures the space between "today" and the next work is considered part of the keyword and not the argument. The argument itself can be used in the script as the special string "{query}".</p>
+
+<p>The <code>title</code> and <code>subtext</code> appear in the Alfred dropdown when you are typing the keyword.</p>
+
+<h2>The Run Script object</h2>
+
+<p>I selected PHP as the language, left all the checkboxes as they were, and entered the following script. Not the most sophisticated script, but before I invest time to make it slick I want to make sure I actually need it.</p>
+
+<p>``` php
+switch ("{query}") {
+  case "tomorrow":
+  case "1":
+  case "+1":
+  case "t":</p>
+
+<pre><code>$when = mktime(0, 0, 0, date("m")  , date("d")+1, date("Y"));
+break;
+</code></pre>
+
+<p>  case "2":
+  case "+2":</p>
+
+<pre><code>$when = mktime(0, 0, 0, date("m")  , date("d")+2, date("Y"));
+break;
+</code></pre>
+
+<p>  case "3":
+  case "+3":</p>
+
+<pre><code>$when = mktime(0, 0, 0, date("m")  , date("d")+3, date("Y"));
+break;
+</code></pre>
+
+<p>  case "-2":</p>
+
+<pre><code>$when = mktime(0, 0, 0, date("m")  , date("d")+2, date("Y"));
+break;
+</code></pre>
+
+<p>  case "-3":</p>
+
+<pre><code>$when = mktime(0, 0, 0, date("m")  , date("d")+3, date("Y"));
+break;
+</code></pre>
+
+<p>  case "yesterday":
+  case "-1":
+  case "y":</p>
+
+<pre><code>$when = mktime(0, 0, 0, date("m")  , date("d")-1, date("Y"));
+break;
+</code></pre>
+
+<p>  case "next\ week":
+  case "7":
+  case "+7":
+  case "n":</p>
+
+<pre><code>$when = mktime(0, 0, 0, date("m")  , date("d")+7, date("Y"));
+break;
+</code></pre>
+
+<p>  case "last\ week":
+  case "l":
+  case "-7":</p>
+
+<pre><code>$when = mktime(0, 0, 0, date("m")  , date("d")-7, date("Y"));
+break;
+</code></pre>
+
+<p>  default:</p>
+
+<pre><code>$when = mktime(0, 0, 0, date("m")  , date("d"), date("Y"));
+break;
+</code></pre>
+
+<p>}
+print date("[Y-m-d]", $when);
+```</p>
+
+<h2>The Copy To Clipboard object</h2>
+
+<p>For this I only ticked the 'Automatically paste to front most app' tickbox.</p>
+
+<h2>Job done</h2>
+
+<p>Creating the workflow was quite quick, and since I store the Alfred preferences in my Dropbox folder, I can easily share them with my work computer. So now I can easily type "ALT-Space today RETURN" to insert a date in the document I am writing, or any of the more complicated ones like "today -3" or "today n" (although I probably won't need those).</p>
+]]></content>
+  </entry>
+  
+</feed>

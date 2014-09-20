@@ -1,0 +1,225 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>dotfiles - Fabrizio (Fritz) Stelluto</title>
+	<meta name="author" content="">
+
+	
+	<meta name="description" content="Mathias Bynes, of jsPerf fame, keeps his on Github - that would be .bash_profile and other default files. I think it&#8217;s a great idea, so I have &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="Fabrizio (Fritz) Stelluto" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.ico" rel="shortcut icon">
+	<link rel="icon" href="/favicon.gif" type="image/gif" />
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	
+</head>
+
+
+<body ontouchstart="">
+
+  <header id="header" class="inner">
+<nav id="main-nav"><div>
+  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+  <a href="/">home</a>
+  <a href="/blog/">blog</a>
+</div></nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><div>
+  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+  <a href="/">home</a>
+  <a href="/blog/">blog</a>
+</div></div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="http://google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:gotofritz.net">
+			</form>
+		</div>
+	</div>
+</nav>
+
+<nav id="sub-nav" class="alignright">
+	<form class="search" action="http://google.com/search" method="get">
+		<input class="alignright" type="text" name="q" results="0">
+		<input type="hidden" name="q" value="site:gotofritz.net">
+	</form>
+</nav>
+
+</header>
+	
+		
+	
+	<div id="content" class="inner">
+    
+    <article class="post">
+	<h1 class="title">Dotfiles</h1>
+	<div>
+		<div class="meta">
+			<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-01T16:11:00+02:00" pubdate data-updated="true">2013-09-01, Sun</time></div>
+			<div class="tags">
+
+
+	<a class='category' href='/blog/cat/geekery/'>Geekery</a>
+
+
+</div>
+			
+				<span class="comments"><a href="/blog/geekery/storing-bash-profile-and-so-on-on-github/#disqus_thread">Comments</a></span>
+			
+		</div>
+		<div class="entry-content"><p><a href="http://mathiasbynens.be/" title="[new window] Mathias Bynens" target="_blank">Mathias Bynes</a>, of jsPerf fame, keeps <a href="https://github.com/mathiasbynens/dotfiles" title="[new window] mathiasbynens/dotfiles" target="_blank">his on Github</a> - that would be .bash_profile and other default files. I think it&#8217;s a great idea, so <a href="https://github.com/gotofritz/dotfiles" title="[new window] gotofritz/dotfiles" target="_blank">I have started doing the same</a>.</p>
+
+<!--more-->
+
+
+<h2>Using Git and the bootstrap script</h2>
+
+<p>I have a cloned version of the dotfile directory on my machine. To update</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">cd </span>path/to/dotfile/clone
+</span><span class='line'>git pull origin master
+</span><span class='line'>./bootstrap.sh <span class="c">#./bootstrap.sh -f to avoid the prompt</span>
+</span><span class='line'>. ~/.bash_profile
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Path</h2>
+
+<p>I have no problem with putting the path under github - there&#8217;s no confidential stuff in there.</p>
+
+<h2>Add custom commands without creating a new fork</h2>
+
+<p>If <code>~/.extra</code> exists, it will be sourced along with the other files. You can use this to add a few custom commands without the need to fork this entire repository, or to add commands you don’t want to commit to a public repository.</p>
+
+<p>My <code>~/.extra</code> looks something like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># Git credentials</span>
+</span><span class='line'><span class="c"># Not in the repository, to prevent people from accidentally committing under my name</span>
+</span><span class='line'><span class="nv">GIT_AUTHOR_NAME</span><span class="o">=</span><span class="s2">&quot;Fritz Stelluto&quot;</span>
+</span><span class='line'><span class="nv">GIT_COMMITTER_NAME</span><span class="o">=</span><span class="s2">&quot;$GIT_AUTHOR_NAME&quot;</span>
+</span><span class='line'>git config --global user.name <span class="s2">&quot;$GIT_AUTHOR_NAME&quot;</span>
+</span><span class='line'><span class="nv">GIT_AUTHOR_EMAIL</span><span class="o">=</span><span class="s2">&quot;xxxxxxx&quot;</span>
+</span><span class='line'><span class="nv">GIT_COMMITTER_EMAIL</span><span class="o">=</span><span class="s2">&quot;$GIT_AUTHOR_EMAIL&quot;</span>
+</span><span class='line'>git config --global user.email <span class="s2">&quot;$GIT_AUTHOR_EMAIL&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You could also use <code>~/.extra</code> to override settings, functions and aliases from my dotfiles repository. It’s probably better to <a href="https://github.com/mathiasbynens/dotfiles/fork">fork this repository</a> instead, though.</p>
+
+<h2>Sensible OS X defaults</h2>
+
+<p>When setting up a new Mac, you may want to set some sensible OS X defaults:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>./.osx
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Install Homebrew formulae</h2>
+
+<p>When setting up a new Mac, you may want to install some common <a href="http://brew.sh/">Homebrew</a> formulae (after installing Homebrew, of course):</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>brew bundle ~/Brewfile
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Install native apps with <code>brew cask</code></h2>
+
+<p>You could also install native apps with <a href="https://github.com/phinze/homebrew-cask"><code>brew cask</code></a>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>./.cask
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+	</div>
+</article>
+
+
+<section id="comment">
+    <h1 class="title">Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+
+    
+  </div>
+	<footer id="footer" class="inner">Copyright &copy; 2014
+
+    Fabrizio (Fritz) Stelluto
+
+</footer>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="/javascripts/slash.js"></script>
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'goto-fritz';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://gotofritz.net/blog/geekery/storing-bash-profile-and-so-on-on-github/';
+        var disqus_url = 'http://gotofritz.net/blog/geekery/storing-bash-profile-and-so-on-on-github/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-11254155-2']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+</body>
+</html>

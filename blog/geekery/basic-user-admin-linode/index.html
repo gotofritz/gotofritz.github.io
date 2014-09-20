@@ -1,0 +1,407 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Basic user admin in an Ubuntu Linode - Fabrizio (Fritz) Stelluto</title>
+	<meta name="author" content="">
+
+	
+	<meta name="description" content="Some simple user admin on an Ubuntu Linode VPS server. Create an admin user on my linode New Linodes come with no users except for root by default. &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="Fabrizio (Fritz) Stelluto" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.ico" rel="shortcut icon">
+	<link rel="icon" href="/favicon.gif" type="image/gif" />
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	
+</head>
+
+
+<body ontouchstart="">
+
+  <header id="header" class="inner">
+<nav id="main-nav"><div>
+  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+  <a href="/">home</a>
+  <a href="/blog/">blog</a>
+</div></nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><div>
+  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+  <a href="/">home</a>
+  <a href="/blog/">blog</a>
+</div></div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="http://google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:gotofritz.net">
+			</form>
+		</div>
+	</div>
+</nav>
+
+<nav id="sub-nav" class="alignright">
+	<form class="search" action="http://google.com/search" method="get">
+		<input class="alignright" type="text" name="q" results="0">
+		<input type="hidden" name="q" value="site:gotofritz.net">
+	</form>
+</nav>
+
+</header>
+	
+		
+	
+	<div id="content" class="inner">
+    
+    <article class="post">
+	<h1 class="title">Basic User Admin in an Ubuntu Linode</h1>
+	<div>
+		<div class="meta">
+			<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-09-22T22:31:00+02:00" pubdate data-updated="true">2011-09-22, Thu</time></div>
+			<div class="tags">
+
+
+	<a class='category' href='/blog/cat/geekery/'>Geekery</a>
+
+
+</div>
+			
+				<span class="comments"><a href="/blog/geekery/basic-user-admin-linode/#disqus_thread">Comments</a></span>
+			
+		</div>
+		<div class="entry-content"><p>Some simple user admin on an Ubuntu <a href="http://www.linode.com/" title="[new window] Linode - Xen VPS Hosting" target="_blank">Linode VPS server</a>.</p>
+
+<!--more-->
+
+
+<h2>Create an admin user on my linode</h2>
+
+<p>New Linodes come with no users except for root by default. Having a root user with ssh access is always a bad idea, because it is an obvious account to guess the password of. Better to have a separate account with a non-obvious name, so potential attackers would have to guess both. Before creating a new account though, I changed the settings all new users.</p>
+
+<h3>Changing default settings for new users on Ubuntu</h3>
+
+<p>The commands below change the default prompt, editor, shell, and added a little command history navigation thing.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#change the default shell new users get</span>
+</span><span class='line'><span class="nv">$ </span>useradd -D -s /bin/bash
+</span><span class='line'>
+</span><span class='line'><span class="c"># love this trick - type the beginning of a command, say &quot;useradd&quot; then use the up / down</span>
+</span><span class='line'><span class="c"># key, and only see commands from your history that start with &quot;useradd&quot;</span>
+</span><span class='line'><span class="nv">$ </span>nano /etc/skel/.inputrc
+</span><span class='line'><span class="s2">&quot;\e[A&quot;</span>: <span class="nb">history</span>-search-backward
+</span><span class='line'><span class="s2">&quot;\e[B&quot;</span>: <span class="nb">history</span>-search-forward
+</span><span class='line'>
+</span><span class='line'><span class="c"># change the prompt to one I like better and use nano as default editor</span>
+</span><span class='line'><span class="nv">$ </span>nano /etc/skel/.bash_profile
+</span><span class='line'><span class="nb">export </span><span class="nv">EDITOR</span><span class="o">=</span>nano
+</span><span class='line'>
+</span><span class='line'><span class="k">if</span> <span class="o">[</span> -x /usr/bin/tput <span class="o">]</span> <span class="o">&amp;&amp;</span> tput setaf 1 &gt;&amp;/dev/null; <span class="k">then</span>
+</span><span class='line'>    <span class="c"># We have color support; assume it&#39;s compliant with Ecma-48</span>
+</span><span class='line'>    <span class="c"># (ISO/IEC-6429). (Lack of such support is extremely rare, and such</span>
+</span><span class='line'>    <span class="c"># a case would tend to support setf rather than setaf.)</span>
+</span><span class='line'>    <span class="nv">color_prompt</span><span class="o">=</span>yes
+</span><span class='line'><span class="k">else</span>
+</span><span class='line'><span class="k">    </span><span class="nv">color_prompt</span><span class="o">=</span>
+</span><span class='line'><span class="k">fi</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;$color_prompt&quot;</span> <span class="o">=</span> yes <span class="o">]</span>; <span class="k">then</span>
+</span><span class='line'><span class="k">    </span><span class="nb">export </span><span class="nv">PS1</span><span class="o">=</span><span class="s2">&quot;\n[\t] \[\033[01;32m\]\u@\H\[\033[00m\]:\$PWD\n&quot;</span>
+</span><span class='line'><span class="k">else</span>
+</span><span class='line'><span class="k">    </span><span class="nb">export </span><span class="nv">PS1</span><span class="o">=</span><span class="s2">&quot;\n[\t] \u@\H:\$PWD\n&quot;</span>
+</span><span class='line'><span class="k">fi</span>
+</span><span class='line'><span class="nb">unset </span>color_prompt
+</span><span class='line'>
+</span><span class='line'><span class="c"># enable color support of ls and also add handy aliases</span>
+</span><span class='line'><span class="k">if</span> <span class="o">[</span> -x /usr/bin/dircolors <span class="o">]</span>; <span class="k">then</span>
+</span><span class='line'><span class="k">    </span><span class="nb">test</span> -r ~/.dircolors <span class="o">&amp;&amp;</span> <span class="nb">eval</span> <span class="s2">&quot;$(dircolors -b ~/.dircolors)&quot;</span> <span class="o">||</span> <span class="nb">eval</span> <span class="s2">&quot;$(dircolors -b)&quot;</span>
+</span><span class='line'>    <span class="nb">alias </span><span class="nv">ls</span><span class="o">=</span><span class="s1">&#39;ls --color=auto&#39;</span>
+</span><span class='line'>    <span class="c">#alias dir=&#39;dir --color=auto&#39;</span>
+</span><span class='line'>    <span class="c">#alias vdir=&#39;vdir --color=auto&#39;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nb">alias </span><span class="nv">grep</span><span class="o">=</span><span class="s1">&#39;grep --color=auto&#39;</span>
+</span><span class='line'>    <span class="nb">alias </span><span class="nv">fgrep</span><span class="o">=</span><span class="s1">&#39;fgrep --color=auto&#39;</span>
+</span><span class='line'>    <span class="nb">alias </span><span class="nv">egrep</span><span class="o">=</span><span class="s1">&#39;egrep --color=auto&#39;</span>
+</span><span class='line'><span class="k">fi</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Creating new users on Ubuntu</h3>
+
+<p>The following creates the new user and sets its password. The -m creates the home folder.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>useradd -m -g admin ME
+</span><span class='line'><span class="nv">$ </span>passwd ME
+</span><span class='line'>Enter new UNIX password:
+</span><span class='line'>Retype new UNIX password:
+</span><span class='line'>passwd: password updated successfully
+</span><span class='line'><span class="nv">$ </span><span class="nb">exit</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I then log in as the new user with</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>ssh ME@example.com
+</span><span class='line'>Welcome to Ubuntu 12.04.1 LTS <span class="o">(</span>GNU/Linux 3.5.2-linode45 i686<span class="o">)</span>
+</span><span class='line'>
+</span><span class='line'> * Documentation:  https://help.ubuntu.com/
+</span><span class='line'>
+</span><span class='line'>  System information as of Sat Sep 22 23:43:20 CEST 2012
+</span><span class='line'>
+</span><span class='line'>  System load:  0.0               Processes:           78
+</span><span class='line'>  Usage of /:   3.2% of 18.89GB   Users logged in:     1
+</span><span class='line'>  Memory usage: 41%               IP address <span class="k">for </span>eth0: 109.74.203.184
+</span><span class='line'>  Swap usage:   0%
+</span><span class='line'>
+</span><span class='line'>  Graph this data and manage this system at https://landscape.canonical.com/
+</span><span class='line'>
+</span><span class='line'>0 packages can be updated.
+</span><span class='line'>0 updates are security updates.
+</span><span class='line'>
+</span><span class='line'><span class="c"># while I am here, I create a directory I will need later</span>
+</span><span class='line'><span class="nv">$ </span>mkdir ~/.ssh
+</span><span class='line'><span class="nv">$ </span>chmod 700 ~/.ssh
+</span><span class='line'><span class="nv">$ </span><span class="nb">exit</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Logging in with SSH keys</h2>
+
+<p><a href="http://www.google.com/search?q=SSH%20public%20key%20authentication" title="[new window] google this" target="_blank">SSH public key authentication</a> is a safer alternative to passwords, which are often under brute force attacks. Additionally you can set it up so that you don&#8217;t have to enter any password at all to connect to your server.</p>
+
+<h3>Setting up SSH keys</h3>
+
+<p>I run the following in Termnial on my machine. I save the key in a custom file as I have other keys for other purposes.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># generates the keys in custom files</span>
+</span><span class='line'><span class="nv">$ </span>ssh-keygen
+</span><span class='line'>Generating public/private rsa key pair.
+</span><span class='line'>Enter file in which to save the key <span class="o">(</span>/Users/ME/.ssh/id_rsa<span class="o">)</span>: /Users/ME/.ssh/CUSTOM_FILENAME
+</span><span class='line'>Enter passphrase <span class="o">(</span>empty <span class="k">for </span>no passphrase<span class="o">)</span>:
+</span><span class='line'>Enter same passphrase again:
+</span><span class='line'>Your identification has been saved in /Users/ME/.ssh/CUSTOM_FILENAME.
+</span><span class='line'>Your public key has been saved in /Users/ME/.ssh/CUSTOM_FILENAME.pub.
+</span><span class='line'>The key fingerprint is:
+</span><span class='line'>xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx ME@MY_MACHINE
+</span><span class='line'>The key<span class="err">&#39;</span>s randomart image is:
+</span><span class='line'>+--<span class="o">[</span> RSA 2048<span class="o">]</span>----+
+</span><span class='line'>|  . . . . . . .  |
+</span><span class='line'>|  . . . . . . .  |
+</span><span class='line'>|  . . . . . . .  |
+</span><span class='line'>|  . . . . . . .  |
+</span><span class='line'>|  . . . . . . .  |
+</span><span class='line'>|  . . . . . . .  |
+</span><span class='line'>|  . . . . . . .  |
+</span><span class='line'>|  . . . . . . .  |
+</span><span class='line'>|  . . . . . . .  |
+</span><span class='line'>+-----------------+
+</span><span class='line'>
+</span><span class='line'><span class="c"># add the custom file to the list of keys</span>
+</span><span class='line'><span class="nv">$ </span>ssh-add -K /Users/ME/.ssh/CUSTOM_FILENAME
+</span><span class='line'>Enter passphrase <span class="k">for</span> /Users/ME/.ssh/CUSTOM_FILENAME:
+</span><span class='line'>Identity added: /Users/ME/.ssh/CUSTOM_FILENAME <span class="o">(</span>/Users/ME/.ssh/CUSTOM_FILENAME<span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This generates two keys, public and private. The private stays on my machine, and the public goes on the server. I do that with scp, from my local machine</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># send the key to the server</span>
+</span><span class='line'>scp /Users/ME/.ssh/CUSTOM_FILENAME.pub ME@EXAMPLE.COM:/home/ME/.ssh/uploaded_key.pub
+</span><span class='line'><span class="c"># get onto the server and add the key to the list of authorized keys</span>
+</span><span class='line'><span class="c"># .ssh/ should exist, I created it earliern</span>
+</span><span class='line'>ssh ME@EXAMPLE.COM <span class="s2">&quot;echo `cat ~/.ssh/uploaded_key.pub` &gt;&gt; ~/.ssh/authorized_keys&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>It is also a good idea to change the following in /etc/ssh/sshd_config:
+(NOTE: it&#8217;s sshd_config with a &#8216;d&#8217;, not ssh_config which also exists)</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>PasswordAuthentication no
+</span><span class='line'><span class="c"># ...</span>
+</span><span class='line'>PermitRootLogin no
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Meaning from now on my workstation is the only way to get into my machine (until I create new keys in other machines), and root canot login anymore.</p>
+
+<h2>More server hardening</h2>
+
+<p>It is a good idea to secure your VPS with a firewall at least. The Linode documentation is very good, and there are various sources around the web, such as <a href="http://www.thefanclub.co.za/how-to/how-secure-ubuntu-1204-lts-server-part-1-basics" title="[new window] How to secure an Ubuntu 12.04 LTS server - Part 1 The Basics | How To | The Fan Club | dynamic design solutions | web design and development" target="_blank">How to secure an Ubuntu 12.04 LTS server</a>.</p>
+</div>
+	</div>
+</article>
+
+
+<section id="comment">
+    <h1 class="title">Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+
+    
+  </div>
+	<footer id="footer" class="inner">Copyright &copy; 2014
+
+    Fabrizio (Fritz) Stelluto
+
+</footer>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="/javascripts/slash.js"></script>
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'goto-fritz';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://gotofritz.net/blog/geekery/basic-user-admin-linode/';
+        var disqus_url = 'http://gotofritz.net/blog/geekery/basic-user-admin-linode/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-11254155-2']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+</body>
+</html>

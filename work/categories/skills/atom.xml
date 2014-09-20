@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Skills | Fabrizio (Fritz) Stelluto]]></title>
+  <link href="http://gotofritz.net/categories/skills/atom.xml" rel="self"/>
+  <link href="http://gotofritz.net/"/>
+  <updated>2012-10-14T00:26:33+02:00</updated>
+  <id>http://gotofritz.net/</id>
+  <author>
+    <name><![CDATA[]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Front end engineer]]></title>
+    <link href="http://gotofritz.network/skills/javascript-ajax"/>
+    <updated>1995-12-31T01:00:00+01:00</updated>
+    <id>http://gotofritz.network/skills/javascript-ajax</id>
+    <content type="html"><![CDATA[<p>I started my internet career as a HTML "programmer", and began using Javascript as soon as Netscape invented it in '96. Today, I write standard compliant, accessible, SEO optimized code using the popular Ajax friendly Javascript libraries such as <a href="/tags/jquery/">JQuery</a>, <a href="/tags/mootools/">MooTools</a>, <a href="/tags/prototype-js/">PrototypeJS</a>, <a href="/tags/yui/">YUI</a></p>
+
+<p>I have used HTML (in all its flavours from HTML 3.2 to HTML 5 via XHTML), CSS, Javascript, for...</p>
+
+<ul>
+<li><p>creating standard compliant, accessible websites</p></li>
+<li><p>templating systems</p></li>
+<li><p>online content management tools</p></li>
+<li><p>email newsletters</p></li>
+<li><p>established a house style for a team</p></li>
+<li><p>training absolute beginners in those technologies</p></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[PHP]]></title>
+    <link href="http://gotofritz.network/skills/php"/>
+    <updated>1995-12-30T01:00:00+01:00</updated>
+    <id>http://gotofritz.network/skills/php</id>
+    <content type="html"><![CDATA[<p>I have used PHP for many years, it is my backend technology of choice for most projects.</p>
+
+<p>With PHP, I have...</p>
+
+<ul>
+<li><p>written complex server side applications from scratch</p></li>
+<li><p>used frameworks such as <a href="http://www.symfony-project.org/">Symfony</a>, <a href="http://codeigniter.com/">CodeIgniter</a>, and  <a href="http://www.symfony-project.org/">Zend</a></p></li>
+<li><p>customized PHP-based packages such as <a href="http://drupal.org/">Drupal</a>, <a href="http://wordpress.org/">Wordpress</a> (which this site runs on)</p></li>
+<li><p>worked with databases such as       <a href="http://www.mysql.com/">mySQL</a>,     <a href="http://www.postgresql.org/">PostgreSQL</a>,       <a href="http://www.sqlite.org/">MS-SQL</a>, and       <a href="http://www.sqlite.org/">SQLite</a></p></li>
+<li><p>worked with XML, XSLT, and XPath</p></li>
+<li><p>used third party APIs including     <a href="http://developer.bebo.com/">Bebo</a>,     <a href="http://developer.facebook.com/">Facebook</a></p></li>
+<li><p>written command line scripts to perform scheduled tasks/cron jobs</p></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Actionscript]]></title>
+    <link href="http://gotofritz.network/skills/actionscript"/>
+    <updated>1995-12-29T01:00:00+01:00</updated>
+    <id>http://gotofritz.network/skills/actionscript</id>
+    <content type="html"><![CDATA[<p>I've been using Actionscript seriously since Flash 5, and progressed to AS2 and AS3. I am pretty much giving it up though, given the current HTML / Javascript reinassance.</p>
+
+<p>With Actionscript, I have...</p>
+
+<ul>
+<li><p>created frameworks for modular websites</p></li>
+<li><p>built registration microsites, and banners</p></li>
+<li><p>put together page flip magazines</p></li>
+<li><p>created multilingual widgets</p></li>
+<li><p>developed e-card applications</p></li>
+<li><p>built widgets for social networks such as Bebo and Facebook</p></li>
+<li><p>built simple games with high score tables</p></li>
+<li><p>implemented kiosk applications</p></li>
+<li><p>built online applications which send image data to a server for generating personalized tokens</p></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Ajax]]></title>
+    <link href="http://gotofritz.network/skills/ajax"/>
+    <updated>1995-12-28T01:00:00+01:00</updated>
+    <id>http://gotofritz.network/skills/ajax</id>
+    <content type="html"><![CDATA[<p>Although not stricly Ajax, as no XML was passed, I have used Javascript and server side scripts to refresh parts of a web interfaces for quite some time.</p>
+
+<p>With Ajax, I have...</p>
+
+<ul>
+<li><p>built simple content management systems</p></li>
+<li><p>built social applications on Facebook</p></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Production]]></title>
+    <link href="http://gotofritz.network/skills/production"/>
+    <updated>1995-12-27T13:58:57+01:00</updated>
+    <id>http://gotofritz.network/skills/production</id>
+    <content type="html"><![CDATA[<p>Despite the job title of  'technical director', a large portion of my role at <a href="/employers/cmw-london/">CMW London</a>  was technical production - in fact the person I replaced was an out and out producer. I scoped projects, wrote functional specifications, managed timelines, and QA'ed them.</p>
+
+<p>In the distant past I run the production dept. of <a href="/employers/intervid/">a small London agency</a> for a few months.</p>
+]]></content>
+  </entry>
+  
+</feed>

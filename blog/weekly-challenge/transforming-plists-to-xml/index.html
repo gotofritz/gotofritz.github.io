@@ -1,0 +1,1285 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Transforming OS X plists into XML - Fabrizio (Fritz) Stelluto</title>
+	<meta name="author" content="">
+
+	
+	<meta name="description" content="The challenge this week: convert recipe data from an app&#8217;s proprietary plist format to another XML format, using XSLT and PHP. Other posts in &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="Fabrizio (Fritz) Stelluto" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.ico" rel="shortcut icon">
+	<link rel="icon" href="/favicon.gif" type="image/gif" />
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	
+</head>
+
+
+<body ontouchstart="">
+
+  <header id="header" class="inner">
+<nav id="main-nav"><div>
+  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+  <a href="/">home</a>
+  <a href="/blog/">blog</a>
+</div></nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><div>
+  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+  <a href="/">home</a>
+  <a href="/blog/">blog</a>
+</div></div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="http://google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:gotofritz.net">
+			</form>
+		</div>
+	</div>
+</nav>
+
+<nav id="sub-nav" class="alignright">
+	<form class="search" action="http://google.com/search" method="get">
+		<input class="alignright" type="text" name="q" results="0">
+		<input type="hidden" name="q" value="site:gotofritz.net">
+	</form>
+</nav>
+
+</header>
+	
+		
+	
+	<div id="content" class="inner">
+    
+    <article class="post">
+	<h1 class="title">Transforming OS X Plists Into XML</h1>
+	<div>
+		<div class="meta">
+			<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-03-16T14:59:44+01:00" pubdate data-updated="true">2012-03-16, Fri</time></div>
+			<div class="tags">
+
+
+	<a class='category' href='/blog/cat/weekly-challenge/'>Weekly Challenge</a>
+
+
+</div>
+			
+				<span class="comments"><a href="/blog/weekly-challenge/transforming-plists-to-xml#disqus_thread">Comments</a></span>
+			
+		</div>
+		<div class="entry-content"><p>The challenge this week: convert recipe data from an app&#8217;s proprietary plist format to another XML format, using XSLT and PHP.</p>
+
+<!--more-->
+
+
+<p><nav class="related-posts" id="multipart" markdown="1">
+  <h2>Other posts in this series</h2></p>
+
+<ul>
+<li><a href="/blog/weekly-challenge/managing-xml-files-sublime-text-2/">part 1</a>: Managing XML Files With Sublime Text 2</li>
+<li><a href="/blog/weekly-challenge/fetching-google-spreadsheets-converting-xml/">part 2</a>: Fetching Google Spreadsheets as XML</li>
+<li><a href="/blog/weekly-challenge/fetching-google-spreadsheets-converting-xml/">part 3</a>: Transforming plists into XML</li>
+<li><a href="/blog/weekly-challenge/restful-python-api-bottle/">part 4</a>: creating a RESTful Python API With Bottle
+</nav></li>
+</ul>
+
+
+<h2>About the challenge</h2>
+
+<p>I am slowly building a recipe manager web app, and as a first step I am converting all data I have to a common XML format I have defined in <a href="/blog/weekly-challenge/managing-xml-files-sublime-text-2/">part 1</a>. Some of the data I had stored by a cute looking, but ultimately disappoing, OS X app called Yummy Soup!. I need to liberate that data, which the app can export as an <a href="http://en.wikipedia.org/wiki/Plist#Mac_OS_X">OS X plist</a>, which is an XML format.</p>
+
+<p>Some artefacts <a href="https://github.com/gotofritz/Weekly-Challenges/tree/master/weekly-challenge-15_recipes_yummy">available on GitHub</a>.</p>
+
+<h2>Converting from YummySoup! plist format to XML</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='gherkin'><span class='line'><span class="k">Feature:</span><span class="nf"> Converting from YummySoup! plist format to XML</span>
+</span><span class='line'><span class="nf">    In order to consolidate my recipe data</span>
+</span><span class='line'><span class="nf">    As a geeky recipe author</span>
+</span><span class='line'><span class="nf">    I need to convert from plist to XML</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Converting from one type of XML to another is a job for XSLT, and Apache Ant is what I normally run XSLT with. But first of all, I get the YS! recipes. I can only export them all to single file, by opening the app, selecting all recipes in it, and selecting &#8216;export&#8217;. It created a plist with 239 dict nodes in it, each of them a recipe.</p>
+
+<h3>Using Apache Ant to run an XSLT job on a file</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='gherkin'><span class='line'><span class="k">Scenario:</span><span class="nf"> Using Apache Ant to run an XSLT job on a file</span>
+</span><span class='line'><span class="k">    Given </span><span class="nf">that I have an XSLT and an XML file</span>
+</span><span class='line'><span class="nf">    </span><span class="k">When </span><span class="nf">I run the extractFromYS Ant job</span>
+</span><span class='line'><span class="nf">    </span><span class="k">Then </span><span class="nf">a new XML file should be produced</span>
+</span><span class='line'><span class="nf">    </span><span class="k">And </span><span class="nf">it should include data from the input file</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This is easily achieved using my standard Ant setup</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;project</span> <span class="na">name=</span><span class="s">&quot;WeeklyChallenge12&quot;</span> <span class="na">default=</span><span class="s">&quot;extractFromYS&quot;</span> <span class="na">basedir=</span><span class="s">&quot;.&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;description&gt;</span>Gotofritz Weekly Challenge 15<span class="nt">&lt;/description&gt;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nt">&lt;property</span> <span class="na">environment=</span><span class="s">&quot;env&quot;</span><span class="nt">/&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;property</span> <span class="na">file=</span><span class="s">&quot;common.properties&quot;</span><span class="nt">/&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;property</span> <span class="na">file=</span><span class="s">&quot;local.properties&quot;</span><span class="nt">/&gt;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nt">&lt;target</span>
+</span><span class='line'>    <span class="na">name =</span> <span class="s">&quot;extractFromYS&quot;</span>
+</span><span class='line'>    <span class="na">description =</span> <span class="s">&quot;Extracts recipes from Yummy Soup&quot;</span>
+</span><span class='line'>    <span class="na">depends =</span> <span class="s">&quot;increaseBuildNumber&quot;</span>
+</span><span class='line'>    <span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;xslt</span>
+</span><span class='line'>      <span class="na">in    =</span> <span class="s">&quot;239_YummySoup_recipes.ysr&quot;</span>
+</span><span class='line'>      <span class="na">out   =</span> <span class="s">&quot;output.xml&quot;</span>
+</span><span class='line'>      <span class="na">style =</span> <span class="s">&quot;recipes.xsl&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;outputproperty</span> <span class="na">name=</span><span class="s">&quot;method&quot;</span> <span class="na">value=</span><span class="s">&quot;xml&quot;</span><span class="nt">/&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;outputproperty</span> <span class="na">name=</span><span class="s">&quot;standalone&quot;</span> <span class="na">value=</span><span class="s">&quot;yes&quot;</span><span class="nt">/&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;outputproperty</span> <span class="na">name=</span><span class="s">&quot;encoding&quot;</span> <span class="na">value=</span><span class="s">&quot;utf-8&quot;</span><span class="nt">/&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;outputproperty</span> <span class="na">name=</span><span class="s">&quot;indent&quot;</span> <span class="na">value=</span><span class="s">&quot;yes&quot;</span><span class="nt">/&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/xslt&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/target&gt;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nt">&lt;target</span>
+</span><span class='line'>    <span class="na">name =</span> <span class="s">&quot;increaseBuildNumber&quot;</span> <span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;propertyfile</span>
+</span><span class='line'>      <span class="na">file    =</span> <span class="s">&quot;buildnumber.txt&quot;</span>
+</span><span class='line'>      <span class="na">comment =</span> <span class="s">&quot;Version number&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;entry</span>  <span class="na">key=</span><span class="s">&quot;build&quot;</span> <span class="na">type=</span><span class="s">&quot;int&quot;</span> <span class="na">default=</span><span class="s">&quot;0&quot;</span> <span class="na">operation=</span><span class="s">&quot;+&quot;</span><span class="nt">/&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/propertyfile&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/target&gt;</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;/project&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Normally I split property files between common and local (i.e., those that go under version control and those that don&#8217;t). In this case I need neither, but Ant will carry on working even if it doesn&#8217;t find the files, which is nice. The job extractFromYS is set as default for the project, which allows me to run it from Sublime Text 2 without doing any special work - just choose &#8216;Ant&#8217; as the build system, then hit CMD-B.</p>
+
+<p>The target increaseBuildNumber is a standard one I use which increases a number in a text file every time I run the job. This is often useful, although probably not this time, but I am happy to keep it for consistency with my other projects. Finally the XSLT job - as simple as it gets, with a file in, file out, and XSLT file, plus some output parameters.</p>
+
+<p>The XSL file is also as simple as it can be:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf8&quot;?&gt;</span>
+</span><span class='line'><span class="nt">&lt;xsl:stylesheet</span> <span class="na">version=</span><span class="s">&quot;1.0&quot;</span> <span class="na">xmlns:xsl=</span><span class="s">&quot;http://www.w3.org/1999/XSL/Transform&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'><span class="nt">&lt;xsl:preserve-space</span> <span class="na">elements=</span><span class="s">&quot;*&quot;</span><span class="nt">/&gt;</span>
+</span><span class='line'><span class="nt">&lt;xsl:output</span> <span class="na">indent =</span> <span class="s">&quot;yes&quot;</span> <span class="na">cdata-section-elements=</span><span class="s">&quot;title description source step&quot;</span><span class="nt">/&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;xsl:template</span> <span class="na">match=</span><span class="s">&quot;/plist/array/dict/string[2]&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>------------------
+</span><span class='line'>  <span class="nt">&lt;xsl:value-of</span> <span class="na">select=</span><span class="s">&quot;.&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'><span class="nt">&lt;/xsl:template&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>What I am looking for is one string per recipe, to see that the XSLT runs and recognizes them. It did.</p>
+
+<h3>Transforming plist into XML</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='gherkin'><span class='line'><span class="k">Scenario:</span><span class="nf"> Transforming plist into XML</span>
+</span><span class='line'><span class="k">    Given </span><span class="nf">that an OS X plist document is being XSL transformed</span>
+</span><span class='line'><span class="nf">    </span><span class="k">And </span><span class="nf">key value pairs are stored as </span><span class="nv">&lt;key&gt;</span><span class="nf">KEY</span><span class="nv">&lt;/key&gt;&lt;string&gt;</span><span class="nf">VALUE</span><span class="nv">&lt;/string&gt;</span><span class="nf"></span>
+</span><span class='line'><span class="nf">    </span><span class="k">When </span><span class="nf">a node is passed through a template</span>
+</span><span class='line'><span class="nf">    and KEY passed as paramerter</span>
+</span><span class='line'><span class="nf">    </span><span class="k">Then </span><span class="nf">the associated VALUE should be replaced</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The XML schema of plists is rather akward for XSLT, so I created a template for handling it. Note that &#8216;string&#8217; is only one of the possible plist types, but it&#8217;s the only one I need in this particular case. I started with fetching the name of the recipe only as a test.</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf8&quot;?&gt;</span>
+</span><span class='line'><span class="nt">&lt;xsl:stylesheet</span> <span class="na">version=</span><span class="s">&quot;1.0&quot;</span> <span class="na">xmlns:xsl=</span><span class="s">&quot;http://www.w3.org/1999/XSL/Transform&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'><span class="nt">&lt;xsl:preserve-space</span> <span class="na">elements=</span><span class="s">&quot;*&quot;</span><span class="nt">/&gt;</span>
+</span><span class='line'><span class="nt">&lt;xsl:output</span> <span class="na">indent =</span> <span class="s">&quot;yes&quot;</span> <span class="na">cdata-section-elements=</span><span class="s">&quot;title description source step&quot;</span><span class="nt">/&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;xsl:template</span> <span class="na">match=</span><span class="s">&quot;/&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;xsl:copy&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;xsl:apply-templates</span> <span class="na">select=</span><span class="s">&quot;/plist/array/dict&quot;</span><span class="nt">/&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/xsl:copy&gt;</span>
+</span><span class='line'><span class="nt">&lt;/xsl:template&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;xsl:template</span> <span class="na">match=</span><span class="s">&quot;/plist/array/dict&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;xsl:template</span> <span class="na">name=</span><span class="s">&quot;val&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;xsl:param</span> <span class="na">name=</span><span class="s">&quot;node&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;xsl:value-of</span> <span class="na">select=</span><span class="s">&quot;$node/following-sibling::string[1]&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'><span class="nt">&lt;/xsl:template&gt;</span>
+</span><span class='line'>
+</span><span class='line'>-------------------------
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;xsl:processing-instruction</span> <span class="na">name=</span><span class="s">&quot;xml-stylesheet&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>href=&quot;recipe.xsl&quot; type=&quot;text/xsl&quot;
+</span><span class='line'><span class="nt">&lt;/xsl:processing-instruction&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;recipe</span> <span class="na">lang=</span><span class="s">&quot;en-uk&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;title&gt;&lt;xsl:call-template</span> <span class="na">name=</span><span class="s">&quot;val&quot;</span><span class="nt">&gt;&lt;xsl:with-param</span> <span class="na">name=</span><span class="s">&quot;node&quot;</span> <span class="na">select=</span><span class="s">&quot;*[. = &#39;name&#39;]&quot;</span><span class="nt">/&gt;&lt;/xsl:call-template&gt;&lt;/title&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;description&gt;&lt;xsl:call-template</span> <span class="na">name=</span><span class="s">&quot;val&quot;</span><span class="nt">&gt;&lt;xsl:with-param</span> <span class="na">name=</span><span class="s">&quot;node&quot;</span> <span class="na">select=</span><span class="s">&quot;*[. = &#39;recipeDescription&#39;]&quot;</span><span class="nt">/&gt;&lt;/xsl:call-template&gt;&lt;/description&gt;</span>
+</span><span class='line'><span class="nt">&lt;/xsl:template&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The xsl:template match=&#8221;/&#8221; matches the whole document and it&#8217;s the entry point to control which other templates get to handle which nodes. Every time it encounters a dict node, which is once per recipe, in the source XML document, it handles control to xsl:template match=&#8221;/plist/array/dict&#8221;. There a new XML document is appended to the output, separated by a row of lines. This is not valid XML of course, but I will split it later.</p>
+
+<p><code>xsl:processing-instruction name="xml-stylesheet"</code> adds the stylesheet reference to the output - you can&#8217;t just type <code>&lt;?xsl... ?&gt;</code> otherwise it looks like it is an instruction to be run rather than a string to be output.</p>
+
+<p>Then a couple of tags are mapped from one file to another: &#8216;name&#8217; becomes &#8216;title&#8217;, &#8216;recipeDescription&#8217; becomes &#8216;description&#8217; and so on. A named template, val, is used to convert from <key>name</key><string>Mulligatawny</string> to  <title>Mulligatawny</title> This is easily achieved using following-sibling to fetch the value associated with a plist key.</p>
+
+<p>Another thing worth nothing is the <code>cdata-section-elements="title description source step"</code> in the xsl:output node on line 6. That defines a list of elements whose content will be wrapped in a CDATA, which is nice.</p>
+
+<h3>Splitting string with XSL built in string functions</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='gherkin'><span class='line'><span class="k">Scenario:</span><span class="nf"> Splitting string with XSL built in string functions</span>
+</span><span class='line'><span class="k">    Given </span><span class="nf">that cuisine is stored as a string in format &quot;</span><span class="s">STYLE / REGION</span><span class="nf">&quot;</span>
+</span><span class='line'><span class="nf">    </span><span class="k">When </span><span class="nf">I pass it through the template</span>
+</span><span class='line'><span class="nf">    </span><span class="k">Then </span><span class="nf">it should return a node for style, and one for region</span>
+</span><span class='line'><span class="nf">    </span><span class="k">And </span><span class="nf">it should be equal to &quot;</span><span class="nv">&lt;style&gt;</span><span class="s">STYLE</span><span class="nv">&lt;/style&gt;&lt;region&gt;</span><span class="s">REGION</span><span class="nv">&lt;/region&gt;</span><span class="nf">&quot;</span>
+</span><span class='line'><span class="nf">    </span><span class="k">Given </span><span class="nf">that cuisine is stored as a string in format &quot;</span><span class="s">STYLE</span><span class="nf">&quot;</span>
+</span><span class='line'><span class="nf">    </span><span class="k">And </span><span class="nf">it has no REGION</span>
+</span><span class='line'><span class="nf">    </span><span class="k">When </span><span class="nf">I pass it through the template</span>
+</span><span class='line'><span class="nf">    </span><span class="k">Then </span><span class="nf">it should return a node for style, and an empty one for region</span>
+</span><span class='line'><span class="nf">    </span><span class="k">And </span><span class="nf">it should be equal to </span><span class="nv">&lt;style&gt;</span><span class="nf">STYLE</span><span class="nv">&lt;/style&gt;&lt;region&gt;&lt;/region&gt;</span><span class="nf">`</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>There are two use cases here - one is dealing with strings like &#8216;Italian / Sardinian&#8217; or &#8216;Indian / Kerala&#8217;, the other deals with &#8216;English&#8217;, &#8216;Spanish&#8217; etc. First the &#8216;val&#8217; template is called, to save the &#8216;cuisine&#8217; string to a variable, then I use as simple xsl:choose and some of XSL&#8217;s built-in string functions to handle both use cases.</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;xsl:template</span> <span class="na">match=</span><span class="s">&quot;/plist/array/dict&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;xsl:variable</span> <span class="na">name=</span><span class="s">&quot;cuisine&quot;</span><span class="nt">&gt;&lt;xsl:call-template</span> <span class="na">name=</span><span class="s">&quot;val&quot;</span><span class="nt">&gt;&lt;xsl:with-param</span> <span class="na">name=</span><span class="s">&quot;node&quot;</span> <span class="na">select=</span><span class="s">&quot;*[. = &#39;cuisine&#39;]&quot;</span><span class="nt">/&gt;&lt;/xsl:call-template&gt;&lt;/xsl:variable&gt;</span>
+</span><span class='line'>    ...
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;xsl:processing-instruction</span> <span class="na">name=</span><span class="s">&quot;xml-stylesheet&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>href=&quot;recipe.xsl&quot; type=&quot;text/xsl&quot;
+</span><span class='line'><span class="nt">&lt;/xsl:processing-instruction&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;recipe</span> <span class="na">lang=</span><span class="s">&quot;en-uk&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    ...
+</span><span class='line'>    <span class="nt">&lt;cuisine&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;xsl:choose&gt;</span>
+</span><span class='line'>            <span class="nt">&lt;xsl:when</span> <span class="na">test=</span><span class="s">&quot;contains( $cuisine, &#39;/&#39;)&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>                <span class="nt">&lt;style&gt;&lt;xsl:value-of</span> <span class="na">select=</span><span class="s">&quot;normalize-space( substring-before( $cuisine, &#39;/&#39; ) )&quot;</span> <span class="nt">/&gt;&lt;/style&gt;</span>
+</span><span class='line'>                <span class="nt">&lt;region&gt;&lt;xsl:value-of</span> <span class="na">select=</span><span class="s">&quot;normalize-space( substring-after( $cuisine, &#39;/&#39;) )&quot;</span> <span class="nt">/&gt;&lt;/region&gt;</span>
+</span><span class='line'>            <span class="nt">&lt;/xsl:when&gt;</span>
+</span><span class='line'>            <span class="nt">&lt;xsl:otherwise&gt;</span>
+</span><span class='line'>                <span class="nt">&lt;style&gt;&lt;xsl:value-of</span> <span class="na">select=</span><span class="s">&quot;$cuisine&quot;</span> <span class="nt">/&gt;&lt;/style&gt;</span>
+</span><span class='line'>                <span class="nt">&lt;region&gt;&lt;/region&gt;</span>
+</span><span class='line'>            <span class="nt">&lt;/xsl:otherwise&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;/xsl:choose&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;approach&gt;&lt;/approach&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/cuisine&gt;</span>
+</span><span class='line'>    ...
+</span><span class='line'><span class="nt">&lt;/recipe&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Splitting string with XSL using a recursive function</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='gherkin'><span class='line'><span class="k">Scenario:</span><span class="nf"> Splitting string with XSL using a recursive function</span>
+</span><span class='line'><span class="k">    Given </span><span class="nf">that tags are stored as a single comma separated string</span>
+</span><span class='line'><span class="nf">    </span><span class="k">When </span><span class="nf">I pass it through the splitstring template</span>
+</span><span class='line'><span class="nf">    </span><span class="k">Then </span><span class="nf">it should return a node for each tag</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>A comma separated list doesn&#8217;t have limits, so a recursive template called splitstring will be used. It is a generic template that can be reused in other projects - it takes three parameters as arguments, the input string, the delimiter and the ouput tag to be generated. The string to be passed in is saved to a variable with the val template.</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="c">&lt;!--</span>
+</span><span class='line'><span class="c">splitstring - splits a string and assigns each substring to a node</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">@param {String} list the string to be split</span>
+</span><span class='line'><span class="c">@param {String} delimiter the string to split by, [optional  default ,]</span>
+</span><span class='line'><span class="c">@oaran {String} tag the name of the tag to be created, [optional  default &#39;tag&#39;]</span>
+</span><span class='line'><span class="c">--&gt;</span>
+</span><span class='line'><span class="nt">&lt;xsl:template</span> <span class="na">name=</span><span class="s">&quot;splitstring&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;xsl:param</span> <span class="na">name=</span><span class="s">&quot;list&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;xsl:param</span> <span class="na">name=</span><span class="s">&quot;delimiter&quot;</span> <span class="na">select=</span><span class="s">&quot;&#39;,&#39;&quot;</span><span class="nt">/&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;xsl:param</span> <span class="na">name=</span><span class="s">&quot;tag&quot;</span> <span class="na">select=</span><span class="s">&quot;&#39;tag&#39;&quot;</span><span class="nt">/&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;xsl:variable</span> <span class="na">name=</span><span class="s">&quot;newstring&quot;</span><span class="nt">&gt;&lt;xsl:choose&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;xsl:when</span> <span class="na">test=</span><span class="s">&quot;contains( $list, $delimiter )&quot;</span><span class="nt">&gt;&lt;xsl:value-of</span> <span class="na">select=</span><span class="s">&quot;normalize-space($list)&quot;</span> <span class="nt">/&gt;&lt;/xsl:when&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;xsl:otherwise&gt;&lt;xsl:value-of</span> <span class="na">select=</span><span class="s">&quot;concat(normalize-space($list), $delimiter)&quot;</span> <span class="nt">/&gt;&lt;/xsl:otherwise&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/xsl:choose&gt;&lt;/xsl:variable&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;xsl:variable</span> <span class="na">name=</span><span class="s">&quot;first&quot;</span> <span class="na">select=</span><span class="s">&quot;substring-before($newstring, $delimiter)&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;xsl:variable</span> <span class="na">name=</span><span class="s">&quot;remaining&quot;</span> <span class="na">select=</span><span class="s">&quot;substring-after($newstring, $delimiter)&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;xsl:element</span> <span class="na">name=</span><span class="s">&quot;{$tag}&quot;</span><span class="nt">&gt;&lt;xsl:value-of</span> <span class="na">select=</span><span class="s">&quot;$first&quot;</span> <span class="nt">/&gt;&lt;/xsl:element&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;xsl:if</span> <span class="na">test=</span><span class="s">&quot;$remaining&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>            <span class="nt">&lt;xsl:call-template</span> <span class="na">name=</span><span class="s">&quot;splitstring&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>            <span class="nt">&lt;xsl:with-param</span> <span class="na">name=</span><span class="s">&quot;strlisting&quot;</span> <span class="na">select=</span><span class="s">&quot;$remaining&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'>            <span class="nt">&lt;xsl:with-param</span> <span class="na">name=</span><span class="s">&quot;delimiter&quot;</span> <span class="na">select=</span><span class="s">&quot;$delimiter&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'>            <span class="nt">&lt;xsl:with-param</span> <span class="na">name=</span><span class="s">&quot;tag&quot;</span> <span class="na">select=</span><span class="s">&quot;$tag&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;/xsl:call-template&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/xsl:if&gt;</span>
+</span><span class='line'><span class="nt">&lt;/xsl:template&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;xsl:template</span> <span class="na">match=</span><span class="s">&quot;/plist/array/dict&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;xsl:variable</span> <span class="na">name=</span><span class="s">&quot;tags&quot;</span><span class="nt">&gt;&lt;xsl:call-template</span> <span class="na">name=</span><span class="s">&quot;val&quot;</span><span class="nt">&gt;&lt;xsl:with-param</span> <span class="na">name=</span><span class="s">&quot;node&quot;</span> <span class="na">select=</span><span class="s">&quot;*[. = &#39;keywords&#39;]&quot;</span><span class="nt">/&gt;&lt;/xsl:call-template&gt;&lt;/xsl:variable&gt;</span>
+</span><span class='line'>    ...
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;xsl:processing-instruction</span> <span class="na">name=</span><span class="s">&quot;xml-stylesheet&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>href=&quot;recipe.xsl&quot; type=&quot;text/xsl&quot;
+</span><span class='line'><span class="nt">&lt;/xsl:processing-instruction&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;recipe</span> <span class="na">lang=</span><span class="s">&quot;en-uk&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>...
+</span><span class='line'>    <span class="nt">&lt;tags&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;xsl:call-template</span> <span class="na">name=</span><span class="s">&quot;splitstring&quot;</span><span class="nt">&gt;&lt;xsl:with-param</span> <span class="na">name=</span><span class="s">&quot;list&quot;</span> <span class="na">select=</span><span class="s">&quot;$tags&quot;</span><span class="nt">/&gt;&lt;/xsl:call-template&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/tags&gt;</span>
+</span><span class='line'>...
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Using XSL extension to process tricky strings</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='gherkin'><span class='line'><span class="k">Scenario:</span><span class="nf"> Using XSL extension to process tricky strings</span>
+</span><span class='line'><span class="k">    Given </span><span class="nf">that ingredient data in XML node is too complex for XSLT</span>
+</span><span class='line'><span class="nf">    </span><span class="k">And </span><span class="nf">directions are not split in individual steps</span>
+</span><span class='line'><span class="nf">    </span><span class="k">When </span><span class="nf">I run the XSLT</span>
+</span><span class='line'><span class="nf">    </span><span class="k">Then </span><span class="nf">I want to process the list with a different language</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I have two issues here. Firstly, the directions are split into steps in various different ways, none of them useful, depending on which version of the app they were created in. This is part of what I found so annoying with the software. The ingredients list is more regular, but it is a Python list of tuples, where a tuple either signals the start of a new group of ingredients, or it is a single ingredient.</p>
+
+<p>The first case could be solved with a few regular expressions. XSLT 2 has them, but I am still on 1 so no joy there. Either way, the second case is simply too complex for XSLT, so I need to look at ways to bring other languages into the equation.</p>
+
+<p>XSLT can be extended with various languages - Java as expected, but also Python (or rather Jython, the Java implementation thererof), and Javascript. Alternatively, when running the transform through PHP, the XSLT processor there is able to use PHP functions to process nodes.</p>
+
+<p>I first tried Jython - the ingredients list is (almost) valid Python data, so I thought it should be easy. Then I tried Javascript, because I know it quite well. But I couldn&#8217;t get either to work - it looks like Xalan kept treating the scripts as Java instead of using the lang attribute. I <a href="http://stackoverflow.com/questions/9853426/unable-to-create-xslt-extension-in-javascript-or-jython-with-ant">posted on StackOverflow</a> and hope that will help.</p>
+
+<p>I had slightly more luck with extending XSLT with Java. but only by using simple methods of built-in Java classes into Xalan. For example here&#8217;s how to print the date using Java:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;xsl:stylesheet</span> <span class="na">version=</span><span class="s">&quot;1.0&quot;</span>
+</span><span class='line'>    <span class="na">xmlns:xsl=</span><span class="s">&quot;http://www.w3.org/1999/XSL/T&quot;</span>
+</span><span class='line'>    <span class="na">exclude-result-prefixes=</span><span class="s">&quot;java&quot;</span>
+</span><span class='line'>    <span class="na">xmlns:java=</span><span class="s">&quot;http://xml.apache.org/xslt/java&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    ....
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;xsl:value-of</span> <span class="na">select=</span><span class="s">&quot;java:java.util.Date.new()&quot;</span><span class="nt">/&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>But anything more complex proved to be problematic. That left one last option: good old PHP.</p>
+
+<p>PHP has <a href="http://www.php.net/manual/en/xsltprocessor.registerphpfunctions.php">registerPHPFunctions</a> which are equivalent to XSL extensions, but you have to run the transform from within PHP. This is not such a big deal though, as I am only processing one file.</p>
+
+<p>First of all, I created the simplest possible PHP file to get started. The following will simply run the XML file through an XSL that copies the XML out as is, without changing it.</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="x">$file_in  = &quot;/PATH/TO/239_YummySoup_recipes.ysr&quot;;</span>
+</span><span class='line'><span class="x">$file_out = &quot;/PATH/TO/239_YummySoup_recipes_preprocessed.xml&quot;;</span>
+</span><span class='line'>
+</span><span class='line'><span class="x">$xsl = &lt;&lt;&lt;EOB</span>
+</span><span class='line'><span class="cp">&lt;?</span><span class="nx">xml</span> <span class="nx">version</span><span class="o">=</span><span class="s2">&quot;1.0&quot;</span> <span class="nx">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="cp">?&gt;</span><span class="x"></span>
+</span><span class='line'><span class="x">&lt;xsl:stylesheet version=&quot;1.0&quot;</span>
+</span><span class='line'><span class="x">     xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot;</span>
+</span><span class='line'><span class="x">     xmlns:php=&quot;http://php.net/xsl&quot;&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="x">&lt;xsl:output method=&quot;html&quot; encoding=&quot;utf-8&quot; indent=&quot;yes&quot;/&gt;</span>
+</span><span class='line'><span class="x">&lt;xsl:template match=&quot;/&quot;&gt;</span>
+</span><span class='line'><span class="x">  &lt;xsl:copy-of select=&quot;.&quot; /&gt;</span>
+</span><span class='line'><span class="x">&lt;/xsl:template&gt;</span>
+</span><span class='line'><span class="x">&lt;/xsl:stylesheet&gt;</span>
+</span><span class='line'><span class="x">EOB;</span>
+</span><span class='line'>
+</span><span class='line'><span class="x">$xml_in  = new DOMDocument;</span>
+</span><span class='line'><span class="x">$xml_in-&gt;load( $file_in );</span>
+</span><span class='line'><span class="x">$xsl_doc  = new DOMDocument( &quot;1.0&quot;, &quot;utf-8&quot; );</span>
+</span><span class='line'><span class="x">$xsl_doc-&gt;loadXML( $xsl );</span>
+</span><span class='line'><span class="x">$xslt = new XSLTProcessor();</span>
+</span><span class='line'><span class="x">$xslt-&gt;importStyleSheet( $xsl_doc );</span>
+</span><span class='line'>
+</span><span class='line'><span class="x">#NOTE that using &lt;xsl:processing instruction doesn&#39;t seem to work</span>
+</span><span class='line'><span class="x">#the processing instruction is gereated as </span><span class="cp">&lt;?</span><span class="nx">xml</span> <span class="nx">version</span><span class="o">=</span><span class="s2">&quot;..&quot;</span> <span class="o">&gt;</span>
+</span><span class='line'><span class="c1">#i.e., without the closing ?</span>
+</span><span class='line'><span class="nv">$xml_out</span> <span class="o">=</span> <span class="s1">&#39;&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&#39;</span> <span class="o">.</span> <span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">&quot;</span> <span class="o">.</span> <span class="nv">$xslt</span><span class="o">-&gt;</span><span class="na">transformToXML</span><span class="p">(</span> <span class="nv">$xml_in</span> <span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$FH_file_out</span> <span class="o">=</span> <span class="nb">fopen</span><span class="p">(</span> <span class="nv">$file_out</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span> <span class="p">);</span>
+</span><span class='line'><span class="nb">fwrite</span><span class="p">(</span> <span class="nv">$FH_file_out</span><span class="p">,</span> <span class="nv">$xml_out</span> <span class="p">);</span>
+</span><span class='line'><span class="nb">fclose</span><span class="p">(</span> <span class="nv">$FH_file_out</span> <span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">echo</span> <span class="s1">&#39;XML preprocessed&#39;</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Then I changed the Ant job so that it runs the PHP preprocessing before the XSLT</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;project</span> <span class="na">name=</span><span class="s">&quot;WeeklyChallenge12&quot;</span> <span class="na">default=</span><span class="s">&quot;extractFromYS&quot;</span> <span class="na">basedir=</span><span class="s">&quot;.&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;description&gt;</span>Gotofritz Weekly Challenge 15<span class="nt">&lt;/description&gt;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nt">&lt;property</span> <span class="na">environment=</span><span class="s">&quot;env&quot;</span><span class="nt">/&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;property</span> <span class="na">file=</span><span class="s">&quot;common.properties&quot;</span><span class="nt">/&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;property</span> <span class="na">file=</span><span class="s">&quot;local.properties&quot;</span><span class="nt">/&gt;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nt">&lt;target</span>
+</span><span class='line'>    <span class="na">name =</span> <span class="s">&quot;extractFromYS&quot;</span>
+</span><span class='line'>    <span class="na">description =</span> <span class="s">&quot;Extracts recipes from Yummy Soup&quot;</span>
+</span><span class='line'>    <span class="na">depends =</span> <span class="s">&quot;increaseBuildNumber&quot;</span>
+</span><span class='line'>    <span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;exec</span>
+</span><span class='line'>      <span class="na">executable =</span> <span class="s">&quot;php&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;arg</span> <span class="na">value=</span><span class="s">&quot;-f=recipes.php&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/exec&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;xslt</span>
+</span><span class='line'>      <span class="na">in    =</span> <span class="s">&quot;239_YummySoup_recipes_preprocessed.xml&quot;</span>
+</span><span class='line'>      <span class="na">out   =</span> <span class="s">&quot;output.xml&quot;</span>
+</span><span class='line'>      <span class="na">style =</span> <span class="s">&quot;recipes.xsl&quot;</span>
+</span><span class='line'>      <span class="na">force =</span> <span class="s">&quot;yes&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;outputproperty</span> <span class="na">name=</span><span class="s">&quot;method&quot;</span> <span class="na">value=</span><span class="s">&quot;xml&quot;</span><span class="nt">/&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;outputproperty</span> <span class="na">name=</span><span class="s">&quot;standalone&quot;</span> <span class="na">value=</span><span class="s">&quot;yes&quot;</span><span class="nt">/&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;outputproperty</span> <span class="na">name=</span><span class="s">&quot;encoding&quot;</span> <span class="na">value=</span><span class="s">&quot;utf-8&quot;</span><span class="nt">/&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;outputproperty</span> <span class="na">name=</span><span class="s">&quot;indent&quot;</span> <span class="na">value=</span><span class="s">&quot;yes&quot;</span><span class="nt">/&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/xslt&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/target&gt;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nt">&lt;target</span>
+</span><span class='line'>    <span class="na">name =</span> <span class="s">&quot;increaseBuildNumber&quot;</span> <span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;propertyfile</span>
+</span><span class='line'>      <span class="na">file    =</span> <span class="s">&quot;buildnumber.txt&quot;</span>
+</span><span class='line'>      <span class="na">comment =</span> <span class="s">&quot;Version number&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;entry</span>  <span class="na">key=</span><span class="s">&quot;build&quot;</span> <span class="na">type=</span><span class="s">&quot;int&quot;</span> <span class="na">default=</span><span class="s">&quot;0&quot;</span> <span class="na">operation=</span><span class="s">&quot;+&quot;</span><span class="nt">/&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/propertyfile&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/target&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;/project&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>That works well, nothing changes in the output XML files. So finally I have a way to call functions written in a different language from XSLT.</p>
+
+<h3>Using PHP functions to process regular expressions in XSLT</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='gherkin'><span class='line'><span class="k">Scenario:</span><span class="nf"> Using PHP functions to process regular expressions in XSLT</span>
+</span><span class='line'><span class="k">    Given </span><span class="nf">that the directions data is not always split into steps</span>
+</span><span class='line'><span class="nf">    </span><span class="k">But </span><span class="nf">each step could be enclosed in &amp;lt;li&amp;gt; tags</span>
+</span><span class='line'><span class="nf">    Or each step could be enclosed by </span><span class="nv">&lt;li&gt;</span><span class="nf"> tags</span>
+</span><span class='line'><span class="nf">    Or steps could be separated by two new lines</span>
+</span><span class='line'><span class="nf">    Or steps could be separated by </span><span class="nv">&lt;br&gt;</span><span class="nf"> or &amp;lt;br&amp;; tags</span>
+</span><span class='line'><span class="nf">    </span><span class="k">And </span><span class="nf">steps could be preceeded by (</span><span class="s">1</span><span class="nf">) or </span><span class="s">1</span><span class="nf">)</span>
+</span><span class='line'><span class="nf">    </span><span class="k">When </span><span class="nf">I the PHP function processes them</span>
+</span><span class='line'><span class="nf">    </span><span class="k">Then </span><span class="nf">it should output a list of </span><span class="nv">&lt;step&gt;</span><span class="nf"> nodes</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The first step here is to arrange the XSLT so that it leaves everything untouched except for the nodes I want to process via PHP. I do this by changing the XSL embedded in the PHP file</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+</span><span class='line'><span class="nt">&lt;xsl:stylesheet</span> <span class="na">version=</span><span class="s">&quot;1.0&quot;</span>
+</span><span class='line'>     <span class="na">xmlns:xsl=</span><span class="s">&quot;http://www.w3.org/1999/XSL/Transform&quot;</span>
+</span><span class='line'>     <span class="na">xmlns:php=</span><span class="s">&quot;http://php.net/xsl&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;xsl:output</span> <span class="na">method=</span><span class="s">&quot;html&quot;</span> <span class="na">encoding=</span><span class="s">&quot;utf-8&quot;</span> <span class="na">indent=</span><span class="s">&quot;yes&quot;</span><span class="nt">/&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">&lt;!-- ENTRY POINT --&gt;</span>
+</span><span class='line'><span class="nt">&lt;xsl:template</span> <span class="na">match=</span><span class="s">&quot;/&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'><span class="nt">&lt;plist</span> <span class="na">version=</span><span class="s">&quot;1.0&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'><span class="nt">&lt;array&gt;</span>
+</span><span class='line'>     <span class="nt">&lt;xsl:apply-templates</span> <span class="na">select=</span><span class="s">&quot;/plist/array/dict&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'><span class="nt">&lt;/array&gt;</span>
+</span><span class='line'><span class="nt">&lt;/plist&gt;</span>
+</span><span class='line'><span class="nt">&lt;/xsl:template&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">&lt;!-- ONCE PER RECIPE --&gt;</span>
+</span><span class='line'><span class="nt">&lt;xsl:template</span> <span class="na">match=</span><span class="s">&quot;/plist/array/dict&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;dict&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;xsl:variable</span> <span class="na">name=</span><span class="s">&quot;directions&quot;</span><span class="nt">&gt;&lt;xsl:value-of</span> <span class="na">select=</span><span class="s">&quot;./string[preceding-sibling::key=&#39;directions&#39;][1]&quot;</span><span class="nt">/&gt;&lt;/xsl:variable&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;xsl:copy-of</span> <span class="na">select=</span><span class="s">&quot;php:function(&#39;splitSteps&#39;, \$directions )&quot;</span><span class="nt">/&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;xsl:copy-of</span> <span class="na">select=</span><span class="s">&quot;./*[preceding-sibling::*[1][not(. = &#39;directions&#39;)]]&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/dict&gt;</span>
+</span><span class='line'><span class="nt">&lt;/xsl:template&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;/xsl:stylesheet&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Line 20 finds the node I am interested in, a string node preceeded by a key node with value &#8216;directions&#8217;, assign it to a variable, and then pass it to a PHP function. Note that the PHP function is called in a copy-of node, that allows the function to return some DOM nodes of its own - if I use value-of, then I can only return a string.</p>
+
+<p>Line 22 finds all the other nodes, i.e. the ones who are not string nodes preceeded by etc., and just copy them as they are.</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="x">/**</span>
+</span><span class='line'><span class="x"> * handles the directions, which are split in all sort of weird and wonderful ways, and turns the into a set of nodes. Note that the set of nodes need to ve a valid XML document, i.e. with a single rood node. Lucily, that works here.</span>
+</span><span class='line'><span class="x"> * @param  {String} $node the content of the ndoe</span>
+</span><span class='line'><span class="x"> * @return {DOMDocument}       a DOM tree</span>
+</span><span class='line'><span class="x"> */</span>
+</span><span class='line'><span class="x">function splitSteps( $node ) {</span>
+</span><span class='line'>
+</span><span class='line'><span class="x">    $find    = array();</span>
+</span><span class='line'><span class="x">    $replace = array();</span>
+</span><span class='line'>
+</span><span class='line'><span class="x">    #hteml_decode_entities didn&#39;t work</span>
+</span><span class='line'><span class="x">    array_push( $find, &quot;&#39;&amp;lt;&#39;&quot; );</span>
+</span><span class='line'><span class="x">    array_push( $replace,  &quot;&lt;&quot; );</span>
+</span><span class='line'>
+</span><span class='line'><span class="x">    array_push( $find, &quot;&#39;&amp;gt;&#39;&quot; );</span>
+</span><span class='line'><span class="x">    array_push( $replace,  &quot;&gt;&quot; );</span>
+</span><span class='line'>
+</span><span class='line'><span class="x">    array_push( $find, &quot;&#39;&lt;br&gt;&#39;&quot; );</span>
+</span><span class='line'><span class="x">    array_push( $replace,  &quot;\n\n&quot; );</span>
+</span><span class='line'>
+</span><span class='line'><span class="x">    array_push( $find, &quot;&#39;&lt;/?[ou]l&gt;&#39;&quot; );</span>
+</span><span class='line'><span class="x">    array_push( $replace,  &quot;&quot; );</span>
+</span><span class='line'>
+</span><span class='line'><span class="x">    array_push( $find, &quot;&#39;&lt;li&gt;&#39;&quot; );</span>
+</span><span class='line'><span class="x">    array_push( $replace,  &quot;\n&quot; );</span>
+</span><span class='line'>
+</span><span class='line'><span class="x">    array_push( $find, &quot;&#39;&lt;/li&gt;&#39;&quot; );</span>
+</span><span class='line'><span class="x">    array_push( $replace,  &quot;\n&quot; );</span>
+</span><span class='line'>
+</span><span class='line'><span class="x">    array_push( $find, &quot;&#39;\n[ \t]+&#39;&quot; );</span>
+</span><span class='line'><span class="x">    array_push( $replace,  &quot;\n&quot; );</span>
+</span><span class='line'>
+</span><span class='line'><span class="x">    array_push( $find, &quot;&#39;\n{2,}&#39;&quot; );</span>
+</span><span class='line'><span class="x">    array_push( $replace,  &quot;\n\n&quot; );</span>
+</span><span class='line'>
+</span><span class='line'><span class="x">    array_push( $find, &quot;&#39;(^|\n)\(?\d+\.?\d?\)\s*&#39;&quot; );</span>
+</span><span class='line'><span class="x">    array_push( $replace,  &quot;\n\n&quot; );</span>
+</span><span class='line'>
+</span><span class='line'><span class="x">    array_push( $find, &quot;&#39;\n\n&#39;&quot; );</span>
+</span><span class='line'><span class="x">    array_push( $replace,  &quot;&lt;/step&gt;\n&lt;step&gt;&quot; );</span>
+</span><span class='line'>
+</span><span class='line'><span class="x">    $node = &quot;&lt;directions&gt;&lt;step&gt;&quot; . preg_replace( $find, $replace, $node ) . &quot;&lt;/step&gt;&lt;/directions&gt;&quot;;</span>
+</span><span class='line'><span class="x">    $dom = new DOMDocument(&quot;1.0&quot;,&quot;UTF-8&quot;);</span>
+</span><span class='line'><span class="x">    $dom-&gt;loadXML( $node ) or die ( $node );</span>
+</span><span class='line'><span class="x">    return $dom;</span>
+</span><span class='line'><span class="x">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The PHP function runs a bunch of regular expressions on the strings, using the array form of preg_replace. The end result is an XML tree with a single root node. This is then parsed into an XML document and returned. The PHP XSLT processor will treat that XML as a DOM fragment, and happily add the nodes to the document it is processing. If I had only returned the XML string, all the &gt; and &lt; would have been transformed into &amp;gt; and &amp;lt;.</p>
+
+<p>I run this, and apart from a few stray missing entities (which is why I added the die statement) it processed fine.</p>
+
+<h3>More XSLT processing with PHP</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='gherkin'><span class='line'><span class="k">Scenario:</span><span class="nf"> More XSLT processing with PHP</span>
+</span><span class='line'><span class="k">    Given </span><span class="nf">that the ingredient list is almost a list of Python tuples</span>
+</span><span class='line'><span class="nf">    </span><span class="k">And </span><span class="nf">strings are not quoted unless empty or longer than one word</span>
+</span><span class='line'><span class="nf">    </span><span class="k">When </span><span class="nf">I parse the ingredient node</span>
+</span><span class='line'><span class="nf">    </span><span class="k">Then </span><span class="nf">I want a list of nodes compatible with the XML schema I have been working with</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The ingredient list is stored as a single string in this format:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;string&gt;</span>(
+</span><span class='line'>        (
+</span><span class='line'>        &quot;For The Pastry:&quot;,
+</span><span class='line'>        &quot;&quot;,
+</span><span class='line'>        &quot;&quot;,
+</span><span class='line'>        &quot;&quot;,
+</span><span class='line'>        YES,
+</span><span class='line'>        NO,
+</span><span class='line'>        945989
+</span><span class='line'>    ),
+</span><span class='line'>        (
+</span><span class='line'>        125,
+</span><span class='line'>        g,
+</span><span class='line'>        &quot;unsalted butter&quot;,
+</span><span class='line'>        &quot;&quot;,
+</span><span class='line'>        NO,
+</span><span class='line'>        NO,
+</span><span class='line'>        2364227
+</span><span class='line'>    ), ....
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>where YES, NO, determine whether the entry is  an ingredient group or an ingredient. Not a great format, but at least regular.</p>
+
+<p>First I change the XSL so that it it now passes either ingredients or directions nodes to the respective PHP function, and passes the rest untouched.</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;xsl:template</span> <span class="na">match=</span><span class="s">&quot;/plist/array/dict&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;dict&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;xsl:variable</span> <span class="na">name=</span><span class="s">&quot;directions&quot;</span><span class="nt">&gt;&lt;xsl:value-of</span> <span class="na">select=</span><span class="s">&quot;./string[preceding-sibling::key=&#39;directions&#39;][1]&quot;</span><span class="nt">/&gt;&lt;/xsl:variable&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;xsl:variable</span> <span class="na">name=</span><span class="s">&quot;ingredients&quot;</span><span class="nt">&gt;&lt;xsl:value-of</span> <span class="na">select=</span><span class="s">&quot;./string[preceding-sibling::key=&#39;ingredientsArray&#39;][1]&quot;</span><span class="nt">/&gt;&lt;/xsl:variable&gt;</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="nt">&lt;xsl:copy-of</span> <span class="na">select=</span><span class="s">&quot;php:function(&#39;getIngredients&#39;, \$ingredients )&quot;</span><span class="nt">/&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;xsl:copy-of</span> <span class="na">select=</span><span class="s">&quot;php:function(&#39;splitSteps&#39;, \$directions )&quot;</span><span class="nt">/&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;xsl:copy-of</span> <span class="na">select=</span><span class="s">&quot;./*[preceding-sibling::*[1][not(. = &#39;ingredientsArray&#39;) and not(. = &#39;directions&#39;)]]&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/dict&gt;</span>
+</span><span class='line'><span class="nt">&lt;/xsl:template&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The PHP function to handle ingredients is not so hard (in PHP - it&#8217;d have been a much worse in XSL). It uses regular expressions to massage the string into something that resembles a csv string, then splits it, then copies the various bits into DOM nodes.</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="x">/**</span>
+</span><span class='line'><span class="x"> * parses the ingredient string, which looks like a python tuple, but without quoted string</span>
+</span><span class='line'><span class="x"> * @param  String $node the node being processed</span>
+</span><span class='line'><span class="x"> * @return DOMFragment       a list of nodes</span>
+</span><span class='line'><span class="x"> */</span>
+</span><span class='line'><span class="x">function getIngredients( $node ) {</span>
+</span><span class='line'><span class="x">    //removes enclosing ()</span>
+</span><span class='line'><span class="x">    $node = substr( $node, 1, -1 );</span>
+</span><span class='line'>
+</span><span class='line'><span class="x">    //gets rid of stuff and flatten</span>
+</span><span class='line'><span class="x">    $node = preg_replace( &quot;&#39;\&quot;&#39;&quot;, &quot;&quot;, $node );</span>
+</span><span class='line'><span class="x">    $node = preg_replace( &quot;&#39;\n\s*&#39;&quot;, &quot; &quot;, $node );</span>
+</span><span class='line'>
+</span><span class='line'><span class="x">    //gets individual  ingredients or group names</span>
+</span><span class='line'><span class="x">    $lines = preg_split( &quot;&#39;(^|\),)\s*\(&#39;&quot;, $node );</span>
+</span><span class='line'><span class="x">    $header = array(</span>
+</span><span class='line'><span class="x">            &quot;quantity&quot; =&gt; 0</span>
+</span><span class='line'><span class="x">          , &quot;measurement&quot; =&gt; 1</span>
+</span><span class='line'><span class="x">          , &quot;name&quot;        =&gt; 2</span>
+</span><span class='line'><span class="x">          , &quot;preparation&quot; =&gt; 3</span>
+</span><span class='line'><span class="x">          , &quot;isgroup&quot;     =&gt; 4</span>
+</span><span class='line'><span class="x">          , &quot;ignore&quot;      =&gt; 5</span>
+</span><span class='line'><span class="x">          , &quot;ignore2&quot;     =&gt; 6</span>
+</span><span class='line'><span class="x">          );</span>
+</span><span class='line'>
+</span><span class='line'><span class="x">    $dom  = new DOMDocument( &quot;1.0&quot;, &quot;UTF-8&quot; );</span>
+</span><span class='line'><span class="x">    $root = $dom-&gt;appendChild( new DOMElement( &#39;ingredients&#39; ) );</span>
+</span><span class='line'>
+</span><span class='line'><span class="x">    for( $i=0, $i2=sizeof( $lines ); $i&lt;$i2; $i++ ){</span>
+</span><span class='line'><span class="x">        $line = trim( $lines[$i] );</span>
+</span><span class='line'><span class="x">        if( &quot;&quot; === $line ){</span>
+</span><span class='line'><span class="x">            continue;</span>
+</span><span class='line'><span class="x">        }</span>
+</span><span class='line'><span class="x">        //treats line as a CSV</span>
+</span><span class='line'><span class="x">        $fields = preg_split( &quot;&#39;:?\,\s*&#39;&quot;, $line );</span>
+</span><span class='line'><span class="x">        //a line is either a groupname or an igredient</span>
+</span><span class='line'><span class="x">        if( &quot;YES&quot; === $fields[ $header[&quot;isgroup&quot;] ] ){</span>
+</span><span class='line'><span class="x">            $ndGroup = $root-&gt;appendChild( new DOMElement( &#39;group&#39; ) );</span>
+</span><span class='line'><span class="x">            $ndGroup-&gt;appendChild( new DOMElement( &#39;name&#39;, $fields[ $header[&quot;quantity&quot;] ] ) );</span>
+</span><span class='line'><span class="x">        } else {</span>
+</span><span class='line'><span class="x">            if( !isset( $ndGroup ) ){</span>
+</span><span class='line'><span class="x">                $ndGroup = $root-&gt;appendChild( new DOMElement( &#39;group&#39; ) );</span>
+</span><span class='line'><span class="x">            }</span>
+</span><span class='line'><span class="x">            $ndIngredient = $ndGroup-&gt;appendChild( new DOMElement( &#39;ingredient&#39; ) );</span>
+</span><span class='line'><span class="x">            $ndIngredient-&gt;appendChild( new DOMElement( &#39;quantity&#39;,     $fields[ $header[&quot;quantity&quot;] ] ) );</span>
+</span><span class='line'><span class="x">            $ndIngredient-&gt;appendChild( new DOMElement( &#39;measurement&#39;,  $fields[ $header[&quot;measurement&quot;] ] ) );</span>
+</span><span class='line'><span class="x">            $ndIngredient-&gt;appendChild( new DOMElement( &#39;name&#39;,         $fields[ $header[&quot;name&quot;] ] ) );</span>
+</span><span class='line'><span class="x">            $ndIngredient-&gt;appendChild( new DOMElement( &#39;preparation&#39;,  $fields[ $header[&quot;preparation&quot;] ] ) );</span>
+</span><span class='line'><span class="x">        }</span>
+</span><span class='line'><span class="x">    }</span>
+</span><span class='line'><span class="x">    return $root;</span>
+</span><span class='line'><span class="x">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Splitting XSL output to separate files with Xalan&#8217;s redirect</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='gherkin'><span class='line'><span class="k">Scenario:</span><span class="nf"> Splitting XSL output to separate files with Xalan&#39;s redirect</span>
+</span><span class='line'><span class="k">    Given </span><span class="nf">that XSLT are being processed with Xalan</span>
+</span><span class='line'><span class="nf">    </span><span class="k">And </span><span class="nf">that the input is a single XML file with several recipes in it</span>
+</span><span class='line'><span class="nf">    </span><span class="k">When </span><span class="nf">a recipe start is encountered</span>
+</span><span class='line'><span class="nf">    </span><span class="k">Then </span><span class="nf">the processor should create a new file for it</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>There are several possible approaches to splitting the XML in separate files, but the easiest is to use one of the XSLT extensions supported by <a href="http://xml.apache.org/xalan-j/downloads.html">Xalan</a>, the default XSL processor used by Ant.</p>
+
+<p>The extension needed in this case is <a href="http://xml.apache.org/xalan-j/apidocs/index.html">redirect (can be found on the bottom LHS)</a>. To import it into the XSL document, I added a namespace to the xsl:stylesheet decalration:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf8&quot;?&gt;</span>
+</span><span class='line'><span class="nt">&lt;xsl:stylesheet</span> <span class="na">version=</span><span class="s">&quot;1.0&quot;</span>
+</span><span class='line'>    <span class="na">xmlns:xsl=</span><span class="s">&quot;http://www.w3.org/1999/XSL/Transform&quot;</span>
+</span><span class='line'>    <span class="na">xmlns:jython-extension=</span><span class="s">&quot;http://www.jython.org/&quot;</span>
+</span><span class='line'>    <span class="na">xmlns:redirect=</span><span class="s">&quot;org.apache.xalan.xslt.extensions.Redirect&quot;</span>
+</span><span class='line'>    <span class="na">extension-element-prefixes=</span><span class="s">&quot;redirect&quot;</span>
+</span><span class='line'>    <span class="na">xmlns:lxslt=</span><span class="s">&quot;http://xml.apache.org/xslt&quot;</span>
+</span><span class='line'>    <span class="na">exclude-result-prefixes=</span><span class="s">&quot;lxslt&quot;</span><span class="nt">&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>(NOTE: some sources suggest using xmlns:redirect=&#8221;org.apache.xalan.xslt.extensions.Redirect&#8221; but that doesn&#8217;t work for the version of Xalan included with Ant).</p>
+
+<p>Then using it is simply a matter of enclosing the recipe template with a redirect:write tags, which takes a &#8216;file&#8217; attribute to specify the file path. Note that &#8216;file&#8217; is relative to where the project home, which by default is where the buid.xml file sits.</p>
+
+<p>I also used the xsl:fallback tag for catching errors, but for a one off job it doesn&#8217;t really matter.</p>
+
+<p>Note that among the XSLT extension supported by Xalan there are also some dealing with string, including splitting a string, but the recursive function I have created works fine and it&#8217;s independent of the processor, so I&#8217;ll stick to that.</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;xsl:template</span> <span class="na">match=</span><span class="s">&quot;/plist/array/dict&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;xsl:variable</span> <span class="na">name=</span><span class="s">&quot;title&quot;</span><span class="nt">&gt;&lt;xsl:call-template</span> <span class="na">name=</span><span class="s">&quot;val&quot;</span><span class="nt">&gt;&lt;xsl:with-param</span> <span class="na">name=</span><span class="s">&quot;node&quot;</span> <span class="na">select=</span><span class="s">&quot;*[. = &#39;name&#39;]&quot;</span><span class="nt">/&gt;&lt;/xsl:call-template&gt;&lt;/xsl:variable&gt;</span>
+</span><span class='line'>...
+</span><span class='line'>
+</span><span class='line'>    <span class="nt">&lt;redirect:write</span>  <span class="na">file=</span><span class="s">&quot;reipes/{$title}.xml&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'><span class="nt">&lt;xsl:processing-instruction</span> <span class="na">name=</span><span class="s">&quot;xml-stylesheet&quot;</span><span class="nt">&gt;</span>href=&quot;recipe.xsl&quot; type=&quot;text/xsl&quot;<span class="nt">&lt;/xsl:processing-instruction&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;recipe</span> <span class="na">lang=</span><span class="s">&quot;en-uk&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>....
+</span><span class='line'><span class="nt">&lt;/recipe&gt;</span>
+</span><span class='line'><span class="nt">&lt;xsl:fallback&gt;</span>
+</span><span class='line'>--- REDIRECT FAILED ---
+</span><span class='line'><span class="nt">&lt;/xsl:fallback&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/redirect:write&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>At first the transform failed with the error: Error! Unrecognized XSLTC extension &#8216;org.apache.xalan.xslt.extensions.Redirect:write&#8217;. After a bit of digging around, I <a href="http://xml.apache.org/xalan-j/downloads.html">downloaded the latest version of Xalan</a>, extracted the zip, and copied the jars with <code>sudo cp ~/Downloads/xalan-j_2_7_1/lib/*.jar /usr/share/ant/lib/</code>That fixed the issue, and I was able to generate all the recipes.</p>
+
+<h2>Challenge 100% complete</h2>
+
+<p>If this was a proper job, I would have first explored whether I could have done it all the way I planned it (i.e., using Ant, XSLT, and Jython) and would have changed plan once I discovered I couldn&#8217;t. That would have meant doing the whole thing in PHP rather than a two step procedure. But I am only playing around, and  the important thing is that the conversation was successful.</p>
+
+<p>The scripts are <a href="https://github.com/gotofritz/Weekly-Challenges/tree/master/weekly-challenge-15_recipes_yummy">available on GitHub</a>.</p>
+</div>
+	</div>
+</article>
+
+<article class="archives">
+  <div class="related-posts">
+    <h2>Related Posts</h2>
+    
+      <article>
+        <h3 class="title"><a href="/blog/geekery/removing-directory-content-ant">Removing directory content with Apache Ant</a></h3>
+        <div class="meta">
+          <span class="tags">
+
+
+	<a class='category' href='/blog/cat/geekery/'>Geekery</a>
+
+
+</span>
+            
+          <time datetime="2012-03-16T14:59:44+01:00" pubdate>2012-03-16</time>
+            
+        </div>
+      </article>
+    
+      <article>
+        <h3 class="title"><a href="/blog/weekly-challenge/fetching-google-spreadsheets-converting-xml">Fetching Google Spreadsheets as XML</a></h3>
+        <div class="meta">
+          <span class="tags">
+
+
+	<a class='category' href='/blog/cat/weekly-challenge/'>Weekly Challenge</a>
+
+
+</span>
+            
+          <time datetime="2012-03-16T14:59:44+01:00" pubdate>2012-03-16</time>
+            
+        </div>
+      </article>
+    
+      <article>
+        <h3 class="title"><a href="/blog/weekly-challenge/managing-xml-files-sublime-text-2">Managing XML files with Sublime Text 2</a></h3>
+        <div class="meta">
+          <span class="tags">
+
+
+	<a class='category' href='/blog/cat/weekly-challenge/'>Weekly Challenge</a>
+
+
+</span>
+            
+          <time datetime="2012-03-16T14:59:44+01:00" pubdate>2012-03-16</time>
+            
+        </div>
+      </article>
+    
+  </div>
+</article>
+
+
+<section id="comment">
+    <h1 class="title">Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+
+    
+  </div>
+	<footer id="footer" class="inner">Copyright &copy; 2014
+
+    Fabrizio (Fritz) Stelluto
+
+</footer>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="/javascripts/slash.js"></script>
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'goto-fritz';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://gotofritz.net/blog/weekly-challenge/transforming-plists-to-xml';
+        var disqus_url = 'http://gotofritz.net/blog/weekly-challenge/transforming-plists-to-xml';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-11254155-2']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,313 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Damn you, Octopress! - Fabrizio (Fritz) Stelluto</title>
+	<meta name="author" content="">
+
+	
+	<meta name="description" content="Octopress work reasonably well - until something happens. Say, for example, you are on OS X and upgrade your python to 2.7.3. Everything stops &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="Fabrizio (Fritz) Stelluto" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.ico" rel="shortcut icon">
+	<link rel="icon" href="/favicon.gif" type="image/gif" />
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	
+</head>
+
+
+<body ontouchstart="">
+
+  <header id="header" class="inner">
+<nav id="main-nav"><div>
+  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+  <a href="/">home</a>
+  <a href="/blog/">blog</a>
+</div></nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><div>
+  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+  <a href="/">home</a>
+  <a href="/blog/">blog</a>
+</div></div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="http://google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:gotofritz.net">
+			</form>
+		</div>
+	</div>
+</nav>
+
+<nav id="sub-nav" class="alignright">
+	<form class="search" action="http://google.com/search" method="get">
+		<input class="alignright" type="text" name="q" results="0">
+		<input type="hidden" name="q" value="site:gotofritz.net">
+	</form>
+</nav>
+
+</header>
+	
+		
+	
+	<div id="content" class="inner">
+    
+    <article class="post">
+	<h1 class="title">Damn You, Octopress!</h1>
+	<div>
+		<div class="meta">
+			<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-12-12T23:20:00+01:00" pubdate data-updated="true">2012-12-12, Wed</time></div>
+			<div class="tags">
+
+
+	<a class='category' href='/blog/cat/geekery/'>Geekery</a>
+
+
+</div>
+			
+				<span class="comments"><a href="/blog/geekery/damn-you-octopress/#disqus_thread">Comments</a></span>
+			
+		</div>
+		<div class="entry-content"><p>Octopress work reasonably well - until something happens. Say, for example, you are on OS X and upgrade your python to 2.7.3. Everything stops working, and you&#8217;ll never be able to fix it again. A ruby application that relies on python - what could possibly go wrong?</p>
+
+<!--more-->
+
+
+<h2>Could not find platform independent libraries</h2>
+
+<p>After upgrading python, suddenly running rake generate resulted in this error:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rake generate
+</span><span class='line'>## Generating Site with Jekyll
+</span><span class='line'>unchanged sass/screen.scss
+</span><span class='line'>/Users/ME/.rvm/gems/ruby-1.9.3-p194/gems/maruku-0.6.0/lib/maruku/input/parse_doc.rb:22:in `&lt;top (required)&gt;': iconv will be deprecated in the future, use String#encode instead.
+</span><span class='line'>Configuration from /Users/ME/work/octopress/_config.yml
+</span><span class='line'>Building site: source -&gt; public
+</span><span class='line'>Could not find platform independent libraries &lt;prefix&gt;
+</span><span class='line'>Could not find platform dependent libraries &lt;exec_prefix&gt;
+</span><span class='line'>Consider setting $PYTHONHOME to &lt;prefix&gt;[:&lt;exec_prefix&gt;]
+</span><span class='line'>ImportError: No module named site</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Oh. Well, let&#8217;s just do what it says, shall we? I open ~/.bash_profile with <code>nano ~/.bash_profile</code> and add</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>export PYTHONHOME=/usr/bin/python</span></code></pre></td></tr></table></div></figure>
+
+
+<p>then restart Terminal. That solves that particular issue.</p>
+
+<h2>sh: - : invalid option</h2>
+
+<p>But now I am getting another error:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rake generate
+</span><span class='line'>## Generating Site with Jekyll
+</span><span class='line'>unchanged sass/screen.scss
+</span><span class='line'>/Users/ME/.rvm/gems/ruby-1.9.3-p194/gems/maruku-0.6.0/lib/maruku/input/parse_doc.rb:22:in `&lt;top (required)&gt;': iconv will be deprecated in the future, use String#encode instead.
+</span><span class='line'>Configuration from /Users/ME/work/octopress/_config.yml
+</span><span class='line'>Building site: source -&gt; public
+</span><span class='line'>ImportError: No module named site
+</span><span class='line'>sh: - : invalid option
+</span><span class='line'>Usage:  sh [GNU long option] [option] ...
+</span><span class='line'>  sh [GNU long option] [option] script-file ...
+</span><span class='line'>GNU long options:
+</span><span class='line'>  --debug
+</span><span class='line'>  --debugger
+</span><span class='line'>  --dump-po-strings
+</span><span class='line'>  --dump-strings
+</span><span class='line'>  --help
+</span><span class='line'>  --init-file
+</span><span class='line'># etc</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The issue seems to be pygment, the module that does syntax highlighting. It is written in python, and run from inside one of the gems. I tried a few different things, but in the end the most successful was creating a file in the plugins directory, <code>plugins/octopress_fix.rb</code>, with instructions to run the older version of python</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;rubypython&#39;</span>
+</span><span class='line'><span class="no">RubyPython</span><span class="o">.</span><span class="n">configure</span> <span class="ss">:python_exe</span> <span class="o">=&gt;</span> <span class="s1">&#39;python2.6&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>`block in ffi_lib&#8217;: Could not open library &#8216;lib.dylib&#8217;</h2>
+
+<p>The latest error message is now</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">rake</span> <span class="n">generate</span>
+</span><span class='line'><span class="c1">## Generating Site with Jekyll</span>
+</span><span class='line'><span class="n">unchanged</span> <span class="n">sass</span><span class="o">/</span><span class="n">screen</span><span class="o">.</span><span class="n">scss</span>
+</span><span class='line'><span class="sr">/Users/</span><span class="no">ME</span><span class="o">/.</span><span class="n">rvm</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="n">ruby</span><span class="o">-</span><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">3</span><span class="o">-</span><span class="n">p194</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="n">maruku</span><span class="o">-</span><span class="mi">0</span><span class="o">.</span><span class="mi">6</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">maruku</span><span class="o">/</span><span class="n">input</span><span class="o">/</span><span class="n">parse_doc</span><span class="o">.</span><span class="n">rb</span><span class="p">:</span><span class="mi">22</span><span class="ss">:in</span> <span class="sb">`&lt;top (required)&gt;&#39;: iconv will be deprecated in the future, use String#encode instead.</span>
+</span><span class='line'><span class="sb">Configuration from /Users/ME/work/octopress/_config.yml</span>
+</span><span class='line'><span class="sb">Building site: source -&gt; public</span>
+</span><span class='line'><span class="sb">&#39;import site&#39; failed; use -v for traceback</span>
+</span><span class='line'><span class="sb">&#39;import site&#39; failed; use -v for traceback</span>
+</span><span class='line'><span class="sb">&#39;import site&#39; failed; use -v for traceback</span>
+</span><span class='line'><span class="sb">/Users/ME/.rvm/gems/ruby-1.9.3-p194/gems/ffi-1.0.11/lib/ffi/library.rb:121:in `</span><span class="n">block</span> <span class="k">in</span> <span class="n">ffi_lib</span><span class="s1">&#39;: Could not open library &#39;</span><span class="n">lib</span><span class="o">.</span><span class="n">dylib</span><span class="err">&#39;</span><span class="p">:</span> <span class="n">dlopen</span><span class="p">(</span><span class="n">lib</span><span class="o">.</span><span class="n">dylib</span><span class="p">,</span> <span class="mi">9</span><span class="p">):</span> <span class="n">image</span> <span class="ow">not</span> <span class="n">found</span> <span class="p">(</span><span class="no">LoadError</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Google takes me to this <a href="https://github.com/tmm1/pygments.rb/issues/10" title="[new window] Lib.so issues when calling Pygments::Lexer · Issue #10 · tmm1/pygments.rb" target="_blank">pygments issue on github</a>, where it is suggested I upgrade the version of pygments in octopress/Gemfile</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="n">gem</span> <span class="s1">&#39;pygments.rb&#39;</span><span class="p">,</span> <span class="s1">&#39;~&gt; 0.3.2&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>blankslate.rb warning: undefining `object_id&#8217; may cause serious problems</h2>
+
+<p>The error is now</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">rake</span> <span class="n">generate</span>
+</span><span class='line'><span class="c1">## Generating Site with Jekyll</span>
+</span><span class='line'><span class="n">unchanged</span> <span class="n">sass</span><span class="o">/</span><span class="n">screen</span><span class="o">.</span><span class="n">scss</span>
+</span><span class='line'><span class="no">Configuration</span> <span class="n">from</span> <span class="sr">/Users/</span><span class="no">ME</span><span class="o">/</span><span class="n">work</span><span class="o">/</span><span class="n">octopress</span><span class="o">/</span><span class="n">_config</span><span class="o">.</span><span class="n">yml</span>
+</span><span class='line'><span class="sr">/Users/</span><span class="no">ME</span><span class="o">/.</span><span class="n">rvm</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="n">ruby</span><span class="o">-</span><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">3</span><span class="o">-</span><span class="n">p194</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="n">blankslate</span><span class="o">-</span><span class="mi">3</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">2</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">blankslate</span><span class="o">.</span><span class="n">rb</span><span class="p">:</span><span class="mi">51</span><span class="p">:</span> <span class="ss">warning</span><span class="p">:</span> <span class="n">undefining</span> <span class="sb">`object_id&#39; may cause serious problems</span>
+</span><span class='line'><span class="sb">Building site: source -&gt; public</span>
+</span><span class='line'><span class="sb">/Users/ME/.rvm/gems/ruby-1.9.3-p194/gems/pygments.rb-0.3.2/lib/pygments/popen.rb:351:in `</span><span class="k">rescue</span> <span class="k">in</span> <span class="n">get_header</span><span class="err">&#39;</span><span class="p">:</span> <span class="no">Failed</span> <span class="n">to</span> <span class="n">get</span> <span class="n">header</span><span class="o">.</span> <span class="p">(</span><span class="no">MentosError</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>pygments.rb has meanwhile been updated to 0.3.3, so I try</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">gem</span> <span class="n">update</span> <span class="n">pygments</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>then bump the number up in the Gemfile, but no improvement.</p>
+
+<h2>Pygments.rb doesn&#8217;t like Python 2.7.3</h2>
+
+<p>In the end I had to rever Python version by amending the Python version of from 2.7.3 to 2.6 in the path in my ~/.bash_profile file</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">.</span><span class="n">.</span><span class="o">.</span><span class="n">.</span><span class="no">System</span><span class="o">/</span><span class="no">Library</span><span class="o">/</span><span class="no">Frameworks</span><span class="o">/</span><span class="no">Python</span><span class="o">.</span><span class="n">framework</span><span class="o">/</span><span class="no">Versions</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">6</span><span class="o">/</span><span class="ss">bin</span><span class="p">:</span><span class="vg">$PATH</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Ok that works - still get the &#8220;blankslate.rb warning: undefining `object_id&#8217; may cause serious problems&#8221; line but it generates site.
+But I don&#8217;t like it at all, it seems brittle. Granted, I can&#8217;t blame Octopress for Ruby and Python not talking to each other, but still.</p>
+</div>
+	</div>
+</article>
+
+
+<section id="comment">
+    <h1 class="title">Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+
+    
+  </div>
+	<footer id="footer" class="inner">Copyright &copy; 2014
+
+    Fabrizio (Fritz) Stelluto
+
+</footer>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="/javascripts/slash.js"></script>
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'goto-fritz';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://gotofritz.net/blog/geekery/damn-you-octopress/';
+        var disqus_url = 'http://gotofritz.net/blog/geekery/damn-you-octopress/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-11254155-2']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+</body>
+</html>
