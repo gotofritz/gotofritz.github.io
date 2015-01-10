@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Weekly Challenge | Fabrizio (Fritz) Stelluto]]></title>
   <link href="http://gotofritz.net/blog/cat/weekly-challenge/atom.xml" rel="self"/>
   <link href="http://gotofritz.net/"/>
-  <updated>2015-01-10T01:58:04+01:00</updated>
+  <updated>2015-01-10T02:08:25+01:00</updated>
   <id>http://gotofritz.net/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -3968,463 +3968,6 @@ Scenario: Creating a playlist of missing iTunes tracks</p>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Generate Boilerplate project folders with Python]]></title>
-    <link href="http://gotofritz.net/blog/weekly-challenge/generate-boilerplate-python"/>
-    <updated>2012-07-08T14:42:22+02:00</updated>
-    <id>http://gotofritz.net/blog/weekly-challenge/generate-boilerplate-python</id>
-    <content type="html"><![CDATA[<p>The challenge this week: a simple command line script to generate weekly challenge boilerplates</p>
-
-<!--more-->
-
-
-<h2>TL;DR</h2>
-
-<p>I created a python script that I can call on the shell from the weekly-challenges directory: <div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>weekly NAME_OF_CHALLENGE
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
-
-<h2>About the challenge</h2>
-
-<p>Haven't been doing one of these for a while, due to a new addition to the family. I need a very easy one to get me back into it.</p>
-
-<p>Setting up a weekly challenge is a repetitive task, so I should write a script for it. I picked Python as the scripting language.</p>
-
-<p>Some artefacts <a href="https://github.com/gotofritz/Weekly-Challenges/tree/master/weekly-challenge-22_challenge-generator">available on GitHub</a>.</p>
-
-<h2>Weekly Challenge Generator</h2>
-
-<p>``` gherkin
-Feature: Weekly Challenge Generator</p>
-
-<pre><code>In order to speed up creation of weekly challenges
-As a command line user
-I need a script that creates them
-</code></pre>
-
-<p>```</p>
-
-<p>A single feature should be enough to describe this.</p>
-
-<h3>Setting up script</h3>
-
-<p>``` gherkin
-Scenario: Setting up script</p>
-
-<pre><code>Given that I am on the command line
-And I am in the directory weekly-challenges
-When I type "weekly"
-Then a script should be run
-And the last line of output it prints should start with "done"
-</code></pre>
-
-<p>```</p>
-
-<p>The easiest of first steps. In mock TDD style, I write only enough code to pass the "tests" - except that there are no test scripts yet.
-<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="c">#!/usr/bin/env python&lt;/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="s">&quot;&quot;&quot;</span>
-</span><span class='line'><span class="s">Command line script to generate the boilerplate for weekly challenge</span>
-</span><span class='line'><span class="s">Run with -h for a list of arguments</span>
-</span><span class='line'><span class="s">&quot;&quot;&quot;</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="k">def</span> <span class="nf">main</span><span class="p">():</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="k">print</span> <span class="s">&quot;done&quot;</span>
-</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="k">if</span> <span class="o">&lt;</span><span class="n">strong</span><span class="o">&gt;</span><span class="n">name</span><span class="o">&lt;/</span><span class="n">strong</span><span class="o">&gt;</span> <span class="o">==</span> <span class="s">&quot;&lt;strong&gt;main&lt;/strong&gt;&quot;</span><span class="p">:</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="n">main</span><span class="p">()</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-</code></pre>
-
-<p>Saved the script as weekly, made it executable, and created a symbolic link to it from /usr/local/bin
-<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>chmod 775 weekly
-</span><span class='line'><span class="nb">cd</span> /usr/local/bin
-</span><span class='line'>sudo ln -s /PATH/TO/weekly weekly
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
-
-<p>Then tested by going into the directory weekly-challenges and typing weekly - it works.</p>
-
-<h3>Copying boilerplate</h3>
-
-<p>``` gherkin
-Scenario: Copying boilerplate</p>
-
-<pre><code>Given that I am in directory weekly-challenges
-And there are "howManyDirectories" non-hidden directories
-And none of them is called "weekly-challenge-xx_yyy"
-When I run the command weekly
-And I pass "yyy" as an argument
-Then there should be one more directory
-And it should be called "weekly-challenge-xx_yyy"
-And it should include a file called README.md
-And it should include a file called week.md
-And it should include a file that ends in .sublime-project
-</code></pre>
-
-<p>```</p>
-
-<p>I created a folder called boilerplate, with the three required file. The task is simply to copy it over and rename it. A little bit of messing about with paths, but in essence a trivial task. Passing "yyy" as an argument was added retroactively to keep it consistent with later scenarios.</p>
-
-<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">import</span> <span class="nn">os</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">shutil</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="k">def</span> <span class="nf">main</span><span class="p">():</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="n">path_here</span>   <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">realpath</span><span class="p">(</span> <span class="n">__file__</span> <span class="p">)</span>  <span class="p">)</span> <span class="c">#this may not worked in more complex cases with modules</span>
-</span><span class='line'><span class="n">path_parent</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span> <span class="n">path_here</span> <span class="p">)</span>
-</span><span class='line'><span class="n">project_hashed</span> <span class="o">=</span> <span class="s">&quot;yyy&quot;</span>
-</span><span class='line'><span class="n">path_new</span>       <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span> <span class="n">path_parent</span><span class="p">,</span> <span class="s">&quot;weekly-challenge-xx_&quot;</span> <span class="o">+</span> <span class="n">project_hashed</span> <span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span> <span class="n">path_new</span> <span class="p">):</span>
-</span><span class='line'>    <span class="n">shutil</span><span class="o">.</span><span class="n">copytree</span><span class="p">(</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span> <span class="n">path_here</span><span class="p">,</span> <span class="s">&quot;boilerplate&quot;</span> <span class="p">),</span> <span class="n">path_new</span> <span class="p">)</span>
-</span><span class='line'><span class="k">print</span> <span class="s">&quot;done&quot;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-</code></pre>
-
-<h3>Naming the new directory</h3>
-
-<p>``` gherkin
-Scenario: Naming the new directory</p>
-
-<pre><code>Given that I am in directory weekly-challenges
-And there isn't a directory called "weekly-challenge-xx_test"
-When I run comand weekly
-And I pass "test" as an argument
-Then a directory called "weekly-challenge-xx_test" should be created
-And I pass "a list of strings" as an argument
-Then a directory called "weekly-challenge-xx_a-list-of-strings" should be created
-And I pass "it's got_punctuation!" as an argument
-Then a directory called "weekly-challenge-xx_its-got-punctuation" should be created
-</code></pre>
-
-<p>```</p>
-
-<p>I used the argparse module to parse the command line arguments, and a couple of regular expressions to remove punctuation from the argument.
-<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">def</span> <span class="nf">main</span><span class="p">():</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="c">#parses arguments</span>
-</span><span class='line'><span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s">&quot;Generate the boilerplate for weekly challenge&quot;</span><span class="p">)</span>
-</span><span class='line'><span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span> <span class="s">&quot;challenge_name&quot;</span><span class="p">,</span>
-</span><span class='line'>                <span class="n">action</span><span class="o">=</span><span class="s">&quot;store&quot;</span><span class="p">,</span>
-</span><span class='line'>                <span class="n">help</span><span class="o">=</span><span class="s">&quot;the name of the challenge&quot;</span><span class="p">)</span>
-</span><span class='line'><span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
-</span><span class='line'>
-</span><span class='line'><span class="c">#manipulates inputs</span>
-</span><span class='line'><span class="n">path_here</span>      <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">realpath</span><span class="p">(</span> <span class="n">__file__</span> <span class="p">)</span>  <span class="p">)</span> <span class="c">#this may not worked in more complex cases with modules</span>
-</span><span class='line'><span class="n">path_parent</span>    <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span> <span class="n">path_here</span> <span class="p">)</span>
-</span><span class='line'><span class="n">project_hashed</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span> <span class="s">r&#39;[^a-zA-Z0-9_ ]&#39;</span><span class="p">,</span> <span class="s">&#39;&#39;</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">challenge_name</span> <span class="p">)</span>
-</span><span class='line'><span class="n">project_hashed</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span> <span class="s">r&#39;[ _]&#39;</span><span class="p">,</span> <span class="s">&#39;-&#39;</span><span class="p">,</span> <span class="n">project_hashed</span> <span class="p">)</span>
-</span><span class='line'><span class="n">path_new</span>       <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span> <span class="n">path_parent</span><span class="p">,</span> <span class="s">&quot;weekly-challenge-xx_&quot;</span> <span class="o">+</span> <span class="n">project_hashed</span> <span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="c">#copies</span>
-</span><span class='line'><span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span> <span class="n">path_new</span> <span class="p">):</span>
-</span><span class='line'>    <span class="n">shutil</span><span class="o">.</span><span class="n">copytree</span><span class="p">(</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span> <span class="n">path_here</span><span class="p">,</span> <span class="s">&quot;boilerplate&quot;</span> <span class="p">),</span> <span class="n">path_new</span> <span class="p">)</span>
-</span><span class='line'>    <span class="k">print</span> <span class="s">&quot;done &quot;</span> <span class="o">+</span> <span class="n">path_new</span>
-</span><span class='line'><span class="k">else</span><span class="p">:</span>
-</span><span class='line'>    <span class="k">print</span> <span class="s">&quot;done&quot;</span>
-</span><span class='line'>
-</span><span class='line'><span class="c">#exits with status</span>
-</span><span class='line'><span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span> <span class="mi">0</span> <span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-</code></pre>
-
-<p>This works for all challenge names passed.</p>
-
-<h3>Numbering challenges</h3>
-
-<p>``` gherkin
-Scenario: Numbering challenges</p>
-
-<pre><code>Given that I am in directory weekly-challenges
-And the last directory is called "weekly-challenge-22_challenge-generator"
-And there isn't a directory whose name starts with "weekly-challenge-23"
-When I run comand weekly
-And I pass "test" as an argument
-Then a directory called "weekly-challenge-23_test" should be created
-</code></pre>
-
-<p>```</p>
-
-<p>Now the issue is reading existing folder names, detecting the number in it, increasing it, and using it for the new folder name.
-<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">def</span> <span class="nf">main</span><span class="p">():</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="c">#parses arguments</span>
-</span><span class='line'><span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s">&quot;Generate the boilerplate for weekly challenge&quot;</span><span class="p">)</span>
-</span><span class='line'><span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span> <span class="s">&quot;challenge_name&quot;</span><span class="p">,</span>
-</span><span class='line'>                <span class="n">action</span><span class="o">=</span><span class="s">&quot;store&quot;</span><span class="p">,</span>
-</span><span class='line'>                <span class="n">help</span><span class="o">=</span><span class="s">&quot;the name of the challenge&quot;</span><span class="p">)</span>
-</span><span class='line'><span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
-</span><span class='line'>
-</span><span class='line'><span class="c">#manipulates inputs</span>
-</span><span class='line'><span class="n">path_here</span>      <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">realpath</span><span class="p">(</span> <span class="n">__file__</span> <span class="p">)</span>  <span class="p">)</span> <span class="c">#this may not worked in more complex cases with modules</span>
-</span><span class='line'><span class="n">path_parent</span>    <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span> <span class="n">path_here</span> <span class="p">)</span>
-</span><span class='line'><span class="n">project_hashed</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span> <span class="s">r&#39;[^a-zA-Z0-9_ ]&#39;</span><span class="p">,</span> <span class="s">&#39;&#39;</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">challenge_name</span> <span class="p">)</span>
-</span><span class='line'><span class="n">project_hashed</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span> <span class="s">r&#39;[ _]&#39;</span><span class="p">,</span> <span class="s">&#39;-&#39;</span><span class="p">,</span> <span class="n">project_hashed</span> <span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="c">#extracts number</span>
-</span><span class='line'><span class="n">stem</span> <span class="o">=</span> <span class="s">&quot;weekly-challenge-&quot;</span>
-</span><span class='line'><span class="n">number</span> <span class="o">=</span> <span class="mi">0</span>
-</span><span class='line'><span class="n">matcher</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span> <span class="s">&quot;^&quot;</span><span class="o">+</span><span class="n">stem</span><span class="o">+</span><span class="s">&quot;(\d+)&quot;</span> <span class="p">)</span>
-</span><span class='line'><span class="k">for</span> <span class="n">folder</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span> <span class="n">path_parent</span> <span class="p">):</span>
-</span><span class='line'>    <span class="n">matched</span> <span class="o">=</span> <span class="n">matcher</span><span class="o">.</span><span class="n">match</span><span class="p">(</span> <span class="n">folder</span> <span class="p">)</span>
-</span><span class='line'>    <span class="k">if</span> <span class="ow">not</span> <span class="n">matched</span><span class="p">:</span>
-</span><span class='line'>        <span class="k">continue</span>
-</span><span class='line'>    <span class="n">number</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span> <span class="n">number</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span> <span class="n">matched</span><span class="o">.</span><span class="n">group</span><span class="p">(</span> <span class="mi">1</span> <span class="p">)</span> <span class="p">)</span> <span class="p">)</span>
-</span><span class='line'><span class="n">number</span> <span class="o">=</span> <span class="s">&#39;</span><span class="si">%02d</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span> <span class="n">number</span> <span class="o">+</span> <span class="mi">1</span> <span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">path_new</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span> <span class="n">path_parent</span><span class="p">,</span> <span class="s">&quot;weekly-challenge-&quot;</span> <span class="o">+</span> <span class="n">number</span> <span class="o">+</span> <span class="s">&quot;_&quot;</span> <span class="o">+</span> <span class="n">project_hashed</span> <span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'><span class="n">shutil</span><span class="o">.</span><span class="n">copytree</span><span class="p">(</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span> <span class="n">path_here</span><span class="p">,</span> <span class="s">&quot;boilerplate&quot;</span> <span class="p">),</span> <span class="n">path_new</span> <span class="p">)</span>
-</span><span class='line'><span class="k">print</span> <span class="s">&quot;done &quot;</span> <span class="o">+</span> <span class="n">path_new</span>
-</span><span class='line'>
-</span><span class='line'><span class="c">#exits with status</span>
-</span><span class='line'><span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span> <span class="mi">0</span> <span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-</code></pre>
-
-<h3>Creating Sublime Project files</h3>
-
-<p>``` gherkin
-Scenario: Creating Sublime Project files</p>
-
-<pre><code>Given that I am running command weekly
-When a folder with name weekly-challenge-23_its-got-punctuation is created
-Then the file project.sublime-project within it should include the line "path": "PTH/TO/weekly-challenge-23_its-got-punctuation"
-</code></pre>
-
-<p>```</p>
-
-<p>I wanted to use <a href="https://github.com/defunkt/pystache/">Mustache (or rather, Pystache)</a> for this, but I am not able to install modules anymore due to a botched 2.7.3 upgrade. Since it's just a line that needs changing, I'll hardcode what mustache does.</p>
-
-<p>First, changed the sublime file to <div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="p">{</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="s2">&quot;folders&quot;</span><span class="o">:</span>
-</span><span class='line'><span class="p">[</span>
-</span><span class='line'>    <span class="p">{</span>
-</span><span class='line'>        <span class="s2">&quot;path&quot;</span><span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-</span><span class='line'>        <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;Work&quot;</span><span class="p">,</span>
-</span><span class='line'>        <span class="s2">&quot;file_exclude_patterns&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;*.sublime-*&quot;</span><span class="p">]</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'><span class="p">],</span>
-</span><span class='line'><span class="s2">&quot;settings&quot;</span><span class="o">:</span><span class="p">{</span>
-</span><span class='line'>    <span class="s2">&quot;tab_completion&quot;</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
-</span><span class='line'>    <span class="s2">&quot;tab_size&quot;</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
-</span><span class='line'>    <span class="s2">&quot;translate_tabs_to_spaces&quot;</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
-</span><span class='line'>    <span class="s2">&quot;trim_automatic_white_space&quot;</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
-</span><span class='line'>    <span class="s2">&quot;trim_trailing_white_space_on_save&quot;</span><span class="o">:</span> <span class="kc">true</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
-
-<p>Then amended the script</p>
-
-<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="c">#parses arguments</span>
-</span><span class='line'><span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s">&quot;Generate the boilerplate for weekly challenge&quot;</span><span class="p">)</span>
-</span><span class='line'><span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span> <span class="s">&quot;challenge_name&quot;</span><span class="p">,</span>
-</span><span class='line'>                <span class="n">action</span><span class="o">=</span><span class="s">&quot;store&quot;</span><span class="p">,</span>
-</span><span class='line'>                <span class="n">help</span><span class="o">=</span><span class="s">&quot;the name of the challenge&quot;</span><span class="p">)</span>
-</span><span class='line'><span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
-</span><span class='line'>
-</span><span class='line'><span class="c">#manipulates inputs</span>
-</span><span class='line'><span class="n">path_here</span>        <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">realpath</span><span class="p">(</span> <span class="n">__file__</span> <span class="p">)</span>  <span class="p">)</span> <span class="c">#this may not worked in more complex cases with modules</span>
-</span><span class='line'><span class="n">path_boilerplate</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span> <span class="n">path_here</span><span class="p">,</span> <span class="s">&quot;boilerplate&quot;</span> <span class="p">)</span>
-</span><span class='line'><span class="n">path_parent</span>      <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span> <span class="n">path_here</span> <span class="p">)</span>
-</span><span class='line'><span class="n">sublime_file</span>     <span class="o">=</span> <span class="s">&quot;project.sublime-project&quot;</span>
-</span><span class='line'><span class="n">project_hashed</span>   <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span> <span class="s">r&#39;[^a-zA-Z0-9_ ]&#39;</span><span class="p">,</span> <span class="s">&#39;&#39;</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">challenge_name</span> <span class="p">)</span>
-</span><span class='line'><span class="n">project_hashed</span>   <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span> <span class="s">r&#39;[ _]&#39;</span><span class="p">,</span> <span class="s">&#39;-&#39;</span><span class="p">,</span> <span class="n">project_hashed</span> <span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="c">#extracts number</span>
-</span><span class='line'><span class="n">stem</span> <span class="o">=</span> <span class="s">&quot;weekly-challenge-&quot;</span>
-</span><span class='line'><span class="n">number</span> <span class="o">=</span> <span class="mi">0</span>
-</span><span class='line'><span class="n">matcher</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span> <span class="s">&quot;^&quot;</span><span class="o">+</span><span class="n">stem</span><span class="o">+</span><span class="s">&quot;(\d+)&quot;</span> <span class="p">)</span>
-</span><span class='line'><span class="k">for</span> <span class="n">folder</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span> <span class="n">path_parent</span> <span class="p">):</span>
-</span><span class='line'>    <span class="n">matched</span> <span class="o">=</span> <span class="n">matcher</span><span class="o">.</span><span class="n">match</span><span class="p">(</span> <span class="n">folder</span> <span class="p">)</span>
-</span><span class='line'>    <span class="k">if</span> <span class="ow">not</span> <span class="n">matched</span><span class="p">:</span>
-</span><span class='line'>        <span class="k">continue</span>
-</span><span class='line'>    <span class="n">number</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span> <span class="n">number</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span> <span class="n">matched</span><span class="o">.</span><span class="n">group</span><span class="p">(</span> <span class="mi">1</span> <span class="p">)</span> <span class="p">)</span> <span class="p">)</span>
-</span><span class='line'><span class="n">number</span> <span class="o">=</span> <span class="s">&#39;</span><span class="si">%02d</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span> <span class="n">number</span> <span class="o">+</span> <span class="mi">1</span> <span class="p">)</span>
-</span><span class='line'><span class="n">path_new</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span> <span class="n">path_parent</span><span class="p">,</span> <span class="s">&quot;weekly-challenge-&quot;</span> <span class="o">+</span> <span class="n">number</span> <span class="o">+</span> <span class="s">&quot;_&quot;</span> <span class="o">+</span> <span class="n">project_hashed</span> <span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="c">#creates boilerplate with challenge specific data</span>
-</span><span class='line'><span class="n">shutil</span><span class="o">.</span><span class="n">copytree</span><span class="p">(</span> <span class="n">path_boilerplate</span><span class="p">,</span> <span class="n">path_new</span> <span class="p">)</span>
-</span><span class='line'><span class="k">with</span> <span class="nb">open</span><span class="p">(</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span> <span class="n">path_boilerplate</span><span class="p">,</span> <span class="n">sublime_file</span> <span class="p">),</span> <span class="s">&quot;r&quot;</span> <span class="p">)</span> <span class="k">as</span> <span class="n">source</span><span class="p">:</span>
-</span><span class='line'>    <span class="n">sourcetext</span> <span class="o">=</span> <span class="n">source</span><span class="o">.</span><span class="n">read</span><span class="p">();</span>
-</span><span class='line'><span class="n">sourcetext</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span> <span class="s">&#39;&#39;</span><span class="p">,</span> <span class="n">path_new</span><span class="p">,</span> <span class="n">sourcetext</span> <span class="p">)</span>
-</span><span class='line'><span class="k">with</span> <span class="nb">open</span><span class="p">(</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span> <span class="n">path_new</span><span class="p">,</span> <span class="n">sublime_file</span> <span class="p">),</span> <span class="s">&quot;w&quot;</span> <span class="p">)</span> <span class="k">as</span> <span class="n">destination</span><span class="p">:</span>
-</span><span class='line'>    <span class="n">destination</span><span class="o">.</span><span class="n">write</span><span class="p">(</span> <span class="n">sourcetext</span> <span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'><span class="c">#exits with status</span>
-</span><span class='line'><span class="k">print</span> <span class="s">&quot;done &quot;</span> <span class="o">+</span> <span class="n">path_new</span>
-</span><span class='line'><span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span> <span class="mi">0</span> <span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-</code></pre>
-
-<h2>Challenge 100% complete</h2>
-
-<p>This was an easy way to get me back into it.</p>
-
-<p>The scripts are <a href="https://github.com/gotofritz/Weekly-Challenges/tree/master/weekly-challenge-22_challenge-generator">available on GitHub</a>.</p>
-]]></content>
-  </entry>
-  
-  <entry>
     <title type="html"><![CDATA[Creating a RESTful Python API with Bottle]]></title>
     <link href="http://gotofritz.net/blog/weekly-challenge/restful-python-api-bottle"/>
     <updated>2012-03-31T17:06:55+02:00</updated>
@@ -4436,7 +3979,7 @@ Then the file project.sublime-project within it should include the line "path": 
 
 <h2>About the challenge</h2>
 
-<p>This is part of an ongoing project, a simple <a href="#multipart" title="jump down to list of all the parts in the series">recipe manager</a>. Previous steps left me with a set of XML files I can visualize in a browser, one per recipe. I now need a quick and dirty way to manage those files directly from the (yet to be built) front end.</p>
+<p>This is part of an larger, abondoned project, a simple recipe manager. Previous steps had left me with a set of XML files I can visualize in a browser by applying XSLT to them. I now need a quick and dirty way to manage those files directly from the (yet to be built) front end.</p>
 
 <p>``` gherkin
 Feature: Creating a quick RESTful API for recipes</p>
@@ -5030,6 +4573,193 @@ And the &lt;PTH&gt; should contain &lt;newfilelist&gt;
 <p>This is quick and dirty work - no testing, and running off a local dev server which wouldn't be suited for production. But I am still amazed but how easy it all was. Bottle really does rock.</p>
 
 <p>The scripts are <a href="https://github.com/gotofritz/Weekly-Challenges/tree/master/weekly-challenge-17_restful">available on GitHub</a>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Building scalable PHP / MySQL websites]]></title>
+    <link href="http://gotofritz.net/blog/weekly-challenge/building-scalable-php-mysql-websites"/>
+    <updated>2012-02-03T11:10:36+01:00</updated>
+    <id>http://gotofritz.net/blog/weekly-challenge/building-scalable-php-mysql-websites</id>
+    <content type="html"><![CDATA[<p>The task: summarize notes from a lecture about scaling PHP apps.</p>
+
+<!--more-->
+
+
+<p>Can't remember by whom, but you can tell it was a couple of years ago because neither cloud services nor NoSQL get much of a mention. It also doesn't mention tools such as <a href="https://www.varnish-cache.org/">Varnish</a>. Most of the information is still relevant though.</p>
+
+<h2>Scaling</h2>
+
+<p> Scaling means enabling your application to grow as traffic grows.</p>
+
+<h2>Scaling the web server</h2>
+
+<p>I.e., the server responding to browser requests. Different stages:</p>
+
+<h3>STAGE 1: a single server with everything in it</h3>
+
+<h3>STAGE 2: Load balanced servers</h3>
+
+<p>Servers can be added as needed.</p>
+
+<ul>
+<li><p>Commercial solutions are expensive but do all you need and more (compression on the fly, etc)
+Examples: <a href="http://www.citrix.com/English/ps2/products/product.asp?contentID=21679">Citrix NetScaler</a>, <a href="http://www.f5.com/glossary/load-balancing.html">F5 Big-IP</a></p></li>
+<li><p><a href="http://www2.de.squid-cache.org/">squid</a> is open source and can do load balancing</p></li>
+<li><p>Other, less strong, options</p>
+
+<ul>
+<li><p><a href="http://en.wikipedia.org/wiki/Round-robin_DNS">DNS rotation</a> - hacky but works.</p></li>
+<li><p><a href="http://danga.com/perlbal/">Perlbal</a></p></li>
+<li><p><a href="http://httpd.apache.org/docs/2.1/mod/mod_proxy_balancer.html">Apache Proxy Balancer</a>, a simulator</p></li>
+<li><p>Cloud services, proprietary</p></li>
+</ul>
+</li>
+</ul>
+
+
+<p>The guiding principle: only implement what you need, but without coding yourself into a corner. So:</p>
+
+<ul>
+<li><p>Don't code assuming a physical machine; so careful with <a href="http://php.net/manual/en/book.apc.php">APC</a>, <a href="http://www.zend.com/products/server/">Zend Server</a></p></li>
+<li><p>Don't assume a file system, unless you use distributive file system NFTS etc</p></li>
+<li><p>Do not use file based sessions but DB based</p></li>
+</ul>
+
+
+<p>If you <em>have</em> to, encapsulate all the bad practices into a BAD CLASS, so that you know what to change later on when you need to scale.</p>
+
+<h2>Scaling the database</h2>
+
+<p>The database is <em>always</em> the bottleneck.</p>
+
+<h3>STAGE 1: a single server with everything in it</h3>
+
+<h3>STAGE 2: master slave replication</h3>
+
+<p>Two databases - everything that happens in the master also happens in the slave. This is easily set up with <a href="http://dev.mysql.com/doc/refman/5.1/en/replication.html">MySQL</a>. It's worth doing even if only one physical server - if nothing else for backing up.</p>
+
+<h3>STAGE 3: isolate areas of load</h3>
+
+<p>Have read happen from slave, write to master. Worth preparing for that, by having an extra paramater in you DB call to select which server is being accessed.
+If doing that, one needs to avoid slave lag - i.e., the delay between action on master being reproduced on the slave. It should be in the order of 0.001s, but can get worse if there is lots of traffic, up to 2s.
+To prepare for that, don't write code with a master instruction immediately followed by a slave instruction.</p>
+
+<h3>STAGE 4: multiple slaves</h3>
+
+<p>Again, something that comes out of the box with MySQL.
+A typical, but not ideal, scenario - one master, and one slave box for each load balanced web server box. Or one box for each load balanced web server / DB pair.
+It's simple but not ideal, as you must create a web server even if all you want is to add a new DB slave, or viceversa. And if a DB gets corrupted you quickly need to remove the web server from the pool, which kind of defeats the point. It's better to have each web server pick up random DB box.</p>
+
+<p>Sample code:<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="x">class DB {&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="x">&lt;pre&gt;&lt;code&gt;   private static $cfg = array(</span>
+</span><span class='line'><span class="x">       &#39;write&#39; =&amp;gt;</span>
+</span><span class='line'><span class="x">           array(&#39;mysql:dbname=MyDB;host=10.1.2.3&#39;),</span>
+</span><span class='line'><span class="x">       &#39;read&#39; =&amp;gt;</span>
+</span><span class='line'><span class="x">           array(&#39;mysql:dbname=MyDB;host=10.1.2.7&#39;,</span>
+</span><span class='line'><span class="x">                 &#39;mysql:dbname=MyDB;host=10.1.2.8&#39;,</span>
+</span><span class='line'><span class="x">                 &#39;mysql:dbname=MyDB;host=10.1.2.9&#39;);</span>
+</span><span class='line'><span class="x">       );</span>
+</span><span class='line'><span class="x">   public static function getConnection($pool) {</span>
+</span><span class='line'><span class="x">       $max = count(self::$cfg[$pool]) - 1;</span>
+</span><span class='line'><span class="x">       $dsn = self::$cfg[$pool][mt_rand(0, $max)];</span>
+</span><span class='line'><span class="x">       return new PDO($dsn, USER, PASS);</span>
+</span><span class='line'><span class="x">   }</span>
+</span><span class='line'><span class="x">&lt;/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="x">&lt;p&gt;   }</span>
+</span><span class='line'><span class="x">   $db = DB::getConnection(&#39;read&#39;);</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<h3>STAGE 5: slave pools</h3>
+
+<p>Pools increases the likelihood that queries gets cached on a given server. Another benefit is that if certain queries need improving performance, you can add servers to that particular pool.
+Different approaches:</p>
+
+<ul>
+<li><p>Divide slaves into pools, each handling only one type of query.</p></li>
+<li><p>Keep a pool of slaves just for batch jobs</p></li>
+<li><p>Use a pool of slaves for comments, one for articles, etc</p></li>
+<li><p>Use a pool for AJAX calls, another for posts, etc</p></li>
+</ul>
+
+
+<h3>STAGE 6: partitioning</h3>
+
+<p>Breaking up the master database. A drawback is that you can lose some SQL functionality, for example the ability to do joins, so they have to done in PHP. You can prepare for it by having the connection returned depending on the type of query.</p>
+
+<p>There are tools for it - <a href="http://www.mysql.com/products/cluster/">MySQL Cluster</a> (which takes a long time to do the splitting), or <a href="http://en.wikipedia.org/wiki/Federated_database_system">federation</a>, but they are a bit generic.</p>
+
+<p>Three types: vertical partitioning, horizontal partitioning, application level partitioning.</p>
+
+<h4>Vertical partitioning</h4>
+
+<p>Done on a single master. Moving different columns into different tables - trying to create smaller tables. Candidates: rarely used columns, columns mostly empty, columns not used in where clauses.</p>
+
+<h4>Horizontal partitioning</h4>
+
+<p>Mostly applied to multiple masters. It's when rows are split across databases. It can be</p>
+
+<ul>
+<li><p>Range based</p></li>
+<li><p>Date based (most common)</p></li>
+<li><p>Interlaced (row 1 in table 1, row 2 in table 2, etc). It works well for IDs where you can use module division.</p></li>
+<li><p>User based, like Facebook which have (had) users from different universities in different databases</p></li>
+</ul>
+
+
+<h4>Application level partitioning</h4>
+
+<p>Only done on multiple servers. Different tables in different DB servers, keeping related tables together to allow for joins.</p>
+
+<h3>STAGE 7: partition between data centers</h3>
+
+<p>Like master slave - but hell.</p>
+
+<h2>Caching Database</h2>
+
+<p>It allows you ignore the DB. Principles:</p>
+
+<ul>
+<li><p>choose small, discrete, reusable units</p></li>
+<li><p>don't store data you can't recreate</p></li>
+<li><p>store data in as close to final processed form</p></li>
+</ul>
+
+
+<p>Two types:</p>
+
+<h3>Single server memory caches</h3>
+
+<p>It caches data specific to the server you are on. It is about performance, not scalability though. <a href="http://php.net/manual/en/book.apc.php">APC</a>, <a href="http://www.zend.com/products/server/">Zend Server</a> are used for that. Limited due to lack of synchronised cache.</p>
+
+<h3>Distributed cache</h3>
+
+<p>Required for scalability. Classic: <a href="http://memcached.org/">Memcached</a>, <a href="http://www.zend.com/en/products/server/features">Zend platform</a>.</p>
+
+<h2>Challenge 100% complete</h2>
+
+<p>This was a simple but useful task, as this is a busy week.</p>
 ]]></content>
   </entry>
   
