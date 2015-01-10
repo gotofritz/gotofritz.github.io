@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Weekly Challenge | Fabrizio (Fritz) Stelluto]]></title>
   <link href="http://gotofritz.net/blog/cat/weekly-challenge/atom.xml" rel="self"/>
   <link href="http://gotofritz.net/"/>
-  <updated>2015-01-10T01:55:15+01:00</updated>
+  <updated>2015-01-10T01:58:04+01:00</updated>
   <id>http://gotofritz.net/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -4434,15 +4434,6 @@ Then the file project.sublime-project within it should include the line "path": 
 <!--more-->
 
 
-<p><nav class="related-posts" id="multipart" markdown="1">
-  <h2>Other posts in this series</h2>
-
-  * [part 1](/blog/weekly-challenge/managing-xml-files-sublime-text-2/): Managing XML Files With Sublime Text 2
-  * [part 2](/blog/weekly-challenge/fetching-google-spreadsheets-converting-xml/): Fetching Google Spreadsheets as XML
-  * [part 3](/blog/weekly-challenge/fetching-google-spreadsheets-converting-xml/): Transforming plists into XML
-  * [part 4](/blog/weekly-challenge/restful-python-api-bottle/): creating a RESTful Python API With Bottle
-</nav></p>
-
 <h2>About the challenge</h2>
 
 <p>This is part of an ongoing project, a simple <a href="#multipart" title="jump down to list of all the parts in the series">recipe manager</a>. Previous steps left me with a set of XML files I can visualize in a browser, one per recipe. I now need a quick and dirty way to manage those files directly from the (yet to be built) front end.</p>
@@ -5039,15 +5030,6 @@ And the &lt;PTH&gt; should contain &lt;newfilelist&gt;
 <p>This is quick and dirty work - no testing, and running off a local dev server which wouldn't be suited for production. But I am still amazed but how easy it all was. Bottle really does rock.</p>
 
 <p>The scripts are <a href="https://github.com/gotofritz/Weekly-Challenges/tree/master/weekly-challenge-17_restful">available on GitHub</a>.</p>
-
-<p><nav class="related-posts" id="multipart" markdown="1">
-  <h2>Other posts in this series</h2>
-
-  * [part 1](/blog/weekly-challenge/managing-xml-files-sublime-text-2/): Managing XML Files With Sublime Text 2
-  * [part 2](/blog/weekly-challenge/fetching-google-spreadsheets-converting-xml/): Fetching Google Spreadsheets as XML
-  * [part 3](/blog/weekly-challenge/fetching-google-spreadsheets-converting-xml/): Transforming plists into XML
-  * [part 4](/blog/weekly-challenge/restful-python-api-bottle/): creating a RESTful Python API With Bottle
-</nav></p>
 ]]></content>
   </entry>
   
