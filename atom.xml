@@ -4,7 +4,7 @@
   <title><![CDATA[Fabrizio (Fritz) Stelluto]]></title>
   <link href="http://gotofritz.net/atom.xml" rel="self"/>
   <link href="http://gotofritz.net/"/>
-  <updated>2015-03-08T00:05:54+01:00</updated>
+  <updated>2015-04-04T03:03:33+02:00</updated>
   <id>http://gotofritz.net/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -12,6 +12,30 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Useful Alfred workflows for web development]]></title>
+    <link href="http://gotofritz.net/blog/geekery/alfred-workflows-web-development/"/>
+    <updated>2015-04-04T01:51:00+02:00</updated>
+    <id>http://gotofritz.net/blog/geekery/useful-alfred-color-tool-for-os-x</id>
+    <content type="html"><![CDATA[<p><a href="http://www.alfredapp.com/">Alfred App</a> has a couple of useful workflow for web developers.</p>
+
+<!--more-->
+
+
+<p>Alfred App is one of the things that make working on OS X a pleasure. There are lots of useful workflows out there, and using a folder inside Dropbox as the sync folder (Preferences &gt; Advanced &gt; Syncing.. ) allows me to share them among my work and home machines.</p>
+
+<p>Here are a couple of workflows I find useful for web development.</p>
+
+<h2><a href="http://www.packal.org/workflow/colors">Colors</a></h2>
+
+<p>I can type a color directly into Alfred, say <code>#ff0000</code> or <code>rgb 1,45,87</code> and Alfred will show me a list of conversions in other formats, with a swatch in the color itself. Use <code>c name</code> for a CSS color name, say <code>c red</code>.</p>
+
+<h2><a href="https://github.com/willfarrell/alfred-encode-decode-workflow">Encode/Decode</a></h2>
+
+<p>Quickly convert from HTML or URL encoded text to plain by typing <code>decode &lt;TEXT&gt;</code>, or viceversa with  <code>encode &lt;TEXT&gt;</code>.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Directory listings in Apache 2.4]]></title>
@@ -2319,67 +2343,6 @@ Manual loops and &#8220;string&#8221;.split( char )  seem faster across most pla
 
 <p>Ok that works - still get the &#8220;blankslate.rb warning: undefining `object_id&#8217; may cause serious problems&#8221; line but it generates site.
 But I don&#8217;t like it at all, it seems brittle. Granted, I can&#8217;t blame Octopress for Ruby and Python not talking to each other, but still.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[HTML scaffolding in Buster.js]]></title>
-    <link href="http://gotofritz.net/blog/geekery/html-scaffolding-in-buster-dot-js/"/>
-    <updated>2012-11-26T00:13:00+01:00</updated>
-    <id>http://gotofritz.net/blog/geekery/html-scaffolding-in-buster-dot-js</id>
-    <content type="html"><![CDATA[<p>I am a fan of <a href="http://busterjs.org">buster.js</a>, the JS testing framework influenced by JSTestDriver but taking things much further. It is however still a bit cutting edge. The <a href="http://docs.busterjs.org/en/latest/modules/buster-configuration/#resource" title="[new window] buster-configuration — Buster.JS 0.6.2 documentation" target="_blank">resources section of Buster.js documentation</a>, for example, is quite dense and cryptic. Here&#8217;s how to use a static HTML file as the basis of your tests.</p>
-
-<!--more-->
-
-
-<p>Assume your project sits in wwwroot/, and your tests in tests/ next to it. Inside tests/ there is a folder with the HTML fixtures you want to use, tests/fixtures/index.html. Then in your config file, tests/buster.js, you simply add a resource pointing to it</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nx">config</span><span class="p">[</span><span class="s2">&quot;My tests&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nx">rootPath</span><span class="o">:</span> <span class="s2">&quot;../&quot;</span><span class="p">,</span>
-</span><span class='line'>    <span class="nx">environment</span><span class="o">:</span> <span class="s2">&quot;browser&quot;</span><span class="p">,</span>
-</span><span class='line'>    <span class="nx">libs</span><span class="o">:</span> <span class="p">[</span>
-</span><span class='line'>        <span class="s2">&quot;wwwroot/libs/**/*.js&quot;</span>
-</span><span class='line'>    <span class="p">],</span>
-</span><span class='line'>    <span class="nx">sources</span><span class="o">:</span> <span class="p">[</span>
-</span><span class='line'>        <span class="s2">&quot;wwwroot/*.js&quot;</span>
-</span><span class='line'>    <span class="p">],</span>
-</span><span class='line'>    <span class="nx">tests</span><span class="o">:</span> <span class="p">[</span>
-</span><span class='line'>        <span class="s2">&quot;tests/*-test.js&quot;</span>
-</span><span class='line'>    <span class="p">],</span>
-</span><span class='line'>    <span class="s2">&quot;resources&quot;</span><span class="o">:</span> <span class="p">[{</span>
-</span><span class='line'>        <span class="s2">&quot;path&quot;</span><span class="o">:</span> <span class="s2">&quot;/&quot;</span><span class="p">,</span>
-</span><span class='line'>        <span class="s2">&quot;file&quot;</span><span class="o">:</span> <span class="s2">&quot;tests/fixtures/index.html&quot;</span><span class="p">,</span>
-</span><span class='line'>        <span class="s2">&quot;headers&quot;</span><span class="o">:</span> <span class="p">{</span>
-</span><span class='line'>            <span class="s2">&quot;Content-Type&quot;</span><span class="o">:</span> <span class="s2">&quot;text/html&quot;</span>
-</span><span class='line'>        <span class="p">}</span>
-</span><span class='line'>    <span class="p">}]</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
 ]]></content>
   </entry>
   
