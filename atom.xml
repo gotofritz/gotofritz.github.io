@@ -4,7 +4,7 @@
   <title><![CDATA[Fabrizio (Fritz) Stelluto]]></title>
   <link href="http://gotofritz.net/atom.xml" rel="self"/>
   <link href="http://gotofritz.net/"/>
-  <updated>2015-04-27T01:12:48+02:00</updated>
+  <updated>2015-05-29T01:32:37+02:00</updated>
   <id>http://gotofritz.net/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -12,6 +12,218 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Why doesn't ls | echo work?]]></title>
+    <link href="http://gotofritz.net/blog/geekery/why-pipe-echo-doesnt-work/"/>
+    <updated>2015-05-28T22:58:00+02:00</updated>
+    <id>http://gotofritz.net/blog/geekery/why-pipe-echo-doesnt-work</id>
+    <content type="html"><![CDATA[<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>ls | <span class="nb">echo</span>
+</span><span class='line'><span class="err">$</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Those new to bash often wonder why piping a command to <code>echo</code> doesn&#8217;t do anything. Here&#8217;s a quick explanation.</p>
+
+<!--more-->
+
+
+<h2>Streams vs. Arguments</h2>
+
+<p>Bash commands are small (mostly..) independent programs which in theory <a href="https://en.wikipedia.org/wiki/Unix_philosophy#Do_One_Thing_and_Do_It_Well]">&#8220;do one  thing and do it well&#8221;</a>. To prove this, you can find out where they are in the filesystem with <code>which</code></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>which ls
+</span><span class='line'>/usr/local/opt/coreutils/libexec/gnubin/ls
+</span><span class='line'><span class="err">$</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Each of this programs has <i>streams</i> available to them - the default ones are STDIN to read from, STDOUT to write to, and STDERR to write errors to. Your terminal uses streams too - the keyboard is connected to STDIN, and when terminal gets some data or errors it will print them on the command line (unless you have redirected them).</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># the keyboard is STDIN to terminal - by default, what you type is both passed</span>
+</span><span class='line'><span class="c"># to STDOUT, as well as kept around while it waits for you to hit return</span>
+</span><span class='line'><span class="nv">$ </span>a b c
+</span><span class='line'><span class="c"># when you type return, bash tries to run what you have typed as a command</span>
+</span><span class='line'><span class="c"># in this case I had typed some gibberish - terminal print a message to STDERR</span>
+</span><span class='line'><span class="c"># (for terminal, STDERR is the same as STDOUT, i.e. the command line)</span>
+</span><span class='line'>-bash: a: <span class="nb">command </span>not found
+</span><span class='line'><span class="c"># now bash has recognized a program, cat</span>
+</span><span class='line'><span class="nv">$ </span>cat
+</span><span class='line'><span class="c"># STDIN (i.e. the keyboard) is still displayed by terminal as you type, but</span>
+</span><span class='line'><span class="c"># when you hit return it will be processed by the command cat - until you type</span>
+</span><span class='line'><span class="c"># CTRL-C to quit the command</span>
+</span><span class='line'>1
+</span><span class='line'>1
+</span><span class='line'><span class="c"># All that cat does is simply copy STDIN to STDOUT every time you enter return.</span>
+</span><span class='line'><span class="c"># that&#39;s why each line is repeated twice - the first line is what you type,</span>
+</span><span class='line'><span class="c"># STDIN, handled by terminal; the second is what cat does, i.e. print to STDOUT</span>
+</span><span class='line'>2
+</span><span class='line'>2
+</span><span class='line'><span class="c"># the &gt; character redirects STDOUT to a file (&lt; does the same for STDIN)</span>
+</span><span class='line'><span class="nv">$ </span>cat &gt; output.txt
+</span><span class='line'><span class="c"># here we still see what you type (STDIN) but the output of cat is going</span>
+</span><span class='line'><span class="c"># directly into output.txt rather than STDOUT</span>
+</span><span class='line'>1
+</span><span class='line'>2
+</span><span class='line'>3
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Streams are file-like handles which point directly to the kernel. What makes Unix so useful is that you can connect small programs together by joining the STDOUT of a program with the STDIN of another - using the pipe character, <code>|</code>, and because they are made to look like a file, it will just work. But you already knew that.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># the STDOUT of the ps program is connected to the STDIN of grep</span>
+</span><span class='line'><span class="nv">$ </span>ps -ef | grep httpd
+</span><span class='line'>....
+</span><span class='line'><span class="err">$</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Programs can also have <i>arguments</i> - these are values that are typically typed in and passed to the program by Bash as an array. A lot of programs support both arguments and STDIN / STDOUT; but they don&#8217;t have to. So, grep for example loads its arguments to decide what to do:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>grep <span class="s2">&quot;export&quot;</span> ~/.bash_profile
+</span><span class='line'><span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;$HOME/bin:$PATH&quot;</span>
+</span><span class='line'><span class="err">$</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In this case the first argument is a pattern to match, and the second a filename. <code>grep</code> finds occurrences of the pattern in the file.</p>
+
+<p>But grep also supports STDIN:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>grep <span class="s2">&quot;export&quot;</span>
+</span><span class='line'>I am now typing something
+</span><span class='line'>grep is looking <span class="k">for </span>the string <span class="nb">export</span> - will it find it?
+</span><span class='line'>grep is looking <span class="k">for </span>the string <span class="nb">export</span> - will it find it?
+</span><span class='line'><span class="err">$</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>With only one argument, the programmer(s) who created <code>grep</code> decided to treat the first argument as a pattern as before, and to wait for input from STDIN since it wouldn&#8217;t know which file to open. In the example above I start typing some random stuff and press return, and when grep finds the string matching the patter in my text it will spit out the string again.</p>
+
+<h2>Why can&#8217;t you pipe a command to echo?</h2>
+
+<p>With all that out of the way, the explanation is quite simple - piping commands to <code>echo</code> does not work, because echo was not programmed to care about STDIN. All it&#8217;s wired up to do is to take the <i>arguments</i> and copy them to STDOUT.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># ls puts the output on STDOUT, which is connected to echo&#39;s STDIN</span>
+</span><span class='line'><span class="c"># but echo ignores STDIN, all it cares about is command line arguments</span>
+</span><span class='line'><span class="nv">$ </span>ls | <span class="nb">echo</span>
+</span><span class='line'><span class="err">$</span>
+</span><span class='line'><span class="c"># takes arguments 1 2 3 and copies them to STDOUT</span>
+</span><span class='line'><span class="nv">$ </span><span class="nb">echo </span>1 2 3
+</span><span class='line'>1 2 3
+</span><span class='line'><span class="err">$</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So if your command ignores STDIN, what you have to do is to find a different one which does the same thing, but also reads from STDIN. In the case of echo, that substitute is <code>cat</code>, which as we saw above, does what echo does, but using STDIN as input:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>ls ~/ | cat
+</span><span class='line'>Applications
+</span><span class='line'>Desktop
+</span><span class='line'>...
+</span><span class='line'><span class="err">$</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>But that&#8217;s not the whole story.</p>
+
+<h2>Using xargs to transform STDIN to arguments</h2>
+
+<p>Turns out you <i>can</i> pipe to echo, if you use <code>xargs</code>. Xargs is a command that takes STDIN and turns it into arguments for a <i>command</i> (if it finds no command it will use echo). So:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># xargs is basically creating the command: echo Applications Desktop Documents ...</span>
+</span><span class='line'><span class="nv">$ </span>ls ~/ | xargs <span class="nb">echo</span>
+</span><span class='line'>Applications Desktop Documents ...
+</span><span class='line'><span class="err">$</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Notice the difference between <code>cat</code> and <code>xargs</code>. cat adds newlines - it treats each space separated word as a different input. xargs instead removes newlines - part of its purpose is to normalize blank spaces, tabs and newlines into a consistent format.</p>
+
+<p>You can see that better by passing the argument -1 to ls, which prints the arguments one per line:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>ls -1 ~/
+</span><span class='line'>Applications
+</span><span class='line'>Desktop
+</span><span class='line'>...
+</span><span class='line'><span class="nv">$ </span> ls -1 ~/ | xargs <span class="nb">echo</span>
+</span><span class='line'>Applications Desktop Documents ...
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Further reading</h2>
+
+<p>There is lots of info around the web, here are a couple of simple links:
+<a href="http://www.westwind.com/reference/OS-X/commandline/pipes.html">Pipes and Redirects</a> and
+<a href="http://www.december.com/unix/tutor/pipesfilters.html">Intro to Unix: Pipes and Filters</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[How to generate an error in a Gulp task]]></title>
@@ -2123,166 +2335,6 @@ header( &quot;Content-Type: application/vnd.ms-excel&quot; );
 <h2>That&#8217;s all folks</h2>
 
 <p>Nothing too exciting.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Installing Redmine on OS X]]></title>
-    <link href="http://gotofritz.net/blog/geekery/installing-redmine-os-x/"/>
-    <updated>2013-03-12T22:19:00+01:00</updated>
-    <id>http://gotofritz.net/blog/geekery/installing-redmine-on-os-x</id>
-    <content type="html"><![CDATA[<p><a href="http://en.wikipedia.org/wiki/Redmine" title="[new window] Redmine - Wikipedia, the free encyclopedia" target="_blank">Redmine</a> is an issue management tool I like using, as it looks professional, it&#8217;s very customizable, and it&#8217;s reasonably easy to install. Here&#8217;s how I have installed it on OS X, and the issues I found.</p>
-
-<!--more-->
-
-
-<h2>Checking out and installing Redmine</h2>
-
-<p>The <a href="http://www.redmine.org/projects/redmine/wiki/RedmineInstall" title="[new window] RedmineInstall - Redmine" target="_blank">official Redmine installation instructions</a> are clear enough. Everything is done on the command line.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># check out code from svn</span>
-</span><span class='line'><span class="nv">$ </span><span class="nb">cd</span> ~/src
-</span><span class='line'><span class="nv">$ </span>svn co http://svn.redmine.org/redmine/branches/2.2-stable redmine-2.2
-</span><span class='line'><span class="nv">$ </span><span class="nb">cd </span>redmine-2.2
-</span><span class='line'>
-</span><span class='line'><span class="c"># run installation scripts</span>
-</span><span class='line'><span class="nv">$ </span>bundle install --without development <span class="nb">test </span>postgresql sqlite
-</span><span class='line'>
-</span><span class='line'><span class="c"># configure redmine to use database</span>
-</span><span class='line'><span class="nv">$ </span>cp config/database.yml.example config/database.yml;
-</span><span class='line'><span class="nv">$ </span>subl config/database.yml
-</span><span class='line'>
-</span><span class='line'><span class="c"># in the config file, I left only the production database, as this is my dev machine</span>
-</span><span class='line'><span class="c"># production:</span>
-</span><span class='line'><span class="c">#  adapter: mysql2</span>
-</span><span class='line'><span class="c">#  database: redmine</span>
-</span><span class='line'><span class="c">#  host: localhost</span>
-</span><span class='line'><span class="c">#  username: redmine</span>
-</span><span class='line'><span class="c">#  password: my_password</span>
-</span><span class='line'>
-</span><span class='line'><span class="c"># create database</span>
-</span><span class='line'><span class="nv">$ </span>mysql -u root
-</span><span class='line'>&gt; create database redmine character <span class="nb">set </span>utf8;
-</span><span class='line'>&gt; create user <span class="s1">&#39;redmine&#39;</span>@<span class="s1">&#39;localhost&#39;</span> identified by <span class="s1">&#39;my_password&#39;</span>;
-</span><span class='line'>&gt; grant all privileges on redmine.* to <span class="s1">&#39;redmine&#39;</span>@<span class="s1">&#39;localhost&#39;</span>;
-</span><span class='line'>&gt; <span class="nb">exit</span>;
-</span><span class='line'>
-</span><span class='line'><span class="c"># generate secret token</span>
-</span><span class='line'><span class="nv">$ </span>rake generate_secret_token
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Error: please install the mysql2 adapter</h2>
-
-<p>It was going well - obviously it couldn&#8217;t last. When I tried to run the scripts that setup the database schema, I started getting errors.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ RAILS_ENV</span><span class="o">=</span>production rake db:migrate
-</span><span class='line'>Please install the mysql2 adapter: <span class="sb">`</span>gem install activerecord-mysql2-adapter<span class="sb">`</span> <span class="o">(</span>dlopen<span class="o">(</span>/Users/ME/.rvm/gems/ruby-1.9.3-p194/gems/mysql2-0.3.11/lib/mysql2/mysql2.bundle, 9<span class="o">)</span>: Library not loaded: libmysqlclient.18.dylib
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Some intensive Googling revealed the solution - I had to edit the Gemfile, <tt>subl Gemfile</tt>.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># REMOVE:</span>
-</span><span class='line'><span class="n">platforms</span> <span class="ss">:mri_18</span><span class="p">,</span> <span class="ss">:mingw_18</span> <span class="k">do</span>
-</span><span class='line'>  <span class="n">group</span> <span class="ss">:mysql</span> <span class="k">do</span>
-</span><span class='line'>    <span class="n">gem</span> <span class="s2">&quot;mysql&quot;</span><span class="p">,</span> <span class="s2">&quot;~&gt; 2.8.1&quot;</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">platforms</span> <span class="ss">:mri_19</span><span class="p">,</span> <span class="ss">:mingw_19</span> <span class="k">do</span>
-</span><span class='line'>  <span class="n">group</span> <span class="ss">:mysql</span> <span class="k">do</span>
-</span><span class='line'>    <span class="n">gem</span> <span class="s2">&quot;mysql2&quot;</span><span class="p">,</span> <span class="s2">&quot;~&gt; 0.3.11&quot;</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1"># ADD</span>
-</span><span class='line'><span class="n">gem</span> <span class="s2">&quot;mysql2&quot;</span><span class="p">,</span> <span class="s2">&quot;~&gt; 0.3.11&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Error: dlopen&#8230; Library not loaded: libmysqlclient.18.dylib</h2>
-
-<p>Still not happy about that libmysqlclient</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ RAILS_ENV</span><span class="o">=</span>production rake db:migrate
-</span><span class='line'>dlopen<span class="o">(</span>/Users/ME/.rvm/gems/ruby-1.9.3-p194/gems/mysql2-0.3.11/lib/mysql2/mysql2.bundle, 9<span class="o">)</span>: Library not loaded: libmysqlclient.18.dylib
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This <a href="http://stackoverflow.com/questions/4546698/library-not-loaded-libmysqlclient-16-dylib-error-when-trying-to-run-rails-serv" title="[new window] mysql - Library not loaded: libmysqlclient.16.dylib error when trying to run 'rails server' on OS X 10.6 with mysql2 gem - Stack Overflow" target="_blank">StackOverflow answer</a> revealed the answer</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>sudo ln -s /usr/local/mysql/lib/libmysqlclient.18.dylib /usr/lib/libmysqlclient.18.dylib
-</span><span class='line'><span class="nv">$ RAILS_ENV</span><span class="o">=</span>production rake db:migrate
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Problem solved</p>
-
-<h2>Running Redmine</h2>
-
-<p>As I am only running Redmine locally, I am happy with using the Webrick webserver. This is built as a dev tool, it&#8217;s not really suitable for hosting production websites.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>ruby script/rails server webrick -e production
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>I can then access Redmine through the local address, http://localhost:3000/. The default credential to get in are admin / admin.</p>
-
-<h2>Conclusion</h2>
-
-<p>Hope this may come useful. There is <a href="http://www.redmine.org/" title="[new window] Overview - Redmine" target="_blank">more Redmine documentation</a> if you need it.</p>
 ]]></content>
   </entry>
   

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Geekery | Fabrizio (Fritz) Stelluto]]></title>
   <link href="http://gotofritz.net/blog/cat/geekery/atom.xml" rel="self"/>
   <link href="http://gotofritz.net/"/>
-  <updated>2015-04-27T01:12:48+02:00</updated>
+  <updated>2015-05-29T01:32:37+02:00</updated>
   <id>http://gotofritz.net/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -12,6 +12,168 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Why doesn't ls | echo work?]]></title>
+    <link href="http://gotofritz.net/blog/geekery/why-pipe-echo-doesnt-work/"/>
+    <updated>2015-05-28T22:58:00+02:00</updated>
+    <id>http://gotofritz.net/blog/geekery/why-pipe-echo-doesnt-work</id>
+    <content type="html"><![CDATA[<p><code>bash
+$ ls | echo
+$
+</code>
+Those new to bash often wonder why piping a command to <code>echo</code> doesn't do anything. Here's a quick explanation.</p>
+
+<!--more-->
+
+
+<h2>Streams vs. Arguments</h2>
+
+<p>Bash commands are small (mostly..) independent programs which in theory <a href="https://en.wikipedia.org/wiki/Unix_philosophy#Do_One_Thing_and_Do_It_Well]">"do one  thing and do it well"</a>. To prove this, you can find out where they are in the filesystem with <code>which</code>
+<code>bash
+$ which ls
+/usr/local/opt/coreutils/libexec/gnubin/ls
+$
+</code></p>
+
+<p>Each of this programs has <i>streams</i> available to them - the default ones are STDIN to read from, STDOUT to write to, and STDERR to write errors to. Your terminal uses streams too - the keyboard is connected to STDIN, and when terminal gets some data or errors it will print them on the command line (unless you have redirected them).
+``` bash</p>
+
+<h1>the keyboard is STDIN to terminal - by default, what you type is both passed</h1>
+
+<h1>to STDOUT, as well as kept around while it waits for you to hit return</h1>
+
+<p>$ a b c</p>
+
+<h1>when you type return, bash tries to run what you have typed as a command</h1>
+
+<h1>in this case I had typed some gibberish - terminal print a message to STDERR</h1>
+
+<h1>(for terminal, STDERR is the same as STDOUT, i.e. the command line)</h1>
+
+<p>-bash: a: command not found</p>
+
+<h1>now bash has recognized a program, cat</h1>
+
+<p>$ cat</p>
+
+<h1>STDIN (i.e. the keyboard) is still displayed by terminal as you type, but</h1>
+
+<h1>when you hit return it will be processed by the command cat - until you type</h1>
+
+<h1>CTRL-C to quit the command</h1>
+
+<p>1
+1</p>
+
+<h1>All that cat does is simply copy STDIN to STDOUT every time you enter return.</h1>
+
+<h1>that's why each line is repeated twice - the first line is what you type,</h1>
+
+<h1>STDIN, handled by terminal; the second is what cat does, i.e. print to STDOUT</h1>
+
+<p>2
+2</p>
+
+<h1>the > character redirects STDOUT to a file (&lt; does the same for STDIN)</h1>
+
+<p>$ cat > output.txt</p>
+
+<h1>here we still see what you type (STDIN) but the output of cat is going</h1>
+
+<h1>directly into output.txt rather than STDOUT</h1>
+
+<p>1
+2
+3
+```</p>
+
+<p>Streams are file-like handles which point directly to the kernel. What makes Unix so useful is that you can connect small programs together by joining the STDOUT of a program with the STDIN of another - using the pipe character, <code>|</code>, and because they are made to look like a file, it will just work. But you already knew that.
+``` bash</p>
+
+<h1>the STDOUT of the ps program is connected to the STDIN of grep</h1>
+
+<p>$ ps -ef | grep httpd
+....
+$
+```</p>
+
+<p>Programs can also have <i>arguments</i> - these are values that are typically typed in and passed to the program by Bash as an array. A lot of programs support both arguments and STDIN / STDOUT; but they don't have to. So, grep for example loads its arguments to decide what to do:
+<code>bash
+$ grep "export" ~/.bash_profile
+export PATH="$HOME/bin:$PATH"
+$
+</code>
+In this case the first argument is a pattern to match, and the second a filename. <code>grep</code> finds occurrences of the pattern in the file.</p>
+
+<p>But grep also supports STDIN:
+<code>bash
+$ grep "export"
+I am now typing something
+grep is looking for the string export - will it find it?
+grep is looking for the string export - will it find it?
+$
+</code>
+With only one argument, the programmer(s) who created <code>grep</code> decided to treat the first argument as a pattern as before, and to wait for input from STDIN since it wouldn't know which file to open. In the example above I start typing some random stuff and press return, and when grep finds the string matching the patter in my text it will spit out the string again.</p>
+
+<h2>Why can't you pipe a command to echo?</h2>
+
+<p>With all that out of the way, the explanation is quite simple - piping commands to <code>echo</code> does not work, because echo was not programmed to care about STDIN. All it's wired up to do is to take the <i>arguments</i> and copy them to STDOUT.
+``` bash</p>
+
+<h1>ls puts the output on STDOUT, which is connected to echo's STDIN</h1>
+
+<h1>but echo ignores STDIN, all it cares about is command line arguments</h1>
+
+<p>$ ls | echo
+$</p>
+
+<h1>takes arguments 1 2 3 and copies them to STDOUT</h1>
+
+<p>$ echo 1 2 3
+1 2 3
+$
+<code>
+So if your command ignores STDIN, what you have to do is to find a different one which does the same thing, but also reads from STDIN. In the case of echo, that substitute is `cat`, which as we saw above, does what echo does, but using STDIN as input:
+</code>
+$ ls ~/ | cat
+Applications
+Desktop
+...
+$
+```
+But that's not the whole story.</p>
+
+<h2>Using xargs to transform STDIN to arguments</h2>
+
+<p>Turns out you <i>can</i> pipe to echo, if you use <code>xargs</code>. Xargs is a command that takes STDIN and turns it into arguments for a <i>command</i> (if it finds no command it will use echo). So:
+``` bash</p>
+
+<h1>xargs is basically creating the command: echo Applications Desktop Documents ...</h1>
+
+<p>$ ls ~/ | xargs echo
+Applications Desktop Documents ...
+$
+<code>``
+Notice the difference between</code>cat<code>and</code>xargs`. cat adds newlines - it treats each space separated word as a different input. xargs instead removes newlines - part of its purpose is to normalize blank spaces, tabs and newlines into a consistent format.</p>
+
+<p>You can see that better by passing the argument -1 to ls, which prints the arguments one per line:
+<code>bash
+$ ls -1 ~/
+Applications
+Desktop
+...
+$  ls -1 ~/ | xargs echo
+Applications Desktop Documents ...
+</code></p>
+
+<h2>Further reading</h2>
+
+<p>There is lots of info around the web, here are a couple of simple links:
+<a href="http://www.westwind.com/reference/OS-X/commandline/pipes.html">Pipes and Redirects</a> and
+<a href="http://www.december.com/unix/tutor/pipesfilters.html">Intro to Unix: Pipes and Filters</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[How to generate an error in a Gulp task]]></title>
@@ -208,77 +370,6 @@ CustomLog "/private/var/log/apache2/my-virtual-host.dev-access_log" common
 <h2>Restart apache and all is well</h2>
 
 <p>After a <code>sudo apachectl restart</code> everything works fine.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Injecting local IP Address into a file with bash]]></title>
-    <link href="http://gotofritz.net/blog/geekery/injecting-local-ip-address-into-a-file-with-bash/"/>
-    <updated>2014-03-03T14:24:00+01:00</updated>
-    <id>http://gotofritz.net/blog/geekery/injecting-local-ip-address-into-a-file-with-bash</id>
-    <content type="html"><![CDATA[<p>Sometimes there are some config file on which you have no control for which you need to change an IP address to that of your current dev machine. Here's how I fix that with a bash script.</p>
-
-<!--more-->
-
-
-<h2>A good place to put bash scripts</h2>
-
-<p>I have a <code>bin</code> folder inside my user folder. It is in the <code>$PATH</code>, meaning every script file in there can be executed as a script from anywhere. In there I create a text file called <code>fix-config-PROJECT</code>. Yes, I make one per project, because I hard code the paths of the files to change. This could evolve into something more complex if the need arises, but the setup I have so far has served me well so far.</p>
-
-<p><code>bash
-nano ~/bin/fix-config-PROJECT
-</code></p>
-
-<h2>The script file</h2>
-
-<p>``` bash</p>
-
-<h1>!/bin/bash</h1>
-
-<p>IP=<code>ifconfig  | grep inet | grep -v inet6 | tail -n1 | awk '{print $2}'</code>
-for file in "launchpad/src/main/tomcat/conf/context.xml" "path/to/etc.xml"
-do
-  svn revert $file
-  sed -i "" "s/localhost/$IP/g" $file
-done
-```</p>
-
-<h2>Script breakdown</h2>
-
-<dl class="code-breakdown">
-  <dt class="long-line">IP=`ifconfig  | grep inet | grep -v inet6 | tail -n1 | awk '{print $2}'`</dt>
-  <dd class="long-line">This runs a series of commands one after the other, using <code>|</code> to pass the result of each command to the next. The ` at the beginning and end put the result into a variable <code>$IP</code></dd>
-
-  <dt>ifconfig</dt>
-  <dd>From the manpage: "The ifconfig utility is used to assign an address to a network interface and/or configure network interface parameters". Used without parameters, it returns a big chunk of text with current settings. The IP address is in there somewhere.</dd>
-
-  <dt>grep inet</dt>
-  <dt>grep -v inet6</dt>
-  <dd>extracts the lines from that chunk of text which have "inet" in it, but not "inet6"</dd>
-
-  <dt>tail -n1</dt>
-  <dd>take the last of these lines</dd>
-
-  <dt>awk '{print $2}'</dt>
-  <dd>At this point we have a string like <code>inet 192.168.2.108 netmask 0xffffff00 broadcast 192.168.2.255</code>. Awk can be used to extract the 192... from it. Awk is a utilities that processes a line of text by splitting into fields where blank spaces are - it is used for handling database dumps etc. In this case, it is basically saying that after it's split the line into fields (which it does automatically), it should print out the second field and throw away the rest.</dd>
-
-  <dt class="long-line">for file in "launchpad/src/main/tomcat/conf/context.xml" "path/to/etc.xml"</dt>
-  <dd class="long-line">The files I need to process are listed out one after the other. This is good enough for my use case. Note that the paths are not absolute, so that I can use the same command in different svn branches. What this line does is looping through each file</dd>
-
-  <dt class="long-line">svn revert $file</dt>
-  <dt class="long-line">sed -i "" "s/localhost/$IP/g" $file</dt>
-  <dd class="long-line">First I revert the latest changes, then I make new ones. This time using sed, a utility which processes text a line at the time, transforming it on the way. The <code>-i ""</code> means to process the file in place (as opposed to create a copy), without creating a backup. The substitution is simple, I simply change all occurrences of <code>locahost</code> with the IP address from earlier</dd>
-</dl>
-
-
-<h2>Running the script</h2>
-
-<p>I can now run the script from anywhere on my machine, usually as
-<code>bash
-cd PROJECT/branch_x
-fix-config-PROJECT
-</code>
-and then all the config files are changed as required, and I can access my local version site from tablets etc using the IP address.</p>
 ]]></content>
   </entry>
   
