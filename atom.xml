@@ -4,7 +4,7 @@
   <title><![CDATA[Fabrizio (Fritz) Stelluto]]></title>
   <link href="http://gotofritz.net/atom.xml" rel="self"/>
   <link href="http://gotofritz.net/"/>
-  <updated>2015-05-29T01:52:36+02:00</updated>
+  <updated>2015-06-19T01:25:25+02:00</updated>
   <id>http://gotofritz.net/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -12,6 +12,139 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[How to prevent Less errors stopping gulp watch]]></title>
+    <link href="http://gotofritz.net/blog/geekery/how-to-prevent-less-errors-stopping-gulp-watch/"/>
+    <updated>2015-06-19T00:56:00+02:00</updated>
+    <id>http://gotofritz.net/blog/geekery/how-to-prevent-less-errors-stopping-gulp-watch</id>
+    <content type="html"><![CDATA[<p>A <code>gulp watch</code> task will stop as soon as you have a Less error. Here&#8217;s I how prevented that.</p>
+
+<!--more-->
+
+
+<h2>A simple gulp less task</h2>
+
+<p>Here is a simple gulp less task that runs manually by typing <code>gulp css:less</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kd">var</span> <span class="nx">less</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&quot;gulp-less&quot;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">gulp</span><span class="p">.</span><span class="nx">task</span><span class="p">(</span><span class="err">“</span><span class="nx">css</span><span class="o">:</span><span class="nx">less</span><span class="s2">&quot;, function (cb) {</span>
+</span><span class='line'><span class="s2">   var lessArgs = {</span>
+</span><span class='line'><span class="s2">          // fill in as appropriate</span>
+</span><span class='line'><span class="s2">        };</span>
+</span><span class='line'>
+</span><span class='line'><span class="s2">   return gulp</span>
+</span><span class='line'><span class="s2">  .src(“./less/**/*.less&quot;</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">less</span><span class="p">(</span><span class="nx">lessArgs</span><span class="p">))</span>
+</span><span class='line'>  <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">gulp</span><span class="p">.</span><span class="nx">dest</span><span class="p">(</span><span class="s2">&quot;dist/&quot;</span><span class="p">));</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>A simple &#8220;gulp watch&#8221; task</h2>
+
+<p>Here is a simple watch version of the task - it will watch less files, and rerun the task whenever a file is changed:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kd">var</span> <span class="nx">less</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&quot;gulp-less&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="kd">var</span> <span class="nx">watch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&quot;gulp-watch&quot;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">gulp</span><span class="p">.</span><span class="nx">task</span><span class="p">(</span><span class="s2">&quot;css:watch&quot;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">cb</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">lessArgs</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>      <span class="c1">// fill in as appropriate</span>
+</span><span class='line'>    <span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">return</span> <span class="nx">gulp</span>
+</span><span class='line'>  <span class="p">.</span><span class="nx">src</span><span class="p">(</span><span class="err">“</span><span class="p">.</span><span class="o">/</span><span class="nx">less</span><span class="cm">/**/</span><span class="o">*</span><span class="p">.</span><span class="nx">less</span><span class="s2">&quot;)</span>
+</span><span class='line'><span class="s2">  .pipe(watch(“./less/**/*.less&quot;</span><span class="p">))</span>
+</span><span class='line'>  <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">less</span><span class="p">(</span><span class="nx">lessArgs</span><span class="p">))</span>
+</span><span class='line'>  <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">gulp</span><span class="p">.</span><span class="nx">dest</span><span class="p">(</span><span class="s2">&quot;dist/&quot;</span><span class="p">));</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>The gulp-less plugin documentation doesn’t help</h2>
+
+<p>The <a href="https://www.npmjs.com/package/gulp-less">gulp-less plugin documentation</a> states</p>
+
+<blockquote><p>By default, a gulp task will fail and all streams will halt when an error happens.To change this behavior check out the error handling documentation <a href="https://github.com/gulpjs/gulp/blob/master/docs/recipes/combining-streams-to-handle-errors.md">here</a></p></blockquote>
+
+<p>But don’t waste your time installing the <code>stream-combiner2</code> plugin - it doesn’t work.</p>
+
+<p><code>Plumber</code>, which  I came across when googling for the issue (you’ll probably end up <a href="https://github.com/gulpjs/gulp/issues/259">in this github issue</a>  sooner or later if you google for this) didn&#8217;t help either.</p>
+
+<h2>How to stop &#8220;gulp watch&#8221; dying when on a Less or Sass error</h2>
+
+<p>The solution that worked for me was to create a function which handles the error and make the function emit the error. Then attach directly to the less task:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kd">var</span> <span class="nx">gutil</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&quot;gulp-util&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="kd">var</span> <span class="nx">less</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&quot;gulp-less&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="kd">var</span> <span class="nx">onError</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">gutil</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">gutil</span><span class="p">.</span><span class="nx">colors</span><span class="p">.</span><span class="nx">red</span><span class="p">(</span><span class="s2">&quot;ERROR&quot;</span><span class="p">,</span> <span class="nx">taskName</span><span class="p">),</span> <span class="nx">err</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">this</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="s2">&quot;end&quot;</span><span class="p">,</span> <span class="k">new</span> <span class="nx">gutil</span><span class="p">.</span><span class="nx">PluginError</span><span class="p">(</span><span class="nx">taskName</span><span class="p">,</span> <span class="nx">err</span><span class="p">,</span> <span class="p">{</span> <span class="nx">showStack</span><span class="o">:</span> <span class="kc">true</span> <span class="p">}));</span>
+</span><span class='line'>  <span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">gulp</span><span class="p">.</span><span class="nx">task</span><span class="p">(</span><span class="err">“</span><span class="nx">css</span><span class="o">:</span><span class="nx">less</span><span class="s2">&quot;, function jsLint() {</span>
+</span><span class='line'><span class="s2">  var lessArgs = {</span>
+</span><span class='line'><span class="s2">      // fill in as appropriate</span>
+</span><span class='line'><span class="s2">    };</span>
+</span><span class='line'>
+</span><span class='line'><span class="s2">  return gulp</span>
+</span><span class='line'><span class="s2">  .src(“./less/**/*.less&quot;</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">watch</span><span class="p">(</span><span class="err">“</span><span class="p">.</span><span class="o">/</span><span class="nx">less</span><span class="cm">/**/</span><span class="o">*</span><span class="p">.</span><span class="nx">less</span><span class="s2">&quot;))</span>
+</span><span class='line'><span class="s2">  .pipe(less(lessArgs).on(&#39;error&#39;, onError))</span>
+</span><span class='line'><span class="s2">  .pipe(gulp.dest(&quot;</span><span class="nx">dist</span><span class="o">/</span><span class="err">&quot;</span><span class="p">));</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In the example above, the function is <code>onError</code> - is the “this.emit” that does the magic. <code>gutil.log</code> is only eye candy. The onError function is connected to less with <code>.on(“error”, onError)</code>. And that’s all there is to it.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Why doesn't ls | echo work?]]></title>
@@ -2259,82 +2392,6 @@ header( &quot;Content-Type: application/vnd.ms-excel&quot; );
 
 
 <p>You must be careful that if your filename ends with .php most browsers will refuse to open it as an Excel file. An easy workaround would be to save the file in a folder, say /test/index.php, and access it as /test/.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Generating skewed random numbers]]></title>
-    <link href="http://gotofritz.net/blog/howto/skewing-random-numbers-towards-0"/>
-    <updated>2013-03-19T12:44:36+01:00</updated>
-    <id>http://gotofritz.net/blog/howto/skewing-random-numbers-towards-0</id>
-    <content type="html"><![CDATA[<p>A quick and dirty way to generate skewed random numbers from when I needed test data for a game.</p>
-
-<!--more-->
-
-
-<h2>Skewing random numbers with quadratics and exponentials</h2>
-
-<p>A quick way to skew random numbers towards 0, i.e. to make lower numbers more likely, is to raise the random numbers to a power - the higher the power, the higher the skew. To skew the other way, i.e. to make higher numbers more likely, just subract from 1</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">x</span><span class="o">^</span><span class="mi">2</span>      <span class="o">-&gt;</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">pow</span><span class="p">(</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">(),</span> <span class="mi">2</span> <span class="p">);</span>
-</span><span class='line'><span class="mi">1</span><span class="o">-</span><span class="nx">x</span><span class="o">^</span><span class="mi">2</span>    <span class="o">-&gt;</span> <span class="mi">1</span> <span class="o">-</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">pow</span><span class="p">(</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">(),</span> <span class="mi">2</span> <span class="p">);</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Or you could use an exponential for more drastic curves.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">e</span><span class="o">^</span><span class="p">(</span><span class="mi">4</span><span class="nx">x</span><span class="o">-</span><span class="mi">4</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">pow</span><span class="p">(</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">E</span><span class="p">,</span> <span class="mi">4</span> <span class="o">*</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span> <span class="o">-</span> <span class="mi">4</span> <span class="p">);</span>
-</span><span class='line'><span class="mi">1</span><span class="o">-</span><span class="nx">e</span><span class="o">^</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="nx">x</span><span class="p">)</span><span class="o">-&gt;</span> <span class="mi">1</span><span class="o">-</span><span class="nb">Math</span><span class="p">.</span><span class="nx">pow</span><span class="p">(</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">E</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span> <span class="o">*</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span> <span class="p">);</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Obviously not the most efficient way of generating random numbers, but could be useful in certain occasions where performance is not an issue.</p>
-
-<h2>A basic class to generate skewed random numbers</h2>
-
-<p><a href="https://gist.github.com/gotofritz/5201188" title="[new window] github gist: A basic class to generate skewed random numbers" target="_blank">This gist</a> is a rough and ready class to test random numbers. It takes a map functions, generates 10 numbers, and pretty prints them to the console.</p>
-
-<script src="https://gist.github.com/gotofritz/5201188.js"></script>
-
-
-<p>Here&#8217;s the output of a run. Not very conclusive, I have only printed 10 numbers because of space.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">RND</span> <span class="mf">0.075</span> <span class="o">-</span> <span class="mf">0.339</span> <span class="o">-</span> <span class="mf">0.363</span> <span class="o">-</span> <span class="mf">0.434</span> <span class="o">-</span> <span class="mf">0.435</span> <span class="o">-</span> <span class="mf">0.563</span> <span class="o">-</span> <span class="mf">0.669</span> <span class="o">-</span> <span class="mf">0.739</span> <span class="o">-</span> <span class="mf">0.808</span> <span class="o">-</span> <span class="mf">0.874</span>
-</span><span class='line'><span class="nx">RND</span> <span class="mf">0.037</span> <span class="o">-</span> <span class="mf">0.069</span> <span class="o">-</span> <span class="mf">0.158</span> <span class="o">-</span> <span class="mf">0.258</span> <span class="o">-</span> <span class="mf">0.266</span> <span class="o">-</span> <span class="mf">0.424</span> <span class="o">-</span> <span class="mf">0.501</span> <span class="o">-</span> <span class="mf">0.551</span> <span class="o">-</span> <span class="mf">0.933</span> <span class="o">-</span> <span class="mf">0.994</span>
-</span><span class='line'><span class="nx">PW2</span> <span class="mf">0.002</span> <span class="o">-</span> <span class="mf">0.024</span> <span class="o">-</span> <span class="mf">0.031</span> <span class="o">-</span> <span class="mf">0.033</span> <span class="o">-</span> <span class="mf">0.113</span> <span class="o">-</span> <span class="mf">0.140</span> <span class="o">-</span> <span class="mf">0.369</span> <span class="o">-</span> <span class="mf">0.540</span> <span class="o">-</span> <span class="mf">0.576</span> <span class="o">-</span> <span class="mf">0.679</span>
-</span><span class='line'><span class="nx">PW2</span> <span class="mf">0.008</span> <span class="o">-</span> <span class="mf">0.227</span> <span class="o">-</span> <span class="mf">0.760</span> <span class="o">-</span> <span class="mf">0.821</span> <span class="o">-</span> <span class="mf">0.821</span> <span class="o">-</span> <span class="mf">0.853</span> <span class="o">-</span> <span class="mf">0.874</span> <span class="o">-</span> <span class="mf">0.874</span> <span class="o">-</span> <span class="mf">0.999</span> <span class="o">-</span> <span class="mf">1.000</span>
-</span><span class='line'><span class="nx">PW4</span> <span class="mf">0.000</span> <span class="o">-</span> <span class="mf">0.000</span> <span class="o">-</span> <span class="mf">0.001</span> <span class="o">-</span> <span class="mf">0.004</span> <span class="o">-</span> <span class="mf">0.004</span> <span class="o">-</span> <span class="mf">0.052</span> <span class="o">-</span> <span class="mf">0.151</span> <span class="o">-</span> <span class="mf">0.435</span> <span class="o">-</span> <span class="mf">0.498</span> <span class="o">-</span> <span class="mf">0.501</span>
-</span><span class='line'><span class="nx">PW4</span> <span class="mf">0.030</span> <span class="o">-</span> <span class="mf">0.079</span> <span class="o">-</span> <span class="mf">0.370</span> <span class="o">-</span> <span class="mf">0.875</span> <span class="o">-</span> <span class="mf">0.967</span> <span class="o">-</span> <span class="mf">0.977</span> <span class="o">-</span> <span class="mf">0.986</span> <span class="o">-</span> <span class="mf">0.993</span> <span class="o">-</span> <span class="mf">0.994</span> <span class="o">-</span> <span class="mf">0.998</span>
-</span><span class='line'><span class="nx">EXP</span> <span class="mf">0.020</span> <span class="o">-</span> <span class="mf">0.025</span> <span class="o">-</span> <span class="mf">0.028</span> <span class="o">-</span> <span class="mf">0.033</span> <span class="o">-</span> <span class="mf">0.038</span> <span class="o">-</span> <span class="mf">0.044</span> <span class="o">-</span> <span class="mf">0.166</span> <span class="o">-</span> <span class="mf">0.171</span> <span class="o">-</span> <span class="mf">0.352</span> <span class="o">-</span> <span class="mf">0.462</span>
-</span><span class='line'><span class="nx">EXP</span> <span class="mf">0.247</span> <span class="o">-</span> <span class="mf">0.376</span> <span class="o">-</span> <span class="mf">0.429</span> <span class="o">-</span> <span class="mf">0.448</span> <span class="o">-</span> <span class="mf">0.703</span> <span class="o">-</span> <span class="mf">0.752</span> <span class="o">-</span> <span class="mf">0.820</span> <span class="o">-</span> <span class="mf">0.850</span> <span class="o">-</span> <span class="mf">0.862</span> <span class="o">-</span> <span class="mf">0.909</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Visualizing distribution with Canvas</h2>
-
-<p>Just for a laugh (stop sniggering at the back), I thought I&#8217;d try some primitive HTML Canvas visualizations. The CodePen below runs the same code on 1000 sample points, and uses vertical lines to show their distribution.</p>
-
-<pre class="codepen" data-height="330" data-type="result" data-href="zpgje" data-user="gotofritz" data-safe="true"><code></code><a href="http://codepen.io/gotofritz/pen/zpgje">Check out this Pen!</a></pre>
-
-
-<script async src="http://codepen.io/assets/embed/ei.js"></script>
-
-
-<h2>That&#8217;s all folks</h2>
-
-<p>Nothing too exciting.</p>
 ]]></content>
   </entry>
   
