@@ -107,6 +107,8 @@ $ Those new to bash often wonder why piping a command to echo doesn&#8217;t do a
 
 <h2>Streams vs. Arguments</h2>
 
+<h3>Bash commands are just programs</h3>
+
 <p>Bash commands are small (mostly..) independent programs which in theory <a href="https://en.wikipedia.org/wiki/Unix_philosophy#Do_One_Thing_and_Do_It_Well]">&#8220;do one  thing and do it well&#8221;</a>. To prove this, you can find out where they are in the filesystem with <code>which</code></p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -118,7 +120,30 @@ $ Those new to bash often wonder why piping a command to echo doesn&#8217;t do a
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>Each of this programs has <i>streams</i> available to them - the default ones are STDIN to read from, STDOUT to write to, and STDERR to write errors to. Your terminal uses streams too - the keyboard is connected to STDIN, and when terminal gets some data or errors it will print them on the command line (unless you have redirected them).</p>
+<h3>Standard Unix streams</h3>
+
+<p>Each of this programs can access <i>streams</i>. Streams are open ended communication channels between the program and the environment - they used to be the keyboard and the terminal, but they are abstracted so that writing to or reading from a stream is exactly the same as doing it to a file. The three default streams are STDIN to read from (the keyboard), STDOUT to write to (the terminal), and STDERR to write errors to (also the terminal). Standard behaviour can be easily changed, so that an app can be made to write to a file instead of the STDOUT stream, for example.</p>
+
+<p>By default your shell app (Terminal on OS X) connects the keyboard as STDIN and the shell window as both STDOUT and STDERR. When you type something (STDIN) it&#8217;s passed on immediately to the app which does two things - it pushes it as it is to window (STDOUT) so that you see what you&#8217;ve typed; and it keeps it around waiting for you to hit return. At the point it will parse what you have typed and run it as a command if it can, and print the output to the window (STDOUT); if it doesn&#8217;t understand it, it will print an error message to the window (STDERR)</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># Terminal taking your STDIN and copying it to STDOUT</span>
+</span><span class='line'><span class="nv">$ </span><span class="nb">echo</span> <span class="s2">&quot;hello&quot;</span>
+</span><span class='line'><span class="c"># &lt;RETURN&gt; detected - command run and result printed to STDOUT</span>
+</span><span class='line'>hello
+</span><span class='line'><span class="c"># this command wasn&#39;t understood - error message printed to STDERR (which in Terminal is exactly the same window as STDOUT)</span>
+</span><span class='line'><span class="nv">$ </span>gibberish
+</span><span class='line'>-bash: gibberish: <span class="nb">command </span>not found
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>A shell program will also get the same STDOUT, STDIN and STDERR as Terminal - depending on the program, you may get the same output twice.</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -130,52 +155,83 @@ $ Those new to bash often wonder why piping a command to echo doesn&#8217;t do a
 <span class='line-number'>8</span>
 <span class='line-number'>9</span>
 <span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># the keyboard is STDIN to terminal - by default, what you type is both passed</span>
-</span><span class='line'><span class="c"># to STDOUT, as well as kept around while it waits for you to hit return</span>
-</span><span class='line'><span class="nv">$ </span>a b c
-</span><span class='line'><span class="c"># when you type return, bash tries to run what you have typed as a command</span>
-</span><span class='line'><span class="c"># in this case I had typed some gibberish - terminal print a message to STDERR</span>
-</span><span class='line'><span class="c"># (for terminal, STDERR is the same as STDOUT, i.e. the command line)</span>
-</span><span class='line'>-bash: a: <span class="nb">command </span>not found
-</span><span class='line'><span class="c"># now bash has recognized a program, cat</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># program &quot;cat&quot; recognized and started</span>
 </span><span class='line'><span class="nv">$ </span>cat
-</span><span class='line'><span class="c"># STDIN (i.e. the keyboard) is still displayed by terminal as you type, but</span>
-</span><span class='line'><span class="c"># when you hit return it will be processed by the command cat - until you type</span>
-</span><span class='line'><span class="c"># CTRL-C to quit the command</span>
-</span><span class='line'>1
-</span><span class='line'>1
-</span><span class='line'><span class="c"># All that cat does is simply copy STDIN to STDOUT every time you enter return.</span>
-</span><span class='line'><span class="c"># that&#39;s why each line is repeated twice - the first line is what you type,</span>
-</span><span class='line'><span class="c"># STDIN, handled by terminal; the second is what cat does, i.e. print to STDOUT</span>
-</span><span class='line'>2
-</span><span class='line'>2
-</span><span class='line'><span class="c"># the &gt; character redirects STDOUT to a file (&lt; does the same for STDIN)</span>
-</span><span class='line'><span class="nv">$ </span>cat &gt; output.txt
-</span><span class='line'><span class="c"># here we still see what you type (STDIN) but the output of cat is going</span>
-</span><span class='line'><span class="c"># directly into output.txt rather than STDOUT</span>
-</span><span class='line'>1
-</span><span class='line'>2
-</span><span class='line'>3
+</span><span class='line'><span class="c"># it just sits there and collects everything you type in STDIN until you type &lt;RETURN&gt; then it prints it to STDOUT</span>
+</span><span class='line'><span class="c"># meanwhile your shell window is also pushing everything it gets to STDOUT, therefore you get it twice</span>
+</span><span class='line'>line1 <span class="c"># printed to STDOUT by shell window as you type</span>
+</span><span class='line'>line1 <span class="c"># printed to STDOUT by cat when you typed &lt;RETURN&gt;</span>
+</span><span class='line'>line2 <span class="c"># printed to STDOUT by shell window as you type</span>
+</span><span class='line'>line2 <span class="c"># etc</span>
+</span><span class='line'><span class="c"># to quit the shell program normally you use &lt;CTRL-C&gt;</span>
+</span><span class='line'><span class="err">$</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>Streams are file-like handles which point directly to the kernel. What makes Unix so useful is that you can connect small programs together by joining the STDOUT of a program with the STDIN of another - using the pipe character, <code>|</code>, and because they are made to look like a file, it will just work. But you already knew that.</p>
+<h3>Streams redirection</h3>
+
+<p>You can easily redirect one of the three standard streams to something else - typically a file. To redirect STDOUT, use &gt;</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># program cat recognized; STDOUT redirected to a file</span>
+</span><span class='line'><span class="nv">$ </span>cat &gt; test.txt
+</span><span class='line'><span class="c"># your shell window is still printing to STDOUT as you type; but cat itself is not, it is printing to the text file.</span>
+</span><span class='line'><span class="c"># So this time you only get each line once</span>
+</span><span class='line'>line1 <span class="c"># printed to STDOUT by shell window as you type</span>
+</span><span class='line'>line2 <span class="c"># printed to STDOUT by shell window as you type</span>
+</span><span class='line'><span class="c"># to quit the shell program normally you use &lt;CTRL-C&gt;</span>
+</span><span class='line'><span class="err">$</span>
+</span><span class='line'><span class="c"># if you open your text file, it will have the text you have just typed inside</span>
+</span><span class='line'><span class="nv">$ </span>open test.txt
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>STDIN is redirected with &lt;</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># program cat recognized; instead of taking STDIN from keyboard, use a file</span>
+</span><span class='line'><span class="nv">$ </span>cat &lt; test.txt
+</span><span class='line'><span class="c"># all the text in the file is printed out in one go</span>
+</span><span class='line'>line1
+</span><span class='line'>line2
+</span><span class='line'>line3
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>STDERR is redirected with 2&gt;</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># error printed to STDERR</span>
+</span><span class='line'><span class="nv">$ </span>cat gibberish
+</span><span class='line'>cat: gibberish: No such file or directory
+</span><span class='line'><span class="c"># STDERR redirected to &quot;the null device&quot;, i.e. an address on Unix systems that absorbs all error messages and suppresses them</span>
+</span><span class='line'><span class="nv">$ </span>cat gibberish 2&gt; /dev/null
+</span><span class='line'><span class="c"># no output - it&#39;s disappeared into /dev/null</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Streams piping</h3>
+
+<p>What makes Unix so useful is that you can connect small programs together by joining the STDOUT of a program with the STDIN of another - using the pipe character, <code>|</code>, and because streams are treated like files, it will just work. But you already knew that.</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -187,6 +243,8 @@ $ Those new to bash often wonder why piping a command to echo doesn&#8217;t do a
 </span><span class='line'><span class="err">$</span>
 </span></code></pre></td></tr></table></div></figure>
 
+
+<h3>Program arguments</h3>
 
 <p>Programs can also have <i>arguments</i> - these are values that are typically typed in and passed to the program by Bash as an array. A lot of programs support both arguments and STDIN / STDOUT; but they don&#8217;t have to. So, grep for example loads its arguments to decide what to do:</p>
 
@@ -295,6 +353,7 @@ $ Those new to bash often wonder why piping a command to echo doesn&#8217;t do a
 <h2>Further reading</h2>
 
 <p>There is lots of info around the web, here are a couple of simple links:
+<a href="https://gigaom.com/2009/07/01/dig-into-unix-standard-streams/">Dig Into Unix: Standard Streams</a>
 <a href="http://www.westwind.com/reference/OS-X/commandline/pipes.html">Pipes and Redirects</a> and
 <a href="http://www.december.com/unix/tutor/pipesfilters.html">Intro to Unix: Pipes and Filters</a></p>
 </div>
