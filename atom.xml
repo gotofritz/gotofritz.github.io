@@ -4,7 +4,7 @@
   <title><![CDATA[Fabrizio (Fritz) Stelluto]]></title>
   <link href="http://gotofritz.net/atom.xml" rel="self"/>
   <link href="http://gotofritz.net/"/>
-  <updated>2015-07-15T01:35:42+02:00</updated>
+  <updated>2015-07-15T01:38:43+02:00</updated>
   <id>http://gotofritz.net/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -410,10 +410,14 @@
 
 <h2>Further reading</h2>
 
-<p>There is lots of info around the web, here are a couple of simple links:
-<a href="https://gigaom.com/2009/07/01/dig-into-unix-standard-streams/">Dig Into Unix: Standard Streams</a>
-<a href="http://www.westwind.com/reference/OS-X/commandline/pipes.html">Pipes and Redirects</a> and
-<a href="http://www.december.com/unix/tutor/pipesfilters.html">Intro to Unix: Pipes and Filters</a></p>
+<p>There is lots of info around the web, here are a couple of simple links:</p>
+
+<ul>
+<li><a href="https://gigaom.com/2009/07/01/dig-into-unix-standard-streams/">Dig Into Unix: Standard Streams</a></li>
+<li><a href="http://www.westwind.com/reference/OS-X/commandline/pipes.html">Pipes and Redirects</a> and</li>
+<li><a href="http://www.december.com/unix/tutor/pipesfilters.html">Intro to Unix: Pipes and Filters</a></li>
+</ul>
+
 ]]></content>
   </entry>
   
