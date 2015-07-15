@@ -4,7 +4,7 @@
   <title><![CDATA[Fabrizio (Fritz) Stelluto]]></title>
   <link href="http://gotofritz.net/atom.xml" rel="self"/>
   <link href="http://gotofritz.net/"/>
-  <updated>2015-07-15T22:34:22+02:00</updated>
+  <updated>2015-07-15T22:35:33+02:00</updated>
   <id>http://gotofritz.net/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -337,7 +337,7 @@
 </pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># grep called with two arguments: export and ~/.bash_profile</span>
 </span><span class='line'><span class="nv">$ </span>grep <span class="s2">&quot;export&quot;</span> ~/.bash_profile
 </span><span class='line'><span class="c"># it runs on the file .bash_profile in your home folder (~/) and prints out each</span>
-</span><span class='line'><span class="c"># line that match the pattern</span>
+</span><span class='line'><span class="c"># line that matches the pattern</span>
 </span><span class='line'><span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;$HOME/bin:$PATH&quot;</span>
 </span><span class='line'><span class="err">$</span>
 </span></code></pre></td></tr></table></div></figure>
