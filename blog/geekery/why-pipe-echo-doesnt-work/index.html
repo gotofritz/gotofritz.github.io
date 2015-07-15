@@ -135,11 +135,13 @@ $ Those new to bash often wonder why piping a command to echo doesn&#8217;t do a
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
 <span class='line-number'>7</span>
+<span class='line-number'>8</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># Terminal taking your STDIN and copying it to STDOUT</span>
 </span><span class='line'><span class="nv">$ </span><span class="nb">echo</span> <span class="s2">&quot;hello&quot;</span>
 </span><span class='line'><span class="c"># &lt;RETURN&gt; detected - command run and result printed to STDOUT</span>
 </span><span class='line'>hello
-</span><span class='line'><span class="c"># this command wasn&#39;t understood - error message printed to STDERR (which in Terminal is exactly the same window as STDOUT)</span>
+</span><span class='line'><span class="c"># this command wasn&#39;t understood - error message printed to STDERR (which</span>
+</span><span class='line'><span class="c"># in Terminal is exactly the same window as STDOUT)</span>
 </span><span class='line'><span class="nv">$ </span>gibberish
 </span><span class='line'>-bash: gibberish: <span class="nb">command </span>not found
 </span></code></pre></td></tr></table></div></figure>
@@ -157,10 +159,14 @@ $ Those new to bash often wonder why piping a command to echo doesn&#8217;t do a
 <span class='line-number'>8</span>
 <span class='line-number'>9</span>
 <span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># program &quot;cat&quot; recognized and started</span>
 </span><span class='line'><span class="nv">$ </span>cat
-</span><span class='line'><span class="c"># it just sits there and collects everything you type in STDIN until you type &lt;RETURN&gt; then it prints it to STDOUT</span>
-</span><span class='line'><span class="c"># meanwhile your shell window is also pushing everything it gets to STDOUT, therefore you get it twice</span>
+</span><span class='line'><span class="c"># it just sits there and collects everything you type in STDIN until</span>
+</span><span class='line'><span class="c"># you type &lt;RETURN&gt; then it prints it to STDOUT</span>
+</span><span class='line'><span class="c"># meanwhile your shell window is also pushing everything it gets to STDOUT,</span>
+</span><span class='line'><span class="c"># therefore you get it twice</span>
 </span><span class='line'>line1 <span class="c"># printed to STDOUT by shell window as you type</span>
 </span><span class='line'>line1 <span class="c"># printed to STDOUT by cat when you typed &lt;RETURN&gt;</span>
 </span><span class='line'>line2 <span class="c"># printed to STDOUT by shell window as you type</span>
@@ -184,9 +190,11 @@ $ Those new to bash often wonder why piping a command to echo doesn&#8217;t do a
 <span class='line-number'>8</span>
 <span class='line-number'>9</span>
 <span class='line-number'>10</span>
+<span class='line-number'>11</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># program cat recognized; STDOUT redirected to a file</span>
 </span><span class='line'><span class="nv">$ </span>cat &gt; test.txt
-</span><span class='line'><span class="c"># your shell window is still printing to STDOUT as you type; but cat itself is not, it is printing to the text file.</span>
+</span><span class='line'><span class="c"># your shell window is still printing to STDOUT as you type; but cat</span>
+</span><span class='line'><span class="c"># itself is not, it is printing to the text file.</span>
 </span><span class='line'><span class="c"># So this time you only get each line once</span>
 </span><span class='line'>line1 <span class="c"># printed to STDOUT by shell window as you type</span>
 </span><span class='line'>line2 <span class="c"># printed to STDOUT by shell window as you type</span>
@@ -222,14 +230,89 @@ $ Those new to bash often wonder why piping a command to echo doesn&#8217;t do a
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
+<span class='line-number'>7</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># error printed to STDERR</span>
 </span><span class='line'><span class="nv">$ </span>cat gibberish
 </span><span class='line'>cat: gibberish: No such file or directory
-</span><span class='line'><span class="c"># STDERR redirected to &quot;the null device&quot;, i.e. an address on Unix systems that absorbs all error messages and suppresses them</span>
+</span><span class='line'><span class="c"># STDERR redirected to &quot;the null device&quot;, i.e. an address on Unix systems</span>
+</span><span class='line'><span class="c"># that absorbs all error messages and suppresses them</span>
 </span><span class='line'><span class="nv">$ </span>cat gibberish 2&gt; /dev/null
 </span><span class='line'><span class="c"># no output - it&#39;s disappeared into /dev/null</span>
 </span></code></pre></td></tr></table></div></figure>
 
+
+<h3>Program arguments</h3>
+
+<p>Programs can also have <i>arguments</i> - these are values that are typically typed in and passed to the program by Bash as an array. Arguments are space separated (you can use quotation marks to include a space as part of the argument).</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># program &quot;echo&quot; called, and 3 arguments passed to it - a, b, and c</span>
+</span><span class='line'><span class="nv">$ </span><span class="nb">echo  </span>a b c
+</span><span class='line'><span class="c"># echo does its thing - which is simply to print out arguments</span>
+</span><span class='line'>a b c
+</span><span class='line'><span class="err">$</span>
+</span><span class='line'><span class="c"># this time it echo is called with one argument - the complete sentence</span>
+</span><span class='line'><span class="nv">$ </span><span class="nb">echo</span> <span class="s2">&quot;What’s it going to be then, eh?&quot;</span>
+</span><span class='line'><span class="c"># in the case of echo, the result looks exactly the same. It may not do for other programs</span>
+</span><span class='line'>What’s it going to be <span class="k">then</span>, eh?
+</span><span class='line'><span class="err">$</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>A lot of programs support both arguments and STDIN / STDOUT; but they don&#8217;t have to. Take grep for example - a program that prints out the input if it matches a pattern. When you run it, it looks at how many arguments it was passed to decide what to do:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># grep called with two arguments: export and ~/.bash_profile</span>
+</span><span class='line'><span class="nv">$ </span>grep <span class="s2">&quot;export&quot;</span> ~/.bash_profile
+</span><span class='line'><span class="c"># it runs on the file .bash_profile in your home folder (~/) and prints out each</span>
+</span><span class='line'><span class="c"># line that match the pattern</span>
+</span><span class='line'><span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;$HOME/bin:$PATH&quot;</span>
+</span><span class='line'><span class="err">$</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>When it detects two arguments, it treats the first  as a pattern, and the second as the path of a file to open and read line by line. It then prints any line in the file that include the pattern</p>
+
+<p>But grep also supports STDIN:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># grep called with only one argument: export. Instead of connecting to a file,</span>
+</span><span class='line'><span class="c"># it waits for input on STDIN</span>
+</span><span class='line'><span class="nv">$ </span>grep <span class="s2">&quot;export&quot;</span>
+</span><span class='line'><span class="c"># Terminal prints what you type to STDOUT, as usual</span>
+</span><span class='line'>I am now typing something
+</span><span class='line'><span class="c"># still Terminal...</span>
+</span><span class='line'>grep is looking <span class="k">for </span>the string <span class="nb">export</span> - will it find it?
+</span><span class='line'><span class="c"># grep has detected &quot;export&quot; in its STDIN - so it prints it to STDOUT</span>
+</span><span class='line'>grep is looking <span class="k">for </span>the string <span class="nb">export</span> - will it find it?
+</span><span class='line'><span class="err">$</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>With only one argument, the programmers who created <code>grep</code> decided to treat the first argument as a pattern as before, and to wait for input from STDIN. It makes sense since with only one argument it wouldn&#8217;t know which file to open. In the example above I start typing some random stuff and press return, and when grep finds the string matching the patter in my text it will spit out the string again.</p>
 
 <h3>Streams piping</h3>
 
@@ -246,38 +329,6 @@ $ Those new to bash often wonder why piping a command to echo doesn&#8217;t do a
 </span></code></pre></td></tr></table></div></figure>
 
 
-<h3>Program arguments</h3>
-
-<p>Programs can also have <i>arguments</i> - these are values that are typically typed in and passed to the program by Bash as an array. A lot of programs support both arguments and STDIN / STDOUT; but they don&#8217;t have to. So, grep for example loads its arguments to decide what to do:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>grep <span class="s2">&quot;export&quot;</span> ~/.bash_profile
-</span><span class='line'><span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;$HOME/bin:$PATH&quot;</span>
-</span><span class='line'><span class="err">$</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>In this case the first argument is a pattern to match, and the second a filename. <code>grep</code> finds occurrences of the pattern in the file.</p>
-
-<p>But grep also supports STDIN:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>grep <span class="s2">&quot;export&quot;</span>
-</span><span class='line'>I am now typing something
-</span><span class='line'>grep is looking <span class="k">for </span>the string <span class="nb">export</span> - will it find it?
-</span><span class='line'>grep is looking <span class="k">for </span>the string <span class="nb">export</span> - will it find it?
-</span><span class='line'><span class="err">$</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>With only one argument, the programmer(s) who created <code>grep</code> decided to treat the first argument as a pattern as before, and to wait for input from STDIN since it wouldn&#8217;t know which file to open. In the example above I start typing some random stuff and press return, and when grep finds the string matching the patter in my text it will spit out the string again.</p>
-
 <h2>Why can&#8217;t you pipe a command to echo?</h2>
 
 <p>With all that out of the way, the explanation is quite simple - piping commands to <code>echo</code> does not work, because echo was not programmed to care about STDIN. All it&#8217;s wired up to do is to take the <i>arguments</i> and copy them to STDOUT.</p>
@@ -286,17 +337,9 @@ $ Those new to bash often wonder why piping a command to echo doesn&#8217;t do a
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># ls puts the output on STDOUT, which is connected to echo&#39;s STDIN</span>
 </span><span class='line'><span class="c"># but echo ignores STDIN, all it cares about is command line arguments</span>
 </span><span class='line'><span class="nv">$ </span>ls | <span class="nb">echo</span>
-</span><span class='line'><span class="err">$</span>
-</span><span class='line'><span class="c"># takes arguments 1 2 3 and copies them to STDOUT</span>
-</span><span class='line'><span class="nv">$ </span><span class="nb">echo </span>1 2 3
-</span><span class='line'>1 2 3
 </span><span class='line'><span class="err">$</span>
 </span></code></pre></td></tr></table></div></figure>
 

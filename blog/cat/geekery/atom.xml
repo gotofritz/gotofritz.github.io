@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Geekery | Fabrizio (Fritz) Stelluto]]></title>
   <link href="http://gotofritz.net/blog/cat/geekery/atom.xml" rel="self"/>
   <link href="http://gotofritz.net/"/>
-  <updated>2015-07-15T19:30:12+02:00</updated>
+  <updated>2015-07-15T22:31:29+02:00</updated>
   <id>http://gotofritz.net/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -150,7 +150,9 @@ $
 
 <p>hello</p>
 
-<h1>this command wasn't understood - error message printed to STDERR (which in Terminal is exactly the same window as STDOUT)</h1>
+<h1>this command wasn't understood - error message printed to STDERR (which</h1>
+
+<h1>in Terminal is exactly the same window as STDOUT)</h1>
 
 <p>$ gibberish
 -bash: gibberish: command not found
@@ -163,9 +165,13 @@ $
 
 <p>$ cat</p>
 
-<h1>it just sits there and collects everything you type in STDIN until you type <RETURN> then it prints it to STDOUT</h1>
+<h1>it just sits there and collects everything you type in STDIN until</h1>
 
-<h1>meanwhile your shell window is also pushing everything it gets to STDOUT, therefore you get it twice</h1>
+<h1>you type <RETURN> then it prints it to STDOUT</h1>
+
+<h1>meanwhile your shell window is also pushing everything it gets to STDOUT,</h1>
+
+<h1>therefore you get it twice</h1>
 
 <p>line1 # printed to STDOUT by shell window as you type
 line1 # printed to STDOUT by cat when you typed <RETURN>
@@ -186,7 +192,9 @@ line2 # etc</p>
 
 <p>$ cat > test.txt</p>
 
-<h1>your shell window is still printing to STDOUT as you type; but cat itself is not, it is printing to the text file.</h1>
+<h1>your shell window is still printing to STDOUT as you type; but cat</h1>
+
+<h1>itself is not, it is printing to the text file.</h1>
 
 <h1>So this time you only get each line once</h1>
 
@@ -224,13 +232,80 @@ line3
 <p>$ cat gibberish
 cat: gibberish: No such file or directory</p>
 
-<h1>STDERR redirected to "the null device", i.e. an address on Unix systems that absorbs all error messages and suppresses them</h1>
+<h1>STDERR redirected to "the null device", i.e. an address on Unix systems</h1>
+
+<h1>that absorbs all error messages and suppresses them</h1>
 
 <p>$ cat gibberish 2> /dev/null</p>
 
 <h1>no output - it's disappeared into /dev/null</h1>
 
 <p>```</p>
+
+<h3>Program arguments</h3>
+
+<p>Programs can also have <i>arguments</i> - these are values that are typically typed in and passed to the program by Bash as an array. Arguments are space separated (you can use quotation marks to include a space as part of the argument).</p>
+
+<p>``` bash</p>
+
+<h1>program "echo" called, and 3 arguments passed to it - a, b, and c</h1>
+
+<p>$ echo  a b c</p>
+
+<h1>echo does its thing - which is simply to print out arguments</h1>
+
+<p>a b c
+$</p>
+
+<h1>this time it echo is called with one argument - the complete sentence</h1>
+
+<p>$ echo "What’s it going to be then, eh?"</p>
+
+<h1>in the case of echo, the result looks exactly the same. It may not do for other programs</h1>
+
+<p>What’s it going to be then, eh?
+$
+```</p>
+
+<p>A lot of programs support both arguments and STDIN / STDOUT; but they don't have to. Take grep for example - a program that prints out the input if it matches a pattern. When you run it, it looks at how many arguments it was passed to decide what to do:
+``` bash</p>
+
+<h1>grep called with two arguments: export and ~/.bash_profile</h1>
+
+<p>$ grep "export" ~/.bash_profile</p>
+
+<h1>it runs on the file .bash_profile in your home folder (~/) and prints out each</h1>
+
+<h1>line that match the pattern</h1>
+
+<p>export PATH="$HOME/bin:$PATH"
+$
+```
+When it detects two arguments, it treats the first  as a pattern, and the second as the path of a file to open and read line by line. It then prints any line in the file that include the pattern</p>
+
+<p>But grep also supports STDIN:
+``` bash</p>
+
+<h1>grep called with only one argument: export. Instead of connecting to a file,</h1>
+
+<h1>it waits for input on STDIN</h1>
+
+<p>$ grep "export"</p>
+
+<h1>Terminal prints what you type to STDOUT, as usual</h1>
+
+<p>I am now typing something</p>
+
+<h1>still Terminal...</h1>
+
+<p>grep is looking for the string export - will it find it?</p>
+
+<h1>grep has detected "export" in its STDIN - so it prints it to STDOUT</h1>
+
+<p>grep is looking for the string export - will it find it?
+$
+<code>``
+With only one argument, the programmers who created</code>grep` decided to treat the first argument as a pattern as before, and to wait for input from STDIN. It makes sense since with only one argument it wouldn't know which file to open. In the example above I start typing some random stuff and press return, and when grep finds the string matching the patter in my text it will spit out the string again.</p>
 
 <h3>Streams piping</h3>
 
@@ -244,26 +319,6 @@ cat: gibberish: No such file or directory</p>
 $
 ```</p>
 
-<h3>Program arguments</h3>
-
-<p>Programs can also have <i>arguments</i> - these are values that are typically typed in and passed to the program by Bash as an array. A lot of programs support both arguments and STDIN / STDOUT; but they don't have to. So, grep for example loads its arguments to decide what to do:
-<code>bash
-$ grep "export" ~/.bash_profile
-export PATH="$HOME/bin:$PATH"
-$
-</code>
-In this case the first argument is a pattern to match, and the second a filename. <code>grep</code> finds occurrences of the pattern in the file.</p>
-
-<p>But grep also supports STDIN:
-<code>bash
-$ grep "export"
-I am now typing something
-grep is looking for the string export - will it find it?
-grep is looking for the string export - will it find it?
-$
-</code>
-With only one argument, the programmer(s) who created <code>grep</code> decided to treat the first argument as a pattern as before, and to wait for input from STDIN since it wouldn't know which file to open. In the example above I start typing some random stuff and press return, and when grep finds the string matching the patter in my text it will spit out the string again.</p>
-
 <h2>Why can't you pipe a command to echo?</h2>
 
 <p>With all that out of the way, the explanation is quite simple - piping commands to <code>echo</code> does not work, because echo was not programmed to care about STDIN. All it's wired up to do is to take the <i>arguments</i> and copy them to STDOUT.
@@ -274,12 +329,6 @@ With only one argument, the programmer(s) who created <code>grep</code> decided 
 <h1>but echo ignores STDIN, all it cares about is command line arguments</h1>
 
 <p>$ ls | echo
-$</p>
-
-<h1>takes arguments 1 2 3 and copies them to STDOUT</h1>
-
-<p>$ echo 1 2 3
-1 2 3
 $
 <code>
 So if your command ignores STDIN, what you have to do is to find a different one which does the same thing, but also reads from STDIN. In the case of echo, that substitute is `cat`, which as we saw above, does what echo does, but using STDIN as input:
