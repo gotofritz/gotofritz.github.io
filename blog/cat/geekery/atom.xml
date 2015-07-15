@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Geekery | Fabrizio (Fritz) Stelluto]]></title>
   <link href="http://gotofritz.net/blog/cat/geekery/atom.xml" rel="self"/>
   <link href="http://gotofritz.net/"/>
-  <updated>2015-07-15T22:31:29+02:00</updated>
+  <updated>2015-07-15T22:34:22+02:00</updated>
   <id>http://gotofritz.net/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -257,7 +257,7 @@ cat: gibberish: No such file or directory</p>
 <p>a b c
 $</p>
 
-<h1>this time it echo is called with one argument - the complete sentence</h1>
+<h1>this time echo is called with one argument - the complete sentence</h1>
 
 <p>$ echo "What’s it going to be then, eh?"</p>
 

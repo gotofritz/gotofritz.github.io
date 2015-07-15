@@ -4,7 +4,7 @@
   <title><![CDATA[Fabrizio (Fritz) Stelluto]]></title>
   <link href="http://gotofritz.net/atom.xml" rel="self"/>
   <link href="http://gotofritz.net/"/>
-  <updated>2015-07-15T22:31:29+02:00</updated>
+  <updated>2015-07-15T22:34:22+02:00</updated>
   <id>http://gotofritz.net/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -318,7 +318,7 @@
 </span><span class='line'><span class="c"># echo does its thing - which is simply to print out arguments</span>
 </span><span class='line'>a b c
 </span><span class='line'><span class="err">$</span>
-</span><span class='line'><span class="c"># this time it echo is called with one argument - the complete sentence</span>
+</span><span class='line'><span class="c"># this time echo is called with one argument - the complete sentence</span>
 </span><span class='line'><span class="nv">$ </span><span class="nb">echo</span> <span class="s2">&quot;What’s it going to be then, eh?&quot;</span>
 </span><span class='line'><span class="c"># in the case of echo, the result looks exactly the same. It may not do for other programs</span>
 </span><span class='line'>What’s it going to be <span class="k">then</span>, eh?
