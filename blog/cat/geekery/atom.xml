@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Geekery | Fabrizio (Fritz) Stelluto]]></title>
   <link href="http://gotofritz.net/blog/cat/geekery/atom.xml" rel="self"/>
   <link href="http://gotofritz.net/"/>
-  <updated>2015-07-15T19:29:03+02:00</updated>
+  <updated>2015-07-15T19:30:12+02:00</updated>
   <id>http://gotofritz.net/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -134,7 +134,7 @@ $
 
 <h3>Standard Unix streams</h3>
 
-<p>Each of this programs can access <i>streams</i>. Streams are open ended communication channels between the program and the unix core - they used to be the keyboard and the terminal, but they are abstracted so that writing to or reading from a stream is exactly the same as doing it to a file. The "(text) terminal" was <em>the</em> way to connect to a computer remotely - it was basically one of those <a href="https://upload.wikimedia.org/wikipedia/commons/8/87/Televideo925Terminal.jpg">fat screens</a> you see in old movies. In modern computers the same functionality is carried out by a small dedicated program, which is referred as either "the shell", "the command line", "the CLI (command line interface)" or, on OS X, "Terminal".</p>
+<p>Each of these programs can access <i>streams</i>. Streams are open ended communication channels between the program and the unix core - they used to be the keyboard and the terminal, but they are abstracted so that writing to or reading from a stream is exactly the same as doing it to a file. The "(text) terminal" was <em>the</em> way to connect to a computer remotely - it was basically one of those <a href="https://upload.wikimedia.org/wikipedia/commons/8/87/Televideo925Terminal.jpg">fat screens</a> you see in old movies. In modern computers the same functionality is carried out by a small dedicated program, which is referred as either "the shell", "the command line", "the CLI (command line interface)" or, on OS X, "Terminal".</p>
 
 <p>The three default streams are STDIN to read from (the keyboard), STDOUT to write to (the shell), and STDERR to write errors to (also the shell). Standard behaviour can be easily changed, so that an app can be made to write to a file instead of the STDOUT stream, for example.</p>
 
