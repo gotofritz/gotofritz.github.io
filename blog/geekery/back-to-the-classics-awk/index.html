@@ -1,0 +1,1250 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Back to the classics: awk - Fabrizio (Fritz) Stelluto</title>
+	<meta name="author" content="">
+
+	
+	<meta name="description" content="In this age of npm and github and easily available modules in any language of your choice, it is easy to forget the old Unix workhorses. Here&#8217;s &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="Fabrizio (Fritz) Stelluto" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.ico" rel="shortcut icon">
+	<link rel="icon" href="/favicon.gif" type="image/gif" />
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	
+</head>
+
+
+<body ontouchstart="">
+
+  <header id="header" class="inner">
+<nav id="main-nav"><div>
+  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+  <a href="/">home</a>
+  <a href="/blog/">blog</a>
+</div></nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><div>
+  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+  <a href="/">home</a>
+  <a href="/blog/">blog</a>
+</div></div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="http://google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:gotofritz.net">
+			</form>
+		</div>
+	</div>
+</nav>
+
+<nav id="sub-nav" class="alignright">
+	<form class="search" action="http://google.com/search" method="get">
+		<input class="alignright" type="text" name="q" results="0">
+		<input type="hidden" name="q" value="site:gotofritz.net">
+	</form>
+</nav>
+
+</header>
+	
+		
+	
+	<div id="content" class="inner">
+    
+    <article class="post">
+	<h1 class="title">Back to the Classics: Awk</h1>
+	<div>
+		<div class="meta">
+			<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-07-15T23:19:00+02:00" pubdate data-updated="true">2015-07-15, Wed</time></div>
+			<div class="tags">
+
+
+	<a class='category' href='/blog/cat/geekery/'>Geekery</a>
+
+
+</div>
+			
+				<span class="comments"><a href="/blog/geekery/back-to-the-classics-awk/#disqus_thread">Comments</a></span>
+			
+		</div>
+		<div class="entry-content"><p>In this age of npm and github and easily available modules in any language of your choice, it is easy to forget the old Unix workhorses. Here&#8217;s a look at awk, a shell utility that allows you to treat and manipulate text files as if they were databases.</p>
+
+<!--more-->
+
+
+<h2>What is awk?</h2>
+
+<p><code>Awk</code> is both the name of the command line utility, and the language used for it. It was invented at Bells Labs at the peak of punk rock, 1977, and its name is simply the initials of its three creators. Awk reads input (a file, or a stream) one line (one &#8220;record&#8221;) at the time, splits it into fields by blank space (these are all defaults that can be changed), and then uses the instructions in the awk language to manipulate these fields and generate some output. The ability to read files as streams is a big plus - it means the memory footprint is the same if you read a file of 1Kb or 200Tb; for a larger file it will just take longer.</p>
+
+<h3>Example awk in action</h3>
+
+<p>Here&#8217;s what the simplest awk program looks like - this is basically <code>cat</code></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># awk loads the short program: {print} and wait for user to type stuff</span>
+</span><span class='line'><span class="nv">$ </span>awk <span class="s1">&#39;{print}&#39;</span>
+</span><span class='line'><span class="c"># as you type, the shell prints out what you are typing. Awk is waiting</span>
+</span><span class='line'><span class="c"># for a &lt;RETURN&gt; outside a &#39;&#39;</span>
+</span><span class='line'>It was a bright cold day in April, and the clocks were striking thirteen.
+</span><span class='line'><span class="c"># now awk kicks in and runs the program on the input</span>
+</span><span class='line'><span class="c"># {print} simply prints the input line as it is, so here it is again</span>
+</span><span class='line'>It was a bright cold day in April, and the clocks were striking thirteen.
+</span><span class='line'><span class="err">$</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The strong point of <code>awk</code> is that it automatically splits lines of text as if they were &#8220;columns&#8221; in a spreadsheet and assigns each column to a variable (a &#8220;field&#8221;). Then you can manipulate them and spit them out</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># awk loads a slightly more complex program and waits</span>
+</span><span class='line'><span class="nv">$ </span>awk <span class="s1">&#39;{print $3 &quot;: &quot; $1 + $2}&#39;</span>
+</span><span class='line'><span class="c"># waiting for a &lt;RETURN&gt; outside a &#39;&#39;</span>
+</span><span class='line'>10 20 Toronto
+</span><span class='line'><span class="c"># this line is split into 3 &quot;columns&quot;, and</span>
+</span><span class='line'><span class="c"># 10 is assigned to $1, 20 to $2, and Toronto to $3</span>
+</span><span class='line'><span class="c"># then the program {print &quot;$3: &quot; $1 + $2} is run - it adds $1 + $2 and</span>
+</span><span class='line'><span class="c"># prints the result out, with some extra text (the :)</span>
+</span><span class='line'>Toronto: 30
+</span><span class='line'><span class="c"># now it waits for the next line</span>
+</span><span class='line'>20 30 Miami
+</span><span class='line'><span class="c"># same program run on it</span>
+</span><span class='line'>Miami: 50
+</span><span class='line'><span class="err">$</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Running awk programs and redirecting input, output</h2>
+
+<p>Running awk on STDIN is not very useful, but of course you can use Unix magic to redirect the input and / or output of the program</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># awk will treat the second argument as a path to a file to read from</span>
+</span><span class='line'><span class="nv">$ </span>awk <span class="s1">&#39;{print}&#39;</span> some_data.txt
+</span><span class='line'>... <span class="c"># prints whatever was in some_data.txt</span>
+</span><span class='line'><span class="err">$</span>
+</span><span class='line'><span class="c"># exactly the same thing but done differently - redirecting file to STDIN</span>
+</span><span class='line'><span class="nv">$ </span>awk <span class="s1">&#39;{print}&#39;</span> &lt; some_data.txt
+</span><span class='line'>... <span class="c"># prints whatever was in some_data.txt</span>
+</span><span class='line'><span class="err">$</span>
+</span><span class='line'><span class="c"># you can read several files, in order</span>
+</span><span class='line'><span class="nv">$ </span>awk <span class="s1">&#39;{print}&#39;</span> some_data.txt more_data.txt
+</span><span class='line'>...
+</span><span class='line'><span class="err">$</span>
+</span><span class='line'><span class="c"># now the processed data goes to a separate file</span>
+</span><span class='line'><span class="nv">$ </span>awk <span class="s1">&#39;{print}&#39;</span> some_data.txt &gt; result.txt
+</span><span class='line'><span class="err">$</span>
+</span><span class='line'><span class="c"># the awk program itself can be loaded to a file - here this file is created</span>
+</span><span class='line'><span class="nv">$ </span><span class="nb">echo</span> <span class="s1">&#39;{print}&#39;</span> &gt; awk.txt
+</span><span class='line'><span class="c"># passing the command on to awk with the -f option</span>
+</span><span class='line'><span class="nv">$ </span>awk -f awk.txt some_data.txt &gt; result.txt
+</span><span class='line'><span class="err">$</span>
+</span><span class='line'><span class="c"># mixing STDIN with files. The &quot;-&quot; is substituted by STDIN,  which is dealt with</span>
+</span><span class='line'><span class="c"># after some_data.txt</span>
+</span><span class='line'><span class="nv">$ </span>ls -l | awk <span class="s1">&#39;{print}&#39;</span> some_data.txt - more_data.txt
+</span><span class='line'><span class="nv">$ </span>... <span class="c"># prints all lines from some_data.txt</span>
+</span><span class='line'><span class="nv">$ </span>... <span class="c"># prints result of ls -l (this is the &quot;-&quot;)</span>
+</span><span class='line'><span class="nv">$ </span>... <span class="c"># prints all lines from more_data.txt</span>
+</span><span class='line'><span class="err">$</span>
+</span><span class='line'><span class="c"># pass some text into awk, then run an awk program on it</span>
+</span><span class='line'><span class="nv">$ </span><span class="nb">echo</span> <span class="s1">&#39;1 2 3&#39;</span> | awk <span class="s1">&#39;{print}&#39;</span>
+</span><span class='line'><span class="nv">$ </span>1 2 3
+</span><span class='line'><span class="err">$</span>
+</span><span class='line'><span class="c"># using the curl util to download a csv file, piping it to awk, and running</span>
+</span><span class='line'><span class="c"># the simple awk program on it</span>
+</span><span class='line'><span class="nv">$ </span>curl http://is.gd/eUrbOZ | awk <span class="s1">&#39;{print}&#39;</span>
+</span><span class='line'>Forename,Surname,Description on ballot paper,Constituency Name,PANo,Votes,Share
+</span><span class='line'>... <span class="c"># etc</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Anatomy of an awk program</h2>
+
+<p>So far the awk example consisted of simple one liners - but awk programs can consist of several instructions (&#8220;actions&#8221;). You can still write them out on the shell:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># note: the &quot;&gt;&quot; is added automatically when hitting return inside a &#39;&#39;,</span>
+</span><span class='line'><span class="c"># and the space between &gt; and { was added manually to make it line up</span>
+</span><span class='line'><span class="nv">$ </span>awk <span class="s1">&#39;{print}</span>
+</span><span class='line'><span class="s1">&gt;      {print}</span>
+</span><span class='line'><span class="s1">&gt;      {print}&#39;</span>
+</span><span class='line'><span class="c"># now that the closing &#39; was typed, awk kicks in. this programs simply</span>
+</span><span class='line'><span class="c"># prints out whatever you type three times</span>
+</span><span class='line'>oh <span class="c"># typed by you</span>
+</span><span class='line'>oh <span class="c"># printed by awk 3 times</span>
+</span><span class='line'>oh
+</span><span class='line'>oh
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In this tutorial I will put the awk program in its own file and load it from the command line - just to make formatting easier and allow comments. The file loaded here has suffix &#8220;.awk&#8221; but that&#8217;s irrelevant, it could be any filename.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>awk -f example.awk some_input_text.txt
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>An awk program consists of a list of actions, one after the other, and typically one per line (they can be broken up though). There are two special types of actions - BEGIN actions are executed only once, before the text is scanned, and END only once, afterwards. All other actions are executed in order on every line of text. Assume your input file includes increasing integers, one per line</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>1
+</span><span class='line'>2
+</span><span class='line'>3
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Then the program below</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>BEGIN <span class="o">{</span> print <span class="s2">&quot;START!&quot;</span> <span class="o">}</span>
+</span><span class='line'><span class="o">{</span>print <span class="s2">&quot;--------------&quot;</span><span class="o">}</span>
+</span><span class='line'><span class="o">{</span>print<span class="o">}</span>
+</span><span class='line'><span class="o">{</span>print<span class="o">}</span>
+</span><span class='line'><span class="o">{</span>print<span class="o">}</span>
+</span><span class='line'>END <span class="o">{</span> print <span class="s2">&quot;END!&quot;</span> <span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Would produce</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>START!
+</span><span class='line'>--------------
+</span><span class='line'>1
+</span><span class='line'>1
+</span><span class='line'>1
+</span><span class='line'>--------------
+</span><span class='line'>2
+</span><span class='line'>2
+</span><span class='line'>2
+</span><span class='line'>--------------
+</span><span class='line'>3
+</span><span class='line'>3
+</span><span class='line'>3
+</span><span class='line'>END!
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Note that actions can be in any order (they will be executed in the order they are written) and there can be multiple BEGIN and END, so the following is also a legal program.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="o">{</span>print <span class="s2">&quot;--------------&quot;</span><span class="o">}</span>
+</span><span class='line'><span class="o">{</span>print<span class="o">}</span>
+</span><span class='line'>END <span class="o">{</span> print <span class="s2">&quot;END!&quot;</span> <span class="o">}</span>
+</span><span class='line'>BEGIN <span class="o">{</span> print <span class="s2">&quot;START!&quot;</span> <span class="o">}</span>
+</span><span class='line'><span class="o">{</span>print<span class="o">}</span>
+</span><span class='line'>END <span class="o">{</span> print <span class="s2">&quot;Copyright 2005&quot;</span> <span class="o">}</span>
+</span><span class='line'><span class="o">{</span>print<span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The way the program is dealt with is:</p>
+
+<ul>
+<li>all the BEGIN actions are executed, in order</li>
+<li>input is read one line at the time, and for each line
+
+<ul>
+<li>the line is split into fields</li>
+<li>each action, in turn, is run on the fields</li>
+</ul>
+</li>
+<li>all the END actions are run at the end</li>
+</ul>
+
+
+<p>Inside the actions awk offers what most programming languages offer - variable, loops, tests, etc.</p>
+
+<h3>Actions formatting</h3>
+
+<p>Awk follows Unix conventions on most things, so in case of doubt whatever works in Bash scripts tends to work.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># a &#39;normal&#39; one lne</span>
+</span><span class='line'>BEGIN <span class="o">{</span> print <span class="s2">&quot;START&quot;</span> <span class="o">}</span>
+</span><span class='line'><span class="c"># you can add newlines for formatting - this is equivalent to the above</span>
+</span><span class='line'>BEGIN <span class="o">{</span>
+</span><span class='line'>  print <span class="s2">&quot;START&quot;</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>-&gt; START
+</span><span class='line'>-&gt; START
+</span><span class='line'>
+</span><span class='line'><span class="c"># as in Bash scripts, you can use the semicolon to separate multiple statements</span>
+</span><span class='line'><span class="c"># on the same line...</span>
+</span><span class='line'>BEGIN <span class="o">{</span> print <span class="s2">&quot;STA&quot;</span>; print <span class="s2">&quot;RT&quot;</span>;<span class="o">}</span>
+</span><span class='line'><span class="c"># or you can write them one per line, with or without semicolon</span>
+</span><span class='line'>BEGIN <span class="o">{</span> print <span class="s2">&quot;STA&quot;</span>
+</span><span class='line'>        print <span class="s2">&quot;RT&quot;</span> <span class="o">}</span>
+</span><span class='line'>-&gt; STA
+</span><span class='line'>   RT
+</span><span class='line'>-&gt; STA
+</span><span class='line'>   RT
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Variables</h2>
+
+<p>Awk makes several variables available to the programs - some are loaded when the program is launched, some are updated with each line read, some are created by the program itself.</p>
+
+<h3>Field Variables</h3>
+
+<p>Whenever awk reads a line, it splits it into &#8220;fields&#8221; by white-space / tab (this is the default and can be overridden), Then each field is copied to a variable $1, $2, &#8230;. in order - there is no limit. Additionally, $0 contains the whole line.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># assume this file</span>
+</span><span class='line'>1 2 3 4 5 6 7
+</span><span class='line'>
+</span><span class='line'><span class="c"># the following two lines are equivalent</span>
+</span><span class='line'><span class="o">{</span> print <span class="o">}</span>
+</span><span class='line'><span class="o">{</span> print <span class="nv">$0</span> <span class="o">}</span>
+</span><span class='line'>-&gt; 1 2 3 4 5 6 7
+</span><span class='line'>-&gt; 1 2 3 4 5 6 7
+</span><span class='line'>
+</span><span class='line'><span class="c"># only prints some fields we are interested in</span>
+</span><span class='line'><span class="o">{</span> print <span class="nv">$1</span> <span class="s2">&quot; &quot;</span> <span class="nv">$3</span> <span class="o">}</span>
+</span><span class='line'>-&gt; 1 3
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The field number doesn&#8217;t have to be a constant - it can be an expression or a variable. For example, the global variable NF contains the number of the last field and is updated which every line read. So if there are 7 fields, NF would be 7, and $NF would be $7, i.e. the last field</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># assume this file</span>
+</span><span class='line'>1 2 3 4 5 6 7
+</span><span class='line'>
+</span><span class='line'><span class="c"># both mean first and last field - but the first version only works if there are</span>
+</span><span class='line'><span class="c"># 7 fields, the second always works</span>
+</span><span class='line'><span class="o">{</span>print <span class="nv">$1</span> <span class="s2">&quot; &quot;</span> <span class="nv">$7</span><span class="o">}</span>
+</span><span class='line'><span class="o">{</span>print <span class="nv">$1</span> <span class="s2">&quot; &quot;</span> <span class="nv">$NF</span><span class="o">}</span>
+</span><span class='line'>-&gt; 1 7
+</span><span class='line'>-&gt; 1 7
+</span><span class='line'><span class="c">#</span>
+</span><span class='line'><span class="c"># print the last two fields</span>
+</span><span class='line'><span class="o">{</span>print <span class="k">$(</span>NF-1<span class="k">)</span> <span class="s2">&quot; &quot;</span> <span class="nv">$NF</span><span class="o">}</span>
+</span><span class='line'>-&gt; 6 7
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Another useful global variable that gets updated for each record is NR - this is the record number</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># feed a four line input into awk</span>
+</span><span class='line'><span class="nv">$ </span><span class="nb">echo</span> <span class="s1">&#39;a</span>
+</span><span class='line'><span class="s1">&gt; b</span>
+</span><span class='line'><span class="s1">&gt; c</span>
+</span><span class='line'><span class="s1">&gt; d&#39;</span> | awk <span class="s1">&#39;{print NR &quot;) &quot; $1}&#39;</span>
+</span><span class='line'><span class="c"># it prints the line number, ), and the first (and only) field</span>
+</span><span class='line'>1<span class="o">)</span> a
+</span><span class='line'>2<span class="o">)</span> b
+</span><span class='line'>3<span class="o">)</span> c
+</span><span class='line'>4<span class="o">)</span> d
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You can assign to a field variable with the &#8216;=&#8217; operator, thereby changing the record content:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># adding something to a field - will only works if it&#39;s a number</span>
+</span><span class='line'><span class="o">{</span><span class="nv">$3</span> <span class="o">=</span> <span class="o">(</span><span class="nv">$3</span> + 100<span class="o">)</span>
+</span><span class='line'><span class="c"># now print the updated line</span>
+</span><span class='line'>print <span class="nv">$0</span><span class="o">}</span>
+</span><span class='line'>-&gt; 1 2 103 4 5 6 7
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you assign to a field variable that doesn&#8217;t exist, it will be added to the record</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># the record only contains $1 and $2;</span>
+</span><span class='line'><span class="nv">$ </span><span class="nb">echo </span>1 2 | awk <span class="s1">&#39;{print $0}&#39;</span>
+</span><span class='line'><span class="nv">$ </span>1 2
+</span><span class='line'><span class="err">$</span>
+</span><span class='line'><span class="c"># the program adds two new fields</span>
+</span><span class='line'><span class="nv">$ </span><span class="nb">echo </span>1 2 | awk <span class="s1">&#39;{$3 = 3; $4 = 4; print $0}&#39;</span>
+</span><span class='line'><span class="nv">$ </span>1 2 3 4
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Global variables</h3>
+
+<p>A few variables are set when the program is launched. Here&#8217;s a very short list - if you need to play with these you probably want to get yourself a book on awk.</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th align="right">Variable</th>
+<th align="left"> </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td align="right"> ARGV    </td>
+<td align="left"> array of command line arguments</td>
+</tr>
+<tr>
+<td></td>
+<td align="right"> ARGC    </td>
+<td align="left"> number of command line arguments</td>
+</tr>
+<tr>
+<td></td>
+<td align="right"> ENVIRON </td>
+<td align="left"> associative array with environment. Depends on system</td>
+</tr>
+<tr>
+<td></td>
+<td align="right"> FILENAME</td>
+<td align="left"> self explanatory</td>
+</tr>
+</tbody>
+</table>
+
+
+<h3>User defined variables</h3>
+
+<p>To create your own variable, just start assigning to them with the &#8216;=&#8217; operator - awk will initialize them to an emptry string (which becomes a 0 if used in numeric context). The type of variable is dynamic and can vary during its lifetime.</p>
+
+<p>In the example below, awk is used on the ls command to find the total size of a folder.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># ls -la returns listings in the form:</span>
+</span><span class='line'><span class="c"># -rw-rw-r--    1 gotofritz staff   1513 Dec 15  2013 .bash_profile</span>
+</span><span class='line'><span class="c"># awk simply collects each filesize and adds it to a running total,</span>
+</span><span class='line'><span class="c"># then prints it at the end</span>
+</span><span class='line'><span class="nv">$ </span>ls -la | awk <span class="s1">&#39;    { total += $5 }</span>
+</span><span class='line'><span class="s1">                END { print total }&#39;</span>
+</span><span class='line'>-&gt; 158448
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Arrays</h3>
+
+<p>Awk has associative arrays, similar to PHP&#8217;s or Javascript. You create an array by using it, no need to initialize it.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># assume this file</span>
+</span><span class='line'>10 Life changes fast
+</span><span class='line'>20 Life changes in the instant
+</span><span class='line'>30 You sit down to dinner and life as you know it ends
+</span><span class='line'>40 The question of self-pity
+</span><span class='line'>
+</span><span class='line'><span class="c"># creates my_array and inserts all lines into it</span>
+</span><span class='line'><span class="o">{</span> my_array<span class="o">[</span><span class="nv">$1</span><span class="o">]</span> <span class="o">=</span> <span class="nv">$2</span> <span class="o">}</span>
+</span><span class='line'><span class="c"># creates - note that array is sparse</span>
+</span><span class='line'>my_array<span class="o">[</span>10<span class="o">]</span> <span class="o">=</span> <span class="s2">&quot;Life changes fast&quot;</span>
+</span><span class='line'>my_array<span class="o">[</span>20<span class="o">]</span> <span class="o">=</span> <span class="s2">&quot;Life changes in the instant&quot;</span>
+</span><span class='line'>my_array<span class="o">[</span>30<span class="o">]</span> <span class="o">=</span> <span class="s2">&quot;You sit down to dinner and life as you know it ends&quot;</span>
+</span><span class='line'>my_array<span class="o">[</span>40<span class="o">]</span> <span class="o">=</span> <span class="s2">&quot;The question of self-pity&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># string keys are also possible</span>
+</span><span class='line'><span class="o">{</span> my_array<span class="o">[</span><span class="s2">&quot;name&quot;</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&quot;Homer&quot;</span> <span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>One thing that is different in awk is that multidimensional arrays use a single set of square brackets to wrap both indices</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># assume this file</span>
+</span><span class='line'>dad homer
+</span><span class='line'>mum marge
+</span><span class='line'>son bart
+</span><span class='line'>
+</span><span class='line'><span class="c"># creates a two dimensional array</span>
+</span><span class='line'><span class="o">{</span> family<span class="o">[</span><span class="s2">&quot;simpsons&quot;</span>,<span class="nv">$1</span><span class="o">]</span> <span class="o">=</span> <span class="nv">$2</span> <span class="o">}</span>
+</span><span class='line'>-&gt; creates
+</span><span class='line'>family<span class="o">[</span><span class="s2">&quot;simpsons&quot;</span>,<span class="s2">&quot;dad&quot;</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&quot;homer&quot;</span>
+</span><span class='line'>family<span class="o">[</span><span class="s2">&quot;simpsons&quot;</span>,<span class="s2">&quot;mum&quot;</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&quot;marge&quot;</span>
+</span><span class='line'>family<span class="o">[</span><span class="s2">&quot;simpsons&quot;</span>,<span class="s2">&quot;son&quot;</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&quot;bart&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Regular expressions</h3>
+
+<p>A regular expression (regexp) is a mini programming language which is used to describe variable strings; it is embedded in most programming languages.
+Regexps are enclosed in slashes and use a combination of literal characters and punctuation to describe strings. The operator ~ is used to match a regexp, and !~ to ensure it is not matched.</p>
+
+<p>Regular expressions is a complicated topic of its own; here is just a quick introduction</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># print all lines with &quot;gmail&quot; in the 1st field</span>
+</span><span class='line'><span class="o">{</span> <span class="k">if</span> <span class="o">(</span><span class="nv">$1</span> ~ /gmail/<span class="o">)</span> print<span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># prints all lines EXCEPT those with &quot;gmail&quot;</span>
+</span><span class='line'><span class="o">{</span> <span class="k">if</span> <span class="o">(</span><span class="nv">$1</span> !~ /gmail/<span class="o">)</span> print<span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># ^ indicates start of string.</span>
+</span><span class='line'><span class="c"># this matches &quot;tom&quot; &quot;tomato&quot; but not &quot;atom&quot;</span>
+</span><span class='line'><span class="o">{</span> <span class="k">if</span> <span class="o">(</span><span class="nv">$1</span> ~ /^tom/<span class="o">)</span> print<span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># $ indicates end of string</span>
+</span><span class='line'><span class="c"># this matches &quot;tom&quot;, &quot;atom&quot; but not &quot;tomato&quot;</span>
+</span><span class='line'><span class="o">{</span> <span class="k">if</span> <span class="o">(</span><span class="nv">$1</span> ~ /tom<span class="nv">$/</span><span class="o">)</span> print<span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># this matches &quot;tom&quot;, not &quot;atom&quot; and not &quot;tomato&quot;</span>
+</span><span class='line'><span class="o">{</span> <span class="k">if</span> <span class="o">(</span><span class="nv">$1</span> ~ /^tom<span class="nv">$/</span><span class="o">)</span> print<span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># . matches any character.</span>
+</span><span class='line'><span class="c"># this matches &quot;bear&quot; &quot;boar&quot; but not &quot;bar&quot;</span>
+</span><span class='line'><span class="o">{</span> <span class="k">if</span> <span class="o">(</span><span class="nv">$1</span> ~ /b..r/<span class="o">)</span> print<span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># [ABC] matches one character from the set &quot;A&quot;, &quot;B&quot;, &quot;C&quot;</span>
+</span><span class='line'><span class="c"># this matches &quot;boar&quot; &quot;bear&quot; but not &quot;blar&quot;</span>
+</span><span class='line'><span class="o">{</span> <span class="k">if</span> <span class="o">(</span><span class="nv">$1</span> ~ /b<span class="o">[</span>oe<span class="o">]</span>ar/<span class="o">)</span> print<span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># [^ABC] matches one character which is anything except &quot;A&quot;, &quot;B&quot;, &quot;C&quot;</span>
+</span><span class='line'><span class="c"># this matches &quot;blar&quot; but neither &quot;boar&quot; nor &quot;bear&quot;</span>
+</span><span class='line'><span class="o">{</span> <span class="k">if</span> <span class="o">(</span><span class="nv">$1</span> ~ /b<span class="o">[</span>^oe<span class="o">]</span>ar/<span class="o">)</span> print<span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># (abc) groups the expression abc as a unit.</span>
+</span><span class='line'><span class="c"># | is an &quot;or&quot;</span>
+</span><span class='line'><span class="c"># \ is used to scape special characters, i.e. treat them as normal characters</span>
+</span><span class='line'><span class="c"># in this case we want to treat the &#39;.&#39; as a period and not &quot;any character&quot;</span>
+</span><span class='line'><span class="c"># the following matches @gmail.com or @yahoo.com</span>
+</span><span class='line'><span class="o">{</span> <span class="k">if</span> <span class="o">(</span><span class="nv">$1</span> ~ /@<span class="o">(</span>gmail<span class="o">)</span>|<span class="o">(</span>yahoo<span class="o">)</span><span class="se">\.</span>com/<span class="o">)</span> print<span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># * means repeat zero or more. + is repeat once or more. ? is repeat 0 or 1</span>
+</span><span class='line'><span class="o">{</span> <span class="k">if</span> <span class="o">(</span><span class="nv">$1</span> ~ /&lt;<span class="o">[</span>^&gt;<span class="o">]</span>+&gt;<span class="o">[</span>^&lt;<span class="o">]</span>*&lt;/<span class="o">[</span>^&gt;<span class="o">]</span>+&gt;<span class="se">\.</span>?/<span class="o">)</span> print <span class="o">}</span>
+</span><span class='line'><span class="c"># the following matches &lt; followed by one or more (+) of anything except &gt;, then &gt;</span>
+</span><span class='line'><span class="c"># then zero or more (*) of anything except &lt;</span>
+</span><span class='line'><span class="c"># then &lt;/ followed by one or more (+) of anything except &gt;, then &gt;</span>
+</span><span class='line'><span class="c"># then an optional .</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Statements, operators, and function</h2>
+
+<h3>Control statements</h3>
+
+<p>Awk has the usual loops and conditionals familiar from C. Braces are optional for single nested statements</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># braces are optional for single statements</span>
+</span><span class='line'><span class="k">for</span> <span class="o">(</span>name in list_of_names<span class="o">)</span>
+</span><span class='line'>  print name
+</span><span class='line'>
+</span><span class='line'><span class="k">for</span> <span class="o">(</span>capital_city in country<span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>  print capital_city
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># but needed for multiple statements</span>
+</span><span class='line'><span class="k">if</span> <span class="o">(</span>NR % <span class="nv">2</span> <span class="o">==</span> 0<span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>  <span class="nv">$2</span> <span class="o">=</span> <span class="nv">$1</span> * 2
+</span><span class='line'>  print <span class="nv">$0</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>if-else</h4>
+
+<p>Awk doesn&#8217;t have booleans. Instead it treats the number 0 or the empty string &#8220;&#8221; as false, and any other value (including the string &#8220;0&#8221;) as true. The comparison operators are the familiar ones, with double equal sign for equality, plus the tilde ~ and !~ for regular expression matching, and &#8220;in&#8221; for array existence</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="o">{</span> <span class="k">if</span> <span class="o">(</span><span class="nv">$1</span> <span class="o">==</span> <span class="s2">&quot;full&quot;</span><span class="o">)</span> ... <span class="o">}</span>
+</span><span class='line'><span class="o">{</span> <span class="k">if</span> <span class="o">(</span><span class="nv">$2</span> &lt; 0.5<span class="o">)</span> ... <span class="o">}</span>
+</span><span class='line'><span class="o">{</span> <span class="k">if</span> <span class="o">(</span><span class="nv">$0</span> ~ /Republican/<span class="o">)</span> print <span class="nv">$0</span> <span class="o">}</span> ... <span class="c"># matches regexp</span>
+</span><span class='line'><span class="o">{</span> <span class="k">if</span> <span class="o">(</span><span class="nv">$1</span> !~ /Completed/<span class="o">)</span> print <span class="nv">$0</span> <span class="o">}</span> ... <span class="c"># rejects regexp</span>
+</span><span class='line'><span class="o">{</span> <span class="k">if</span> <span class="o">(</span>capital_city in country<span class="o">)</span> print country<span class="o">[</span><span class="s2">&quot;capital_city&quot;</span><span class="o">]</span> <span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>loops</h4>
+
+<p>Awk has both for and while loops (including do-while). Additionally, there is the for-in loop for sparse arrays</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># assume file</span>
+</span><span class='line'>1 10 100
+</span><span class='line'>2 20 200
+</span><span class='line'>
+</span><span class='line'><span class="c"># both these programs will print each line with fields back-to-front</span>
+</span><span class='line'><span class="c"># while loop version...</span>
+</span><span class='line'><span class="o">{</span> <span class="nv">i</span> <span class="o">=</span> NF
+</span><span class='line'>  <span class="nv">line</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+</span><span class='line'>  <span class="k">while</span> <span class="o">(</span>i<span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>    <span class="nv">line</span> <span class="o">=</span>  line <span class="s2">&quot; &quot;</span> <span class="nv">$i</span>
+</span><span class='line'>    i--
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>  print line
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'><span class="c"># for loop version</span>
+</span><span class='line'><span class="o">{</span> <span class="nv">line</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+</span><span class='line'>  <span class="k">for</span> <span class="o">(</span><span class="nv">i</span><span class="o">=</span>NF; i&gt;0; i--<span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>    <span class="nv">line</span> <span class="o">=</span>  line <span class="s2">&quot; &quot;</span> <span class="nv">$i</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>  print line
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>-&gt; 100 10 1
+</span><span class='line'>   200 20 2
+</span><span class='line'>
+</span><span class='line'><span class="c"># puts each line of input into the array</span>
+</span><span class='line'><span class="o">{</span> lines<span class="o">[</span><span class="nv">$NR</span><span class="o">]</span> <span class="o">=</span> <span class="nv">$0</span> <span class="o">}</span>
+</span><span class='line'><span class="c"># at end prints all the lines</span>
+</span><span class='line'>END <span class="o">{</span>
+</span><span class='line'>  <span class="k">for</span> <span class="o">(</span>line in lines<span class="o">)</span>
+</span><span class='line'>    print line
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>break</code> and <code>continue</code> statements are available to exit a loop prematurely or skipping an iteration respectively.</p>
+
+<h4>next</h4>
+
+<p><code>next</code> is used to stop precessing a record and moving on to the next</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="o">{</span> <span class="k">if</span> <span class="o">(</span><span class="nv">$5</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="o">)</span> next <span class="o">}</span>
+</span><span class='line'><span class="o">{</span> print <span class="nv">$5</span> <span class="nv">$4</span> <span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Awk numeric operators</h3>
+
+<p>The usual maths operators can be used: +, -, /, * , ++, &#8211; plus % for modulus, ^ for exponentiation. Unary + converts to a number</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">echo</span> <span class="s2">&quot;1</span>
+</span><span class='line'><span class="s2">&gt; 2</span>
+</span><span class='line'><span class="s2">&gt; 3</span>
+</span><span class='line'><span class="s2">&gt; 4&quot;</span> | awk <span class="s1">&#39;{print $1 ^ 2}&#39;</span>
+</span><span class='line'>1
+</span><span class='line'>4
+</span><span class='line'>9
+</span><span class='line'>16
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>String concatenation</h3>
+
+<p>Concatenating string in awk is slightly weird. There is no string concatenation operator; just put the strings next to each other. Because of that it is recommended to use parenthesis except for trivial cases. Alternatively, <code>print</code> can take multiple comma separated arguments - and they will be printed with a space separating them</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># assume this file</span>
+</span><span class='line'>1
+</span><span class='line'>2
+</span><span class='line'>3
+</span><span class='line'>4
+</span><span class='line'>
+</span><span class='line'><span class="c"># the strings ($1..) and &quot;a&quot; are concatenated (no space between them) and</span>
+</span><span class='line'><span class="c"># the resulting string is passed to print</span>
+</span><span class='line'><span class="o">{</span>print <span class="o">(</span><span class="nv">$1</span>+2<span class="o">)</span> <span class="s2">&quot;a&quot;</span><span class="o">}</span>
+</span><span class='line'>3a
+</span><span class='line'>4a
+</span><span class='line'>5a
+</span><span class='line'>6a
+</span><span class='line'>
+</span><span class='line'><span class="c"># two separate strings are passed to print -  a space is put between them</span>
+</span><span class='line'><span class="o">{</span>print <span class="o">(</span><span class="nv">$1</span>+2<span class="o">)</span>, <span class="s2">&quot;a&quot;</span><span class="o">}</span>
+</span><span class='line'>3 a
+</span><span class='line'>4 a
+</span><span class='line'>5 a
+</span><span class='line'>6 a
+</span><span class='line'>
+</span><span class='line'><span class="c"># string concatenation works for variables too</span>
+</span><span class='line'><span class="o">{</span> <span class="nv">something</span> <span class="o">=</span> <span class="nv">$1</span> <span class="s2">&quot;--&quot;</span>
+</span><span class='line'>  print something <span class="o">}</span>
+</span><span class='line'>1--
+</span><span class='line'>2--
+</span><span class='line'>3--
+</span><span class='line'>4--
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Built in functions</h3>
+
+<p>There are a number of built in functions: numeric ones like cosine, square root, random; string functions like print or string length; time functions and bitwise functions. You can easily find out what they are by looking at the output of <code>man awk</code>.</p>
+
+<h3>User defined functions</h3>
+
+<p>You can define functions anywhere in your code, outside actions. They are pretty similar to Javascript</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># define funtion outside rules - could be at the bottom of file</span>
+</span><span class='line'><span class="k">function </span>my_func<span class="o">(</span>field_content<span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>  print <span class="s2">&quot;FIELD: &quot;</span> field_content
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># now use in rules</span>
+</span><span class='line'><span class="o">{</span>my_func<span class="o">(</span><span class="nv">$1</span><span class="o">)}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Patterns</h2>
+
+<p>Previously I described an awk program as a series of actions, with the special case of BEGIN and END. That&#8217;s not entirely correct. An awk program consists of a sequence of actions and optional <em>patterns</em>; BEGIN and END are two special patterns. Incidentally, there is also a BEGINFILE and ENDFILE, for when processing more than one file at the time.</p>
+
+<p>BEGIN and END are special because they identify actions which are not executed for every line of input, but before or after the whole program is run. The other patterns are used on every line to determine whether the action should be run for that particular line or not. Patterns are espressions that return false (i.e., 0 or &#8220;&#8221;) or true (anything else). When the pattern returns true, the rules is executed.</p>
+
+<h3>Regular expression patterns</h3>
+
+<p>Regular expressions can be used as pattern; they match the entire line. An exclamation mark reverses the match. Boolean operators can be used to combine patterns</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># print lines with an email address</span>
+</span><span class='line'><span class="c"># (very lazy match - will only work if all email addresses are well formed)</span>
+</span><span class='line'>/@/ <span class="o">{</span> print <span class="nv">$3</span><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># prints all lines except those with a gmail address</span>
+</span><span class='line'>! /@gmail<span class="se">\.</span>/ <span class="o">{</span> print <span class="nv">$0</span> <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># prints lines with an @ and the sequence 0160</span>
+</span><span class='line'>/@/ <span class="o">&amp;&amp;</span> /0160/ <span class="o">{</span> print <span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The regular expressions above are a shortcut for <code>$0 ~ /pattern/</code>, i.e. &#8220;apply the regexp to whole line&#8221;. Similar rules can be made for individual fields&#8230;</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># matches only the regx on one field</span>
+</span><span class='line'><span class="nv">$1</span> ~ /Anthony/ <span class="o">{</span> print <span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>..and all expressions seen so far</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># print even lines</span>
+</span><span class='line'>NR % <span class="nv">2</span> <span class="o">==</span> 0 <span class="o">{</span> print <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># print only if length of 1st field is greater than 3</span>
+</span><span class='line'><span class="c"># length is a string function mentioned above</span>
+</span><span class='line'>length<span class="o">(</span><span class="nv">$1</span><span class="o">)</span> &gt; 3 <span class="o">{</span> print <span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The reason we have been able to run program without patterns is because there is a special pattern, the empty pattern, which matches every line. In fact we could have a program which is just a pattern; the default action <code>{print}</code> would be executed.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># prints whole line, default action</span>
+</span><span class='line'><span class="nv">$1</span> <span class="o">==</span> <span class="s2">&quot;complete&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Splitting records and fields differently from default</h2>
+
+<p>By default awk treats each line as a record. In reality what it does is to split the input by a record separator, stored in the variable RS, which happens to be the new line character. You can change that in an awk program.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># separate records by semicolon</span>
+</span><span class='line'><span class="nv">$ </span><span class="nb">echo</span> <span class="s2">&quot;1 2 3;4 5 6;7 8 9&quot;</span> | awk <span class="s1">&#39;BEGIN {RS = &quot;;&quot; }</span>
+</span><span class='line'><span class="s1">&gt;                                 {print}&#39;</span>
+</span><span class='line'>1 2 3
+</span><span class='line'>4 5 6
+</span><span class='line'>7 8 9
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Something similar is possible with the field separator, which is stored in the variable FS. By default it is equal to the regexp <code>[ \t\n]+</code>, i.e. any number of consectuve spaces of any type. Note that in reality awk cheats - leaving FS default doesn&#8217;t just mean setting it to <code>[ \t\n]+</code>, but also trimming $0 of leading and trailing empty space before processing it.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># separate fields by comma</span>
+</span><span class='line'><span class="nv">$ </span><span class="nb">echo</span> <span class="s2">&quot;1,2,3</span>
+</span><span class='line'><span class="s2">4,5,6</span>
+</span><span class='line'><span class="s2">7,8,9&quot;</span> | awk <span class="s1">&#39;BEGIN {FS = &quot;,&quot; }</span>
+</span><span class='line'><span class="s1">&gt;             {print}&#39;</span>
+</span><span class='line'>1,2,3
+</span><span class='line'>4,5,6
+</span><span class='line'>7,8,9
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You can combine the two together if, for example, your data has one field per line and records are separated by multiple lines - an empty RS means &#8220;any number of consecutive \n &#8220;&#8221;</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># assume this data</span>
+</span><span class='line'>homer simpson
+</span><span class='line'>dad
+</span><span class='line'>
+</span><span class='line'>marge simpson
+</span><span class='line'>mum
+</span><span class='line'>
+</span><span class='line'><span class="c"># separate records by any number of newlines, and have one field per line</span>
+</span><span class='line'>BEGIN <span class="o">{</span><span class="nv">RS</span><span class="o">=</span><span class="s2">&quot;&quot;</span>; <span class="nv">FS</span><span class="o">=</span><span class="s2">&quot;\n&quot;</span><span class="o">}</span>
+</span><span class='line'><span class="o">{</span> print <span class="nv">$1</span> <span class="s2">&quot; (&quot;</span> <span class="nv">$2</span> <span class="s2">&quot;)&quot;</span> <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>-&gt; homer simpson <span class="o">(</span>dad<span class="o">)</span>
+</span><span class='line'>   marge simpson <span class="o">(</span>mum<span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Passing option to awk</h2>
+
+<p>A field separator (but not a record separator) can be also passed to an awk program in two ways. First of all, awk has a special option for it, -F (note that there is no space between it and the separator). And awk allow passing of variables with the -v syntax, so you could just pass FS that way.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># change separator from within program</span>
+</span><span class='line'>BEGIN <span class="o">{</span><span class="nv">FS</span> <span class="o">=</span> <span class="s2">&quot;,&quot;</span> <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># pass separator with special option -F - note that you don&#39;t need quotes</span>
+</span><span class='line'><span class="nv">$ </span><span class="nb">echo</span> <span class="s2">&quot;1,2,3</span>
+</span><span class='line'><span class="s2">&gt; 4,5,6&quot;</span> | awk -F, <span class="s1">&#39;{print}&#39;</span>
+</span><span class='line'>1,2,3
+</span><span class='line'>4,5,6
+</span><span class='line'>
+</span><span class='line'><span class="c"># pass separator as external var with -v</span>
+</span><span class='line'><span class="nv">$ </span><span class="nb">echo</span> <span class="s2">&quot;1,2,3</span>
+</span><span class='line'><span class="s2">&gt; 4,5,6&quot;</span> | awk -v <span class="nv">FS</span><span class="o">=</span><span class="s2">&quot;,&quot;</span> <span class="s1">&#39;{print}&#39;</span>
+</span><span class='line'>1,2,3
+</span><span class='line'>4,5,6i
+</span><span class='line'>
+</span><span class='line'><span class="c"># in fact you can pass any variable of your choice with -v</span>
+</span><span class='line'><span class="nv">$ </span><span class="nb">echo</span> <span class="s2">&quot;&quot;</span> | awk -v <span class="nv">WHAT</span><span class="o">=</span><span class="s2">&quot;grow up&quot;</span> <span class="s1">&#39;{print &quot;All children, except one, &quot; WHAT}&#39;</span>
+</span><span class='line'>All children, except one, grow up
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Reading CSV files in awk</h2>
+
+<p>The naive approach would be to simply set FS=&#8221;,&#8221; - but that doesn&#8217;t cover the fact that some fields are surrounded by quotation marks and others aren&#8217;t, and sometimes you have newlines and / or commas inside a field. <a href="http://www.linuxquestions.org/questions/programming-9/awk-with-csv-files-881103/">Here are some examples scripts</a> people have put together to solve the issues. They are also good examples of fairly complex awk scripts.</p>
+
+<p>Personally I think that&#8217;s taking things too far - if you have to force awk to create arrays to store  manipulated record fragments you may as well use a fully fledged scripting language.</p>
+
+<h2>Learning more about awk</h2>
+
+<p>With that all the main awk topics were touched on. If you want to go deeper I recomend <a href="http://www.staff.science.uu.nl/~oostr102/docs/nawk/nawk_toc.html">The AWK Manual</a>, or <a href="http://shop.oreilly.com/product/9780596000707.do">one of the O&#8217;Reilly books</a></p>
+</div>
+	</div>
+</article>
+
+
+<section id="comment">
+    <h1 class="title">Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+
+  </div>
+	<footer id="footer" class="inner">Copyright &copy; 2015
+
+    Fabrizio (Fritz) Stelluto
+
+</footer>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="/javascripts/slash.js"></script>
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'goto-fritz';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://gotofritz.net/blog/geekery/back-to-the-classics-awk/';
+        var disqus_url = 'http://gotofritz.net/blog/geekery/back-to-the-classics-awk/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-11254155-2']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+</body>
+</html>
