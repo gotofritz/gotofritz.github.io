@@ -90,7 +90,7 @@
 				<span class="comments"><a href="/blog/geekery/back-to-the-classics-awk/#disqus_thread">Comments</a></span>
 			
 		</div>
-		<div class="entry-content"><p>In this age of npm and github and easily available modules in any language of your choice, it is easy to forget the old Unix workhorses. Here&#8217;s a look at awk, a shell utility that allows you to treat and manipulate text files as if they were databases.</p>
+		<div class="entry-content"><p>In this age of npm and github and easily available modules in any language of your choice, it is easy to forget the old Unix workhorses. Here&#8217;s a look at awk, a shell utility that allows you to treat and manipulate text files as if they were databases. In <a href="/blog/geekery/a-selection-of-akw-scripts/">Part 2</a> there are a few sample scripts.</p>
 
 <!--more-->
 
@@ -98,6 +98,8 @@
 <h2>What is awk?</h2>
 
 <p><code>Awk</code> is both the name of the command line utility, and the language used for it. It was invented at Bells Labs at the peak of punk rock, 1977, and its name is simply the initials of its three creators. Awk reads input (a file, or a stream) one line (one &#8220;record&#8221;) at the time, splits it into fields by blank space (these are all defaults that can be changed), and then uses the instructions in the awk language to manipulate these fields and generate some output. The ability to read files as streams is a big plus - it means the memory footprint is the same if you read a file of 1Kb or 200Tb; for a larger file it will just take longer.</p>
+
+<p>Awk is standard with the version of bash that comes with OS X, and several others. There is another variant which is widespread - gawk, GNU awk. It is actually better than the original, because it offers array sort and length functions, the ability to include files, and more flexible rules for splitting input in fields. Here I will limit myself to the standard awk.</p>
 
 <h3>Example awk in action</h3>
 
@@ -156,6 +158,8 @@
 </span><span class='line'><span class="err">$</span>
 </span></code></pre></td></tr></table></div></figure>
 
+
+<p>Despite its simplicity, you can take awk quite far - for example creating <a href="http://awk.info/?doc/story.html">a random sci-fi plot generator</a>.</p>
 
 <h2>Running awk programs and redirecting input, output</h2>
 
@@ -665,6 +669,8 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
+<p>Note that arrays in awk are pretty awkward. There are no built in functions to deal with them except for the for &#8230; in loop. If you need to sort, or even just find out the length, you&#8217;ll have to write your own functions. There are a couple in <a href="/blog/geekery/a-selection-of-akw-scripts/">Part 2</a>. Alternatively, use gawk which has <a href="https://www.gnu.org/software/gawk/manual/gawk.html#Arrays">better array handling</a>.</p>
+
 <h3>Regular expressions</h3>
 
 <p>A regular expression (regexp) is a mini programming language which is used to describe variable strings; it is embedded in most programming languages.
@@ -983,6 +989,29 @@ Regexps are enclosed in slashes and use a combination of literal characters and 
 
 <p>There are a number of built in functions: numeric ones like cosine, square root, random; string functions like print or string length; time functions and bitwise functions. You can easily find out what they are by looking at the output of <code>man awk</code>.</p>
 
+<p>Worth nothing that besides <code>print</code> awk also offers <code>printf</code>, i.e. &#8220;print formatted&#8221;. Printf is common to many Unix tools and languages. You give a string with some placeholders and rules, and then you pass variables to &#8220;plug in&#8221; those placeholders. The important thing is the rules, which control things like right alignment, decimal precision, zero padding for numbers, etc. A statement looks like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="o">{</span> <span class="nb">printf</span> <span class="s2">&quot;%-10s %04.3f%% \n&quot;</span>, <span class="nv">$1</span>, <span class="nv">$2</span> <span class="o">}</span>
+</span><span class='line'><span class="c"># placeholders start with %</span>
+</span><span class='line'><span class="c"># %-10s is a string (s), and is left aligned (-) within a field 10 spaces wide (10)</span>
+</span><span class='line'><span class="c"># %07.3f is a decimal number or float (f), the toal length has to be at least 7</span>
+</span><span class='line'><span class="c">#        characters (7) and is padded with zeroes if too small (0) and has</span>
+</span><span class='line'><span class="c">#        3 decimals (3) and minimum 3 in the integer part (7 - 3 decimals - the point)</span>
+</span><span class='line'><span class="c"># %% if you want to print an actual %, you need to type it twice %%</span>
+</span><span class='line'><span class="c"># \n you need to supply the new line manually</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><a href="http://www.math.utah.edu/docs/info/gawk_7.html#SEC61">More information on printf</a>.</p>
+
 <h3>User defined functions</h3>
 
 <p>You can define functions anywhere in your code, outside actions. They are pretty similar to Javascript</p>
@@ -1190,11 +1219,52 @@ Regexps are enclosed in slashes and use a combination of literal characters and 
 
 <p>Personally I think that&#8217;s taking things too far - if you have to force awk to create arrays to store  manipulated record fragments you may as well use a fully fledged scripting language.</p>
 
+<p>Another approach is to use gawk, and <a href="https://www.gnu.org/software/gawk/manual/gawk.html#Splitting-By-Content">its FPAT variable</a></p>
+
 <h2>Learning more about awk</h2>
 
 <p>With that all the main awk topics were touched on. If you want to go deeper I recomend <a href="http://www.staff.science.uu.nl/~oostr102/docs/nawk/nawk_toc.html">The AWK Manual</a>, or <a href="http://shop.oreilly.com/product/9780596000707.do">one of the O&#8217;Reilly books</a></p>
 </div>
 	</div>
+</article>
+
+<article class="archives">
+  <div class="related-posts">
+    <h2>Related Posts</h2>
+    
+      <article>
+        <h3 class="title"><a href="/blog/geekery/a-selection-of-akw-scripts/">A selection of akw scripts</a></h3>
+        <div class="meta">
+          <span class="tags">
+
+
+	<a class='category' href='/blog/cat/geekery/'>Geekery</a>
+
+
+</span>
+            
+          <time datetime="2015-07-15T23:19:00+02:00" pubdate>2015-07-15</time>
+            
+        </div>
+      </article>
+    
+      <article>
+        <h3 class="title"><a href="/blog/geekery/storing-bash-profile-and-so-on-on-github/">dotfiles</a></h3>
+        <div class="meta">
+          <span class="tags">
+
+
+	<a class='category' href='/blog/cat/geekery/'>Geekery</a>
+
+
+</span>
+            
+          <time datetime="2015-07-15T23:19:00+02:00" pubdate>2015-07-15</time>
+            
+        </div>
+      </article>
+    
+  </div>
 </article>
 
 
