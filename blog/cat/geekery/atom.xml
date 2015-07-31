@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Geekery | Fabrizio (Fritz) Stelluto]]></title>
   <link href="http://gotofritz.net/blog/cat/geekery/atom.xml" rel="self"/>
   <link href="http://gotofritz.net/"/>
-  <updated>2015-07-28T00:08:22+02:00</updated>
+  <updated>2015-08-01T01:10:26+02:00</updated>
   <id>http://gotofritz.net/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -398,6 +398,30 @@ function swap(A, i, j,   t) {
   SNP:  4.7%
 Green:  3.8%
 </code></p>
+
+<h2>Print first or last x characters of a line</h2>
+
+<p>You can easily mimick <code>head -c</code> or <code>tail -c</code> with awk - if you really want to.
+``` bash</p>
+
+<h1>equivalent</h1>
+
+<p>$ awk '{print substr($0, 1, 32)}' xxx
+$ head -c 32 xxx</p>
+
+<h1>equivalent</h1>
+
+<p>$ awk 'END {print substr($0, length($0) - 30, 32)}' xxx
+$ tail -c 32 xxx
+```</p>
+
+<p>But with awk you can also skip a few characters into a file
+``` bash</p>
+
+<h1>no heard or tail equivalent - print characters 32 to 64</h1>
+
+<p>$ awk '{print substr($0, 32, 32)}' xxx
+```</p>
 
 <h2>Other examples</h2>
 

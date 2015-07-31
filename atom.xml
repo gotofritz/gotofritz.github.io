@@ -4,7 +4,7 @@
   <title><![CDATA[Fabrizio (Fritz) Stelluto]]></title>
   <link href="http://gotofritz.net/atom.xml" rel="self"/>
   <link href="http://gotofritz.net/"/>
-  <updated>2015-07-28T00:08:22+02:00</updated>
+  <updated>2015-08-01T01:10:26+02:00</updated>
   <id>http://gotofritz.net/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -586,6 +586,36 @@
 </span><span class='line'>   LD:  7.9%
 </span><span class='line'>  SNP:  4.7%
 </span><span class='line'>Green:  3.8%
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Print first or last x characters of a line</h2>
+
+<p>You can easily mimick <code>head -c</code> or <code>tail -c</code> with awk - if you really want to.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># equivalent</span>
+</span><span class='line'><span class="nv">$ </span>awk <span class="s1">&#39;{print substr($0, 1, 32)}&#39;</span> xxx
+</span><span class='line'><span class="nv">$ </span>head -c 32 xxx
+</span><span class='line'>
+</span><span class='line'><span class="c"># equivalent</span>
+</span><span class='line'><span class="nv">$ </span>awk <span class="s1">&#39;END {print substr($0, length($0) - 30, 32)}&#39;</span> xxx
+</span><span class='line'><span class="nv">$ </span>tail -c 32 xxx
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>But with awk you can also skip a few characters into a file</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># no heard or tail equivalent - print characters 32 to 64</span>
+</span><span class='line'><span class="nv">$ </span>awk <span class="s1">&#39;{print substr($0, 32, 32)}&#39;</span> xxx
 </span></code></pre></td></tr></table></div></figure>
 
 
