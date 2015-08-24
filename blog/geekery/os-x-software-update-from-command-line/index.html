@@ -1,0 +1,304 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>OS X Software Update from the Command Line - Fabrizio (Fritz) Stelluto</title>
+	<meta name="author" content="">
+
+	
+	<meta name="description" content="Software updates can be quite tedious - you have to click a lot of buttons, then get into the Apple Store etc. But you can avoid all that by running &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="Fabrizio (Fritz) Stelluto" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.ico" rel="shortcut icon">
+	<link rel="icon" href="/favicon.gif" type="image/gif" />
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	
+</head>
+
+
+<body ontouchstart="">
+
+  <header id="header" class="inner">
+<nav id="main-nav"><div>
+  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+  <a href="/">home</a>
+  <a href="/blog/">blog</a>
+</div></nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><div>
+  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+  <a href="/">home</a>
+  <a href="/blog/">blog</a>
+</div></div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="http://google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:gotofritz.net">
+			</form>
+		</div>
+	</div>
+</nav>
+
+<nav id="sub-nav" class="alignright">
+	<form class="search" action="http://google.com/search" method="get">
+		<input class="alignright" type="text" name="q" results="0">
+		<input type="hidden" name="q" value="site:gotofritz.net">
+	</form>
+</nav>
+
+</header>
+	
+		
+	
+	<div id="content" class="inner">
+    
+    <article class="post">
+	<h1 class="title">OS X Software Update From the Command Line</h1>
+	<div>
+		<div class="meta">
+			<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-08-25T00:41:00+02:00" pubdate data-updated="true">2015-08-25, Tue</time></div>
+			<div class="tags">
+
+
+	<a class='category' href='/blog/cat/geekery/'>Geekery</a>
+
+
+</div>
+			
+				<span class="comments"><a href="/blog/geekery/os-x-software-update-from-command-line/#disqus_thread">Comments</a></span>
+			
+		</div>
+		<div class="entry-content"><p>Software updates can be quite tedious - you have to click a lot of buttons, then get into the Apple Store etc. But you can avoid all that by running it from the command line.</p>
+
+<!--more-->
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>sudo softwareupdate -i -r
+</span><span class='line'>Password:
+</span><span class='line'>Software Update Tool
+</span><span class='line'>Copyright 2002-2012 Apple Inc.
+</span><span class='line'>
+</span><span class='line'>Finding available software
+</span><span class='line'>
+</span><span class='line'>Downloaded OS X Update
+</span><span class='line'>Installing OS X Update
+</span><span class='line'>Done.
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Which breaks down as</p>
+
+<dl class="code-breakdown">
+  <dt>sudo</dt>
+  <dd>needs to run as admin (you will have to enter a password after you type return)</dd>
+
+  <dt>softwareupdate</dt>
+  <dd>this is the command line utility that does the job</dd>
+
+  <dt>-i</dt>
+  <dd>install - you can specify what to install, all, or just&#8230;</dd>
+
+  <dt>-r</dt>
+  <dd>&#8230;the recommended updates</dd>
+</dl>
+
+
+<p>This is all there is to it.</p>
+
+<h2>Slightly more complex usage of softwareupdate</h2>
+
+<p>You can ask for a list of available software before you install:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>softwareupdate -l
+</span><span class='line'>Software Update Tool
+</span><span class='line'>Copyright 2002-2012 Apple Inc.
+</span><span class='line'>
+</span><span class='line'>Finding available software
+</span><span class='line'>Software Update found the following new or updated software:
+</span><span class='line'>  * MacBookAirEFIUpdate2.4-2.4
+</span><span class='line'>       MacBook Air EFI Firmware Update <span class="o">(</span>2.4<span class="o">)</span>, 3817K <span class="o">[</span>recommended<span class="o">]</span> <span class="o">[</span>restart<span class="o">]</span>
+</span><span class='line'>  * ProAppsQTCodecs-1.0
+</span><span class='line'>       ProApps QuickTime codecs <span class="o">(</span>1.0<span class="o">)</span>, 968K <span class="o">[</span>recommended<span class="o">]</span>
+</span><span class='line'>  * JavaForOSX-1.0
+</span><span class='line'>       Java <span class="k">for </span>OS X 2012-005 <span class="o">(</span>1.0<span class="o">)</span>, 65288K <span class="o">[</span>recommended<span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You can then install individual packages by simply naming them</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>sudo softwareupdate -i JavaForOSX-1.0
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Or you can ignore some packages and then install everything else (<code>-a, all</code>)</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>softwareupdate --ignore JavaForOSX-1.0
+</span><span class='line'><span class="nv">$ </span>sudo softwareupdate -i -a
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Note that the &#8211;ignore flag will persist until it is reset with <code>--reset-ignored</code> (which clears <em>all</em> flags)</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>softwareupdate --reset-ignored
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>More options can be viewed with <code>softwareupdate -h</code> or <code>man softwareupdate</code></p>
+</div>
+	</div>
+</article>
+
+<article class="archives">
+  <div class="related-posts">
+    <h2>Related Posts</h2>
+    
+      <article>
+        <h3 class="title"><a href="/blog/geekery/cannot-install-xcode-3-2-6-snow-leopard">Cannot install Xcode 3.2.6 on Snow Leopard</a></h3>
+        <div class="meta">
+          <span class="tags">
+
+
+	<a class='category' href='/blog/cat/geekery/'>Geekery</a>
+
+
+</span>
+            
+          <time datetime="2015-08-25T00:41:00+02:00" pubdate>2015-08-25</time>
+            
+        </div>
+      </article>
+    
+      <article>
+        <h3 class="title"><a href="/blog/geekery/os-x-extended-attibutes">Dealing with extended attributes on OS X</a></h3>
+        <div class="meta">
+          <span class="tags">
+
+
+	<a class='category' href='/blog/cat/geekery/'>Geekery</a>
+
+
+</span>
+            
+          <time datetime="2015-08-25T00:41:00+02:00" pubdate>2015-08-25</time>
+            
+        </div>
+      </article>
+    
+      <article>
+        <h3 class="title"><a href="/blog/howto/simple-voice-recording-mac">Making a simple voice recording on a Mac</a></h3>
+        <div class="meta">
+          <span class="tags">
+
+
+	<a class='category' href='/blog/cat/howto/'>HowTo</a>
+
+
+</span>
+            
+          <time datetime="2015-08-25T00:41:00+02:00" pubdate>2015-08-25</time>
+            
+        </div>
+      </article>
+    
+  </div>
+</article>
+
+
+<section id="comment">
+    <h1 class="title">Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+
+  </div>
+	<footer id="footer" class="inner">Copyright &copy; 2015
+
+    Fabrizio (Fritz) Stelluto
+
+</footer>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="/javascripts/slash.js"></script>
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'goto-fritz';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://gotofritz.net/blog/geekery/os-x-software-update-from-command-line/';
+        var disqus_url = 'http://gotofritz.net/blog/geekery/os-x-software-update-from-command-line/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-11254155-2']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+</body>
+</html>
