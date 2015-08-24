@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Geekery | Fabrizio (Fritz) Stelluto]]></title>
   <link href="http://gotofritz.net/blog/cat/geekery/atom.xml" rel="self"/>
   <link href="http://gotofritz.net/"/>
-  <updated>2015-08-01T01:10:26+02:00</updated>
+  <updated>2015-08-25T01:58:27+02:00</updated>
   <id>http://gotofritz.net/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -12,6 +12,92 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[OS X Software Update from the Command Line]]></title>
+    <link href="http://gotofritz.net/blog/geekery/os-x-software-update-from-command-line/"/>
+    <updated>2015-08-25T00:41:00+02:00</updated>
+    <id>http://gotofritz.net/blog/geekery/os-x-software-update-from-the-command-line</id>
+    <content type="html"><![CDATA[<p>Software updates can be quite tedious - you have to click a lot of buttons, then get into the Apple Store etc. But you can avoid all that by running it from the command line.</p>
+
+<!--more-->
+
+
+<p>``` bash
+$ sudo softwareupdate -i -r
+Password:
+Software Update Tool
+Copyright 2002-2012 Apple Inc.</p>
+
+<p>Finding available software</p>
+
+<p>Downloaded OS X Update
+Installing OS X Update
+Done.
+```</p>
+
+<p>Which breaks down as</p>
+
+<dl class="code-breakdown">
+  <dt>sudo</dt>
+  <dd>needs to run as admin (you will have to enter a password after you type return)</dd>
+
+  <dt>softwareupdate</dt>
+  <dd>this is the command line utility that does the job</dd>
+
+  <dt>-i</dt>
+  <dd>install - you can specify what to install, all, or just...</dd>
+
+  <dt>-r</dt>
+  <dd>...the recommended updates</dd>
+</dl>
+
+
+<p>This is all there is to it.</p>
+
+<h2>Slightly more complex usage of softwareupdate</h2>
+
+<p>You can ask for a list of available software before you install:
+```  bash
+$ softwareupdate -l
+Software Update Tool
+Copyright 2002-2012 Apple Inc.</p>
+
+<p>Finding available software
+Software Update found the following new or updated software:
+  * MacBookAirEFIUpdate2.4-2.4</p>
+
+<pre><code>   MacBook Air EFI Firmware Update (2.4), 3817K [recommended] [restart]
+</code></pre>
+
+<ul>
+<li>ProAppsQTCodecs-1.0
+   ProApps QuickTime codecs (1.0), 968K [recommended]</li>
+<li>JavaForOSX-1.0
+   Java for OS X 2012-005 (1.0), 65288K [recommended]
+```</li>
+</ul>
+
+
+<p>You can then install individual packages by simply naming them
+<code>bash
+$ sudo softwareupdate -i JavaForOSX-1.0
+</code></p>
+
+<p>Or you can ignore some packages and then install everything else (<code>-a, all</code>)
+<code>bash
+$ softwareupdate --ignore JavaForOSX-1.0
+$ sudo softwareupdate -i -a
+</code></p>
+
+<p>Note that the --ignore flag will persist until it is reset with <code>--reset-ignored</code> (which clears <em>all</em> flags)
+<code>bash
+$ softwareupdate --reset-ignored
+</code></p>
+
+<p>More options can be viewed with <code>softwareupdate -h</code> or <code>man softwareupdate</code></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[A selection of akw scripts]]></title>
@@ -1693,67 +1779,6 @@ Applications Desktop Documents ...
 <li><a href="http://www.december.com/unix/tutor/pipesfilters.html">Intro to Unix: Pipes and Filters</a></li>
 </ul>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[How to generate an error in a Gulp task]]></title>
-    <link href="http://gotofritz.net/blog/geekery/how-to-generate-error-in-gulp-task/"/>
-    <updated>2015-04-27T12:29:00+02:00</updated>
-    <id>http://gotofritz.net/blog/geekery/how-to-generate-an-error-in-a-gulp-task</id>
-    <content type="html"><![CDATA[<p>When writing a Gulp task that doesn't involve streams, how do you throw an error?</p>
-
-<!--more-->
-
-
-<h2>Motivation</h2>
-
-<p><a href="http://gulpjs.com/">Gulp</a>, is a popular javscript build tool for web development. Gulp tasks are based around <a href="https://github.com/substack/stream-handbook">streams</a>; but sometimes streams are too clumsy when you want to do a simple task. Say you want to check a JSON file conforms to certain rule. It's much easier to require the file, check what you need to check, and then throw an error if you need to than it is opening the file as a stream and validating it.</p>
-
-<p>But how do you throw an error in Gulp "the proper way", i.e. not just by throwing a standard JS error?</p>
-
-<h2>Validating a package.json file</h2>
-
-<p>I had to validate a package json file to make sure all packages were installed with the <code>--save-dev</code> flag. In other words, all dependencies should be in exact semantic format, <code>1.2.3</code> instead of the default <code>^1.2.3</code> or <code>~1.2.3</code>. It is simply enough in plain node, without the extra complication of streams - you require package.json, then test each dependency.</p>
-
-<p>``` js
-gulp.task(taskName, function (cb) {
-  var gutil = require("gulp-util");
-  var packageData = require("./package.json");</p>
-
-<p>  // we test all three types of dependencies
-  ["devDependencies", "dependencies", "optionalDependencies"]
-  .forEach(function validateAnObj(key) {</p>
-
-<pre><code>// load each dependency
-Object.keys(packageData[key])
-.forEach(function validateAField(field) {
-
-  // check the version complies
-  var hasInvalidVersion = (/[^0-9.]/.test(packageData[key][field]));
-
-  // this is where the magic happens
-  if (hasInvalidVersion) {
-    throw new gutil.PluginError({
-      plugin: taskName,
-      message: field + " in " + key + " has non compliant versioning: " + packageData[key][field]
-    });
-  }
-});
-</code></pre>
-
-<p>  });
-});
-```</p>
-
-<h2>Throwing an error with gulp</h2>
-
-<p>The easiset way to throw a gulp-y error is to use <code>gulp-util</code>, which has a PluginError that can be thrown. <a href="https://github.com/gulpjs/gulp-util#user-content-new-pluginerrorpluginname-message-options">Here is the documentation for PluginError</a>. <code>plugin</code> and <code>message</code> get outputted on separate lines; they are basically a title message and a message body.
-There are also a couple of options that can be passed, do refer to the documentation.</p>
-
-<h2>This is not using gulp the way it was meant to be</h2>
-
-<p>There isn't always a benefit in turning simple problems into a stream problem. Hope this info was useful.</p>
 ]]></content>
   </entry>
   

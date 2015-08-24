@@ -4,7 +4,7 @@
   <title><![CDATA[Fabrizio (Fritz) Stelluto]]></title>
   <link href="http://gotofritz.net/atom.xml" rel="self"/>
   <link href="http://gotofritz.net/"/>
-  <updated>2015-08-01T01:10:26+02:00</updated>
+  <updated>2015-08-25T01:58:27+02:00</updated>
   <id>http://gotofritz.net/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -12,6 +12,116 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[OS X Software Update from the Command Line]]></title>
+    <link href="http://gotofritz.net/blog/geekery/os-x-software-update-from-command-line/"/>
+    <updated>2015-08-25T00:41:00+02:00</updated>
+    <id>http://gotofritz.net/blog/geekery/os-x-software-update-from-the-command-line</id>
+    <content type="html"><![CDATA[<p>Software updates can be quite tedious - you have to click a lot of buttons, then get into the Apple Store etc. But you can avoid all that by running it from the command line.</p>
+
+<!--more-->
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>sudo softwareupdate -i -r
+</span><span class='line'>Password:
+</span><span class='line'>Software Update Tool
+</span><span class='line'>Copyright 2002-2012 Apple Inc.
+</span><span class='line'>
+</span><span class='line'>Finding available software
+</span><span class='line'>
+</span><span class='line'>Downloaded OS X Update
+</span><span class='line'>Installing OS X Update
+</span><span class='line'>Done.
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Which breaks down as</p>
+
+<dl class="code-breakdown">
+  <dt>sudo</dt>
+  <dd>needs to run as admin (you will have to enter a password after you type return)</dd>
+
+  <dt>softwareupdate</dt>
+  <dd>this is the command line utility that does the job</dd>
+
+  <dt>-i</dt>
+  <dd>install - you can specify what to install, all, or just&#8230;</dd>
+
+  <dt>-r</dt>
+  <dd>&#8230;the recommended updates</dd>
+</dl>
+
+
+<p>This is all there is to it.</p>
+
+<h2>Slightly more complex usage of softwareupdate</h2>
+
+<p>You can ask for a list of available software before you install:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>softwareupdate -l
+</span><span class='line'>Software Update Tool
+</span><span class='line'>Copyright 2002-2012 Apple Inc.
+</span><span class='line'>
+</span><span class='line'>Finding available software
+</span><span class='line'>Software Update found the following new or updated software:
+</span><span class='line'>  * MacBookAirEFIUpdate2.4-2.4
+</span><span class='line'>       MacBook Air EFI Firmware Update <span class="o">(</span>2.4<span class="o">)</span>, 3817K <span class="o">[</span>recommended<span class="o">]</span> <span class="o">[</span>restart<span class="o">]</span>
+</span><span class='line'>  * ProAppsQTCodecs-1.0
+</span><span class='line'>       ProApps QuickTime codecs <span class="o">(</span>1.0<span class="o">)</span>, 968K <span class="o">[</span>recommended<span class="o">]</span>
+</span><span class='line'>  * JavaForOSX-1.0
+</span><span class='line'>       Java <span class="k">for </span>OS X 2012-005 <span class="o">(</span>1.0<span class="o">)</span>, 65288K <span class="o">[</span>recommended<span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You can then install individual packages by simply naming them</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>sudo softwareupdate -i JavaForOSX-1.0
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Or you can ignore some packages and then install everything else (<code>-a, all</code>)</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>softwareupdate --ignore JavaForOSX-1.0
+</span><span class='line'><span class="nv">$ </span>sudo softwareupdate -i -a
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Note that the &#8211;ignore flag will persist until it is reset with <code>--reset-ignored</code> (which clears <em>all</em> flags)</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>softwareupdate --reset-ignored
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>More options can be viewed with <code>softwareupdate -h</code> or <code>man softwareupdate</code></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[A selection of akw scripts]]></title>
@@ -4042,15 +4152,6 @@ So that tells me that svn 1.7.something is called <code>subversion17</code> in H
 <p>I run it on playlists of up to 5000 items and it worked ok, with only 1% of files that couldn&#8217;t be copied (weird character encoding introduced by iTunes that couldn&#8217;t be decoded easily). I can live with that.</p>
 
 <p>Obviously there are lots of possible improvements, but I only had a window of a couple of hours and it was great just to get something that did the job.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Hallo pro!vision]]></title>
-    <link href="http://gotofritz.net/blog/news/goodbye-akqa-hallo-provision/"/>
-    <updated>2013-04-03T11:37:00+02:00</updated>
-    <id>http://gotofritz.net/blog/news/hallo-pro-slash-vision</id>
-    <content type="html"><![CDATA[<p>After two and a half years at AKQA, I am looking forward to <a href="http://www.pro-vision.de/de.html" title="[new window] pro!vision GmbH" target="_blank">pro!vision</a>. An exciting new challenge.</p>
 ]]></content>
   </entry>
   
