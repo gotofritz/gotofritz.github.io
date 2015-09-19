@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Geekery | Fabrizio (Fritz) Stelluto]]></title>
   <link href="http://gotofritz.net/blog/cat/geekery/atom.xml" rel="self"/>
   <link href="http://gotofritz.net/"/>
-  <updated>2015-08-25T01:58:27+02:00</updated>
+  <updated>2015-09-19T23:50:29+02:00</updated>
   <id>http://gotofritz.net/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -12,6 +12,48 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Multiline regular expressions in Javascript]]></title>
+    <link href="http://gotofritz.net/blog/geekery/multiline-regular-expressions-javascript/"/>
+    <updated>2015-09-19T23:39:00+02:00</updated>
+    <id>http://gotofritz.net/blog/geekery/multiline-regular-expressions-in-javascript</id>
+    <content type="html"><![CDATA[<p>There are no flags to match multi-line text is in JS. But it can be done with a character class.</p>
+
+<!--more-->
+
+
+<h2>The problem</h2>
+
+<p>In both cases below we expect <code>\d.line</code> to match <code>0\nline</code> but it doesn't work - because \n are not matched by the "." character class.
+```js
+"line 0\nline1".match(/\d.line/)
+// null</p>
+
+<p>// ES6
+<code>line 0
+line1</code>.match(/\d.line/)
+// null
+```</p>
+
+<h2>The solution</h2>
+
+<p>The <code>[^]</code> character class is equivalent to . but with the newline added in
+```js
+"line 0\nline1".match(/\d[<sup>]line/)</sup>
+// ["0
+// line"]</p>
+
+<p>// ES6
+<code>line 0
+line1</code>.match(/\d[<sup>]line/)</sup>
+// ["0
+// line"]
+```</p>
+
+<p>For more info, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp#character-classes">visit the relevant MDN page</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[OS X Software Update from the Command Line]]></title>
@@ -1509,276 +1551,6 @@ this.emit("end", new gutil.PluginError(taskName, err, { showStack: true }));
 });
 <code>``
 In the example above, the function is</code>onError<code>- is the “this.emit” that does the magic.</code>gutil.log<code>is only eye candy. The onError function is connected to less with</code>.on(“error”, onError)`. And that’s all there is to it.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Why doesn't ls | echo work?]]></title>
-    <link href="http://gotofritz.net/blog/geekery/why-pipe-echo-doesnt-work/"/>
-    <updated>2015-05-28T22:58:00+02:00</updated>
-    <id>http://gotofritz.net/blog/geekery/why-pipe-echo-doesnt-work</id>
-    <content type="html"><![CDATA[<p><code>bash
-$ ls | echo
-$
-</code>
-Those new to bash often wonder why piping a command to <code>echo</code> doesn't do anything. Here's a quick explanation.</p>
-
-<!--more-->
-
-
-<h2>Streams vs. Arguments</h2>
-
-<h3>Bash commands are just programs</h3>
-
-<p>Bash commands are small (mostly..) independent programs which in theory <a href="https://en.wikipedia.org/wiki/Unix_philosophy#Do_One_Thing_and_Do_It_Well]">"do one  thing and do it well"</a>. To prove this, you can find out where they are in the filesystem with <code>which</code>
-<code>bash
-$ which ls
-/usr/local/opt/coreutils/libexec/gnubin/ls
-$
-</code></p>
-
-<h3>Standard Unix streams</h3>
-
-<p>Each of these programs can access <i>streams</i>. Streams are open ended communication channels between the program and the unix core - they used to be the keyboard and the terminal, but they are abstracted so that writing to or reading from a stream is exactly the same as doing it to a file. The "(text) terminal" was <em>the</em> way to connect to a computer remotely - it was basically one of those <a href="https://upload.wikimedia.org/wikipedia/commons/8/87/Televideo925Terminal.jpg">fat screens</a> you see in old movies. In modern computers the same functionality is carried out by a small dedicated program, which is referred as either "the shell", "the command line", "the CLI (command line interface)" or, on OS X, "Terminal".</p>
-
-<p>The three default streams are STDIN to read from (the keyboard), STDOUT to write to (the shell), and STDERR to write errors to (also the shell). Standard behaviour can be easily changed, so that an app can be made to write to a file instead of the STDOUT stream, for example.</p>
-
-<p>By default your shell app connects the keyboard as STDIN and the shell window as both STDOUT and STDERR. When you type something (STDIN) it's passed on immediately to the app which does two things - it pushes it as it is to window (STDOUT) so that you see what you've typed; and it keeps it around waiting for you to hit return. At the point it will parse what you have typed and run it as a command if it can, and print the output to the window (STDOUT); if it doesn't understand it, it will print an error message to the window (STDERR)</p>
-
-<p>``` bash</p>
-
-<h1>Terminal taking your STDIN and copying it to STDOUT</h1>
-
-<p>$ echo "hello"</p>
-
-<h1><RETURN> detected - command run and result printed to STDOUT</h1>
-
-<p>hello</p>
-
-<h1>this command wasn't understood - error message printed to STDERR (which</h1>
-
-<h1>in Terminal is exactly the same window as STDOUT)</h1>
-
-<p>$ gibberish
--bash: gibberish: command not found
-```</p>
-
-<p>A shell program will also get the same STDOUT, STDIN and STDERR as Terminal - depending on the program, you may get the same output twice.
-``` bash</p>
-
-<h1>program "cat" recognized and started</h1>
-
-<p>$ cat</p>
-
-<h1>it just sits there and collects everything you type in STDIN until</h1>
-
-<h1>you type <RETURN> then it prints it to STDOUT</h1>
-
-<h1>meanwhile your shell window is also pushing everything it gets to STDOUT,</h1>
-
-<h1>therefore you get it twice</h1>
-
-<p>line1 # printed to STDOUT by shell window as you type
-line1 # printed to STDOUT by cat when you typed <RETURN>
-line2 # printed to STDOUT by shell window as you type
-line2 # etc</p>
-
-<h1>to quit the shell program normally you use <CTRL-C></h1>
-
-<p>$
-```</p>
-
-<h3>Streams redirection</h3>
-
-<p>You can easily redirect one of the three standard streams to something else - typically a file. To redirect STDOUT, use &gt;
-``` bash</p>
-
-<h1>program cat recognized; STDOUT redirected to a file</h1>
-
-<p>$ cat > test.txt</p>
-
-<h1>your shell window is still printing to STDOUT as you type; but cat</h1>
-
-<h1>itself is not, it is printing to the text file.</h1>
-
-<h1>So this time you only get each line once</h1>
-
-<p>line1 # printed to STDOUT by shell window as you type
-line2 # printed to STDOUT by shell window as you type</p>
-
-<h1>to quit the shell program normally you use <CTRL-C></h1>
-
-<p>$</p>
-
-<h1>if you open your text file, it will have the text you have just typed inside</h1>
-
-<p>$ open test.txt
-```</p>
-
-<p>STDIN is redirected with &lt;
-``` bash</p>
-
-<h1>program cat recognized; instead of taking STDIN from keyboard, use a file</h1>
-
-<p>$ cat &lt; test.txt</p>
-
-<h1>all the text in the file is printed out in one go</h1>
-
-<p>line1
-line2
-line3
-```</p>
-
-<p>STDERR is redirected with 2&gt;
-``` bash</p>
-
-<h1>error printed to STDERR</h1>
-
-<p>$ cat gibberish
-cat: gibberish: No such file or directory</p>
-
-<h1>STDERR redirected to "the null device", i.e. an address on Unix systems</h1>
-
-<h1>that absorbs all error messages and suppresses them</h1>
-
-<p>$ cat gibberish 2> /dev/null</p>
-
-<h1>no output - it's disappeared into /dev/null</h1>
-
-<p>```</p>
-
-<h3>Program arguments</h3>
-
-<p>Programs can also have <i>arguments</i> - these are values that are typically typed in and passed to the program by Bash as an array. Arguments are space separated (you can use quotation marks to include a space as part of the argument).</p>
-
-<p>``` bash</p>
-
-<h1>program "echo" called, and 3 arguments passed to it - a, b, and c</h1>
-
-<p>$ echo  a b c</p>
-
-<h1>echo does its thing - which is simply to print out arguments</h1>
-
-<p>a b c
-$</p>
-
-<h1>this time echo is called with one argument - the complete sentence</h1>
-
-<p>$ echo "What’s it going to be then, eh?"</p>
-
-<h1>in the case of echo, the result looks exactly the same. It may not do for other programs</h1>
-
-<p>What’s it going to be then, eh?
-$
-```</p>
-
-<p>A lot of programs support both arguments and STDIN / STDOUT; but they don't have to. Take grep for example - a program that prints out the input if it matches a pattern. When you run it, it looks at how many arguments it was passed to decide what to do:
-``` bash</p>
-
-<h1>grep called with two arguments: export and ~/.bash_profile</h1>
-
-<p>$ grep "export" ~/.bash_profile</p>
-
-<h1>it runs on the file .bash_profile in your home folder (~/) and prints out each</h1>
-
-<h1>line that matches the pattern</h1>
-
-<p>export PATH="$HOME/bin:$PATH"
-$
-```
-When it detects two arguments, it treats the first  as a pattern, and the second as the path of a file to open and read line by line. It then prints any line in the file that include the pattern</p>
-
-<p>But grep also supports STDIN:
-``` bash</p>
-
-<h1>grep called with only one argument: export. Instead of connecting to a file,</h1>
-
-<h1>it waits for input on STDIN</h1>
-
-<p>$ grep "export"</p>
-
-<h1>Terminal prints what you type to STDOUT, as usual</h1>
-
-<p>I am now typing something</p>
-
-<h1>still Terminal...</h1>
-
-<p>grep is looking for the string export - will it find it?</p>
-
-<h1>grep has detected "export" in its STDIN - so it prints it to STDOUT</h1>
-
-<p>grep is looking for the string export - will it find it?
-$
-<code>``
-With only one argument, the programmers who created</code>grep` decided to treat the first argument as a pattern as before, and to wait for input from STDIN. It makes sense since with only one argument it wouldn't know which file to open. In the example above I start typing some random stuff and press return, and when grep finds the string matching the patter in my text it will spit out the string again.</p>
-
-<h3>Streams piping</h3>
-
-<p>What makes Unix so useful is that you can connect small programs together by joining the STDOUT of a program with the STDIN of another - using the pipe character, <code>|</code>, and because streams are treated like files, it will just work. But you already knew that.
-``` bash</p>
-
-<h1>the STDOUT of the ps program is connected to the STDIN of grep</h1>
-
-<p>$ ps -ef | grep httpd
-....
-$
-```</p>
-
-<h2>Why can't you pipe a command to echo?</h2>
-
-<p>With all that out of the way, the explanation is quite simple - piping commands to <code>echo</code> does not work, because echo was not programmed to care about STDIN. All it's wired up to do is to take the <i>arguments</i> and copy them to STDOUT.
-``` bash</p>
-
-<h1>ls puts the output on STDOUT, which is connected to echo's STDIN</h1>
-
-<h1>but echo ignores STDIN, all it cares about is command line arguments</h1>
-
-<p>$ ls | echo
-$
-<code>
-So if your command ignores STDIN, what you have to do is to find a different one which does the same thing, but also reads from STDIN. In the case of echo, that substitute is `cat`, which as we saw above, does what echo does, but using STDIN as input:
-</code>
-$ ls ~/ | cat
-Applications
-Desktop
-...
-$
-```
-But that's not the whole story.</p>
-
-<h2>Using xargs to transform STDIN to arguments</h2>
-
-<p>Turns out you <i>can</i> pipe to echo, if you use <code>xargs</code>. Xargs is a command that takes STDIN and turns it into arguments for a <i>command</i> (if it finds no command it will use echo). So:
-``` bash</p>
-
-<h1>xargs is basically creating the command: echo Applications Desktop Documents ...</h1>
-
-<p>$ ls ~/ | xargs echo
-Applications Desktop Documents ...
-$
-<code>``
-Notice the difference between</code>cat<code>and</code>xargs`. cat adds newlines - it treats each space separated word as a different input. xargs instead removes newlines - part of its purpose is to normalize blank spaces, tabs and newlines into a consistent format.</p>
-
-<p>You can see that better by passing the argument -1 to ls, which prints the arguments one per line:
-<code>bash
-$ ls -1 ~/
-Applications
-Desktop
-...
-$  ls -1 ~/ | xargs echo
-Applications Desktop Documents ...
-</code></p>
-
-<h2>Further reading</h2>
-
-<p>There is lots of info around the web, here are a couple of simple links:</p>
-
-<ul>
-<li><a href="https://gigaom.com/2009/07/01/dig-into-unix-standard-streams/">Dig Into Unix: Standard Streams</a></li>
-<li><a href="http://www.westwind.com/reference/OS-X/commandline/pipes.html">Pipes and Redirects</a> and</li>
-<li><a href="http://www.december.com/unix/tutor/pipesfilters.html">Intro to Unix: Pipes and Filters</a></li>
-</ul>
-
 ]]></content>
   </entry>
   
