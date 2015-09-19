@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Geekery | Fabrizio (Fritz) Stelluto]]></title>
   <link href="http://gotofritz.net/blog/cat/geekery/atom.xml" rel="self"/>
   <link href="http://gotofritz.net/"/>
-  <updated>2015-09-19T23:50:29+02:00</updated>
+  <updated>2015-09-19T23:55:25+02:00</updated>
   <id>http://gotofritz.net/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -25,7 +25,7 @@
 
 <h2>The problem</h2>
 
-<p>In both cases below we expect <code>\d.line</code> to match <code>0\nline</code> but it doesn't work - because \n are not matched by the "." character class.
+<p>In both cases below we expect <code>\d.line</code> to match <code>0\nline</code> but it doesn't work - because newlines are not matched by the <code>.</code> character class.
 ```js
 "line 0\nline1".match(/\d.line/)
 // null</p>
@@ -38,7 +38,7 @@ line1</code>.match(/\d.line/)
 
 <h2>The solution</h2>
 
-<p>The <code>[^]</code> character class is equivalent to . but with the newline added in
+<p>Use the <code>[^]</code> character class, which is equivalent to <code>.</code> but with the newline added in
 ```js
 "line 0\nline1".match(/\d[<sup>]line/)</sup>
 // ["0

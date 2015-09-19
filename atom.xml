@@ -4,7 +4,7 @@
   <title><![CDATA[Fabrizio (Fritz) Stelluto]]></title>
   <link href="http://gotofritz.net/atom.xml" rel="self"/>
   <link href="http://gotofritz.net/"/>
-  <updated>2015-09-19T23:50:29+02:00</updated>
+  <updated>2015-09-19T23:55:25+02:00</updated>
   <id>http://gotofritz.net/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -25,7 +25,7 @@
 
 <h2>The problem</h2>
 
-<p>In both cases below we expect <code>\d.line</code> to match <code>0\nline</code> but it doesn&#8217;t work - because \n are not matched by the &#8220;.&#8221; character class.</p>
+<p>In both cases below we expect <code>\d.line</code> to match <code>0\nline</code> but it doesn&#8217;t work - because newlines are not matched by the <code>.</code> character class.</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -46,7 +46,7 @@
 
 <h2>The solution</h2>
 
-<p>The <code>[^]</code> character class is equivalent to . but with the newline added in</p>
+<p>Use the <code>[^]</code> character class, which is equivalent to <code>.</code> but with the newline added in</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
