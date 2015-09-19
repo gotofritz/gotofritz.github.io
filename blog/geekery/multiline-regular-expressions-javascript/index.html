@@ -1,0 +1,201 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Multiline regular expressions in Javascript - Fabrizio (Fritz) Stelluto</title>
+	<meta name="author" content="">
+
+	
+	<meta name="description" content="There are no flags to match multi-line text is in JS. But it can be done with a character class. The problem In both cases below we expect \d.line to &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="Fabrizio (Fritz) Stelluto" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.ico" rel="shortcut icon">
+	<link rel="icon" href="/favicon.gif" type="image/gif" />
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	
+</head>
+
+
+<body ontouchstart="">
+
+  <header id="header" class="inner">
+<nav id="main-nav"><div>
+  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+  <a href="/">home</a>
+  <a href="/blog/">blog</a>
+</div></nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><div>
+  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+  <a href="/">home</a>
+  <a href="/blog/">blog</a>
+</div></div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="http://google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:gotofritz.net">
+			</form>
+		</div>
+	</div>
+</nav>
+
+<nav id="sub-nav" class="alignright">
+	<form class="search" action="http://google.com/search" method="get">
+		<input class="alignright" type="text" name="q" results="0">
+		<input type="hidden" name="q" value="site:gotofritz.net">
+	</form>
+</nav>
+
+</header>
+	
+		
+	
+	<div id="content" class="inner">
+    
+    <article class="post">
+	<h1 class="title">Multiline Regular Expressions in Javascript</h1>
+	<div>
+		<div class="meta">
+			<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-09-19T23:39:00+02:00" pubdate data-updated="true">2015-09-19, Sat</time></div>
+			<div class="tags">
+
+
+	<a class='category' href='/blog/cat/geekery/'>Geekery</a>
+
+
+</div>
+			
+				<span class="comments"><a href="/blog/geekery/multiline-regular-expressions-javascript/#disqus_thread">Comments</a></span>
+			
+		</div>
+		<div class="entry-content"><p>There are no flags to match multi-line text is in JS. But it can be done with a character class.</p>
+
+<!--more-->
+
+
+<h2>The problem</h2>
+
+<p>In both cases below we expect <code>\d.line</code> to match <code>0\nline</code> but it doesn&#8217;t work - because \n are not matched by the &#8220;.&#8221; character class.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="s2">&quot;line 0\nline1&quot;</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="sr">/\d.line/</span><span class="p">)</span>
+</span><span class='line'><span class="c1">// null</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// ES6</span>
+</span><span class='line'><span class="err">`</span><span class="nx">line</span> <span class="mi">0</span>
+</span><span class='line'><span class="nx">line1</span><span class="err">`</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="sr">/\d.line/</span><span class="p">)</span>
+</span><span class='line'><span class="c1">// null</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>The solution</h2>
+
+<p>The <code>[^]</code> character class is equivalent to . but with the newline added in</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="s2">&quot;line 0\nline1&quot;</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="sr">/\d[^]line/</span><span class="p">)</span>
+</span><span class='line'><span class="c1">// [&quot;0</span>
+</span><span class='line'><span class="c1">// line&quot;]</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// ES6</span>
+</span><span class='line'><span class="err">`</span><span class="nx">line</span> <span class="mi">0</span>
+</span><span class='line'><span class="nx">line1</span><span class="err">`</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="sr">/\d[^]line/</span><span class="p">)</span>
+</span><span class='line'><span class="c1">// [&quot;0</span>
+</span><span class='line'><span class="c1">// line&quot;]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>For more info, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp#character-classes">visit the relevant MDN page</a></p>
+</div>
+	</div>
+</article>
+
+
+<section id="comment">
+    <h1 class="title">Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+
+  </div>
+	<footer id="footer" class="inner">Copyright &copy; 2015
+
+    Fabrizio (Fritz) Stelluto
+
+</footer>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="/javascripts/slash.js"></script>
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'goto-fritz';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://gotofritz.net/blog/geekery/multiline-regular-expressions-javascript/';
+        var disqus_url = 'http://gotofritz.net/blog/geekery/multiline-regular-expressions-javascript/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-11254155-2']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+</body>
+</html>
