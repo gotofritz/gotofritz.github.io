@@ -4,7 +4,7 @@
   <title><![CDATA[Fabrizio (Fritz) Stelluto]]></title>
   <link href="http://gotofritz.net/atom.xml" rel="self"/>
   <link href="http://gotofritz.net/"/>
-  <updated>2015-09-19T23:55:25+02:00</updated>
+  <updated>2015-10-21T01:00:34+02:00</updated>
   <id>http://gotofritz.net/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -12,6 +12,43 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Pretty printing XML]]></title>
+    <link href="http://gotofritz.net/blog/geekery/pretty-printing-xml/"/>
+    <updated>2015-10-21T00:38:00+02:00</updated>
+    <id>http://gotofritz.net/blog/geekery/pretty-printing-xml</id>
+    <content type="html"><![CDATA[<p><a href="http://www.w3.org/People/Raggett/tidy/">tidy</a> is a command line tool to pretty print XML.</p>
+
+<!--more-->
+
+
+<h2>What is tidy?</h2>
+
+<p>It&#8217;s a very unslick util for tidying up HTML markup which gets the job done. It also has an XML mode, which is what is useful here. To install it on OS X, simply do</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>&gt; brew install tidy
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Tidy usage</h2>
+
+<p>To pretty print <code>input.xml</code>  and save the output to <code>pretty_printed.xml</code></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>&gt; tidy -xml -i input.xml &gt; pretty_printed.xml
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>There are several <a href="http://tidy.sourceforge.net/docs/quickref.html#break-before-br">command line options</a>. For example, to change the case of tabs to uppercase:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>&gt; tidy -xml --uppercase-tags y  -i input.xml
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Multiline regular expressions in Javascript]]></title>
@@ -3899,106 +3936,6 @@ Wrap the options in an object, and save the file somewhere sensible.</p>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'>./.cask
 </span></code></pre></td></tr></table></div></figure>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Install a specific version of a tool on OS X with Homebrew]]></title>
-    <link href="http://gotofritz.net/blog/geekery/install-specific-version-homebrew/"/>
-    <updated>2013-07-17T12:40:00+02:00</updated>
-    <id>http://gotofritz.net/blog/geekery/install-a-specific-version-of-a-tool-on-os-x-with-homebrew</id>
-    <content type="html"><![CDATA[<p>Sometimes you need to install an older version of a package with <a href="http://mxcl.github.io/homebrew/" title="[new window] Homebrew — MacPorts driving you to drink? Try Homebrew!" target="_blank">Homebrew</a>. Here&#8217;s how I installed version 1.7.10 of Subversion.</p>
-
-<!--more-->
-
-
-<h2>Why?</h2>
-
-<p>I couldn&#8217;t connect to my company&#8217;s repository using the latest 1.8.0 - svn failed with the message <code>svn: E120171: Error running context: An error occurred during SSL communication</code>. A quick <a href="https://duckduckgo.com/" title="[new window] Search DuckDuckGo - they respect your privacy, unlike google" target="_blank">DuckDuckGo</a> (gosh that&#8217;s a mouthful) took me to <a href="https://groups.google.com/forum/#!topic/subversion-development/13KWf3N2myk" title="[new window] RE: svn commit: r1501049 - in /subversion/trunk/subversion: include/svn_error_codes.h libsvn_ra_serf/util_error.c - Google Groups" target="_blank">some mail group where Subversion developers bicker among themselves</a>, but no solution. So I went down to a known stabler version.</p>
-
-<p>All the information here comes from <a href="http://stackoverflow.com/questions/3987683/homebrew-install-specific-version-of-formula" title="[new window] Homebrew install specific version of formula? - Stack Overflow" target="_blank">this SO answer</a>.</p>
-
-<h2>Uninstall the previous version</h2>
-
-<p>Make sure you don&#8217;t have an old version of the package installed:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>brew uninstall svn
-</span><span class='line'><span class="nv">$ </span>sudo mv /usr/bin/svn /usr/bin/svn1.6
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>In the case of svn, I also needed to remove the version that comes by default with OS X, as Homebrew is not able to unlink the two.</p>
-
-<h2>Find out how old versions are called</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>brew search subversion
-</span><span class='line'>subversion
-</span><span class='line'>homebrew/versions/subversion16  homebrew/versions/subversion17
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>The above tells you what svn packages are available. Note that searching for <code>svn</code> instead of <code>subversion</code> returns the current version only for some reason.
-So that tells me that svn 1.7.something is called <code>subversion17</code> in Homebrew world, and it can be found into <code>versions</code></p>
-
-<h2>Install old versions</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>brew tap homebrew/versions
-</span><span class='line'>Cloning into <span class="s1">&#39;/usr/local/Library/Taps/homebrew-versions&#39;</span>...
-</span><span class='line'>remote: Counting objects: 1022, <span class="k">done</span>.
-</span><span class='line'>remote: Compressing objects: 100% <span class="o">(</span>566/566<span class="o">)</span>, <span class="k">done</span>.
-</span><span class='line'>remote: Total 1022 <span class="o">(</span>delta 585<span class="o">)</span>, reused 873 <span class="o">(</span>delta 456<span class="o">)</span>
-</span><span class='line'>Receiving objects: 100% <span class="o">(</span>1022/1022<span class="o">)</span>, 250.05 KiB | 428 KiB/s, <span class="k">done</span>.
-</span><span class='line'>Resolving deltas: 100% <span class="o">(</span>585/585<span class="o">)</span>, <span class="k">done</span>.
-</span><span class='line'>Tapped 98 formula
-</span><span class='line'>
-</span><span class='line'><span class="nv">$ </span>brew install <span class="nv">subversion17</span>
-</span><span class='line'><span class="o">==</span>&gt; Downloading http://www.apache.org/dyn/closer.cgi?path<span class="o">=</span>subversion/subversion-1.7.10.tar.bz2
-</span><span class='line'>Already downloaded: /Library/Caches/Homebrew/subversion17-1.7.10.tar.bz2
-</span><span class='line'><span class="o">==</span>&gt; ./configure --prefix<span class="o">=</span>/usr/local/Cellar/subversion17/1.7.10 --with-apr<span class="o">=</span>/usr/bin --with-ssl --with-zlib<span class="o">=</span>/usr --with-sqlite<span class="o">=</span>/usr/local/opt/sqlite --with-serf<span class="o">=</span>/usr/local/opt/serf --disable-neon-version-check --disable-mod-activation --disable-nls --without-apache-libexecdir --without-berkel
-</span><span class='line'><span class="o">==</span>&gt; <span class="nv">make</span>
-</span><span class='line'><span class="o">==</span>&gt; make <span class="nv">install</span>
-</span><span class='line'><span class="o">==</span>&gt; make <span class="nv">tools</span>
-</span><span class='line'><span class="o">==</span>&gt; make install-tools
-</span><span class='line'><span class="o">==</span>&gt; Caveats
-</span><span class='line'>Bash completion has been installed to:
-</span><span class='line'>  /usr/local/etc/bash_completion.d
-</span><span class='line'><span class="o">==</span>&gt; Summary
-</span><span class='line'>/usr/local/Cellar/subversion17/1.7.10: 106 files, 7.7M, built in 3.1 minutes
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Before you install a version you need to enable the whole &#8220;getting old versions&#8221; thing - you do that with the <code>tap</code> command. Afterwards, it&#8217;s just a matter of installing the package I found earlier.</p>
-
-<h2>That&#8217;s it</h2>
-
-<p>Job done.</p>
 ]]></content>
   </entry>
   

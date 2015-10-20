@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Geekery | Fabrizio (Fritz) Stelluto]]></title>
   <link href="http://gotofritz.net/blog/cat/geekery/atom.xml" rel="self"/>
   <link href="http://gotofritz.net/"/>
-  <updated>2015-09-19T23:55:25+02:00</updated>
+  <updated>2015-10-21T01:00:34+02:00</updated>
   <id>http://gotofritz.net/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -12,6 +12,42 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Pretty printing XML]]></title>
+    <link href="http://gotofritz.net/blog/geekery/pretty-printing-xml/"/>
+    <updated>2015-10-21T00:38:00+02:00</updated>
+    <id>http://gotofritz.net/blog/geekery/pretty-printing-xml</id>
+    <content type="html"><![CDATA[<p><a href="http://www.w3.org/People/Raggett/tidy/">tidy</a> is a command line tool to pretty print XML.</p>
+
+<!--more-->
+
+
+<h2>What is tidy?</h2>
+
+<p>It's a very unslick util for tidying up HTML markup which gets the job done. It also has an XML mode, which is what is useful here. To install it on OS X, simply do
+``` bash</p>
+
+<blockquote><p>brew install tidy
+```</p></blockquote>
+
+<h2>Tidy usage</h2>
+
+<p>To pretty print <code>input.xml</code>  and save the output to <code>pretty_printed.xml</code></p>
+
+<p>``` bash</p>
+
+<blockquote><p>tidy -xml -i input.xml > pretty_printed.xml
+```</p></blockquote>
+
+<p>There are several <a href="http://tidy.sourceforge.net/docs/quickref.html#break-before-br">command line options</a>. For example, to change the case of tabs to uppercase:</p>
+
+<p>``` bash</p>
+
+<blockquote><p>tidy -xml --uppercase-tags y  -i input.xml
+```</p></blockquote>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Multiline regular expressions in Javascript]]></title>
@@ -1457,100 +1493,6 @@ All children, except one, grow up
 <h2>Learning more about awk</h2>
 
 <p>With that all the main awk topics were touched on. If you want to go deeper I recomend <a href="http://www.staff.science.uu.nl/~oostr102/docs/nawk/nawk_toc.html">The AWK Manual</a>, or <a href="http://shop.oreilly.com/product/9780596000707.do">one of the O'Reilly books</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[How to prevent Less errors stopping gulp watch]]></title>
-    <link href="http://gotofritz.net/blog/geekery/how-to-prevent-less-errors-stopping-gulp-watch/"/>
-    <updated>2015-06-19T00:56:00+02:00</updated>
-    <id>http://gotofritz.net/blog/geekery/how-to-prevent-less-errors-stopping-gulp-watch</id>
-    <content type="html"><![CDATA[<p>A <code>gulp watch</code> task will stop as soon as you have a Less error. Here's I how prevented that.</p>
-
-<!--more-->
-
-
-<h2>A simple gulp less task</h2>
-
-<p>Here is a simple gulp less task that runs manually by typing <code>gulp css:less</code>:
-``` js
-var less = require("gulp-less");</p>
-
-<p>gulp.task(“css:less", function (cb) {
-   var lessArgs = {</p>
-
-<pre><code>      // fill in as appropriate
-    };
-</code></pre>
-
-<p>   return gulp
-  .src(“./less/<em>*/</em>.less")
-  .pipe(less(lessArgs))
-  .pipe(gulp.dest("dist/"));
-});
-```</p>
-
-<h2>A simple "gulp watch" task</h2>
-
-<p>Here is a simple watch version of the task - it will watch less files, and rerun the task whenever a file is changed:
-``` js
-var less = require("gulp-less");
-var watch = require("gulp-watch");</p>
-
-<p>gulp.task("css:watch", function (cb) {
-  var lessArgs = {</p>
-
-<pre><code>  // fill in as appropriate
-};
-</code></pre>
-
-<p>  return gulp
-  .src(“./less/<strong>/*.less")
-  .pipe(watch(“./less/</strong>/*.less"))
-  .pipe(less(lessArgs))
-  .pipe(gulp.dest("dist/"));
-});
-```</p>
-
-<h2>The gulp-less plugin documentation doesn’t help</h2>
-
-<p>The <a href="https://www.npmjs.com/package/gulp-less">gulp-less plugin documentation</a> states</p>
-
-<blockquote><p>By default, a gulp task will fail and all streams will halt when an error happens.To change this behavior check out the error handling documentation <a href="https://github.com/gulpjs/gulp/blob/master/docs/recipes/combining-streams-to-handle-errors.md">here</a></p></blockquote>
-
-<p>But don’t waste your time installing the <code>stream-combiner2</code> plugin - it doesn’t work.</p>
-
-<p><code>Plumber</code>, which  I came across when googling for the issue (you’ll probably end up <a href="https://github.com/gulpjs/gulp/issues/259">in this github issue</a>  sooner or later if you google for this) didn't help either.</p>
-
-<h2>How to stop "gulp watch" dying when on a Less or Sass error</h2>
-
-<p>The solution that worked for me was to create a function which handles the error and make the function emit the error. Then attach directly to the less task:
-``` js
-var gutil = require("gulp-util");
-var less = require("gulp-less");
-var onError = function (err) {</p>
-
-<pre><code>gutil.log(gutil.colors.red("ERROR", taskName), err);
-this.emit("end", new gutil.PluginError(taskName, err, { showStack: true }));
-</code></pre>
-
-<p>  };</p>
-
-<p>gulp.task(“css:less", function jsLint() {
-  var lessArgs = {</p>
-
-<pre><code>  // fill in as appropriate
-};
-</code></pre>
-
-<p>  return gulp
-  .src(“./less/<strong>/*.less")
-  .pipe(watch(“./less/</strong>/*.less"))
-  .pipe(less(lessArgs).on('error', onError))
-  .pipe(gulp.dest("dist/"));
-});
-<code>``
-In the example above, the function is</code>onError<code>- is the “this.emit” that does the magic.</code>gutil.log<code>is only eye candy. The onError function is connected to less with</code>.on(“error”, onError)`. And that’s all there is to it.</p>
 ]]></content>
   </entry>
   
