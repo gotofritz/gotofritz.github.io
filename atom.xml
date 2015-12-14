@@ -4,7 +4,7 @@
   <title><![CDATA[Fabrizio (Fritz) Stelluto]]></title>
   <link href="http://gotofritz.net/atom.xml" rel="self"/>
   <link href="http://gotofritz.net/"/>
-  <updated>2015-11-22T02:18:25+01:00</updated>
+  <updated>2015-12-14T22:51:20+01:00</updated>
   <id>http://gotofritz.net/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -12,6 +12,46 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[How To Avoid sudo npm]]></title>
+    <link href="http://gotofritz.net/blog/geekery/how-to-avoid-sudo-npm/"/>
+    <updated>2015-12-14T22:12:00+01:00</updated>
+    <id>http://gotofritz.net/blog/geekery/how-to-avoid-sudo-npm</id>
+    <content type="html"><![CDATA[<p>You know the story. You try to do <code>npm install hipster-package</code> on OS X and you get a whole load of errors; the easy way out is to just use <code>sudo npm install</code>. Everyone, however, keep saying how that is bad idea. But how do you make npm work without sudo? It&#8217;s quite simple actually.</p>
+
+<!--more-->
+
+
+<h2>On your dev machine</h2>
+
+<p>If you are the typical js developer who works on OS X, all you need to do is just change the owner of the node binaries</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># this should solve the problem</span>
+</span><span class='line'>sudo chown -R <span class="nv">$USER</span> /usr/local
+</span><span class='line'>
+</span><span class='line'><span class="c"># this may also help</span>
+</span><span class='line'>sudo chmod -R 777 ~/.npm
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you are working on projects and someone has already checked in a package.json run with sudo, you need to make sure the whole team changes the permissions of at the same time</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># is someone has checked in a version of package.json with the wrong permissions</span>
+</span><span class='line'>chmod -775 package.json
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Unix purists will find this hacky; and rightly so. The <em>proper</em> way of doing is to create a group for everyone who should be allowed to run npm, even if it&#8217;s just you. However for a simple dev machine that is good enough.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[So You Want To Move To Berlin?]]></title>
@@ -3945,116 +3985,6 @@ Wrap the options in an object, and save the file somewhere sensible.</p>
 </span><span class='line'><span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[JSTestDriver boilerplate]]></title>
-    <link href="http://gotofritz.net/blog/geekery/jstestdriver-boilerplate/"/>
-    <updated>2013-10-17T00:03:00+02:00</updated>
-    <id>http://gotofritz.net/blog/geekery/jstestdriver-boilerplate</id>
-    <content type="html"><![CDATA[<p>Before abandoning <a href="https://code.google.com/p/js-test-driver/" title="[new window] js-test-driver - Remote javascript console - Google Project Hosting" target="_blank">JsTestDriver</a> (hello <a href="http://karma-runner.github.io/0.10/index.html" title="[new window] Karma - Spectacular Test Runner for Javascript" target="_blank">Karma</a>!), here&#8217;s a summary of my setup and <a href="https://github.com/gotofritz/jstestdriver-boilerplate" title="[new window] gotofritz/jstestdriver-boilerplate" target="_blank">a boilerplate</a> for future reference.</p>
-
-<!--more-->
-
-
-<h2>Why use JsTestDriver (JSTD), anyway?</h2>
-
-<p>For a couple of years JSTD was the best option in town for running JS unit tests. The best thing about it: it is just a jar file, so it runs everywhere - all the more modern alternatives require node.js, which is not always feasible. So JSTD remains my Plan B in those cases. And it is very nifty, it does pretty much everything all the shinier hipster tools do.</p>
-
-<h2>Why give up on JsTestDriver?</h2>
-
-<p>JSTD is not dead, but it may as well be so. It was made by Google, and it&#8217;s maintained by a single guy who apparently doesn&#8217;t have a Windows machine. As a result, the code coverage plugin hasn&#8217;t worked for Windows for at least two years. And we all know what happens at Google when only one guy is assigned part time on a project, right? Besides, it&#8217;s much slower than its node competitors, and it often time outs when you have too many tests. In other words, it is getting old and creaky.</p>
-
-<h2>Folder structure</h2>
-
-<p>The folder structure I use for JSTD is not dissimilar to that of any unit test framework:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">test</span>
-</span><span class='line'> +--/bin              <span class="c"># jar files and executables</span>
-</span><span class='line'>      +--/JsTestDriver-1.3.5.jar
-</span><span class='line'>      +--/coverage-1.3.5.jar
-</span><span class='line'> +--/coverage         <span class="c"># svn:ignore, for coverage reports</span>
-</span><span class='line'> +--/fixtures         <span class="c"># static html and json files</span>
-</span><span class='line'> +--/lib              <span class="c"># javascript libraries which are not part of the app</span>
-</span><span class='line'>       +--/jasmine-jquery.js
-</span><span class='line'>       +--/jasmine-jstd-adapter.js
-</span><span class='line'>       +--/jasmine-sinon.js
-</span><span class='line'>       +--/jasmine
-</span><span class='line'>       +--/phantomjs-jstd.js
-</span><span class='line'>       +--/sinon.js
-</span><span class='line'>  +--/mocks           <span class="c"># mocking application&#39;s classes</span>
-</span><span class='line'>  +--/tests           <span class="c"># the actual tests</span>
-</span><span class='line'>  jstd.conf           <span class="c"># configuration file</span>
-</span><span class='line'>  jstd-runner.sh   <span class="c"># runner</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>The <code>bin</code> folder may or may not be under subversion, this depends on the team&#8217;s philosophy (many object to the idea in principle, but it&#8217;s only a couple of rarely changing jars).</p>
-
-<p>I use JSTD with Jasmine, partly because of the useful <code>jasmine-jquery</code> plugin, which, among other things, allow fixtures to be served easily. I also like sinon for extra mocking power. Also, decoupling the runner from the test library allows me to switch from JSTD to, say, Karma easily.</p>
-
-<h2>The JSTD configuration file, jstd.conf</h2>
-
-<p>The config file <a href="https://github.com/gotofritz/jstestdriver-boilerplate/blob/master/test/jstd.conf">jstd.cong</a> is written in YAML, which is much nicer than XML. Nothing exciting here - <code>load</code> is for the under test files, <code>test</code> is for test libraries and the tests itself, and <code>serve</code> is for fixtures. Note that the coverage plugin is commented out because broken.</p>
-
-<h2>The JSTD runner script</h2>
-
-<p>Normally one runs two instances of JSTD in two terminal tabs - one as a server, and one as a test runner against the server. To make that easier, I wrapped the JSTD command (<code>java -jar … etc</code>) with a Bash script, <a href="https://github.com/gotofritz/jstestdriver-boilerplate/blob/master/test/js-test-driver.sh">js-test-driver.sh</a>  (sorry Windows users) which allows everything to be controlled from one place. And that includes running the tests both against a &#8220;physical&#8221; browser, and a headless one (i.e., <a href="http://phantomjs.org/" title="[new window] PhantomJS: Headless WebKit with JavaScript API" target="_blank">PhantomJS</a>)</p>
-
-<p>After making the script executable with <code>chmod 775 jstd-runner.sh</code>, you run in one of the following ways</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>./jstd-runner.sh <span class="nb">local </span>start  <span class="c"># will start the server then quit</span>
-</span><span class='line'>                              <span class="c"># (no need to start another tab)</span>
-</span><span class='line'>./jstd-runner.sh <span class="nb">local </span>run    <span class="c"># will run the tests</span>
-</span><span class='line'>./jstd-runner.sh <span class="nb">local </span>stop   <span class="c"># will stop the server when finished for</span>
-</span><span class='line'>                              <span class="c"># the day</span>
-</span><span class='line'>./jstd-runner.sh headless     <span class="c"># will start the server, run the tests with</span>
-</span><span class='line'>                              <span class="c"># PhantomJS, and stop the server</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>The script is improved a little  bit with every project - the next improvement would be to run <code>start</code> automatically if there is no server running and you type <code>run</code>, and also to allow to pass extra arguments in the command to the jar.</p>
-
-<h2>Code to be tested</h2>
-
-<p>The source code is a single JS file with a minimalistic object, <a href="https://github.com/gotofritz/jstestdriver-boilerplate/blob/master/src/js/example.js">example.js</a>.</p>
-
-<h2>HTML and JSON Fixtures</h2>
-
-<p>In the fixtures directory there is an HTML fixture, <a href="https://github.com/gotofritz/jstestdriver-boilerplate/blob/master/test/fixtures/example.html">example.html</a> and a JSON one, <a href="https://github.com/gotofritz/jstestdriver-boilerplate/blob/master/test/fixtures/example.json">example.json</a>. They can be used to mimic server response, different config files, and HTML fragments. Again, nothing too exciting</p>
-
-<h2>The Jasmine test file</h2>
-
-<p><a href="https://github.com/gotofritz/jstestdriver-boilerplate/blob/master/test/tests/example-test.js">example-test.js</a> is where the fun happens - this has the Jasmine tests. I have included a vanilla test (&#8220;version&#8221;), a test for HTML (&#8220;removeHeader&#8221;) and JSON (&#8220;loadData&#8221;) fixtures, the former using the <a href="https://github.com/velesin/jasmine-jquery">jasmine-jquery plugin</a>, and the simplest usage of a sinon spy and the <a href="https://github.com/froots/jasmine-sinon">jasmine-sinon</a> plugin,</p>
-
-<h2>Conclusion</h2>
-
-<p>So <a href="https://github.com/gotofritz/jstestdriver-boilerplate" title="[new window] gotofritz/jstestdriver-boilerplate" target="_blank">the boilerplate is on github</a>, all documented in case I ever need it again, but so far I am much happier with karma.</p>
 ]]></content>
   </entry>
   
