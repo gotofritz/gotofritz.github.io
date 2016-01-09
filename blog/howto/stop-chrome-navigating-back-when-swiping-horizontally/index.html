@@ -3,13 +3,11 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Happy birthday, PHP. - Fabrizio (Fritz) Stelluto</title>
+	<title>Stop Chrome navigating back when swiping horizontally - Fabrizio (Fritz) Stelluto</title>
 	<meta name="author" content="">
 
 	
-	<meta name="description" content="PHP is seventeen
-today.
-Oh, and&#8230; ">
+	<meta name="description" content="If you try to use Google Chrome on a small window on a laptop, perhaps because you are comparing two web pages side by side, swiping left or right &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -65,7 +63,7 @@ Oh, and&#8230; ">
 	<div id="content" class="inner">
     
     <article class="post">
-	<h1 class="title">Happy Birthday, PHP.</h1>
+	<h1 class="title">Stop Chrome Navigating Back When Swiping Horizontally</h1>
 	<div>
 		<div class="meta">
 			<div class="date">
@@ -80,78 +78,35 @@ Oh, and&#8230; ">
   
 
 
-<time datetime="2012-06-08T02:00:37+02:00" pubdate data-updated="true">2012-06-08, Fri</time></div>
+<time datetime="2016-01-09T02:07:00+01:00" pubdate data-updated="true">2016-01-09, Sat</time></div>
 			<div class="tags">
 
 
-	<a class='category' href='/blog/cat/geekery/'>Geekery</a>
+	<a class='category' href='/blog/cat/howto/'>Howto</a>
 
 
 </div>
 			
-				<span class="comments"><a href="/blog/geekery/happy-birthday-php#disqus_thread">Comments</a></span>
+				<span class="comments"><a href="/blog/howto/stop-chrome-navigating-back-when-swiping-horizontally/#disqus_thread">Comments</a></span>
 			
 		</div>
-		<div class="entry-content"><p><a href="https://groups.google.com/group/comp.infosystems.www.authoring.cgi/msg/cc7d43454d64d133?pli=1" title="[new window] Announce: Personal Home Page Tools (PHP Tools) - comp.infosystems.www.authoring.cgi | Google Groups">PHP is seventeen
-today</a>.
-<a href="http://eindbazen.net/2012/05/php-cgi-advisory-cve-2012-1823/" title="[new window] DE EINDBAZEN » Eindbazen PHP-CGI advisory (CVE-2012-1823)">Oh, and&#8230;</a></p>
+		<div class="entry-content"><p>If you try to use Google Chrome on a small window on a laptop, perhaps because you are comparing two web pages side by side, swiping left or right doesn&#8217;t move the page around, but it jumps to the previous or next page. Here&#8217;s how to prevent that on OS X.</p>
+
+<!--more-->
+
+
+<p>The following commands, typed in Terminal, will stop that most annoying behaviour.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>defaults write com.google.Chrome.plist AppleEnableSwipeNavigateWithScrolls -bool FALSE
+</span><span class='line'>defaults write com.google.Chromium.plist AppleEnableSwipeNavigateWithScrolls -bool FALSE
+</span><span class='line'>defaults write com.google.ChromeCanary.plist AppleEnableSwipeNavigateWithScrolls -bool FALSE
+</span></code></pre></td></tr></table></div></figure>
+
 </div>
 	</div>
-</article>
-
-<article class="archives">
-  <div class="related-posts">
-    <h2>Related Posts</h2>
-    
-      <article>
-        <h3 class="title"><a href="/blog/geekery/installing-apache-2.2-php-5.4-os-x">Installing Apache 2.2 and PHP 5.4 on OS X</a></h3>
-        <div class="meta">
-          <span class="tags">
-
-
-	<a class='category' href='/blog/cat/geekery/'>Geekery</a>
-
-
-</span>
-            
-          <time datetime="2012-06-08T02:00:37+02:00" pubdate>2012-06-08</time>
-            
-        </div>
-      </article>
-    
-      <article>
-        <h3 class="title"><a href="/blog/weekly-challenge/building-scalable-php-mysql-websites">Building scalable PHP / MySQL websites</a></h3>
-        <div class="meta">
-          <span class="tags">
-
-
-	<a class='category' href='/blog/cat/weekly-challenge/'>Weekly Challenge</a>
-
-
-</span>
-            
-          <time datetime="2012-06-08T02:00:37+02:00" pubdate>2012-06-08</time>
-            
-        </div>
-      </article>
-    
-      <article>
-        <h3 class="title"><a href="/blog/geekery/php-5-4-short-arrays">PHP 5.4 introduces short arrays</a></h3>
-        <div class="meta">
-          <span class="tags">
-
-
-	<a class='category' href='/blog/cat/geekery/'>Geekery</a>
-
-
-</span>
-            
-          <time datetime="2012-06-08T02:00:37+02:00" pubdate>2012-06-08</time>
-            
-        </div>
-      </article>
-    
-  </div>
 </article>
 
 
@@ -176,8 +131,8 @@ today</a>.
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://gotofritz.net/blog/geekery/happy-birthday-php';
-        var disqus_url = 'http://gotofritz.net/blog/geekery/happy-birthday-php';
+        var disqus_identifier = 'http://gotofritz.net/blog/howto/stop-chrome-navigating-back-when-swiping-horizontally/';
+        var disqus_url = 'http://gotofritz.net/blog/howto/stop-chrome-navigating-back-when-swiping-horizontally/';
         var disqus_script = 'embed.js';
       
     (function () {

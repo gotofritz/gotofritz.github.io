@@ -4,7 +4,7 @@
   <title><![CDATA[Fabrizio (Fritz) Stelluto]]></title>
   <link href="http://gotofritz.net/atom.xml" rel="self"/>
   <link href="http://gotofritz.net/"/>
-  <updated>2015-12-20T01:31:02+01:00</updated>
+  <updated>2016-01-09T02:12:54+01:00</updated>
   <id>http://gotofritz.net/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -12,6 +12,29 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Stop Chrome navigating back when swiping horizontally]]></title>
+    <link href="http://gotofritz.net/blog/howto/stop-chrome-navigating-back-when-swiping-horizontally/"/>
+    <updated>2016-01-09T02:07:00+01:00</updated>
+    <id>http://gotofritz.net/blog/howto/stop-chrome-navigating-back-when-swiping-horizontally</id>
+    <content type="html"><![CDATA[<p>If you try to use Google Chrome on a small window on a laptop, perhaps because you are comparing two web pages side by side, swiping left or right doesn&#8217;t move the page around, but it jumps to the previous or next page. Here&#8217;s how to prevent that on OS X.</p>
+
+<!--more-->
+
+
+<p>The following commands, typed in Terminal, will stop that most annoying behaviour.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>defaults write com.google.Chrome.plist AppleEnableSwipeNavigateWithScrolls -bool FALSE
+</span><span class='line'>defaults write com.google.Chromium.plist AppleEnableSwipeNavigateWithScrolls -bool FALSE
+</span><span class='line'>defaults write com.google.ChromeCanary.plist AppleEnableSwipeNavigateWithScrolls -bool FALSE
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[How To Avoid sudo npm]]></title>
@@ -3824,167 +3847,6 @@ Please, don't. https://github.com/styleguide/templates/2.0
 <p>The replacing job is done by the <code>rename</code> function. This takes two arguments, the destination path and the src path. Note that a <code>cwd</code> is used, so that the the source path only includes the part from the cwd to the file being processed, i.e. the filename.</p>
 
 <p>The task is then called with <code>grunt copy:getSCSSFromCSS</code></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Sharing JSHint settings in Grunt]]></title>
-    <link href="http://gotofritz.net/blog/geekery/sharing-jshint-settings-grunt/"/>
-    <updated>2013-11-03T22:08:00+01:00</updated>
-    <id>http://gotofritz.net/blog/geekery/sharing-jshint-settings-in-grunt</id>
-    <content type="html"><![CDATA[<p>JSHint settings can get quite long and clog a Gruntfile. Luckily it is fairly simple to move them to their own file.</p>
-
-<!--more-->
-
-
-<h2>Create a JSON file with JSHint settings</h2>
-
-<p>Just copy your standard .jshintrc file, or create one (<a href="https://github.com/jshint/jshint/blob/master/examples/.jshintrc" title="[new window] jshint/examples/.jshintrc at master · jshint/jshint" target="_blank">a good .jshintrc file</a> to use as a starting point can be found on GitHub).
-Wrap the options in an object, and save the file somewhere sensible.</p>
-
-<p>I save the file as JSON, which strictly speaking, means it has no comments (although grunt doesn&#8217;t complaing if it does). Here&#8217;s my standard .jshintrc</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-<span class='line-number'>50</span>
-<span class='line-number'>51</span>
-<span class='line-number'>52</span>
-<span class='line-number'>53</span>
-<span class='line-number'>54</span>
-<span class='line-number'>55</span>
-<span class='line-number'>56</span>
-<span class='line-number'>57</span>
-<span class='line-number'>58</span>
-<span class='line-number'>59</span>
-<span class='line-number'>60</span>
-<span class='line-number'>61</span>
-<span class='line-number'>62</span>
-</pre></td><td class='code'><pre><code class='json'><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="nt">&quot;options&quot;</span><span class="p">:</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nt">&quot;bitwise&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;browser&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;camelcase&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;curly&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;eqeqeq&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;forin&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;immed&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;indent&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;latedef&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;newcap&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;noarg&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;noempty&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;nonew&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;plusplus&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;quotmark&quot;</span><span class="p">:</span> <span class="s2">&quot;double&quot;</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;undef&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;unused&quot;</span><span class="p">:</span> <span class="s2">&quot;false&quot;</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;strict&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;trailing&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;maxparams&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;maxdepth&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;maxerr&quot;</span><span class="p">:</span> <span class="mi">500</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;maxlen&quot;</span><span class="p">:</span> <span class="mi">80</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;asi&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;boss&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;debug&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;eqnull&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;evil&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;expr&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;funcscope&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;globalstrict&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;iterator&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;lastsemic&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;laxbreak&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;laxcomma&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;loopfunc&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;multistr&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;proto&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;scripturl&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;smarttabs&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;shadow&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;sub&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;supernew&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;nomen&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;onevar&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;white&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;globals&quot;</span><span class="p">:</span> <span class="p">{</span>
-</span><span class='line'>      <span class="nt">&quot;$&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-</span><span class='line'>      <span class="nt">&quot;afterEach&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-</span><span class='line'>      <span class="nt">&quot;beforeEach&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-</span><span class='line'>      <span class="nt">&quot;describe&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-</span><span class='line'>      <span class="nt">&quot;expect&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-</span><span class='line'>      <span class="nt">&quot;getJSONFixture&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-</span><span class='line'>      <span class="nt">&quot;it&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-</span><span class='line'>      <span class="nt">&quot;jasmine&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-</span><span class='line'>      <span class="nt">&quot;jQuery&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-</span><span class='line'>      <span class="nt">&quot;sinon&quot;</span><span class="p">:</span> <span class="kc">true</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Use require to include the settings into the Gruntfile</h2>
-
-<p>The rest is easy - as grunt is node.js, just use <code>require</code> to import the settings:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">jshint</span><span class="o">:</span> <span class="p">{</span>
-</span><span class='line'>  <span class="nx">options</span><span class="o">:</span> <span class="nx">require</span><span class="p">(</span> <span class="s2">&quot;./jshint.json&quot;</span> <span class="p">).</span><span class="nx">options</span><span class="p">,</span>
-</span><span class='line'>  <span class="nx">all</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;Gruntfile.js&#39;</span><span class="p">,</span> <span class="s1">&#39;lib/**/*.js&#39;</span><span class="p">,</span> <span class="s1">&#39;test/**/*.js&#39;</span><span class="p">]</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
 ]]></content>
   </entry>
   
