@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Geekery | Fabrizio (Fritz) Stelluto]]></title>
   <link href="http://gotofritz.net/blog/cat/geekery/atom.xml" rel="self"/>
   <link href="http://gotofritz.net/"/>
-  <updated>2016-01-09T02:12:54+01:00</updated>
+  <updated>2016-01-16T22:48:42+01:00</updated>
   <id>http://gotofritz.net/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -12,6 +12,102 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Backing up a hard disk to another in OS X]]></title>
+    <link href="http://gotofritz.net/blog/geekery/backing-up-hard-disk-os-x/"/>
+    <updated>2016-01-16T22:44:00+01:00</updated>
+    <id>http://gotofritz.net/blog/geekery/backing-up-a-hard-disk-to-another-in-os-x</id>
+    <content type="html"><![CDATA[<p><a href="https://en.wikipedia.org/wiki/Time_Machine_(OS_X)">Time Machine</a> does its own backup magic, but sometimes you just simply want two identical copies of the same hard disk. For that <a href="https://en.wikipedia.org/wiki/Rsync">rsync</a> is the way to go.</p>
+
+<!--more-->
+
+
+<p>Rsync is a utility you run by typing commands in Terminal, and it was designed exactly for doing that one job - it looks at one source folder and all its subfolders, finds all the files in there, then look at the destination folder and copies over only what needs to be copied, making it very fast. It's got a ton of options, but all you need is to find that one command that works for you and use it again and again as needed.</p>
+
+<h2>Syncing two hard disks with rsync</h2>
+
+<p>Let's say you have two hard disks, "ORIGINAL" and "BACKUP DISK". For the first transfer, you may as well copy manually all the files from ORIGINAL to BACKUP DISK by dragging them, rsync doesn't do it any better or faster. From then on, whenever you want to backup the disk (every day, every week, whatever) you can start with this command:</p>
+
+<p><code>bash
+$ rsync -aS --delete --progress  /Volumes/ORIGINAL/ /Volumes/BACKUP\ DISK/
+</code></p>
+
+<p>The command breaks down as follows:</p>
+
+<dl class="code-breakdown">
+  <dt>rsync</dt>
+  <dd>calls the utility</dd>
+
+  <dt>-a</dt>
+  <dd>turns on archive mode, which basically ensures all subfolders, permissions and files parameters are copied </dd>
+
+  <dt>S</dt>
+  <dd>if there wasn't already a dash for -a, this would be -S. This compacts sparse files for efficiency </dd>
+
+  <dt>--delete</dt>
+  <dd>this ensures that any files in the destination that were not there in the source will be deleted</dd>
+
+  <dt>/Volumes/ORIGINAL</dt>
+  <dd>the original</dd>
+
+  <dt>/Volumes/BACKUP\ DISK</dt>
+  <dd>the destination. Note that I have typed a backslash before the space after BACKUP, BACKUP\ DISK - that tells Terminal that the word isn't finish yet, and the space is part of the word</dd>
+</dl>
+
+
+<p>If you want to skip some files or folders, you can add their paths to the command. Note that you have one <code>--exclude</code> options for every patter you want to exclude. Also note the <code>*</code> wildcards, which basically means "anything here"</p>
+
+<p><code>bash
+$ rsync -aS --delete --progress --exclude *.Trash* --exclude /that_file.txt
+   --exclude /other_file.jpg /Volumes/ORIGINAL/ /Volumes/BACKUP\ DISK/
+</code></p>
+
+<p>If you have a lot of excludes it makes sense to put the list in a file, and then tell rsync to use that. It makes sense even if you only have a few files, because then you can easily add and remove things from there without having to change the command - as you start playing with rsync you soon find out there are a few system folders you don't want to backup, like Spotlight indices and so on.</p>
+
+<p><code>bash
+$ rsync -aS --delete --progress --exclude-from ~/.rsync_exclude_list
+  /Volumes/ORIGINAL/ /Volumes/BACKUP\ DISK/
+</code></p>
+
+<p>and .rsync_exclude_list can have all the patterns in there, one per line. The file  can be named whatever you want - I have put it in the home folder (that's what ~/ at the beginning means) and used a name that starts with a dot because it works well with my <a href="/blog/geekery/storing-bash-profile-and-so-on-on-github/">dotfiles</a>.</p>
+
+<p>``` bash</p>
+
+<h1>list of files not to be included when running alias backupext</h1>
+
+<p><em>.Trash</em>
+.TemporaryItems<em>
+.DocumentRevisions-</em>
+.Spotlight-*
+```</p>
+
+<h2>Making things easier with an alias</h2>
+
+<p>Instead of trying to remember that command every time you need to back up, you can create an alias, i.e. a shortcut to the command. Depending on your setup, you can just add it to your bash_profile file. If you use <a href="/blog/geekery/storing-bash-profile-and-so-on-on-github/">dotfiles</a>, just add it to the .alias file and then run bootstrap.sh again.</p>
+
+<p>``` bash</p>
+
+<h1>this will create it if it doesn't exist. Nano is a text editor that runs inside</h1>
+
+<h1>Terminal. It's simple and it shows the shortcuts at the bottom (^ = control key)</h1>
+
+<p>nano ~/.bash_profile</p>
+
+<h1>or if you use the sublime text editor...</h1>
+
+<p>subl ~/.bash_profile</p>
+
+<h1>then type this anywhere in the file, in a line of its own</h1>
+
+<p>alias backupext="rsync -aS --delete --progress --exclude-from ~/.rsync_exclude_list
+  /Volumes/ORIGINAL/ /Volumes/BACKUP\ DISK/"</p>
+
+<h1>to save and quit in nano press CTRL-X - it will ask you to save the file</h1>
+
+<p>```</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[How To Avoid sudo npm]]></title>
@@ -209,426 +305,6 @@ $ softwareupdate --reset-ignored
 </code></p>
 
 <p>More options can be viewed with <code>softwareupdate -h</code> or <code>man softwareupdate</code></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[A selection of akw scripts]]></title>
-    <link href="http://gotofritz.net/blog/geekery/a-selection-of-akw-scripts/"/>
-    <updated>2015-07-25T00:16:00+02:00</updated>
-    <id>http://gotofritz.net/blog/geekery/a-selection-of-akw-scripts</id>
-    <content type="html"><![CDATA[<p>Some examples scripts to complement the previous <a href="/blog/geekery/back-to-the-classics-awk/">awk tutorial</a></p>
-
-<!--more-->
-
-
-<p>All the scripts here assume the fields in the data is space separated - i.e. <code>UK   London  10000</code> etc. There hasn't been a CSV standard until recently, but the one you get from MS Office doesn't work too well with awk, because CSV is basically a rubbish format and hard to handle. But if you have a "well behaved" CSV file, i.e. one which doesn't have commas, quotation marks, or new lines inside fields, e.g <code>UK,London,10000</code> then you can easily process it by passing -F"," to the awk call:
-<code>bash
-awk -F"," -f my_awk_script.awk some_input_data.txt
-</code>
-In practice unless you generate the data yourself there is always going to be the odd comma or quotation mark in your data somewhere, so I find it easier to convert the data to tab separated using a <a href="http://www.convertcsv.com/csv-to-csv.htm">free online CSV to TSV converter like this</a>. I then call awk with "\t" as the separator, because some field may have spaces inside them.</p>
-
-<p>The command below is what I use - my awk program is in my_awk_script.awk, the data is in uk_electoral_data_converted.csv, and the results goes into awk_output.txt.
-<code>
-awk -F"\t" -f my_awk_script.awk uk_electoral_data_converted.csv &gt; awk_output.txt
-</code></p>
-
-<h3>Sample data: UK election results</h3>
-
-<p>Some of the scripts will use <a href="http://is.gd/eUrbOZ">data from the 2015 UK election in CSV format</a> as data, converted to TSV. Here's what it looks like:
-<code>bash
-Forename  Surname Description on ballot paper Constituency Name PANO  Votes Share (%) Change  FIELD9  Incumbent?  FIELD11 Constituency ID Region ID County  Region  Country Constituency type Party name identifier Party abbreviation
-Gerald  Howarth The Conservative Party Candidate  Aldershot 7 23369 50.6  3.9   MP    E14000530 E12000008 Hampshire South East  England Borough Conservative  Con
-Gary  Puffett Labour Party  Aldershot 7 8468  18.3  6.2       E14000530 E12000008 Hampshire South East  England Borough Labour  Lab
-Bill  Walker  UK Independence Party (UKIP)  Aldershot 7 8253  17.9  13.4        E14000530 E12000008 Hampshire South East  England Borough UK Independence Party UKIP
-...
-</code></p>
-
-<p>And here are the field names in order
-<code>bash
- 1 Forename
- 2 Surname
- 3 Description on ballot paper
- 4 Constituency Name
- 5 PANO
- 6 Votes
- 7 Share (%)
- 8 Change
- 9 --
-10 Incumbent?
-11 --
-12 Constituency ID
-13 Region ID
-14 County
-15 Region
-16 Country
-17 Constituency type
-18 Party name identifier
-19 Party abbreviation
-</code></p>
-
-<h3>Skipping header row</h3>
-
-<p>``` bash</p>
-
-<h1>put NR > 1 in front of every action to skip the header row</h1>
-
-<p>NR > 1 { print }</p>
-
-<h1>result</h1>
-
-<p>Gerald  Howarth The Conservative Party Candidate  Aldershot ...
-...
-```</p>
-
-<h3>Skipping empty records</h3>
-
-<p>``` bash</p>
-
-<h1>check if the first field is empty</h1>
-
-<p>NF { print }
-```</p>
-
-<h3>Rearranging fields, and skipping some</h3>
-
-<p>``` bash
-NR > 1 &amp;&amp; NF { print $4 ": " $2 " " $1 " (" $NF ") " $7 "% " }</p>
-
-<h1>NR > 1    ignore header</h1>
-
-<h1>NF  ignore empty record</h1>
-
-<h1>print constituence name, name surname, party abbreviation, share of the vote</h1>
-
-<h1>ignore otehr fields</h1>
-
-<p>Aldershot: Howarth Gerald (Con) 50.6%
-Aldershot: Puffett Gary (Lab) 18.3%
-Aldershot: Walker Bill (UKIP) 17.9%
-Aldershot: Hilliar Alan (LD) 8.8%
-Aldershot: Hewitt Carl (Green) 4.4%
-...
-```</p>
-
-<h3>Print sum of all fields</h3>
-
-<p>Finds the national Conservative vote
-``` bash
-$NF == "Con" {total += $6}
-END          {print total}</p>
-
-<h1>$NF == "Con"  if a record concerns a tory vote</h1>
-
-<h1>{total += $6} add it to a running total</h1>
-
-<h1>END           when all records are processed</h1>
-
-<h1>{print total} output total</h1>
-
-<p>11299609
-```</p>
-
-<h3>Work out column averages</h3>
-
-<p>Find the total vote of the 6 larger parties and their % of the national vote
-``` bash</p>
-
-<h1>keep a running total</h1>
-
-<p>NR > 1 &amp;&amp; NF  {total += $6}</p>
-
-<h1>keep a total for each party - don' do anything yet</h1>
-
-<p>$NF == "Con"        {total_con += $6}
-$NF == "Lab"        {total_lab += $6}
-$NF == "UKIP"       {total_ukip += $6}
-$NF == "LD"         {total_ld += $6}
-$NF == "Green"      {total_green += $6}
-$NF == "SNP"        {total_snp += $6}</p>
-
-<h1>print a report at the end</h1>
-
-<p>END {
-  print "TOTAL: " total
-  print "Con:   " (100 * total_con / total) "%"
-  print "Lab:   " (100 * total_lab / total) "%"
-  print "UKIP:  " (100 * total_ukip / total) "%"
-  print "LD:    " (100 * total_ld / total) "%"
-  print "SNP:   " (100 * total_snp / total) "%"
-  print "Green: " (100 * total_green / total) "%"
-}</p>
-
-<h1>output:</h1>
-
-<p>TOTAL: 30697255
-Con:   36.8098%
-Lab:   30.449%
-UKIP:  12.6431%
-LD:    7.87014%
-SNP:   4.738%
-Green: 3.77112%
-```</p>
-
-<h3>Using functions</h3>
-
-<p>The same as above, but without copy and paste code
-``` bash</p>
-
-<h1>abstracting copy-and-paste code into a function</h1>
-
-<p>function print_party_percentage(party_name, party_vote, total_vote) {
-  print party_name "   " (100 * party_vote / total_vote) "%"
-}</p>
-
-<h1>same program as before</h1>
-
-<p>NR > 1 &amp;&amp; NF   {total += $6}
-$NF == "Con"   {total_con += $6}
-$NF == "Lab"   {total_lab += $6}
-$NF == "UKIP"  {total_ukip += $6}
-$NF == "LD"    {total_ld += $6}
-$NF == "Green" {total_green += $6}
-$NF == "SNP"   {total_snp += $6}
-END {
-  print "TOTAL: " total
-  print_party_percentage("Con", total_con, total)
-  print_party_percentage("Lab", total_lab, total)
-  print_party_percentage("UKIP", total_ukip, total)
-  print_party_percentage("LD", total_ld, total)
-  print_party_percentage("SNP", total_snp, total)
-  print_party_percentage("Green", total_green, total)
-}</p>
-
-<h1>output - looks messier because previous program was manually formatted</h1>
-
-<p>TOTAL: 30697255
-Con   36.8098%
-Lab   30.449%
-UKIP   12.6431%
-LD   7.87014%
-SNP   4.738%
-Green   3.77112%
-```</p>
-
-<h3>Formatting numerical precision and alignment with printf</h3>
-
-<p>Same as above, but using printf for formatting
-``` bash
-function print_party_percentage(party_name, party_vote, total_vote) {
-  printf "%5s: %4.1f%%\n", party_name, (100 * party_vote / total_vote)
-  # %5s a string (s) of fixed width 5 or more (5) aligned right (if it was -5 it would be left)
-  # %4.1f a number (f) with one decimal (.1) and total width 4 (4) aligned right (4)
-  # %% an actual %
-}</p>
-
-<h1>same program as before</h1>
-
-<p>NR > 1 &amp;&amp; NF   {total += $6}
-$NF == "Con"   {total_con += $6}
-$NF == "Lab"   {total_lab += $6}
-$NF == "UKIP"  {total_ukip += $6}
-$NF == "LD"    {total_ld += $6}
-$NF == "Green" {total_green += $6}
-$NF == "SNP"   {total_snp += $6}
-END {
-  print "TOTAL: " total
-  print_party_percentage("Con", total_con, total)
-  print_party_percentage("Lab", total_lab, total)
-  print_party_percentage("UKIP", total_ukip, total)
-  print_party_percentage("LD", total_ld, total)
-  print_party_percentage("SNP", total_snp, total)
-}</p>
-
-<h1>output</h1>
-
-<p>TOTAL: 30697255
-  Con: 36.8%
-  Lab: 30.4%
- UKIP: 12.6%
-   LD:  7.9%
-  SNP:  4.7%
-```</p>
-
-<h3>Using arrays to group data</h3>
-
-<p>There is still some copy and past code because we are hardcoding the parties. We can use arrays to group whatever parties we find.</p>
-
-<p>``` bash</p>
-
-<h1>same formatting function as before</h1>
-
-<p>function print_party_percentage(party_name, party_vote, total_vote) {
-  printf "%5s: %4.1f%%\n", party_name, (100 * party_vote / total_vote)
-}</p>
-
-<h1>skip empty and header lines</h1>
-
-<p>NR > 1 &amp;&amp; NF  {
-  # runnint total
-  total += $6
-  # create or update running total for current party
-  party_totals[$NF] += $6
-}</p>
-
-<h1>when all records are processed</h1>
-
-<p>END {
-  print "TOTAL: " total
-  # print a line for each party
-  for (party in party_totals)</p>
-
-<pre><code>print_party_percentage(party, party_totals[party], total)
-</code></pre>
-
-<p>}</p>
-
-<h1>output - there are a LOT of tiny local parties</h1>
-
-<p>TOTAL: 30697255
-  UUP:  0.4%
-Left Unity - Trade Unionists and Socialists:  0.0%
-  IZB:  0.0%
-Respect:  0.0%
-  SSP:  0.0%
-  NSW:  0.0%
-The 30-50 Coalition:  0.0%
-.... and so on
-```</p>
-
-<p>Oh - turns out if you include all the novelty parties there are 132 of them across the UK. We need to sort the array and only print the top X items. Turns out it is quite complicated.</p>
-
-<h3>Sorting array</h3>
-
-<p>Standard awk's array are not sortable. This was a design choice - only associative arrays are supported, so there is no order, hence they can't be sorted in any meaningful way. <a href="https://www.gnu.org/software/gawk/manual/gawk.html#Arrays">gawk, however, has two array sorting functions</a> - how do they do it? They actually create a new associative array, with all the values from the original but none of they keys; they keys are replaced by new ones, in order. Then you use a for loop (not the standard for in) to read all the array "in order". This is all well and good if you don't need the keys, but I do (they are the name of the party). Besides, I am using awk and not gawk.</p>
-
-<p>The best approach is to create a new array with just the keys, sort that array, and then loop through it in order in order to find out which keys of the original array to read.
-``` bash</p>
-
-<h1>kickstarts the sort process</h1>
-
-<h1>puts all the sorted keys into a separate array. if i</h1>
-
-<p>function homebrew_asort(original, processed) {
-  # before we use the array we must be sure it is empty
-  empty_array(processed)
-  original_length = copy_and_count_array(original, processed)
-  qsort(original, processed, 0, original_length)
-  return original_length
-}</p>
-
-<h1>removes al values</h1>
-
-<p>function empty_array(A) {
-  for (i in A)</p>
-
-<pre><code>delete A[i]
-</code></pre>
-
-<p>}</p>
-
-<h1>awk doesn't even have an array size function... you also have to roll out your own</h1>
-
-<p>function copy_and_count_array(original, processed) {
-  for (key in original) {</p>
-
-<pre><code># awk doesn't seem to like array[0] -  so we start from 1
-size++
-processed[size] = key
-</code></pre>
-
-<p>  }
-  return size
-}</p>
-
-<h1>Adapted from a script from awk.info</h1>
-
-<h1>http://awk.info/?quicksort</h1>
-
-<p>function qsort(original, keys, left, right,   i, last) {
-  if (left >= right)  return
-  swap(keys, left, left + int( (right - left + 1) * rand() ) )
-  last = left
-  for (i = left+1; i &lt;= right; i++)</p>
-
-<pre><code>if (original[keys[i]] &lt; original[keys[left]])
-  swap(keys, ++last, i)
-</code></pre>
-
-<p>  swap(keys, left, last)
-  qsort(original, keys, left, last-1)
-  qsort(original, keys, last+1, right)
-}
-function swap(A, i, j,   t) {
-  t = A[i]; A[i] = A[j]; A[j] = t
-}</p>
-
-<h1>same formatting function as before</h1>
-
-<p>function print_party_percentage(party_name, party_vote, total_vote) {
-  printf "%5s: %4.1f%%\n", party_name, (100 * party_vote / total_vote)
-}</p>
-
-<h1>same main action as before</h1>
-
-<p>NR > 1 &amp;&amp; NF  {
-  total += $6
-  party_totals[$NF] += $6
-}</p>
-
-<h1>when all records are processed</h1>
-
-<p>END {
-  parties_count = homebrew_asort(party_totals, keys)
-  for  (i = parties_count; i >= parties_count - 5; i--)</p>
-
-<pre><code>print_party_percentage(keys[i], party_totals[keys[i]], total)
-</code></pre>
-
-<p>}
-```</p>
-
-<p>And the output
-<code>bash
-  Con: 36.8%
-  Lab: 30.4%
- UKIP: 12.6%
-   LD:  7.9%
-  SNP:  4.7%
-Green:  3.8%
-</code></p>
-
-<h2>Print first or last x characters of a line</h2>
-
-<p>You can easily mimick <code>head -c</code> or <code>tail -c</code> with awk - if you really want to.
-``` bash</p>
-
-<h1>equivalent</h1>
-
-<p>$ awk '{print substr($0, 1, 32)}' xxx
-$ head -c 32 xxx</p>
-
-<h1>equivalent</h1>
-
-<p>$ awk 'END {print substr($0, length($0) - 30, 32)}' xxx
-$ tail -c 32 xxx
-```</p>
-
-<p>But with awk you can also skip a few characters into a file
-``` bash</p>
-
-<h1>no heard or tail equivalent - print characters 32 to 64</h1>
-
-<p>$ awk '{print substr($0, 32, 32)}' xxx
-```</p>
-
-<h2>Other examples</h2>
-
-<p>The <a href="http://awk.info/">awk.info</a> website has some <a href="http://awk.info/?OneLiners">one liners</a> with extensive <a href="http://www.catonmat.net/blog/awk-one-liners-explained-part-one/">explanations</a></p>
-
-<p>The <a href="http://www.math.utah.edu/docs/info/gawk_4.html">gawk manual includes some one liners</a> which are compatible with standard awk.</p>
-
-<p>The Unix School: <a href="http://www.theunixschool.com/2012/06/awk-10-examples-to-group-data-in-csv-or.html">10 examples to group data in a CSV or text file</a></p>
 ]]></content>
   </entry>
   
