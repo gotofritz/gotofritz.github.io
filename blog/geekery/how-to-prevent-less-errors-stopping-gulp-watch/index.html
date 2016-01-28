@@ -193,14 +193,16 @@
 <span class='line-number'>16</span>
 <span class='line-number'>17</span>
 <span class='line-number'>18</span>
+<span class='line-number'>19</span>
 </pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kd">var</span> <span class="nx">gutil</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&quot;gulp-util&quot;</span><span class="p">);</span>
 </span><span class='line'><span class="kd">var</span> <span class="nx">less</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&quot;gulp-less&quot;</span><span class="p">);</span>
-</span><span class='line'><span class="kd">var</span> <span class="nx">onError</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nx">gutil</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">gutil</span><span class="p">.</span><span class="nx">colors</span><span class="p">.</span><span class="nx">red</span><span class="p">(</span><span class="s2">&quot;ERROR&quot;</span><span class="p">,</span> <span class="nx">taskName</span><span class="p">),</span> <span class="nx">err</span><span class="p">);</span>
-</span><span class='line'>    <span class="k">this</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="s2">&quot;end&quot;</span><span class="p">,</span> <span class="k">new</span> <span class="nx">gutil</span><span class="p">.</span><span class="nx">PluginError</span><span class="p">(</span><span class="nx">taskName</span><span class="p">,</span> <span class="nx">err</span><span class="p">,</span> <span class="p">{</span> <span class="nx">showStack</span><span class="o">:</span> <span class="kc">true</span> <span class="p">}));</span>
-</span><span class='line'>  <span class="p">};</span>
+</span><span class='line'><span class="kd">var</span> <span class="nx">taskName</span> <span class="o">=</span> <span class="err">“</span><span class="nx">css</span><span class="o">:</span><span class="nx">less</span><span class="s2">&quot;;</span>
+</span><span class='line'><span class="s2">var onError = function (err) {</span>
+</span><span class='line'><span class="s2">    gutil.log(gutil.colors.red(&quot;</span><span class="nx">ERROR</span><span class="s2">&quot;, taskName), err);</span>
+</span><span class='line'><span class="s2">    this.emit(&quot;</span><span class="nx">end</span><span class="s2">&quot;, new gutil.PluginError(taskName, err, { showStack: true }));</span>
+</span><span class='line'><span class="s2">  };</span>
 </span><span class='line'>
-</span><span class='line'><span class="nx">gulp</span><span class="p">.</span><span class="nx">task</span><span class="p">(</span><span class="err">“</span><span class="nx">css</span><span class="o">:</span><span class="nx">less</span><span class="s2">&quot;, function jsLint() {</span>
+</span><span class='line'><span class="s2">gulp.task(taskName, function jsLint() {</span>
 </span><span class='line'><span class="s2">  var lessArgs = {</span>
 </span><span class='line'><span class="s2">      // fill in as appropriate</span>
 </span><span class='line'><span class="s2">    };</span>
