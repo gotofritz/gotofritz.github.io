@@ -1,332 +1,185 @@
-
 <!DOCTYPE HTML>
 <html>
 <head>
-	<meta charset="utf-8">
-	<title>Copying files from an iTunes playlist to a folder - Fabrizio (Fritz) Stelluto</title>
-	<meta name="author" content="">
-
-	
-	<meta name="description" content="A quick and dirty Node script to copy the files in an iTunes playlist to a folder, in random order and without preserving file names. I use it to &hellip;">
-	
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-	<link href="/atom.xml" rel="alternate" title="Fabrizio (Fritz) Stelluto" type="application/atom+xml">
-	<link rel="canonical" href="">
-	<link href="/favicon.ico" rel="shortcut icon">
-	<link rel="icon" href="/favicon.gif" type="image/gif" />
-	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-	
+  <meta charset="utf-8">
+  <title>Copying files from an iTunes playlist to a folder || Fritz Stelluto</title>
+  <meta name="author" content="gotofritz">
+  <meta name="description" content="A quick and dirty Node script to copy the files in an iTunes playlist to a folder, in random order and without preserving file names. I use it to copy music to my flashcard to listen to it in non-Apple hardware.">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link href="/assets/favicon.ico" rel="shortcut icon">
+  <link rel="icon" href="/assets/favicon.gif" type="image/gif" />
+  <link href="/assets/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 </head>
 
-
 <body ontouchstart="">
-
   <header id="header" class="inner">
-<nav id="main-nav"><div>
-  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
-  <a href="/">home</a>
-  <a href="/blog/">blog</a>
-</div></nav>
-<nav id="mobile-nav">
-	<div class="alignleft menu">
-		<a class="button">Menu</a>
-		<div class="container"><div>
-  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
-  <a href="/">home</a>
-  <a href="/blog/">blog</a>
-</div></div>
-	</div>
-	<div class="alignright search">
-		<a class="button"></a>
-		<div class="container">
-			<form action="http://google.com/search" method="get">
-				<input type="text" name="q" results="0">
-				<input type="hidden" name="q" value="site:gotofritz.net">
-			</form>
-		</div>
-	</div>
-</nav>
+    <nav id="main-nav">
+      <div>
+        <a href="/">home</a>
+        <a href="/blog/">blog</a>
+      </div>
+    </nav>
 
-<nav id="sub-nav" class="alignright">
-	<form class="search" action="http://google.com/search" method="get">
-		<input class="alignright" type="text" name="q" results="0">
-		<input type="hidden" name="q" value="site:gotofritz.net">
-	</form>
-</nav>
-
-</header>
-	
-		
-	
-	<div id="content" class="inner">
-    
-    <article class="post">
-	<h1 class="title">Copying Files From an iTunes Playlist to a Folder</h1>
-	<div>
-		<div class="meta">
-			<div class="date">
+    <nav id="sub-nav" class="alignright">
+      <form class="search" action="http://google.com/search" method="get">
+        <input class="alignright" type="text" name="q" results="0">
+        <input type="hidden" name="q" value="site:gotofritz.net">
+      </form>
+    </nav>
+  </header>
 
 
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-07-14T17:02:00+02:00" pubdate data-updated="true">2013-07-14, Sun</time></div>
-			<div class="tags">
-
-
-	<a class='category' href='/blog/cat/geekery/'>Geekery</a>
-
-
-</div>
-			
-				<span class="comments"><a href="/blog/geekery/itunes-playlist-copy-files/#disqus_thread">Comments</a></span>
-			
-		</div>
-		<div class="entry-content"><p>A quick and dirty Node script to copy the files in an iTunes playlist to a folder, in random order and without preserving file names. I use it to copy music to my flashcard to listen to it in non-Apple hardware.</p>
-
-<!--more-->
-
-
-<h2>Getting the playlist</h2>
-
-<p>I generate my playlist in iTunes, then export them as XML by right clicking on the playlist name and selecting &#8220;Export&#8230;&#8221; from the contextual menu. At the end of this step I have an XML file which looks like</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
-</span><span class='line'><span class="cp">&lt;!DOCTYPE plist PUBLIC &quot;-//Apple Computer//DTD PLIST 1.0//EN&quot; &quot;http://www.apple.com/DTDs/PropertyList-1.0.dtd&quot;&gt;</span>
-</span><span class='line'><span class="nt">&lt;plist</span> <span class="na">version=</span><span class="s">&quot;1.0&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'><span class="nt">&lt;dict&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;key&gt;</span>Major Version<span class="nt">&lt;/key&gt;&lt;integer&gt;</span>1<span class="nt">&lt;/integer&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;key&gt;</span>Minor Version<span class="nt">&lt;/key&gt;&lt;integer&gt;</span>1<span class="nt">&lt;/integer&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;key&gt;</span>Date<span class="nt">&lt;/key&gt;&lt;date&gt;</span>2013-07-14T09:36:36Z<span class="nt">&lt;/date&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;key&gt;</span>Application Version<span class="nt">&lt;/key&gt;&lt;string&gt;</span>11.0.4<span class="nt">&lt;/string&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;key&gt;</span>Features<span class="nt">&lt;/key&gt;&lt;integer&gt;</span>5<span class="nt">&lt;/integer&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;key&gt;</span>Music Folder<span class="nt">&lt;/key&gt;&lt;string&gt;</span>file://localhost/Volumes/HD1T2/Music/<span class="nt">&lt;/string&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;key&gt;</span>Library Persistent ID<span class="nt">&lt;/key&gt;&lt;string&gt;</span>C326B89DCF4457DF<span class="nt">&lt;/string&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;key&gt;</span>Tracks<span class="nt">&lt;/key&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;dict&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;key&gt;</span>41540<span class="nt">&lt;/key&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;dict&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;key&gt;</span>Track ID<span class="nt">&lt;/key&gt;&lt;integer&gt;</span>41540<span class="nt">&lt;/integer&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;key&gt;</span>Name<span class="nt">&lt;/key&gt;&lt;string&gt;</span>World<span class="nt">&lt;/string&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;key&gt;</span>Artist<span class="nt">&lt;/key&gt;&lt;string&gt;</span>1619 FB<span class="nt">&lt;/string&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;key&gt;</span>Album<span class="nt">&lt;/key&gt;&lt;string&gt;</span>Sound Of Funk Vol 2<span class="nt">&lt;/string&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;key&gt;</span>Grouping<span class="nt">&lt;/key&gt;&lt;string&gt;</span>where:us<span class="nt">&lt;/string&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;key&gt;</span>Genre<span class="nt">&lt;/key&gt;&lt;string&gt;</span>funk-classic<span class="nt">&lt;/string&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;key&gt;</span>Kind<span class="nt">&lt;/key&gt;&lt;string&gt;</span>MPEG audio file<span class="nt">&lt;/string&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;key&gt;</span>Size<span class="nt">&lt;/key&gt;&lt;integer&gt;</span>6516189<span class="nt">&lt;/integer&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;key&gt;</span>Total Time<span class="nt">&lt;/key&gt;&lt;integer&gt;</span>162847<span class="nt">&lt;/integer&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;key&gt;</span>Track Number<span class="nt">&lt;/key&gt;&lt;integer&gt;</span>14<span class="nt">&lt;/integer&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;key&gt;</span>Track Count<span class="nt">&lt;/key&gt;&lt;integer&gt;</span>19<span class="nt">&lt;/integer&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;key&gt;</span>Date Modified<span class="nt">&lt;/key&gt;&lt;date&gt;</span>2010-05-15T20:40:41Z<span class="nt">&lt;/date&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;key&gt;</span>Date Added<span class="nt">&lt;/key&gt;&lt;date&gt;</span>2012-07-14T07:42:39Z<span class="nt">&lt;/date&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;key&gt;</span>Bit Rate<span class="nt">&lt;/key&gt;&lt;integer&gt;</span>320<span class="nt">&lt;/integer&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;key&gt;</span>Sample Rate<span class="nt">&lt;/key&gt;&lt;integer&gt;</span>44100<span class="nt">&lt;/integer&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;key&gt;</span>Play Count<span class="nt">&lt;/key&gt;&lt;integer&gt;</span>4<span class="nt">&lt;/integer&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;key&gt;</span>Play Date<span class="nt">&lt;/key&gt;&lt;integer&gt;</span>3330533910<span class="nt">&lt;/integer&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;key&gt;</span>Play Date UTC<span class="nt">&lt;/key&gt;&lt;date&gt;</span>2009-07-15T18:18:30Z<span class="nt">&lt;/date&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;key&gt;</span>Rating<span class="nt">&lt;/key&gt;&lt;integer&gt;</span>60<span class="nt">&lt;/integer&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;key&gt;</span>Album Rating<span class="nt">&lt;/key&gt;&lt;integer&gt;</span>60<span class="nt">&lt;/integer&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;key&gt;</span>Album Rating Computed<span class="nt">&lt;/key&gt;&lt;true/&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;key&gt;</span>Normalization<span class="nt">&lt;/key&gt;&lt;integer&gt;</span>2644<span class="nt">&lt;/integer&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;key&gt;</span>Persistent ID<span class="nt">&lt;/key&gt;&lt;string&gt;</span>B16D68918FB4215E<span class="nt">&lt;/string&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;key&gt;</span>Track Type<span class="nt">&lt;/key&gt;&lt;string&gt;</span>File<span class="nt">&lt;/string&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;key&gt;</span>File Type<span class="nt">&lt;/key&gt;&lt;integer&gt;</span>1297106739<span class="nt">&lt;/integer&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;key&gt;</span>Location<span class="nt">&lt;/key&gt;&lt;string&gt;</span>file://localhost/Volumes/HD1T2/Music/Music/1619%20FB/Sound%20Of%20Funk%20Vol%202/14%20World.mp3<span class="nt">&lt;/string&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;key&gt;</span>File Folder Count<span class="nt">&lt;/key&gt;&lt;integer&gt;</span>5<span class="nt">&lt;/integer&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;key&gt;</span>Library Folder Count<span class="nt">&lt;/key&gt;&lt;integer&gt;</span>1<span class="nt">&lt;/integer&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;/dict&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Filtering the file names from the iTunes xml export</h2>
-
-<p>I am only interested in files, so I switch to Terminal to extract the lines with the file paths from the XML document, and discard everything else. I use <a href="https://github.com/ggreer/the_silver_searcher" title="[new window] ggreer/the_silver_searcher" target="_blank">ag</a> and <a href="http://www.grymoire.com/Unix/Sed.html" title="[new window] Sed - An Introduction and Tutorial" target="_blank">sed</a> for that.</p>
-
-<div><script src='https://gist.github.com/5994589.js?file=ag.sh'></script>
-<noscript><pre><code>ag &quot;Location&lt;/key&gt;&lt;string&gt;file://&quot; /Users/ME/Desktop/export.xml | sed -f itunes.sed  &gt; /Users/ME/Desktop/export_sed.xml
-</code></pre></noscript></div>
-
-
-
-
+<div id="content" class="inner">
+  <article class="post">
+    <h1 class="title">Copying files from an iTunes playlist to a folder</h1>
+    <div>
+      <div class="meta">
+        <div class="date">
+          <time datetime="2013-07-14T17:02:00+02:00" pubdate>2013-07-14</time>
+        </div>
+        <div class="tags">
+          itunes,
+          node,
+          sed
+        </div>
+      </div>
+      <div class="entry-content">
+<div class="archive">This post is too old to be of any use. It has been archived.</div>
+<p>A quick and dirty Node script to copy the files in an iTunes playlist to a folder, in random order and without preserving file names. I use it to copy music to my flashcard to listen to it in non-Apple hardware.
+<!--more--></p>
+<h2 id="getting-the-playlist">Getting the playlist</h2>
+<p>I generate my playlist in iTunes, then export them as XML by right clicking on the playlist name and selecting &quot;Export...&quot; from the contextual menu. At the end of this step I have an XML file which looks like</p>
+<pre><code>    &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+    &lt;!DOCTYPE plist PUBLIC &quot;-//Apple Computer//DTD PLIST 1.0//EN&quot; &quot;http://www.apple.com/DTDs/PropertyList-1.0.dtd&quot;&gt;
+    &lt;plist version=&quot;1.0&quot;&gt;
+    &lt;dict&gt;
+        &lt;key&gt;Major Version&lt;/key&gt;&lt;integer&gt;1&lt;/integer&gt;
+        &lt;key&gt;Minor Version&lt;/key&gt;&lt;integer&gt;1&lt;/integer&gt;
+        &lt;key&gt;Date&lt;/key&gt;&lt;date&gt;2013-07-14T09:36:36Z&lt;/date&gt;
+        &lt;key&gt;Application Version&lt;/key&gt;&lt;string&gt;11.0.4&lt;/string&gt;
+        &lt;key&gt;Features&lt;/key&gt;&lt;integer&gt;5&lt;/integer&gt;
+        &lt;key&gt;Music Folder&lt;/key&gt;&lt;string&gt;file://localhost/Volumes/HD1T2/Music/&lt;/string&gt;
+        &lt;key&gt;Library Persistent ID&lt;/key&gt;&lt;string&gt;C326B89DCF4457DF&lt;/string&gt;
+        &lt;key&gt;Tracks&lt;/key&gt;
+        &lt;dict&gt;
+            &lt;key&gt;41540&lt;/key&gt;
+            &lt;dict&gt;
+                &lt;key&gt;Track ID&lt;/key&gt;&lt;integer&gt;41540&lt;/integer&gt;
+                &lt;key&gt;Name&lt;/key&gt;&lt;string&gt;World&lt;/string&gt;
+                &lt;key&gt;Artist&lt;/key&gt;&lt;string&gt;1619 FB&lt;/string&gt;
+                &lt;key&gt;Album&lt;/key&gt;&lt;string&gt;Sound Of Funk Vol 2&lt;/string&gt;
+                &lt;key&gt;Grouping&lt;/key&gt;&lt;string&gt;where:us&lt;/string&gt;
+                &lt;key&gt;Genre&lt;/key&gt;&lt;string&gt;funk-classic&lt;/string&gt;
+                &lt;key&gt;Kind&lt;/key&gt;&lt;string&gt;MPEG audio file&lt;/string&gt;
+                &lt;key&gt;Size&lt;/key&gt;&lt;integer&gt;6516189&lt;/integer&gt;
+                &lt;key&gt;Total Time&lt;/key&gt;&lt;integer&gt;162847&lt;/integer&gt;
+                &lt;key&gt;Track Number&lt;/key&gt;&lt;integer&gt;14&lt;/integer&gt;
+                &lt;key&gt;Track Count&lt;/key&gt;&lt;integer&gt;19&lt;/integer&gt;
+                &lt;key&gt;Date Modified&lt;/key&gt;&lt;date&gt;2010-05-15T20:40:41Z&lt;/date&gt;
+                &lt;key&gt;Date Added&lt;/key&gt;&lt;date&gt;2012-07-14T07:42:39Z&lt;/date&gt;
+                &lt;key&gt;Bit Rate&lt;/key&gt;&lt;integer&gt;320&lt;/integer&gt;
+                &lt;key&gt;Sample Rate&lt;/key&gt;&lt;integer&gt;44100&lt;/integer&gt;
+                &lt;key&gt;Play Count&lt;/key&gt;&lt;integer&gt;4&lt;/integer&gt;
+                &lt;key&gt;Play Date&lt;/key&gt;&lt;integer&gt;3330533910&lt;/integer&gt;
+                &lt;key&gt;Play Date UTC&lt;/key&gt;&lt;date&gt;2009-07-15T18:18:30Z&lt;/date&gt;
+                &lt;key&gt;Rating&lt;/key&gt;&lt;integer&gt;60&lt;/integer&gt;
+                &lt;key&gt;Album Rating&lt;/key&gt;&lt;integer&gt;60&lt;/integer&gt;
+                &lt;key&gt;Album Rating Computed&lt;/key&gt;&lt;true/&gt;
+                &lt;key&gt;Normalization&lt;/key&gt;&lt;integer&gt;2644&lt;/integer&gt;
+                &lt;key&gt;Persistent ID&lt;/key&gt;&lt;string&gt;B16D68918FB4215E&lt;/string&gt;
+                &lt;key&gt;Track Type&lt;/key&gt;&lt;string&gt;File&lt;/string&gt;
+                &lt;key&gt;File Type&lt;/key&gt;&lt;integer&gt;1297106739&lt;/integer&gt;
+                &lt;key&gt;Location&lt;/key&gt;&lt;string&gt;file://localhost/Volumes/HD1T2/Music/Music/1619%20FB/Sound%20Of%20Funk%20Vol%202/14%20World.mp3&lt;/string&gt;
+                &lt;key&gt;File Folder Count&lt;/key&gt;&lt;integer&gt;5&lt;/integer&gt;
+                &lt;key&gt;Library Folder Count&lt;/key&gt;&lt;integer&gt;1&lt;/integer&gt;
+            &lt;/dict&gt;
+</code></pre><h2 id="filtering-the-file-names-from-the-itunes-xml-export">Filtering the file names from the iTunes xml export</h2>
+<p>I am only interested in files, so I switch to Terminal to extract the lines with the file paths from the XML document, and discard everything else. I use <a href="https://github.com/ggreer/the_silver_searcher">ag</a> and <a href="http://www.grymoire.com/Unix/Sed.html">sed</a> for that.</p>
+<pre><code>    ag &quot;Location&lt;/key&gt;&lt;string&gt;file://&quot; /Users/ME/Desktop/export.xml | sed -f itunes.sed  &gt; /Users/ME/Desktop/export_sed.xml
+</code></pre><p>The command can be broken down as:</p>
 <dl class="code-breakdown">
     <dt>ag</dt>
-    <dd><a href="https://github.com/ggreer/the_silver_searcher" title="[new window] ggreer/the_silver_searcher" target="_blank">ag</a> is faster than <a href="http://beyondgrep.com/" title="[new window] Beyond grep: ack 2.04, a source code search tool for programmers" target="_blank">ack</a>, which is faster than grep. It lets you find strings inside files, and it&#8217;s dead easy to install.</dd>
+    <dd><a href="https://github.com/ggreer/the_silver_searcher" title="[new window] ggreer/the_silver_searcher" target="_blank">ag</a> is faster than <a href="http://beyondgrep.com/" title="[new window] Beyond grep: ack 2.04, a source code search tool for programmers" target="_blank">ack</a>, which is faster than grep. It lets you find strings inside files, and it&#39;s dead easy to install.</dd>
 
-    <dt class="long-line">&#8220;Location&lt;/key&gt;&lt;string&gt;file://&#8221;</dt>
-    <dd class="long-line">this is the XML fragment before each file path. I put &#8220;location&#8221; because there are other paths.</dd>
+    <dt class="long-line">&quot;Location&lt;/key&gt;&lt;string&gt;file://&quot;</dt>
+    <dd class="long-line">this is the XML fragment before each file path. I put &quot;location&quot; because there are other paths.</dd>
 
     <dt>|</dt>
-    <dd>pipe, like always in Unix, get the output of what&#8217;s on the left and feed it as input to what&#8217;s on the right</dd>
+    <dd>pipe, like always in Unix, get the output of what&#39;s on the left and feed it as input to what&#39;s on the right</dd>
 
     <dt><a href="http://www.grymoire.com/Unix/Sed.html" title="[new window] Sed - An Introduction and Tutorial" target="_blank">sed</a></dt>
-    <dd><b>s</b>tream <b>ed</b>itor, another comand line tool that web developers don&#8217;t use enough IMHO. It comes by default with all Unix systems, including OS X. You give it (a) file(s), it applies text manipulations to it end you can save the results in another file. The manipulation themselves can be saved in a file&#8230;</dd>
+    <dd><b>s</b>tream <b>ed</b>itor, another comand line tool that web developers don&#39;t use enough IMHO. It comes by default with all Unix systems, including OS X. You give it (a) file(s), it applies text manipulations to it end you can save the results in another file. The manipulation themselves can be saved in a file...</dd>
 
     <dt>-f itunes.sed</dt>
-    <dd>&#8230;which is exactly what I am doing here, so I can reuse it later (see below)</dd>
+    <dd>...which is exactly what I am doing here, so I can reuse it later (see below)</dd>
 
     <dt class="long-line">&gt; /Users/ME/Desktop/export_sed.xml</dt>
     <dd class="long-line">this is where the output goes</dd>
 </dl>
 
-
-<p>The regular expression used is in a file (it makes developing it easier). The path to my music folder is hard coded. Note that regular expressions in the OS X version of sed are pretty basic, you don&#8217;t have &#8220;+&#8221; for example.</p>
-
-<div><script src='https://gist.github.com/5994589.js?file=itunes.sed'></script>
-<noscript><pre><code>s|^.*file://localhost\(/Volumes/HD1T2/Music/Music/.*\.[wmM][a4pP][3aAv]\).*$|\1|</code></pre></noscript></div>
-
-
-<p>After that I am left a text file with a list of file paths in iTunes weird URL encoding variant.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>/Volumes/HD1T2/Music/Music/1619%20FB/Sound%20Of%20Funk%20Vol%202/14%20World.mp3
-</span><span class='line'>/Volumes/HD1T2/Music/Music/4%20Hero%20+%20Carina%20Andersson/Creating%20Patterns/14%20Les%20Fleur.mp3
-</span><span class='line'>/Volumes/HD1T2/Music/Music/4%20Hero/Two%20Pages/1-07%20Spirits%20In%20Transit.mp3
-</span><span class='line'>/Volumes/HD1T2/Music/Music/4%20Hero/Two%20Pages/1-09%20Star%20Chasers.mp3
-</span><span class='line'>/Volumes/HD1T2/Music/Music/4%20Hero/Two%20Pages%20Reinterpretations/01%20Planetaria%20<span class="o">(</span>Hefner%20Remix<span class="o">)</span>.mp3
-</span><span class='line'>/Volumes/HD1T2/Music/Music/A%20Guy%20Called%20Gerald/Essence/15%20Landed.mp3
-</span><span class='line'>...
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Randomizing the list with node</h2>
-
+<p>The regular expression used is in a file (it makes developing it easier). The path to my music folder is hard coded. Note that regular expressions in the OS X version of sed are pretty basic, you don&#39;t have &quot;+&quot; for example.</p>
+<pre><code>s|^.*file://localhost\(/Volumes/HD1T2/Music/Music/.*\.[wmM][a4pP][3aAv]\).*$|\1|
+</code></pre><p>After that I am left a text file with a list of file paths in iTunes weird URL encoding variant.</p>
+<pre><code>/Volumes/HD1T2/Music/Music/1619%20FB/Sound%20Of%20Funk%20Vol%202/14%20World.mp3
+/Volumes/HD1T2/Music/Music/4%20Hero%20+%20Carina%20Andersson/Creating%20Patterns/14%20Les%20Fleur.mp3
+/Volumes/HD1T2/Music/Music/4%20Hero/Two%20Pages/1-07%20Spirits%20In%20Transit.mp3
+/Volumes/HD1T2/Music/Music/4%20Hero/Two%20Pages/1-09%20Star%20Chasers.mp3
+/Volumes/HD1T2/Music/Music/4%20Hero/Two%20Pages%20Reinterpretations/01%20Planetaria%20(Hefner%20Remix).mp3
+/Volumes/HD1T2/Music/Music/A%20Guy%20Called%20Gerald/Essence/15%20Landed.mp3
+...
+</code></pre><h2 id="randomizing-the-list-with-node">Randomizing the list with node</h2>
 <p>I run the node script <a href="https://gist.github.com/gotofritz/5994589#file-music_from_itunes-js" title="[new window] Copying the files from iTunes playlist to a folder" target="_blank">music_from_itunes</a> from Terminal</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">cd</span> /path/to
-</span><span class='line'>chmod 775 music_from_itunes
-</span><span class='line'>./music_from_itunes
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>I tried using the <code>lazy</code> modules to read the file as a stream instead of gobbling it up into an array in one go, but something is odd with my npm installation, and I didn&#8217;t have time to work out what. So I wrote it using only standard modules, plus one of mine. It will load the complete list in memory, shuffle it, and then print out a bash file to copy these shuffled files to an external hard disk. Note that all paths are hard coded at the top of the file.</p>
-
-<p>The <a href="https://gist.github.com/gotofritz/5994589#file-mandoline_helper-js" title="[new window] Copying the files from iTunes playlist to a folder" target="_blank">mandoline_helper</a> module I wrote is a container for all my iTunes related scripts, it&#8217;s all rough and ready stuff focusing on functional style js.</p>
-
+<pre><code>cd /path/to
+chmod 775 music_from_itunes
+./music_from_itunes
+</code></pre><p>I tried using the <code>lazy</code> modules to read the file as a stream instead of gobbling it up into an array in one go, but something is odd with my npm installation, and I didn&#39;t have time to work out what. So I wrote it using only standard modules, plus one of mine. It will load the complete list in memory, shuffle it, and then print out a bash file to copy these shuffled files to an external hard disk. Note that all paths are hard coded at the top of the file.</p>
+<p>The <a href="https://gist.github.com/gotofritz/5994589#file-mandoline_helper-js" title="[new window] Copying the files from iTunes playlist to a folder" target="_blank">mandoline_helper</a> module I wrote is a container for all my iTunes related scripts, it&#39;s all rough and ready stuff focusing on functional style js.</p>
 <p>At the end of this step I am left with a bash file, which is a collection of copy instructions.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>cp <span class="s2">&quot;/Volumes/HD1T2/Music/Music/James Brown _ JB&#39;s/Hell/My Thang.mp3&quot;</span> <span class="s2">&quot;/Volumes/SD/MUSIC/0001.mp3&quot;</span>
-</span><span class='line'>cp <span class="s2">&quot;/Volumes/HD1T2/Music/Music/Cham/DJ Zhao_ Balmyard Rockers Mix/Funny Man.mp3&quot;</span> <span class="s2">&quot;/Volumes/SD/MUSIC/0002.mp3&quot;</span>
-</span><span class='line'>cp <span class="s2">&quot;/Volumes/HD1T2/Music/Music/Last Step/Sacred Symbols of Mu CD2/10 Lives With Angel.mp3&quot;</span> <span class="s2">&quot;/Volumes/SD/MUSIC/0003.mp3&quot;</span>
-</span><span class='line'>cp <span class="s2">&quot;/Volumes/HD1T2/Music/Music/Smokeringz/Professor Tsungs Art Of Science Funktion/10 Flytronix.mp3&quot;</span> <span class="s2">&quot;/Volumes/SD/MUSIC/0004.mp3&quot;</span>
-</span><span class='line'>cp <span class="s2">&quot;/Volumes/HD1T2/Music/Music/Compilations/Hip Hop Don&#39;t Stop - The Greatest/19 Egg Trippin&#39;.mp3&quot;</span> <span class="s2">&quot;/Volumes/SD/MUSIC/0005.mp3&quot;</span>
-</span><span class='line'>...
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Doing the actual copy</h2>
-
-<p>The output of the last step is a file in my home directory called <code>bash_files.sh</code>. I simply run that, and roughly one hour later (for a 16GB flash drive) it&#8217;s all done.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">cd</span>
-</span><span class='line'>./bash_files.sh
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>It (mostly) works</h2>
-
-<p>I run it on playlists of up to 5000 items and it worked ok, with only 1% of files that couldn&#8217;t be copied (weird character encoding introduced by iTunes that couldn&#8217;t be decoded easily). I can live with that.</p>
-
+<pre><code>cp &quot;/Volumes/HD1T2/Music/Music/James Brown _ JB&#39;s/Hell/My Thang.mp3&quot; &quot;/Volumes/SD/MUSIC/0001.mp3&quot;
+cp &quot;/Volumes/HD1T2/Music/Music/Cham/DJ Zhao_ Balmyard Rockers Mix/Funny Man.mp3&quot; &quot;/Volumes/SD/MUSIC/0002.mp3&quot;
+cp &quot;/Volumes/HD1T2/Music/Music/Last Step/Sacred Symbols of Mu CD2/10 Lives With Angel.mp3&quot; &quot;/Volumes/SD/MUSIC/0003.mp3&quot;
+cp &quot;/Volumes/HD1T2/Music/Music/Smokeringz/Professor Tsungs Art Of Science Funktion/10 Flytronix.mp3&quot; &quot;/Volumes/SD/MUSIC/0004.mp3&quot;
+cp &quot;/Volumes/HD1T2/Music/Music/Compilations/Hip Hop Don&#39;t Stop - The Greatest/19 Egg Trippin&#39;.mp3&quot; &quot;/Volumes/SD/MUSIC/0005.mp3&quot;
+...
+</code></pre><h2 id="doing-the-actual-copy">Doing the actual copy</h2>
+<p>The output of the last step is a file in my home directory called <code>bash_files.sh</code>. I simply run that, and roughly one hour later (for a 16GB flash drive) it&#39;s all done.</p>
+<pre><code>cd
+./bash_files.sh
+</code></pre><h2 id="it-mostly-works">It (mostly) works</h2>
+<p>I run it on playlists of up to 5000 items and it worked ok, with only 1% of files that couldn&#39;t be copied (weird character encoding introduced by iTunes that couldn&#39;t be decoded easily). I can live with that.</p>
 <p>Obviously there are lots of possible improvements, but I only had a window of a couple of hours and it was great just to get something that did the job.</p>
-</div>
-	</div>
-</article>
+
+      </div>
+    </div>
+  </article>
 
 
-<section id="comment">
+<!-- <section id="comment">
     <h1 class="title">Comments</h1>
     <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </div>
 </section>
 
   </div>
-	<footer id="footer" class="inner">Copyright &copy; 2016
+  -->
+  <footer id="footer" class="inner">Copyright &copy; 2016
 
-    Fabrizio (Fritz) Stelluto
+    Fritz Stelluto
 
 </footer>
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-<script src="/javascripts/slash.js"></script>
+<!--
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 
 
 <script type="text/javascript">
       var disqus_shortname = 'goto-fritz';
-      
-        
+
+
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://gotofritz.net/blog/geekery/itunes-playlist-copy-files/';
-        var disqus_url = 'http://gotofritz.net/blog/geekery/itunes-playlist-copy-files/';
+        var disqus_identifier = 'http://gotofritz.net/blog/geekery/backing-up-hard-disk-os-x/';
+        var disqus_url = 'http://gotofritz.net/blog/geekery/backing-up-hard-disk-os-x/';
         var disqus_script = 'embed.js';
-      
+
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
       dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
@@ -336,19 +189,19 @@
 
 
 
-	<script type="text/javascript">
-		var _gaq = _gaq || [];
-		_gaq.push(['_setAccount', 'UA-11254155-2']);
-		_gaq.push(['_trackPageview']);
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-11254155-2']);
+    _gaq.push(['_trackPageview']);
 
-		(function() {
-			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-		})();
-	</script>
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
 
-
+-->
 
 </body>
 </html>

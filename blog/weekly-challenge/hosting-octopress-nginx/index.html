@@ -1,376 +1,181 @@
-
 <!DOCTYPE HTML>
 <html>
 <head>
-	<meta charset="utf-8">
-	<title>Hosting Octopress on nginx - Fabrizio (Fritz) Stelluto</title>
-	<meta name="author" content="">
-
-	
-	<meta name="description" content="The best thing about Octopress is that it makes it easier to switch to one of the servers out there which are faster than Apache - Nginx, lighttpd, &hellip;">
-	
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-	<link href="/atom.xml" rel="alternate" title="Fabrizio (Fritz) Stelluto" type="application/atom+xml">
-	<link rel="canonical" href="">
-	<link href="/favicon.ico" rel="shortcut icon">
-	<link rel="icon" href="/favicon.gif" type="image/gif" />
-	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-	
+  <meta charset="utf-8">
+  <title>Hosting Octopress on nginx || Fritz Stelluto</title>
+  <meta name="author" content="gotofritz">
+  <meta name="description" content="The best thing about Octopress is that it makes it easier to switch to one of the servers out there which are faster than Apache - Nginx, lighttpd, or services such as Amazon S3. I went for nginx.">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link href="/assets/favicon.ico" rel="shortcut icon">
+  <link rel="icon" href="/assets/favicon.gif" type="image/gif" />
+  <link href="/assets/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 </head>
 
-
 <body ontouchstart="">
-
   <header id="header" class="inner">
-<nav id="main-nav"><div>
-  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
-  <a href="/">home</a>
-  <a href="/blog/">blog</a>
-</div></nav>
-<nav id="mobile-nav">
-	<div class="alignleft menu">
-		<a class="button">Menu</a>
-		<div class="container"><div>
-  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
-  <a href="/">home</a>
-  <a href="/blog/">blog</a>
-</div></div>
-	</div>
-	<div class="alignright search">
-		<a class="button"></a>
-		<div class="container">
-			<form action="http://google.com/search" method="get">
-				<input type="text" name="q" results="0">
-				<input type="hidden" name="q" value="site:gotofritz.net">
-			</form>
-		</div>
-	</div>
-</nav>
+    <nav id="main-nav">
+      <div>
+        <a href="/">home</a>
+        <a href="/blog/">blog</a>
+      </div>
+    </nav>
 
-<nav id="sub-nav" class="alignright">
-	<form class="search" action="http://google.com/search" method="get">
-		<input class="alignright" type="text" name="q" results="0">
-		<input type="hidden" name="q" value="site:gotofritz.net">
-	</form>
-</nav>
-
-</header>
-	
-		
-	
-	<div id="content" class="inner">
-    
-    <article class="post">
-	<h1 class="title">Hosting Octopress on Nginx</h1>
-	<div>
-		<div class="meta">
-			<div class="date">
+    <nav id="sub-nav" class="alignright">
+      <form class="search" action="http://google.com/search" method="get">
+        <input class="alignright" type="text" name="q" results="0">
+        <input type="hidden" name="q" value="site:gotofritz.net">
+      </form>
+    </nav>
+  </header>
 
 
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-09-21T19:24:00+02:00" pubdate data-updated="true">2012-09-21, Fri</time></div>
-			<div class="tags">
-
-
-	<a class='category' href='/blog/cat/weekly-challenge/'>Weekly Challenge</a>
-
-
-</div>
-			
-				<span class="comments"><a href="/blog/weekly-challenge/hosting-octopress-nginx/#disqus_thread">Comments</a></span>
-			
-		</div>
-		<div class="entry-content"><p>The best thing about Octopress is that it makes it easier to switch to one of the servers out there which are faster than Apache - Nginx, lighttpd, or services such as Amazon S3. I went for nginx.</p>
-
-<!--more-->
-
-
-<h2>Deploying Octopress to my server</h2>
-
+<div id="content" class="inner">
+  <article class="post">
+    <h1 class="title">Hosting Octopress on nginx</h1>
+    <div>
+      <div class="meta">
+        <div class="date">
+          <time datetime="2012-09-21T19:24:00+02:00" pubdate>2012-09-21</time>
+        </div>
+        <div class="tags">
+          octopress,
+          nginx
+        </div>
+      </div>
+      <div class="entry-content">
+<div class="archive">This post is too old to be of any use. It has been archived.</div>
+<p>The best thing about Octopress is that it makes it easier to switch to one of the servers out there which are faster than Apache - Nginx, lighttpd, or services such as Amazon S3. I went for nginx.
+<!--more--></p>
+<h2 id="deploying-octopress-to-my-server">Deploying Octopress to my server</h2>
 <p>For now I want to self-host my site on my <a href="http://www.linode.com/" title="[new window] Linode - Xen VPS Hosting" target="_blank">Linode</a>. Since both my server and my local machines are fresh installs, I first needed to <a href="/blog/geekery/basic-user-admin-linode/" title="Basic user admin in an Ubuntu Linode">set up users, SSH keys</a> and suchlike.</p>
-
 <p>With that done, I toyed with the idea of deploying Octopress via Dropbox - I mean, could it get any easier? Just symlink the public folder into dropbox</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>ln -s /path/to/octopress/Public /Users/ME/Dropbox/gotofritz.net
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>and then <a href="https://www.dropbox.com/install?os=lnx" title="[new window] Dropbox - Download Dropbox - Simplify your life" target="_blank">install Dropbox on the server</a> and do the same on that side. But somehow I felt reluctant to do that.</p>
-
+<pre><code>ln -s /path/to/octopress/Public /Users/ME/Dropbox/gotofritz.net
+</code></pre><p>and then <a href="https://www.dropbox.com/install?os=lnx" title="[new window] Dropbox - Download Dropbox - Simplify your life" target="_blank">install Dropbox on the server</a> and do the same on that side. But somehow I felt reluctant to do that.</p>
 <p>Instead I picked rsync as the deploy method.</p>
-
-<h2>Deploying Octopress with rsync</h2>
-
-<p>It&#8217;s really as simple as the <a href="http://octopress.org/docs/deploying/rsync/" title="[new window] Deploying with rsync - Octopress" target="_blank">instructions on the Octopress site</a> say - you change a couple of settings in the Rakefile, and then you run <tt>rake deploy</tt>.</p>
-
-<h2>Hosting Octopress on nginx</h2>
-
-<h3>Installing nginx on Ubuntu</h3>
-
-<p>I didn&#8217;t have nginx on my server, so I installed it and started it a version which includes <a href="http://code.google.com/p/naxsi/" title="[new window] naxsi - Naxsi is an open source, high performance, low rules maintenance, Web Application Firewall module for Nginx - Google Project Hosting" target="_blank">naxsi, an nginx firewall</a>.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>apt-get install nginx-naxsi
-</span><span class='line'>/etc/init.d/nginx start
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>I then changed some of the settings in /etc/nginx/nginx.conf - enabled gizipping, added the location of the log files, nothing too weird.</p>
-
+<h2 id="deploying-octopress-with-rsync">Deploying Octopress with rsync</h2>
+<p>It&#39;s really as simple as the <a href="http://octopress.org/docs/deploying/rsync/" title="[new window] Deploying with rsync - Octopress" target="_blank">instructions on the Octopress site</a> say - you change a couple of settings in the Rakefile, and then you run <tt>rake deploy</tt>.</p>
+<h2 id="hosting-octopress-on-nginx">Hosting Octopress on nginx</h2>
+<h3 id="installing-nginx-on-ubuntu">Installing nginx on Ubuntu</h3>
+<p>I didn&#39;t have nginx on my server, so I installed it and started it a version which includes <a href="http://code.google.com/p/naxsi/" title="[new window] naxsi - Naxsi is an open source, high performance, low rules maintenance, Web Application Firewall module for Nginx - Google Project Hosting" target="_blank">naxsi, an nginx firewall</a>.</p>
+<pre><code>apt-get install nginx-naxsi
+/etc/init.d/nginx start
+</code></pre><p>I then changed some of the settings in /etc/nginx/nginx.conf - enabled gizipping, added the location of the log files, nothing too weird.</p>
 <p>Then I created a config file in /etc/nginx/sites-available/gotofritz.net</p>
+<pre><code>server {
+    listen       80;
+    server_name  www.gotofritz.net;
+    return       301 http://gotofritz.net$request_uri;
+}
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-<span class='line-number'>50</span>
-<span class='line-number'>51</span>
-<span class='line-number'>52</span>
-<span class='line-number'>53</span>
-<span class='line-number'>54</span>
-<span class='line-number'>55</span>
-<span class='line-number'>56</span>
-<span class='line-number'>57</span>
-<span class='line-number'>58</span>
-<span class='line-number'>59</span>
-<span class='line-number'>60</span>
-<span class='line-number'>61</span>
-<span class='line-number'>62</span>
-<span class='line-number'>63</span>
-<span class='line-number'>64</span>
-<span class='line-number'>65</span>
-<span class='line-number'>66</span>
-<span class='line-number'>67</span>
-<span class='line-number'>68</span>
-<span class='line-number'>69</span>
-<span class='line-number'>70</span>
-<span class='line-number'>71</span>
-<span class='line-number'>72</span>
-<span class='line-number'>73</span>
-<span class='line-number'>74</span>
-<span class='line-number'>75</span>
-<span class='line-number'>76</span>
-<span class='line-number'>77</span>
-<span class='line-number'>78</span>
-<span class='line-number'>79</span>
-</pre></td><td class='code'><pre><code class='nginx'><span class='line'><span class="k">server</span> <span class="p">{</span>
-</span><span class='line'>    <span class="kn">listen</span>       <span class="mi">80</span><span class="p">;</span>
-</span><span class='line'>    <span class="kn">server_name</span>  <span class="s">www.gotofritz.net</span><span class="p">;</span>
-</span><span class='line'>    <span class="kn">return</span>       <span class="mi">301</span> <span class="s">http://gotofritz.net</span><span class="nv">$request_uri</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">server</span> <span class="p">{</span>
-</span><span class='line'>    <span class="kn">listen</span>       <span class="mi">80</span><span class="p">;</span>
-</span><span class='line'>    <span class="kn">server_name</span>  <span class="s">blog.gotofritz.net</span><span class="p">;</span>
-</span><span class='line'>    <span class="kn">return</span>       <span class="mi">301</span> <span class="s">http://gotofritz.net/blog</span><span class="nv">$request_uri</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">server</span> <span class="p">{</span>
-</span><span class='line'>    <span class="kn">listen</span>       <span class="mi">80</span><span class="p">;</span>
-</span><span class='line'>    <span class="kn">server_name</span>  <span class="s">work.gotofritz.net</span><span class="p">;</span>
-</span><span class='line'>    <span class="kn">return</span>       <span class="mi">301</span> <span class="s">http://gotofritz.net/work</span><span class="nv">$request_uri</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">server</span> <span class="p">{</span>
-</span><span class='line'>    <span class="kn">listen</span>       <span class="mi">80</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="kn">root</span> <span class="s">...</span>
-</span><span class='line'>    <span class="s">index</span> <span class="s">index.html</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="kn">server_name</span> <span class="s">gotofritz.net</span><span class="p">;</span>
-</span><span class='line'>    <span class="kn">access_log</span> <span class="s">...</span>
-</span><span class='line'>    <span class="s">error_log</span> <span class="s">...</span>
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'>    <span class="s">error_page</span> <span class="mi">500</span> <span class="mi">502</span> <span class="mi">503</span> <span class="mi">504</span> <span class="s">/50x.html</span><span class="p">;</span>
-</span><span class='line'>    <span class="kn">location</span> <span class="p">=</span> <span class="s">/50x.html</span> <span class="p">{</span>
-</span><span class='line'>         <span class="kn">root</span> <span class="s">/usr/share/nginx/www</span><span class="p">;</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'>    <span class="c1"># do not serve pages starting with .</span>
-</span><span class='line'>    <span class="kn">location</span> <span class="p">~</span> <span class="sr">/\.</span> <span class="p">{</span>
-</span><span class='line'>         <span class="kn">log_not_found</span> <span class="no">off</span><span class="p">;</span>
-</span><span class='line'>          <span class="kn">deny</span> <span class="s">all</span><span class="p">;</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="c1">### This location definition prevents Nginx from serving any files which begin</span>
-</span><span class='line'>    <span class="c1">### with a dollar sign, so Nginx will refuse to serve out a temp file if you</span>
-</span><span class='line'>    <span class="c1">### are doing any editing inside a web-available directory</span>
-</span><span class='line'>    <span class="kn">location</span> <span class="p">~</span> <span class="sr">~$</span> <span class="p">{</span>
-</span><span class='line'>        <span class="kn">access_log</span> <span class="no">off</span><span class="p">;</span>
-</span><span class='line'>        <span class="kn">log_not_found</span> <span class="no">off</span><span class="p">;</span>
-</span><span class='line'>        <span class="kn">deny</span> <span class="s">all</span><span class="p">;</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="c1">### These next two locations simply prevent Nginx from logging every time the</span>
-</span><span class='line'>    <span class="c1">### favicon &amp; robots.txt files are accessed, to keep the logs clean</span>
-</span><span class='line'>    <span class="kn">location</span> <span class="p">=</span> <span class="s">/robots.txt</span> <span class="p">{</span>
-</span><span class='line'>      <span class="kn">access_log</span> <span class="no">off</span><span class="p">;</span>
-</span><span class='line'>      <span class="kn">log_not_found</span> <span class="no">off</span><span class="p">;</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="c1">#don&#39;t need these for static site</span>
-</span><span class='line'>    <span class="kn">location</span> <span class="p">~</span> <span class="sr">\.(aspx|php|jsp|cgi)$</span> <span class="p">{</span>
-</span><span class='line'>            <span class="kn">return</span> <span class="mi">410</span><span class="p">;</span>
-</span><span class='line'>            <span class="kn">access_log</span> <span class="no">off</span><span class="p">;</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="kn">location</span> <span class="p">=</span> <span class="s">/favicon.ico</span> <span class="p">{</span>
-</span><span class='line'>      <span class="kn">access_log</span> <span class="no">off</span><span class="p">;</span>
-</span><span class='line'>      <span class="kn">log_not_found</span> <span class="no">off</span><span class="p">;</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="kn">location</span> <span class="p">~</span> <span class="sr">\.js</span> <span class="p">{</span>
-</span><span class='line'>      <span class="kn">access_log</span> <span class="no">off</span><span class="p">;</span>
-</span><span class='line'>      <span class="kn">log_not_found</span> <span class="no">off</span><span class="p">;</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="kn">location</span> <span class="p">~</span> <span class="sr">\.css</span> <span class="p">{</span>
-</span><span class='line'>      <span class="kn">access_log</span> <span class="no">off</span><span class="p">;</span>
-</span><span class='line'>      <span class="kn">log_not_found</span> <span class="no">off</span><span class="p">;</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+server {
+    listen       80;
+    server_name  blog.gotofritz.net;
+    return       301 http://gotofritz.net/blog$request_uri;
+}
+
+server {
+    listen       80;
+    server_name  work.gotofritz.net;
+    return       301 http://gotofritz.net/work$request_uri;
+}
+
+server {
+    listen       80;
+
+    root ...
+    index index.html;
+
+    server_name gotofritz.net;
+    access_log ...
+    error_log ...
 
 
-<p>Created a symlink between sites-available and sites-enabled, then restarted the server</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>ln -s ../sites-enabled/gotofritz.net gotofritz.net
-</span><span class='line'>sudo /etc/init.d/nginx restart
-</span></code></pre></td></tr></table></div></figure>
+    error_page 500 502 503 504 /50x.html;
+    location = /50x.html {
+        root /usr/share/nginx/www;
+    }
 
 
-<p>Anf off we go. Check out the speed - it&#8217;s actually faster to load the page from my Linode in the UK than it is to load it locally on my machine using Pow.</p>
-</div>
-	</div>
-</article>
+    # do not serve pages starting with .
+    location ~ /\. {
+        log_not_found off;
+        deny all;
+    }
 
-<article class="archives">
-  <div class="related-posts">
-    <h2>Related Posts</h2>
-    
-      <article>
-        <h3 class="title"><a href="/blog/geekery/adding-related-post-to-octopress/">Adding Related Post to Octopress</a></h3>
-        <div class="meta">
-          <span class="tags">
+    ### This location definition prevents Nginx from serving any files which begin
+    ### with a dollar sign, so Nginx will refuse to serve out a temp file if you
+    ### are doing any editing inside a web-available directory
+    location ~ ~$ {
+        access_log off;
+        log_not_found off;
+        deny all;
+    }
+
+    ### These next two locations simply prevent Nginx from logging every time the
+    ### favicon &amp; robots.txt files are accessed, to keep the logs clean
+    location = /robots.txt {
+    access_log off;
+    log_not_found off;
+    }
+
+    #don&#39;t need these for static site
+    location ~ \.(aspx|php|jsp|cgi)$ {
+            return 410;
+            access_log off;
+    }
+
+    location = /favicon.ico {
+    access_log off;
+    log_not_found off;
+    }
+
+    location ~ \.js {
+    access_log off;
+    log_not_found off;
+    }
+
+    location ~ \.css {
+    access_log off;
+    log_not_found off;
+    }
+
+}
+</code></pre><p>Created a symlink between sites-available and sites-enabled, then restarted the server</p>
+<pre><code>ln -s ../sites-enabled/gotofritz.net gotofritz.net
+sudo /etc/init.d/nginx restart
+</code></pre><p>Anf off we go. Check out the speed - it&#39;s actually faster to load the page from my Linode in the UK than it is to load it locally on my machine using Pow.</p>
+
+      </div>
+    </div>
+  </article>
 
 
-	<a class='category' href='/blog/cat/geekery/'>Geekery</a>
-
-
-</span>
-            
-          <time datetime="2012-09-21T19:24:00+02:00" pubdate>2012-09-21</time>
-            
-        </div>
-      </article>
-    
-      <article>
-        <h3 class="title"><a href="/blog/weekly-challenge/migrating-wordpress-blogs-to-octopress">Migrating Wordpress blogs to Octopress</a></h3>
-        <div class="meta">
-          <span class="tags">
-
-
-	<a class='category' href='/blog/cat/weekly-challenge/'>Weekly Challenge</a>
-
-
-</span>
-            
-          <time datetime="2012-09-21T19:24:00+02:00" pubdate>2012-09-21</time>
-            
-        </div>
-      </article>
-    
-  </div>
-</article>
-
-
-<section id="comment">
+<!-- <section id="comment">
     <h1 class="title">Comments</h1>
     <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </div>
 </section>
 
   </div>
-	<footer id="footer" class="inner">Copyright &copy; 2016
+  -->
+  <footer id="footer" class="inner">Copyright &copy; 2016
 
-    Fabrizio (Fritz) Stelluto
+    Fritz Stelluto
 
 </footer>
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-<script src="/javascripts/slash.js"></script>
+<!--
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 
 
 <script type="text/javascript">
       var disqus_shortname = 'goto-fritz';
-      
-        
+
+
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://gotofritz.net/blog/weekly-challenge/hosting-octopress-nginx/';
-        var disqus_url = 'http://gotofritz.net/blog/weekly-challenge/hosting-octopress-nginx/';
+        var disqus_identifier = 'http://gotofritz.net/blog/geekery/backing-up-hard-disk-os-x/';
+        var disqus_url = 'http://gotofritz.net/blog/geekery/backing-up-hard-disk-os-x/';
         var disqus_script = 'embed.js';
-      
+
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
       dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
@@ -380,19 +185,19 @@
 
 
 
-	<script type="text/javascript">
-		var _gaq = _gaq || [];
-		_gaq.push(['_setAccount', 'UA-11254155-2']);
-		_gaq.push(['_trackPageview']);
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-11254155-2']);
+    _gaq.push(['_trackPageview']);
 
-		(function() {
-			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-		})();
-	</script>
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
 
-
+-->
 
 </body>
 </html>

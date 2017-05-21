@@ -1,161 +1,102 @@
-
 <!DOCTYPE HTML>
 <html>
 <head>
-	<meta charset="utf-8">
-	<title>Sending emails with non ASCII characters from Classic ASP - Fabrizio (Fritz) Stelluto</title>
-	<meta name="author" content="">
-
-	
-	<meta name="description" content="To have an ASP page send an email with non-ASCII European text (Cyrillic, Greek, Czech, etc) you&#8217;ll need to use UTF-8. Saving Source Files As &hellip;">
-	
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-	<link href="/atom.xml" rel="alternate" title="Fabrizio (Fritz) Stelluto" type="application/atom+xml">
-	<link rel="canonical" href="">
-	<link href="/favicon.ico" rel="shortcut icon">
-	<link rel="icon" href="/favicon.gif" type="image/gif" />
-	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-	
+  <meta charset="utf-8">
+  <title>Sending emails with non ASCII characters from Classic ASP || Fritz Stelluto</title>
+  <meta name="author" content="gotofritz">
+  <meta name="description" content="To have an ASP page send an email with non-ASCII European text (Cyrillic, Greek, Czech, etc) you&amp;#39;ll need to use UTF-8.">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link href="/assets/favicon.ico" rel="shortcut icon">
+  <link rel="icon" href="/assets/favicon.gif" type="image/gif" />
+  <link href="/assets/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 </head>
 
-
 <body ontouchstart="">
-
   <header id="header" class="inner">
-<nav id="main-nav"><div>
-  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
-  <a href="/">home</a>
-  <a href="/blog/">blog</a>
-</div></nav>
-<nav id="mobile-nav">
-	<div class="alignleft menu">
-		<a class="button">Menu</a>
-		<div class="container"><div>
-  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
-  <a href="/">home</a>
-  <a href="/blog/">blog</a>
-</div></div>
-	</div>
-	<div class="alignright search">
-		<a class="button"></a>
-		<div class="container">
-			<form action="http://google.com/search" method="get">
-				<input type="text" name="q" results="0">
-				<input type="hidden" name="q" value="site:gotofritz.net">
-			</form>
-		</div>
-	</div>
-</nav>
+    <nav id="main-nav">
+      <div>
+        <a href="/">home</a>
+        <a href="/blog/">blog</a>
+      </div>
+    </nav>
 
-<nav id="sub-nav" class="alignright">
-	<form class="search" action="http://google.com/search" method="get">
-		<input class="alignright" type="text" name="q" results="0">
-		<input type="hidden" name="q" value="site:gotofritz.net">
-	</form>
-</nav>
-
-</header>
-	
-		
-	
-	<div id="content" class="inner">
-    
-    <article class="post">
-	<h1 class="title">Sending Emails With Non ASCII Characters From Classic ASP</h1>
-	<div>
-		<div class="meta">
-			<div class="date">
+    <nav id="sub-nav" class="alignright">
+      <form class="search" action="http://google.com/search" method="get">
+        <input class="alignright" type="text" name="q" results="0">
+        <input type="hidden" name="q" value="site:gotofritz.net">
+      </form>
+    </nav>
+  </header>
 
 
-
-
-
-
-
-
-  
-
-
-<time datetime="2006-09-22T12:43:03+02:00" pubdate data-updated="true">2006-09-22, Fri</time></div>
-			<div class="tags">
-
-
-	<a class='category' href='/blog/cat/howto/'>HowTo</a>
-
-
-</div>
-			
-				<span class="comments"><a href="/blog/howto/sending-emails-non-ascii-characters-classic-asp#disqus_thread">Comments</a></span>
-			
-		</div>
-		<div class="entry-content"><p>To have an ASP page send an email with non-ASCII European text (Cyrillic, Greek, Czech, etc) you&#8217;ll need to use UTF-8.</p>
-
-<!--more-->
-
-
-<h2>Saving Source Files As UTF-8</h2>
-
-<p>First all, make sure you save the actual ASP files itself as UTF-8, and make sure it is the correct type of UTF-8 (i.e., not &#8220;UTF-8 no BOM&#8221;). To do that in Dreamweaver, bring up the Page Properties menu (cmd/ctrl J or Modify > Page Properties&#8230;), select the Title/Encoding tab, and make sure you have UTF-8 selected and the BOM ticked. Then you need to specify the character encoding for the page itself. If you saved the page as UTF-8, then you can use the codepage attribute in the language tag as follows:
+<div id="content" class="inner">
+  <article class="post">
+    <h1 class="title">Sending emails with non ASCII characters from Classic ASP</h1>
+    <div>
+      <div class="meta">
+        <div class="date">
+          <time datetime="2006-09-22T12:43:00+02:00" pubdate>2006-09-22</time>
+        </div>
+        <div class="tags">
+          classic asp
+        </div>
+      </div>
+      <div class="entry-content">
+    <div class="archive">This post is old, and probably obsolete</div>
+<p>To have an ASP page send an email with non-ASCII European text (Cyrillic, Greek, Czech, etc) you&#39;ll need to use UTF-8.
+<!--more--></p>
+<h2 id="saving-source-files-as-utf-8">Saving Source Files As UTF-8</h2>
+<p>First all, make sure you save the actual ASP files itself as UTF-8, and make sure it is the correct type of UTF-8 (i.e., not &quot;UTF-8 no BOM&quot;). Then you need to specify the character encoding for the page itself. If you saved the page as UTF-8, then you can use the codepage attribute in the language tag as follows:
 <code>&lt;%@ Language=JScript CodePage=65001 %&gt;</code></p>
-
 <p>Alternatively, if you are not able to save pages in UTF-8 and session management is on, you can use a the CodePage attribute of the Session object, which allows the response to be different from the encoding of the file itself.
 <code>&lt;% Session.CodePage=650001 %&gt;</code></p>
-
 <p>Although not essential, you may also want to set the character set explicity, both in the Response object and as a meta tag:
-<code>Response.Charset="UTF-8"</code></p>
-
+<code>Response.Charset=&quot;UTF-8&quot;</code></p>
 <p>and as a meta tag:
-<code>&lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8" /&gt;</code></p>
-
-<h2>Saving A Mail Message As UTF-8 WIth CDO.Message</h2>
-
+<code>&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;</code></p>
+<h2 id="saving-a-mail-message-as-utf-8-with-cdo-message">Saving A Mail Message As UTF-8 WIth CDO.Message</h2>
 <p>The above will ensure your <em>web page</em> is served properly. But what about the email content? If you use CDO.Message to send emails, then it is pretty simple - just use set the charset property:</p>
-
-<div><script src='https://gist.github.com/2508034.js?file=CDO.message.asp'></script>
-<noscript><pre><code>var objMail = Server.CreateObject( &quot;CDO.Message&quot; );
+<pre><code>var objMail = Server.CreateObject( &quot;CDO.Message&quot; );
 objMail.BodyPart.charset = &quot;unicode-1-1-utf-8&quot;;
-objMail.From     = 'sender@example.com';
-objMail.To       = 'receiver@example.com';
-objMail.Cc       = 'cc@example.com';
-objMail.Subject  = 'Text email';
-objMail.TextBody = 'Hello. just a text email';
-objMail.HTMLBody = ' ... ';
-objMail.AddAttachment( 'asd' );</code></pre></noscript></div>
+objMail.From     = &#39;sender@example.com&#39;;
+objMail.To       = &#39;receiver@example.com&#39;;
+objMail.Cc       = &#39;cc@example.com&#39;;
+objMail.Subject  = &#39;Text email&#39;;
+objMail.TextBody = &#39;Hello. just a text email&#39;;
+objMail.HTMLBody = &#39; ... &#39;;
+objMail.AddAttachment( &#39;asd&#39; );
+</code></pre>
+      </div>
+    </div>
+  </article>
 
 
-
-</div>
-	</div>
-</article>
-
-
-<section id="comment">
+<!-- <section id="comment">
     <h1 class="title">Comments</h1>
     <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </div>
 </section>
 
   </div>
-	<footer id="footer" class="inner">Copyright &copy; 2016
+  -->
+  <footer id="footer" class="inner">Copyright &copy; 2016
 
-    Fabrizio (Fritz) Stelluto
+    Fritz Stelluto
 
 </footer>
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-<script src="/javascripts/slash.js"></script>
+<!--
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 
 
 <script type="text/javascript">
       var disqus_shortname = 'goto-fritz';
-      
-        
+
+
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://gotofritz.net/blog/howto/sending-emails-non-ascii-characters-classic-asp';
-        var disqus_url = 'http://gotofritz.net/blog/howto/sending-emails-non-ascii-characters-classic-asp';
+        var disqus_identifier = 'http://gotofritz.net/blog/geekery/backing-up-hard-disk-os-x/';
+        var disqus_url = 'http://gotofritz.net/blog/geekery/backing-up-hard-disk-os-x/';
         var disqus_script = 'embed.js';
-      
+
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
       dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
@@ -165,19 +106,19 @@ objMail.AddAttachment( 'asd' );</code></pre></noscript></div>
 
 
 
-	<script type="text/javascript">
-		var _gaq = _gaq || [];
-		_gaq.push(['_setAccount', 'UA-11254155-2']);
-		_gaq.push(['_trackPageview']);
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-11254155-2']);
+    _gaq.push(['_trackPageview']);
 
-		(function() {
-			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-		})();
-	</script>
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
 
-
+-->
 
 </body>
 </html>

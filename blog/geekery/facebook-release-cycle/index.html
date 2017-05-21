@@ -1,157 +1,96 @@
-
 <!DOCTYPE HTML>
 <html>
 <head>
-	<meta charset="utf-8">
-	<title>Facebook continuos integration cycle - Fabrizio (Fritz) Stelluto</title>
-	<meta name="author" content="">
-
-	
-	<meta name="description" content="There is an interesting screencast by Chuck Rossi, release manager, on how they manage the release process at Facebook. Worth seeing, but if you &hellip;">
-	
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-	<link href="/atom.xml" rel="alternate" title="Fabrizio (Fritz) Stelluto" type="application/atom+xml">
-	<link rel="canonical" href="">
-	<link href="/favicon.ico" rel="shortcut icon">
-	<link rel="icon" href="/favicon.gif" type="image/gif" />
-	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-	
+  <meta charset="utf-8">
+  <title>Facebook continuos integration cycle || Fritz Stelluto</title>
+  <meta name="author" content="gotofritz">
+  <meta name="description" content="There is an interesting screencast by Chuck Rossi, release manager, on how they manage the release process at Facebook. Worth seeing, but if you haven&amp;#39;t got the time, here&amp;#39;s a quick executive summary.">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link href="/assets/favicon.ico" rel="shortcut icon">
+  <link rel="icon" href="/assets/favicon.gif" type="image/gif" />
+  <link href="/assets/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 </head>
 
-
 <body ontouchstart="">
-
   <header id="header" class="inner">
-<nav id="main-nav"><div>
-  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
-  <a href="/">home</a>
-  <a href="/blog/">blog</a>
-</div></nav>
-<nav id="mobile-nav">
-	<div class="alignleft menu">
-		<a class="button">Menu</a>
-		<div class="container"><div>
-  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
-  <a href="/">home</a>
-  <a href="/blog/">blog</a>
-</div></div>
-	</div>
-	<div class="alignright search">
-		<a class="button"></a>
-		<div class="container">
-			<form action="http://google.com/search" method="get">
-				<input type="text" name="q" results="0">
-				<input type="hidden" name="q" value="site:gotofritz.net">
-			</form>
-		</div>
-	</div>
-</nav>
+    <nav id="main-nav">
+      <div>
+        <a href="/">home</a>
+        <a href="/blog/">blog</a>
+      </div>
+    </nav>
 
-<nav id="sub-nav" class="alignright">
-	<form class="search" action="http://google.com/search" method="get">
-		<input class="alignright" type="text" name="q" results="0">
-		<input type="hidden" name="q" value="site:gotofritz.net">
-	</form>
-</nav>
+    <nav id="sub-nav" class="alignright">
+      <form class="search" action="http://google.com/search" method="get">
+        <input class="alignright" type="text" name="q" results="0">
+        <input type="hidden" name="q" value="site:gotofritz.net">
+      </form>
+    </nav>
+  </header>
 
-</header>
-	
-		
-	
-	<div id="content" class="inner">
+
+<div id="content" class="inner">
+  <article class="post">
+    <h1 class="title">Facebook continuos integration cycle</h1>
+    <div>
+      <div class="meta">
+        <div class="date">
+          <time datetime="2011-07-26T17:52:00+02:00" pubdate>2011-07-26</time>
+        </div>
+        <div class="tags">
+          facebook
+        </div>
+      </div>
+      <div class="entry-content">
     
-    <article class="post">
-	<h1 class="title">Facebook Continuos Integration Cycle</h1>
-	<div>
-		<div class="meta">
-			<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-07-26T17:52:45+02:00" pubdate data-updated="true">2011-07-26, Tue</time></div>
-			<div class="tags">
-
-
-	<a class='category' href='/blog/cat/geekery/'>Geekery</a>
-
-
-</div>
-			
-				<span class="comments"><a href="/blog/geekery/facebook-release-cycle#disqus_thread">Comments</a></span>
-			
-		</div>
-		<div class="entry-content"><p>There is an interesting screencast by Chuck Rossi, release manager, on <a href="http://www.facebook.com/video/video.php?v=10100259101684977&amp;oid=9445547199&amp;comments;">how they manage the release process at Facebook</a>. Worth seeing, but if you haven&#8217;t got the time, here&#8217;s a quick executive summary.</p>
-
-<!--more-->
-
-
-<h2>Facebook runs weekly release cycles</h2>
-
-<p>Facebook use svn internally. All developers push to the trunk; every Sunday a release branch is created from the trunk (the &#8216;shadow branch&#8217;, which includes the tests as well). It gets tested for a couple of days, and on Tuesday it is pushed out. Each developer is responsible for their own fixes, and if they are not available to support them the fixes is removed from the branch.</p>
-
-<h2>Facebook uses IRC bots internally</h2>
-
-<p>Everybody communicates internally by IRC; IRC bots are set up to reply to common questions (the &#8220;questions that should not be asked&#8221; as Chuck Rossi called them). For example to ask &#8220;is my rev going to be in the next release&#8221;, the developer would type  <code>/msg request_bot rt [rev #]?</code> either in the IRC window, or the address bar of their browser.</p>
-
-<p>IRC bots are also used to communicate availability to support one&#8217;s own fixes <code>/msg request_bot support</code> or someone else&#8217;s <code>/msg request_bot support @someoneelse</code> A fix with nobody to support it is not released.</p>
-
-<h2>Facebook use the usual testing tools, plus some custom ones</h2>
-
+<p>There is an interesting screencast by Chuck Rossi, release manager, on <a href="http://www.facebook.com/video/video.php?v=10100259101684977&amp;oid=9445547199&comments;">how they manage the release process at Facebook</a>. Worth seeing, but if you haven&#39;t got the time, here&#39;s a quick executive summary.
+<!--more--></p>
+<h2 id="facebook-runs-weekly-release-cycles">Facebook runs weekly release cycles</h2>
+<p>Facebook use svn internally. All developers push to the trunk; every Sunday a release branch is created from the trunk (the &#39;shadow branch&#39;, which includes the tests as well). It gets tested for a couple of days, and on Tuesday it is pushed out. Each developer is responsible for their own fixes, and if they are not available to support them the fixes is removed from the branch.</p>
+<h2 id="facebook-uses-irc-bots-internally">Facebook uses IRC bots internally</h2>
+<p>Everybody communicates internally by IRC; IRC bots are set up to reply to common questions (the &quot;questions that should not be asked&quot; as Chuck Rossi called them). For example to ask &quot;is my rev going to be in the next release&quot;, the developer would type  <code>/msg request_bot rt [rev #]?</code> either in the IRC window, or the address bar of their browser.</p>
+<p>IRC bots are also used to communicate availability to support one&#39;s own fixes <code>/msg request_bot support</code> or someone else&#39;s <code>/msg request_bot support @someoneelse</code> A fix with nobody to support it is not released.</p>
+<h2 id="facebook-use-the-usual-testing-tools-plus-some-custom-ones">Facebook use the usual testing tools, plus some custom ones</h2>
 <p>They use unit testing, selenium, PHP debugging, and have quite a few reporting tools of their own. They have a nifty one which isolates PHP errors and gives a timeline of how often it occurs.</p>
-
-<h2>Facebook use a gatekeeper to push code out</h2>
-
-<p>The code for next 6 months is already in the Facebook codebase - but it&#8217;s not available to members of the public. There is a &#8216;gatekeeper&#8217; to determine who runs varios revisions of the code - they can make it available internally, by IP range, by age group, country, and, interestingly, by % of global users. That allows them to push out a revision to 1% of the general public for a few minutes, gather some data, make the code unavailable again, analyze the data, and then try again, perhaps with a high percentage next time.</p>
-
-<h2>Facebook use push karma to manage risk</h2>
-
+<h2 id="facebook-use-a-gatekeeper-to-push-code-out">Facebook use a gatekeeper to push code out</h2>
+<p>The code for next 6 months is already in the Facebook codebase - but it&#39;s not available to members of the public. There is a &#39;gatekeeper&#39; to determine who runs varios revisions of the code - they can make it available internally, by IP range, by age group, country, and, interestingly, by % of global users. That allows them to push out a revision to 1% of the general public for a few minutes, gather some data, make the code unavailable again, analyze the data, and then try again, perhaps with a high percentage next time.</p>
+<h2 id="facebook-use-push-karma-to-manage-risk">Facebook use push karma to manage risk</h2>
 <p>Every developer has a karma score of 4 stars when they start, and any major issue they caused lowers that score. That allows the release managers to decide whether to run extra tests for riskier developers.</p>
-
-<h2>Facebook use BitTorrent to push code to the cluster</h2>
-
+<h2 id="facebook-use-bittorrent-to-push-code-to-the-cluster">Facebook use BitTorrent to push code to the cluster</h2>
 <p>PHP code is compiled, using HipHop, into a 1GB binary which includes all of Facebook.com. That is then put on an internal BitTorrent tracker, and the thousand of production servers download it. The release managers can then reboot them in clusters with the changes.</p>
-
 <p>  *[svn]: subversion</p>
-</div>
-	</div>
-</article>
+
+      </div>
+    </div>
+  </article>
 
 
-<section id="comment">
+<!-- <section id="comment">
     <h1 class="title">Comments</h1>
     <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </div>
 </section>
 
   </div>
-	<footer id="footer" class="inner">Copyright &copy; 2016
+  -->
+  <footer id="footer" class="inner">Copyright &copy; 2016
 
-    Fabrizio (Fritz) Stelluto
+    Fritz Stelluto
 
 </footer>
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-<script src="/javascripts/slash.js"></script>
+<!--
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 
 
 <script type="text/javascript">
       var disqus_shortname = 'goto-fritz';
-      
-        
+
+
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://gotofritz.net/blog/geekery/facebook-release-cycle';
-        var disqus_url = 'http://gotofritz.net/blog/geekery/facebook-release-cycle';
+        var disqus_identifier = 'http://gotofritz.net/blog/geekery/backing-up-hard-disk-os-x/';
+        var disqus_url = 'http://gotofritz.net/blog/geekery/backing-up-hard-disk-os-x/';
         var disqus_script = 'embed.js';
-      
+
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
       dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
@@ -161,19 +100,19 @@
 
 
 
-	<script type="text/javascript">
-		var _gaq = _gaq || [];
-		_gaq.push(['_setAccount', 'UA-11254155-2']);
-		_gaq.push(['_trackPageview']);
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-11254155-2']);
+    _gaq.push(['_trackPageview']);
 
-		(function() {
-			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-		})();
-	</script>
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
 
-
+-->
 
 </body>
 </html>

@@ -1,113 +1,57 @@
-
 <!DOCTYPE HTML>
 <html>
 <head>
-	<meta charset="utf-8">
-	<title>Finding files inside an archive with Terminal - Fabrizio (Fritz) Stelluto</title>
-	<meta name="author" content="">
-
-	
-	<meta name="description" content="Looking for files inside an archive, without having to extract them first using Apple&#8217;s Terminal. find command How to find files inside an &hellip;">
-	
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-	<link href="/atom.xml" rel="alternate" title="Fabrizio (Fritz) Stelluto" type="application/atom+xml">
-	<link rel="canonical" href="">
-	<link href="/favicon.ico" rel="shortcut icon">
-	<link rel="icon" href="/favicon.gif" type="image/gif" />
-	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-	
+  <meta charset="utf-8">
+  <title>Finding files inside an archive with Terminal || Fritz Stelluto</title>
+  <meta name="author" content="gotofritz">
+  <meta name="description" content="Looking for files inside an archive, without having to extract them first using Apple&amp;#39;s Terminal.">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link href="/assets/favicon.ico" rel="shortcut icon">
+  <link rel="icon" href="/assets/favicon.gif" type="image/gif" />
+  <link href="/assets/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 </head>
 
-
 <body ontouchstart="">
-
   <header id="header" class="inner">
-<nav id="main-nav"><div>
-  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
-  <a href="/">home</a>
-  <a href="/blog/">blog</a>
-</div></nav>
-<nav id="mobile-nav">
-	<div class="alignleft menu">
-		<a class="button">Menu</a>
-		<div class="container"><div>
-  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
-  <a href="/">home</a>
-  <a href="/blog/">blog</a>
-</div></div>
-	</div>
-	<div class="alignright search">
-		<a class="button"></a>
-		<div class="container">
-			<form action="http://google.com/search" method="get">
-				<input type="text" name="q" results="0">
-				<input type="hidden" name="q" value="site:gotofritz.net">
-			</form>
-		</div>
-	</div>
-</nav>
+    <nav id="main-nav">
+      <div>
+        <a href="/">home</a>
+        <a href="/blog/">blog</a>
+      </div>
+    </nav>
 
-<nav id="sub-nav" class="alignright">
-	<form class="search" action="http://google.com/search" method="get">
-		<input class="alignright" type="text" name="q" results="0">
-		<input type="hidden" name="q" value="site:gotofritz.net">
-	</form>
-</nav>
+    <nav id="sub-nav" class="alignright">
+      <form class="search" action="http://google.com/search" method="get">
+        <input class="alignright" type="text" name="q" results="0">
+        <input type="hidden" name="q" value="site:gotofritz.net">
+      </form>
+    </nav>
+  </header>
 
-</header>
-	
-		
-	
-	<div id="content" class="inner">
+
+<div id="content" class="inner">
+  <article class="post">
+    <h1 class="title">Finding files inside an archive with Terminal</h1>
+    <div>
+      <div class="meta">
+        <div class="date">
+          <time datetime="2009-11-09T19:26:00+01:00" pubdate>2009-11-09</time>
+        </div>
+        <div class="tags">
+          bash,
+          os x
+        </div>
+      </div>
+      <div class="entry-content">
     
-    <article class="post">
-	<h1 class="title">Finding Files Inside an Archive With Terminal</h1>
-	<div>
-		<div class="meta">
-			<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-11-09T19:26:04+01:00" pubdate data-updated="true">2009-11-09, Mon</time></div>
-			<div class="tags">
-
-
-	<a class='category' href='/blog/cat/howto/'>HowTo</a>
-
-
-</div>
-			
-				<span class="comments"><a href="/blog/howto/finding-files-inside-archive#disqus_thread">Comments</a></span>
-			
-		</div>
-		<div class="entry-content"><p>Looking for files inside an archive, without having to extract them first using <a href="http://en.wikipedia.org/wiki/Apple_Terminal">Apple&#8217;s Terminal</a>.</p>
-
-<!--more-->
-
-
-<h2>find command</h2>
-
-<p>How to find files inside an archive, without having to extract them first using <a href="http://en.wikipedia.org/wiki/Apple_Terminal">Apple&#8217;s Terminal</a>, or any Unix / Linux <a href="http://en.wikipedia.org/wiki/Bash">bash</a> shell.</p>
-
-<div><script src='https://gist.github.com/5232223.js?file=find-files-inside-archive.sh'></script>
-<noscript><pre><code>#find files inside archive
-find /dir/ -iname archive.tar -print0 | xargs -0 tar t -f | grep &quot;filename you are searching for&quot;
+<p>Looking for files inside an archive, without having to extract them first using <a href="http://en.wikipedia.org/wiki/Apple_Terminal">Apple&#39;s Terminal</a>.
+<!--more--></p>
+<h2 id="find-command">find command</h2>
+<p>How to find files inside an archive, without having to extract them first using <a href="http://en.wikipedia.org/wiki/Apple_Terminal">Apple&#39;s Terminal</a>, or any Unix / Linux <a href="http://en.wikipedia.org/wiki/Bash">bash</a> shell.</p>
+<pre><code>find /dir/ -iname archive.tar -print0 | xargs -0 tar t -f | grep &quot;filename you are searching for&quot;
 find /dir/ -iname archive.zip -print0 | xargs -0 unzip -l | grep &quot;filename you are searching for&quot;
-find /dir/ -iname archive.rar -print0 | xargs -0 unrar l | grep &quot;filename you are searching for&quot;</code></pre></noscript></div>
-
-
-<h2>Command breakdown</h2>
-
+find /dir/ -iname archive.rar -print0 | xargs -0 unrar l | grep &quot;filename you are searching for&quot;
+</code></pre><h2 id="command-breakdown">Command breakdown</h2>
 <dl class="code-breakdown">
 <dt>find /dir/</dt>
 <dd>use the powerful <a href="http://en.wikipedia.org/wiki/Find" title="[new window] find - Wikipedia, the free encyclopedia" target="_blank">find</a> command, inside the folder where the archive is</dd>
@@ -119,10 +63,10 @@ find /dir/ -iname archive.rar -print0 | xargs -0 unrar l | grep &quot;filename y
 <dd>when files are found, spit them out in a list with a NULL at the end instead of a new line - this helps with the next step</dd>
 
 <dt>|</dt>
-<dd>pass the list generated by find to the next command&#8230;</dd>
+<dd>pass the list generated by find to the next command...</dd>
 
 <dt>xargs -0</dt>
-<dd>&#8230;which is <a href="http://en.wikipedia.org/wiki/Xargs" title="[new window] xargs - Wikipedia, the free encyclopedia" target="_blank">xargs</a>, used to take a list of results and pass them on. The -0 is telling xargs to use NULL as the separator</dd>
+<dd>...which is <a href="http://en.wikipedia.org/wiki/Xargs" title="[new window] xargs - Wikipedia, the free encyclopedia" target="_blank">xargs</a>, used to take a list of results and pass them on. The -0 is telling xargs to use NULL as the separator</dd>
 
 <dt>tar t -f</dt>
 <dd>use <a href="http://en.wikipedia.org/wiki/Tar_(Unix)" title="[new window] tar (computing) - Wikipedia, the free encyclopedia" target="_blank">tar</a> to list (t) the content of the archive, files only (-f)</dd>
@@ -134,99 +78,47 @@ find /dir/ -iname archive.rar -print0 | xargs -0 unrar l | grep &quot;filename y
 <dd>use <a href="http://en.wikipedia.org/wiki/Unrar" title="[new window] Unrar - Wikipedia, the free encyclopedia" target="_blank">unrar</a> to list  the content of the archive</dd>
 
 <dt>|</dt>
-<dd>pass the list generated by find to the next command&#8230;</dd>
+<dd>pass the list generated by find to the next command...</dd>
 
-<dt class="long-line">grep &#8220;filename you are searching for&#8221;</dt>
+<dt class="long-line">grep &quot;filename you are searching for&quot;</dt>
 <dd class="long-line">only show the items in the list that match the fillename, using  <a href="http://en.wikipedia.org/wiki/Grep" title="[new window] grep - Wikipedia, the free encyclopedia" target="_blank">grep</a></dd>
 </dl>
 
 
 
-</div>
-	</div>
-</article>
-
-<article class="archives">
-  <div class="related-posts">
-    <h2>Related Posts</h2>
-    
-      <article>
-        <h3 class="title"><a href="/blog/geekery/os-x-extended-attibutes">Dealing with extended attributes on OS X</a></h3>
-        <div class="meta">
-          <span class="tags">
 
 
-	<a class='category' href='/blog/cat/geekery/'>Geekery</a>
+      </div>
+    </div>
+  </article>
 
 
-</span>
-            
-          <time datetime="2009-11-09T19:26:04+01:00" pubdate>2009-11-09</time>
-            
-        </div>
-      </article>
-    
-      <article>
-        <h3 class="title"><a href="/blog/howto/a-place-for-unix-scripts-osx">A good place for scripts in OSX</a></h3>
-        <div class="meta">
-          <span class="tags">
-
-
-	<a class='category' href='/blog/cat/howto/'>HowTo</a>
-
-
-</span>
-            
-          <time datetime="2009-11-09T19:26:04+01:00" pubdate>2009-11-09</time>
-            
-        </div>
-      </article>
-    
-      <article>
-        <h3 class="title"><a href="/blog/howto/finding-recently-changed-files-osx-terminal">Finding recently changed files with Terminal</a></h3>
-        <div class="meta">
-          <span class="tags">
-
-
-	<a class='category' href='/blog/cat/howto/'>HowTo</a>
-
-
-</span>
-            
-          <time datetime="2009-11-09T19:26:04+01:00" pubdate>2009-11-09</time>
-            
-        </div>
-      </article>
-    
-  </div>
-</article>
-
-
-<section id="comment">
+<!-- <section id="comment">
     <h1 class="title">Comments</h1>
     <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </div>
 </section>
 
   </div>
-	<footer id="footer" class="inner">Copyright &copy; 2016
+  -->
+  <footer id="footer" class="inner">Copyright &copy; 2016
 
-    Fabrizio (Fritz) Stelluto
+    Fritz Stelluto
 
 </footer>
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-<script src="/javascripts/slash.js"></script>
+<!--
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 
 
 <script type="text/javascript">
       var disqus_shortname = 'goto-fritz';
-      
-        
+
+
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://gotofritz.net/blog/howto/finding-files-inside-archive';
-        var disqus_url = 'http://gotofritz.net/blog/howto/finding-files-inside-archive';
+        var disqus_identifier = 'http://gotofritz.net/blog/geekery/backing-up-hard-disk-os-x/';
+        var disqus_url = 'http://gotofritz.net/blog/geekery/backing-up-hard-disk-os-x/';
         var disqus_script = 'embed.js';
-      
+
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
       dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
@@ -236,19 +128,19 @@ find /dir/ -iname archive.rar -print0 | xargs -0 unrar l | grep &quot;filename y
 
 
 
-	<script type="text/javascript">
-		var _gaq = _gaq || [];
-		_gaq.push(['_setAccount', 'UA-11254155-2']);
-		_gaq.push(['_trackPageview']);
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-11254155-2']);
+    _gaq.push(['_trackPageview']);
 
-		(function() {
-			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-		})();
-	</script>
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
 
-
+-->
 
 </body>
 </html>

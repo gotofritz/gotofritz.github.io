@@ -1,113 +1,56 @@
-
 <!DOCTYPE HTML>
 <html>
 <head>
-	<meta charset="utf-8">
-	<title>Backing up a hard disk to another in OS X - Fabrizio (Fritz) Stelluto</title>
-	<meta name="author" content="">
-
-	
-	<meta name="description" content="Time Machine does its own backup magic, but sometimes you just simply want two identical copies of the same hard disk. For that rsync is the way to &hellip;">
-	
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-	<link href="/atom.xml" rel="alternate" title="Fabrizio (Fritz) Stelluto" type="application/atom+xml">
-	<link rel="canonical" href="">
-	<link href="/favicon.ico" rel="shortcut icon">
-	<link rel="icon" href="/favicon.gif" type="image/gif" />
-	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-	
+  <meta charset="utf-8">
+  <title>Backing up a hard disk to another in OS X || Fritz Stelluto</title>
+  <meta name="author" content="gotofritz">
+  <meta name="description" content="Time Machine does its own backup magic, but sometimes you just simply want two identical copies of the same hard disk. For that rsync is the way to go.">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link href="/assets/favicon.ico" rel="shortcut icon">
+  <link rel="icon" href="/assets/favicon.gif" type="image/gif" />
+  <link href="/assets/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 </head>
 
-
 <body ontouchstart="">
-
   <header id="header" class="inner">
-<nav id="main-nav"><div>
-  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
-  <a href="/">home</a>
-  <a href="/blog/">blog</a>
-</div></nav>
-<nav id="mobile-nav">
-	<div class="alignleft menu">
-		<a class="button">Menu</a>
-		<div class="container"><div>
-  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
-  <a href="/">home</a>
-  <a href="/blog/">blog</a>
-</div></div>
-	</div>
-	<div class="alignright search">
-		<a class="button"></a>
-		<div class="container">
-			<form action="http://google.com/search" method="get">
-				<input type="text" name="q" results="0">
-				<input type="hidden" name="q" value="site:gotofritz.net">
-			</form>
-		</div>
-	</div>
-</nav>
+    <nav id="main-nav">
+      <div>
+        <a href="/">home</a>
+        <a href="/blog/">blog</a>
+      </div>
+    </nav>
 
-<nav id="sub-nav" class="alignright">
-	<form class="search" action="http://google.com/search" method="get">
-		<input class="alignright" type="text" name="q" results="0">
-		<input type="hidden" name="q" value="site:gotofritz.net">
-	</form>
-</nav>
+    <nav id="sub-nav" class="alignright">
+      <form class="search" action="http://google.com/search" method="get">
+        <input class="alignright" type="text" name="q" results="0">
+        <input type="hidden" name="q" value="site:gotofritz.net">
+      </form>
+    </nav>
+  </header>
 
-</header>
-	
-		
-	
-	<div id="content" class="inner">
+
+<div id="content" class="inner">
+  <article class="post">
+    <h1 class="title">Backing up a hard disk to another in OS X</h1>
+    <div>
+      <div class="meta">
+        <div class="date">
+          <time datetime="2016-01-16T22:44:00+01:00" pubdate>2016-01-16</time>
+        </div>
+        <div class="tags">
+          os x,
+          backup
+        </div>
+      </div>
+      <div class="entry-content">
     
-    <article class="post">
-	<h1 class="title">Backing Up a Hard Disk to Another in OS X</h1>
-	<div>
-		<div class="meta">
-			<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2016-01-16T22:44:00+01:00" pubdate data-updated="true">2016-01-16, Sat</time></div>
-			<div class="tags">
-
-
-	<a class='category' href='/blog/cat/geekery/'>Geekery</a>
-
-
-</div>
-			
-				<span class="comments"><a href="/blog/geekery/backing-up-hard-disk-os-x/#disqus_thread">Comments</a></span>
-			
-		</div>
-		<div class="entry-content"><p><a href="https://en.wikipedia.org/wiki/Time_Machine_(OS_X)">Time Machine</a> does its own backup magic, but sometimes you just simply want two identical copies of the same hard disk. For that <a href="https://en.wikipedia.org/wiki/Rsync">rsync</a> is the way to go.</p>
-
-<!--more-->
-
-
-<p>Rsync is a utility you run by typing commands in Terminal, and it was designed exactly for doing that one job - it looks at one source folder and all its subfolders, finds all the files in there, then look at the destination folder and copies over only what needs to be copied, making it very fast. It&#8217;s got a ton of options, but all you need is to find that one command that works for you and use it again and again as needed.</p>
-
-<h2>Syncing two hard disks with rsync</h2>
-
-<p>Let&#8217;s say you have two hard disks, &#8220;ORIGINAL&#8221; and &#8220;BACKUP DISK&#8221;. For the first transfer, you may as well copy manually all the files from ORIGINAL to BACKUP DISK by dragging them, rsync doesn&#8217;t do it any better or faster. From then on, whenever you want to backup the disk (every day, every week, whatever) you can start with this command:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>rsync -aS --delete --progress  /Volumes/ORIGINAL/ /Volumes/BACKUP<span class="se">\ </span>DISK/
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>The command breaks down as follows:</p>
-
+<p><a href="https://en.wikipedia.org/wiki/Time_Machine_(OS_X)">Time Machine</a> does its own backup magic, but sometimes you just simply want two identical copies of the same hard disk. For that <a href="https://en.wikipedia.org/wiki/Rsync">rsync</a> is the way to go.
+<!--more--></p>
+<p>rsync is a utility you run by typing commands in Terminal. It was designed exactly for doing that one job: keeping folders or devices in sync (in Unix everything is a file or a folder, even an external hard disk). rsyinc looks at one source folder and all its subfolders, finds all the files in there, then looks at the destination folder and copies over only what needs to be copied, making it very fast. It&#39;s got a ton of options and can become very involved. But all you need is to find that one command that works for you and use it again and again as needed.</p>
+<h2 id="syncing-two-hard-disks-with-rsync">Syncing two hard disks with rsync</h2>
+<p>Let&#39;s say you have two hard disks, &quot;ORIGINAL&quot; and &quot;BACKUP DISK&quot;. For the first transfer, you may as well copy manually all the files from ORIGINAL to BACKUP DISK by dragging them, rsync doesn&#39;t do it any better or faster. From then on, whenever you want to backup the disk (every day, every week, whatever) you can start with this command:</p>
+<pre><code>&gt; rsync -aS --delete --progress  /Volumes/ORIGINAL/ /Volumes/BACKUP\ DISK/
+</code></pre><p>The command breaks down as follows:</p>
 <dl class="code-breakdown">
   <dt>rsync</dt>
   <dd>calls the utility</dd>
@@ -116,112 +59,79 @@
   <dd>turns on archive mode, which basically ensures all subfolders, permissions and files parameters are copied </dd>
 
   <dt>S</dt>
-  <dd>if there wasn&#8217;t already a dash for -a, this would be -S. This compacts sparse files for efficiency </dd>
+  <dd>if there wasn&#39;t already a dash for -a, this would be -S. This compacts sparse files for efficiency </dd>
 
-  <dt>&#8211;delete</dt>
+  <dt>--delete</dt>
   <dd>this ensures that any files in the destination that were not there in the source will be deleted</dd>
 
   <dt>/Volumes/ORIGINAL</dt>
   <dd>the original</dd>
 
   <dt>/Volumes/BACKUP\ DISK</dt>
-  <dd>the destination. Note that I have typed a backslash before the space after BACKUP, BACKUP\ DISK - that tells Terminal that the word isn&#8217;t finish yet, and the space is part of the word</dd>
+  <dd>the destination. Note that I have typed a backslash before the space after BACKUP, BACKUP\ DISK - that tells Terminal that the word isn&#39;t finish yet, and the space is part of the word</dd>
 </dl>
 
+<h3 id="excluding-files-from-rsync">Excluding files from rsync</h3>
+<p>If you want to skip some files or folders, you can add their paths to the command:</p>
+<pre><code>&gt; rsync -aS --delete --progress --exclude *.Trash* --exclude /that_file.txt \
+  --exclude /other_file.jpg /Volumes/ORIGINAL/ /Volumes/BACKUP\ DISK/
+</code></pre><p> Note that you have one <code>--exclude</code> options for every patter you want to exclude. Also note the <code>*</code> wildcards, which basically means &quot;anything here&quot;</p>
+<h3 id="creating-a-list-of-files-to-exclude-from-rsync">Creating a list of files to exclude from rsync</h3>
+<p>If you have a lot of excludes it makes sense to put the list in a file, and then tell rsync to use that. It makes sense even if you only have a few files, because then you can easily add and remove things from there without having to change the command - as you start playing with rsync you soon find out there are a few system folders you don&#39;t want to backup, like Spotlight indices and so on.</p>
+<pre><code>&gt; rsync -aS --delete --progress --exclude-from ~/.rsync_exclude_list
+  /Volumes/ORIGINAL/ /Volumes/BACKUP\ DISK/
+</code></pre><p>and .rsync_exclude_list can have all the patterns in there, one per line. The file  can be named whatever you want - I have put it in the home folder (that&#39;s what ~/ at the beginning means) and used a name that starts with a dot because it works well with my <a href="/blog/geekery/storing-bash-profile-and-so-on-on-github/">dotfiles</a>.</p>
+<pre><code># list of files not to be included when running alias backupext
+*.Trash*
+.TemporaryItems*
+.DocumentRevisions-*
+.Spotlight-*
+</code></pre><h2 id="making-things-easier-with-an-alias">Making things easier with an alias</h2>
+<p>Instead of trying to remember that command every time you need to back up, you can create an alias, i.e. a shortcut to the command. Depending on your setup, you can just add it to your <code>.bash_profile</code> file. If you use <a href="/blog/geekery/storing-bash-profile-and-so-on-on-github/">dotfiles</a>, just add it to the .alias file and then run bootstrap.sh again.</p>
+<pre><code># this will create it if it doesn&#39;t exist. Nano is a text editor that runs inside
+# Terminal. It&#39;s simple and it shows the shortcuts at the bottom (^ = control key)
+nano ~/.bash_profile
 
-<p>If you want to skip some files or folders, you can add their paths to the command. Note that you have one <code>--exclude</code> options for every patter you want to exclude. Also note the <code>*</code> wildcards, which basically means &#8220;anything here&#8221;</p>
+# or if you use vscode...
+code ~/.bash_profile
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>rsync -aS --delete --progress --exclude *.Trash* --exclude /that_file.txt
-</span><span class='line'>   --exclude /other_file.jpg /Volumes/ORIGINAL/ /Volumes/BACKUP<span class="se">\ </span>DISK/
-</span></code></pre></td></tr></table></div></figure>
+# then type this anywhere in the file, in a sincle line
+alias backupext=&quot;rsync -aS --delete --progress --exclude-from ~/.rsync_exclude_list
+  /Volumes/ORIGINAL/ /Volumes/BACKUP\ DISK/&quot;
 
-
-<p>If you have a lot of excludes it makes sense to put the list in a file, and then tell rsync to use that. It makes sense even if you only have a few files, because then you can easily add and remove things from there without having to change the command - as you start playing with rsync you soon find out there are a few system folders you don&#8217;t want to backup, like Spotlight indices and so on.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>rsync -aS --delete --progress --exclude-from ~/.rsync_exclude_list
-</span><span class='line'>  /Volumes/ORIGINAL/ /Volumes/BACKUP<span class="se">\ </span>DISK/
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>and .rsync_exclude_list can have all the patterns in there, one per line. The file  can be named whatever you want - I have put it in the home folder (that&#8217;s what ~/ at the beginning means) and used a name that starts with a dot because it works well with my <a href="/blog/geekery/storing-bash-profile-and-so-on-on-github/">dotfiles</a>.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># list of files not to be included when running alias backupext</span>
-</span><span class='line'>*.Trash*
-</span><span class='line'>.TemporaryItems*
-</span><span class='line'>.DocumentRevisions-*
-</span><span class='line'>.Spotlight-*
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Making things easier with an alias</h2>
-
-<p>Instead of trying to remember that command every time you need to back up, you can create an alias, i.e. a shortcut to the command. Depending on your setup, you can just add it to your bash_profile file. If you use <a href="/blog/geekery/storing-bash-profile-and-so-on-on-github/">dotfiles</a>, just add it to the .alias file and then run bootstrap.sh again.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># this will create it if it doesn&#39;t exist. Nano is a text editor that runs inside</span>
-</span><span class='line'><span class="c"># Terminal. It&#39;s simple and it shows the shortcuts at the bottom (^ = control key)</span>
-</span><span class='line'>nano ~/.bash_profile
-</span><span class='line'>
-</span><span class='line'><span class="c"># or if you use the sublime text editor...</span>
-</span><span class='line'>subl ~/.bash_profile
-</span><span class='line'>
-</span><span class='line'><span class="c"># then type this anywhere in the file, in a line of its own</span>
-</span><span class='line'><span class="nb">alias </span><span class="nv">backupext</span><span class="o">=</span><span class="s2">&quot;rsync -aS --delete --progress --exclude-from ~/.rsync_exclude_list</span>
-</span><span class='line'><span class="s2">  /Volumes/ORIGINAL/ /Volumes/BACKUP\ DISK/&quot;</span>
-</span><span class='line'>
-</span><span class='line'><span class="c"># to save and quit in nano press CTRL-X - it will ask you to save the file</span>
-</span></code></pre></td></tr></table></div></figure>
-
-</div>
-	</div>
-</article>
+# to save and quit in nano press CTRL-X - it will ask you to save the file
+</code></pre>
+      </div>
+    </div>
+  </article>
 
 
-<section id="comment">
+<!-- <section id="comment">
     <h1 class="title">Comments</h1>
     <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </div>
 </section>
 
   </div>
-	<footer id="footer" class="inner">Copyright &copy; 2016
+  -->
+  <footer id="footer" class="inner">Copyright &copy; 2016
 
-    Fabrizio (Fritz) Stelluto
+    Fritz Stelluto
 
 </footer>
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-<script src="/javascripts/slash.js"></script>
+<!--
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 
 
 <script type="text/javascript">
       var disqus_shortname = 'goto-fritz';
-      
-        
+
+
         // var disqus_developer = 1;
         var disqus_identifier = 'http://gotofritz.net/blog/geekery/backing-up-hard-disk-os-x/';
         var disqus_url = 'http://gotofritz.net/blog/geekery/backing-up-hard-disk-os-x/';
         var disqus_script = 'embed.js';
-      
+
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
       dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
@@ -231,19 +141,19 @@
 
 
 
-	<script type="text/javascript">
-		var _gaq = _gaq || [];
-		_gaq.push(['_setAccount', 'UA-11254155-2']);
-		_gaq.push(['_trackPageview']);
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-11254155-2']);
+    _gaq.push(['_trackPageview']);
 
-		(function() {
-			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-		})();
-	</script>
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
 
-
+-->
 
 </body>
 </html>

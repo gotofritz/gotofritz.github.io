@@ -1,137 +1,86 @@
-
 <!DOCTYPE HTML>
 <html>
 <head>
-	<meta charset="utf-8">
-	<title>Advanced Evernote search - Fabrizio (Fritz) Stelluto</title>
-	<meta name="author" content="">
-
-	
-	<meta name="description" content="It isn&#8217;t immediately obvious, but Evernote offers advanced search operators. Basic Evernote search Evernote search is quite quirky. It is an &# &hellip;">
-	
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-	<link href="/atom.xml" rel="alternate" title="Fabrizio (Fritz) Stelluto" type="application/atom+xml">
-	<link rel="canonical" href="">
-	<link href="/favicon.ico" rel="shortcut icon">
-	<link rel="icon" href="/favicon.gif" type="image/gif" />
-	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-	
+  <meta charset="utf-8">
+  <title>Advanced Evernote search || Fritz Stelluto</title>
+  <meta name="author" content="gotofritz">
+  <meta name="description" content="It isn&amp;#39;t immediately obvious, but Evernote offers advanced search operators.">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link href="/assets/favicon.ico" rel="shortcut icon">
+  <link rel="icon" href="/assets/favicon.gif" type="image/gif" />
+  <link href="/assets/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 </head>
 
-
 <body ontouchstart="">
-
   <header id="header" class="inner">
-<nav id="main-nav"><div>
-  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
-  <a href="/">home</a>
-  <a href="/blog/">blog</a>
-</div></nav>
-<nav id="mobile-nav">
-	<div class="alignleft menu">
-		<a class="button">Menu</a>
-		<div class="container"><div>
-  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
-  <a href="/">home</a>
-  <a href="/blog/">blog</a>
-</div></div>
-	</div>
-	<div class="alignright search">
-		<a class="button"></a>
-		<div class="container">
-			<form action="http://google.com/search" method="get">
-				<input type="text" name="q" results="0">
-				<input type="hidden" name="q" value="site:gotofritz.net">
-			</form>
-		</div>
-	</div>
-</nav>
+    <nav id="main-nav">
+      <div>
+        <a href="/">home</a>
+        <a href="/blog/">blog</a>
+      </div>
+    </nav>
 
-<nav id="sub-nav" class="alignright">
-	<form class="search" action="http://google.com/search" method="get">
-		<input class="alignright" type="text" name="q" results="0">
-		<input type="hidden" name="q" value="site:gotofritz.net">
-	</form>
-</nav>
+    <nav id="sub-nav" class="alignright">
+      <form class="search" action="http://google.com/search" method="get">
+        <input class="alignright" type="text" name="q" results="0">
+        <input type="hidden" name="q" value="site:gotofritz.net">
+      </form>
+    </nav>
+  </header>
 
-</header>
-	
-		
-	
-	<div id="content" class="inner">
+
+<div id="content" class="inner">
+  <article class="post">
+    <h1 class="title">Advanced Evernote search</h1>
+    <div>
+      <div class="meta">
+        <div class="date">
+          <time datetime="2011-09-04T13:55:00+02:00" pubdate>2011-09-04</time>
+        </div>
+        <div class="tags">
+          evernote
+        </div>
+      </div>
+      <div class="entry-content">
     
-    <article class="post">
-	<h1 class="title">Advanced Evernote Search</h1>
-	<div>
-		<div class="meta">
-			<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-09-04T13:55:27+02:00" pubdate data-updated="true">2011-09-04, Sun</time></div>
-			<div class="tags">
-
-
-	<a class='category' href='/blog/cat/geekery/'>Geekery</a>
-
-
-</div>
-			
-				<span class="comments"><a href="/blog/geekery/advanced-evernote-search#disqus_thread">Comments</a></span>
-			
-		</div>
-		<div class="entry-content"><p>It isn&#8217;t immediately obvious, but <a href="http://evernote.com/">Evernote</a> offers advanced search operators.</p>
-
-<!--more-->
-
-
-<h2>Basic Evernote search</h2>
-
-<p>Evernote search is quite quirky. It is an &#8216;all&#8217; search by default, and the order of the search operators matters.</p>
-
+<p>It isn&#39;t immediately obvious, but <a href="http://evernote.com/">Evernote</a> offers advanced search operators.
+<!--more--></p>
+<h2 id="basic-evernote-search">Basic Evernote search</h2>
+<p>Evernote search is quite quirky. It is an &#39;all&#39; search by default, and the order of the search operators matters.</p>
 <dl class="code-breakdown">
 <dt>word</dt>
 <dd>
-  Searching for word will match any occurrences of word, obviously, but also those starting with word (e.g. &#8216;wordpress&#8217;). In other words, think of it as the equivalent to word*. Note that this is <i>not</i> what it says in the <a href="http://dev.evernote.com/documentation/local/chapters/search_grammar.php" title="[new window] Evernote Search Grammar - Evernote Developers" target="_blank">Evernote API documentation</a>, where it states &#8220;Words in the content of the note are split by whitespace or punctuation&#8221;.  This is unfortunate, because sometimes you only want the exact match, but luckily you can use quotation marks in that case.
+  Searching for word will match any occurrences of word, obviously, but also those starting with word (e.g. &#39;wordpress&#39;). In other words, think of it as the equivalent to word&ast;. Note that this is <i>not</i> what it says in the <a href="http://dev.evernote.com/documentation/local/chapters/search_grammar.php" title="[new window] Evernote Search Grammar - Evernote Developers" target="_blank">Evernote API documentation</a>, where it states &quot;Words in the content of the note are split by whitespace or punctuation&quot;.  This is unfortunate, because sometimes you only want the exact match, but luckily you can use quotation marks in that case.
 </dd>
 
-<dt>word*</dt>
+<dt>word&ast;</dt>
 <dd>
-Wildcards are allowed only at the end, and in theory potato* should match both  &#8216;potatoes&#8217; and &#8216;potato&#8217; whereas potato should only match the singular. But in the Evernote app at least, the wildcard seems to be implied so this is redundant.
+Wildcards are allowed only at the end, and in theory <code>potato&amp;ast;</code> should match both  &#39;potatoes&#39; and &#39;potato&#39; whereas <code>potato</code> should only match the singular. But in the Evernote app at least, the wildcard seems to be implied so this is redundant.
 </dd>
 
 <dt>strange word</dt>
 <dd>
-By default searches only returns notes that match all words, regardless of the order. strange word will match notes containing &#8220;this word is strange&#8221;, &#8220;this is a strange word&#8221;, and &#8220;Strange! [&#8230;15 pars later&#8230;] my word&#8221;
+By default searches only returns notes that match all words, regardless of the order. <code>strange word</code> will match notes containing &quot;this word is strange&quot;, &quot;this is a strange word&quot;, and &quot;Strange! [...15 pars later...] my word&quot;
 </dd>
 
-<dt>&#8220;strange word&#8221;
-&#8220;word&#8221;</dt>
+<dt>&quot;strange word&quot;
+&quot;word&quot;</dt>
 <dd>
-Quotation marks limit the search to an exact match, so this will only match &#8220;this is a strange word&#8221; in the previous example. You can also use quotation marks to remove the implied wildcard - word will also match <i>wordpress</i> and <i>wording</i>, but &#8220;word&#8221; (with the double quotes) will not.
+Quotation marks limit the search to an exact match, so this will only match &quot;this is a strange word&quot; in the previous example. You can also use quotation marks to remove the implied wildcard - <code>word</code> will also match <i>wordpress</i> and <i>wording</i>, but <code>&quot;word&quot;</code> (with the double quotes) will not.
 </dd>
 
 <dt>-word</dt>
 <dd>
-matches notes that do not contain words starting with &#8220;word&#8221;
+matches notes that do not contain words starting with &quot;word&quot;
 </dd>
 </dl>
 
 
-<h2>Advanced search options: tag and intitle</h2>
 
-<p>They normally take the form option:value. Note that in these cases, the wildcards works - i.e., option:value is different from option:value*. The former means &#8220;any note where [option] is <em>exactly</em> [value]&#8221;, whereas the latter means &#8220;any note where [option] starts with [value]&#8221;.</p>
 
+
+<h2 id="advanced-search-options-tag-and-intitle">Advanced search options: tag and intitle</h2>
+<p>They normally take the form option:value. Note that in these cases, the wildcards works - i.e., option:value is different from option:value&ast;. The former means &quot;any note where [option] is <em>exactly</em> [value]&quot;, whereas the latter means &quot;any note where [option] starts with [value]&quot;.</p>
 <dl class="code-breakdown">
 
 
@@ -152,19 +101,19 @@ match notes with any of the search terms instead of all. This has to be the firs
 will match notes with tag theTag. Note that wildcards do work for tags, so this will match only theTag, not theTags
 </dd>
 
-<dt>tag:theTag*</dt>
+<dt>tag:theTag&ast;</dt>
 <dd>
 use wildcards for looser matches. Note that you can only put them at the end of a word.
 </dd>
 
-<dt>tag:*</dt>
+<dt>tag:&ast;</dt>
 <dd>
 any tagged note
 </dd>
 
-<dt>-tag:theTag*</dt>
+<dt>-tag:theTag&ast;</dt>
 <dd>
-match notes that don&#8217;t have tags starting with theTag.
+match notes that don&#39;t have tags starting with theTag.
 </dd>
 
 <dt>intitle:theTitle</dt>
@@ -172,7 +121,7 @@ match notes that don&#8217;t have tags starting with theTag.
 a title search. Exact matches only
 </dd>
 
-<dt>intitle:theTitle*</dt>
+<dt>intitle:theTitle&ast;</dt>
 <dd>
 title search using wildcards.
 </dd>
@@ -182,36 +131,38 @@ title search using wildcards.
 Matches all words, in any order, within the title.
 </dd>
 
-<dt>intitle:&#8221;strange word&#8221;</dt>
+<dt>intitle:&quot;strange word&quot;</dt>
 <dd>
-exact match of sequence &#8220;strange word&#8221;. The algorithm seems a bit buggy - a note with title &#8220;this is a strange word&#8221; will be matched by intitle:&#8221;strange word&#8221;, intitle:&#8221;strange a word&#8221;, intitle:&#8221;strange that word&#8221; but not intitle:&#8221;strange b  word&#8221; or intitle:&#8221;word strange&#8221;
+exact match of sequence &quot;strange word&quot;. The algorithm seems a bit buggy - a note with title &quot;this is a strange word&quot; will be matched by <code>intitle:&quot;strange word&quot;</code>, <code>intitle:&quot;strange a word&quot;</code>, <code>intitle:&quot;strange that word&quot;</code> but not <code>intitle:&quot;strange b  word&quot;</code> or <code>intitle:&quot;word strange&quot;</code>
 </dd>
 
 <dt>-intitle:word</dt>
 <dd>
-Excludes notes with &#8220;word&#8221; in the title.
+Excludes notes with &quot;word&quot; in the title.
 </dd>
 
 <dt class="long-line">intitle:strange -intitle:word</dt>
 <dd class="long-line">
-all notes with the word &#8220;strange&#8221; but not &#8220;word&#8221; in the title
+all notes with the word &quot;strange&quot; but not &quot;word&quot; in the title
 </dd>
 
 <dt>author:name</dt>
 <dd>
-Notes with author equal to &#8216;name&#8217;. Notes don&#8217;t have authors unless you create one yourself.
+Notes with author equal to &#39;name&#39;. Notes don&#39;t have authors unless you create one yourself.
 </dd>
 </dl>
 
 
-<h2>Search evernote by date</h2>
 
-<p>Evernote has some useful date searches capabilities. A date match means &#8216;since that date (and time)&#8221;. If you want to have a range of dates instead of just a starting point, use two dates, a positive one for the start and a negative one for the end - e.g. created:2009 -created:2011 for dates between 2009 and 2010.</p>
 
-<p>Dates use either the ISO 8601 format or relative date format. ISO 8601 is either yyyyMMdd for dates or yyyyMMddTHHmmss for date times. The T is the actual capital &#8216;T&#8217; to separate date and time, and the other letter stand for y=year, M=month etc.</p>
 
-<p>The relative format is easier; the word &#8220;day&#8221; stands for midnight of current day; &#8220;week&#8221; = midnight of the closest sunday, in the past, to current day;  &#8220;month&#8221; = midnight of 1st of current month; &#8220;year&#8221; = midnight of 1st of January of current year. You can also subtract an integer to refer to dates further back, e.g. day-2.</p>
 
+
+
+<h2 id="search-evernote-by-date">Search evernote by date</h2>
+<p>Evernote has some useful date searches capabilities. A date match means &#39;since that date (and time)&quot;. If you want to have a range of dates instead of just a starting point, use two dates, a positive one for the start and a negative one for the end - e.g. <code>created:2009 -created:2011</code> for dates between 2009 and 2010.</p>
+<p>Dates use either the ISO 8601 format or relative date format. ISO 8601 is either yyyyMMdd for dates or yyyyMMddTHHmmss for date times. The T is the actual capital &#39;T&#39; to separate date and time, and the other letter stand for y=year, M=month etc.</p>
+<p>The relative format is easier; the word &quot;day&quot; stands for midnight of current day; &quot;week&quot; = midnight of the closest sunday, in the past, to current day;  &quot;month&quot; = midnight of 1st of current month; &quot;year&quot; = midnight of 1st of January of current year. You can also subtract an integer to refer to dates further back, e.g. day-2.</p>
 <dl class="code-breakdown">
 
 <dt>created:day</dt>
@@ -241,16 +192,15 @@ matches notes created between 19:15 and 20:25 of 11th of April  2011
 </dl>
 
 
-<h2>More advanced search options</h2>
 
+
+
+<h2 id="more-advanced-search-options">More advanced search options</h2>
 <p>There are even more parameters some of which I had to dig out from the Thrift API files.</p>
-
-<h3>Resource</h3>
-
-<p>Resources match notes which include at least one of the MIME types you list. Using MIME types is good news, because you can, say, use resource:image/gif for matchin gif files, or resource:image/* for matching any image. Note: here&#8217;s the <a href="http://www.iana.org/assignments/media-types/index.html">official list of MIME types</a>.</p>
-
+<h3 id="resource">Resource</h3>
+<p>Resources match notes which include at least one of the MIME types you list. Using MIME types is good news, because you can, say, use resource:image/gif for matchin gif files, or resource:image/&ast; for matching any image. Note: here&#39;s the <a href="http://www.iana.org/assignments/media-types/index.html">official list of MIME types</a>.</p>
 <dl class="code-breakdown">
-<dt>resource:audio/*</dt>
+<dt>resource:audio/&ast;</dt>
 <dd>
 Match notes with audio files embedded in them.
 </dd>
@@ -260,36 +210,38 @@ Match notes with audio files embedded in them.
 Match notes with pdf files
 </dd>
 
-<dt class="long-line">resource:image/* -resource:image/gif</dt>
+<dt class="long-line">resource:image/&ast; -resource:image/gif</dt>
 <dd class="long-line">
 Match notes with images which are not gifs
 </dd>
 </dl>
 
 
-<h3>SourceURL</h3>
 
+
+
+<h3 id="sourceurl">SourceURL</h3>
 <p>The URL the note comes from. Note that you need to include the http:// as well if using wildcards. This is not as useful as it may seem, because wildcards only work at the end of the string, so you need to write out all possible variations of a url to be sure:</p>
-
 <dl class="code-breakdown">
-<dt class="long-line">sourceurl:http://www.bbc* sourceurl:http://news.bbc* sourceurl:http://bbc*</dt>
+<dt class="long-line">sourceurl:http://www.bbc&ast; sourceurl:http://news.bbc&ast; sourceurl:http://bbc&ast;</dt>
 <dd class="long-line">
 Match notes from BBC websites, including news
 </dd>
 </dl>
 
 
-<h3>Source</h3>
 
-<p>When you add a note, Evernote creates a &#8216;source&#8217; attribute to keep track of where the note comes from - unless it was created from within Evernote itself.</p>
 
+
+<h3 id="source">Source</h3>
+<p>When you add a note, Evernote creates a &#39;source&#39; attribute to keep track of where the note comes from - unless it was created from within Evernote itself.</p>
 <dl class="code-breakdown">
 <dt>source:app.ms.word</dt>
 <dd>
 Matches notes created with the MS Word plugin
 </dd>
 
-<dt>source:app.ms.*</dt>
+<dt>source:app.ms.&ast;</dt>
 <dd>
 Matches notes created with any Microsoft plugin
 </dd>
@@ -309,101 +261,51 @@ Notes created with one of the browser plugins
 Notes created with the mobile app
 </dd>
 
-<dt>-source:*</dt>
+<dt>-source:&ast;</dt>
 <dd>
 Notes created within the Evernote app (i.e., with no source attribute)
 </dd>
 </dl>
 
 
-<h3>Those are the useful Evernote search attributes.</h3>
 
+
+
+
+<h3 id="those-are-the-useful-evernote-search-attributes-">Those are the useful Evernote search attributes.</h3>
 <p>There are other, like latitude and longitude, but they are more useful for software connecting to the API.</p>
-</div>
-	</div>
-</article>
 
-<article class="archives">
-  <div class="related-posts">
-    <h2>Related Posts</h2>
-    
-      <article>
-        <h3 class="title"><a href="/blog/howto/serving-an-excel-worksheet-to-a-browser">Serving an Excel Worksheet to a browser</a></h3>
-        <div class="meta">
-          <span class="tags">
+      </div>
+    </div>
+  </article>
 
 
-	<a class='category' href='/blog/cat/howto/'>HowTo</a>
-
-
-</span>
-            
-          <time datetime="2011-09-04T13:55:27+02:00" pubdate>2011-09-04</time>
-            
-        </div>
-      </article>
-    
-      <article>
-        <h3 class="title"><a href="/blog/geekery/cannot-install-xcode-3-2-6-snow-leopard">Cannot install Xcode 3.2.6 on Snow Leopard</a></h3>
-        <div class="meta">
-          <span class="tags">
-
-
-	<a class='category' href='/blog/cat/geekery/'>Geekery</a>
-
-
-</span>
-            
-          <time datetime="2011-09-04T13:55:27+02:00" pubdate>2011-09-04</time>
-            
-        </div>
-      </article>
-    
-      <article>
-        <h3 class="title"><a href="/blog/geekery/link-specific-moment-youtube">Link directly to a specific moment in a YouTube video</a></h3>
-        <div class="meta">
-          <span class="tags">
-
-
-	<a class='category' href='/blog/cat/geekery/'>Geekery</a>
-
-
-</span>
-            
-          <time datetime="2011-09-04T13:55:27+02:00" pubdate>2011-09-04</time>
-            
-        </div>
-      </article>
-    
-  </div>
-</article>
-
-
-<section id="comment">
+<!-- <section id="comment">
     <h1 class="title">Comments</h1>
     <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </div>
 </section>
 
   </div>
-	<footer id="footer" class="inner">Copyright &copy; 2016
+  -->
+  <footer id="footer" class="inner">Copyright &copy; 2016
 
-    Fabrizio (Fritz) Stelluto
+    Fritz Stelluto
 
 </footer>
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-<script src="/javascripts/slash.js"></script>
+<!--
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 
 
 <script type="text/javascript">
       var disqus_shortname = 'goto-fritz';
-      
-        
+
+
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://gotofritz.net/blog/geekery/advanced-evernote-search';
-        var disqus_url = 'http://gotofritz.net/blog/geekery/advanced-evernote-search';
+        var disqus_identifier = 'http://gotofritz.net/blog/geekery/backing-up-hard-disk-os-x/';
+        var disqus_url = 'http://gotofritz.net/blog/geekery/backing-up-hard-disk-os-x/';
         var disqus_script = 'embed.js';
-      
+
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
       dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
@@ -413,19 +315,19 @@ Notes created within the Evernote app (i.e., with no source attribute)
 
 
 
-	<script type="text/javascript">
-		var _gaq = _gaq || [];
-		_gaq.push(['_setAccount', 'UA-11254155-2']);
-		_gaq.push(['_trackPageview']);
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-11254155-2']);
+    _gaq.push(['_trackPageview']);
 
-		(function() {
-			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-		})();
-	</script>
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
 
-
+-->
 
 </body>
 </html>

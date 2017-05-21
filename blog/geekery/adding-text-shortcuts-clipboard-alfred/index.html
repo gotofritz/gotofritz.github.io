@@ -1,264 +1,148 @@
-
 <!DOCTYPE HTML>
 <html>
 <head>
-	<meta charset="utf-8">
-	<title>Adding useful text shortcuts to the clipboard with Alfred - Fabrizio (Fritz) Stelluto</title>
-	<meta name="author" content="">
-
-	
-	<meta name="description" content="Alfred Worflows can be useful in creating strings and pushing them immediately to the clipboard, so that they are available without moving the hands &hellip;">
-	
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-	<link href="/atom.xml" rel="alternate" title="Fabrizio (Fritz) Stelluto" type="application/atom+xml">
-	<link rel="canonical" href="">
-	<link href="/favicon.ico" rel="shortcut icon">
-	<link rel="icon" href="/favicon.gif" type="image/gif" />
-	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-	
+  <meta charset="utf-8">
+  <title>Adding useful text shortcuts to the clipboard with Alfred || Fritz Stelluto</title>
+  <meta name="author" content="gotofritz">
+  <meta name="description" content="Alfred Worflows can be useful in creating strings and pushing them immediately to the clipboard, so that they are available without moving the hands from the keyboard.">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link href="/assets/favicon.ico" rel="shortcut icon">
+  <link rel="icon" href="/assets/favicon.gif" type="image/gif" />
+  <link href="/assets/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 </head>
 
-
 <body ontouchstart="">
-
   <header id="header" class="inner">
-<nav id="main-nav"><div>
-  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
-  <a href="/">home</a>
-  <a href="/blog/">blog</a>
-</div></nav>
-<nav id="mobile-nav">
-	<div class="alignleft menu">
-		<a class="button">Menu</a>
-		<div class="container"><div>
-  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
-  <a href="/">home</a>
-  <a href="/blog/">blog</a>
-</div></div>
-	</div>
-	<div class="alignright search">
-		<a class="button"></a>
-		<div class="container">
-			<form action="http://google.com/search" method="get">
-				<input type="text" name="q" results="0">
-				<input type="hidden" name="q" value="site:gotofritz.net">
-			</form>
-		</div>
-	</div>
-</nav>
+    <nav id="main-nav">
+      <div>
+        <a href="/">home</a>
+        <a href="/blog/">blog</a>
+      </div>
+    </nav>
 
-<nav id="sub-nav" class="alignright">
-	<form class="search" action="http://google.com/search" method="get">
-		<input class="alignright" type="text" name="q" results="0">
-		<input type="hidden" name="q" value="site:gotofritz.net">
-	</form>
-</nav>
-
-</header>
-	
-		
-	
-	<div id="content" class="inner">
-    
-    <article class="post">
-	<h1 class="title">Adding Useful Text Shortcuts to the Clipboard With Alfred</h1>
-	<div>
-		<div class="meta">
-			<div class="date">
+    <nav id="sub-nav" class="alignright">
+      <form class="search" action="http://google.com/search" method="get">
+        <input class="alignright" type="text" name="q" results="0">
+        <input type="hidden" name="q" value="site:gotofritz.net">
+      </form>
+    </nav>
+  </header>
 
 
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-12-15T17:30:00+01:00" pubdate data-updated="true">2013-12-15, Sun</time></div>
-			<div class="tags">
-
-
-	<a class='category' href='/blog/cat/geekery/'>Geekery</a>
-
-
-</div>
-			
-				<span class="comments"><a href="/blog/geekery/adding-text-shortcuts-clipboard-alfred/#disqus_thread">Comments</a></span>
-			
-		</div>
-		<div class="entry-content"><p><a href="http://support.alfredapp.com/workflows" title="[new window] Workflows - Alfred v2 Support" target="_blank">Alfred Worflows</a> can be useful in creating strings and pushing them immediately to the clipboard, so that they are available without moving the hands from the keyboard.</p>
-
-<!--more-->
-
-
-<h2>Pushing formatted date into the clipboard</h2>
-
+<div id="content" class="inner">
+  <article class="post">
+    <h1 class="title">Adding useful text shortcuts to the clipboard with Alfred</h1>
+    <div>
+      <div class="meta">
+        <div class="date">
+          <time datetime="2013-12-15T17:30:00+01:00" pubdate>2013-12-15</time>
+        </div>
+        <div class="tags">
+          alfreadapp
+        </div>
+      </div>
+      <div class="entry-content">
+<div class="archive">This post is too old to be of any use. It has been archived.</div>
+<p><a href="http://support.alfredapp.com/workflows" title="[new window] Workflows - Alfred v2 Support" target="_blank">Alfred Worflows</a> can be useful in creating strings and pushing them immediately to the clipboard, so that they are available without moving the hands from the keyboard.
+<!--more--></p>
+<h2 id="pushing-formatted-date-into-the-clipboard">Pushing formatted date into the clipboard</h2>
 <p>For example, I often use dates in the format <code>[yyyy-mm-dd]</code> in various documents and homemade apps. Since it is something I do quite regularly, an Alfred workflow may be a good idea. Something simple, something that works out a date and puts it in the clipboard, and pastes it in the frontmost app if it can.</p>
-
-<h2>Creating the a workflow</h2>
-
+<h2 id="creating-the-a-workflow">Creating the a workflow</h2>
 <p>In Alfred, in the workflows tab, I clicked on the <code>+</code> button at the bottom of the <abbr title="Left Hand Side">LHS</a> panel (1), and selected <code>blank workflow</code>. I filled in some details and clicked <code>save</code></p>
-
-<p>Then I clicked on the plus button at the top of the <abbr title="Right Hand Side">RHS</a> panel (2), and selected from &#8216;inputs&#8217; a &#8216;keyword&#8217;, from &#8216;actions&#8217; a &#8216;run script&#8217;, and from &#8216;outputs&#8217; a &#8216;copy to clipboard&#8217;. I dragged from the kink in &#8216;keyword&#8217; to &#8216;run script&#8217; to connect them, then did the same to connect &#8216;copy to clipboard&#8217;. Then I double clicked on each in turn to edit.</p>
-
-<p><img src="/images/adding-text-shortcuts-clipboard-alfred.png" width="800" height="522" title="[screenshot of the alfred workflow]" ></p>
-
-<h2>The Keyword object</h2>
-
-<p>The <code>keyword</code> argument is the actual keyword that you type in Alfred to run the command, I used &#8220;today&#8221;. I also ticked &#8220;with space&#8221; and selected &#8220;argument optional&#8221; from the dropdown next to it. This means that I can call the argument as &#8220;today +2&#8221; or &#8220;today y&#8221; for example, to get the date two days from now or yesterday. &#8220;With space&#8221; ensures the space between &#8220;today&#8221; and the next work is considered part of the keyword and not the argument. The argument itself can be used in the script as the special string &#8220;{query}&#8221;.</p>
-
+<p>Then I clicked on the plus button at the top of the <abbr title="Right Hand Side">RHS</a> panel (2), and selected from &#39;inputs&#39; a &#39;keyword&#39;, from &#39;actions&#39; a &#39;run script&#39;, and from &#39;outputs&#39; a &#39;copy to clipboard&#39;. I dragged from the kink in &#39;keyword&#39; to &#39;run script&#39; to connect them, then did the same to connect &#39;copy to clipboard&#39;. Then I double clicked on each in turn to edit.</p>
+<p>{% img /images/adding-text-shortcuts-clipboard-alfred.png 800 522 [screenshot of the alfred workflow] %}</p>
+<h2 id="the-keyword-object">The Keyword object</h2>
+<p>The <code>keyword</code> argument is the actual keyword that you type in Alfred to run the command, I used &quot;today&quot;. I also ticked &quot;with space&quot; and selected &quot;argument optional&quot; from the dropdown next to it. This means that I can call the argument as &quot;today +2&quot; or &quot;today y&quot; for example, to get the date two days from now or yesterday. &quot;With space&quot; ensures the space between &quot;today&quot; and the next work is considered part of the keyword and not the argument. The argument itself can be used in the script as the special string &quot;{query}&quot;.</p>
 <p>The <code>title</code> and <code>subtext</code> appear in the Alfred dropdown when you are typing the keyword.</p>
-
-<h2>The Run Script object</h2>
-
+<h2 id="the-run-script-object">The Run Script object</h2>
 <p>I selected PHP as the language, left all the checkboxes as they were, and entered the following script. Not the most sophisticated script, but before I invest time to make it slick I want to make sure I actually need it.</p>
+<pre><code>switch (&quot;{query}&quot;) {
+  case &quot;tomorrow&quot;:
+  case &quot;1&quot;:
+  case &quot;+1&quot;:
+  case &quot;t&quot;:
+    $when = mktime(0, 0, 0, date(&quot;m&quot;)  , date(&quot;d&quot;)+1, date(&quot;Y&quot;));
+    break;
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-<span class='line-number'>50</span>
-<span class='line-number'>51</span>
-</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="x">switch (&quot;{query}&quot;) {</span>
-</span><span class='line'><span class="x">  case &quot;tomorrow&quot;:</span>
-</span><span class='line'><span class="x">  case &quot;1&quot;:</span>
-</span><span class='line'><span class="x">  case &quot;+1&quot;:</span>
-</span><span class='line'><span class="x">  case &quot;t&quot;:</span>
-</span><span class='line'><span class="x">    $when = mktime(0, 0, 0, date(&quot;m&quot;)  , date(&quot;d&quot;)+1, date(&quot;Y&quot;));</span>
-</span><span class='line'><span class="x">    break;</span>
-</span><span class='line'>
-</span><span class='line'><span class="x">  case &quot;2&quot;:</span>
-</span><span class='line'><span class="x">  case &quot;+2&quot;:</span>
-</span><span class='line'><span class="x">    $when = mktime(0, 0, 0, date(&quot;m&quot;)  , date(&quot;d&quot;)+2, date(&quot;Y&quot;));</span>
-</span><span class='line'><span class="x">    break;</span>
-</span><span class='line'>
-</span><span class='line'><span class="x">  case &quot;3&quot;:</span>
-</span><span class='line'><span class="x">  case &quot;+3&quot;:</span>
-</span><span class='line'><span class="x">    $when = mktime(0, 0, 0, date(&quot;m&quot;)  , date(&quot;d&quot;)+3, date(&quot;Y&quot;));</span>
-</span><span class='line'><span class="x">    break;</span>
-</span><span class='line'>
-</span><span class='line'><span class="x">  case &quot;-2&quot;:</span>
-</span><span class='line'><span class="x">    $when = mktime(0, 0, 0, date(&quot;m&quot;)  , date(&quot;d&quot;)+2, date(&quot;Y&quot;));</span>
-</span><span class='line'><span class="x">    break;</span>
-</span><span class='line'>
-</span><span class='line'><span class="x">  case &quot;-3&quot;:</span>
-</span><span class='line'><span class="x">    $when = mktime(0, 0, 0, date(&quot;m&quot;)  , date(&quot;d&quot;)+3, date(&quot;Y&quot;));</span>
-</span><span class='line'><span class="x">    break;</span>
-</span><span class='line'>
-</span><span class='line'><span class="x">  case &quot;yesterday&quot;:</span>
-</span><span class='line'><span class="x">  case &quot;-1&quot;:</span>
-</span><span class='line'><span class="x">  case &quot;y&quot;:</span>
-</span><span class='line'><span class="x">    $when = mktime(0, 0, 0, date(&quot;m&quot;)  , date(&quot;d&quot;)-1, date(&quot;Y&quot;));</span>
-</span><span class='line'><span class="x">    break;</span>
-</span><span class='line'>
-</span><span class='line'><span class="x">  case &quot;next\\ week&quot;:</span>
-</span><span class='line'><span class="x">  case &quot;7&quot;:</span>
-</span><span class='line'><span class="x">  case &quot;+7&quot;:</span>
-</span><span class='line'><span class="x">  case &quot;n&quot;:</span>
-</span><span class='line'><span class="x">    $when = mktime(0, 0, 0, date(&quot;m&quot;)  , date(&quot;d&quot;)+7, date(&quot;Y&quot;));</span>
-</span><span class='line'><span class="x">    break;</span>
-</span><span class='line'>
-</span><span class='line'><span class="x">  case &quot;last\\ week&quot;:</span>
-</span><span class='line'><span class="x">  case &quot;l&quot;:</span>
-</span><span class='line'><span class="x">  case &quot;-7&quot;:</span>
-</span><span class='line'><span class="x">    $when = mktime(0, 0, 0, date(&quot;m&quot;)  , date(&quot;d&quot;)-7, date(&quot;Y&quot;));</span>
-</span><span class='line'><span class="x">    break;</span>
-</span><span class='line'>
-</span><span class='line'><span class="x">  default:</span>
-</span><span class='line'><span class="x">    $when = mktime(0, 0, 0, date(&quot;m&quot;)  , date(&quot;d&quot;), date(&quot;Y&quot;));</span>
-</span><span class='line'><span class="x">    break;</span>
-</span><span class='line'>
-</span><span class='line'><span class="x">}</span>
-</span><span class='line'><span class="x">print date(&quot;[Y-m-d]&quot;, $when);</span>
-</span></code></pre></td></tr></table></div></figure>
+  case &quot;2&quot;:
+  case &quot;+2&quot;:
+    $when = mktime(0, 0, 0, date(&quot;m&quot;)  , date(&quot;d&quot;)+2, date(&quot;Y&quot;));
+    break;
+
+  case &quot;3&quot;:
+  case &quot;+3&quot;:
+    $when = mktime(0, 0, 0, date(&quot;m&quot;)  , date(&quot;d&quot;)+3, date(&quot;Y&quot;));
+    break;
+
+  case &quot;-2&quot;:
+    $when = mktime(0, 0, 0, date(&quot;m&quot;)  , date(&quot;d&quot;)+2, date(&quot;Y&quot;));
+    break;
+
+  case &quot;-3&quot;:
+    $when = mktime(0, 0, 0, date(&quot;m&quot;)  , date(&quot;d&quot;)+3, date(&quot;Y&quot;));
+    break;
+
+  case &quot;yesterday&quot;:
+  case &quot;-1&quot;:
+  case &quot;y&quot;:
+    $when = mktime(0, 0, 0, date(&quot;m&quot;)  , date(&quot;d&quot;)-1, date(&quot;Y&quot;));
+    break;
+
+  case &quot;next\\ week&quot;:
+  case &quot;7&quot;:
+  case &quot;+7&quot;:
+  case &quot;n&quot;:
+    $when = mktime(0, 0, 0, date(&quot;m&quot;)  , date(&quot;d&quot;)+7, date(&quot;Y&quot;));
+    break;
+
+  case &quot;last\\ week&quot;:
+  case &quot;l&quot;:
+  case &quot;-7&quot;:
+    $when = mktime(0, 0, 0, date(&quot;m&quot;)  , date(&quot;d&quot;)-7, date(&quot;Y&quot;));
+    break;
+
+  default:
+    $when = mktime(0, 0, 0, date(&quot;m&quot;)  , date(&quot;d&quot;), date(&quot;Y&quot;));
+    break;
+
+}
+print date(&quot;[Y-m-d]&quot;, $when);
+</code></pre><h2 id="the-copy-to-clipboard-object">The Copy To Clipboard object</h2>
+<p>For this I only ticked the &#39;Automatically paste to front most app&#39; tickbox.</p>
+<h2 id="job-done">Job done</h2>
+<p>Creating the workflow was quite quick, and since I store the Alfred preferences in my Dropbox folder, I can easily share them with my work computer. So now I can easily type &quot;ALT-Space today RETURN&quot; to insert a date in the document I am writing, or any of the more complicated ones like &quot;today -3&quot; or &quot;today n&quot; (although I probably won&#39;t need those).</p>
+
+      </div>
+    </div>
+  </article>
 
 
-<h2>The Copy To Clipboard object</h2>
-
-<p>For this I only ticked the &#8216;Automatically paste to front most app&#8217; tickbox.</p>
-
-<h2>Job done</h2>
-
-<p>Creating the workflow was quite quick, and since I store the Alfred preferences in my Dropbox folder, I can easily share them with my work computer. So now I can easily type &#8220;ALT-Space today RETURN&#8221; to insert a date in the document I am writing, or any of the more complicated ones like &#8220;today -3&#8221; or &#8220;today n&#8221; (although I probably won&#8217;t need those).</p>
-</div>
-	</div>
-</article>
-
-
-<section id="comment">
+<!-- <section id="comment">
     <h1 class="title">Comments</h1>
     <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </div>
 </section>
 
   </div>
-	<footer id="footer" class="inner">Copyright &copy; 2016
+  -->
+  <footer id="footer" class="inner">Copyright &copy; 2016
 
-    Fabrizio (Fritz) Stelluto
+    Fritz Stelluto
 
 </footer>
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-<script src="/javascripts/slash.js"></script>
+<!--
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 
 
 <script type="text/javascript">
       var disqus_shortname = 'goto-fritz';
-      
-        
+
+
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://gotofritz.net/blog/geekery/adding-text-shortcuts-clipboard-alfred/';
-        var disqus_url = 'http://gotofritz.net/blog/geekery/adding-text-shortcuts-clipboard-alfred/';
+        var disqus_identifier = 'http://gotofritz.net/blog/geekery/backing-up-hard-disk-os-x/';
+        var disqus_url = 'http://gotofritz.net/blog/geekery/backing-up-hard-disk-os-x/';
         var disqus_script = 'embed.js';
-      
+
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
       dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
@@ -268,19 +152,19 @@
 
 
 
-	<script type="text/javascript">
-		var _gaq = _gaq || [];
-		_gaq.push(['_setAccount', 'UA-11254155-2']);
-		_gaq.push(['_trackPageview']);
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-11254155-2']);
+    _gaq.push(['_trackPageview']);
 
-		(function() {
-			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-		})();
-	</script>
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
 
-
+-->
 
 </body>
 </html>

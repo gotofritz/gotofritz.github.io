@@ -1,278 +1,154 @@
-
 <!DOCTYPE HTML>
 <html>
 <head>
-	<meta charset="utf-8">
-	<title>Sharing JSHint settings in Grunt - Fabrizio (Fritz) Stelluto</title>
-	<meta name="author" content="">
-
-	
-	<meta name="description" content="JSHint settings can get quite long and clog a Gruntfile. Luckily it is fairly simple to move them to their own file. Create a JSON file with JSHint &hellip;">
-	
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-	<link href="/atom.xml" rel="alternate" title="Fabrizio (Fritz) Stelluto" type="application/atom+xml">
-	<link rel="canonical" href="">
-	<link href="/favicon.ico" rel="shortcut icon">
-	<link rel="icon" href="/favicon.gif" type="image/gif" />
-	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-	
+  <meta charset="utf-8">
+  <title>Sharing JSHint settings in Grunt || Fritz Stelluto</title>
+  <meta name="author" content="gotofritz">
+  <meta name="description" content="JSHint settings can get quite long and clog a Gruntfile. Luckily it is fairly simple to move them to their own file.">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link href="/assets/favicon.ico" rel="shortcut icon">
+  <link rel="icon" href="/assets/favicon.gif" type="image/gif" />
+  <link href="/assets/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 </head>
 
-
 <body ontouchstart="">
-
   <header id="header" class="inner">
-<nav id="main-nav"><div>
-  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
-  <a href="/">home</a>
-  <a href="/blog/">blog</a>
-</div></nav>
-<nav id="mobile-nav">
-	<div class="alignleft menu">
-		<a class="button">Menu</a>
-		<div class="container"><div>
-  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
-  <a href="/">home</a>
-  <a href="/blog/">blog</a>
-</div></div>
-	</div>
-	<div class="alignright search">
-		<a class="button"></a>
-		<div class="container">
-			<form action="http://google.com/search" method="get">
-				<input type="text" name="q" results="0">
-				<input type="hidden" name="q" value="site:gotofritz.net">
-			</form>
-		</div>
-	</div>
-</nav>
+    <nav id="main-nav">
+      <div>
+        <a href="/">home</a>
+        <a href="/blog/">blog</a>
+      </div>
+    </nav>
 
-<nav id="sub-nav" class="alignright">
-	<form class="search" action="http://google.com/search" method="get">
-		<input class="alignright" type="text" name="q" results="0">
-		<input type="hidden" name="q" value="site:gotofritz.net">
-	</form>
-</nav>
-
-</header>
-	
-		
-	
-	<div id="content" class="inner">
-    
-    <article class="post">
-	<h1 class="title">Sharing JSHint Settings in Grunt</h1>
-	<div>
-		<div class="meta">
-			<div class="date">
+    <nav id="sub-nav" class="alignright">
+      <form class="search" action="http://google.com/search" method="get">
+        <input class="alignright" type="text" name="q" results="0">
+        <input type="hidden" name="q" value="site:gotofritz.net">
+      </form>
+    </nav>
+  </header>
 
 
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-11-03T22:08:00+01:00" pubdate data-updated="true">2013-11-03, Sun</time></div>
-			<div class="tags">
-
-
-	<a class='category' href='/blog/cat/geekery/'>Geekery</a>
-
-
-</div>
-			
-				<span class="comments"><a href="/blog/geekery/sharing-jshint-settings-grunt/#disqus_thread">Comments</a></span>
-			
-		</div>
-		<div class="entry-content"><p>JSHint settings can get quite long and clog a Gruntfile. Luckily it is fairly simple to move them to their own file.</p>
-
-<!--more-->
-
-
-<h2>Create a JSON file with JSHint settings</h2>
-
+<div id="content" class="inner">
+  <article class="post">
+    <h1 class="title">Sharing JSHint settings in Grunt</h1>
+    <div>
+      <div class="meta">
+        <div class="date">
+          <time datetime="2013-11-03T22:08:00+01:00" pubdate>2013-11-03</time>
+        </div>
+        <div class="tags">
+          grunt
+        </div>
+      </div>
+      <div class="entry-content">
+<div class="archive">This post is too old to be of any use. It has been archived.</div>
+<p>JSHint settings can get quite long and clog a Gruntfile. Luckily it is fairly simple to move them to their own file.
+<!--more--></p>
+<h2 id="create-a-json-file-with-jshint-settings">Create a JSON file with JSHint settings</h2>
 <p>Just copy your standard .jshintrc file, or create one (<a href="https://github.com/jshint/jshint/blob/master/examples/.jshintrc" title="[new window] jshint/examples/.jshintrc at master · jshint/jshint" target="_blank">a good .jshintrc file</a> to use as a starting point can be found on GitHub).
 Wrap the options in an object, and save the file somewhere sensible.</p>
-
-<p>I save the file as JSON, which strictly speaking, means it has no comments (although grunt doesn&#8217;t complaing if it does). Here&#8217;s my standard .jshintrc</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-<span class='line-number'>50</span>
-<span class='line-number'>51</span>
-<span class='line-number'>52</span>
-<span class='line-number'>53</span>
-<span class='line-number'>54</span>
-<span class='line-number'>55</span>
-<span class='line-number'>56</span>
-<span class='line-number'>57</span>
-<span class='line-number'>58</span>
-<span class='line-number'>59</span>
-<span class='line-number'>60</span>
-<span class='line-number'>61</span>
-<span class='line-number'>62</span>
-</pre></td><td class='code'><pre><code class='json'><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="nt">&quot;options&quot;</span><span class="p">:</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nt">&quot;bitwise&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;browser&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;camelcase&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;curly&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;eqeqeq&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;forin&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;immed&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;indent&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;latedef&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;newcap&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;noarg&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;noempty&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;nonew&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;plusplus&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;quotmark&quot;</span><span class="p">:</span> <span class="s2">&quot;double&quot;</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;undef&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;unused&quot;</span><span class="p">:</span> <span class="s2">&quot;false&quot;</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;strict&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;trailing&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;maxparams&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;maxdepth&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;maxerr&quot;</span><span class="p">:</span> <span class="mi">500</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;maxlen&quot;</span><span class="p">:</span> <span class="mi">80</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;asi&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;boss&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;debug&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;eqnull&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;evil&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;expr&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;funcscope&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;globalstrict&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;iterator&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;lastsemic&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;laxbreak&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;laxcomma&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;loopfunc&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;multistr&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;proto&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;scripturl&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;smarttabs&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;shadow&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;sub&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;supernew&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;nomen&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;onevar&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;white&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;globals&quot;</span><span class="p">:</span> <span class="p">{</span>
-</span><span class='line'>      <span class="nt">&quot;$&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-</span><span class='line'>      <span class="nt">&quot;afterEach&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-</span><span class='line'>      <span class="nt">&quot;beforeEach&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-</span><span class='line'>      <span class="nt">&quot;describe&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-</span><span class='line'>      <span class="nt">&quot;expect&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-</span><span class='line'>      <span class="nt">&quot;getJSONFixture&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-</span><span class='line'>      <span class="nt">&quot;it&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-</span><span class='line'>      <span class="nt">&quot;jasmine&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-</span><span class='line'>      <span class="nt">&quot;jQuery&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-</span><span class='line'>      <span class="nt">&quot;sinon&quot;</span><span class="p">:</span> <span class="kc">true</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Use require to include the settings into the Gruntfile</h2>
-
+<p>I save the file as JSON, which strictly speaking, means it has no comments (although grunt doesn&#39;t complaing if it does). Here&#39;s my standard .jshintrc</p>
+<pre><code>{
+  &quot;options&quot;: {
+    &quot;bitwise&quot;: true,
+    &quot;browser&quot;: true,
+    &quot;camelcase&quot;: true,
+    &quot;curly&quot;: true,
+    &quot;eqeqeq&quot;: true,
+    &quot;forin&quot;: true,
+    &quot;immed&quot;: true,
+    &quot;indent&quot;: 2,
+    &quot;latedef&quot;: true,
+    &quot;newcap&quot;: true,
+    &quot;noarg&quot;: true,
+    &quot;noempty&quot;: true,
+    &quot;nonew&quot;: true,
+    &quot;plusplus&quot;: true,
+    &quot;quotmark&quot;: &quot;double&quot;,
+    &quot;undef&quot;: true,
+    &quot;unused&quot;: &quot;false&quot;,
+    &quot;strict&quot;: true,
+    &quot;trailing&quot;: true,
+    &quot;maxparams&quot;: 4,
+    &quot;maxdepth&quot;: 4,
+    &quot;maxerr&quot;: 500,
+    &quot;maxlen&quot;: 80,
+    &quot;asi&quot;: false,
+    &quot;boss&quot;: false,
+    &quot;debug&quot;: false,
+    &quot;eqnull&quot;: true,
+    &quot;evil&quot;: false,
+    &quot;expr&quot;: true,
+    &quot;funcscope&quot;: false,
+    &quot;globalstrict&quot;: false,
+    &quot;iterator&quot;: false,
+    &quot;lastsemic&quot;: false,
+    &quot;laxbreak&quot;: false,
+    &quot;laxcomma&quot;: true,
+    &quot;loopfunc&quot;: false,
+    &quot;multistr&quot;: true,
+    &quot;proto&quot;: false,
+    &quot;scripturl&quot;: false,
+    &quot;smarttabs&quot;: false,
+    &quot;shadow&quot;: false,
+    &quot;sub&quot;: false,
+    &quot;supernew&quot;: true,
+    &quot;nomen&quot;: true,
+    &quot;onevar&quot;: true,
+    &quot;white&quot;: false,
+    &quot;globals&quot;: {
+      &quot;$&quot;: true,
+      &quot;afterEach&quot;: true,
+      &quot;beforeEach&quot;: true,
+      &quot;describe&quot;: true,
+      &quot;expect&quot;: true,
+      &quot;getJSONFixture&quot;: true,
+      &quot;it&quot;: true,
+      &quot;jasmine&quot;: true,
+      &quot;jQuery&quot;: true,
+      &quot;sinon&quot;: true
+    }
+  }
+}
+</code></pre><h2 id="use-require-to-include-the-settings-into-the-gruntfile">Use require to include the settings into the Gruntfile</h2>
 <p>The rest is easy - as grunt is node.js, just use <code>require</code> to import the settings:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">jshint</span><span class="o">:</span> <span class="p">{</span>
-</span><span class='line'>  <span class="nx">options</span><span class="o">:</span> <span class="nx">require</span><span class="p">(</span> <span class="s2">&quot;./jshint.json&quot;</span> <span class="p">).</span><span class="nx">options</span><span class="p">,</span>
-</span><span class='line'>  <span class="nx">all</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;Gruntfile.js&#39;</span><span class="p">,</span> <span class="s1">&#39;lib/**/*.js&#39;</span><span class="p">,</span> <span class="s1">&#39;test/**/*.js&#39;</span><span class="p">]</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-</div>
-	</div>
-</article>
+<pre><code>jshint: {
+  options: require( &quot;./jshint.json&quot; ).options,
+  all: [&#39;Gruntfile.js&#39;, &#39;lib/**/*.js&#39;, &#39;test/**/*.js&#39;]
+}
+</code></pre>
+      </div>
+    </div>
+  </article>
 
 
-<section id="comment">
+<!-- <section id="comment">
     <h1 class="title">Comments</h1>
     <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </div>
 </section>
 
   </div>
-	<footer id="footer" class="inner">Copyright &copy; 2016
+  -->
+  <footer id="footer" class="inner">Copyright &copy; 2016
 
-    Fabrizio (Fritz) Stelluto
+    Fritz Stelluto
 
 </footer>
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-<script src="/javascripts/slash.js"></script>
+<!--
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 
 
 <script type="text/javascript">
       var disqus_shortname = 'goto-fritz';
-      
-        
+
+
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://gotofritz.net/blog/geekery/sharing-jshint-settings-grunt/';
-        var disqus_url = 'http://gotofritz.net/blog/geekery/sharing-jshint-settings-grunt/';
+        var disqus_identifier = 'http://gotofritz.net/blog/geekery/backing-up-hard-disk-os-x/';
+        var disqus_url = 'http://gotofritz.net/blog/geekery/backing-up-hard-disk-os-x/';
         var disqus_script = 'embed.js';
-      
+
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
       dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
@@ -282,19 +158,19 @@ Wrap the options in an object, and save the file somewhere sensible.</p>
 
 
 
-	<script type="text/javascript">
-		var _gaq = _gaq || [];
-		_gaq.push(['_setAccount', 'UA-11254155-2']);
-		_gaq.push(['_trackPageview']);
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-11254155-2']);
+    _gaq.push(['_trackPageview']);
 
-		(function() {
-			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-		})();
-	</script>
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
 
-
+-->
 
 </body>
 </html>

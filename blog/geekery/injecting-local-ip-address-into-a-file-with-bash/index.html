@@ -1,200 +1,126 @@
-
 <!DOCTYPE HTML>
 <html>
 <head>
-	<meta charset="utf-8">
-	<title>Injecting local IP Address into a file with bash - Fabrizio (Fritz) Stelluto</title>
-	<meta name="author" content="">
-
-	
-	<meta name="description" content="Sometimes there are some config file on which you have no control for which you need to change an IP address to that of your current dev machine. &hellip;">
-	
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-	<link href="/atom.xml" rel="alternate" title="Fabrizio (Fritz) Stelluto" type="application/atom+xml">
-	<link rel="canonical" href="">
-	<link href="/favicon.ico" rel="shortcut icon">
-	<link rel="icon" href="/favicon.gif" type="image/gif" />
-	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-	
+  <meta charset="utf-8">
+  <title>Injecting local IP Address into a file with bash || Fritz Stelluto</title>
+  <meta name="author" content="gotofritz">
+  <meta name="description" content="Sometimes you need to change an IP address inside config files to that of your current dev machine. Here&amp;#39;s how I fix that with a bash script.">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link href="/assets/favicon.ico" rel="shortcut icon">
+  <link rel="icon" href="/assets/favicon.gif" type="image/gif" />
+  <link href="/assets/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 </head>
 
-
 <body ontouchstart="">
-
   <header id="header" class="inner">
-<nav id="main-nav"><div>
-  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
-  <a href="/">home</a>
-  <a href="/blog/">blog</a>
-</div></nav>
-<nav id="mobile-nav">
-	<div class="alignleft menu">
-		<a class="button">Menu</a>
-		<div class="container"><div>
-  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
-  <a href="/">home</a>
-  <a href="/blog/">blog</a>
-</div></div>
-	</div>
-	<div class="alignright search">
-		<a class="button"></a>
-		<div class="container">
-			<form action="http://google.com/search" method="get">
-				<input type="text" name="q" results="0">
-				<input type="hidden" name="q" value="site:gotofritz.net">
-			</form>
-		</div>
-	</div>
-</nav>
+    <nav id="main-nav">
+      <div>
+        <a href="/">home</a>
+        <a href="/blog/">blog</a>
+      </div>
+    </nav>
 
-<nav id="sub-nav" class="alignright">
-	<form class="search" action="http://google.com/search" method="get">
-		<input class="alignright" type="text" name="q" results="0">
-		<input type="hidden" name="q" value="site:gotofritz.net">
-	</form>
-</nav>
+    <nav id="sub-nav" class="alignright">
+      <form class="search" action="http://google.com/search" method="get">
+        <input class="alignright" type="text" name="q" results="0">
+        <input type="hidden" name="q" value="site:gotofritz.net">
+      </form>
+    </nav>
+  </header>
 
-</header>
-	
-		
-	
-	<div id="content" class="inner">
+
+<div id="content" class="inner">
+  <article class="post">
+    <h1 class="title">Injecting local IP Address into a file with bash</h1>
+    <div>
+      <div class="meta">
+        <div class="date">
+          <time datetime="2014-03-03T14:24:00+01:00" pubdate>2014-03-03</time>
+        </div>
+        <div class="tags">
+          bash
+        </div>
+      </div>
+      <div class="entry-content">
     
-    <article class="post">
-	<h1 class="title">Injecting Local IP Address Into a File With Bash</h1>
-	<div>
-		<div class="meta">
-			<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-03-03T14:24:00+01:00" pubdate data-updated="true">2014-03-03, Mon</time></div>
-			<div class="tags">
-
-
-	<a class='category' href='/blog/cat/geekery/'>Geekery</a>
-
-
-</div>
-			
-				<span class="comments"><a href="/blog/geekery/injecting-local-ip-address-into-a-file-with-bash/#disqus_thread">Comments</a></span>
-			
-		</div>
-		<div class="entry-content"><p>Sometimes there are some config file on which you have no control for which you need to change an IP address to that of your current dev machine. Here&#8217;s how I fix that with a bash script.</p>
-
-<!--more-->
-
-
-<h2>A good place to put bash scripts</h2>
-
+<p>Sometimes you need to change an IP address inside config files to that of your current dev machine. Here&#39;s how I fix that with a bash script.
+<!--more--></p>
+<p>I was working on my project where the &quot;standard&quot; tomcat config checked in the project&#39;s repo wouldn&#39;t work on my mac. </p>
+<h2 id="a-good-place-to-put-bash-scripts">A good place to put bash scripts</h2>
 <p>I have a <code>bin</code> folder inside my user folder. It is in the <code>$PATH</code>, meaning every script file in there can be executed as a script from anywhere. In there I create a text file called <code>fix-config-PROJECT</code>. Yes, I make one per project, because I hard code the paths of the files to change. This could evolve into something more complex if the need arises, but the setup I have so far has served me well so far.</p>
+<pre><code>nano ~/bin/fix-config-PROJECT
+</code></pre><h2 id="the-script-file">The script file</h2>
+<pre><code>#!/bin/bash
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>nano ~/bin/fix-config-PROJECT
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>The script file</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#!/bin/bash</span>
-</span><span class='line'>
-</span><span class='line'><span class="nv">IP</span><span class="o">=</span><span class="sb">`</span>ifconfig  | grep inet | grep -v inet6 | tail -n1 | awk <span class="s1">&#39;{print $2}&#39;</span><span class="sb">`</span>
-</span><span class='line'><span class="k">for </span>file in <span class="s2">&quot;launchpad/src/main/tomcat/conf/context.xml&quot;</span> <span class="s2">&quot;path/to/etc.xml&quot;</span>
-</span><span class='line'><span class="k">do</span>
-</span><span class='line'><span class="k">  </span>svn revert <span class="nv">$file</span>
-</span><span class='line'>  sed -i <span class="s2">&quot;&quot;</span> <span class="s2">&quot;s/localhost/$IP/g&quot;</span> <span class="nv">$file</span>
-</span><span class='line'><span class="k">done</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Script breakdown</h2>
-
+IP=`ifconfig  | grep inet | grep -v inet6 | tail -n1 | awk &#39;{print $2}&#39;`
+for file in &quot;launchpad/src/main/tomcat/conf/context.xml&quot; &quot;path/to/etc.xml&quot;
+do
+  svn revert $file
+  sed -i &quot;&quot; &quot;s/localhost/$IP/g&quot; $file
+done
+</code></pre><h2 id="script-breakdown">Script breakdown</h2>
 <dl class="code-breakdown">
-  <dt class="long-line">IP=`ifconfig  | grep inet | grep -v inet6 | tail -n1 | awk &#8216;{print $2}&#8217;`</dt>
+  <dt class="long-line">IP=<code>ifconfig  | grep inet | grep -v inet6 | tail -n1 | awk &#39;{print $2}&#39;</code></dt>
   <dd class="long-line">This runs a series of commands one after the other, using <code>|</code> to pass the result of each command to the next. The ` at the beginning and end put the result into a variable <code>$IP</code></dd>
 
   <dt>ifconfig</dt>
-  <dd>From the manpage: &#8220;The ifconfig utility is used to assign an address to a network interface and/or configure network interface parameters&#8221;. Used without parameters, it returns a big chunk of text with current settings. The IP address is in there somewhere.</dd>
+  <dd>From the manpage: &quot;The ifconfig utility is used to assign an address to a network interface and/or configure network interface parameters&quot;. Used without parameters, it returns a big chunk of text with current settings. The IP address is in there somewhere.</dd>
 
   <dt>grep inet</dt>
   <dt>grep -v inet6</dt>
-  <dd>extracts the lines from that chunk of text which have &#8220;inet&#8221; in it, but not &#8220;inet6&#8221;</dd>
+  <dd>extracts the lines from that chunk of text which have &quot;inet&quot; in it, but not &quot;inet6&quot;</dd>
 
   <dt>tail -n1</dt>
   <dd>take the last of these lines</dd>
 
-  <dt>awk &#8216;{print $2}&#8217;</dt>
-  <dd>At this point we have a string like <code>inet 192.168.2.108 netmask 0xffffff00 broadcast 192.168.2.255</code>. Awk can be used to extract the 192&#8230; from it. Awk is a utilities that processes a line of text by splitting into fields where blank spaces are - it is used for handling database dumps etc. In this case, it is basically saying that after it&#8217;s split the line into fields (which it does automatically), it should print out the second field and throw away the rest.</dd>
+  <dt>awk &#39;{print $2}&#39;</dt>
+  <dd>At this point we have a string like <code>inet 192.168.2.108 netmask 0xffffff00 broadcast 192.168.2.255</code>. Awk can be used to extract the 192... from it. Awk is a utilities that processes a line of text by splitting into fields where blank spaces are - it is used for handling database dumps etc. In this case, it is basically saying that after it&#39;s split the line into fields (which it does automatically), it should print out the second field and throw away the rest.</dd>
 
-  <dt class="long-line">for file in &#8220;launchpad/src/main/tomcat/conf/context.xml&#8221; &#8220;path/to/etc.xml&#8221;</dt>
+  <dt class="long-line">for file in &quot;launchpad/src/main/tomcat/conf/context.xml&quot; &quot;path/to/etc.xml&quot;</dt>
   <dd class="long-line">The files I need to process are listed out one after the other. This is good enough for my use case. Note that the paths are not absolute, so that I can use the same command in different svn branches. What this line does is looping through each file</dd>
 
   <dt class="long-line">svn revert $file</dt>
-  <dt class="long-line">sed -i &#8220;&#8221; &#8220;s/localhost/$IP/g&#8221; $file</dt>
-  <dd class="long-line">First I revert the latest changes, then I make new ones. This time using sed, a utility which processes text a line at the time, transforming it on the way. The <code>-i ""</code> means to process the file in place (as opposed to create a copy), without creating a backup. The substitution is simple, I simply change all occurrences of <code>locahost</code> with the IP address from earlier</dd>
+  <dt class="long-line">sed -i &quot;&quot; &quot;s/localhost/$IP/g&quot; $file</dt>
+  <dd class="long-line">First I revert the latest changes, then I make new ones. This time using sed, a utility which processes text a line at the time, transforming it on the way. The <code>-i &quot;&quot;</code> means to process the file in place (as opposed to create a copy), without creating a backup. The substitution is simple, I simply change all occurrences of <code>locahost</code> with the IP address from earlier</dd>
 </dl>
 
-
-<h2>Running the script</h2>
-
+<h2 id="running-the-script">Running the script</h2>
 <p>I can now run the script from anywhere on my machine, usually as</p>
+<pre><code>cd PROJECT/branch_x
+fix-config-PROJECT
+</code></pre><p>and then all the config files are changed as required, and I can access my local version site from tablets etc using the IP address. It&#39;s a hack but it works.</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">cd </span>PROJECT/branch_x
-</span><span class='line'>fix-config-PROJECT
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>and then all the config files are changed as required, and I can access my local version site from tablets etc using the IP address.</p>
-</div>
-	</div>
-</article>
+      </div>
+    </div>
+  </article>
 
 
-<section id="comment">
+<!-- <section id="comment">
     <h1 class="title">Comments</h1>
     <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </div>
 </section>
 
   </div>
-	<footer id="footer" class="inner">Copyright &copy; 2016
+  -->
+  <footer id="footer" class="inner">Copyright &copy; 2016
 
-    Fabrizio (Fritz) Stelluto
+    Fritz Stelluto
 
 </footer>
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-<script src="/javascripts/slash.js"></script>
+<!--
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 
 
 <script type="text/javascript">
       var disqus_shortname = 'goto-fritz';
-      
-        
+
+
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://gotofritz.net/blog/geekery/injecting-local-ip-address-into-a-file-with-bash/';
-        var disqus_url = 'http://gotofritz.net/blog/geekery/injecting-local-ip-address-into-a-file-with-bash/';
+        var disqus_identifier = 'http://gotofritz.net/blog/geekery/backing-up-hard-disk-os-x/';
+        var disqus_url = 'http://gotofritz.net/blog/geekery/backing-up-hard-disk-os-x/';
         var disqus_script = 'embed.js';
-      
+
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
       dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
@@ -204,19 +130,19 @@
 
 
 
-	<script type="text/javascript">
-		var _gaq = _gaq || [];
-		_gaq.push(['_setAccount', 'UA-11254155-2']);
-		_gaq.push(['_trackPageview']);
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-11254155-2']);
+    _gaq.push(['_trackPageview']);
 
-		(function() {
-			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-		})();
-	</script>
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
 
-
+-->
 
 </body>
 </html>

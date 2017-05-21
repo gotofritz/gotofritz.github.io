@@ -1,0 +1,293 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>New Mac || Fritz Stelluto</title>
+  <meta name="author" content="gotofritz">
+  <meta name="description" content="
+run sudo softwareupdate -i -r
+download chrome (it has bookmarks)
+download sublime (for notes)
+-- added package control https://packagecontrol.io/installation (why not part of sublime??)
+--- added sidebarenhacment
+downlaod alfred
+download dropbox (alfred preferences)
+downloaded evernote
+downloaded gyazmail
+-- copied preferences and settings of old version via dropbox
+downloaded caffeine
+divvy
+homebrew, then brew doctor
+onyx, changed settings
+copied terminal preferences
+installed git keys
+cloned dotfiles and installed them
+-- scratched my head about marks http://apple.stackexchange.com/a/209907/6883
+created automatore service
+installed namechanger
+installed miro
+menubarcountdown
+sourcetree
+google drive
+firefox
+xcode
+created command line subl
+ln -s &amp;quot;/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl&amp;quot; ~/bin/subl
+apache
+-- to edit config:
+sudo subl /etc/apache2/httpd.conf
+then changed
+--- DocumentRoot to  /Users/fritz/Sites
+--- AllowOverride to All
+--- Options All
+--- commented out vhosts
+-- copied /etc/apache2/extra/httpd-vhosts.conf, /etc/hosts (BACKUP)
+-- copied Sites and work
+installed node.js
+-- did sudo chown -R $USER /usr/local
+openoffice
+audacity
+xld http://tmkk.undo.jp/xld/index_e.html
+
+jekyll (from octopress)
+-- gem install jekyll
+
+You don&amp;#39;t have write permissions for the /Library/Ruby/Gems/2.0.0 directory
+-- found this page and followed instructions to install rbenv
+http://flummox-engineering.blogspot.com/2014/05/you-dont-have-write-permissions-for.html
+which ruby
+/usr/bin/ruby
+brew install ruby
+(installs 2.3.1)
+which ruby
+/usr/local/bin/ruby (different)
+rbenv versions
+(only has system)
+ln -s /usr/local/Cellar/ruby/2.3.1/ ~/.rbenv/versions/2.3.1
+rbenv versions
+(gives system and 2.3.1, system selected)
+rbenv global 2.3.1
+rbenv versions
+(gives 2.3.1)
+gem install jekyll
+(it works!)
+-- jekyll new blog-jekyll
+-- manually copied bits of octopress into jekyll site
+-- jekyll build
+/usr/local/Cellar/ruby/2.3.1/lib/ruby/2.3.0/rubygems/core_ext/kernel_require.rb:55:in require&amp;#39;: cannot load such file -- bundler (LoadError)
+gem install bundler
+usr/local/lib/ruby/gems/2.3.0/gems/bundler-1.12.5/lib/bundler/resolver.rb:356:inblock in verify_gemfile_dependencies_are_found!&amp;#39;: Could not find gem &amp;#39;minima&amp;#39; in any of the gem sources listed in your Gemfile or available on this machine.
+gem install minima
+it works! but
+Liquid Exception: Liquid syntax error (line 10): Unknown tag &amp;#39;gist&amp;#39;
+-- made a _plugin directory and copied a gist_tag.rb
+it works, but better
+-- added gem &amp;#39;jekyll-gist&amp;#39; to gemfile
+-- run &amp;#39;bundle&amp;#39;
+it works but
+Jekyll::Converters::Markdown encountered an error while converting &amp;#39;_posts/2006-05-....markdown&amp;#39;: &amp;quot;\xC2&amp;quot; from ASCII-8BIT to UTF-8
+-- manually converted
+it works (will manually have to convert them all!) but
+Liquid Exception: Gist replied with 404 for https://gist.githubusercontent.com/raw/....
+-- removed
+works but
+Liquid Exception: Liquid syntax error (line 9): Unknown tag &amp;#39;codeblock&amp;#39; in
+-- copied code_block.rb to _plugins
+Nooooooo! it&amp;#39;s not enough. It has dependencies to pygment. I must start using rouge - which means manually chaning 000s files!
+
+
+changed codeblock to highlight, and downloaded syntax.css as per https://jekyllrb.com/docs/templates/#code-snippet-highlighting
+it works but
+Liquid Exception: Liquid syntax error (line 25): Unknown tag &amp;#39;img&amp;#39;
+">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link href="/assets/favicon.ico" rel="shortcut icon">
+  <link rel="icon" href="/assets/favicon.gif" type="image/gif" />
+  <link href="/assets/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+</head>
+
+<body ontouchstart="">
+  <header id="header" class="inner">
+    <nav id="main-nav">
+      <div>
+        <a href="/">home</a>
+        <a href="/blog/">blog</a>
+      </div>
+    </nav>
+
+    <nav id="sub-nav" class="alignright">
+      <form class="search" action="http://google.com/search" method="get">
+        <input class="alignright" type="text" name="q" results="0">
+        <input type="hidden" name="q" value="site:gotofritz.net">
+      </form>
+    </nav>
+  </header>
+
+
+<div id="content" class="inner">
+  <article class="post">
+    <h1 class="title">New Mac</h1>
+    <div>
+      <div class="meta">
+        <div class="date">
+          <time datetime="2016-08-29T13:44:00+02:00" pubdate>2016-08-29</time>
+        </div>
+        <div class="tags">
+          os x
+        </div>
+      </div>
+      <div class="entry-content">
+<div class="archive">This post is too old to be of any use. It has been archived.</div>
+<ul>
+<li>run sudo softwareupdate -i -r</li>
+<li>download chrome (it has bookmarks)</li>
+<li>download sublime (for notes)
+-- added package control https://packagecontrol.io/installation (why not part of sublime??)
+--- added sidebarenhacment</li>
+<li>downlaod alfred</li>
+<li>download dropbox (alfred preferences)</li>
+<li>downloaded evernote</li>
+<li>downloaded gyazmail
+-- copied preferences and settings of old version via dropbox</li>
+<li>downloaded caffeine</li>
+<li>divvy</li>
+<li>homebrew, then brew doctor</li>
+<li>onyx, changed settings</li>
+<li>copied terminal preferences</li>
+<li>installed git keys</li>
+<li>cloned dotfiles and installed them
+-- scratched my head about marks http://apple.stackexchange.com/a/209907/6883</li>
+<li>created automatore service</li>
+<li>installed namechanger</li>
+<li>installed miro</li>
+<li>menubarcountdown</li>
+<li>sourcetree</li>
+<li>google drive</li>
+<li>firefox</li>
+<li>xcode</li>
+<li>created command line subl
+ln -s &quot;/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl&quot; ~/bin/subl</li>
+<li>apache
+-- to edit config:
+sudo subl /etc/apache2/httpd.conf
+then changed
+--- DocumentRoot to  /Users/fritz/Sites
+--- AllowOverride to All
+--- Options All
+--- commented out vhosts
+-- copied /etc/apache2/extra/httpd-vhosts.conf, /etc/hosts (BACKUP)
+-- copied Sites and work</li>
+<li>installed node.js
+-- did sudo chown -R $USER /usr/local</li>
+<li>openoffice</li>
+<li>audacity</li>
+<li><p>xld http://tmkk.undo.jp/xld/index_e.html</p>
+</li>
+<li><p>jekyll (from octopress)
+-- gem install jekyll</p>
+<blockquote>
+<p>You don&#39;t have write permissions for the /Library/Ruby/Gems/2.0.0 directory
+-- found this page and followed instructions to install rbenv
+http://flummox-engineering.blogspot.com/2014/05/you-dont-have-write-permissions-for.html
+which ruby
+/usr/bin/ruby
+brew install ruby
+(installs 2.3.1)
+which ruby
+/usr/local/bin/ruby (different)
+rbenv versions
+(only has system)
+ln -s /usr/local/Cellar/ruby/2.3.1/ ~/.rbenv/versions/2.3.1
+rbenv versions
+(gives system and 2.3.1, system selected)
+rbenv global 2.3.1
+rbenv versions
+(gives 2.3.1)
+gem install jekyll
+(it works!)
+-- jekyll new blog-jekyll
+-- manually copied bits of octopress into jekyll site
+-- jekyll build
+/usr/local/Cellar/ruby/2.3.1/lib/ruby/2.3.0/rubygems/core_ext/kernel_require.rb:55:in <code>require&#39;: cannot load such file -- bundler (LoadError)
+gem install bundler
+usr/local/lib/ruby/gems/2.3.0/gems/bundler-1.12.5/lib/bundler/resolver.rb:356:in</code>block in verify_gemfile_dependencies_are_found!&#39;: Could not find gem &#39;minima&#39; in any of the gem sources listed in your Gemfile or available on this machine.
+gem install minima
+it works! but
+Liquid Exception: Liquid syntax error (line 10): Unknown tag &#39;gist&#39;
+-- made a _plugin directory and copied a gist_tag.rb
+it works, but better
+-- added gem &#39;jekyll-gist&#39; to gemfile
+-- run &#39;bundle&#39;
+it works but
+Jekyll::Converters::Markdown encountered an error while converting &#39;_posts/2006-05-....markdown&#39;: &quot;\xC2&quot; from ASCII-8BIT to UTF-8
+-- manually converted
+it works (will manually have to convert them all!) but
+Liquid Exception: Gist replied with 404 for https://gist.githubusercontent.com/raw/....
+-- removed
+works but
+Liquid Exception: Liquid syntax error (line 9): Unknown tag &#39;codeblock&#39; in
+-- copied code_block.rb to _plugins
+Nooooooo! it&#39;s not enough. It has dependencies to pygment. I must start using rouge - which means manually chaning 000s files!</p>
+</blockquote>
+</li>
+<li>changed codeblock to highlight, and downloaded syntax.css as per https://jekyllrb.com/docs/templates/#code-snippet-highlighting
+it works but
+Liquid Exception: Liquid syntax error (line 25): Unknown tag &#39;img&#39;</li>
+</ul>
+
+      </div>
+    </div>
+  </article>
+
+
+<!-- <section id="comment">
+    <h1 class="title">Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+
+  </div>
+  -->
+  <footer id="footer" class="inner">Copyright &copy; 2016
+
+    Fritz Stelluto
+
+</footer>
+<!--
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'goto-fritz';
+
+
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://gotofritz.net/blog/geekery/backing-up-hard-disk-os-x/';
+        var disqus_url = 'http://gotofritz.net/blog/geekery/backing-up-hard-disk-os-x/';
+        var disqus_script = 'embed.js';
+
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-11254155-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+-->
+
+</body>
+</html>

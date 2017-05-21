@@ -1,278 +1,95 @@
-
 <!DOCTYPE HTML>
 <html>
 <head>
-	<meta charset="utf-8">
-	<title>Converting a collection to a JScript object in ASP - Fabrizio (Fritz) Stelluto</title>
-	<meta name="author" content="">
-
-	
-	<meta name="description" content="Some Classic ASP code snippets in JScript for dealing with form data. Enumerators are collections of data that can be iterated through. Although &hellip;">
-	
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-	<link href="/atom.xml" rel="alternate" title="Fabrizio (Fritz) Stelluto" type="application/atom+xml">
-	<link rel="canonical" href="">
-	<link href="/favicon.ico" rel="shortcut icon">
-	<link rel="icon" href="/favicon.gif" type="image/gif" />
-	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-	
+  <meta charset="utf-8">
+  <title>Converting a collection to a JScript object in ASP || Fritz Stelluto</title>
+  <meta name="author" content="gotofritz">
+  <meta name="description" content="Some Classic ASP code snippets in JScript (from the 90s!) for dealing with form data.">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link href="/assets/favicon.ico" rel="shortcut icon">
+  <link rel="icon" href="/assets/favicon.gif" type="image/gif" />
+  <link href="/assets/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 </head>
 
-
 <body ontouchstart="">
-
   <header id="header" class="inner">
-<nav id="main-nav"><div>
-  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
-  <a href="/">home</a>
-  <a href="/blog/">blog</a>
-</div></nav>
-<nav id="mobile-nav">
-	<div class="alignleft menu">
-		<a class="button">Menu</a>
-		<div class="container"><div>
-  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
-  <a href="/">home</a>
-  <a href="/blog/">blog</a>
-</div></div>
-	</div>
-	<div class="alignright search">
-		<a class="button"></a>
-		<div class="container">
-			<form action="http://google.com/search" method="get">
-				<input type="text" name="q" results="0">
-				<input type="hidden" name="q" value="site:gotofritz.net">
-			</form>
-		</div>
-	</div>
-</nav>
+    <nav id="main-nav">
+      <div>
+        <a href="/">home</a>
+        <a href="/blog/">blog</a>
+      </div>
+    </nav>
 
-<nav id="sub-nav" class="alignright">
-	<form class="search" action="http://google.com/search" method="get">
-		<input class="alignright" type="text" name="q" results="0">
-		<input type="hidden" name="q" value="site:gotofritz.net">
-	</form>
-</nav>
-
-</header>
-	
-		
-	
-	<div id="content" class="inner">
-    
-    <article class="post">
-	<h1 class="title">Converting a Collection to a JScript Object in ASP</h1>
-	<div>
-		<div class="meta">
-			<div class="date">
+    <nav id="sub-nav" class="alignright">
+      <form class="search" action="http://google.com/search" method="get">
+        <input class="alignright" type="text" name="q" results="0">
+        <input type="hidden" name="q" value="site:gotofritz.net">
+      </form>
+    </nav>
+  </header>
 
 
-
-
-
-
-
-
-  
-
-
-<time datetime="2006-05-30T15:04:38+02:00" pubdate data-updated="true">2006-05-30, Tue</time></div>
-			<div class="tags">
-
-
-	<a class='category' href='/blog/cat/code-snippets/'>Code Snippets</a>
-
-
-</div>
-			
-				<span class="comments"><a href="/blog/code-snippets/converting-collection-to-jscript-object-classic-asp#disqus_thread">Comments</a></span>
-			
-		</div>
-		<div class="entry-content"><p>Some Classic ASP code snippets in JScript for dealing with form data.</p>
-
+<div id="content" class="inner">
+  <article class="post">
+    <h1 class="title">Converting a collection to a JScript object in ASP</h1>
+    <div>
+      <div class="meta">
+        <div class="date">
+          <time datetime="2006-05-30T15:04:00+02:00" pubdate>2006-05-30</time>
+        </div>
+        <div class="tags">
+          classic asp
+        </div>
+      </div>
+      <div class="entry-content">
+<div class="archive">This post is too old to be of any use. It has been archived.</div>
+<p>Some Classic ASP code snippets in JScript (from the 90s!) for dealing with form data.
 <!--more-->
+<a href="https://msdn.microsoft.com/en-us/library/x32bxwys.aspx">Enumerators</a> are collections of data that can be iterated through with methods like <code>.moveNext</code> etc. They are too VB-like for my taste, so I&#39;ve always avoided them. But some objects in the ASP environment however, such as Request.Form, are provided as Enumerators, and need to be converted them to standard JScript objects. Here&#39;s a couple of routines to do so.</p>
+<h3 id="converting-a-collection-to-a-plain-jscript-object">Converting A Collection To A Plain JScript Object</h3>
+<p>I keep all the functions below in a generic include, coll2obj.asp, and use it across projects.  This is a generic collection-to-object conversion, which doesn&#39;t seem to work on some built-in collections.</p>
+<p><link rel="stylesheet" href="https://assets-cdn.github.com/assets/gist-embed-04d41fe71632a896c1dd3e883de9f48941fad414d68185aa8df817b950873a05.css"><div id="gist2507749" class="gist">    <div class="gist-file">      <div class="gist-data">        <div class="js-gist-file-update-container js-task-list-container file-box">  <div id="file-coll2obj-asp" class="file">      <div itemprop="text" class="blob-wrapper data type-asp">      <table class="highlight tab-size js-file-line-container" data-tab-size="8">      <tr>        <td id="file-coll2obj-asp-L1" class="blob-num js-line-number" data-line-number="1"></td>        <td id="file-coll2obj-asp-LC1" class="blob-code blob-code-inner js-file-line">/<em>*  coll2obj</td>      </tr>      <tr>        <td id="file-coll2obj-asp-L2" class="blob-num js-line-number" data-line-number="2"></td>        <td id="file-coll2obj-asp-LC2" class="blob-code blob-code-inner js-file-line"> </em> transforms a VB collection thing in a JS-friendly object</td>      </tr>      <tr>        <td id="file-coll2obj-asp-L3" class="blob-num js-line-number" data-line-number="3"></td>        <td id="file-coll2obj-asp-LC3" class="blob-code blob-code-inner js-file-line"> <em> @return {Object}</td>      </tr>      <tr>        <td id="file-coll2obj-asp-L4" class="blob-num js-line-number" data-line-number="4"></td>        <td id="file-coll2obj-asp-LC4" class="blob-code blob-code-inner js-file-line"> </em>/</td>      </tr>      <tr>        <td id="file-coll2obj-asp-L5" class="blob-num js-line-number" data-line-number="5"></td>        <td id="file-coll2obj-asp-LC5" class="blob-code blob-code-inner js-file-line">function coll2obj( coll ) {</td>      </tr>      <tr>        <td id="file-coll2obj-asp-L6" class="blob-num js-line-number" data-line-number="6"></td>        <td id="file-coll2obj-asp-LC6" class="blob-code blob-code-inner js-file-line">  var enm = new Enumerator( coll )</td>      </tr>      <tr>        <td id="file-coll2obj-asp-L7" class="blob-num js-line-number" data-line-number="7"></td>        <td id="file-coll2obj-asp-LC7" class="blob-code blob-code-inner js-file-line">    , obj = {}</td>      </tr>      <tr>        <td id="file-coll2obj-asp-L8" class="blob-num js-line-number" data-line-number="8"></td>        <td id="file-coll2obj-asp-LC8" class="blob-code blob-code-inner js-file-line">    ;</td>      </tr>      <tr>        <td id="file-coll2obj-asp-L9" class="blob-num js-line-number" data-line-number="9"></td>        <td id="file-coll2obj-asp-LC9" class="blob-code blob-code-inner js-file-line"></td>      </tr>      <tr>        <td id="file-coll2obj-asp-L10" class="blob-num js-line-number" data-line-number="10"></td>        <td id="file-coll2obj-asp-LC10" class="blob-code blob-code-inner js-file-line">  while( !enm.atEnd() ) {</td>      </tr>      <tr>        <td id="file-coll2obj-asp-L11" class="blob-num js-line-number" data-line-number="11"></td>        <td id="file-coll2obj-asp-LC11" class="blob-code blob-code-inner js-file-line">    obj[enm.item().name]  = enm.item().value;</td>      </tr>      <tr>        <td id="file-coll2obj-asp-L12" class="blob-num js-line-number" data-line-number="12"></td>        <td id="file-coll2obj-asp-LC12" class="blob-code blob-code-inner js-file-line">    enm.moveNext();</td>      </tr>      <tr>        <td id="file-coll2obj-asp-L13" class="blob-num js-line-number" data-line-number="13"></td>        <td id="file-coll2obj-asp-LC13" class="blob-code blob-code-inner js-file-line">  }</td>      </tr>      <tr>        <td id="file-coll2obj-asp-L14" class="blob-num js-line-number" data-line-number="14"></td>        <td id="file-coll2obj-asp-LC14" class="blob-code blob-code-inner js-file-line"></td>      </tr>      <tr>        <td id="file-coll2obj-asp-L15" class="blob-num js-line-number" data-line-number="15"></td>        <td id="file-coll2obj-asp-LC15" class="blob-code blob-code-inner js-file-line">  return obj;</td>      </tr>      <tr>        <td id="file-coll2obj-asp-L16" class="blob-num js-line-number" data-line-number="16"></td>        <td id="file-coll2obj-asp-LC16" class="blob-code blob-code-inner js-file-line">}</td>      </tr></table>  </div>  </div>  </div>      </div>      <div class="gist-meta">        <a href="https://gist.github.com/gotofritz/2507749/raw/3761a626c46d2c77ec9fb87180f936f019de567a/coll2obj.asp" style="float:right">view raw</a>        <a href="https://gist.github.com/gotofritz/2507749#file-coll2obj-asp">coll2obj.asp</a>        hosted with &#10084; by <a href="https://github.com">GitHub</a>      </div>    </div></div></p>
+<h3 id="converting-request-servervariables-to-jscript-object-in-classic-asp">Converting Request.ServerVariables To JScript Object In Classic ASP</h3>
+<p>I&#39;m not quite sure why the function above won&#39;t work on Request.ServerVariables, but it doesn&#39;t, so here&#39;s a function for that specific collection.</p>
+<p><link rel="stylesheet" href="https://assets-cdn.github.com/assets/gist-embed-04d41fe71632a896c1dd3e883de9f48941fad414d68185aa8df817b950873a05.css"><div id="gist2507749" class="gist">    <div class="gist-file">      <div class="gist-data">        <div class="js-gist-file-update-container js-task-list-container file-box">  <div id="file-env2obj-asp" class="file">      <div itemprop="text" class="blob-wrapper data type-asp">      <table class="highlight tab-size js-file-line-container" data-tab-size="8">      <tr>        <td id="file-env2obj-asp-L1" class="blob-num js-line-number" data-line-number="1"></td>        <td id="file-env2obj-asp-LC1" class="blob-code blob-code-inner js-file-line">/<em>*  </td>      </tr>      <tr>        <td id="file-env2obj-asp-L2" class="blob-num js-line-number" data-line-number="2"></td>        <td id="file-env2obj-asp-LC2" class="blob-code blob-code-inner js-file-line"> </em> transforms Request.ServerVariables VB collection </td>      </tr>      <tr>        <td id="file-env2obj-asp-L3" class="blob-num js-line-number" data-line-number="3"></td>        <td id="file-env2obj-asp-LC3" class="blob-code blob-code-inner js-file-line"> <em> in a JS-friendly object</td>      </tr>      <tr>        <td id="file-env2obj-asp-L4" class="blob-num js-line-number" data-line-number="4"></td>        <td id="file-env2obj-asp-LC4" class="blob-code blob-code-inner js-file-line"> </em> @return {Object}</td>      </tr>      <tr>        <td id="file-env2obj-asp-L5" class="blob-num js-line-number" data-line-number="5"></td>        <td id="file-env2obj-asp-LC5" class="blob-code blob-code-inner js-file-line"> */</td>      </tr>      <tr>        <td id="file-env2obj-asp-L6" class="blob-num js-line-number" data-line-number="6"></td>        <td id="file-env2obj-asp-LC6" class="blob-code blob-code-inner js-file-line">function env2obj() {</td>      </tr>      <tr>        <td id="file-env2obj-asp-L7" class="blob-num js-line-number" data-line-number="7"></td>        <td id="file-env2obj-asp-LC7" class="blob-code blob-code-inner js-file-line">  var enm = new Enumerator(Request.ServerVariables)</td>      </tr>      <tr>        <td id="file-env2obj-asp-L8" class="blob-num js-line-number" data-line-number="8"></td>        <td id="file-env2obj-asp-LC8" class="blob-code blob-code-inner js-file-line">    , obj = new Object()</td>      </tr>      <tr>        <td id="file-env2obj-asp-L9" class="blob-num js-line-number" data-line-number="9"></td>        <td id="file-env2obj-asp-LC9" class="blob-code blob-code-inner js-file-line">    , ei, en</td>      </tr>      <tr>        <td id="file-env2obj-asp-L10" class="blob-num js-line-number" data-line-number="10"></td>        <td id="file-env2obj-asp-LC10" class="blob-code blob-code-inner js-file-line">    ;</td>      </tr>      <tr>        <td id="file-env2obj-asp-L11" class="blob-num js-line-number" data-line-number="11"></td>        <td id="file-env2obj-asp-LC11" class="blob-code blob-code-inner js-file-line"></td>      </tr>      <tr>        <td id="file-env2obj-asp-L12" class="blob-num js-line-number" data-line-number="12"></td>        <td id="file-env2obj-asp-LC12" class="blob-code blob-code-inner js-file-line">  while(!enm.atEnd()) {</td>      </tr>      <tr>        <td id="file-env2obj-asp-L13" class="blob-num js-line-number" data-line-number="13"></td>        <td id="file-env2obj-asp-LC13" class="blob-code blob-code-inner js-file-line">    ei  = enm.item();</td>      </tr>      <tr>        <td id="file-env2obj-asp-L14" class="blob-num js-line-number" data-line-number="14"></td>        <td id="file-env2obj-asp-LC14" class="blob-code blob-code-inner js-file-line"></td>      </tr>      <tr>        <td id="file-env2obj-asp-L15" class="blob-num js-line-number" data-line-number="15"></td>        <td id="file-env2obj-asp-LC15" class="blob-code blob-code-inner js-file-line">    if( Request.ServerVariables.Item( ei ).Count &gt; 1 ){      </td>      </tr>      <tr>        <td id="file-env2obj-asp-L16" class="blob-num js-line-number" data-line-number="16"></td>        <td id="file-env2obj-asp-LC16" class="blob-code blob-code-inner js-file-line">      obj[ei] = new Array();</td>      </tr>      <tr>        <td id="file-env2obj-asp-L17" class="blob-num js-line-number" data-line-number="17"></td>        <td id="file-env2obj-asp-LC17" class="blob-code blob-code-inner js-file-line">      en  = new Enumerator( Request.ServerVariables( ei );</td>      </tr>      <tr>        <td id="file-env2obj-asp-L18" class="blob-num js-line-number" data-line-number="18"></td>        <td id="file-env2obj-asp-LC18" class="blob-code blob-code-inner js-file-line">      while( !en.atEnd() )</td>      </tr>      <tr>        <td id="file-env2obj-asp-L19" class="blob-num js-line-number" data-line-number="19"></td>        <td id="file-env2obj-asp-LC19" class="blob-code blob-code-inner js-file-line">      {</td>      </tr>      <tr>        <td id="file-env2obj-asp-L20" class="blob-num js-line-number" data-line-number="20"></td>        <td id="file-env2obj-asp-LC20" class="blob-code blob-code-inner js-file-line">        obj[ei][ obj[ei].length ] = en.item();</td>      </tr>      <tr>        <td id="file-env2obj-asp-L21" class="blob-num js-line-number" data-line-number="21"></td>        <td id="file-env2obj-asp-LC21" class="blob-code blob-code-inner js-file-line">        en.moveNext();</td>      </tr>      <tr>        <td id="file-env2obj-asp-L22" class="blob-num js-line-number" data-line-number="22"></td>        <td id="file-env2obj-asp-LC22" class="blob-code blob-code-inner js-file-line">      }</td>      </tr>      <tr>        <td id="file-env2obj-asp-L23" class="blob-num js-line-number" data-line-number="23"></td>        <td id="file-env2obj-asp-LC23" class="blob-code blob-code-inner js-file-line">      en  = null;</td>      </tr>      <tr>        <td id="file-env2obj-asp-L24" class="blob-num js-line-number" data-line-number="24"></td>        <td id="file-env2obj-asp-LC24" class="blob-code blob-code-inner js-file-line"></td>      </tr>      <tr>        <td id="file-env2obj-asp-L25" class="blob-num js-line-number" data-line-number="25"></td>        <td id="file-env2obj-asp-LC25" class="blob-code blob-code-inner js-file-line">    } else {      </td>      </tr>      <tr>        <td id="file-env2obj-asp-L26" class="blob-num js-line-number" data-line-number="26"></td>        <td id="file-env2obj-asp-LC26" class="blob-code blob-code-inner js-file-line">      obj[ei] = new String( Request.ServerVariables( ei ) );</td>      </tr>      <tr>        <td id="file-env2obj-asp-L27" class="blob-num js-line-number" data-line-number="27"></td>        <td id="file-env2obj-asp-LC27" class="blob-code blob-code-inner js-file-line"></td>      </tr>      <tr>        <td id="file-env2obj-asp-L28" class="blob-num js-line-number" data-line-number="28"></td>        <td id="file-env2obj-asp-LC28" class="blob-code blob-code-inner js-file-line">    }</td>      </tr>      <tr>        <td id="file-env2obj-asp-L29" class="blob-num js-line-number" data-line-number="29"></td>        <td id="file-env2obj-asp-LC29" class="blob-code blob-code-inner js-file-line">    enm.moveNext();</td>      </tr>      <tr>        <td id="file-env2obj-asp-L30" class="blob-num js-line-number" data-line-number="30"></td>        <td id="file-env2obj-asp-LC30" class="blob-code blob-code-inner js-file-line">  }</td>      </tr>      <tr>        <td id="file-env2obj-asp-L31" class="blob-num js-line-number" data-line-number="31"></td>        <td id="file-env2obj-asp-LC31" class="blob-code blob-code-inner js-file-line">  return obj;</td>      </tr>      <tr>        <td id="file-env2obj-asp-L32" class="blob-num js-line-number" data-line-number="32"></td>        <td id="file-env2obj-asp-LC32" class="blob-code blob-code-inner js-file-line">}</td>      </tr></table>  </div>  </div>  </div>      </div>      <div class="gist-meta">        <a href="https://gist.github.com/gotofritz/2507749/raw/3761a626c46d2c77ec9fb87180f936f019de567a/env2obj.asp" style="float:right">view raw</a>        <a href="https://gist.github.com/gotofritz/2507749#file-env2obj-asp">env2obj.asp</a>        hosted with &#10084; by <a href="https://github.com">GitHub</a>      </div>    </div></div></p>
+<h3 id="converting-post-variables-to-jscript-object-in-classic-asp">Converting Post Variables To JScript Object In Classic ASP</h3>
+<p>The same holds for post variables...</p>
+<p><link rel="stylesheet" href="https://assets-cdn.github.com/assets/gist-embed-04d41fe71632a896c1dd3e883de9f48941fad414d68185aa8df817b950873a05.css"><div id="gist2507749" class="gist">    <div class="gist-file">      <div class="gist-data">        <div class="js-gist-file-update-container js-task-list-container file-box">  <div id="file-post2obj-asp" class="file">      <div itemprop="text" class="blob-wrapper data type-asp">      <table class="highlight tab-size js-file-line-container" data-tab-size="8">      <tr>        <td id="file-post2obj-asp-L1" class="blob-num js-line-number" data-line-number="1"></td>        <td id="file-post2obj-asp-LC1" class="blob-code blob-code-inner js-file-line">/<em>  post2obj</td>      </tr>      <tr>        <td id="file-post2obj-asp-L2" class="blob-num js-line-number" data-line-number="2"></td>        <td id="file-post2obj-asp-LC2" class="blob-code blob-code-inner js-file-line"> </em>  transforms Request.Form VB collection into a JS-friendly object</td>      </tr>      <tr>        <td id="file-post2obj-asp-L3" class="blob-num js-line-number" data-line-number="3"></td>        <td id="file-post2obj-asp-LC3" class="blob-code blob-code-inner js-file-line"> <em> @return {Object}</td>      </tr>      <tr>        <td id="file-post2obj-asp-L4" class="blob-num js-line-number" data-line-number="4"></td>        <td id="file-post2obj-asp-LC4" class="blob-code blob-code-inner js-file-line"> </em></td>      </tr>      <tr>        <td id="file-post2obj-asp-L5" class="blob-num js-line-number" data-line-number="5"></td>        <td id="file-post2obj-asp-LC5" class="blob-code blob-code-inner js-file-line"> */</td>      </tr>      <tr>        <td id="file-post2obj-asp-L6" class="blob-num js-line-number" data-line-number="6"></td>        <td id="file-post2obj-asp-LC6" class="blob-code blob-code-inner js-file-line">function post2obj() {</td>      </tr>      <tr>        <td id="file-post2obj-asp-L7" class="blob-num js-line-number" data-line-number="7"></td>        <td id="file-post2obj-asp-LC7" class="blob-code blob-code-inner js-file-line">  var enm = new Enumerator( Request.Form )</td>      </tr>      <tr>        <td id="file-post2obj-asp-L8" class="blob-num js-line-number" data-line-number="8"></td>        <td id="file-post2obj-asp-LC8" class="blob-code blob-code-inner js-file-line">    , obj = new Object()</td>      </tr>      <tr>        <td id="file-post2obj-asp-L9" class="blob-num js-line-number" data-line-number="9"></td>        <td id="file-post2obj-asp-LC9" class="blob-code blob-code-inner js-file-line">    , ei, en</td>      </tr>      <tr>        <td id="file-post2obj-asp-L10" class="blob-num js-line-number" data-line-number="10"></td>        <td id="file-post2obj-asp-LC10" class="blob-code blob-code-inner js-file-line">    ;</td>      </tr>      <tr>        <td id="file-post2obj-asp-L11" class="blob-num js-line-number" data-line-number="11"></td>        <td id="file-post2obj-asp-LC11" class="blob-code blob-code-inner js-file-line"></td>      </tr>      <tr>        <td id="file-post2obj-asp-L12" class="blob-num js-line-number" data-line-number="12"></td>        <td id="file-post2obj-asp-LC12" class="blob-code blob-code-inner js-file-line">  while( !enm.atEnd() ) {</td>      </tr>      <tr>        <td id="file-post2obj-asp-L13" class="blob-num js-line-number" data-line-number="13"></td>        <td id="file-post2obj-asp-LC13" class="blob-code blob-code-inner js-file-line">    ei  = enm.item();</td>      </tr>      <tr>        <td id="file-post2obj-asp-L14" class="blob-num js-line-number" data-line-number="14"></td>        <td id="file-post2obj-asp-LC14" class="blob-code blob-code-inner js-file-line"></td>      </tr>      <tr>        <td id="file-post2obj-asp-L15" class="blob-num js-line-number" data-line-number="15"></td>        <td id="file-post2obj-asp-LC15" class="blob-code blob-code-inner js-file-line">    if(  Request.Form.Item( ei ).Count &gt; 1 ) {</td>      </tr>      <tr>        <td id="file-post2obj-asp-L16" class="blob-num js-line-number" data-line-number="16"></td>        <td id="file-post2obj-asp-LC16" class="blob-code blob-code-inner js-file-line">      obj[ei] = new Array();</td>      </tr>      <tr>        <td id="file-post2obj-asp-L17" class="blob-num js-line-number" data-line-number="17"></td>        <td id="file-post2obj-asp-LC17" class="blob-code blob-code-inner js-file-line">      en  = new Enumerator(Request.Form( ei ));</td>      </tr>      <tr>        <td id="file-post2obj-asp-L18" class="blob-num js-line-number" data-line-number="18"></td>        <td id="file-post2obj-asp-LC18" class="blob-code blob-code-inner js-file-line"></td>      </tr>      <tr>        <td id="file-post2obj-asp-L19" class="blob-num js-line-number" data-line-number="19"></td>        <td id="file-post2obj-asp-LC19" class="blob-code blob-code-inner js-file-line">      while( !en.atEnd() ){</td>      </tr>      <tr>        <td id="file-post2obj-asp-L20" class="blob-num js-line-number" data-line-number="20"></td>        <td id="file-post2obj-asp-LC20" class="blob-code blob-code-inner js-file-line">        obj[ei][ obj[ei].length ] = en.item();</td>      </tr>      <tr>        <td id="file-post2obj-asp-L21" class="blob-num js-line-number" data-line-number="21"></td>        <td id="file-post2obj-asp-LC21" class="blob-code blob-code-inner js-file-line">        en.moveNext();</td>      </tr>      <tr>        <td id="file-post2obj-asp-L22" class="blob-num js-line-number" data-line-number="22"></td>        <td id="file-post2obj-asp-LC22" class="blob-code blob-code-inner js-file-line">      }</td>      </tr>      <tr>        <td id="file-post2obj-asp-L23" class="blob-num js-line-number" data-line-number="23"></td>        <td id="file-post2obj-asp-LC23" class="blob-code blob-code-inner js-file-line"></td>      </tr>      <tr>        <td id="file-post2obj-asp-L24" class="blob-num js-line-number" data-line-number="24"></td>        <td id="file-post2obj-asp-LC24" class="blob-code blob-code-inner js-file-line">      en  = null;</td>      </tr>      <tr>        <td id="file-post2obj-asp-L25" class="blob-num js-line-number" data-line-number="25"></td>        <td id="file-post2obj-asp-LC25" class="blob-code blob-code-inner js-file-line"></td>      </tr>      <tr>        <td id="file-post2obj-asp-L26" class="blob-num js-line-number" data-line-number="26"></td>        <td id="file-post2obj-asp-LC26" class="blob-code blob-code-inner js-file-line">    } else {</td>      </tr>      <tr>        <td id="file-post2obj-asp-L27" class="blob-num js-line-number" data-line-number="27"></td>        <td id="file-post2obj-asp-LC27" class="blob-code blob-code-inner js-file-line">      obj[ei] = new String(Request.Form( ei ) );</td>      </tr>      <tr>        <td id="file-post2obj-asp-L28" class="blob-num js-line-number" data-line-number="28"></td>        <td id="file-post2obj-asp-LC28" class="blob-code blob-code-inner js-file-line">      obj[ei] = obj[ei].replace( /^s+|s+$/, &#39;&#39; );</td>      </tr>      <tr>        <td id="file-post2obj-asp-L29" class="blob-num js-line-number" data-line-number="29"></td>        <td id="file-post2obj-asp-LC29" class="blob-code blob-code-inner js-file-line">    }</td>      </tr>      <tr>        <td id="file-post2obj-asp-L30" class="blob-num js-line-number" data-line-number="30"></td>        <td id="file-post2obj-asp-LC30" class="blob-code blob-code-inner js-file-line"></td>      </tr>      <tr>        <td id="file-post2obj-asp-L31" class="blob-num js-line-number" data-line-number="31"></td>        <td id="file-post2obj-asp-LC31" class="blob-code blob-code-inner js-file-line">    enm.moveNext();</td>      </tr>      <tr>        <td id="file-post2obj-asp-L32" class="blob-num js-line-number" data-line-number="32"></td>        <td id="file-post2obj-asp-LC32" class="blob-code blob-code-inner js-file-line">  }</td>      </tr>      <tr>        <td id="file-post2obj-asp-L33" class="blob-num js-line-number" data-line-number="33"></td>        <td id="file-post2obj-asp-LC33" class="blob-code blob-code-inner js-file-line"></td>      </tr>      <tr>        <td id="file-post2obj-asp-L34" class="blob-num js-line-number" data-line-number="34"></td>        <td id="file-post2obj-asp-LC34" class="blob-code blob-code-inner js-file-line">  return obj;</td>      </tr>      <tr>        <td id="file-post2obj-asp-L35" class="blob-num js-line-number" data-line-number="35"></td>        <td id="file-post2obj-asp-LC35" class="blob-code blob-code-inner js-file-line">}</td>      </tr></table>  </div>  </div>  </div>      </div>      <div class="gist-meta">        <a href="https://gist.github.com/gotofritz/2507749/raw/3761a626c46d2c77ec9fb87180f936f019de567a/post2obj.asp" style="float:right">view raw</a>        <a href="https://gist.github.com/gotofritz/2507749#file-post2obj-asp">post2obj.asp</a>        hosted with &#10084; by <a href="https://github.com">GitHub</a>      </div>    </div></div></p>
+<h3 id="converting-post-variables-to-jscript-object-in-classic-asp">Converting Post Variables To JScript Object In Classic ASP</h3>
+<p>...and query string variables.
+ <link rel="stylesheet" href="https://assets-cdn.github.com/assets/gist-embed-04d41fe71632a896c1dd3e883de9f48941fad414d68185aa8df817b950873a05.css"><div id="gist2507749" class="gist">    <div class="gist-file">      <div class="gist-data">        <div class="js-gist-file-update-container js-task-list-container file-box">  <div id="file-query2obj-asp" class="file">      <div itemprop="text" class="blob-wrapper data type-asp">      <table class="highlight tab-size js-file-line-container" data-tab-size="8">      <tr>        <td id="file-query2obj-asp-L1" class="blob-num js-line-number" data-line-number="1"></td>        <td id="file-query2obj-asp-LC1" class="blob-code blob-code-inner js-file-line">/<em>  </td>      </tr>      <tr>        <td id="file-query2obj-asp-L2" class="blob-num js-line-number" data-line-number="2"></td>        <td id="file-query2obj-asp-LC2" class="blob-code blob-code-inner js-file-line"> </em> transforms Request.QueryString VB collection thing in a JS-friendly object</td>      </tr>      <tr>        <td id="file-query2obj-asp-L3" class="blob-num js-line-number" data-line-number="3"></td>        <td id="file-query2obj-asp-LC3" class="blob-code blob-code-inner js-file-line"> <em> @return {Object}</td>      </tr>      <tr>        <td id="file-query2obj-asp-L4" class="blob-num js-line-number" data-line-number="4"></td>        <td id="file-query2obj-asp-LC4" class="blob-code blob-code-inner js-file-line"> </em>/</td>      </tr>      <tr>        <td id="file-query2obj-asp-L5" class="blob-num js-line-number" data-line-number="5"></td>        <td id="file-query2obj-asp-LC5" class="blob-code blob-code-inner js-file-line">function query2obj() {</td>      </tr>      <tr>        <td id="file-query2obj-asp-L6" class="blob-num js-line-number" data-line-number="6"></td>        <td id="file-query2obj-asp-LC6" class="blob-code blob-code-inner js-file-line">  var enm = new Enumerator( Request.QueryString )</td>      </tr>      <tr>        <td id="file-query2obj-asp-L7" class="blob-num js-line-number" data-line-number="7"></td>        <td id="file-query2obj-asp-LC7" class="blob-code blob-code-inner js-file-line">    , obj = new Object(</td>      </tr>      <tr>        <td id="file-query2obj-asp-L8" class="blob-num js-line-number" data-line-number="8"></td>        <td id="file-query2obj-asp-LC8" class="blob-code blob-code-inner js-file-line">    , ei, en</td>      </tr>      <tr>        <td id="file-query2obj-asp-L9" class="blob-num js-line-number" data-line-number="9"></td>        <td id="file-query2obj-asp-LC9" class="blob-code blob-code-inner js-file-line">    ;</td>      </tr>      <tr>        <td id="file-query2obj-asp-L10" class="blob-num js-line-number" data-line-number="10"></td>        <td id="file-query2obj-asp-LC10" class="blob-code blob-code-inner js-file-line"></td>      </tr>      <tr>        <td id="file-query2obj-asp-L11" class="blob-num js-line-number" data-line-number="11"></td>        <td id="file-query2obj-asp-LC11" class="blob-code blob-code-inner js-file-line">  while( !enm.atEnd() ) {</td>      </tr>      <tr>        <td id="file-query2obj-asp-L12" class="blob-num js-line-number" data-line-number="12"></td>        <td id="file-query2obj-asp-LC12" class="blob-code blob-code-inner js-file-line">    ei  = enm.item();</td>      </tr>      <tr>        <td id="file-query2obj-asp-L13" class="blob-num js-line-number" data-line-number="13"></td>        <td id="file-query2obj-asp-LC13" class="blob-code blob-code-inner js-file-line"></td>      </tr>      <tr>        <td id="file-query2obj-asp-L14" class="blob-num js-line-number" data-line-number="14"></td>        <td id="file-query2obj-asp-LC14" class="blob-code blob-code-inner js-file-line">    if(  Request.QueryString.Item( ei ).Count &gt; 1 ) {</td>      </tr>      <tr>        <td id="file-query2obj-asp-L15" class="blob-num js-line-number" data-line-number="15"></td>        <td id="file-query2obj-asp-LC15" class="blob-code blob-code-inner js-file-line">      obj[ei] = new Array();</td>      </tr>      <tr>        <td id="file-query2obj-asp-L16" class="blob-num js-line-number" data-line-number="16"></td>        <td id="file-query2obj-asp-LC16" class="blob-code blob-code-inner js-file-line">      en  = new Enumerator(Request.QueryString( ei ));</td>      </tr>      <tr>        <td id="file-query2obj-asp-L17" class="blob-num js-line-number" data-line-number="17"></td>        <td id="file-query2obj-asp-LC17" class="blob-code blob-code-inner js-file-line"></td>      </tr>      <tr>        <td id="file-query2obj-asp-L18" class="blob-num js-line-number" data-line-number="18"></td>        <td id="file-query2obj-asp-LC18" class="blob-code blob-code-inner js-file-line">      while( !en.atEnd() ) {</td>      </tr>      <tr>        <td id="file-query2obj-asp-L19" class="blob-num js-line-number" data-line-number="19"></td>        <td id="file-query2obj-asp-LC19" class="blob-code blob-code-inner js-file-line">        obj[ei][ obj[ei].length ] = en.item();</td>      </tr>      <tr>        <td id="file-query2obj-asp-L20" class="blob-num js-line-number" data-line-number="20"></td>        <td id="file-query2obj-asp-LC20" class="blob-code blob-code-inner js-file-line">        en.moveNext();</td>      </tr>      <tr>        <td id="file-query2obj-asp-L21" class="blob-num js-line-number" data-line-number="21"></td>        <td id="file-query2obj-asp-LC21" class="blob-code blob-code-inner js-file-line">      }</td>      </tr>      <tr>        <td id="file-query2obj-asp-L22" class="blob-num js-line-number" data-line-number="22"></td>        <td id="file-query2obj-asp-LC22" class="blob-code blob-code-inner js-file-line"></td>      </tr>      <tr>        <td id="file-query2obj-asp-L23" class="blob-num js-line-number" data-line-number="23"></td>        <td id="file-query2obj-asp-LC23" class="blob-code blob-code-inner js-file-line">      en  = null;</td>      </tr>      <tr>        <td id="file-query2obj-asp-L24" class="blob-num js-line-number" data-line-number="24"></td>        <td id="file-query2obj-asp-LC24" class="blob-code blob-code-inner js-file-line"></td>      </tr>      <tr>        <td id="file-query2obj-asp-L25" class="blob-num js-line-number" data-line-number="25"></td>        <td id="file-query2obj-asp-LC25" class="blob-code blob-code-inner js-file-line">    } else {</td>      </tr>      <tr>        <td id="file-query2obj-asp-L26" class="blob-num js-line-number" data-line-number="26"></td>        <td id="file-query2obj-asp-LC26" class="blob-code blob-code-inner js-file-line">      obj[ei] = new String(Request.QueryString( ei ) );</td>      </tr>      <tr>        <td id="file-query2obj-asp-L27" class="blob-num js-line-number" data-line-number="27"></td>        <td id="file-query2obj-asp-LC27" class="blob-code blob-code-inner js-file-line">      obj[ei] = obj[ei].replace( /^s+|s+$/, &#39;&#39; );</td>      </tr>      <tr>        <td id="file-query2obj-asp-L28" class="blob-num js-line-number" data-line-number="28"></td>        <td id="file-query2obj-asp-LC28" class="blob-code blob-code-inner js-file-line">    }</td>      </tr>      <tr>        <td id="file-query2obj-asp-L29" class="blob-num js-line-number" data-line-number="29"></td>        <td id="file-query2obj-asp-LC29" class="blob-code blob-code-inner js-file-line"></td>      </tr>      <tr>        <td id="file-query2obj-asp-L30" class="blob-num js-line-number" data-line-number="30"></td>        <td id="file-query2obj-asp-LC30" class="blob-code blob-code-inner js-file-line">    enm.moveNext();</td>      </tr>      <tr>        <td id="file-query2obj-asp-L31" class="blob-num js-line-number" data-line-number="31"></td>        <td id="file-query2obj-asp-LC31" class="blob-code blob-code-inner js-file-line">  }</td>      </tr>      <tr>        <td id="file-query2obj-asp-L32" class="blob-num js-line-number" data-line-number="32"></td>        <td id="file-query2obj-asp-LC32" class="blob-code blob-code-inner js-file-line"></td>      </tr>      <tr>        <td id="file-query2obj-asp-L33" class="blob-num js-line-number" data-line-number="33"></td>        <td id="file-query2obj-asp-LC33" class="blob-code blob-code-inner js-file-line">  return obj;</td>      </tr>      <tr>        <td id="file-query2obj-asp-L34" class="blob-num js-line-number" data-line-number="34"></td>        <td id="file-query2obj-asp-LC34" class="blob-code blob-code-inner js-file-line">}</td>      </tr></table>  </div>  </div>  </div>      </div>      <div class="gist-meta">        <a href="https://gist.github.com/gotofritz/2507749/raw/3761a626c46d2c77ec9fb87180f936f019de567a/query2obj.asp" style="float:right">view raw</a>        <a href="https://gist.github.com/gotofritz/2507749#file-query2obj-asp">query2obj.asp</a>        hosted with &#10084; by <a href="https://github.com">GitHub</a>      </div>    </div></div></p>
+
+      </div>
+    </div>
+  </article>
 
 
-<p>Enumerators are collections of data that can be iterated through. Although useful, they are <a href="http://msdn2.microsoft.com/en-us/library/894hfyb4.aspx"> not compliant</a> with <a href="http://www.ecma-international.org/publications/standards/Ecma-262.htm">ECMAScript </a> standards, and therefore I prefer not to use them. Some objects in the ASP environment however, such as Request.Form, are provided as Enumerators, and need to be converted them to standard JScript objects. Here&#8217;s a couple of routines to do so.</p>
-
-<h3>Converting A Collection To A Plain JScript Object</h3>
-
-<p>I keep all the functions below in a generic include, coll2obj.asp, and use it across projects.  This is a generic collection-to-object conversion, which doesn&#8217;t seem to work on some built-in collections.</p>
-
-<div><script src='https://gist.github.com/2507749.js?file=coll2obj.asp'></script>
-<noscript><pre><code>/**  coll2obj
- * transforms a VB collection thing in a JS-friendly object
- * @return {Object}
- */
-function coll2obj( coll ) {
-  var enm = new Enumerator( coll )
-    , obj = {}
-    ;
-
-  while( !enm.atEnd() ) {
-    obj[enm.item().name]  = enm.item().value;
-    enm.moveNext();
-  }
-
-  return obj;
-}</code></pre></noscript></div>
-
-
-<h3>Converting Request.ServerVariables To JScript Object In Classic ASP</h3>
-
-<p>I&#8217;m not quite sure why the function above won&#8217;t work on Request.ServerVariables, but it doesn&#8217;t, so here&#8217;s a function for that specific collection.</p>
-
-<div><script src='https://gist.github.com/2507749.js?file=env2obj.asp'></script>
-<noscript><pre><code>/**  
- * transforms Request.ServerVariables VB collection 
- * in a JS-friendly object
- * @return {Object}
- */
-function env2obj() {
-  var enm = new Enumerator(Request.ServerVariables)
-    , obj = new Object()
-    , ei, en
-    ;
-
-  while(!enm.atEnd()) {
-    ei  = enm.item();
-
-    if( Request.ServerVariables.Item( ei ).Count &gt; 1 ){      
-      obj[ei] = new Array();
-      en  = new Enumerator( Request.ServerVariables( ei );
-      while( !en.atEnd() )
-      {
-        obj[ei][ obj[ei].length ] = en.item();
-        en.moveNext();
-      }
-      en  = null;
-
-    } else {      
-      obj[ei] = new String( Request.ServerVariables( ei ) );
-
-    }
-    enm.moveNext();
-  }
-  return obj;
-}</code></pre></noscript></div>
-
-
-<h3>Converting Post Variables To JScript Object In Classic ASP</h3>
-
-<p>The same holds for post variables&#8230;</p>
-
-<div><script src='https://gist.github.com/2507749.js?file=post2obj.asp'></script>
-<noscript><pre><code>/*  post2obj
- *  transforms Request.Form VB collection into a JS-friendly object
- * @return {Object}
- *
- */
-function post2obj() {
-  var enm = new Enumerator( Request.Form )
-    , obj = new Object()
-    , ei, en
-    ;
-
-  while( !enm.atEnd() ) {
-    ei  = enm.item();
-
-    if(  Request.Form.Item( ei ).Count &gt; 1 ) {
-      obj[ei] = new Array();
-      en  = new Enumerator(Request.Form( ei ));
-
-      while( !en.atEnd() ){
-        obj[ei][ obj[ei].length ] = en.item();
-        en.moveNext();
-      }
-
-      en  = null;
-
-    } else {
-      obj[ei] = new String(Request.Form( ei ) );
-      obj[ei] = obj[ei].replace( /^s+|s+$/, '' );
-    }
-
-    enm.moveNext();
-  }
-
-  return obj;
-}</code></pre></noscript></div>
-
-
-<h3>Converting Post Variables To JScript Object In Classic ASP</h3>
-
-<p>&#8230;and query string variables.</p>
-
-<div><script src='https://gist.github.com/2507749.js?file=query2obj.asp'></script>
-<noscript><pre><code>/*  
- * transforms Request.QueryString VB collection thing in a JS-friendly object
- * @return {Object}
- */
-function query2obj() {
-  var enm = new Enumerator( Request.QueryString )
-    , obj = new Object(
-    , ei, en
-    ;
-
-  while( !enm.atEnd() ) {
-    ei  = enm.item();
-
-    if(  Request.QueryString.Item( ei ).Count &gt; 1 ) {
-      obj[ei] = new Array();
-      en  = new Enumerator(Request.QueryString( ei ));
-
-      while( !en.atEnd() ) {
-        obj[ei][ obj[ei].length ] = en.item();
-        en.moveNext();
-      }
-
-      en  = null;
-
-    } else {
-      obj[ei] = new String(Request.QueryString( ei ) );
-      obj[ei] = obj[ei].replace( /^s+|s+$/, '' );
-    }
-
-    enm.moveNext();
-  }
-
-  return obj;
-}</code></pre></noscript></div>
-
-
-
-</div>
-	</div>
-</article>
-
-
-<section id="comment">
+<!-- <section id="comment">
     <h1 class="title">Comments</h1>
     <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </div>
 </section>
 
   </div>
-	<footer id="footer" class="inner">Copyright &copy; 2016
+  -->
+  <footer id="footer" class="inner">Copyright &copy; 2016
 
-    Fabrizio (Fritz) Stelluto
+    Fritz Stelluto
 
 </footer>
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-<script src="/javascripts/slash.js"></script>
+<!--
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 
 
 <script type="text/javascript">
       var disqus_shortname = 'goto-fritz';
-      
-        
+
+
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://gotofritz.net/blog/code-snippets/converting-collection-to-jscript-object-classic-asp';
-        var disqus_url = 'http://gotofritz.net/blog/code-snippets/converting-collection-to-jscript-object-classic-asp';
+        var disqus_identifier = 'http://gotofritz.net/blog/geekery/backing-up-hard-disk-os-x/';
+        var disqus_url = 'http://gotofritz.net/blog/geekery/backing-up-hard-disk-os-x/';
         var disqus_script = 'embed.js';
-      
+
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
       dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
@@ -282,19 +99,19 @@ function query2obj() {
 
 
 
-	<script type="text/javascript">
-		var _gaq = _gaq || [];
-		_gaq.push(['_setAccount', 'UA-11254155-2']);
-		_gaq.push(['_trackPageview']);
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-11254155-2']);
+    _gaq.push(['_trackPageview']);
 
-		(function() {
-			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-		})();
-	</script>
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
 
-
+-->
 
 </body>
 </html>

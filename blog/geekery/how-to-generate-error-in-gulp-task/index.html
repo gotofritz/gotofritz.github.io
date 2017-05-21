@@ -1,201 +1,117 @@
-
 <!DOCTYPE HTML>
 <html>
 <head>
-	<meta charset="utf-8">
-	<title>How to generate an error in a Gulp task - Fabrizio (Fritz) Stelluto</title>
-	<meta name="author" content="">
-
-	
-	<meta name="description" content="When writing a Gulp task that doesn&#8217;t involve streams, how do you throw an error? Motivation Gulp, is a popular javscript build tool for web &hellip;">
-	
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-	<link href="/atom.xml" rel="alternate" title="Fabrizio (Fritz) Stelluto" type="application/atom+xml">
-	<link rel="canonical" href="">
-	<link href="/favicon.ico" rel="shortcut icon">
-	<link rel="icon" href="/favicon.gif" type="image/gif" />
-	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-	
+  <meta charset="utf-8">
+  <title>How to generate an error in a Gulp task || Fritz Stelluto</title>
+  <meta name="author" content="gotofritz">
+  <meta name="description" content="When writing a Gulp task that doesn&amp;#39;t involve streams, how do you throw an error?">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link href="/assets/favicon.ico" rel="shortcut icon">
+  <link rel="icon" href="/assets/favicon.gif" type="image/gif" />
+  <link href="/assets/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 </head>
 
-
 <body ontouchstart="">
-
   <header id="header" class="inner">
-<nav id="main-nav"><div>
-  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
-  <a href="/">home</a>
-  <a href="/blog/">blog</a>
-</div></nav>
-<nav id="mobile-nav">
-	<div class="alignleft menu">
-		<a class="button">Menu</a>
-		<div class="container"><div>
-  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
-  <a href="/">home</a>
-  <a href="/blog/">blog</a>
-</div></div>
-	</div>
-	<div class="alignright search">
-		<a class="button"></a>
-		<div class="container">
-			<form action="http://google.com/search" method="get">
-				<input type="text" name="q" results="0">
-				<input type="hidden" name="q" value="site:gotofritz.net">
-			</form>
-		</div>
-	</div>
-</nav>
+    <nav id="main-nav">
+      <div>
+        <a href="/">home</a>
+        <a href="/blog/">blog</a>
+      </div>
+    </nav>
 
-<nav id="sub-nav" class="alignright">
-	<form class="search" action="http://google.com/search" method="get">
-		<input class="alignright" type="text" name="q" results="0">
-		<input type="hidden" name="q" value="site:gotofritz.net">
-	</form>
-</nav>
-
-</header>
-	
-		
-	
-	<div id="content" class="inner">
-    
-    <article class="post">
-	<h1 class="title">How to Generate an Error in a Gulp Task</h1>
-	<div>
-		<div class="meta">
-			<div class="date">
+    <nav id="sub-nav" class="alignright">
+      <form class="search" action="http://google.com/search" method="get">
+        <input class="alignright" type="text" name="q" results="0">
+        <input type="hidden" name="q" value="site:gotofritz.net">
+      </form>
+    </nav>
+  </header>
 
 
-
-
-
-
-
-
-  
-
-
-<time datetime="2015-04-27T12:29:00+02:00" pubdate data-updated="true">2015-04-27, Mon</time></div>
-			<div class="tags">
-
-
-	<a class='category' href='/blog/cat/geekery/'>Geekery</a>
-
-
-</div>
-			
-				<span class="comments"><a href="/blog/geekery/how-to-generate-error-in-gulp-task/#disqus_thread">Comments</a></span>
-			
-		</div>
-		<div class="entry-content"><p>When writing a Gulp task that doesn&#8217;t involve streams, how do you throw an error?</p>
-
-<!--more-->
-
-
-<h2>Motivation</h2>
-
-<p><a href="http://gulpjs.com/">Gulp</a>, is a popular javscript build tool for web development. Gulp tasks are based around <a href="https://github.com/substack/stream-handbook">streams</a>; but sometimes streams are too clumsy when you want to do a simple task. Say you want to check a JSON file conforms to certain rule. It&#8217;s much easier to require the file, check what you need to check, and then throw an error if you need to than it is opening the file as a stream and validating it.</p>
-
-<p>But how do you throw an error in Gulp &#8220;the proper way&#8221;, i.e. not just by throwing a standard JS error?</p>
-
-<h2>Validating a package.json file</h2>
-
+<div id="content" class="inner">
+  <article class="post">
+    <h1 class="title">How to generate an error in a Gulp task</h1>
+    <div>
+      <div class="meta">
+        <div class="date">
+          <time datetime="2015-04-27T12:29:00+02:00" pubdate>2015-04-27</time>
+        </div>
+        <div class="tags">
+          gulp
+        </div>
+      </div>
+      <div class="entry-content">
+    <div class="archive">This post is old, and probably obsolete</div>
+<p>When writing a Gulp task that doesn&#39;t involve streams, how do you throw an error?
+<!--more--></p>
+<h2 id="motivation">Motivation</h2>
+<p><a href="http://gulpjs.com/">Gulp</a>, is a popular javscript build tool for web development. Gulp tasks are based around <a href="https://github.com/substack/stream-handbook">streams</a>; but sometimes streams are too clumsy when you want to do a simple task. Say you want to check a JSON file conforms to certain rule. It&#39;s much easier to require the file, check what you need to check, and then throw an error if you need to than it is opening the file as a stream and validating it.</p>
+<p>But how do you throw an error in Gulp &quot;the proper way&quot;, i.e. not just by throwing a standard JS error?</p>
+<h2 id="validating-a-package-json-file">Validating a package.json file</h2>
 <p>I had to validate a package json file to make sure all packages were installed with the <code>--save-dev</code> flag. In other words, all dependencies should be in exact semantic format, <code>1.2.3</code> instead of the default <code>^1.2.3</code> or <code>~1.2.3</code>. It is simply enough in plain node, without the extra complication of streams - you require package.json, then test each dependency.</p>
+<pre><code>gulp.task(taskName, function (cb) {
+  var gutil = require(&quot;gulp-util&quot;);
+  var packageData = require(&quot;./package.json&quot;);
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">gulp</span><span class="p">.</span><span class="nx">task</span><span class="p">(</span><span class="nx">taskName</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">cb</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>  <span class="kd">var</span> <span class="nx">gutil</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&quot;gulp-util&quot;</span><span class="p">);</span>
-</span><span class='line'>  <span class="kd">var</span> <span class="nx">packageData</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&quot;./package.json&quot;</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="c1">// we test all three types of dependencies</span>
-</span><span class='line'>  <span class="p">[</span><span class="s2">&quot;devDependencies&quot;</span><span class="p">,</span> <span class="s2">&quot;dependencies&quot;</span><span class="p">,</span> <span class="s2">&quot;optionalDependencies&quot;</span><span class="p">]</span>
-</span><span class='line'>  <span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span> <span class="nx">validateAnObj</span><span class="p">(</span><span class="nx">key</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="c1">// load each dependency</span>
-</span><span class='line'>    <span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">packageData</span><span class="p">[</span><span class="nx">key</span><span class="p">])</span>
-</span><span class='line'>    <span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span> <span class="nx">validateAField</span><span class="p">(</span><span class="nx">field</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>
-</span><span class='line'>      <span class="c1">// check the version complies</span>
-</span><span class='line'>      <span class="kd">var</span> <span class="nx">hasInvalidVersion</span> <span class="o">=</span> <span class="p">(</span><span class="sr">/[^0-9.]/</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">packageData</span><span class="p">[</span><span class="nx">key</span><span class="p">][</span><span class="nx">field</span><span class="p">]));</span>
-</span><span class='line'>
-</span><span class='line'>      <span class="c1">// this is where the magic happens</span>
-</span><span class='line'>      <span class="k">if</span> <span class="p">(</span><span class="nx">hasInvalidVersion</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="k">throw</span> <span class="k">new</span> <span class="nx">gutil</span><span class="p">.</span><span class="nx">PluginError</span><span class="p">({</span>
-</span><span class='line'>          <span class="nx">plugin</span><span class="o">:</span> <span class="nx">taskName</span><span class="p">,</span>
-</span><span class='line'>          <span class="nx">message</span><span class="o">:</span> <span class="nx">field</span> <span class="o">+</span> <span class="s2">&quot; in &quot;</span> <span class="o">+</span> <span class="nx">key</span> <span class="o">+</span> <span class="s2">&quot; has non compliant versioning: &quot;</span> <span class="o">+</span> <span class="nx">packageData</span><span class="p">[</span><span class="nx">key</span><span class="p">][</span><span class="nx">field</span><span class="p">]</span>
-</span><span class='line'>        <span class="p">});</span>
-</span><span class='line'>      <span class="p">}</span>
-</span><span class='line'>    <span class="p">});</span>
-</span><span class='line'>  <span class="p">});</span>
-</span><span class='line'><span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure>
+  // we test all three types of dependencies
+  [&quot;devDependencies&quot;, &quot;dependencies&quot;, &quot;optionalDependencies&quot;]
+  .forEach(function validateAnObj(key) {
 
+    // load each dependency
+    Object.keys(packageData[key])
+    .forEach(function validateAField(field) {
 
-<h2>Throwing an error with gulp</h2>
+      // check the version complies
+      var hasInvalidVersion = (/[^0-9.]/.test(packageData[key][field]));
 
+      // this is where the magic happens
+      if (hasInvalidVersion) {
+        throw new gutil.PluginError({
+          plugin: taskName,
+          message: field + &quot; in &quot; + key + &quot; has non compliant versioning: &quot; + packageData[key][field]
+        });
+      }
+    });
+  });
+});
+</code></pre><h2 id="throwing-an-error-with-gulp">Throwing an error with gulp</h2>
 <p>The easiset way to throw a gulp-y error is to use <code>gulp-util</code>, which has a PluginError that can be thrown. <a href="https://github.com/gulpjs/gulp-util#user-content-new-pluginerrorpluginname-message-options">Here is the documentation for PluginError</a>. <code>plugin</code> and <code>message</code> get outputted on separate lines; they are basically a title message and a message body.
 There are also a couple of options that can be passed, do refer to the documentation.</p>
+<h2 id="this-is-not-using-gulp-the-way-it-was-meant-to-be">This is not using gulp the way it was meant to be</h2>
+<p>There isn&#39;t always a benefit in turning simple problems into a stream problem. Hope this info was useful.</p>
 
-<h2>This is not using gulp the way it was meant to be</h2>
-
-<p>There isn&#8217;t always a benefit in turning simple problems into a stream problem. Hope this info was useful.</p>
-</div>
-	</div>
-</article>
+      </div>
+    </div>
+  </article>
 
 
-<section id="comment">
+<!-- <section id="comment">
     <h1 class="title">Comments</h1>
     <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </div>
 </section>
 
   </div>
-	<footer id="footer" class="inner">Copyright &copy; 2016
+  -->
+  <footer id="footer" class="inner">Copyright &copy; 2016
 
-    Fabrizio (Fritz) Stelluto
+    Fritz Stelluto
 
 </footer>
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-<script src="/javascripts/slash.js"></script>
+<!--
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 
 
 <script type="text/javascript">
       var disqus_shortname = 'goto-fritz';
-      
-        
+
+
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://gotofritz.net/blog/geekery/how-to-generate-error-in-gulp-task/';
-        var disqus_url = 'http://gotofritz.net/blog/geekery/how-to-generate-error-in-gulp-task/';
+        var disqus_identifier = 'http://gotofritz.net/blog/geekery/backing-up-hard-disk-os-x/';
+        var disqus_url = 'http://gotofritz.net/blog/geekery/backing-up-hard-disk-os-x/';
         var disqus_script = 'embed.js';
-      
+
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
       dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
@@ -205,19 +121,19 @@ There are also a couple of options that can be passed, do refer to the documenta
 
 
 
-	<script type="text/javascript">
-		var _gaq = _gaq || [];
-		_gaq.push(['_setAccount', 'UA-11254155-2']);
-		_gaq.push(['_trackPageview']);
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-11254155-2']);
+    _gaq.push(['_trackPageview']);
 
-		(function() {
-			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-		})();
-	</script>
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
 
-
+-->
 
 </body>
 </html>

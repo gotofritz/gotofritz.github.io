@@ -1,0 +1,677 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Javascript promises || Fritz Stelluto</title>
+  <meta name="author" content="gotofritz">
+  <meta name="description" content="A promise in javascript is a wrapper around async code, i.e. code that will be completed at some unspecified time in the future. It allows the next step to be scheduled easily. They are an upgrade from the traditional callbacks.">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link href="/assets/favicon.ico" rel="shortcut icon">
+  <link rel="icon" href="/assets/favicon.gif" type="image/gif" />
+  <link href="/assets/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+</head>
+
+<body ontouchstart="">
+  <header id="header" class="inner">
+    <nav id="main-nav">
+      <div>
+        <a href="/">home</a>
+        <a href="/blog/">blog</a>
+      </div>
+    </nav>
+
+    <nav id="sub-nav" class="alignright">
+      <form class="search" action="http://google.com/search" method="get">
+        <input class="alignright" type="text" name="q" results="0">
+        <input type="hidden" name="q" value="site:gotofritz.net">
+      </form>
+    </nav>
+  </header>
+
+
+<div id="content" class="inner">
+  <article class="post">
+    <h1 class="title">Javascript promises</h1>
+    <div>
+      <div class="meta">
+        <div class="date">
+          <time datetime="2016-11-09T13:44:00+01:00" pubdate>2016-11-09</time>
+        </div>
+        <div class="tags">
+          promises,
+          javascript
+        </div>
+      </div>
+      <div class="entry-content">
+<div class="archive">This post is too old to be of any use. It has been archived.</div>
+<p>A <em>promise</em> in javascript is a wrapper around async code, i.e. code that will be completed at some unspecified time in the future. It allows the next step to be scheduled easily. They are an upgrade from the traditional <em>callbacks</em>.
+<!--more--></p>
+<h2 id="sync-asynchronouse-operations">Sync, Asynchronouse operations</h2>
+<p>[TODO] ajax, setTimeout, node&#39;s fs</p>
+<h2 id="the-pyramid-of-doom-callback-hell">The pyramid of doom / Callback hell</h2>
+<p>Promises are useful to avoid nested callbacks in sequences of async operations
+[TODO]</p>
+<h2 id="creating-and-using-a-promise">Creating and using a promise</h2>
+<p>The Promise constructor is available since ES6, but there aren&#39;t actually that many promises available in the language:
+<em> window.fetch returns a promise - however it is not supported by all browsers
+</em> ES2017 will get <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function">async</a>
+<em> jQuery.ajax and related function are probably the most popular promises &quot;in the wild&quot;
+</em> that&#39;s it (there are of course third party libraries that return promises, but they are not built in into the language)</p>
+<p>So in most cases working with promises means creating your own. There are therefore two steps - <em>creating</em> a promise, and <em>using</em> the promise.</p>
+<p>A promise is a black box which you create by passing a function to the Promise constructor. In the function there is typically an async function, but doesn&#39;t have to be. A promise has a <code>state</code>, which is <em>pending</em> when the promise is created, and <em>resolved</em> when the promise is ready to move to the next step. However, that state is off limit - as we said, promises are black boxes, you can&#39;t look their state to see whether the async function is finished. All you can do is to chain other promises after it, which will be run when the current promise is finished, and wait.</p>
+<p><code>var myPromise = new Promise(() =&gt; { console.log(&#39;promise running&#39;); return &#39;promise executed&#39; });
+// promise running
+// Promise {[[PromiseStatus]]: &quot;pending&quot;, [[PromiseValue]]: undefined}</code></p>
+<p>When we create a promise we pass it a function, and that function is run there and then. That&#39;s hardly ever useful as it means the promise can be run only once, so you normally wrap the promise in a function that returns a fresh promise every time you call it. That also means you can pass it runtime arguments.</p>
+<p><code>``
+var myPromise = (anArgument) =&gt; new Promise(() =&gt; {
+  console.log(</code>promise with argument ${anArgument} running`);
+  return &#39;promise executed&#39;;
+});
+// (nothing happens)</p>
+<p>```
+Once we have <em>created</em> the promise, then we can <em>use</em> it somewhere.</p>
+<p><code>``
+var myPromise = (anArgument) =&gt; new Promise(() =&gt; {
+  console.log(</code>promise with argument ${anArgument} running`);
+  return &#39;promise executed&#39;;
+});
+myPromise(&#39;xxx&#39;);
+// promise with argument xxx running
+// Promise {[[PromiseStatus]]: &quot;pending&quot;, [[PromiseValue]]: undefined}</p>
+<p>```
+That works, but it&#39;s hardly useful. The whole point of promises is to execute callbacks when an async operation is over; we do that by chaining.</p>
+<p><code>``
+var myPromise = (anArgument) =&gt; new Promise(() =&gt; {
+  console.log(</code>promise with argument ${anArgument} running<code>);
+  return &#39;promise executed&#39;;
+});
+myPromise(&#39;xxx&#39;)
+  .then((input) =&gt; console.log(</code>output of previous step was: ${input}`));
+// promise with argument xxx running
+// Promise {[[PromiseStatus]]: &quot;pending&quot;, [[PromiseValue]]: undefined}</p>
+<p><code>``
+The status is still _pending_; we need to _resolve_ the promise for it to move to the next step. The function inside the following</code>.then` is passed on as an argument to the function inside the promise. To resolve the promise, you call that function; it takes an optional argument.</p>
+<p><code>var myPromise = (anArgument) =&gt; new Promise((resolve) =&gt; {
+  console.log(`promise with argument ${anArgument} running`);
+  resolve(&#39;promise executed&#39;); // &lt;-- resolve is the function inside the &quot;then&quot; below
+                               // we are basically say &quot;move on to the next step&quot;
+});
+myPromise(&#39;xxx&#39;)
+  .then(
+    (input) =&gt; console.log(`output of previous step was: ${input}`) // &lt;-- this function is called &quot;resolve&quot; above
+  );
+// promise with argument xxx running
+// output of previous step was: promise executed
+// Promise {[[PromiseStatus]]: &quot;resolved&quot;, [[PromiseValue]]: undefined}</code>
+So now the state is &quot;resolved&quot; and the next step run.</p>
+<p>But what if the async function fails? Say you send some sort of server request and you get a 404. A <code>.then</code> can take in fact two arguments - a success callback, and an error callback. You can pass those two functions to the promise constructor, common practice is to name them &quot;resolve&quot; and &quot;reject&quot;.</p>
+<p><code>``
+var myPromise = (anArgument) =&gt; new Promise((resolve, reject) =&gt; {
+  console.log(</code>promise with argument ${anArgument} running<code>);
+  reject(&#39;some argument&#39;);
+});
+myPromise(&#39;xxx&#39;)
+  .then(
+        (input) =&gt; console.log(</code>promise was resolved<code>),  // this runs when promise resolves
+        (input) =&gt; console.log(</code>promise was rejected`)  // this runs when promise rejects
+  );</p>
+<p>// promise with argument xxx running
+// promise was rejected
+// Promise {[[PromiseStatus]]: &quot;resolved&quot;, [[PromiseValue]]: undefined}
+```
+The state of the promise is still &quot;resolved&quot;, even though &quot;reject&quot; was called. It&#39;s unfortunate and confusing that &quot;resolve&quot; is used for both the state of a promise which is no longer &quot;pending&quot;, and for the name of the success callback. In practice you get used to it pretty quickly.</p>
+<p>Having two functions inside a <code>.then</code> can be a bit unreadable, so the error callback can be put into a different branch, a <code>.catch</code></p>
+<p><code>``
+var myPromise = (anArgument) =&gt; new Promise((resolve, reject) =&gt; {
+  console.log(</code>promise with argument ${anArgument} running<code>);
+  reject(&#39;some argument&#39;);
+});
+myPromise(&#39;xxx&#39;)
+  .then((input) =&gt; console.log(</code>promise was resolved<code>))
+  .catch((input) =&gt; console.log(</code>promise was rejected`));</p>
+<p>// promise with argument xxx running
+// promise was rejected
+// Promise {[[PromiseStatus]]: &quot;resolved&quot;, [[PromiseValue]]: undefined}
+```
+This is exactly the same as the previous case, but it&#39;s easier to tell where everything is.</p>
+<p>The usefulness of promises is when you have several of them chained together. That&#39;s also when <code>.catch</code> comes in handy; the promise will jump to it whenever any of the previous steps are rejected. So a single catch can be used to handle several error steps, which can be useful.</p>
+<p>```
+var myPromise = () =&gt; new Promise((resolve, reject) =&gt; {
+  let rnd = Math.random();
+  if (rnd &gt; 0.5) {
+    console.log(&#39;rejecting&#39;, rnd);
+    reject(&#39;oh noes you missed&#39;);
+  }
+  else {
+    console.log(&#39;resolving&#39;, rnd);
+    resolve(&#39;target hit!&#39;);
+  }
+});</p>
+<p>// this function is called to start the chain - note the ()
+myPromise()
+  // this is queued, waiting for the previous step to finish - note the absence of ()
+  .then(myPromise)
+   // and so on
+  .then(myPromise)
+  .then(myPromise)
+  // this is waiting for any or the previous steps to be rejected
+  .catch((str) =&gt; console.log(&#39;ERROR&#39;, str));</p>
+<p>// one run:
+// resolving 0.2984725727262314
+// resolving 0.3527389987597389
+// rejecting 0.8746717036908702
+// ERROR oh noes you missed</p>
+<p>// another run:
+// resolving 0.6337866664792018
+// ERROR oh noes you missed</p>
+<p>// another run:
+// resolving 0.3309683732410815
+// resolving 0.38150585214797084
+// resolving 0.3735445039377916
+// resolving 0.3202013260524257
+```
+That&#39;s the standard promise workflow - you create functions which returns a promise, then you start the chain by calling one of them and add the rest to the chain, waiting for them to be called up when ready.</p>
+<h2 id="creating-promises-with-async-code">Creating promises with async code</h2>
+<p>The example above show that promises can also be built using regular, sync code. But of course the point of promises is to handle async code. In node you have several objects with async function, <code>fs</code> being probably the most used. In the browser you have ajax calls. Both of these require some sort of fixtures, or mocking. To avoid that, in testing typically another async function is used: setTimeout</p>
+<p>```
+let myPromise = () =&gt; {
+  return new Promise((resolve, reject) =&gt; {
+    // the body of the promise is async
+    setTimeout(() =&gt; {
+      let rnd = Math.random();
+      if (rnd &gt; 0.75) {
+        console.log(&#39;rejecting&#39;, rnd);
+        reject(&#39;oh noes you missed&#39;);
+      }
+      else {
+        console.log(&#39;resolving&#39;, rnd);
+        resolve(&#39;target hit!&#39;);
+      }
+    }, 1000);
+  });
+};</p>
+<p>myPromise()
+  .then(myPromise)
+  .then(myPromise)
+  .then(myPromise)
+  .catch((str) =&gt; console.log(&#39;ERROR&#39;, str));</p>
+<p>// example run:
+// resolving 0.7885380429638442
+// ERROR oh noes you missed
+```
+The flow is exactly as in the sync case (but of course, with a 1s delay between steps).</p>
+<h2 id="what-arguments-are-being-passed-to-the-next-then-">What arguments are  being passed  to the next then?</h2>
+<p>In the examples above, there is a sequence of <code>.then</code> and a single <code>.catch</code> for dealing with any error in the chain - a typical promise pattern. Let&#39;s explore how chaining works. First let&#39;s prepare a couple of factory functions - they will
+<code>``
+const DT = 1000;
+// a random integer between 0 and 100
+const makeRnd = () =&gt; ~~(Math.random() * 100);
+const logArg = (rnd) =&gt; console.log(</code>... instantiated promise with ${rnd}`);
+const end = (rnd = 0) =&gt; console.log(&#39;END&#39;, rnd);</p>
+<p>const failPartial = (label = &#39;UNLABELLED&#39;, rnd = 0) =&gt; {
+  return new Promise((resolve, reject) =&gt; {
+    logArg(rnd);
+    rnd = makeRnd();
+    setTimeout(() =&gt; {
+      console.log(&#39;FAIL&#39;, label, rnd);
+      reject(rnd);
+    }, DT);
+  });
+};</p>
+<p>const succeedPartial = (label = &#39;UNLABELLED&#39;, rnd = 0) =&gt; {
+  return new Promise((resolve, reject) =&gt; {
+    logArg(rnd);
+    rnd = makeRnd();
+    setTimeout(() =&gt; {
+      console.log(&#39;SUCCESS&#39;, label, rnd);
+      resolve(rnd);
+    }, DT);
+  });
+};</p>
+<p>```</p>
+<p>Then let&#39;s explore what happens
+```
+succeedPartial.bind(null, &#39;START&#39;)()    // we expect this to jump to A
+  .then(succeedPartial.bind(null, &#39;A&#39;)) // we expect this to jump to B
+  .then(succeedPartial.bind(null, &#39;B&#39;)) // we expect nothing else
+  .catch(end)</p>
+<p>// ... instantiated promise with 0
+// SUCCESS START 59
+// ... instantiated promise with 59
+// SUCCESS A 65
+// ... instantiated promise with 65
+// SUCCESS B 95
+```
+No surprises there - all functions resolve, so only the .then blocks are executed, in order</p>
+<p>```
+failPartial.bind(null, &#39;START&#39;)()        // we expect this to jump to END
+  .then(succeedPartial.bind(null, &#39;A&#39;))
+  .then(succeedPartial.bind(null, &#39;B&#39;))
+  .catch(end)                            // we expect nothing else</p>
+<p>// ... instantiated promise with 0
+// FAIL START 89
+// END 89</p>
+<p>succeedPartial.bind(null, &#39;START&#39;)()    // we expect this to jump to A
+  .then(failPartial.bind(null, &#39;A&#39;))    // we expect this to jump to END
+  .then(succeedPartial.bind(null, &#39;B&#39;))
+  .catch(end)                           // we expect nothing else</p>
+<p>// ... instantiated promise with 0
+// SUCCESS START 2
+// ... instantiated promise with 2
+// FAIL A 20
+// END 20
+```
+Also no surprises there - the final catch handles any error anywhere in the chain.</p>
+<p>```
+succeedPartial.bind(null, &#39;START&#39;)()     // we expect this to jump to A
+  .then(failPartial.bind(null, &#39;A&#39;))     // we expect ... ?
+  .then(succeedPartial.bind(null, &#39;B&#39;))</p>
+<p>// ... instantiated promise with 0
+// SUCCESS START 57
+// ... instantiated promise with 57
+// FAIL A 63
+fs.html#fs_file_system:1 Uncaught (in promise) 63
+```
+Without a catch, any error in the chain becomes fatal. Let&#39;s try something more complex</p>
+<p>```
+succeedPartial.bind(null, &#39;START&#39;)()      // we expect this to jump to A
+  .then(failPartial.bind(null, &#39;A&#39;))      // we expect this to jump to C
+  .then(succeedPartial.bind(null, &#39;B&#39;))
+  .catch(succeedPartial.bind(null, &#39;C&#39;))  // we expect this to jump to E
+  .catch(succeedPartial.bind(null, &#39;D&#39;))
+  .then(succeedPartial.bind(null, &#39;E&#39;))   // we expect this to jump to G
+  .catch(succeedPartial.bind(null, &#39;F&#39;))
+  .then(succeedPartial.bind(null, &#39;G&#39;))   // we expect this to jump to H
+  .then(failPartial.bind(null, &#39;H&#39;))      // we expect this to jump to END
+  .then(succeedPartial.bind(null, &#39;I&#39;))
+  .catch(end);</p>
+<p>// ... instantiated promise with 0
+// SUCCESS START 64
+// ... instantiated promise with 64
+// FAIL A 6
+// ... instantiated promise with 6
+// SUCCESS C 61
+// ... instantiated promise with 61
+// SUCCESS E 83
+// ... instantiated promise with 83
+// SUCCESS G 57
+// ... instantiated promise with 57
+// FAIL H 78
+// END 78
+<code>``
+It is clear that at any stage the promise will jump to the closest</code>.then<code>further down the chain when resolved, and to the closest</code>.catch` when rejected.</p>
+<h2 id="more-realistic-use-of-promises">More realistic use of promises</h2>
+<p>It&#39;s all well and good using promises, but we need some more exciting ones than just a setTimeout.</p>
+<p>Here we fetch some text from <a href="https://baconipsum.com/">a public lorem ipsum API</a>, and prepend it to the page</p>
+<p>```
+const fetch = (url) =&gt; {
+  return new Promise((resolve, reject) =&gt; {
+    let request = new XMLHttpRequest();
+    request.responseType = &#39;text&#39;;
+    request.open(&#39;GET&#39;, url);</p>
+<pre><code>// this handles any response from the server - even 404s
+request.onload = () =&gt; {
+  if (request.status == 200) {
+    const text = request.responseText;
+    const body = document.querySelector(&#39;body&#39;);
+    const div = document.createElement(&#39;div&#39;);
+    div.innerHTML = text;
+    body.insertBefore(div, body.firstChild);
+    resolve(request);
+  }
+  else {
+    reject(Error(request.statusText));
+  }
+};
+
+// this handles no response from the server
+request.onerror = function() {
+  reject(Error(&#39;No response from server&#39;));
+};
+
+request.send();
+</code></pre><p>  });
+};</p>
+<p>fetch(&#39;https://baconipsum.com/api/?type=all-meat&amp;paras=3&amp;start-with-lorem=1&amp;format=html&#39;)
+  .then(() =&gt; console.log(&#39;SUCCESS&#39;))
+  .catch((err) =&gt; console.log(&#39;ERROR&#39;, err));
+```
+This is not very versatile - fetch does too much with the response. Let&#39;s make the code more generic</p>
+<p>```
+const fetch = (url, responseType = &#39;text&#39;) =&gt; {
+  return new Promise((resolve, reject) =&gt; {
+    let request = new XMLHttpRequest();
+    request.responseType = responseType;
+    request.open(&#39;GET&#39;, url);</p>
+<pre><code>// this handles any response from the server - even 404s
+request.onload = () =&gt; {
+  if (request.status == 200) {
+    resolve(request);
+  }
+  else {
+    reject(Error(request.statusText));
+  }
+};
+
+// this handles no response from the server
+request.onerror = function() {
+  reject(Error(&#39;No response from server&#39;));
+};
+
+request.send();
+</code></pre><p>  });
+};</p>
+<p>const handleErrors = (err) =&gt; {
+  console.log(&#39;ERROR&#39;, err);
+}</p>
+<p>const insertText = (request) =&gt; {
+  const text = request.responseText;
+  const body = document.querySelector(&#39;body&#39;);
+  const div = document.createElement(&#39;div&#39;);
+  div.innerHTML = text;
+  body.insertBefore(div, body.firstChild);
+};</p>
+<p>fetch(&#39;https://baconipsum.com/api/?type=all-meat&amp;paras=3&amp;start-with-lorem=1&amp;format=html&#39;)
+  .then(insertText)
+  .catch(handleErrors);
+```</p>
+<p>That&#39;s better - now the promise can be used to fetch other things. In the following example, an image</p>
+<p>```
+const insertImage = (request) =&gt; {
+  const blob = request.response;
+  const body = document.querySelector(&#39;body&#39;);
+  const img = document.createElement(&#39;img&#39;);
+  img.src = window.URL.createObjectURL(blob);
+  body.insertBefore(img, body.firstChild);
+};</p>
+<p>fetch(&#39;https://www.placehold.it/350x150&#39;)
+  .then(insertImage)
+  .catch(handleErrors);
+```</p>
+<h2 id="promise-sequence">Promise sequence</h2>
+<p>Here&#39;s a typical example of a sequence of promises - you make a request to a backend, in the response there is the data you need for your next request. We are going to fetch the top comments attached to the top KenM story on reddit. This involves two steps: 1) find the top story, 2) find the top comments.</p>
+<pre><code>let story = &quot;&quot;;
+let comments = [];
+
+Promise.resolve(&#39;https://www.reddit.com/r/theonion/top/.json?sort=top&amp;t=all&#39;)
+  .then(fetch)
+  .then((request) =&gt; {
+    const jsonData = JSON.parse(request.responseText);
+    const topStory = jsonData.data.children[0].data;
+    story = `=== ${topStory.title} ===`;
+    const url = `https://www.reddit.com/${topStory.permalink}.json`;
+    console.log(url)
+    return Promise.resolve(url);
+  })
+  .then(fetch)
+  .then((request) =&gt; {
+    const jsonData = JSON.parse(request.responseText);
+    comments = jsonData[1].data.children.map((child) =&gt; {
+      if (child.data &amp;&amp; child.data.body) {
+        return child.data.body.trim();
+      }
+    });
+    console.log(story, &#39;\n&#39;);
+    console.log(comments.join(&#39;\n\n----\n\n&#39;));
+  })
+  .catch(handleErrors);
+
+  // === Mike Pence Disappointed In The 200,000 Husbands And Fathers Who Permitted Women To Attend March ===
+  //
+  // I&#39;m so jaded after this last year. This actually sounded plausible until I looked at the the subreddit.
+  //
+  // ----
+  //
+  // The Onion is just another failing and pathetic #FakeNews outlet trying to smear Trump. Sad!
+  //
+  // ----
+  //
+  // ..etc...
+</code></pre><p>The chain starts with a <code>Promise.resolve</code>. This is a shortcut for transforming a simple value into a promise to allow chaining. It is equivalent to</p>
+<pre><code>const startOffChain = (url) =&gt; {
+  return new Promise((resolve) =&gt; {
+    resolve(url);
+  }
+};
+
+startOffChain(&#39;https://www.reddit.com/r/KenM/top/.json?sort=top&amp;t=all&#39;)
+  .then(fetch)
+</code></pre><p>It is much shorter. There is also an equivalent <code>Promise.reject</code>.</p>
+<p>In reality there would have been no need to create a <em>startOffChain</em> method, I could have started the chain with <em>fetch</em> which already returns a promise. But I simply liked the consistency of having <code>.then(fetch)</code> twice instead of this</p>
+<pre><code>fetch(&#39;https://www.reddit.com/r/KenM/top/.json?sort=top&amp;t=all&#39;)
+  .then(...)
+  .then(fetch)
+</code></pre><p>The functions which extract data from the JSON are anonymous functions defined inside the <code>.then</code> - it makes sense, as they are very specific functions used once. But one could just as well assign them to a variable and use just use a reference in the chain.</p>
+<pre><code>const processFirstBlock = (request) =&gt; {
+  const jsonData = JSON.parse(request.responseText);
+  ... etc
+}
+
+Promise.resolve(&#39;https://www.reddit.com/r/KenM/top/.json?sort=top&amp;t=all&#39;)
+  .then(fetch)
+  .then(processFirstBlock)
+  .then(fetch)
+  .then(processSecondBlock)
+  .catch(handleError)
+</code></pre><p>That very function returns a Promise.resolve to allow chaining. But it is in fact unnecessary; a promise will automatically promisify a return value, so one could just as well write</p>
+<pre><code>.then((request) =&gt; {
+    const jsonData = JSON.parse(request.responseText);
+    const topStory = jsonData.data.children[0].data;
+    story = `=== ${topStory.title} ===`;
+    const url = `https://www.reddit.com/${topStory.permalink}.json`;
+    console.log(url)
+    return url;  // instead of return Promise.resolve(url);
+  })
+</code></pre><h2 id="using-promises-to-open-or-create-a-file">Using promises to open or create a file</h2>
+<p>So chains are good for sequences of actions. And if one of the steps involves passing some variable from one step to the next, you can just use Promise.resolve or Promise.reject. In the example below a file is opened, created if not existing, manipulated and rewritten.</p>
+<p>```
+const fs = require(&#39;fs&#39;);
+const DATA_PTH = &#39;./test.json&#39;;
+// 97 is ascii for a, 122 for z
+// it&#39;s a quick and dirty function, I wouldn&#39;t do that in production!
+const random_letter = () =&gt; String.fromCharCode(97 + Math.floor(Math.random() * (122 - 97)));</p>
+<p>// you can start a promise chain with a simple resolve
+Promise.resolve(DATA_PTH)</p>
+<p>// try to open a file
+  .then((pth) =&gt; {
+    return new Promise((resolve, reject) =&gt; {
+      fs.readFile(pth, &#39;utf8&#39;, (err, data) =&gt; {
+        if (err) {
+          reject(pth);
+        }
+        else {
+          resolve(JSON.parse(data))
+        }
+      })
+    });
+  })</p>
+<p>// if the file doesn&#39;t exist, create it with some default data
+  .catch((pth) =&gt; {
+    return new Promise((resolve, reject) =&gt; {
+      const DEFAULT_DATA = {};</p>
+<pre><code>  fs.writeFile(pth, JSON.stringify(DEFAULT_DATA), (err) =&gt; {
+    if (err) {
+      reject(pth);
+    }
+    else {
+      resolve(DEFAULT_DATA)
+    }
+  })
+})
+</code></pre><p>  })</p>
+<p>// handle file content, whichever way it was created
+  .then((json) =&gt; {
+    json[random_letter()] = ~~(1000 * Math.random());
+    return Promise.resolve(json);
+  })</p>
+<p>// write updated content
+  .then((json) =&gt; {
+    return new Promise((resolve, reject) =&gt; {
+      fs.writeFile(DATA_PTH, JSON.stringify(json, null, 2), (err) =&gt; {
+        if (err) {
+          reject(pth);
+        }
+        else {
+          resolve(json)
+        }
+      })
+    })
+  })</p>
+<p>// gives some feedback
+  .then((json) =&gt; {
+    console.log(&#39;JSON&#39;, json);
+  })</p>
+<p>// final error catcher
+  .catch((err) =&gt; {
+    console.log(&#39;ERROR&#39;, err);
+  });
+```</p>
+<h2 id="a-simple-cache-with-promise-resolve-and-promise-reject">A simple cache with Promise.resolve and Promise.reject</h2>
+<p>A typical use case which makes good use of Promise.resolve is a file cache.</p>
+<pre><code>const cache = {};
+// a placeholder; prentend this is a real hashing function
+const someHashingFunction = (str) =&gt; escape(str);
+
+var getFileContent = (url) =&gt; {
+  if (!url) {
+    return Promise.reject(new Error(&#39;input error&#39;));
+  }
+  const hashedUrl = someHashingFunction(url);
+  if (hashedUrl in cache) {
+    return Promise.resolve(cache[hashedUrl]);
+  }
+  return fetch(url)
+    .then((response) =&gt; {
+      cache[hashedUrl] = response.responseText;
+      return response.responseText;
+    })
+}
+
+getFileContent(&#39;some url&#39;)
+  .then(...)
+  .catch(...)
+</code></pre><h2 id="promise-all">Promise.all</h2>
+<p>Promise chains are used to execute functions serially. For executing them in parallel, there is <code>Promise.all</code>. Promises.all takes an array of promises, runs them in parallel, and when all are run it passes an array of results, in the same order as the corresponding promises, to the next block. If any promise fails, it jumps to the <code>catch</code> block and doesn&#39;t return any results.</p>
+<p>In the example below the function <code>fetch</code> from earlier is used to create an array of promises taking an array of reddit URL strings (always a good source of mock data) as starting point. The then block logs the name of the subreddit, which should correspond to the jsonPath</p>
+<pre><code>const jsonPaths = [ &#39;theonion&#39;, &#39;riddles&#39;, &#39;antijokes&#39; ];
+// you can add .json to any reddit URL and you get instant mock data
+const jsonPromises = jsonPaths.map((path) =&gt; fetch(`https://www.reddit.com/r/${path}/.json`));
+Promise.all(jsonPromises)
+  // results is in the form
+  // [XMLHttpRequest, XMLHttpRequest, XMLHttpRequest]
+  .then((results) =&gt; {
+      [0, 1, 2].forEach((keyOfPath) =&gt; {
+        // each XMLHttpRequest is an object, the actual data is a json string
+        // attached to the reponse attribute - we need to turn that into an object
+        const jsonData = JSON.parse(results[keyOfPath].response);
+        // I explored https://www.reddit.com/r/riddles/.json in  a browser to discover
+        // the location of the subreddit&#39;s name in the JSON structure, just to have
+        // something meaningful to output
+        console.log(jsonData.data.children[0].data.subreddit)
+      })
+    })
+  .catch((err) =&gt; console.log(err))
+
+// -&gt; same order as jsonPaths
+// VM213:6 TheOnion
+// VM213:6 riddles
+// VM213:6 AntiJokes
+</code></pre><h2 id="promise-race">Promise.race</h2>
+<p><code>Promise.race</code> is the least useful of the lot. At first sight it looks like it can be used, say to fetch data from the fastest of alternative locations</p>
+<pre><code>Promise.race([
+  getFromThisNetwork(url),
+  getFromThatNetwork(url),
+  getFromLocalStorage(url)
+]);
+</code></pre><p>But the problem is that if there are any errors in any of the functions, even the slowest which wasn&#39;t going to be used, the promise jumps to the <code>.catch</code>. So that&#39;s not good.</p>
+<p>The only two uses I know for Promise.race are to time-limit an async function</p>
+<pre><code>Promise.race([
+  new Promise((resolve, reject) =&gt; setTimout(() =&gt; reject(Error(&#39;time limited!&#39;))), TIME_LIMIT),
+  theAsyncFunctionYouWantToLimit()
+])
+</code></pre><p>Another use of Promise race is in this <a href="https://esdiscuss.org/topic/cancel-promise-pattern-no-cancellable-promises">proposal by Jan-Ivar Bruaroey</a>, which comes with a <a href="https://jsfiddle.net/jib1/jz33qs32/">fiddle</a>. A similar example is this implementation of search suggestion:</p>
+<pre><code>&lt;!-- HTML --&gt;
+Search: &lt;input id=&quot;input&quot;&gt;
+
+// KS
+let cancel = () =&gt; {};
+
+input.oninput = function(ev) {
+  let term = ev.target.value;
+  cancel();
+  let p = new Promise(resolve =&gt; cancel = resolve);
+  Promise.race([p, getSearchResults(term)]).then(results =&gt; {
+    if (results) {
+      console.log(`results for &quot;${term}&quot;`,results);
+    }
+  });
+}
+
+function getSearchResults(term) {
+  return new Promise(resolve =&gt; {
+    let timeout = 100 + Math.floor(Math.random() * 1900);
+    setTimeout(() =&gt; resolve([term.toLowerCase(), term.toUpperCase()]), timeout);
+  });
+}
+// from https://stackoverflow.com/questions/30233302/promise-is-it-possible-to-force-cancel-a-promise/41417429#41417429
+</code></pre><h1 id="todo">TODO</h1>
+<p>start going through other do.first</p>
+<p>http://stackoverflow.com/a/41417429/345007</p>
+
+      </div>
+    </div>
+  </article>
+
+
+<!-- <section id="comment">
+    <h1 class="title">Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+
+  </div>
+  -->
+  <footer id="footer" class="inner">Copyright &copy; 2016
+
+    Fritz Stelluto
+
+</footer>
+<!--
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'goto-fritz';
+
+
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://gotofritz.net/blog/geekery/backing-up-hard-disk-os-x/';
+        var disqus_url = 'http://gotofritz.net/blog/geekery/backing-up-hard-disk-os-x/';
+        var disqus_script = 'embed.js';
+
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-11254155-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+-->
+
+</body>
+</html>

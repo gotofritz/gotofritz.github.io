@@ -1,203 +1,120 @@
-
 <!DOCTYPE HTML>
 <html>
 <head>
-	<meta charset="utf-8">
-	<title>Javscript Performance Mythbuster summary - Fabrizio (Fritz) Stelluto</title>
-	<meta name="author" content="">
-
-	
-	<meta name="description" content="Summary of the Javascript Performance Mythbusters slideshow, conveniently in one page. Hope this doesn&#8217;t breach any copyright. A great &hellip;">
-	
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-	<link href="/atom.xml" rel="alternate" title="Fabrizio (Fritz) Stelluto" type="application/atom+xml">
-	<link rel="canonical" href="">
-	<link href="/favicon.ico" rel="shortcut icon">
-	<link rel="icon" href="/favicon.gif" type="image/gif" />
-	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-	
+  <meta charset="utf-8">
+  <title>Javscript Performance Mythbuster summary || Fritz Stelluto</title>
+  <meta name="author" content="gotofritz">
+  <meta name="description" content="Summary of the Javascript Performance Mythbusters slideshow, conveniently in one page. Hope this doesn&amp;#39;t breach any copyright.
+A great presentation @ Velocity 2012 conference on checking common assumptions. With work by Lindsey Simon, Kyle Simpson, Chris Joel, Nicholas C. Zakas">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link href="/assets/favicon.ico" rel="shortcut icon">
+  <link rel="icon" href="/assets/favicon.gif" type="image/gif" />
+  <link href="/assets/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 </head>
 
-
 <body ontouchstart="">
-
   <header id="header" class="inner">
-<nav id="main-nav"><div>
-  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
-  <a href="/">home</a>
-  <a href="/blog/">blog</a>
-</div></nav>
-<nav id="mobile-nav">
-	<div class="alignleft menu">
-		<a class="button">Menu</a>
-		<div class="container"><div>
-  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
-  <a href="/">home</a>
-  <a href="/blog/">blog</a>
-</div></div>
-	</div>
-	<div class="alignright search">
-		<a class="button"></a>
-		<div class="container">
-			<form action="http://google.com/search" method="get">
-				<input type="text" name="q" results="0">
-				<input type="hidden" name="q" value="site:gotofritz.net">
-			</form>
-		</div>
-	</div>
-</nav>
+    <nav id="main-nav">
+      <div>
+        <a href="/">home</a>
+        <a href="/blog/">blog</a>
+      </div>
+    </nav>
 
-<nav id="sub-nav" class="alignright">
-	<form class="search" action="http://google.com/search" method="get">
-		<input class="alignright" type="text" name="q" results="0">
-		<input type="hidden" name="q" value="site:gotofritz.net">
-	</form>
-</nav>
-
-</header>
-	
-		
-	
-	<div id="content" class="inner">
-    
-    <article class="post">
-	<h1 class="title">Javscript Performance Mythbuster Summary</h1>
-	<div>
-		<div class="meta">
-			<div class="date">
+    <nav id="sub-nav" class="alignright">
+      <form class="search" action="http://google.com/search" method="get">
+        <input class="alignright" type="text" name="q" results="0">
+        <input type="hidden" name="q" value="site:gotofritz.net">
+      </form>
+    </nav>
+  </header>
 
 
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-07-17T13:08:21+02:00" pubdate data-updated="true">2012-07-17, Tue</time></div>
-			<div class="tags">
-
-
-	<a class='category' href='/blog/cat/geekery/'>Geekery</a>
-
-
-</div>
-			
-				<span class="comments"><a href="/blog/geekery/javscript-performance-mythbuster-summary#disqus_thread">Comments</a></span>
-			
-		</div>
-		<div class="entry-content"><p>Summary of the <a href="https://docs.google.com/present/view?id=dq52zrp_22f2rx5zjz">Javascript Performance Mythbusters</a> slideshow, conveniently in one page. Hope this doesn&#8217;t breach any copyright.</p>
-
-<p>A great presentation @ <a href="https://twitter.com/velocityconf">Velocity 2012 conference</a> on checking common assumptions. With work by <a href="https://twitter.com/elsigh">Lindsey Simon</a>, <a href="https://twitter.com/getify">Kyle Simpson</a>, <a href="https://twitter.com/robodynamo">Chris Joel</a>, <a href="https://twitter.com/slicknet">Nicholas C. Zakas</a></p>
-
-<!--more-->
-
-
-<h2>Busted myths</h2>
-
+<div id="content" class="inner">
+  <article class="post">
+    <h1 class="title">Javscript Performance Mythbuster summary</h1>
+    <div>
+      <div class="meta">
+        <div class="date">
+          <time datetime="2012-07-17T13:08:00+02:00" pubdate>2012-07-17</time>
+        </div>
+        <div class="tags">
+          javascript,
+          performance,
+          conferences
+        </div>
+      </div>
+      <div class="entry-content">
+    <div class="archive">This post is old, and probably obsolete</div>
+<p>Summary of the <a href="https://docs.google.com/present/view?id=dq52zrp_22f2rx5zjz">Javascript Performance Mythbusters</a> slideshow, conveniently in one page. Hope this doesn&#39;t breach any copyright.</p>
+<p>A great presentation @ <a href="https://twitter.com/velocityconf">Velocity 2012 conference</a> on checking common assumptions. With work by <a href="https://twitter.com/elsigh">Lindsey Simon</a>, <a href="https://twitter.com/getify">Kyle Simpson</a>, <a href="https://twitter.com/robodynamo">Chris Joel</a>, <a href="https://twitter.com/slicknet">Nicholas C. Zakas</a>
+<!--more--></p>
+<h2 id="busted-myths">Busted myths</h2>
 <ul>
-<li><p><a href="http://jsperf.com/string-concatenation-vs-array-join-2/8">String concatenation is not slower than Array.join</a></p></li>
-<li><p><a href="http://jsperf.com/beware-of-implicit-object-conversion/6">Creating a String object is not faster than assigning a string value to a variable</a></p></li>
-<li><p><a href="http://jsperf.com/localstorage-vs-objects/19">Local storage is not much slower than cookies</a></p></li>
-<li><p><a href="http://jsperf.com/more-practical-eval/3">Eval doesn&#8217;t necessarily turn off optimization</a> / <a href="http://jsperf.com/eval-kills">Yes it does</a> (either way, I don&#8217;t go anywhere near it if I can help it)</p></li>
-<li><p>Sorry <a href="http://danwebb.net/2011/5/28/it-is-about-the-hashbangs/">Dan Webb</a>, but <a href="http://jquery.bassistance.de/historytest/">hashbang routing is still needed because history.pushState is not there yet</a></p></li>
-<li><p>A neat trick to improve <a href="http://msdn.microsoft.com/en-us/magazine//gg622887.aspx">jQuery looping</a> - and the proof <a href="http://jsperf.com/scriptjunkie-premature-3">it works</a></p></li>
-<li><p><a href="http://jsperf.com/queryselectorall-vs-getelementsbytagname">querySelectorAll() is NOT faster than getElementsByTagName()</a> - and <a href="http://www.nczonline.net/blog/2010/09/28/why-is-getelementsbytagname-faster-that-queryselectorall/">here&#8217;s why</a></p></li>
-<li><p><a href="http://jsperf.com/lists-of-nodes/3">a good idea to cache a nodeList to an array</a></p></li>
-<li><p><a href="https://github.com/h5bp/lazyweb-requests/issues/42">script defer is buggy on IE</a>. A good strategy is to concat the files, and then chunk in 100k chunks based on how often they change, perhaps with different caching headers and with lay loading</p></li>
-<li><p>some simplified ES5 shims can be faster than native implementations:  <a href="http://jsperf.com/accessor-perf">object creation</a>,  <a href="http://jsperf.com/for-vs-array-foreach/4">forEach</a>,  <a href="http://jsperf.com/bind-vs-custom">bind</a></p></li>
-<li><p><a href="http://jsperf.com/regexp-indexof-perf/16">RegExp are NOT slower than String.indexOf</a></p></li>
+<li><a href="http://jsperf.com/string-concatenation-vs-array-join-2/8">String concatenation is not slower than Array.join</a></li>
+</ul>
+<ul>
+<li><a href="http://jsperf.com/beware-of-implicit-object-conversion/6">Creating a String object is not faster than assigning a string value to a variable</a></li>
+</ul>
+<ul>
+<li><a href="http://jsperf.com/localstorage-vs-objects/19">Local storage is not much slower than cookies</a></li>
+</ul>
+<ul>
+<li><a href="http://jsperf.com/more-practical-eval/3">Eval doesn&#39;t necessarily turn off optimization</a> / <a href="http://jsperf.com/eval-kills">Yes it does</a> (either way, I don&#39;t go anywhere near it if I can help it)</li>
+</ul>
+<ul>
+<li>Sorry <a href="http://danwebb.net/2011/5/28/it-is-about-the-hashbangs/">Dan Webb</a>, but <a href="http://jquery.bassistance.de/historytest/">hashbang routing is still needed because history.pushState is not there yet</a></li>
+</ul>
+<ul>
+<li>A neat trick to improve <a href="http://msdn.microsoft.com/en-us/magazine//gg622887.aspx">jQuery looping</a> - and the proof <a href="http://jsperf.com/scriptjunkie-premature-3">it works</a></li>
+</ul>
+<ul>
+<li><a href="http://jsperf.com/queryselectorall-vs-getelementsbytagname">querySelectorAll() is NOT faster than getElementsByTagName()</a> - and <a href="http://www.nczonline.net/blog/2010/09/28/why-is-getelementsbytagname-faster-that-queryselectorall/">here&#39;s why</a></li>
+</ul>
+<ul>
+<li><a href="http://jsperf.com/lists-of-nodes/3">a good idea to cache a nodeList to an array</a></li>
+</ul>
+<ul>
+<li><a href="https://github.com/h5bp/lazyweb-requests/issues/42">script defer is buggy on IE</a>. A good strategy is to concat the files, and then chunk in 100k chunks based on how often they change, perhaps with different caching headers and with lay loading</li>
+</ul>
+<ul>
+<li>some simplified ES5 shims can be faster than native implementations:  <a href="http://jsperf.com/accessor-perf">object creation</a>,  <a href="http://jsperf.com/for-vs-array-foreach/4">forEach</a>,  <a href="http://jsperf.com/bind-vs-custom">bind</a></li>
+</ul>
+<ul>
+<li><a href="http://jsperf.com/regexp-indexof-perf/16">RegExp are NOT slower than String.indexOf</a></li>
 </ul>
 
-</div>
-	</div>
-</article>
-
-<article class="archives">
-  <div class="related-posts">
-    <h2>Related Posts</h2>
-    
-      <article>
-        <h3 class="title"><a href="/blog/howto/removing-array-duplicates-javascript">Removing array duplicates in Javascript</a></h3>
-        <div class="meta">
-          <span class="tags">
+      </div>
+    </div>
+  </article>
 
 
-	<a class='category' href='/blog/cat/howto/'>HowTo</a>
-
-
-</span>
-            
-          <time datetime="2012-07-17T13:08:21+02:00" pubdate>2012-07-17</time>
-            
-        </div>
-      </article>
-    
-      <article>
-        <h3 class="title"><a href="/blog/geekery/storing-ids-manually-is-faster-than-getelementbyid">Storing IDs manually is faster than getElementById</a></h3>
-        <div class="meta">
-          <span class="tags">
-
-
-	<a class='category' href='/blog/cat/geekery/'>Geekery</a>
-
-
-</span>
-            
-          <time datetime="2012-07-17T13:08:21+02:00" pubdate>2012-07-17</time>
-            
-        </div>
-      </article>
-    
-      <article>
-        <h3 class="title"><a href="/blog/geekery/structuring-css">Structuring CSS - state of play in 2012</a></h3>
-        <div class="meta">
-          <span class="tags">
-
-
-	<a class='category' href='/blog/cat/geekery/'>Geekery</a>
-
-
-</span>
-            
-          <time datetime="2012-07-17T13:08:21+02:00" pubdate>2012-07-17</time>
-            
-        </div>
-      </article>
-    
-  </div>
-</article>
-
-
-<section id="comment">
+<!-- <section id="comment">
     <h1 class="title">Comments</h1>
     <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </div>
 </section>
 
   </div>
-	<footer id="footer" class="inner">Copyright &copy; 2016
+  -->
+  <footer id="footer" class="inner">Copyright &copy; 2016
 
-    Fabrizio (Fritz) Stelluto
+    Fritz Stelluto
 
 </footer>
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-<script src="/javascripts/slash.js"></script>
+<!--
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 
 
 <script type="text/javascript">
       var disqus_shortname = 'goto-fritz';
-      
-        
+
+
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://gotofritz.net/blog/geekery/javscript-performance-mythbuster-summary';
-        var disqus_url = 'http://gotofritz.net/blog/geekery/javscript-performance-mythbuster-summary';
+        var disqus_identifier = 'http://gotofritz.net/blog/geekery/backing-up-hard-disk-os-x/';
+        var disqus_url = 'http://gotofritz.net/blog/geekery/backing-up-hard-disk-os-x/';
         var disqus_script = 'embed.js';
-      
+
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
       dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
@@ -207,19 +124,19 @@
 
 
 
-	<script type="text/javascript">
-		var _gaq = _gaq || [];
-		_gaq.push(['_setAccount', 'UA-11254155-2']);
-		_gaq.push(['_trackPageview']);
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-11254155-2']);
+    _gaq.push(['_trackPageview']);
 
-		(function() {
-			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-		})();
-	</script>
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
 
-
+-->
 
 </body>
 </html>

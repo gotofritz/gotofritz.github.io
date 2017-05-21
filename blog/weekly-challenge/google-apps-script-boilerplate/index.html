@@ -1,633 +1,214 @@
-
 <!DOCTYPE HTML>
 <html>
 <head>
-	<meta charset="utf-8">
-	<title>A Google Apps Script boilerplate - Fabrizio (Fritz) Stelluto</title>
-	<meta name="author" content="">
-
-	
-	<meta name="description" content="This week&#8217;s challenge: distil my Google Apps Script (GAS) know-how into a Spreadsheets boilerplate, and document it. About the challenge At one &hellip;">
-	
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-	<link href="/atom.xml" rel="alternate" title="Fabrizio (Fritz) Stelluto" type="application/atom+xml">
-	<link rel="canonical" href="">
-	<link href="/favicon.ico" rel="shortcut icon">
-	<link rel="icon" href="/favicon.gif" type="image/gif" />
-	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-	
+  <meta charset="utf-8">
+  <title>A Google Apps Script boilerplate || Fritz Stelluto</title>
+  <meta name="author" content="gotofritz">
+  <meta name="description" content="I used to do a lot of GAS programming, but Google&amp;#39;s never seemed to interested in that product so I gave up. Here I document a simple boilerplate project so that I don&amp;#39;t forget how to do it.">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link href="/assets/favicon.ico" rel="shortcut icon">
+  <link rel="icon" href="/assets/favicon.gif" type="image/gif" />
+  <link href="/assets/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 </head>
 
-
 <body ontouchstart="">
-
   <header id="header" class="inner">
-<nav id="main-nav"><div>
-  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
-  <a href="/">home</a>
-  <a href="/blog/">blog</a>
-</div></nav>
-<nav id="mobile-nav">
-	<div class="alignleft menu">
-		<a class="button">Menu</a>
-		<div class="container"><div>
-  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
-  <a href="/">home</a>
-  <a href="/blog/">blog</a>
-</div></div>
-	</div>
-	<div class="alignright search">
-		<a class="button"></a>
-		<div class="container">
-			<form action="http://google.com/search" method="get">
-				<input type="text" name="q" results="0">
-				<input type="hidden" name="q" value="site:gotofritz.net">
-			</form>
-		</div>
-	</div>
-</nav>
+    <nav id="main-nav">
+      <div>
+        <a href="/">home</a>
+        <a href="/blog/">blog</a>
+      </div>
+    </nav>
 
-<nav id="sub-nav" class="alignright">
-	<form class="search" action="http://google.com/search" method="get">
-		<input class="alignright" type="text" name="q" results="0">
-		<input type="hidden" name="q" value="site:gotofritz.net">
-	</form>
-</nav>
-
-</header>
-	
-		
-	
-	<div id="content" class="inner">
-    
-    <article class="post">
-	<h1 class="title">A Google Apps Script Boilerplate</h1>
-	<div>
-		<div class="meta">
-			<div class="date">
+    <nav id="sub-nav" class="alignright">
+      <form class="search" action="http://google.com/search" method="get">
+        <input class="alignright" type="text" name="q" results="0">
+        <input type="hidden" name="q" value="site:gotofritz.net">
+      </form>
+    </nav>
+  </header>
 
 
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-12-12T13:34:25+01:00" pubdate data-updated="true">2011-12-12, Mon</time></div>
-			<div class="tags">
-
-
-	<a class='category' href='/blog/cat/weekly-challenge/'>Weekly Challenge</a>
-
-
-</div>
-			
-				<span class="comments"><a href="/blog/weekly-challenge/google-apps-script-boilerplate#disqus_thread">Comments</a></span>
-			
-		</div>
-		<div class="entry-content"><p>This week&#8217;s challenge: distil my Google Apps Script (GAS) know-how into a Spreadsheets boilerplate, and document it.</p>
-
-<!--more-->
-
-
-<h2>About the challenge</h2>
-
-<p>At one stage Google Apps Script looked very promising - I even planned <a href="/blog/tutorials/getting-started-part-1/">a whole series of GAS tutorials</a>. That was until I realised the platform is still quite unstable and, more importantly, low priority for Google.</p>
-
-<p>I still use GAS from time to time, whenever I need to exchange or format data with people who only really feel comfortable using spreadsheets. So I thought it&#8217;d be useful to crystallise the little I know into a boilerplate, perhaps adding some extra bits.</p>
-
-<p>These scripts <a href="https://github.com/gotofritz/Weekly-Challenges/tree/master/weekly-challenge-04_google-apps-script">available on GitHub</a>. You will need to create a new spreadsheet, and paste them into the script editor window (under Tools).</p>
-
-<h2>Minimal Google Apps Script boilerplate</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='gherkin'><span class='line'><span class="k">Feature:</span><span class="nf"> minimal boilerplate</span>
-</span><span class='line'><span class="nf">    In order to get some code up and running quickly</span>
-</span><span class='line'><span class="nf">    As a developer</span>
-</span><span class='line'><span class="nf">    I want the smallest possible GAS template</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
+<div id="content" class="inner">
+  <article class="post">
+    <h1 class="title">A Google Apps Script boilerplate</h1>
+    <div>
+      <div class="meta">
+        <div class="date">
+          <time datetime="2011-12-12T13:34:00+01:00" pubdate>2011-12-12</time>
+        </div>
+        <div class="tags">
+          google apps script
+        </div>
+      </div>
+      <div class="entry-content">
+    <div class="archive">This post is old, and probably obsolete</div>
+<p>I used to do a lot of GAS programming, but Google&#39;s never seemed to interested in that product so I gave up. Here I document a simple boilerplate project so that I don&#39;t forget how to do it.
+<!--more--></p>
+<h2 id="about-gas">About GAS</h2>
+<p>At one stage Google Apps Script looked very promising - I even started a whole series of tutorials (since deleted). That was until I realised the platform is still quite unstable and, more importantly, low priority for Google.</p>
+<p>I still use GAS from time to time, whenever I need to exchange or format data with people who only really feel comfortable using spreadsheets. So I thought it&#39;d be useful to crystallise the little I know into a boilerplate, perhaps adding some extra bits.</p>
+<h2 id="minimal-google-apps-script-boilerplate">Minimal Google Apps Script boilerplate</h2>
 <p>The script is <a href="https://github.com/gotofritz/Weekly-Challenges/blob/master/weekly-challenge-04_google-apps-script/minimal.js">available on GitHub</a>.</p>
+<p>Probably not everybody&#39;s idea of &#39;small&#39;, but it&#39;s the bare minimum with an example private method (one which comes useful quite often), a couple of menu entries to remind myself how to do separators, and example naming convention.</p>
+<p>There are various ways of running scripts:
+  <em> pressing the &#39;play&#39; button on the script editor
+  </em> presing the &#39;run&#39; button on the script manager (neither very user friendly)
+  <em> running scripts from triggers (onOpen, onEdit, onInstall)
+  </em> choosing an item from a custom menu created by the script
+  * clicking on a button or other UI element in a custom UI &#39;app&#39; that sits on top of the spreadsheet - typically they are made up of panels and buttons to which you can assign event handler</p>
+<p>The first two are not very user friendly. The triggers alone are not very useful - onOpen has only got permissions to run a few commands, and it is typically used to create menus and / or UI apps; onEdit is useful, but not always appropriate. So that leaves us with either a menu or a custom UI, and menus are the easiest, being simply a list of commands, each associated with a function. Also visually they are tucked away out of the way, which is nice. So that&#39;s whay I tend to use.</p>
+<pre><code>//note that these need to be above the onOpen function below
+function menu1(){ ns.menu1(); }
+function menu2(){ ns.menu2(); }
+</code></pre><p>These two lines (in a real script there may be more) define the functions used by the menu(s). Menus only accept top level functions, not object methods, not anything else - there is no way around it but starting your script with a list of functions you want your menus to call.</p>
+<p>&quot;ns&quot; is just a placeholder for any variable name to act as namespace. It could even be done Java (or GWT) style as <code>var example=example||{}; example.formatter = ... etc</code>
+Namespacing helps make your code future proof - you never know, one day Google may relent and allow script sharing (<strong>EDIT</strong> they have). Then not having a global function called &#39;format&#39;, say, would save all sort of hassle if your script is used with someone else&#39;s.</p>
+<pre><code>function onOpen() {
+    //the Google servers are in California, and sometime timezone get all messed up
+    //trying to remedy taht
+    SpreadsheetApp.getActiveSpreadsheet().setSpreadsheetTimeZone( &quot;GMT&quot; );
 
-<p>Probably not everybody&#8217;s idea of &#8216;small&#8217;, but it&#8217;s the bare minimum with an example private method (one which comes useful quite often), a couple of menu entries to remind myself how to do separators, and example naming convention.</p>
+    //this will hold the menu entrie
+    var menuEntries = [];
+    menuEntries.push({name: &quot;Entry 1&quot;, functionName: &quot;menu1&quot;});
+    //a null entry shows a divider
+    menuEntries.push(null);
+    menuEntries.push({name: &quot;Entry 2&quot;, functionName: &quot;menu2&quot;});
 
-<p>There are various ways of running scripts:</p>
+    //create the menu
+    SpreadsheetApp.getActiveSpreadsheet().addMenu( &quot;MY MENU&quot;, menuEntries );
+}
+</code></pre><p>So now I can create my menu(s). Typically I only need one, but you can create more if you want. It&#39;s rather self explanatory - you create an array of tuples and pass it, together with the menu name, to the addmenu method.</p>
+<pre><code>var ns = (function(){
 
-<ul>
-<li><p>pressing the &#8216;play&#8217; button on the script editor</p></li>
-<li><p>presing the &#8216;run&#8217; button on the script manager (neither very user friendly)</p></li>
-<li><p>running scripts from triggers (onOpen, onEdit, onInstall)</p></li>
-<li><p>choosing an item from a custom menu created by the script</p></li>
-<li><p>clicking on a button or other UI element in a custom UI &#8216;app&#8217; that sits on top of the spreadsheet - typically they are made up of panels and buttons to which you can assign event handler</p></li>
-</ul>
+// =========================================================
+// PROPERTIES
+// =========================================================
+  var spr  =  SpreadsheetApp.getActiveSpreadsheet();
+    /**
+    * VAR NAMING CONVENTION
+    * r1xxx = row for range (where first cell has ref 1,1)
+    * c1xxx = column for range (where first cell has ref 1,1)
+    * r0xxx = row for js arrays (where first cell has ref 0,0)
+    * c0xxx = column js arrays (where first cell has ref 0,0)
+    * rc1xx = a pair of range coordinates
+    * rc0xx = a pair of js coordinates
+    */
 
+  // RANGE INDICES - excel style, i.e. 1-based
+  //starting Row
+  var R1START = 1;
+  //starting column
+  var C1START = 1;
 
-<p>The first two are not very user friendly. The triggers alone are not very useful - onOpen has only got permissions to run a few commands, and it is typically used to create menus and / or UI apps; onEdit is useful, but not always appropriate. So that leaves us with either a menu or a custom UI, and menus are the easiest, being simply a list of commands, each associated with a function. Also visually they are tucked away out of the way, which is nice. So that&#8217;s whay I tend to use.</p>
+  // JS INDICES - as typically returned from range.getValues()
+  var R0End = spr.getLastRow() - 1;
+  var C0End = spr.getLastColumn() - 1;
 
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="c1">//note that these need to be above the onOpen function below</span>
-</span><span class='line'><span class="kd">function</span> <span class="nx">menu1</span><span class="p">(){</span> <span class="nx">ns</span><span class="p">.</span><span class="nx">menu1</span><span class="p">();</span> <span class="p">}</span>
-</span><span class='line'><span class="kd">function</span> <span class="nx">menu2</span><span class="p">(){</span> <span class="nx">ns</span><span class="p">.</span><span class="nx">menu2</span><span class="p">();</span> <span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>These two lines (in a real script there may be more) define the functions used by the menu(s). Menus only accept top level functions, not object methods, not anything else - there is no way around it but starting your script with a list of functions you want your menus to call.</p>
-
-<p>&#8220;ns&#8221; is just a placeholder for any variable name to act as namespace. It could even be done Java (or GWT) style as <code>var example=example||{}; example.formatter = ... etc</code>
-Namespacing helps make your code future proof - you never know, one day Google may relent and allow script sharing. Then not having a global function called &#8216;format&#8217;, say, would save all sort of hassle if your script is used with someone else&#8217;s.</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kd">function</span> <span class="nx">onOpen</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>    <span class="c1">//the Google servers are in California, and sometime timezone get all messed up</span>
-</span><span class='line'>    <span class="c1">//trying to remedy taht</span>
-</span><span class='line'>    <span class="nx">SpreadsheetApp</span><span class="p">.</span><span class="nx">getActiveSpreadsheet</span><span class="p">().</span><span class="nx">setSpreadsheetTimeZone</span><span class="p">(</span> <span class="s2">&quot;GMT&quot;</span> <span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="c1">//this will hold the menu entrie</span>
-</span><span class='line'>    <span class="kd">var</span> <span class="nx">menuEntries</span> <span class="o">=</span> <span class="p">[];</span>
-</span><span class='line'>    <span class="nx">menuEntries</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span><span class="nx">name</span><span class="o">:</span> <span class="s2">&quot;Entry 1&quot;</span><span class="p">,</span> <span class="nx">functionName</span><span class="o">:</span> <span class="s2">&quot;menu1&quot;</span><span class="p">});</span>
-</span><span class='line'>    <span class="c1">//a null entry shows a divider</span>
-</span><span class='line'>    <span class="nx">menuEntries</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
-</span><span class='line'>    <span class="nx">menuEntries</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span><span class="nx">name</span><span class="o">:</span> <span class="s2">&quot;Entry 2&quot;</span><span class="p">,</span> <span class="nx">functionName</span><span class="o">:</span> <span class="s2">&quot;menu2&quot;</span><span class="p">});</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="c1">//create the menu</span>
-</span><span class='line'>    <span class="nx">SpreadsheetApp</span><span class="p">.</span><span class="nx">getActiveSpreadsheet</span><span class="p">().</span><span class="nx">addMenu</span><span class="p">(</span> <span class="s2">&quot;MY MENU&quot;</span><span class="p">,</span> <span class="nx">menuEntries</span> <span class="p">);</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>So now I can create my menu(s). Typically I only need one, but you can create more if you want. It&#8217;s rather self explanatory - you create an array of tuples and pass it, together with the menu name, to the addmenu method.</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kd">var</span> <span class="nx">ns</span> <span class="o">=</span> <span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">// =========================================================</span>
-</span><span class='line'><span class="c1">// PROPERTIES</span>
-</span><span class='line'><span class="c1">// =========================================================</span>
-</span><span class='line'>  <span class="kd">var</span> <span class="nx">spr</span>  <span class="o">=</span>  <span class="nx">SpreadsheetApp</span><span class="p">.</span><span class="nx">getActiveSpreadsheet</span><span class="p">()</span>      <span class="c1">//shortcut</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="cm">/**</span>
-</span><span class='line'><span class="cm">     * VAR NAMING CONVENTION</span>
-</span><span class='line'><span class="cm">     * r1xxx = row for range (where first cell has ref 1,1)</span>
-</span><span class='line'><span class="cm">     * c1xxx = column for range (where first cell has ref 1,1)</span>
-</span><span class='line'><span class="cm">     * r0xxx = row for js arrays (where first cell has ref 0,0)</span>
-</span><span class='line'><span class="cm">     * c0xxx = column js arrays (where first cell has ref 0,0)</span>
-</span><span class='line'><span class="cm">     * rc1xx = a pair of range coordinates</span>
-</span><span class='line'><span class="cm">     * rc0xx = a pair of js coordinates</span>
-</span><span class='line'><span class="cm">     */</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="c1">// RANGE INDICES</span>
-</span><span class='line'>    <span class="p">,</span> <span class="nx">R1START</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1">//starting Row</span>
-</span><span class='line'>    <span class="p">,</span> <span class="nx">C1START</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1">//starting column</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="c1">// JS INDICES - as typically returned from range.getValues()</span>
-</span><span class='line'>    <span class="p">,</span> <span class="nx">r0End</span> <span class="o">=</span> <span class="nx">spr</span><span class="p">.</span><span class="nx">getLastRow</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span>
-</span><span class='line'>    <span class="p">,</span> <span class="nx">c0End</span> <span class="o">=</span> <span class="nx">spr</span><span class="p">.</span><span class="nx">getLastColumn</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="c1">//pairs of points</span>
-</span><span class='line'>    <span class="p">,</span> <span class="nx">rc1Start</span> <span class="o">=</span> <span class="p">[</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span> <span class="p">]</span>  <span class="c1">//where the value of Page name is</span>
-</span><span class='line'>    <span class="p">;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This is my namespace object, and illustrate a naming convention for variables. The naming convention is quite handy, as you are constantly mixing 0 and 1 indexed arrays and it&#8217;s good to have a reminder of which one is which. You could also use the &#8220;A1:B2&#8221; notation instead, but I find constantly building strings a nuisance.</p>
-
+  //pairs of points
+  //where the value of Page name is
+  var c1Start = [ 1, 1 ];
+</code></pre><p>This is my namespace object, and illustrate a naming convention for variables. The naming convention is quite handy, as you are constantly mixing 0 and 1 indexed arrays and it&#39;s good to have a reminder of which one is which. You could also use the &quot;A1:B2&quot; notation instead, but I find constantly building strings a nuisance.</p>
 <p>I use spr as a shortcut for SpreadsheetApp.getActiveSpreadsheet(), which is needed all the time.</p>
+<pre><code>/ =========================================================
+// (pseudo) PRIVATE METHODS
+// =========================================================
+  /**
+  * _indexOf
+  * @private
+  * goes through a sheet, doing each row. It can be limited to a range ( by rows and by cell) and finds the first occurrence of a value
+  * @param {String} findme the value to find
+  * @param {Sheet} shFindme the sheet with the range
+  * @param {Number} rFindmeFrom the range in which to search, default 1
+  * @param {Number} cFindmeFrom the range in which to search, default 1
+  * @param {Number} cFindmeTo the range in which to search, default getLastRow
+  * @param {Number} cFindme the range in which to search, default getLastColumn
+  * @return {Array} the row and column indexes of the cell, -1, -1 if not found
+  */
+  function  _indexOf( findme, shFindme, rFindmeFrom, cFindmeFrom, rFindmeTo, cFindmeTo ){
+    var r, c;   //coords
+    var r2, c2; //loop bounds
+    var grid;   //gets the range as js multi array
 
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="err">/ =========================================================</span>
-</span><span class='line'><span class="c1">// (pseudo) PRIVATE METHODS</span>
-</span><span class='line'><span class="c1">// =========================================================</span>
-</span><span class='line'>  <span class="cm">/**</span>
-</span><span class='line'><span class="cm">   * _indexOf</span>
-</span><span class='line'><span class="cm">   * @private</span>
-</span><span class='line'><span class="cm">   * goes through a sheet, doing each row. It can be limited to a range ( by rows and by cell) and finds the first occurrence of a value</span>
-</span><span class='line'><span class="cm">   * @param {String} findme the value to find</span>
-</span><span class='line'><span class="cm">   * @param {Sheet} shFindme the sheet with the range</span>
-</span><span class='line'><span class="cm">   * @param {Number} rFindmeFrom the range in which to search, default 1</span>
-</span><span class='line'><span class="cm">   * @param {Number} cFindmeFrom the range in which to search, default 1</span>
-</span><span class='line'><span class="cm">   * @param {Number} cFindmeTo the range in which to search, default getLastRow</span>
-</span><span class='line'><span class="cm">   * @param {Number} cFindme the range in which to search, default getLastColumn</span>
-</span><span class='line'><span class="cm">   * @return {Array} the row and column indexes of the cell, -1, -1 if not found</span>
-</span><span class='line'><span class="cm">   */</span>
-</span><span class='line'>  <span class="kd">function</span>  <span class="nx">_indexOf</span><span class="p">(</span> <span class="nx">findme</span><span class="p">,</span> <span class="nx">shFindme</span><span class="p">,</span> <span class="nx">rFindmeFrom</span><span class="p">,</span> <span class="nx">cFindmeFrom</span><span class="p">,</span> <span class="nx">rFindmeTo</span><span class="p">,</span> <span class="nx">cFindmeTo</span> <span class="p">){</span>
-</span><span class='line'>    <span class="kd">var</span> <span class="nx">r</span><span class="p">,</span> <span class="nx">c</span>  <span class="c1">//coords</span>
-</span><span class='line'>      <span class="p">,</span> <span class="nx">r2</span><span class="p">,</span> <span class="nx">c2</span> <span class="c1">//loop bounds</span>
-</span><span class='line'>      <span class="p">,</span> <span class="nx">grid</span>  <span class="c1">//gets the range as js multi array</span>
-</span><span class='line'>      <span class="p">;</span>
-</span><span class='line'>    <span class="k">if</span><span class="p">(</span> <span class="o">!</span><span class="nx">shFindme</span> <span class="p">){</span>
-</span><span class='line'>      <span class="k">return</span> <span class="p">[</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span> <span class="p">];</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>    <span class="nx">rFindmeFrom</span> <span class="o">||</span> <span class="p">(</span> <span class="nx">rFindmeFrom</span> <span class="o">=</span> <span class="mi">1</span> <span class="p">);</span>
-</span><span class='line'>    <span class="nx">cFindmeFrom</span> <span class="o">||</span> <span class="p">(</span> <span class="nx">cFindmeFrom</span> <span class="o">=</span> <span class="mi">1</span> <span class="p">);</span>
-</span><span class='line'>    <span class="nx">rFindmeTo</span> <span class="o">||</span> <span class="p">(</span> <span class="nx">rFindmeTo</span> <span class="o">=</span> <span class="nx">shFindme</span><span class="p">.</span><span class="nx">getLastRow</span><span class="p">()</span> <span class="p">);</span>
-</span><span class='line'>    <span class="nx">cFindmeTo</span> <span class="o">||</span> <span class="p">(</span> <span class="nx">cFindmeTo</span> <span class="o">=</span> <span class="nx">shFindme</span><span class="p">.</span><span class="nx">getLastColumn</span><span class="p">()</span> <span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="nx">grid</span> <span class="o">=</span> <span class="nx">shFindme</span><span class="p">.</span><span class="nx">getRange</span><span class="p">(</span> <span class="nx">rFindmeFrom</span><span class="p">,</span> <span class="nx">cFindmeFrom</span><span class="p">,</span> <span class="nx">rFindmeTo</span><span class="p">,</span> <span class="nx">cFindmeTo</span> <span class="p">).</span><span class="nx">getValues</span><span class="p">();</span>
-</span><span class='line'>    <span class="k">for</span><span class="p">(</span> <span class="nx">r</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">r2</span> <span class="o">=</span> <span class="nx">grid</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">r</span> <span class="o">&lt;</span> <span class="nx">r2</span><span class="p">;</span> <span class="nx">r</span><span class="o">++</span> <span class="p">){</span>
-</span><span class='line'>      <span class="k">for</span><span class="p">(</span> <span class="nx">c</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">c2</span> <span class="o">=</span> <span class="nx">grid</span><span class="p">[</span><span class="nx">r</span><span class="p">].</span><span class="nx">length</span><span class="p">;</span> <span class="nx">c</span> <span class="o">&lt;</span> <span class="nx">c2</span><span class="p">;</span> <span class="nx">c</span><span class="o">++</span> <span class="p">){</span>
-</span><span class='line'>        <span class="k">if</span><span class="p">(</span> <span class="nx">grid</span><span class="p">[</span><span class="nx">r</span><span class="p">][</span><span class="nx">c</span><span class="p">]</span> <span class="o">===</span> <span class="nx">findme</span> <span class="p">){</span>
-</span><span class='line'>          <span class="k">return</span> <span class="p">[</span> <span class="nx">r</span><span class="o">+</span><span class="nx">rFindmeFrom</span><span class="p">,</span> <span class="nx">c</span><span class="o">+</span><span class="nx">cFindmeFrom</span> <span class="p">];</span>
-</span><span class='line'>        <span class="p">}</span>
-</span><span class='line'>      <span class="p">}</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>    <span class="k">return</span> <span class="p">[</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span> <span class="p">];</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+    if( !shFindme ){
+      return [ -1, -1 ];
+    }
+    rFindmeFrom || ( rFindmeFrom = 1 );
+    cFindmeFrom || ( cFindmeFrom = 1 );
+    rFindmeTo || ( rFindmeTo = shFindme.getLastRow() );
+    cFindmeTo || ( cFindmeTo = shFindme.getLastColumn() );
+
+    grid = shFindme.getRange( rFindmeFrom, cFindmeFrom, rFindmeTo, cFindmeTo ).getValues();
+    for( r = 0, r2 = grid.length; r &lt; r2; r++ ){
+      for( c = 0, c2 = grid[r].length; c &lt; c2; c++ ){
+        if( grid[r][c] === findme ){
+          return [ r+rFindmeFrom, c+cFindmeFrom ];
+        }
+      }
+    }
+    return [ -1, -1 ];
+  }
+</code></pre><p>The namespace object keeps some methods as &#39;private&#39;, which is just a best practice.</p>
+<p>_indexOf above is an example &quot;private&quot; method. It is a utility function to search a value within a range and return a pair of indices for the first occurrence.</p>
+<pre><code>/ =========================================================
+// PUBLIC METHODS
+// =========================================================
+    var facade = {
+
+      /**
+      * menu1
+      * only doing JavaDoc from habit
+      */
+      menu1 : function(){
+        Browser.msgBox( &quot;Entry 1 works&quot;);
+      },
+
+      /**
+      * menu2
+      * only doing JavaDoc from habit
+      */
+      menu2 : function(){
+        Browser.msgBox( &quot;Entry 2 works too&quot;);
+      }
+
+  }
+  return facade;
+
+})();
+</code></pre><p>Finally, the public method - these are the ones associated with the menu at the beginning of the script.</p>
+
+      </div>
+    </div>
+  </article>
 
 
-<p>The namespace object keeps some methods as &#8216;private&#8217;, which is just a best practice.</p>
-
-<p>_indexOf above is an example &#8220;private&#8221; method. It is a utility function to search a value within a range and return a pair of indices for the first occurrence.</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="err">/ =========================================================</span>
-</span><span class='line'><span class="c1">// PUBLIC METHODS</span>
-</span><span class='line'><span class="c1">// =========================================================</span>
-</span><span class='line'>    <span class="kd">var</span> <span class="nx">facade</span> <span class="o">=</span> <span class="p">{</span>
-</span><span class='line'>
-</span><span class='line'>      <span class="cm">/**</span>
-</span><span class='line'><span class="cm">       * menu1</span>
-</span><span class='line'><span class="cm">       * only doing JavaDoc from habit</span>
-</span><span class='line'><span class="cm">       */</span>
-</span><span class='line'>      <span class="nx">menu1</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(){</span>
-</span><span class='line'>        <span class="nx">Browser</span><span class="p">.</span><span class="nx">msgBox</span><span class="p">(</span> <span class="s2">&quot;Entry 1 works&quot;</span><span class="p">);</span>
-</span><span class='line'>      <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>      <span class="cm">/**</span>
-</span><span class='line'><span class="cm">       * menu2</span>
-</span><span class='line'><span class="cm">       * only doing JavaDoc from habit</span>
-</span><span class='line'><span class="cm">       */</span>
-</span><span class='line'>     <span class="p">,</span> <span class="nx">menu2</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(){</span>
-</span><span class='line'>        <span class="nx">Browser</span><span class="p">.</span><span class="nx">msgBox</span><span class="p">(</span> <span class="s2">&quot;Entry 2 works too&quot;</span><span class="p">);</span>
-</span><span class='line'>      <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'>  <span class="k">return</span> <span class="nx">facade</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'> <span class="p">})();</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Finally, the public method - these are the ones associated with the menu at the beginning of the script.</p>
-
-<h2>GAS boilerplate with version check</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='gherkin'><span class='line'><span class="k">Feature:</span><span class="nf">boilerplate with version check</span>
-</span><span class='line'><span class="nf">    In order to ensure every copy of a common script is up to date</span>
-</span><span class='line'><span class="nf">    As a developer</span>
-</span><span class='line'><span class="nf">    I want a way to compare version of the script against a master version</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>The script is <a href="https://github.com/gotofritz/Weekly-Challenges/blob/master/weekly-challenge-04_google-apps-script/minimal-versioned.js">available on GitHub</a>.</p>
-
-<p><del>Since scripts can&#8217;t be shared</del>
- <strong>[UPDATE: they can now]</strong>, I find myself copying and pasting them into inidividual spreadsheets all the time. Which is ok, except that versioning becomes a pain. There are two ways around this. They both rely on GAS ability to open a spreadsheet from another.</p>
-
-<p>It has been suggested you can save a script as text inside one of the cells of a spreadsheet, then read that cell from a script in another spreadsheet, and eval it. Personally I am not sure Google will allow that to continue - they made it clear one of the reason GAS development is moving at snail&#8217;s pace is security concerns. And also, there have been reports of large scripts passed that way failing randomly.</p>
-
-<p>What I do instead is to keep a master spreadsheet with a version string for all the scripts I write, and then have each of the script check their own version number against it before it runs. It is surprisingly easy to do.</p>
-
-<p>First of all, here&#8217;s an example spreadsheet - version number use <a href="http://semver.org/">semantic versioning</a>
-<img src="/blog/wp-content/uploads/master.png" alt="" /></p>
-
-<p>The first thing to do is tro create such a document, then decide on a unique label for the script you&#8217;ll be working on. Then add an entry with the script label in the first column, and the current version (typically 0.1.0) in the second.</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="c1">//REPLACE WITH YOUR VALUES</span>
-</span><span class='line'><span class="kd">var</span> <span class="nx">masterKey</span> <span class="o">=</span> <span class="s2">&quot;0Avx75VC2FEmAdEVmWl9uQkRuVjlxc0tmVDFSQ2wtaFE&quot;</span> <span class="c1">//the key for your master document, the one with version info</span>
-</span><span class='line'>  <span class="p">,</span> <span class="nx">thisVersion</span> <span class="o">=</span> <span class="s2">&quot;0.1.0&quot;</span>  <span class="c1">//the version of this script</span>
-</span><span class='line'>  <span class="p">,</span> <span class="nx">thisID</span> <span class="o">=</span> <span class="s2">&quot;script&quot;</span>   <span class="c1">//label to find this script in the master version document</span>
-</span><span class='line'>  <span class="p">;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>These three variables are used for locating and comparing the version number. masterKey is the key of the spreadsheet - to get it go to the master spreadsheet, look at the url, there should be a bit that looks like: key=0Avx75VC2FEmAdEVmWl9uQkRuVjlxc0tmVDFSQ2wtaFE&hl;. Copy the part between the = and the &amp;hl.; Incidentally, you can also expose the id from within a script, the API offers a <a href="http://code.google.com/googleapps/appsscript/class_spreadsheet.html#getId">getId()</a> method.
-thisVersion and thisID should be selfexplanatory, they are two cells in the master spreadsheet you have just created.</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="c1">//note that these need to be above the onOpen function below</span>
-</span><span class='line'><span class="kd">function</span> <span class="nx">menu1</span><span class="p">(){</span> <span class="k">if</span><span class="p">(</span> <span class="nx">gotofritz</span><span class="p">.</span><span class="nx">utils</span><span class="p">.</span><span class="nx">isUpToDate</span><span class="p">(</span> <span class="nx">masterKey</span><span class="p">,</span> <span class="nx">thisID</span><span class="p">,</span> <span class="nx">thisVersion</span> <span class="p">)</span> <span class="p">){</span> <span class="nx">ns</span><span class="p">.</span><span class="nx">menu1</span><span class="p">();</span> <span class="p">}</span> <span class="p">}</span>
-</span><span class='line'><span class="kd">function</span> <span class="nx">menu2</span><span class="p">(){</span> <span class="k">if</span><span class="p">(</span> <span class="nx">gotofritz</span><span class="p">.</span><span class="nx">utils</span><span class="p">.</span><span class="nx">isUpToDate</span><span class="p">(</span> <span class="nx">masterKey</span><span class="p">,</span> <span class="nx">thisID</span><span class="p">,</span> <span class="nx">thisVersion</span> <span class="p">)</span> <span class="p">){</span> <span class="nx">ns</span><span class="p">.</span><span class="nx">menu2</span><span class="p">();</span> <span class="p">}</span> <span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>A couple of changes here. First of all, I have created a namespaced utils class, gotofritz.utils, which I keep separate from the main object. The class has a version check function, which only runs a meny entry if the script is up to date. It is rather inelegant to have the checks within the function themselves, not to mention inefficient, but other alternatives include having to declare the utils class at the top of the script, and I rather leave it tucked away at the bottom. Caching the results of the isUpToDate check would also be a good idea, but in practice it&#8217;s not something I&#8217;d need. Normally I load a spreadsheet, run a couple of commands, then I am done. Caching is not something I need, but if you do then it shouldn&#8217;t be too hard to add.</p>
-
-<p>The onOpen function hasn&#8217;t changed. One thing I have changed is removing the private _indexOf method and add it to the utils class. This makes sense, not to mention that the isUpToDate method also needs to use it.</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kd">var</span> <span class="nx">gotofritz</span> <span class="o">=</span> <span class="nx">gotofritz</span> <span class="o">||</span> <span class="p">{}</span>
-</span><span class='line'><span class="nx">gotofritz</span><span class="p">.</span><span class="nx">utils</span> <span class="o">=</span> <span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="c1">//before checking other scripts, I need to check this object itself is up to date</span>
-</span><span class='line'>    <span class="kd">var</span> <span class="nx">utilsMasterKey</span> <span class="o">=</span> <span class="s2">&quot;0Avx75VC2FEmAdEVmWl9uQkRuVjlxc0tmVDFSQ2wtaFE&quot;</span>
-</span><span class='line'>      <span class="p">,</span> <span class="nx">utilsVersion</span> <span class="o">=</span> <span class="s2">&quot;0.1.0&quot;</span>
-</span><span class='line'>      <span class="p">,</span> <span class="nx">utilsID</span> <span class="o">=</span> <span class="s2">&quot;gotofritz.utils&quot;</span>
-</span><span class='line'>      <span class="p">,</span> <span class="nx">facade</span> <span class="c1">//wraps public nethods</span>
-</span><span class='line'>      <span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">//code....</span>
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'>      <span class="k">if</span><span class="p">(</span> <span class="nx">facade</span><span class="p">.</span><span class="nx">isUpToDate</span><span class="p">(</span> <span class="nx">utilsMasterKey</span><span class="p">,</span> <span class="nx">utilsID</span><span class="p">,</span> <span class="nx">utilsVersion</span> <span class="p">)</span> <span class="p">){</span>
-</span><span class='line'>          <span class="k">return</span> <span class="nx">facade</span><span class="p">;</span>
-</span><span class='line'>      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span><span class='line'>          <span class="k">return</span> <span class="p">{</span>
-</span><span class='line'>            <span class="nx">isUpToDate</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(){</span> <span class="nx">Browser</span><span class="p">.</span><span class="nx">msgBox</span><span class="p">(</span> <span class="s2">&quot;please update gotofritz.utils&quot;</span> <span class="p">);</span> <span class="k">return</span> <span class="kc">false</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'>          <span class="p">}</span>
-</span><span class='line'>      <span class="p">}</span>
-</span><span class='line'>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>The new utils class is namespaced as gotofritz - note that using net.gotofrit or com.example won&#8217;t work, both net and com are reserved words.
-Also note that before checking anything else, the utils class checks its own version. If it&#8217;s not up to date it simply doesn&#8217;t initialise all the methods. I suppose one could have all the methods overwritten, but again it&#8217;s not something I really need in practice.</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="cm">/**</span>
-</span><span class='line'><span class="cm">       * isUpToDate</span>
-</span><span class='line'><span class="cm">       * checks a version number against one in a master document</span>
-</span><span class='line'><span class="cm">       * @param {String} masterKey the key of the master document</span>
-</span><span class='line'><span class="cm">       * @param {String} thisID a label for this script to allow us to find it in the master spreadsheet</span>
-</span><span class='line'><span class="cm">       * @param {String} thisVersion the semantic versioning number</span>
-</span><span class='line'><span class="cm">       * @return Booelan whetner thisVersion is loewer or equal than the one in the master document</span>
-</span><span class='line'><span class="cm">       */</span>
-</span><span class='line'>      <span class="nx">isUpToDate</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">masterKey</span><span class="p">,</span> <span class="nx">thisID</span><span class="p">,</span> <span class="nx">thisVersion</span> <span class="p">){</span>
-</span><span class='line'>
-</span><span class='line'>          <span class="kd">var</span> <span class="nx">shMaster</span> <span class="o">=</span> <span class="nx">SpreadsheetApp</span><span class="p">.</span><span class="nx">openById</span><span class="p">(</span> <span class="nx">masterKey</span> <span class="p">).</span><span class="nx">getActiveSheet</span><span class="p">()</span>
-</span><span class='line'>            <span class="p">,</span> <span class="nx">coords</span> <span class="o">=</span> <span class="nx">facade</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span> <span class="nx">thisID</span><span class="p">,</span> <span class="nx">shMaster</span> <span class="p">)</span>
-</span><span class='line'>            <span class="p">,</span> <span class="nx">latestVersion</span>
-</span><span class='line'>            <span class="p">,</span> <span class="nx">aLatestVersion</span><span class="p">,</span> <span class="nx">aThisVersion</span>  <span class="c1">//used to compare the infividual components A.B.C in the version number</span>
-</span><span class='line'>            <span class="p">,</span> <span class="nx">found</span> <span class="o">=</span> <span class="kc">false</span>
-</span><span class='line'>            <span class="p">,</span> <span class="nx">errorMsg</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-</span><span class='line'>            <span class="p">;</span>
-</span><span class='line'>          <span class="k">if</span><span class="p">(</span> <span class="o">-</span><span class="mi">1</span> <span class="o">===</span> <span class="nx">coords</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">){</span>
-</span><span class='line'>            <span class="nx">errorMsg</span> <span class="o">=</span> <span class="s2">&quot;Could not compare &quot;</span> <span class="o">+</span> <span class="nx">thisID</span> <span class="o">+</span> <span class="s2">&quot; with master version: label not found&quot;</span><span class="p">;</span>
-</span><span class='line'>          <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span><span class='line'>            <span class="nx">latestVersion</span> <span class="o">=</span> <span class="nx">shMaster</span><span class="p">.</span><span class="nx">getRange</span><span class="p">(</span> <span class="nx">coords</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="o">+</span><span class="nx">coords</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="p">).</span><span class="nx">getValue</span><span class="p">();</span>
-</span><span class='line'>            <span class="k">if</span><span class="p">(</span> <span class="s2">&quot;&quot;</span> <span class="o">!==</span> <span class="nx">latestVersion</span> <span class="p">){</span>
-</span><span class='line'>              <span class="nx">aLatestVersion</span> <span class="o">=</span> <span class="nb">String</span><span class="p">(</span> <span class="nx">latestVersion</span> <span class="p">).</span><span class="nx">split</span><span class="p">(</span> <span class="s2">&quot;.&quot;</span> <span class="p">);</span>
-</span><span class='line'>              <span class="nx">aThisVersion</span> <span class="o">=</span> <span class="nb">String</span><span class="p">(</span> <span class="nx">thisVersion</span> <span class="p">).</span><span class="nx">split</span><span class="p">(</span> <span class="s2">&quot;.&quot;</span> <span class="p">);</span>
-</span><span class='line'>              <span class="k">if</span><span class="p">(</span> <span class="mi">3</span> <span class="o">===</span> <span class="nx">aLatestVersion</span><span class="p">.</span><span class="nx">length</span> <span class="o">&amp;&amp;</span> <span class="mi">3</span> <span class="o">===</span> <span class="nx">aThisVersion</span><span class="p">.</span><span class="nx">length</span> <span class="p">){</span>
-</span><span class='line'>                <span class="k">if</span><span class="p">(</span> <span class="p">(</span> <span class="o">+</span><span class="nx">aLatestVersion</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="o">+</span><span class="nx">aThisVersion</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span> <span class="o">+</span><span class="nx">aLatestVersion</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="o">+</span><span class="nx">aThisVersion</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="p">)</span>  <span class="o">&amp;&amp;</span> <span class="p">(</span> <span class="o">+</span><span class="nx">aLatestVersion</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="o">+</span><span class="nx">aThisVersion</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="p">)</span> <span class="p">){</span>
-</span><span class='line'>                  <span class="nx">found</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
-</span><span class='line'>                <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span><span class='line'>                  <span class="nx">errorMsg</span> <span class="o">=</span> <span class="s2">&quot;Your version is out of date. Please update &quot;</span><span class="o">+</span><span class="nx">thisID</span> <span class="o">+</span><span class="s2">&quot; from the master spreadsheet&quot;</span><span class="p">;</span>
-</span><span class='line'>                <span class="p">}</span>
-</span><span class='line'>              <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span><span class='line'>                <span class="nx">errorMsg</span> <span class="o">=</span> <span class="s2">&quot;Version number in wrong format. Master:&quot;</span> <span class="o">+</span> <span class="nx">latestVersion</span> <span class="o">+</span><span class="s2">&quot;, this: &quot;</span> <span class="o">+</span> <span class="nx">thisVersion</span><span class="p">;</span>
-</span><span class='line'>              <span class="p">}</span>
-</span><span class='line'>            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span><span class='line'>              <span class="nx">errorMsg</span> <span class="o">=</span> <span class="s2">&quot;Could not find a version number for &quot;</span> <span class="o">+</span> <span class="nx">thisID</span><span class="p">;</span>
-</span><span class='line'>            <span class="p">}</span>
-</span><span class='line'>          <span class="p">}</span>
-</span><span class='line'>          <span class="k">if</span><span class="p">(</span> <span class="o">!</span><span class="nx">found</span> <span class="p">){</span>
-</span><span class='line'>            <span class="nx">Browser</span><span class="p">.</span><span class="nx">msgBox</span><span class="p">(</span> <span class="nx">errorMsg</span> <span class="p">);</span>
-</span><span class='line'>          <span class="p">}</span>
-</span><span class='line'>          <span class="k">return</span> <span class="nx">found</span><span class="p">;</span>
-</span><span class='line'>      <span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>isUpToDate is quite simple and self-explanatory. Note that the indexOf method is used to locate the version number in the master document.</p>
-
-<h2>GAS boilerplate with UI.app</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='gherkin'><span class='line'><span class="k">Feature:</span><span class="nf">boilerplate with UI.app</span>
-</span><span class='line'><span class="nf">    In order to see the possibilities</span>
-</span><span class='line'><span class="nf">    As a developer</span>
-</span><span class='line'><span class="nf">    I want to create a new UI interface to a spreadsheet</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This is too long and will need its own weekly challenge.</p>
-
-<h2>Challenge 66% complete</h2>
-
-<p>Basically I managed to polish all the bits of scripts I had into a template, but didn&#8217;t have enough time to learn new stuff.</p>
-</div>
-	</div>
-</article>
-
-
-<section id="comment">
+<!-- <section id="comment">
     <h1 class="title">Comments</h1>
     <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </div>
 </section>
 
   </div>
-	<footer id="footer" class="inner">Copyright &copy; 2016
+  -->
+  <footer id="footer" class="inner">Copyright &copy; 2016
 
-    Fabrizio (Fritz) Stelluto
+    Fritz Stelluto
 
 </footer>
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-<script src="/javascripts/slash.js"></script>
+<!--
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 
 
 <script type="text/javascript">
       var disqus_shortname = 'goto-fritz';
-      
-        
+
+
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://gotofritz.net/blog/weekly-challenge/google-apps-script-boilerplate';
-        var disqus_url = 'http://gotofritz.net/blog/weekly-challenge/google-apps-script-boilerplate';
+        var disqus_identifier = 'http://gotofritz.net/blog/geekery/backing-up-hard-disk-os-x/';
+        var disqus_url = 'http://gotofritz.net/blog/geekery/backing-up-hard-disk-os-x/';
         var disqus_script = 'embed.js';
-      
+
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
       dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
@@ -637,19 +218,19 @@ Also note that before checking anything else, the utils class checks its own ver
 
 
 
-	<script type="text/javascript">
-		var _gaq = _gaq || [];
-		_gaq.push(['_setAccount', 'UA-11254155-2']);
-		_gaq.push(['_trackPageview']);
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-11254155-2']);
+    _gaq.push(['_trackPageview']);
 
-		(function() {
-			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-		})();
-	</script>
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
 
-
+-->
 
 </body>
 </html>

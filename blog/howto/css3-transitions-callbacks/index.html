@@ -1,281 +1,109 @@
-
 <!DOCTYPE HTML>
 <html>
 <head>
-	<meta charset="utf-8">
-	<title>CSS3 transitions callbacks - Fabrizio (Fritz) Stelluto</title>
-	<meta name="author" content="">
-
-	
-	<meta name="description" content="CSS3 transitions fire off a TransitionEnd event when they end, so that you can attach a Javascript handler to it. The only (minor) inconvenient is &hellip;">
-	
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-	<link href="/atom.xml" rel="alternate" title="Fabrizio (Fritz) Stelluto" type="application/atom+xml">
-	<link rel="canonical" href="">
-	<link href="/favicon.ico" rel="shortcut icon">
-	<link rel="icon" href="/favicon.gif" type="image/gif" />
-	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-	
+  <meta charset="utf-8">
+  <title>CSS3 transitions callbacks || Fritz Stelluto</title>
+  <meta name="author" content="gotofritz">
+  <meta name="description" content="CSS3 transitions fire off a TransitionEnd event when they end, so that you can attach a Javascript handler to it. The only (minor) inconvenient is that the event takes different names depending on the platform.">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link href="/assets/favicon.ico" rel="shortcut icon">
+  <link rel="icon" href="/assets/favicon.gif" type="image/gif" />
+  <link href="/assets/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 </head>
 
-
 <body ontouchstart="">
-
   <header id="header" class="inner">
-<nav id="main-nav"><div>
-  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
-  <a href="/">home</a>
-  <a href="/blog/">blog</a>
-</div></nav>
-<nav id="mobile-nav">
-	<div class="alignleft menu">
-		<a class="button">Menu</a>
-		<div class="container"><div>
-  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
-  <a href="/">home</a>
-  <a href="/blog/">blog</a>
-</div></div>
-	</div>
-	<div class="alignright search">
-		<a class="button"></a>
-		<div class="container">
-			<form action="http://google.com/search" method="get">
-				<input type="text" name="q" results="0">
-				<input type="hidden" name="q" value="site:gotofritz.net">
-			</form>
-		</div>
-	</div>
-</nav>
+    <nav id="main-nav">
+      <div>
+        <a href="/">home</a>
+        <a href="/blog/">blog</a>
+      </div>
+    </nav>
 
-<nav id="sub-nav" class="alignright">
-	<form class="search" action="http://google.com/search" method="get">
-		<input class="alignright" type="text" name="q" results="0">
-		<input type="hidden" name="q" value="site:gotofritz.net">
-	</form>
-</nav>
-
-</header>
-	
-		
-	
-	<div id="content" class="inner">
-    
-    <article class="post">
-	<h1 class="title">CSS3 Transitions Callbacks</h1>
-	<div>
-		<div class="meta">
-			<div class="date">
+    <nav id="sub-nav" class="alignright">
+      <form class="search" action="http://google.com/search" method="get">
+        <input class="alignright" type="text" name="q" results="0">
+        <input type="hidden" name="q" value="site:gotofritz.net">
+      </form>
+    </nav>
+  </header>
 
 
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-07-08T12:38:38+02:00" pubdate data-updated="true">2011-07-08, Fri</time></div>
-			<div class="tags">
-
-
-	<a class='category' href='/blog/cat/howto/'>HowTo</a>
-
-
-</div>
-			
-				<span class="comments"><a href="/blog/howto/css3-transitions-callbacks#disqus_thread">Comments</a></span>
-			
-		</div>
-		<div class="entry-content"><p>CSS3 transitions fire off a TransitionEnd event when they end, so that you can attach a Javascript handler to it. The only (minor) inconvenient is that the event takes different names depending on the platform.</p>
-
-<!--more-->
-
-
-<h2>Different event names on different browsers</h2>
-
-<p>The events names are &#8216;transitionend&#8217; (FF), &#8216;OTransitionEnd&#8217; (Opera), &#8216;webkitTransitionEnd&#8217; (Webkit). IE9 and lower do not support this, although there are <a href="http://blogs.msdn.com/b/ie/archive/2011/04/12/native-html5-first-ie10-platform-preview-available-for-download.aspx">vague promises IE10 will</a>.</p>
-
+<div id="content" class="inner">
+  <article class="post">
+    <h1 class="title">CSS3 transitions callbacks</h1>
+    <div>
+      <div class="meta">
+        <div class="date">
+          <time datetime="2011-07-08T12:38:00+02:00" pubdate>2011-07-08</time>
+        </div>
+        <div class="tags">
+          css3,
+          javascript
+        </div>
+      </div>
+      <div class="entry-content">
+    <div class="archive">This post is old, and probably obsolete</div>
+<p>CSS3 transitions fire off a TransitionEnd event when they end, so that you can attach a Javascript handler to it. The only (minor) inconvenient is that the event takes different names depending on the platform.
+<!--more--></p>
+<h2 id="different-event-names-on-different-browsers">Different event names on different browsers</h2>
+<p>The events names are &#39;transitionend&#39; (FF), &#39;OTransitionEnd&#39; (Opera), &#39;webkitTransitionEnd&#39; (Webkit). IE9 and lower do not support this, although there are <a href="http://blogs.msdn.com/b/ie/archive/2011/04/12/native-html5-first-ie10-platform-preview-available-for-download.aspx">vague promises IE10 will</a>.</p>
 <p>The easiest but less elegant approach would be to add event handlers for all of the above cases - in vanilla Javascript:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kd">var</span> <span class="nx">el</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span> <span class="s2">&quot;...&quot;</span> <span class="p">);</span> <span class="c1">//some element(s)</span>
-</span><span class='line'><span class="nx">el</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span> <span class="s1">&#39;webkitTransitionEnd&#39;</span><span class="p">,</span> <span class="nx">onTransitionEnd</span><span class="p">,</span> <span class="kc">false</span> <span class="p">);</span>
-</span><span class='line'><span class="nx">el</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span> <span class="s1">&#39;transitionend&#39;</span><span class="p">,</span> <span class="nx">onTransitionEnd</span><span class="p">,</span> <span class="kc">false</span> <span class="p">);</span>
-</span><span class='line'><span class="nx">el</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span> <span class="s1">&#39;OTransitionEnd&#39;</span><span class="p">,</span> <span class="nx">onTransitionEnd</span><span class="p">,</span> <span class="kc">false</span> <span class="p">);</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Or one can use a sniffer to determine which event name to use</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kd">var</span> <span class="nx">onTransitionEnd</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span> <span class="nx">e</span> <span class="p">){</span> <span class="nx">alert</span><span class="p">(</span> <span class="s1">&#39;TRANSITION FINISHED&#39;</span> <span class="p">);}</span>
-</span><span class='line'>  <span class="p">,</span> <span class="nx">eventName</span>       <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">webkitBorderRadius</span><span class="o">?</span>
-</span><span class='line'>                        <span class="s2">&quot;webkitTransitionEnd&quot;</span><span class="o">:</span>
-</span><span class='line'>                        <span class="s2">&quot;transitionend&quot;</span>
-</span><span class='line'>  <span class="p">;</span>
-</span><span class='line'><span class="nx">el</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span> <span class="nx">eventName</span><span class="p">,</span> <span class="nx">onTransitionEnd</span><span class="p">,</span> <span class="kc">false</span> <span class="p">);</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>In jQuery</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kd">var</span> <span class="nx">onTransitionEnd</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span> <span class="nx">e</span> <span class="p">){</span> <span class="nx">alert</span><span class="p">(</span> <span class="s1">&#39;TRANSITION FINISHED&#39;</span> <span class="p">);}</span>
-</span><span class='line'>  <span class="p">,</span> <span class="nx">eventName</span>       <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">browser</span><span class="p">.</span><span class="nx">webkit</span><span class="o">?</span>
-</span><span class='line'>                        <span class="s2">&quot;webkitTransitionEnd&quot;</span><span class="o">:</span>
-</span><span class='line'>                        <span class="s2">&quot;transitionend&quot;</span>
-</span><span class='line'>  <span class="p">;</span>
-</span><span class='line'><span class="nx">$</span><span class="p">(</span> <span class="nb">document</span><span class="p">.</span><span class="nx">body</span> <span class="p">).</span><span class="nx">on</span><span class="p">(</span> <span class="nx">eventName</span><span class="p">,</span> <span class="nx">onTransitionEnd</span> <span class="p">);</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre><code>var el = document.querySelector( &quot;...&quot; ); //some element(s)
+el.addEventListener(webkitTransitionEnd&#39;, onTransitionEnd, false );
+el.addEventListener(transitionend&#39;, onTransitionEnd, false );
+el.addEventListener(OTransitionEnd&#39;, onTransitionEnd, false );
+</code></pre><p>Or one can use a sniffer to determine which event name to use</p>
+<pre><code>var onTransitionEnd = function (e){ alert(&#39;TRANSITION FINISHED&#39;); };
+var eventName = document.body.style.webkitBorderRadius
+  ? &quot;webkitTransitionEnd&quot;
+  : &quot;transitionend&quot;;
+el.addEventListener(eventName, onTransitionEnd, false);
+</code></pre><p>In jQuery</p>
+<pre><code>var onTransitionEnd = function (e){ alert(&#39;TRANSITION FINISHED&#39;); };
+var eventName = document.body.style.webkitBorderRadius
+  ? &quot;webkitTransitionEnd&quot;
+  : &quot;transitionend&quot;;
+$( document.body ).on( eventName, onTransitionEnd );
+</code></pre><h2 id="fallback-when-css-transitions-are-not-available">Fallback when CSS transitions are not available</h2>
+<p>Of course we can&#39;t just ignore IE - they are (still!) the most used web browser out there. My preferred strategy is to use modernizr as a sniffer, and fallback on your framework&#39;s animation methods if not supported.</p>
+<pre><code>if( Modernizr.csstransitions ) {
+  //use them if available
+} else {
+  //use your preferred js animation functions
+}
+</code></pre>
+      </div>
+    </div>
+  </article>
 
 
-<h2>Firing the handler after the first event only</h2>
-
-<p>The code above will fire off every time the transition ends. If you want it to hapen just the first time, you&#8217;ll have to unbind the event handler after you fire it. In jQuery you can just use the method .one instead of .bind, which automatically unbinds itself. With other frameworks, for example dojo, you need to unbind it manually</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kd">var</span> <span class="nx">el</span> <span class="o">=</span> <span class="nx">dojo</span><span class="p">....</span> <span class="c1">//some element(s)</span>
-</span><span class='line'>  <span class="p">,</span> <span class="nx">onTransitionEnd</span>     <span class="c1">//callback function</span>
-</span><span class='line'>  <span class="p">,</span> <span class="nx">eventBinding</span>        <span class="c1">//reference to binding</span>
-</span><span class='line'><span class="c1">//</span>
-</span><span class='line'><span class="nx">onTransitionEnd</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">e</span> <span class="p">){</span>
-</span><span class='line'>  <span class="nx">alert</span><span class="p">(</span> <span class="s1">&#39;TRANSITION FINISHED&#39;</span> <span class="p">);</span>
-</span><span class='line'>  <span class="nx">dojo</span><span class="p">.</span><span class="nx">disconnect</span><span class="p">(</span> <span class="nx">eventBinding</span> <span class="p">);</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="c1">//</span>
-</span><span class='line'><span class="nx">eventBinding</span>  <span class="o">=</span> <span class="nx">dojo</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span> <span class="nx">el</span><span class="p">,</span> <span class="s1">&#39;ontransitionend&#39;</span><span class="p">,</span> <span class="nx">onTransitionEnd</span> <span class="p">);</span>
-</span><span class='line'><span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Fallback when CSS transitions are not available</h2>
-
-<p>Of course we can&#8217;t just ignore IE - they are (still!) the most used web browser out there. My preferred strategy is to use modernizr as a sniffer, and fallback on your framework&#8217;s animation methods if not supported.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="k">if</span><span class="p">(</span> <span class="nx">Modernizr</span><span class="p">.</span><span class="nx">csstransitions</span> <span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>  <span class="c1">//use them if available</span>
-</span><span class='line'><span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span><span class='line'>  <span class="c1">//use your preferred js animation functions</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-</div>
-	</div>
-</article>
-
-<article class="archives">
-  <div class="related-posts">
-    <h2>Related Posts</h2>
-    
-      <article>
-        <h3 class="title"><a href="/blog/howto/skewing-random-numbers-towards-0">Generating skewed random numbers</a></h3>
-        <div class="meta">
-          <span class="tags">
-
-
-	<a class='category' href='/blog/cat/howto/'>HowTo</a>
-
-
-</span>
-            
-          <time datetime="2011-07-08T12:38:38+02:00" pubdate>2011-07-08</time>
-            
-        </div>
-      </article>
-    
-      <article>
-        <h3 class="title"><a href="/blog/geekery/finding-max-min-array-js">Finding max or min in Array in Javascript</a></h3>
-        <div class="meta">
-          <span class="tags">
-
-
-	<a class='category' href='/blog/cat/geekery/'>Geekery</a>
-
-
-</span>
-            
-          <time datetime="2011-07-08T12:38:38+02:00" pubdate>2011-07-08</time>
-            
-        </div>
-      </article>
-    
-      <article>
-        <h3 class="title"><a href="/blog/link/2012-04-07">Links, 2012-04-07</a></h3>
-        <div class="meta">
-          <span class="tags">
-
-
-	<a class='category' href='/blog/cat/link/'>Link</a>
-
-
-</span>
-            
-          <time datetime="2011-07-08T12:38:38+02:00" pubdate>2011-07-08</time>
-            
-        </div>
-      </article>
-    
-  </div>
-</article>
-
-
-<section id="comment">
+<!-- <section id="comment">
     <h1 class="title">Comments</h1>
     <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </div>
 </section>
 
   </div>
-	<footer id="footer" class="inner">Copyright &copy; 2016
+  -->
+  <footer id="footer" class="inner">Copyright &copy; 2016
 
-    Fabrizio (Fritz) Stelluto
+    Fritz Stelluto
 
 </footer>
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-<script src="/javascripts/slash.js"></script>
+<!--
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 
 
 <script type="text/javascript">
       var disqus_shortname = 'goto-fritz';
-      
-        
+
+
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://gotofritz.net/blog/howto/css3-transitions-callbacks';
-        var disqus_url = 'http://gotofritz.net/blog/howto/css3-transitions-callbacks';
+        var disqus_identifier = 'http://gotofritz.net/blog/geekery/backing-up-hard-disk-os-x/';
+        var disqus_url = 'http://gotofritz.net/blog/geekery/backing-up-hard-disk-os-x/';
         var disqus_script = 'embed.js';
-      
+
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
       dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
@@ -285,19 +113,19 @@
 
 
 
-	<script type="text/javascript">
-		var _gaq = _gaq || [];
-		_gaq.push(['_setAccount', 'UA-11254155-2']);
-		_gaq.push(['_trackPageview']);
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-11254155-2']);
+    _gaq.push(['_trackPageview']);
 
-		(function() {
-			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-		})();
-	</script>
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
 
-
+-->
 
 </body>
 </html>

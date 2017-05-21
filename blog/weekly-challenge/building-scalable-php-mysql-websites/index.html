@@ -1,356 +1,179 @@
-
 <!DOCTYPE HTML>
 <html>
 <head>
-	<meta charset="utf-8">
-	<title>Building scalable PHP / MySQL websites - Fabrizio (Fritz) Stelluto</title>
-	<meta name="author" content="">
-
-	
-	<meta name="description" content="The task: summarize notes from a lecture about scaling PHP apps. Can&#8217;t remember by whom, but you can tell it was a couple of years ago because &hellip;">
-	
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-	<link href="/atom.xml" rel="alternate" title="Fabrizio (Fritz) Stelluto" type="application/atom+xml">
-	<link rel="canonical" href="">
-	<link href="/favicon.ico" rel="shortcut icon">
-	<link rel="icon" href="/favicon.gif" type="image/gif" />
-	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-	
+  <meta charset="utf-8">
+  <title>Building scalable PHP / MySQL websites || Fritz Stelluto</title>
+  <meta name="author" content="gotofritz">
+  <meta name="description" content="Summary notes from a lecture about scaling PHP apps.">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link href="/assets/favicon.ico" rel="shortcut icon">
+  <link rel="icon" href="/assets/favicon.gif" type="image/gif" />
+  <link href="/assets/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 </head>
 
-
 <body ontouchstart="">
-
   <header id="header" class="inner">
-<nav id="main-nav"><div>
-  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
-  <a href="/">home</a>
-  <a href="/blog/">blog</a>
-</div></nav>
-<nav id="mobile-nav">
-	<div class="alignleft menu">
-		<a class="button">Menu</a>
-		<div class="container"><div>
-  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
-  <a href="/">home</a>
-  <a href="/blog/">blog</a>
-</div></div>
-	</div>
-	<div class="alignright search">
-		<a class="button"></a>
-		<div class="container">
-			<form action="http://google.com/search" method="get">
-				<input type="text" name="q" results="0">
-				<input type="hidden" name="q" value="site:gotofritz.net">
-			</form>
-		</div>
-	</div>
-</nav>
+    <nav id="main-nav">
+      <div>
+        <a href="/">home</a>
+        <a href="/blog/">blog</a>
+      </div>
+    </nav>
 
-<nav id="sub-nav" class="alignright">
-	<form class="search" action="http://google.com/search" method="get">
-		<input class="alignright" type="text" name="q" results="0">
-		<input type="hidden" name="q" value="site:gotofritz.net">
-	</form>
-</nav>
+    <nav id="sub-nav" class="alignright">
+      <form class="search" action="http://google.com/search" method="get">
+        <input class="alignright" type="text" name="q" results="0">
+        <input type="hidden" name="q" value="site:gotofritz.net">
+      </form>
+    </nav>
+  </header>
 
-</header>
-	
-		
-	
-	<div id="content" class="inner">
+
+<div id="content" class="inner">
+  <article class="post">
+    <h1 class="title">Building scalable PHP / MySQL websites</h1>
+    <div>
+      <div class="meta">
+        <div class="date">
+          <time datetime="2012-02-03T11:10:00+01:00" pubdate>2012-02-03</time>
+        </div>
+        <div class="tags">
+          mysql,
+          php
+        </div>
+      </div>
+      <div class="entry-content">
     
-    <article class="post">
-	<h1 class="title">Building Scalable PHP / MySQL Websites</h1>
-	<div>
-		<div class="meta">
-			<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-02-03T11:10:36+01:00" pubdate data-updated="true">2012-02-03, Fri</time></div>
-			<div class="tags">
-
-
-	<a class='category' href='/blog/cat/weekly-challenge/'>Weekly Challenge</a>
-
-
-</div>
-			
-				<span class="comments"><a href="/blog/weekly-challenge/building-scalable-php-mysql-websites#disqus_thread">Comments</a></span>
-			
-		</div>
-		<div class="entry-content"><p>The task: summarize notes from a lecture about scaling PHP apps.</p>
-
-<!--more-->
-
-
-<p>Can&#8217;t remember by whom, but you can tell it was a couple of years ago because neither cloud services nor NoSQL get much of a mention. It also doesn&#8217;t mention tools such as <a href="https://www.varnish-cache.org/">Varnish</a>. Most of the information is still relevant though.</p>
-
-<h2>Scaling</h2>
-
+<p>Summary notes from a lecture about scaling PHP apps.
+<!--more--></p>
+<p>Can&#39;t remember who gave the lecture, but you can tell it was a couple of years ago because neither cloud services nor NoSQL get much of a mention. It also doesn&#39;t mention tools such as <a href="https://www.varnish-cache.org/">Varnish</a>. Most of the information is still relevant though.</p>
+<h2 id="scaling">Scaling</h2>
 <p> Scaling means enabling your application to grow as traffic grows.</p>
-
-<h2>Scaling the web server</h2>
-
+<h2 id="scaling-the-web-server">Scaling the web server</h2>
 <p>I.e., the server responding to browser requests. Different stages:</p>
-
-<h3>STAGE 1: a single server with everything in it</h3>
-
-<h3>STAGE 2: Load balanced servers</h3>
-
+<h3 id="stage-1-a-single-server-with-everything-in-it">STAGE 1: a single server with everything in it</h3>
+<h3 id="stage-2-load-balanced-servers">STAGE 2: Load balanced servers</h3>
 <p>Servers can be added as needed.</p>
-
 <ul>
-<li><p>Commercial solutions are expensive but do all you need and more (compression on the fly, etc)
-Examples: <a href="http://www.citrix.com/English/ps2/products/product.asp?contentID=21679">Citrix NetScaler</a>, <a href="http://www.f5.com/glossary/load-balancing.html">F5 Big-IP</a></p></li>
-<li><p><a href="http://www2.de.squid-cache.org/">squid</a> is open source and can do load balancing</p></li>
-<li><p>Other, less strong, options</p>
-
-<ul>
-<li><p><a href="http://en.wikipedia.org/wiki/Round-robin_DNS">DNS rotation</a> - hacky but works.</p></li>
-<li><p><a href="http://danga.com/perlbal/">Perlbal</a></p></li>
-<li><p><a href="http://httpd.apache.org/docs/2.1/mod/mod_proxy_balancer.html">Apache Proxy Balancer</a>, a simulator</p></li>
-<li><p>Cloud services, proprietary</p></li>
+<li>Commercial solutions are expensive but do all you need and more (compression on the fly, etc)
+Examples: <a href="http://www.citrix.com/English/ps2/products/product.asp?contentID=21679">Citrix NetScaler</a>, <a href="http://www.f5.com/glossary/load-balancing.html">F5 Big-IP</a></li>
+<li><a href="http://www2.de.squid-cache.org/">squid</a> is open source and can do load balancing</li>
+<li>Other, less strong, options<ul>
+<li><a href="http://en.wikipedia.org/wiki/Round-robin_DNS">DNS rotation</a> - hacky but works.</li>
+<li><a href="http://danga.com/perlbal/">Perlbal</a></li>
+<li><a href="http://httpd.apache.org/docs/2.1/mod/mod_proxy_balancer.html">Apache Proxy Balancer</a>, a simulator</li>
+<li>Cloud services, proprietary</li>
 </ul>
 </li>
 </ul>
-
-
 <p>The guiding principle: only implement what you need, but without coding yourself into a corner. So:</p>
-
 <ul>
-<li><p>Don&#8217;t code assuming a physical machine; so careful with <a href="http://php.net/manual/en/book.apc.php">APC</a>, <a href="http://www.zend.com/products/server/">Zend Server</a></p></li>
-<li><p>Don&#8217;t assume a file system, unless you use distributive file system NFTS etc</p></li>
-<li><p>Do not use file based sessions but DB based</p></li>
+<li>Don&#39;t code assuming a physical machine; so careful with <a href="http://php.net/manual/en/book.apc.php">APC</a>, <a href="http://www.zend.com/products/server/">Zend Server</a></li>
+<li>Don&#39;t assume a file system, unless you use distributive file system NFTS etc</li>
+<li>Do not use file based sessions but DB based</li>
 </ul>
-
-
 <p>If you <em>have</em> to, encapsulate all the bad practices into a BAD CLASS, so that you know what to change later on when you need to scale.</p>
-
-<h2>Scaling the database</h2>
-
+<h2 id="scaling-the-database">Scaling the database</h2>
 <p>The database is <em>always</em> the bottleneck.</p>
-
-<h3>STAGE 1: a single server with everything in it</h3>
-
-<h3>STAGE 2: master slave replication</h3>
-
-<p>Two databases - everything that happens in the master also happens in the slave. This is easily set up with <a href="http://dev.mysql.com/doc/refman/5.1/en/replication.html">MySQL</a>. It&#8217;s worth doing even if only one physical server - if nothing else for backing up.</p>
-
-<h3>STAGE 3: isolate areas of load</h3>
-
+<h3 id="stage-1-a-single-server-with-everything-in-it">STAGE 1: a single server with everything in it</h3>
+<h3 id="stage-2-master-slave-replication">STAGE 2: master slave replication</h3>
+<p>Two databases - everything that happens in the master also happens in the slave. This is easily set up with <a href="http://dev.mysql.com/doc/refman/5.1/en/replication.html">MySQL</a>. It&#39;s worth doing even if only one physical server - if nothing else for backing up.</p>
+<h3 id="stage-3-isolate-areas-of-load">STAGE 3: isolate areas of load</h3>
 <p>Have read happen from slave, write to master. Worth preparing for that, by having an extra paramater in you DB call to select which server is being accessed.
 If doing that, one needs to avoid slave lag - i.e., the delay between action on master being reproduced on the slave. It should be in the order of 0.001s, but can get worse if there is lots of traffic, up to 2s.
-To prepare for that, don&#8217;t write code with a master instruction immediately followed by a slave instruction.</p>
-
-<h3>STAGE 4: multiple slaves</h3>
-
+To prepare for that, don&#39;t write code with a master instruction immediately followed by a slave instruction.</p>
+<h3 id="stage-4-multiple-slaves">STAGE 4: multiple slaves</h3>
 <p>Again, something that comes out of the box with MySQL.
 A typical, but not ideal, scenario - one master, and one slave box for each load balanced web server box. Or one box for each load balanced web server / DB pair.
-It&#8217;s simple but not ideal, as you must create a web server even if all you want is to add a new DB slave, or viceversa. And if a DB gets corrupted you quickly need to remove the web server from the pool, which kind of defeats the point. It&#8217;s better to have each web server pick up random DB box.</p>
-
+It&#39;s simple but not ideal, as you must create a web server even if all you want is to add a new DB slave, or viceversa. And if a DB gets corrupted you quickly need to remove the web server from the pool, which kind of defeats the point. It&#39;s better to have each web server pick up random DB box.</p>
 <p>Sample code:</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="x">class DB {</span>
-</span><span class='line'><span class="x">       private static $cfg = array(</span>
-</span><span class='line'><span class="x">           &#39;write&#39; =&gt;</span>
-</span><span class='line'><span class="x">               array(&#39;mysql:dbname=MyDB;host=10.1.2.3&#39;),</span>
-</span><span class='line'><span class="x">           &#39;read&#39; =&gt;</span>
-</span><span class='line'><span class="x">               array(&#39;mysql:dbname=MyDB;host=10.1.2.7&#39;,</span>
-</span><span class='line'><span class="x">                     &#39;mysql:dbname=MyDB;host=10.1.2.8&#39;,</span>
-</span><span class='line'><span class="x">                     &#39;mysql:dbname=MyDB;host=10.1.2.9&#39;);</span>
-</span><span class='line'><span class="x">           );</span>
-</span><span class='line'><span class="x">       public static function getConnection($pool) {</span>
-</span><span class='line'><span class="x">           $max = count(self::$cfg[$pool]) - 1;</span>
-</span><span class='line'><span class="x">           $dsn = self::$cfg[$pool][mt_rand(0, $max)];</span>
-</span><span class='line'><span class="x">           return new PDO($dsn, USER, PASS);</span>
-</span><span class='line'><span class="x">       }</span>
-</span><span class='line'><span class="x">   }</span>
-</span><span class='line'><span class="x">   $db = DB::getConnection(&#39;read&#39;);</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>STAGE 5: slave pools</h3>
-
+<pre><code>class DB {
+    private static $cfg = array(
+        &#39;write&#39; =&gt;
+            array(&#39;mysql:dbname=MyDB;host=10.1.2.3&#39;),
+        &#39;read&#39; =&gt;
+            array(&#39;mysql:dbname=MyDB;host=10.1.2.7&#39;,
+                  &#39;mysql:dbname=MyDB;host=10.1.2.8&#39;,
+                  &#39;mysql:dbname=MyDB;host=10.1.2.9&#39;);
+        );
+    public static function getConnection($pool) {
+        $max = count(self::$cfg[$pool]) - 1;
+        $dsn = self::$cfg[$pool][mt_rand(0, $max)];
+        return new PDO($dsn, USER, PASS);
+    }
+}
+$db = DB::getConnection(&#39;read&#39;);{% endcodeblock %}
+</code></pre><h3 id="stage-5-slave-pools">STAGE 5: slave pools</h3>
 <p>Pools increases the likelihood that queries gets cached on a given server. Another benefit is that if certain queries need improving performance, you can add servers to that particular pool.
 Different approaches:</p>
-
 <ul>
-<li><p>Divide slaves into pools, each handling only one type of query.</p></li>
-<li><p>Keep a pool of slaves just for batch jobs</p></li>
-<li><p>Use a pool of slaves for comments, one for articles, etc</p></li>
-<li><p>Use a pool for AJAX calls, another for posts, etc</p></li>
+<li>Divide slaves into pools, each handling only one type of query.</li>
+<li>Keep a pool of slaves just for batch jobs</li>
+<li>Use a pool of slaves for comments, one for articles, etc</li>
+<li>Use a pool for AJAX calls, another for posts, etc</li>
 </ul>
-
-
-<h3>STAGE 6: partitioning</h3>
-
+<h3 id="stage-6-partitioning">STAGE 6: partitioning</h3>
 <p>Breaking up the master database. A drawback is that you can lose some SQL functionality, for example the ability to do joins, so they have to done in PHP. You can prepare for it by having the connection returned depending on the type of query.</p>
-
 <p>There are tools for it - <a href="http://www.mysql.com/products/cluster/">MySQL Cluster</a> (which takes a long time to do the splitting), or <a href="http://en.wikipedia.org/wiki/Federated_database_system">federation</a>, but they are a bit generic.</p>
-
 <p>Three types: vertical partitioning, horizontal partitioning, application level partitioning.</p>
-
-<h4>Vertical partitioning</h4>
-
+<h4 id="vertical-partitioning">Vertical partitioning</h4>
 <p>Done on a single master. Moving different columns into different tables - trying to create smaller tables. Candidates: rarely used columns, columns mostly empty, columns not used in where clauses.</p>
-
-<h4>Horizontal partitioning</h4>
-
-<p>Mostly applied to multiple masters. It&#8217;s when rows are split across databases. It can be</p>
-
+<h4 id="horizontal-partitioning">Horizontal partitioning</h4>
+<p>Mostly applied to multiple masters. It&#39;s when rows are split across databases. It can be</p>
 <ul>
-<li><p>Range based</p></li>
-<li><p>Date based (most common)</p></li>
-<li><p>Interlaced (row 1 in table 1, row 2 in table 2, etc). It works well for IDs where you can use module division.</p></li>
-<li><p>User based, like Facebook which have (had) users from different universities in different databases</p></li>
+<li>Range based</li>
+<li>Date based (most common)</li>
+<li>Interlaced (row 1 in table 1, row 2 in table 2, etc). It works well for IDs where you can use module division.</li>
+<li>User based, like Facebook which have (had) users from different universities in different databases</li>
 </ul>
-
-
-<h4>Application level partitioning</h4>
-
+<h4 id="application-level-partitioning">Application level partitioning</h4>
 <p>Only done on multiple servers. Different tables in different DB servers, keeping related tables together to allow for joins.</p>
-
-<h3>STAGE 7: partition between data centers</h3>
-
+<h3 id="stage-7-partition-between-data-centers">STAGE 7: partition between data centers</h3>
 <p>Like master slave - but hell.</p>
-
-<h2>Caching Database</h2>
-
+<h2 id="caching-database">Caching Database</h2>
 <p>It allows you ignore the DB. Principles:</p>
-
 <ul>
-<li><p>choose small, discrete, reusable units</p></li>
-<li><p>don&#8217;t store data you can&#8217;t recreate</p></li>
-<li><p>store data in as close to final processed form</p></li>
+<li>choose small, discrete, reusable units</li>
+<li>don&#39;t store data you can&#39;t recreate</li>
+<li>store data in as close to final processed form</li>
 </ul>
-
-
 <p>Two types:</p>
-
-<h3>Single server memory caches</h3>
-
+<h3 id="single-server-memory-caches">Single server memory caches</h3>
 <p>It caches data specific to the server you are on. It is about performance, not scalability though. <a href="http://php.net/manual/en/book.apc.php">APC</a>, <a href="http://www.zend.com/products/server/">Zend Server</a> are used for that. Limited due to lack of synchronised cache.</p>
-
-<h3>Distributed cache</h3>
-
+<h3 id="distributed-cache">Distributed cache</h3>
 <p>Required for scalability. Classic: <a href="http://memcached.org/">Memcached</a>, <a href="http://www.zend.com/en/products/server/features">Zend platform</a>.</p>
 
-<h2>Challenge 100% complete</h2>
-
-<p>This was a simple but useful task, as this is a busy week.</p>
-</div>
-	</div>
-</article>
-
-<article class="archives">
-  <div class="related-posts">
-    <h2>Related Posts</h2>
-    
-      <article>
-        <h3 class="title"><a href="/blog/geekery/avoid-mysql-ext-php">Avoid the mysql extension in PHP</a></h3>
-        <div class="meta">
-          <span class="tags">
+      </div>
+    </div>
+  </article>
 
 
-	<a class='category' href='/blog/cat/geekery/'>Geekery</a>
-
-
-</span>
-            
-          <time datetime="2012-02-03T11:10:36+01:00" pubdate>2012-02-03</time>
-            
-        </div>
-      </article>
-    
-      <article>
-        <h3 class="title"><a href="/blog/geekery/happy-birthday-php">Happy birthday, PHP.</a></h3>
-        <div class="meta">
-          <span class="tags">
-
-
-	<a class='category' href='/blog/cat/geekery/'>Geekery</a>
-
-
-</span>
-            
-          <time datetime="2012-02-03T11:10:36+01:00" pubdate>2012-02-03</time>
-            
-        </div>
-      </article>
-    
-      <article>
-        <h3 class="title"><a href="/blog/geekery/installing-apache-2.2-php-5.4-os-x">Installing Apache 2.2 and PHP 5.4 on OS X</a></h3>
-        <div class="meta">
-          <span class="tags">
-
-
-	<a class='category' href='/blog/cat/geekery/'>Geekery</a>
-
-
-</span>
-            
-          <time datetime="2012-02-03T11:10:36+01:00" pubdate>2012-02-03</time>
-            
-        </div>
-      </article>
-    
-  </div>
-</article>
-
-
-<section id="comment">
+<!-- <section id="comment">
     <h1 class="title">Comments</h1>
     <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </div>
 </section>
 
   </div>
-	<footer id="footer" class="inner">Copyright &copy; 2016
+  -->
+  <footer id="footer" class="inner">Copyright &copy; 2016
 
-    Fabrizio (Fritz) Stelluto
+    Fritz Stelluto
 
 </footer>
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-<script src="/javascripts/slash.js"></script>
+<!--
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 
 
 <script type="text/javascript">
       var disqus_shortname = 'goto-fritz';
-      
-        
+
+
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://gotofritz.net/blog/weekly-challenge/building-scalable-php-mysql-websites';
-        var disqus_url = 'http://gotofritz.net/blog/weekly-challenge/building-scalable-php-mysql-websites';
+        var disqus_identifier = 'http://gotofritz.net/blog/geekery/backing-up-hard-disk-os-x/';
+        var disqus_url = 'http://gotofritz.net/blog/geekery/backing-up-hard-disk-os-x/';
         var disqus_script = 'embed.js';
-      
+
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
       dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
@@ -360,19 +183,19 @@ Different approaches:</p>
 
 
 
-	<script type="text/javascript">
-		var _gaq = _gaq || [];
-		_gaq.push(['_setAccount', 'UA-11254155-2']);
-		_gaq.push(['_trackPageview']);
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-11254155-2']);
+    _gaq.push(['_trackPageview']);
 
-		(function() {
-			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-		})();
-	</script>
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
 
-
+-->
 
 </body>
 </html>

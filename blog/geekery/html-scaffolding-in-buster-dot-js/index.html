@@ -1,178 +1,104 @@
-
 <!DOCTYPE HTML>
 <html>
 <head>
-	<meta charset="utf-8">
-	<title>HTML scaffolding in Buster.js - Fabrizio (Fritz) Stelluto</title>
-	<meta name="author" content="">
-
-	
-	<meta name="description" content="I am a fan of buster.js, the JS testing framework influenced by JSTestDriver but taking things much further. It is however still a bit cutting edge. &hellip;">
-	
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-	<link href="/atom.xml" rel="alternate" title="Fabrizio (Fritz) Stelluto" type="application/atom+xml">
-	<link rel="canonical" href="">
-	<link href="/favicon.ico" rel="shortcut icon">
-	<link rel="icon" href="/favicon.gif" type="image/gif" />
-	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-	
+  <meta charset="utf-8">
+  <title>HTML scaffolding in Buster.js || Fritz Stelluto</title>
+  <meta name="author" content="gotofritz">
+  <meta name="description" content="I am a fan of buster.js, the JS testing framework influenced by JSTestDriver but taking things much further. It is however still a bit cutting edge. The resources section of Buster.js documentation, for example, is quite dense and cryptic. Here&amp;#39;s how to use a static HTML file as the basis of your tests.">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link href="/assets/favicon.ico" rel="shortcut icon">
+  <link rel="icon" href="/assets/favicon.gif" type="image/gif" />
+  <link href="/assets/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 </head>
 
-
 <body ontouchstart="">
-
   <header id="header" class="inner">
-<nav id="main-nav"><div>
-  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
-  <a href="/">home</a>
-  <a href="/blog/">blog</a>
-</div></nav>
-<nav id="mobile-nav">
-	<div class="alignleft menu">
-		<a class="button">Menu</a>
-		<div class="container"><div>
-  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
-  <a href="/">home</a>
-  <a href="/blog/">blog</a>
-</div></div>
-	</div>
-	<div class="alignright search">
-		<a class="button"></a>
-		<div class="container">
-			<form action="http://google.com/search" method="get">
-				<input type="text" name="q" results="0">
-				<input type="hidden" name="q" value="site:gotofritz.net">
-			</form>
-		</div>
-	</div>
-</nav>
+    <nav id="main-nav">
+      <div>
+        <a href="/">home</a>
+        <a href="/blog/">blog</a>
+      </div>
+    </nav>
 
-<nav id="sub-nav" class="alignright">
-	<form class="search" action="http://google.com/search" method="get">
-		<input class="alignright" type="text" name="q" results="0">
-		<input type="hidden" name="q" value="site:gotofritz.net">
-	</form>
-</nav>
-
-</header>
-	
-		
-	
-	<div id="content" class="inner">
-    
-    <article class="post">
-	<h1 class="title">HTML Scaffolding in Buster.js</h1>
-	<div>
-		<div class="meta">
-			<div class="date">
+    <nav id="sub-nav" class="alignright">
+      <form class="search" action="http://google.com/search" method="get">
+        <input class="alignright" type="text" name="q" results="0">
+        <input type="hidden" name="q" value="site:gotofritz.net">
+      </form>
+    </nav>
+  </header>
 
 
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-11-26T00:13:00+01:00" pubdate data-updated="true">2012-11-26, Mon</time></div>
-			<div class="tags">
-
-
-	<a class='category' href='/blog/cat/geekery/'>Geekery</a>
-
-
-</div>
-			
-				<span class="comments"><a href="/blog/geekery/html-scaffolding-in-buster-dot-js/#disqus_thread">Comments</a></span>
-			
-		</div>
-		<div class="entry-content"><p>I am a fan of <a href="http://busterjs.org">buster.js</a>, the JS testing framework influenced by JSTestDriver but taking things much further. It is however still a bit cutting edge. The <a href="http://docs.busterjs.org/en/latest/modules/buster-configuration/#resource" title="[new window] buster-configuration — Buster.JS 0.6.2 documentation" target="_blank">resources section of Buster.js documentation</a>, for example, is quite dense and cryptic. Here&#8217;s how to use a static HTML file as the basis of your tests.</p>
-
-<!--more-->
-
-
+<div id="content" class="inner">
+  <article class="post">
+    <h1 class="title">HTML scaffolding in Buster.js</h1>
+    <div>
+      <div class="meta">
+        <div class="date">
+          <time datetime="2012-11-26T00:13:00+01:00" pubdate>2012-11-26</time>
+        </div>
+        <div class="tags">
+        </div>
+      </div>
+      <div class="entry-content">
+<div class="archive">This post is too old to be of any use. It has been archived.</div>
+<p>I am a fan of <a href="http://busterjs.org">buster.js</a>, the JS testing framework influenced by JSTestDriver but taking things much further. It is however still a bit cutting edge. The <a href="http://docs.busterjs.org/en/latest/modules/buster-configuration/#resource" title="[new window] buster-configuration — Buster.JS 0.6.2 documentation" target="_blank">resources section of Buster.js documentation</a>, for example, is quite dense and cryptic. Here&#39;s how to use a static HTML file as the basis of your tests.
+<!--more--></p>
 <p>Assume your project sits in wwwroot/, and your tests in tests/ next to it. Inside tests/ there is a folder with the HTML fixtures you want to use, tests/fixtures/index.html. Then in your config file, tests/buster.js, you simply add a resource pointing to it</p>
+<pre><code>var config = module.exports;
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nx">config</span><span class="p">[</span><span class="s2">&quot;My tests&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nx">rootPath</span><span class="o">:</span> <span class="s2">&quot;../&quot;</span><span class="p">,</span>
-</span><span class='line'>    <span class="nx">environment</span><span class="o">:</span> <span class="s2">&quot;browser&quot;</span><span class="p">,</span>
-</span><span class='line'>    <span class="nx">libs</span><span class="o">:</span> <span class="p">[</span>
-</span><span class='line'>        <span class="s2">&quot;wwwroot/libs/**/*.js&quot;</span>
-</span><span class='line'>    <span class="p">],</span>
-</span><span class='line'>    <span class="nx">sources</span><span class="o">:</span> <span class="p">[</span>
-</span><span class='line'>        <span class="s2">&quot;wwwroot/*.js&quot;</span>
-</span><span class='line'>    <span class="p">],</span>
-</span><span class='line'>    <span class="nx">tests</span><span class="o">:</span> <span class="p">[</span>
-</span><span class='line'>        <span class="s2">&quot;tests/*-test.js&quot;</span>
-</span><span class='line'>    <span class="p">],</span>
-</span><span class='line'>    <span class="s2">&quot;resources&quot;</span><span class="o">:</span> <span class="p">[{</span>
-</span><span class='line'>        <span class="s2">&quot;path&quot;</span><span class="o">:</span> <span class="s2">&quot;/&quot;</span><span class="p">,</span>
-</span><span class='line'>        <span class="s2">&quot;file&quot;</span><span class="o">:</span> <span class="s2">&quot;tests/fixtures/index.html&quot;</span><span class="p">,</span>
-</span><span class='line'>        <span class="s2">&quot;headers&quot;</span><span class="o">:</span> <span class="p">{</span>
-</span><span class='line'>            <span class="s2">&quot;Content-Type&quot;</span><span class="o">:</span> <span class="s2">&quot;text/html&quot;</span>
-</span><span class='line'>        <span class="p">}</span>
-</span><span class='line'>    <span class="p">}]</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-</div>
-	</div>
-</article>
+config[&quot;My tests&quot;] = {
+    rootPath: &quot;../&quot;,
+    environment: &quot;browser&quot;,
+    libs: [
+        &quot;wwwroot/libs/**/*.js&quot;
+    ],
+    sources: [
+        &quot;wwwroot/*.js&quot;
+    ],
+    tests: [
+        &quot;tests/*-test.js&quot;
+    ],
+    &quot;resources&quot;: [{
+        &quot;path&quot;: &quot;/&quot;,
+        &quot;file&quot;: &quot;tests/fixtures/index.html&quot;,
+        &quot;headers&quot;: {
+            &quot;Content-Type&quot;: &quot;text/html&quot;
+        }
+    }]
+}
+</code></pre>
+      </div>
+    </div>
+  </article>
 
 
-<section id="comment">
+<!-- <section id="comment">
     <h1 class="title">Comments</h1>
     <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </div>
 </section>
 
   </div>
-	<footer id="footer" class="inner">Copyright &copy; 2016
+  -->
+  <footer id="footer" class="inner">Copyright &copy; 2016
 
-    Fabrizio (Fritz) Stelluto
+    Fritz Stelluto
 
 </footer>
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-<script src="/javascripts/slash.js"></script>
+<!--
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 
 
 <script type="text/javascript">
       var disqus_shortname = 'goto-fritz';
-      
-        
+
+
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://gotofritz.net/blog/geekery/html-scaffolding-in-buster-dot-js/';
-        var disqus_url = 'http://gotofritz.net/blog/geekery/html-scaffolding-in-buster-dot-js/';
+        var disqus_identifier = 'http://gotofritz.net/blog/geekery/backing-up-hard-disk-os-x/';
+        var disqus_url = 'http://gotofritz.net/blog/geekery/backing-up-hard-disk-os-x/';
         var disqus_script = 'embed.js';
-      
+
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
       dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
@@ -182,19 +108,19 @@
 
 
 
-	<script type="text/javascript">
-		var _gaq = _gaq || [];
-		_gaq.push(['_setAccount', 'UA-11254155-2']);
-		_gaq.push(['_trackPageview']);
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-11254155-2']);
+    _gaq.push(['_trackPageview']);
 
-		(function() {
-			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-		})();
-	</script>
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
 
-
+-->
 
 </body>
 </html>
