@@ -51,6 +51,8 @@
 <h2 id="the-pyramid-of-doom-callback-hell">The pyramid of doom / Callback hell</h2>
 <p>Promises are useful to avoid nested callbacks in sequences of async operations
 [TODO]</p>
+<h2 id="promise-a-todo-">Promise/A [TODO]</h2>
+<p>http://wiki.commonjs.org/wiki/Promises/A</p>
 <h2 id="creating-and-using-a-promise">Creating and using a promise</h2>
 <p>The Promise constructor is available since ES6, but there aren&#39;t actually that many promises available in the language:
 <em> window.fetch returns a promise - however it is not supported by all browsers
@@ -173,7 +175,7 @@ myPromise()
 ```
 That&#39;s the standard promise workflow - you create functions which returns a promise, then you start the chain by calling one of them and add the rest to the chain, waiting for them to be called up when ready.</p>
 <h2 id="creating-promises-with-async-code">Creating promises with async code</h2>
-<p>The example above show that promises can also be built using regular, sync code. But of course the point of promises is to handle async code. In node you have several objects with async function, <code>fs</code> being probably the most used. In the browser you have ajax calls. Both of these require some sort of fixtures, or mocking. To avoid that, in testing typically another async function is used: setTimeout</p>
+<p>The example above show that promises can also be built using regular, sync code. But of course the point of promises is to handle async code. In node you have several objects with async function, <code>fs</code> being probably the most used. In the browser you have ajax call, but more and more APIs are beginning to use them. Both of these require some sort of fixtures, or mocking. To avoid that, in testing typically another async function is used: setTimeout</p>
 <p>```
 let myPromise = () =&gt; {
   return new Promise((resolve, reject) =&gt; {
@@ -202,7 +204,7 @@ let myPromise = () =&gt; {
 ```
 The flow is exactly as in the sync case (but of course, with a 1s delay between steps).</p>
 <h2 id="what-arguments-are-being-passed-to-the-next-then-">What arguments are  being passed  to the next then?</h2>
-<p>In the examples above, there is a sequence of <code>.then</code> and a single <code>.catch</code> for dealing with any error in the chain - a typical promise pattern. Let&#39;s explore how chaining works. First let&#39;s prepare a couple of factory functions - they will
+<p>In the examples above, there is a sequence of <code>.then</code> and a single <code>.catch</code> for dealing with any error in the chain - a typical promise pattern. Let&#39;s explore how chaining works. First let&#39;s prepare a couple of factory functions - they will [TODO explain, also .bind is bad]
 <code>``
 const DT = 1000;
 // a random integer between 0 and 100
@@ -390,7 +392,7 @@ const insertImage = (request) =&gt; {
   .catch(handleErrors);
 ```</p>
 <h2 id="promise-sequence">Promise sequence</h2>
-<p>Here&#39;s a typical example of a sequence of promises - you make a request to a backend, in the response there is the data you need for your next request. We are going to fetch the top comments attached to the top KenM story on reddit. This involves two steps: 1) find the top story, 2) find the top comments.</p>
+<p>Here&#39;s a typical example of a sequence of promises - you make a request to a backend, in the response there is the data you need for your next request. We are going to fetch the top comments attached to the top Onion story on reddit. This involves two steps: 1) find the top story, 2) find the top comments.</p>
 <pre><code>let story = &quot;&quot;;
 let comments = [];
 
@@ -618,6 +620,68 @@ function getSearchResults(term) {
 </code></pre><h1 id="todo">TODO</h1>
 <p>start going through other do.first</p>
 <p>http://stackoverflow.com/a/41417429/345007</p>
+<h2 id="jquery-s-deferred">jQuery&#39;s Deferred</h2>
+<p>jQuery (remember it?) has had its own implementation of promises called <code>$.Deferred</code> since 1.5 (released in 2011). It wasn&#39;t quite Promise/A compliaint until version 3.0 (released in 2016) - if you are curious about what made it not compliant, <a href="https://blog.jquery.com/2016/06/09/jquery-3-0-final-released/">the changes are listed here</a> (<em>TL;DR</em> jQuery had no catch, there were differences in how exceptions / rejections bubble up the chain, and execution wasn&#39;t async for already resolved promises). In jQuery parliance a <code>deferred</code> is a factory for creating chainable objects with promise like behaviour, and a <code>promise</code> is a read-only deferred to which you could attach listeners such as <code>.then</code> or <code>.fail</code> but that you cannot resolve. A promise is created by calling a deferred&#39;s <code>.promise()</code> method</p>
+<pre><code>function asyncEvent() {
+  var deferred = jQuery.Deferred();
+
+  // do crazy async stuff
+
+  // caller can still attach .then etc to deferred
+  return deferred;
+}
+
+function asyncEventPromise() {
+  var deferred = jQuery.Deferred();
+
+  // do crazy async stuff
+
+  // caller can still attach .then etc to deferred
+  return deferred.promise();
+}
+
+// works
+asyncEvent().resolve();
+
+// cannot resolve a jQuery promise
+asyncEventPromise().resolve();
+
+// but you can attach listeners
+asyncEventPromise().then(() =&gt; console.log(&#39;yeah&#39;));
+</code></pre><p><code>$.Deferred</code> was used under the hood for Ajax calls, and it was probably a lot of dev&#39;s first encounter with something promise-like back then</p>
+<pre><code>$.getJSON( &quot;example.json&quot;, function() {
+  console.log( &quot;success&quot; );
+})
+.done(function() {
+  console.log( &quot;second success&quot; );
+})
+.fail(function() {
+  console.log( &quot;error&quot; );
+})
+.always(function() {
+  console.log( &quot;complete&quot; );
+});
+</code></pre><p>You used <code>$.when</code> instead of Promise.all to execute a bunch of deferred in parallel</p>
+<pre><code>$.when(
+  $.getJSON( &quot;/this.json&quot; ),
+  $.getJSON( &quot;/that.json&quot; ),
+  $.getJSON( &quot;/config.json&quot; )
+)
+.done(function() {
+  console.log( &quot;success&quot; );
+})
+.fail(function() {
+  console.log( &quot;error&quot; );
+});
+</code></pre><p>jQuery 1.7 introduced the very useful <a href="http://api.jquery.com/deferred.progress/">deferred.progress</a> and <a href="http://api.jquery.com/deferred.notify/">deferred.notify</a> which allow progress of the async function to be tracked.</p>
+<p>There is <a href="https://msdn.microsoft.com/en-us/magazine/gg723713.aspx">an old article by Add Osmany about $.Deferred</a>, and of course useful pages in the jQuery documentation:</p>
+<ul>
+<li><a href="http://learn.jquery.com/ajax/">jQuery Ajax Tutorial</a></li>
+<li><a href="http://api.jquery.com/deferred.promise/">deferred.promise()</a></li>
+<li><a href="http://robdodson.me/using-jquery-deferred-to-load-an-underscore-template/">Using jQuery Deferred to Load an Underscore Template</a></li>
+<li><a href="https://www.mobomo.com/2011/02/fun-with-jquery-deferred/">A More Expressive setTimeout()</a></li>
+<li><a href="https://joseoncode.com/2011/09/26/a-walkthrough-jquery-deferred-and-promise/">Additional examples of jQuery’s Deferred API</a></li>
+</ul>
 
       </div>
     </div>
