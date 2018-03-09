@@ -49,7 +49,7 @@
 <h2 id="about-the-task">About the task</h2>
 <p>This is part of an larger, abondoned project, a simple recipe manager. Previous steps had left me with a set of XML files I can visualize in a browser by applying XSLT to them. I now need a quick and dirty way to manage those files directly from the (yet to be built) front end.</p>
 <p>I decided to use Python for the backend because I am trying to learn it. I decided to give <a href="http://bottlepy.org/docs/dev/index.html" title="[new window] Bottle: Python Web Framework — Bottle 0.12-dev documentation" target="_blank">Bottle</a> a shot.</p>
-<p>Some artefacts <a href="https://github.com/gotofritz/Weekly-Challenges/tree/master/weekly-challenge-17_restful">available on GitHub</a>.</p>
+<p>Some artefacts <a href="https://github.com/gotofritz/restful-bottle-api">available on GitHub</a>.</p>
 <h2 id="installing-bottle">Installing Bottle</h2>
 <p>I couldn&#39;t use curl or wget for some reason, so I simply pointed my browser to <a href="https://raw.github.com/defnull/bottle/master/bottle.py" title="[new window] view the script" target="_blank">http://bottlepy.org/bottle.py</a> and hit &quot;Save as...&quot; to download the single Python file to a folder called bottle. To test it run, I created the first iteration of <code>recipes-api.py</code> script</p>
 <pre><code>from bottle import route, run
@@ -204,7 +204,7 @@ def recipe_delete( name=&quot;&quot; ):
             return { &quot;success&quot; : False  }
 </code></pre><h2 id="so-there">So there</h2>
 <p>This is quick and dirty work - no testing, and running off a local dev server which wouldn&#39;t be suited for production. But I am still amazed but how easy it all was. Bottle really does rock.</p>
-<p>The scripts are <a href="https://github.com/gotofritz/Weekly-Challenges/tree/master/weekly-challenge-17_restful">available on GitHub</a>.</p>
+<p>The scripts are <a href="https://github.com/gotofritz/restful-bottle-api">available on GitHub</a>.</p>
 
       </div>
     </div>
