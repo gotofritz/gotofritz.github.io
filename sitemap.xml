@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
 <url> <loc>http://gotofritz.net/</loc> </url>
-<url> <loc>http://gotofritz.net/blog/howto/sending-emails-non-ascii-characters-classic-asp/</loc> </url>
 <url> <loc>http://gotofritz.net/blog/howto/serving-an-excel-worksheet-to-a-browser/</loc> </url>
-<url> <loc>http://gotofritz.net/blog/tutorials/copying-files-matching-pattern-cpio/</loc> </url>
+<url> <loc>http://gotofritz.net/blog/howto/sending-emails-non-ascii-characters-classic-asp/</loc> </url>
 <url> <loc>http://gotofritz.net/blog/tutorials/batch-unrar-command-line-os-x/</loc> </url>
+<url> <loc>http://gotofritz.net/blog/tutorials/copying-files-matching-pattern-cpio/</loc> </url>
 <url> <loc>http://gotofritz.net/blog/howto/finding-recently-changed-files-osx-terminal/</loc> </url>
 <url> <loc>http://gotofritz.net/blog/howto/finding-files-inside-archive/</loc> </url>
 <url> <loc>http://gotofritz.net/blog/howto/joining-pdf-files-in-os-x-from-the-command-line/</loc> </url>
@@ -65,9 +65,9 @@
 <url> <loc>http://gotofritz.net/blog/geekery/os-x-software-update-from-command-line/</loc> </url>
 <url> <loc>http://gotofritz.net/blog/geekery/multiline-regular-expressions-javascript/</loc> </url>
 <url> <loc>http://gotofritz.net/blog/geekery/pretty-printing-xml/</loc> </url>
+<url> <loc>http://gotofritz.net/blog/living/so-you-want-to-move-to-berlin/</loc> </url>
 <url> <loc>http://gotofritz.net/blog/geekery/how-to-avoid-sudo-npm/</loc> </url>
 <url> <loc>http://gotofritz.net/blog/howto/stop-chrome-navigating-back-when-swiping-horizontally/</loc> </url>
-<url> <loc>http://gotofritz.net/blog/living/so-you-want-to-move-to-berlin/</loc> </url>
 <url> <loc>http://gotofritz.net/blog/geekery/backing-up-hard-disk-os-x/</loc> </url>
 <url> <loc>http://gotofritz.net/blog/geekery/css-selectors/</loc> </url>
 <url> <loc>http://gotofritz.net/blog/geekery/xss-cross-site-scripting/</loc> </url>
