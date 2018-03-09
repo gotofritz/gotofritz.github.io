@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <title>A Google Apps Script boilerplate || Fritz Stelluto</title>
   <meta name="author" content="gotofritz">
-  <meta name="description" content="I used to do a lot of GAS programming, but Google&amp;#39;s never seemed to interested in that product so I gave up. Here I document a simple boilerplate project so that I don&amp;#39;t forget how to do it.">
+  <meta name="description" content="I used to do a lot of Google Apps Script (GAS) programming, but Google&amp;#39;s never seemed to interested in that product so I gave up. Here I document a simple boilerplate project so that I don&amp;#39;t forget how to do it.">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <link href="/assets/favicon.ico" rel="shortcut icon">
   <link rel="icon" href="/assets/favicon.gif" type="image/gif" />
@@ -42,141 +42,23 @@
         </div>
       </div>
       <div class="entry-content">
-    <div class="archive">This post is old, and probably obsolete</div>
-<p>I used to do a lot of GAS programming, but Google&#39;s never seemed to interested in that product so I gave up. Here I document a simple boilerplate project so that I don&#39;t forget how to do it.
+    
+<p>I used to do a lot of Google Apps Script (GAS) programming, but Google&#39;s never seemed to interested in that product so I gave up. Here I document a simple boilerplate project so that I don&#39;t forget how to do it.
 <!--more--></p>
-<h2 id="about-gas">About GAS</h2>
-<p>At one stage Google Apps Script looked very promising - I even started a whole series of tutorials (since deleted). That was until I realised the platform is still quite unstable and, more importantly, low priority for Google.</p>
-<p>I still use GAS from time to time, whenever I need to exchange or format data with people who only really feel comfortable using spreadsheets. So I thought it&#39;d be useful to crystallise the little I know into a boilerplate, perhaps adding some extra bits.</p>
+<h2 id="about-google-apps-script">About Google Apps Script</h2>
+<p><a href="https://developers.google.com/apps-script/">GAS</a> allows you to add Javascript scripts to control all your various Google Apps like Calendar, Word documents, Spreadsheets, ... At one stage it looked very promising and exciting - I even started a whole series of tutorials (since deleted). That was until I realised the platform was very unstable and, more importantly, low priority for Google.</p>
+<p>I still use GAS from time to time, whenever I need to exchange data with people who only really feel comfortable using spreadsheets, or for prototypes. So I thought it&#39;d be useful to crystallise the little I know into a boilerplate, perhaps adding some extra bits.</p>
 <h2 id="minimal-google-apps-script-boilerplate">Minimal Google Apps Script boilerplate</h2>
-<p>The script is <a href="https://github.com/gotofritz/Weekly-Challenges/blob/master/weekly-challenge-04_google-apps-script/minimal.js">available on GitHub</a>.</p>
-<p>Probably not everybody&#39;s idea of &#39;small&#39;, but it&#39;s the bare minimum with an example private method (one which comes useful quite often), a couple of menu entries to remind myself how to do separators, and example naming convention.</p>
-<p>There are various ways of running scripts:
-  <em> pressing the &#39;play&#39; button on the script editor
-  </em> presing the &#39;run&#39; button on the script manager (neither very user friendly)
-  <em> running scripts from triggers (onOpen, onEdit, onInstall)
-  </em> choosing an item from a custom menu created by the script
-  * clicking on a button or other UI element in a custom UI &#39;app&#39; that sits on top of the spreadsheet - typically they are made up of panels and buttons to which you can assign event handler</p>
-<p>The first two are not very user friendly. The triggers alone are not very useful - onOpen has only got permissions to run a few commands, and it is typically used to create menus and / or UI apps; onEdit is useful, but not always appropriate. So that leaves us with either a menu or a custom UI, and menus are the easiest, being simply a list of commands, each associated with a function. Also visually they are tucked away out of the way, which is nice. So that&#39;s whay I tend to use.</p>
-<pre><code>//note that these need to be above the onOpen function below
-function menu1(){ ns.menu1(); }
-function menu2(){ ns.menu2(); }
-</code></pre><p>These two lines (in a real script there may be more) define the functions used by the menu(s). Menus only accept top level functions, not object methods, not anything else - there is no way around it but starting your script with a list of functions you want your menus to call.</p>
-<p>&quot;ns&quot; is just a placeholder for any variable name to act as namespace. It could even be done Java (or GWT) style as <code>var example=example||{}; example.formatter = ... etc</code>
-Namespacing helps make your code future proof - you never know, one day Google may relent and allow script sharing (<strong>EDIT</strong> they have). Then not having a global function called &#39;format&#39;, say, would save all sort of hassle if your script is used with someone else&#39;s.</p>
-<pre><code>function onOpen() {
-    //the Google servers are in California, and sometime timezone get all messed up
-    //trying to remedy taht
-    SpreadsheetApp.getActiveSpreadsheet().setSpreadsheetTimeZone( &quot;GMT&quot; );
-
-    //this will hold the menu entrie
-    var menuEntries = [];
-    menuEntries.push({name: &quot;Entry 1&quot;, functionName: &quot;menu1&quot;});
-    //a null entry shows a divider
-    menuEntries.push(null);
-    menuEntries.push({name: &quot;Entry 2&quot;, functionName: &quot;menu2&quot;});
-
-    //create the menu
-    SpreadsheetApp.getActiveSpreadsheet().addMenu( &quot;MY MENU&quot;, menuEntries );
-}
-</code></pre><p>So now I can create my menu(s). Typically I only need one, but you can create more if you want. It&#39;s rather self explanatory - you create an array of tuples and pass it, together with the menu name, to the addmenu method.</p>
-<pre><code>var ns = (function(){
-
-// =========================================================
-// PROPERTIES
-// =========================================================
-  var spr  =  SpreadsheetApp.getActiveSpreadsheet();
-    /**
-    * VAR NAMING CONVENTION
-    * r1xxx = row for range (where first cell has ref 1,1)
-    * c1xxx = column for range (where first cell has ref 1,1)
-    * r0xxx = row for js arrays (where first cell has ref 0,0)
-    * c0xxx = column js arrays (where first cell has ref 0,0)
-    * rc1xx = a pair of range coordinates
-    * rc0xx = a pair of js coordinates
-    */
-
-  // RANGE INDICES - excel style, i.e. 1-based
-  //starting Row
-  var R1START = 1;
-  //starting column
-  var C1START = 1;
-
-  // JS INDICES - as typically returned from range.getValues()
-  var R0End = spr.getLastRow() - 1;
-  var C0End = spr.getLastColumn() - 1;
-
-  //pairs of points
-  //where the value of Page name is
-  var c1Start = [ 1, 1 ];
-</code></pre><p>This is my namespace object, and illustrate a naming convention for variables. The naming convention is quite handy, as you are constantly mixing 0 and 1 indexed arrays and it&#39;s good to have a reminder of which one is which. You could also use the &quot;A1:B2&quot; notation instead, but I find constantly building strings a nuisance.</p>
-<p>I use spr as a shortcut for SpreadsheetApp.getActiveSpreadsheet(), which is needed all the time.</p>
-<pre><code>/ =========================================================
-// (pseudo) PRIVATE METHODS
-// =========================================================
-  /**
-  * _indexOf
-  * @private
-  * goes through a sheet, doing each row. It can be limited to a range ( by rows and by cell) and finds the first occurrence of a value
-  * @param {String} findme the value to find
-  * @param {Sheet} shFindme the sheet with the range
-  * @param {Number} rFindmeFrom the range in which to search, default 1
-  * @param {Number} cFindmeFrom the range in which to search, default 1
-  * @param {Number} cFindmeTo the range in which to search, default getLastRow
-  * @param {Number} cFindme the range in which to search, default getLastColumn
-  * @return {Array} the row and column indexes of the cell, -1, -1 if not found
-  */
-  function  _indexOf( findme, shFindme, rFindmeFrom, cFindmeFrom, rFindmeTo, cFindmeTo ){
-    var r, c;   //coords
-    var r2, c2; //loop bounds
-    var grid;   //gets the range as js multi array
-
-    if( !shFindme ){
-      return [ -1, -1 ];
-    }
-    rFindmeFrom || ( rFindmeFrom = 1 );
-    cFindmeFrom || ( cFindmeFrom = 1 );
-    rFindmeTo || ( rFindmeTo = shFindme.getLastRow() );
-    cFindmeTo || ( cFindmeTo = shFindme.getLastColumn() );
-
-    grid = shFindme.getRange( rFindmeFrom, cFindmeFrom, rFindmeTo, cFindmeTo ).getValues();
-    for( r = 0, r2 = grid.length; r &lt; r2; r++ ){
-      for( c = 0, c2 = grid[r].length; c &lt; c2; c++ ){
-        if( grid[r][c] === findme ){
-          return [ r+rFindmeFrom, c+cFindmeFrom ];
-        }
-      }
-    }
-    return [ -1, -1 ];
-  }
-</code></pre><p>The namespace object keeps some methods as &#39;private&#39;, which is just a best practice.</p>
-<p>_indexOf above is an example &quot;private&quot; method. It is a utility function to search a value within a range and return a pair of indices for the first occurrence.</p>
-<pre><code>/ =========================================================
-// PUBLIC METHODS
-// =========================================================
-    var facade = {
-
-      /**
-      * menu1
-      * only doing JavaDoc from habit
-      */
-      menu1 : function(){
-        Browser.msgBox( &quot;Entry 1 works&quot;);
-      },
-
-      /**
-      * menu2
-      * only doing JavaDoc from habit
-      */
-      menu2 : function(){
-        Browser.msgBox( &quot;Entry 2 works too&quot;);
-      }
-
-  }
-  return facade;
-
-})();
-</code></pre><p>Finally, the public method - these are the ones associated with the menu at the beginning of the script.</p>
+<p>The script is <a href="https://github.com/gotofritz/google-apps-script-boilerplate/blob/master/minimal.js">available on GitHub</a>.</p>
+<p>When I created it, you couldn&#39;t import GAS scripts into your spreadsheet. I don&#39;t know if that&#39;s changed, but the old way to use it is</p>
+<ul>
+<li>Create your spreadsheet and name it so that it gets saved</li>
+<li>Select Tools &gt; Script Editor from the spreadsheet menu. That will open a new browser tab with the script editor</li>
+<li>Copy and paste the content of <a href="https://raw.githubusercontent.com/gotofritz/google-apps-script-boilerplate/master/minimal.js">minimal.js</a> into it</li>
+<li>In the menu above the script select &#39;onOpen&#39; (it was the one next to the &#39;bug&#39; icon when I wrote this), and then the &#39;play&#39; button</li>
+<li>Now go back to the spreadsheet - there should be a new menu entry &#39;MY MENU&#39; beside &#39;Help&#39;</li>
+</ul>
+<p>Once you got get going, you are ready to hack away. The &#39;help&#39; menu will take you to API references for the various Google Apps products (Spreadsheet is only one of the available ones)</p>
 
       </div>
     </div>

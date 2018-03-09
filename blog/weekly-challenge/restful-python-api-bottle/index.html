@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <title>Creating a RESTful Python API with Bottle || Fritz Stelluto</title>
   <meta name="author" content="gotofritz">
-  <meta name="description" content="The challenge this week: using Python to create a RESTful service to allow simple CRUD operations on a bunch of XML files.">
+  <meta name="description" content="I used Bottle, a Python framework, to create a quick and dirty RESTful service to allow simple CRUD operations on a bunch of XML files.">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <link href="/assets/favicon.ico" rel="shortcut icon">
   <link rel="icon" href="/assets/favicon.gif" type="image/gif" />
@@ -44,18 +44,14 @@
       </div>
       <div class="entry-content">
     <div class="archive">This post is old, and probably obsolete</div>
-<p>The challenge this week: using Python to create a RESTful service to allow simple <abbr title="Create Retrieve Update Delete">CRUD</abbr> operations on a bunch of XML files.
+<p>I used Bottle, a Python framework, to create a quick and dirty RESTful service to allow simple <abbr title="Create Retrieve Update Delete">CRUD</abbr> operations on a bunch of XML files.
 <!--more--></p>
 <h2 id="about-the-task">About the task</h2>
 <p>This is part of an larger, abondoned project, a simple recipe manager. Previous steps had left me with a set of XML files I can visualize in a browser by applying XSLT to them. I now need a quick and dirty way to manage those files directly from the (yet to be built) front end.</p>
-<pre><code>Feature: Creating a quick RESTful API for recipes
-    In order to develop a front end quickly
-    As a developer
-    I need to a RESTful API that performas basic CRUD operations
-</code></pre><p>I decided to use Python for the backend because I am trying to learn it, and it also fits well with some tools that I intend to use further down the line. I haven&#39;t decided on a framework yet - I will try <a href="http://bottlepy.org/docs/dev/index.html" title="[new window] Bottle: Python Web Framework — Bottle 0.12-dev documentation" target="_blank">Bottle</a> to start with.</p>
+<p>I decided to use Python for the backend because I am trying to learn it. I decided to give <a href="http://bottlepy.org/docs/dev/index.html" title="[new window] Bottle: Python Web Framework — Bottle 0.12-dev documentation" target="_blank">Bottle</a> a shot.</p>
 <p>Some artefacts <a href="https://github.com/gotofritz/Weekly-Challenges/tree/master/weekly-challenge-17_restful">available on GitHub</a>.</p>
 <h2 id="installing-bottle">Installing Bottle</h2>
-<p>I couldn&#39;t use curl or wget for some reason, so I simply pointed my browser to <a href="https://raw.github.com/defnull/bottle/master/bottle.py" title="[new window] view the script" target="_blank">http://bottlepy.org/bottle.py</a> and hit &quot;Save as...&quot; to download the single Python file to a folder called bottle. To test it run, I created this script</p>
+<p>I couldn&#39;t use curl or wget for some reason, so I simply pointed my browser to <a href="https://raw.github.com/defnull/bottle/master/bottle.py" title="[new window] view the script" target="_blank">http://bottlepy.org/bottle.py</a> and hit &quot;Save as...&quot; to download the single Python file to a folder called bottle. To test it run, I created the first iteration of <code>recipes-api.py</code> script</p>
 <pre><code>from bottle import route, run
 
 @route(&#39;/&#39;)
@@ -63,31 +59,11 @@ def hello():
     return &quot;Hello World!&quot;
 
 run(host=&#39;localhost&#39;, port=8080, debug=True)
-</code></pre><p>and started the server with <code>python test1.py</code>. I then checked the server was up and running by pointing a browser to http://localhost:8080/. I got the Hello World string</p>
-<p>Now I can start building the API.</p>
+</code></pre><p>and started the server with <code>python recipes-api.py</code>. I then checked the server was up and running by pointing a browser to http://localhost:8080/. I got the Hello World string</p>
+<p>Now I was ready to start building the API.</p>
 <h3 id="testing-bottle-installation">Testing Bottle installation</h3>
-<p>This server is going to perform the most basic CRUD operation without checking input, using HTTP verbs. That would be PUT for Create / Update (the only difference will be whether there is already a file by that name or not); DELETE for Delete; GET for Retrieve, plus another GET at the root to get the list of available recipes. Nothing fancier than that.</p>
-<p>The first step is to create a script that proves all the calls I want to make work.</p>
-<pre><code>Scenario: Installing and setting up Bottle
-    Given that I am running test2.py
-    When I access the &lt;url&gt; with &lt;verb&gt;
-    Then the response should have status 200 and be &lt;response&gt;
-
-Examples: Basic Strings
-    | url                                | verb   | response           |
-    | http://localhost:8080/recipes      | GET    | LIST               |
-    | http://localhost:8080/recipes/name | PUT    | SAVE RECIPE name   |
-    | http://localhost:8080/recipes/name | GET    | SHOW RECIPE name   |
-    | http://localhost:8080/recipes/name | DELETE | DELETE RECIPE name |
-
-
-Examples: JSON Responses
-    | url                                | verb   | response                                                                                     |
-    | http://localhost:8080/recipes      | GET    | { &quot;success&quot; : False, &quot;paths&quot; : [], &quot;error&quot; : &quot;list not implemented yet&quot; }                    |
-    | http://localhost:8080/recipes/name | PUT    | { &quot;success&quot; : False, &quot;path&quot; : &quot;/PTH/TO/XML/name.xml&quot;, &quot;error&quot; : &quot;save not implemented yet&quot; } |
-    | http://localhost:8080/recipes/name | GET    | { &quot;success&quot; : False, &quot;path&quot; : &quot;/PTH/TO/XML/name.xml&quot;, &quot;error&quot; : &quot;show not implemented yet&quot; } |
-    | http://localhost:8080/recipes/name | DELETE | { &quot;success&quot; : False, &quot;paths&quot; : [], &quot;error&quot; : &quot;delete not implemented yet&quot; }                  |
-</code></pre><p>I will test this manually with curl with this script</p>
+<p>This server is going to perform the most basic CRUD operation without checking input, using HTTP verbs. That would be PUT for Create / Update (the only difference will be whether there is already a file by that name or not); DELETE for Delete; GET for Retrieve, plus another GET at the root to get the list of available files. Nothing fancier than that.</p>
+<p>The first step is to create a script that proves all the calls I want to make work. I will test this manually with curl with these commands</p>
 <pre><code>curl -X GET http://localhost:8080/recipes
 curl -X DELETE http://localhost:8080/recipes/name
 curl -X GET http://localhost:8080/recipes/name
@@ -112,9 +88,9 @@ def recipe_save( name=&quot;Mystery Recipe&quot; ):
     return &quot;SAVE RECIPE &quot; + name
 
 run(host=&#39;localhost&#39;, port=8080, debug=True)
-</code></pre><p>I run <code>python test2.py</code>, run the curl requests, and for each of them I got the expected response. Blimey - this is <em>way</em> too easy.</p>
+</code></pre><p>I run <code>python recipes-api.py</code> again, run the curl requests, and for each of them I got the expected response. Blimey - this is <em>way</em> too easy.</p>
 <h3 id="returning-json-data-with-bottle">Returning JSON data with Bottle</h3>
-<p>So simple I can skip directly to the next iteration, return JSON responses in the right &quot;shape&quot;, but with dummy data:</p>
+<p>Next returning JSON responses in the right &quot;shape&quot;, but with dummy data:</p>
 <pre><code>from bottle import route, run
 
 @route(&#39;/recipes/&#39;)
@@ -135,65 +111,28 @@ def recipe_save( name=&quot;Mystery Recipe&quot; ):
 
 run(host=&#39;localhost&#39;, port=8080, debug=True)
 </code></pre><h3 id="reading-config-data">Reading config data</h3>
-<p>Finally, I will set up a config files for the app to read config data from - always good practice.</p>
-<pre><code>Scenario: Loading config data with ConfigParser
-    Given that config.json contains
-        &quot;&quot;&quot;
-        &quot;paths&quot; : {
-            &quot;xml&quot; : &quot;/Users/ME/work/xml/&quot;
-        }
-        &quot;&quot;&quot;
-    And I am running test2.py
-    When I access http://localhost:8080/recipes/name
-    Then the app should return a JSON response { &quot;success&quot; : false, &quot;path&quot; : &quot;/Users/ME/work/xml/name.xml&quot; , &quot;error&quot; : &quot;show not implemented yet }
-</code></pre><p>Nothing really too exciting here.</p>
+<p>Finally, I will set up a config files for the app to read config data from - always good practice. Nothing really too exciting here.</p>
 <pre><code>import json
 from bottle import route, run
 
-config_file = open( &#39;config.json&#39; )
-config_data = json.load( config_file )
-pth_xml     = config_data[&quot;paths&quot;][&quot;xml&quot;]
-
+config_file = open(&#39;config.json&#39;)
+config_data = json.load(config_file)
+pth_xml = config_data[&quot;paths&quot;][&quot;xml&quot;]
 
 @route(&#39;/recipes/&#39;)
-def recipes_list():
-    return { &quot;success&quot; : False, &quot;paths&quot; : [], &quot;error&quot; : &quot;list not implemented yet&quot; }
-
-@route(&#39;/recipes/&lt;name&gt;&#39;, method=&#39;GET&#39;)
-def recipe_show( name=&quot;Mystery Recipe&quot; ):
-    return { &quot;success&quot; : False, &quot;path&quot; : pth_xml +name +&quot; .xml&quot;, &quot;error&quot; : &quot;show not implemented yet&quot; }
-
-@route(&#39;/recipes/&lt;name&gt;&#39;, method=&#39;DELETE&#39; )
-def recipe_delete( name=&quot;Mystery Recipe&quot; ):
-    return { &quot;success&quot; : False, &quot;error&quot; : &quot;delete not implemented yet&quot; }
-
-@route(&#39;/recipes/&lt;name&gt;&#39;, method=&#39;PUT&#39;)
-def recipe_save( name=&quot;Mystery Recipe&quot; ):
-    return { &quot;success&quot; : False, &quot;path&quot; : pth_xml +name +&quot; .xml&quot;, &quot;error&quot; : &quot;save not implemented yet&quot; }
-
-run(host=&#39;localhost&#39;, port=8080, debug=True)
+... etc
 </code></pre><p>I run it and got the expected results.</p>
 <h2 id="creating-restful-responses">Creating RESTful responses</h2>
 <p>Now it&#39;s simply a matter of filling in the blanks, and writing those methods.</p>
 <h3 id="returning-a-json-formatted-directory-listing-with-bottle">Returning a JSON formatted directory listing with Bottle</h3>
-<p>First, let&#39;s get list of files.</p>
-<pre><code>Scenario: Returning a JSON formatted directory listing with Bottle
-    Given that config.json points to &lt;PTH&gt;
-    And &lt;PTH&gt; contains &lt;filelist&gt;
-    When I request http://localhost:8080/recipes&lt;url&gt; with &lt;verb&gt;
-    Then the app should return &lt;response&gt;
-
-Examples: simple listing
-    | PTH         | filelist                   | url | verb | response                                                    |
-    | test/data/1 | a.xml, b.xml, c.xml, d.txt | /   | GET  | { &quot;success&quot;: true, &quot;paths&quot;: [ &quot;a.xml&quot;, &quot;b.xml&quot;, &quot;c.xml&quot; ] } |
-</code></pre><p>This is a readdir job, very simple with python.</p>
+<p>First, let&#39;s get list of files. This is a readdir job, very simple with python.</p>
 <pre><code>import json
 import os
 from bottle import route, run
 
 config_file = open( &#39;config.json&#39; )
 config_data = json.load( config_file )
-pth_xml     = config_data[&quot;paths&quot;][&quot;xml&quot;]
+pth_xml = config_data[&quot;paths&quot;][&quot;xml&quot;]
 
 @route(&#39;/recipes/&#39;)
 def recipes_list():
@@ -205,25 +144,14 @@ def recipes_list():
     return { &quot;success&quot; : True, &quot;paths&quot; : paths }
 </code></pre><p>Err... that&#39;s it. A JSON response. In the browser.</p>
 <h3 id="echoing-xml-files-with-bottle">Echoing XML files with Bottle</h3>
-<p>Now, let&#39;s look at one of these files in the list.</p>
-<pre><code>Scenario: Echoing XML files with Bottle
-    Given that config.json points to &lt;PTH&gt;
-    And &lt;PTH&gt; contains &lt;filelist&gt;
-    When I request http://localhost:8080/recipes&lt;url&gt; with &lt;verb&gt;
-    Then the app should return &lt;response&gt;
-
-Examples: simple listing
-    | PTH         | filelist                   | url | verb | response           |
-    | test/data/1 | a.xml, b.xml, c.xml, d.txt | /a  | GET  | &lt;content of a.xml&gt; |
-</code></pre><p>So now I am actually serving a file. It&#39;s not JSON, it&#39;s XML - that&#39;s still OK, it&#39;s all human readable data in the end.</p>
-<p>This is ridiculously easy using Bottle&#39;s static_file. Note that Bottle takes case of slashes, so I won&#39;t need to watch out for someone passing ../../../../../etc/passwd as name and showing sensitive data.</p>
+<p>Now, let&#39;s look at one of these files in the list. This is ridiculously easy using Bottle&#39;s static_file. Note that Bottle takes case of slashes, so I won&#39;t need to watch out for someone passing ../../../../../etc/passwd as name and showing sensitive data.</p>
 <pre><code>import json
 import os
 from bottle import route, run, static_file
 
 config_file = open( &#39;config.json&#39; )
 config_data = json.load( config_file )
-pth_xml     = config_data[&quot;paths&quot;][&quot;xml&quot;]
+pth_xml = config_data[&quot;paths&quot;][&quot;xml&quot;]
 
 @route(&#39;/recipes/&lt;name&gt;&#39;, method=&#39;GET&#39;)
 def recipe_show( name=&quot;&quot; ):
@@ -233,28 +161,15 @@ def recipe_show( name=&quot;&quot; ):
         return { &quot;success&quot; : False, &quot;error&quot; : &quot;show called without a filename&quot; }
 </code></pre><p>Embarassingly simple.</p>
 <h3 id="creating-and-updating-xml-files-with-bottle">Creating and updating XML files with Bottle</h3>
-<p>The next obvious step is to add files to the set. The same script will be used for create or update - any exisiting files will simply be overwritten, without checking. And there won&#39;t be any checks for the correct XML format either.</p>
-<pre><code>Scenario: Creating and updating XML files with Bottle
-    Given that config.json points to &lt;PTH&gt;
-    And &lt;PTH&gt; contains &lt;filelist&gt;
-    When I request http://localhost:8080/recipes&lt;url&gt; with &lt;verb&gt;
-    And send &lt;postdata&gt;
-    Then the app should return &lt;response&gt;
-    And the &lt;PTH&gt; should contain &lt;newfilelist&gt;
-    And &lt;PTH&gt;&lt;url&gt; should contain &lt;postdata&gt;
-
-Examples: simple listing
-    | PTH         | filelist     | url | verb | postdata | response                                             | newfilelist         |
-    | test/data/2 | a.xml, b.xml | /f  | PUT  | new file | { &quot;success&quot;: true, &quot;path&quot;: [ &quot;test/data/2/a.xml&quot; ] } | a.xml, b.xml, f.xml |
-    | test/data/2 | a.xml, b.xml | /a  | PUT  | new file | { &quot;success&quot;: true, &quot;path&quot;: [ &quot;test/data/2/a.xml&quot; ] } | a.xml, b.xml        |
-</code></pre><p>This is also fairly simple, as long as one knows where to get the PUT data from - request.forms, which requires the request module.</p>
+<p>The next obvious step is to add files to the set. The same script will be used for create or update - any exisiting files will simply be overwritten, without checking. And there won&#39;t be any schema checks either</p>
+<p>This is also fairly simple, as long as one knows where to get the PUT data from - request.forms, which requires the request module.</p>
 <pre><code>import json
 import os
 from bottle import route, run, request
 
 config_file = open( &#39;config.json&#39; )
 config_data = json.load( config_file )
-pth_xml     = config_data[&quot;paths&quot;][&quot;xml&quot;]
+pth_xml = config_data[&quot;paths&quot;][&quot;xml&quot;]
 
 @route(&#39;/recipes/&lt;name&gt;&#39;, method=&#39;PUT&#39;)
 def recipe_save( name=&quot;&quot; ):
@@ -270,25 +185,14 @@ def recipe_save( name=&quot;&quot; ):
 curl -X PUT --data-urlencode &quot;xml=new file&quot; http://localhost:8080/recipes/a
 </code></pre><p>Everything worked as expected.</p>
 <h3 id="deleting-files-with-bottle">Deleting files with Bottle</h3>
-<p>The last piece of the puzzle.</p>
-<pre><code>Scenario: eleting files with Bottle
-    Given that config.json points to &lt;PTH&gt;
-    And &lt;PTH&gt; contains &lt;filelist&gt;
-    When I request http://localhost:8080/recipes&lt;url&gt; with &lt;verb&gt;
-    Then the app should return &lt;response&gt;
-    And the &lt;PTH&gt; should contain &lt;newfilelist&gt;
-
-Examples: simple listing
-    | PTH         | filelist            | url | verb    | response            | newfilelist  |
-    | test/data/2 | a.xml, b.xml, f.xml | /f  | DELETE  | { &quot;success&quot;: true } | a.xml, b.xml |
-</code></pre><p>Also fairly simple. A try / except is used to avoid errors if the files doesn&#39;t exist.</p>
+<p>The last piece of the puzzle, also fairly simple. A try / except is used to avoid errors if the files doesn&#39;t exist.</p>
 <pre><code>import json
 import os
 from bottle import route, run, , request
 
 config_file = open( &#39;config.json&#39; )
 config_data = json.load( config_file )
-pth_xml     = config_data[&quot;paths&quot;][&quot;xml&quot;]
+pth_xml = config_data[&quot;paths&quot;][&quot;xml&quot;]
 
 @route(&#39;/recipes/&lt;name&gt;&#39;, method=&#39;DELETE&#39; )
 def recipe_delete( name=&quot;&quot; ):
