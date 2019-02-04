@@ -11,92 +11,61 @@
   <link href="/assets/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 </head>
 
-<body ontouchstart="">
-  <header id="header" class="inner">
-    <nav id="main-nav">
-      <div>
-        <a href="/">home</a>
-        <a href="/blog/">blog</a>
-      </div>
-    </nav>
+<body class="content-post"">
+  <div class="gradient-container">
+    <main class="panel-container">
+      <div class="content">
+        <nav class="topnav">
+          <div itemscope itemtype="http://schema.org/Person" class="vcard group-of-links">
+            <a href="/">home</a>
+            <a href="/fritz-stelluto_resume.pdf" title="my CV as a PDF">search</a>
+          </div>
+        </nav>
 
-    <nav id="sub-nav" class="alignright">
-      <form class="search" action="http://google.com/search" method="get">
-        <input class="alignright" type="text" name="q" results="0">
-        <input type="hidden" name="q" value="site:gotofritz.net">
-      </form>
-    </nav>
-  </header>
-
-
-<div id="content" class="inner">
-  <article class="post">
-    <h1 class="title">Cannot install Xcode 3.2.6 on Snow Leopard</h1>
-    <div>
+<article>
+  <section class="intro">
+    <!--
       <div class="meta">
         <div class="date">
-          <time datetime="2012-09-14T00:40:00+02:00" pubdate>2012-09-14</time>
+          <time datetime="2017-08-29T13:44:00+02:00" pubdate>2017-08-29</time>
         </div>
         <div class="tags">
-          os x
+          security,
+          frontend
         </div>
       </div>
-      <div class="entry-content">
-<div class="archive">This post is too old to be of any use. It has been archived.</div>
-<p>In order to install <a href="http://mxcl.github.com/homebrew/">Homebrew</a> on my clean OS X 10.6.8 re-install, I needed <a href="https://developer.apple.com/downloads/index.action#">Xcode 3.2.6</a>, but I was getting errors.
-<!--more--></p>
-<p>The installer quit with &quot;The Installation Failed An unknown installation error occurred.&quot;  A look at /var/log/install.log revelead the problem to be &quot;The package “iPhoneSystemComponents.pkg” is untrusted. CSSMERR_TP_CERT_EXPIRED.</p>
-<p>CSSMERR_TP_CERT_EXPIRED is the hint - the certificate is expired. Setting the OS X date to 2011 fixed the problem</p>
-
+       -->
+    <div class="post-meta">
+      <time datetime="2012-09-14T00:40:00+02:00" pubdate>2012-09-14</time>
+      //
+      <div class="tags">
+        os x
       </div>
     </div>
-  </article>
+    <h1>Cannot install Xcode 3.2.6 on Snow Leopard</h1>
+    <h2>In order to install Homebrew on my clean OS X 10.6.8 re-install, I needed Xcode 3.2.6, but I was getting errors.</h2>
+
+  </section>
+  <section class="post-content">
+    The installer quit with “The Installation Failed An unknown installation error occurred.”  A look at /var/log/install.log revelead the problem to be “The package “iPhoneSystemComponents.pkg” is untrusted. CSSMERR_TP_CERT_EXPIRED.</p>
+<p>CSSMERR_TP_CERT_EXPIRED is the hint - the certificate is expired. Setting the OS X date to 2011 fixed the problem</p>
+  </section>
 
 
-<!-- <section id="comment">
-    <h1 class="title">Comments</h1>
-    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-</div>
-</section>
-
+    </div>
   </div>
-  -->
-  <footer id="footer" class="inner">Copyright &copy; 2016
+</div>
 
-    Fritz Stelluto
-
-</footer>
-<!--
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script type="text/javascript">
-      var disqus_shortname = 'goto-fritz';
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-11254155-2']);
+  _gaq.push(['_trackPageview']);
 
-
-        // var disqus_developer = 1;
-        var disqus_identifier = 'http://gotofritz.net/blog/geekery/backing-up-hard-disk-os-x/';
-        var disqus_url = 'http://gotofritz.net/blog/geekery/backing-up-hard-disk-os-x/';
-        var disqus_script = 'embed.js';
-
-    (function () {
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    }());
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
 </script>
--->
-
-
-  <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-11254155-2']);
-    _gaq.push(['_trackPageview']);
-
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
-
 </body>
 </html>

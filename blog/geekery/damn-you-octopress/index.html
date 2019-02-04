@@ -4,48 +4,50 @@
   <meta charset="utf-8">
   <title>Damn you, Octopress! || Fritz Stelluto</title>
   <meta name="author" content="gotofritz">
-  <meta name="description" content="Octopress work reasonably well - until something happens. Say, for example, you are on OS X and upgrade your python to 2.7.3. Everything stops working, and you&amp;#39;ll never be able to fix it again. A ruby application that relies on python - what could possibly go wrong?">
+  <meta name="description" content="Octopress work reasonably well - until something happens. Say, for example, you are on OS X and upgrade your python to 2.7.3. Everything stops working, and you’ll never be able to fix it again. A ruby application that relies on python - what could possibly go wrong?">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <link href="/assets/favicon.ico" rel="shortcut icon">
   <link rel="icon" href="/assets/favicon.gif" type="image/gif" />
   <link href="/assets/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 </head>
 
-<body ontouchstart="">
-  <header id="header" class="inner">
-    <nav id="main-nav">
-      <div>
-        <a href="/">home</a>
-        <a href="/blog/">blog</a>
-      </div>
-    </nav>
+<body class="content-post"">
+  <div class="gradient-container">
+    <main class="panel-container">
+      <div class="content">
+        <nav class="topnav">
+          <div itemscope itemtype="http://schema.org/Person" class="vcard group-of-links">
+            <a href="/">home</a>
+            <a href="/fritz-stelluto_resume.pdf" title="my CV as a PDF">search</a>
+          </div>
+        </nav>
 
-    <nav id="sub-nav" class="alignright">
-      <form class="search" action="http://google.com/search" method="get">
-        <input class="alignright" type="text" name="q" results="0">
-        <input type="hidden" name="q" value="site:gotofritz.net">
-      </form>
-    </nav>
-  </header>
-
-
-<div id="content" class="inner">
-  <article class="post">
-    <h1 class="title">Damn you, Octopress!</h1>
-    <div>
+<article>
+  <section class="intro">
+    <!--
       <div class="meta">
         <div class="date">
-          <time datetime="2012-12-12T23:20:00+01:00" pubdate>2012-12-12</time>
+          <time datetime="2017-08-29T13:44:00+02:00" pubdate>2017-08-29</time>
         </div>
         <div class="tags">
-          octopress
+          security,
+          frontend
         </div>
       </div>
-      <div class="entry-content">
-<div class="archive">This post is too old to be of any use. It has been archived.</div>
-<p>Octopress work reasonably well - until something happens. Say, for example, you are on OS X and upgrade your python to 2.7.3. Everything stops working, and you&#39;ll never be able to fix it again. A ruby application that relies on python - what could possibly go wrong?
-<!--more--></p>
-<h2 id="could-not-find-platform-independent-libraries">Could not find platform independent libraries</h2>
+       -->
+    <div class="post-meta">
+      <time datetime="2012-12-12T23:20:00+01:00" pubdate>2012-12-12</time>
+      //
+      <div class="tags">
+        octopress
+      </div>
+    </div>
+    <h1>Damn you, Octopress!</h1>
+    <h2>Octopress work reasonably well - until something happens. Say, for example, you are on OS X and upgrade your python to 2.7.3. Everything stops working, and you’ll never be able to fix it again. A ruby application that relies on python - what could possibly go wrong?</h2>
+
+  </section>
+  <section class="post-content">
+    <h2 id="could-not-find-platform-independent-libraries">Could not find platform independent libraries</h2>
 <p>After upgrading python, suddenly running rake generate resulted in this error:</p>
 <pre><code>rake generate
 ## Generating Site with Jekyll
@@ -56,10 +58,8 @@ Building site: source -&gt; public
 Could not find platform independent libraries &lt;prefix&gt;
 Could not find platform dependent libraries &lt;exec_prefix&gt;
 Consider setting $PYTHONHOME to &lt;prefix&gt;[:&lt;exec_prefix&gt;]
-ImportError: No module named site
-</code></pre><p>Oh. Well, let&#39;s just do what it says, shall we? I open ~/.bash_profile with <code>nano ~/.bash_profile</code> and add</p>
-<pre><code>export PYTHONHOME=/usr/bin/python
-</code></pre><p>then restart Terminal. That solves that particular issue.</p>
+ImportError: No module named site</code></pre><p>Oh. Well, let’s just do what it says, shall we? I open ~/.bash_profile with <code>nano ~/.bash_profile</code> and add</p>
+<pre><code>export PYTHONHOME=/usr/bin/python</code></pre><p>then restart Terminal. That solves that particular issue.</p>
 <h2 id="sh-invalid-option">sh: - : invalid option</h2>
 <p>But now I am getting another error:</p>
 <pre><code>rake generate
@@ -79,11 +79,9 @@ GNU long options:
   --dump-strings
   --help
   --init-file
-# etc
-</code></pre><p>The issue seems to be pygment, the module that does syntax highlighting. It is written in python, and run from inside one of the gems. I tried a few different things, but in the end the most successful was creating a file in the plugins directory, <code>plugins/octopress_fix.rb</code>, with instructions to run the older version of python</p>
+# etc</code></pre><p>The issue seems to be pygment, the module that does syntax highlighting. It is written in python, and run from inside one of the gems. I tried a few different things, but in the end the most successful was creating a file in the plugins directory, <code>plugins/octopress_fix.rb</code>, with instructions to run the older version of python</p>
 <pre><code>require &#39;rubypython&#39;
-RubyPython.configure :python_exe =&gt; &#39;python2.6&#39;
-</code></pre><h2 id="-block-in-ffi_lib-could-not-open-library-lib-dylib-">`block in ffi_lib&#39;: Could not open library &#39;lib.dylib&#39;</h2>
+RubyPython.configure :python_exe =&gt; &#39;python2.6&#39;</code></pre><h2 id="-block-in-ffi_lib-could-not-open-library-lib-dylib-">`block in ffi_lib’: Could not open library ‘lib.dylib’</h2>
 <p>The latest error message is now</p>
 <pre><code>rake generate
 ## Generating Site with Jekyll
@@ -94,10 +92,8 @@ Building site: source -&gt; public
 &#39;import site&#39; failed; use -v for traceback
 &#39;import site&#39; failed; use -v for traceback
 &#39;import site&#39; failed; use -v for traceback
-/Users/ME/.rvm/gems/ruby-1.9.3-p194/gems/ffi-1.0.11/lib/ffi/library.rb:121:in `block in ffi_lib&#39;: Could not open library &#39;lib.dylib&#39;: dlopen(lib.dylib, 9): image not found (LoadError)
-</code></pre><p>Google takes me to this <a href="https://github.com/tmm1/pygments.rb/issues/10" title="[new window] Lib.so issues when calling Pygments::Lexer · Issue #10 · tmm1/pygments.rb" target="_blank">pygments issue on github</a>, where it is suggested I upgrade the version of pygments in octopress/Gemfile</p>
-<pre><code>gem &#39;pygments.rb&#39;, &#39;~&gt; 0.3.2&#39;
-</code></pre><h2 id="blankslate-rb-warning-undefining-object_id-may-cause-serious-problems">blankslate.rb warning: undefining `object_id&#39; may cause serious problems</h2>
+/Users/ME/.rvm/gems/ruby-1.9.3-p194/gems/ffi-1.0.11/lib/ffi/library.rb:121:in `block in ffi_lib&#39;: Could not open library &#39;lib.dylib&#39;: dlopen(lib.dylib, 9): image not found (LoadError)</code></pre><p>Google takes me to this <a href="https://github.com/tmm1/pygments.rb/issues/10" title="[new window] Lib.so issues when calling Pygments::Lexer · Issue #10 · tmm1/pygments.rb" target="_blank">pygments issue on github</a>, where it is suggested I upgrade the version of pygments in octopress/Gemfile</p>
+<pre><code>gem &#39;pygments.rb&#39;, &#39;~&gt; 0.3.2&#39;</code></pre><h2 id="blankslate-rb-warning-undefining-object_id-may-cause-serious-problems">blankslate.rb warning: undefining `object_id’ may cause serious problems</h2>
 <p>The error is now</p>
 <pre><code>rake generate
 ## Generating Site with Jekyll
@@ -105,65 +101,28 @@ unchanged sass/screen.scss
 Configuration from /Users/ME/work/octopress/_config.yml
 /Users/ME/.rvm/gems/ruby-1.9.3-p194/gems/blankslate-3.1.2/lib/blankslate.rb:51: warning: undefining `object_id&#39; may cause serious problems
 Building site: source -&gt; public
-/Users/ME/.rvm/gems/ruby-1.9.3-p194/gems/pygments.rb-0.3.2/lib/pygments/popen.rb:351:in `rescue in get_header&#39;: Failed to get header. (MentosError)
-</code></pre><p>pygments.rb has meanwhile been updated to 0.3.3, so I try</p>
-<pre><code>gem update pygments
-</code></pre><p>then bump the number up in the Gemfile, but no improvement.</p>
-<h2 id="pygments-rb-doesn-t-like-python-2-7-3">Pygments.rb doesn&#39;t like Python 2.7.3</h2>
+/Users/ME/.rvm/gems/ruby-1.9.3-p194/gems/pygments.rb-0.3.2/lib/pygments/popen.rb:351:in `rescue in get_header&#39;: Failed to get header. (MentosError)</code></pre><p>pygments.rb has meanwhile been updated to 0.3.3, so I try</p>
+<pre><code>gem update pygments</code></pre><p>then bump the number up in the Gemfile, but no improvement.</p>
+<h2 id="pygments-rb-doesn-t-like-python-2-7-3">Pygments.rb doesn’t like Python 2.7.3</h2>
 <p>In the end I had to rever Python version by amending the Python version of from 2.7.3 to 2.6 in the path in my ~/.bash_profile file</p>
-<pre><code> ....System/Library/Frameworks/Python.framework/Versions/2.6/bin:$PATH
-</code></pre><p>Ok that works - still get the &quot;blankslate.rb warning: undefining `object_id&#39; may cause serious problems&quot; line but it generates site.
-But I don&#39;t like it at all, it seems brittle. Granted, I can&#39;t blame Octopress for Ruby and Python not talking to each other, but still.</p>
+<pre><code> ....System/Library/Frameworks/Python.framework/Versions/2.6/bin:$PATH</code></pre><p>Ok that works - still get the “blankslate.rb warning: undefining `object_id’ may cause serious problems” line but it generates site.<br>But I don’t like it at all, it seems brittle. Granted, I can’t blame Octopress for Ruby and Python not talking to each other, but still.</p>
+  </section>
 
-      </div>
+
     </div>
-  </article>
-
-
-<!-- <section id="comment">
-    <h1 class="title">Comments</h1>
-    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-</div>
-</section>
-
   </div>
-  -->
-  <footer id="footer" class="inner">Copyright &copy; 2016
+</div>
 
-    Fritz Stelluto
-
-</footer>
-<!--
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script type="text/javascript">
-      var disqus_shortname = 'goto-fritz';
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-11254155-2']);
+  _gaq.push(['_trackPageview']);
 
-
-        // var disqus_developer = 1;
-        var disqus_identifier = 'http://gotofritz.net/blog/geekery/backing-up-hard-disk-os-x/';
-        var disqus_url = 'http://gotofritz.net/blog/geekery/backing-up-hard-disk-os-x/';
-        var disqus_script = 'embed.js';
-
-    (function () {
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    }());
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
 </script>
--->
-
-
-  <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-11254155-2']);
-    _gaq.push(['_trackPageview']);
-
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
-
 </body>
 </html>

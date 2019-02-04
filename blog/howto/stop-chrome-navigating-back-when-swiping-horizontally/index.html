@@ -44,8 +44,9 @@
       </div>
       <div class="entry-content">
     
-<p>If you try to use Google Chrome on a small window on a laptop, perhaps because you are comparing two web pages side by side, swiping left or right doesn&#39;t move the page around, but it jumps to the previous or next page. Here&#39;s how to prevent that on OS X.
-<!--more--></p>
+<p>If you try to use Google Chrome on a small window on a laptop, perhaps because you are comparing two web pages side by side, swiping left or right doesn&#39;t move the page around, but it jumps to the previous or next page. Here&#39;s how to prevent that on OS X.</p>
+<!--more-->
+
 <h2 id="the-el-capitan-way">The El Capitan way</h2>
 <p>Since OS X 10.11 (El Capitan) the setting is system wide, and Chrome respects that as you can see in this <a href="https://bugs.chromium.org/p/chromium/issues/detail?id=682508">Chrome bug report</a>.</p>
 <p>To change it, go in System Preferences &gt; Trackpad &gt; More Gestures and untick &quot;Swipe Between Pages&quot;.</p>
@@ -53,8 +54,7 @@
 <p>Before El Capitan Chrome had its own setting, which you could change by typing the following commands in Terminal</p>
 <pre><code>defaults write com.google.Chrome.plist AppleEnableSwipeNavigateWithScrolls -bool FALSE
 defaults write com.google.Chromium.plist AppleEnableSwipeNavigateWithScrolls -bool FALSE
-defaults write com.google.ChromeCanary.plist AppleEnableSwipeNavigateWithScrolls -bool FALSE
-</code></pre>
+defaults write com.google.ChromeCanary.plist AppleEnableSwipeNavigateWithScrolls -bool FALSE</code></pre>
       </div>
     </div>
   </article>

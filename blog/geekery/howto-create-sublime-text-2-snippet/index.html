@@ -4,72 +4,73 @@
   <meta charset="utf-8">
   <title>How to create a Sublime Text snippet || Fritz Stelluto</title>
   <meta name="author" content="gotofritz">
-  <meta name="description" content="Snippets are chunks of text that you can have your editor paste in when you type a shortcut. Here&amp;#39;s how to create them with the Sublime Text editor. Update I know use Visual Studio Code so I&amp;#39;m not sure whether this still works.">
+  <meta name="description" content="Snippets are chunks of text that you can have your editor paste in when you type a shortcut. Here’s how to create them with the Sublime Text editor. Update I know use Visual Studio Code so I’m not sure whether this still works.">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <link href="/assets/favicon.ico" rel="shortcut icon">
   <link rel="icon" href="/assets/favicon.gif" type="image/gif" />
   <link href="/assets/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 </head>
 
-<body ontouchstart="">
-  <header id="header" class="inner">
-    <nav id="main-nav">
-      <div>
-        <a href="/">home</a>
-        <a href="/blog/">blog</a>
-      </div>
-    </nav>
+<body class="content-post"">
+  <div class="gradient-container">
+    <main class="panel-container">
+      <div class="content">
+        <nav class="topnav">
+          <div itemscope itemtype="http://schema.org/Person" class="vcard group-of-links">
+            <a href="/">home</a>
+            <a href="/fritz-stelluto_resume.pdf" title="my CV as a PDF">search</a>
+          </div>
+        </nav>
 
-    <nav id="sub-nav" class="alignright">
-      <form class="search" action="http://google.com/search" method="get">
-        <input class="alignright" type="text" name="q" results="0">
-        <input type="hidden" name="q" value="site:gotofritz.net">
-      </form>
-    </nav>
-  </header>
-
-
-<div id="content" class="inner">
-  <article class="post">
-    <h1 class="title">How to create a Sublime Text snippet</h1>
-    <div>
+<article>
+  <section class="intro">
+    <!--
       <div class="meta">
         <div class="date">
-          <time datetime="2011-12-07T09:46:00+01:00" pubdate>2011-12-07</time>
+          <time datetime="2017-08-29T13:44:00+02:00" pubdate>2017-08-29</time>
         </div>
         <div class="tags">
-          editors,
-          sublime text
+          security,
+          frontend
         </div>
       </div>
-      <div class="entry-content">
-    
-<p>Snippets are chunks of text that you can have your editor paste in when you type a shortcut. Here&#39;s how to create them with the <a href="http://www.sublimetext.com/2">Sublime Text</a> editor. <strong>Update</strong> I know use Visual Studio Code so I&#39;m not sure whether this still works.
-<!--more--></p>
-<p><strong>Update</strong>: found some <a href="http://sublimetext.info/docs/en/extensibility/snippets.html">unofficial Snippets documentation</a></p>
-<p>Sublime Text snippets uses the same format as TextMate ones, which is handy. To create one, select Tools &gt; New Snippet... A new Sublime document will open. Type your text inside the CDATA block. Some variables are available, more or less useful:</p>
+       -->
+    <div class="post-meta">
+      <time datetime="2011-12-07T09:46:00+01:00" pubdate>2011-12-07</time>
+      //
+      <div class="tags">
+        editors,
+        sublime text
+      </div>
+    </div>
+    <h1>How to create a Sublime Text snippet</h1>
+    <h2>Snippets are chunks of text that you can have your editor paste in when you type a shortcut. Here’s how to create them with the Sublime Text editor. Update I know use Visual Studio Code so I’m not sure whether this still works.</h2>
+
+  </section>
+  <section class="post-content">
+    <strong>Update</strong>: found some <a pppp href="http://sublimetext.info/docs/en/extensibility/snippets.html">unofficial Snippets documentation</a></p>
+<p>Sublime Text snippets uses the same format as TextMate ones, which is handy. To create one, select Tools &gt; New Snippet… A new Sublime document will open. Type your text inside the CDATA block. Some variables are available, more or less useful:</p>
 <dl class="code-breakdown">
     <dt>$TM_CURRENT_LINE</dt>
     <dd>The content of the line on which the snippet is called</dd>
 
-    <dt>$TM_CURRENT_WORD</dt>
-    <dd>the word in which the caret is located.</dd>
+<pre><code>&lt;dt&gt;$TM_CURRENT_WORD&lt;/dt&gt;
+&lt;dd&gt;the word in which the caret is located.&lt;/dd&gt;
 
-    <dt>$TM_FILEPATH</dt>
-    <dd>The absolute path of the file</dd>
+&lt;dt&gt;$TM_FILEPATH&lt;/dt&gt;
+&lt;dd&gt;The absolute path of the file&lt;/dd&gt;
 
-    <dt>$TM_LINE_INDEX</dt>
-    <dd>The position of the caret within the current line</dd>
+&lt;dt&gt;$TM_LINE_INDEX&lt;/dt&gt;
+&lt;dd&gt;The position of the caret within the current line&lt;/dd&gt;
 
-    <dt>TM_LINE_NUMBER</dt>
-    <dd>The line number where the caret was</dd>
+&lt;dt&gt;TM_LINE_NUMBER&lt;/dt&gt;
+&lt;dd&gt;The line number where the caret was&lt;/dd&gt;
 
-    <dt>$TM_SELECTED_TEXT`</dt>
-    <dd>The selected text (only works when calling snippet from meny or with shortcuts)</dd>
-</dl>
+&lt;dt&gt;$TM_SELECTED_TEXT`&lt;/dt&gt;
+&lt;dd&gt;The selected text (only works when calling snippet from meny or with shortcuts)&lt;/dd&gt;</code></pre></dl>
 
 
-<p>Slightly more useful are your own custom variables - you can create them in the .tmPreferences files inside the packages. Use Miscellanous.tmPreferences to apply them to all packages. Those files are in XML (plists in fact), and you need to find a node with key &quot;settings&quot; and add a fragment like this</p>
+<p>Slightly more useful are your own custom variables - you can create them in the .tmPreferences files inside the packages. Use Miscellanous.tmPreferences to apply them to all packages. Those files are in XML (plists in fact), and you need to find a node with key “settings” and add a fragment like this</p>
 <pre><code>&lt;key&gt;shellVariables&lt;/key&gt;
 &lt;array&gt;
     &lt;dict&gt;
@@ -84,68 +85,31 @@
         &lt;key&gt;value&lt;/key&gt;
         &lt;string&gt;ok! got it&lt;/string&gt;
     &lt;/dict&gt;
-&lt;/array&gt;
-</code></pre><p>Then save the file into Packages/User (so that it doesn&#39;t get overwritten when you upgrade).</p>
+&lt;/array&gt;</code></pre><p>Then save the file into Packages/User (so that it doesn’t get overwritten when you upgrade).</p>
 <p>But the most useful are tab stops - $0 is where the caret will placed after the snippet is pasted in, and $1, $2 etc are placeholders, i.e. positions where you can get to by using the tab key. So for example</p>
-<pre><code>&lt;h1 id=&quot;$1&quot;&gt;$2&lt;/h1&gt;$0
-</code></pre><p>The caret will be placed at $1, then when you tab it&#39;ll jump to $2, then finally to its resting place of $0.</p>
-<p>Even better, with &#39;mirrors&#39; you can edit more than one placeholder at once, for example</p>
-<pre><code>&lt;$1&gt; That was a $1 tag&lt;/$1&gt;$0
-</code></pre><p>When you tab, and type, say &#39;h1&#39; , <em>all</em> the tab stops marked $1 will have &#39;h1&#39; in them. But that&#39;s not all.</p>
+<pre><code>&lt;h1 id=&quot;$1&quot;&gt;$2&lt;/h1&gt;$0</code></pre><p>The caret will be placed at $1, then when you tab it’ll jump to $2, then finally to its resting place of $0.</p>
+<p>Even better, with ‘mirrors’ you can edit more than one placeholder at once, for example</p>
+<pre><code>&lt;$1&gt; That was a $1 tag&lt;/$1&gt;$0</code></pre><p>When you tab, and type, say ‘h1’ , <em>all</em> the tab stops marked $1 will have ‘h1’ in them. But that’s not all.</p>
 <p>You can also use regular expressions to modify a mirror before replacing it. For example, int his completely contrived example</p>
-<pre><code>${1/(.+)_(.+)/\u\1 \u\2/} : $1
-</code></pre><p>If you type &quot;john_lennon&quot; on the right, the left will transform it to &quot;John Lennon&quot;</p>
+<pre><code>${1/(.+)_(.+)/\u\1 \u\2/} : $1</code></pre><p>If you type “john_lennon” on the right, the left will transform it to “John Lennon”</p>
 <p>The rest is easy - in the snippet file comment out the &lt;tabTrigger&gt;xxx&lt;/tabTrigger&gt;, and replace the text with whatever you want to use to call your shortcut up - whenever you type that followed by tab, the snippet will be inserted.</p>
+  </section>
 
-      </div>
+
     </div>
-  </article>
-
-
-<!-- <section id="comment">
-    <h1 class="title">Comments</h1>
-    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-</div>
-</section>
-
   </div>
-  -->
-  <footer id="footer" class="inner">Copyright &copy; 2016
+</div>
 
-    Fritz Stelluto
-
-</footer>
-<!--
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script type="text/javascript">
-      var disqus_shortname = 'goto-fritz';
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-11254155-2']);
+  _gaq.push(['_trackPageview']);
 
-
-        // var disqus_developer = 1;
-        var disqus_identifier = 'http://gotofritz.net/blog/geekery/backing-up-hard-disk-os-x/';
-        var disqus_url = 'http://gotofritz.net/blog/geekery/backing-up-hard-disk-os-x/';
-        var disqus_script = 'embed.js';
-
-    (function () {
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    }());
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
 </script>
--->
-
-
-  <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-11254155-2']);
-    _gaq.push(['_trackPageview']);
-
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
-
 </body>
 </html>

@@ -43,35 +43,37 @@
       </div>
       <div class="entry-content">
     
-<p>It isn&#39;t immediately obvious, but <a href="http://evernote.com/">Evernote</a> offers advanced search operators.
-<!--more--></p>
+<p>It isn&#39;t immediately obvious, but <a href="http://evernote.com/">Evernote</a> offers advanced search operators.</p>
+<!--more-->
+
+
 <h2 id="basic-evernote-search">Basic Evernote search</h2>
 <p>Evernote search is quite quirky. It is an &#39;all&#39; search by default, and the order of the search operators matters.</p>
 <dl class="code-breakdown">
 <dt>word</dt>
 <dd>
-  Searching for word will match any occurrences of word, obviously, but also those starting with word (e.g. &#39;wordpress&#39;). In other words, think of it as the equivalent to word&ast;. Note that this is <i>not</i> what it says in the <a href="http://dev.evernote.com/documentation/local/chapters/search_grammar.php" title="[new window] Evernote Search Grammar - Evernote Developers" target="_blank">Evernote API documentation</a>, where it states &quot;Words in the content of the note are split by whitespace or punctuation&quot;.  This is unfortunate, because sometimes you only want the exact match, but luckily you can use quotation marks in that case.
+  Searching for word will match any occurrences of word, obviously, but also those starting with word (e.g. 'wordpress'). In other words, think of it as the equivalent to word&ast;. Note that this is <i>not</i> what it says in the <a href="http://dev.evernote.com/documentation/local/chapters/search_grammar.php" title="[new window] Evernote Search Grammar - Evernote Developers" target="_blank">Evernote API documentation</a>, where it states "Words in the content of the note are split by whitespace or punctuation".  This is unfortunate, because sometimes you only want the exact match, but luckily you can use quotation marks in that case.
 </dd>
 
 <dt>word&ast;</dt>
 <dd>
-Wildcards are allowed only at the end, and in theory <code>potato&amp;ast;</code> should match both  &#39;potatoes&#39; and &#39;potato&#39; whereas <code>potato</code> should only match the singular. But in the Evernote app at least, the wildcard seems to be implied so this is redundant.
+Wildcards are allowed only at the end, and in theory `potato&ast;` should match both  'potatoes' and 'potato' whereas `potato` should only match the singular. But in the Evernote app at least, the wildcard seems to be implied so this is redundant.
 </dd>
 
 <dt>strange word</dt>
 <dd>
-By default searches only returns notes that match all words, regardless of the order. <code>strange word</code> will match notes containing &quot;this word is strange&quot;, &quot;this is a strange word&quot;, and &quot;Strange! [...15 pars later...] my word&quot;
+By default searches only returns notes that match all words, regardless of the order. `strange word` will match notes containing "this word is strange", "this is a strange word", and "Strange! [...15 pars later...] my word"
 </dd>
 
-<dt>&quot;strange word&quot;
-&quot;word&quot;</dt>
+<dt>"strange word"
+"word"</dt>
 <dd>
-Quotation marks limit the search to an exact match, so this will only match &quot;this is a strange word&quot; in the previous example. You can also use quotation marks to remove the implied wildcard - <code>word</code> will also match <i>wordpress</i> and <i>wording</i>, but <code>&quot;word&quot;</code> (with the double quotes) will not.
+Quotation marks limit the search to an exact match, so this will only match "this is a strange word" in the previous example. You can also use quotation marks to remove the implied wildcard - `word` will also match <i>wordpress</i> and <i>wording</i>, but `"word"` (with the double quotes) will not.
 </dd>
 
 <dt>-word</dt>
 <dd>
-matches notes that do not contain words starting with &quot;word&quot;
+matches notes that do not contain words starting with "word"
 </dd>
 </dl>
 
@@ -113,7 +115,7 @@ any tagged note
 
 <dt>-tag:theTag&ast;</dt>
 <dd>
-match notes that don&#39;t have tags starting with theTag.
+match notes that don't have tags starting with theTag.
 </dd>
 
 <dt>intitle:theTitle</dt>
@@ -131,24 +133,24 @@ title search using wildcards.
 Matches all words, in any order, within the title.
 </dd>
 
-<dt>intitle:&quot;strange word&quot;</dt>
+<dt>intitle:"strange word"</dt>
 <dd>
-exact match of sequence &quot;strange word&quot;. The algorithm seems a bit buggy - a note with title &quot;this is a strange word&quot; will be matched by <code>intitle:&quot;strange word&quot;</code>, <code>intitle:&quot;strange a word&quot;</code>, <code>intitle:&quot;strange that word&quot;</code> but not <code>intitle:&quot;strange b  word&quot;</code> or <code>intitle:&quot;word strange&quot;</code>
+exact match of sequence "strange word". The algorithm seems a bit buggy - a note with title "this is a strange word" will be matched by `intitle:"strange word"`, `intitle:"strange a word"`, `intitle:"strange that word"` but not `intitle:"strange b  word"` or `intitle:"word strange"`
 </dd>
 
 <dt>-intitle:word</dt>
 <dd>
-Excludes notes with &quot;word&quot; in the title.
+Excludes notes with "word" in the title.
 </dd>
 
 <dt class="long-line">intitle:strange -intitle:word</dt>
 <dd class="long-line">
-all notes with the word &quot;strange&quot; but not &quot;word&quot; in the title
+all notes with the word "strange" but not "word" in the title
 </dd>
 
 <dt>author:name</dt>
 <dd>
-Notes with author equal to &#39;name&#39;. Notes don&#39;t have authors unless you create one yourself.
+Notes with author equal to 'name'. Notes don't have authors unless you create one yourself.
 </dd>
 </dl>
 

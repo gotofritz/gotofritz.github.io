@@ -4,47 +4,49 @@
   <meta charset="utf-8">
   <title>HTML scaffolding in Buster.js || Fritz Stelluto</title>
   <meta name="author" content="gotofritz">
-  <meta name="description" content="I am a fan of buster.js, the JS testing framework influenced by JSTestDriver but taking things much further. It is however still a bit cutting edge. The resources section of Buster.js documentation, for example, is quite dense and cryptic. Here&amp;#39;s how to use a static HTML file as the basis of your tests.">
+  <meta name="description" content="I am a fan of buster.js, the JS testing framework influenced by JSTestDriver but taking things much further. It is however still a bit cutting edge. The resources section of Buster.js documentation, for example, is quite dense and cryptic. Here’s how to use a static HTML file as the basis of your tests.">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <link href="/assets/favicon.ico" rel="shortcut icon">
   <link rel="icon" href="/assets/favicon.gif" type="image/gif" />
   <link href="/assets/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 </head>
 
-<body ontouchstart="">
-  <header id="header" class="inner">
-    <nav id="main-nav">
-      <div>
-        <a href="/">home</a>
-        <a href="/blog/">blog</a>
-      </div>
-    </nav>
+<body class="content-post"">
+  <div class="gradient-container">
+    <main class="panel-container">
+      <div class="content">
+        <nav class="topnav">
+          <div itemscope itemtype="http://schema.org/Person" class="vcard group-of-links">
+            <a href="/">home</a>
+            <a href="/fritz-stelluto_resume.pdf" title="my CV as a PDF">search</a>
+          </div>
+        </nav>
 
-    <nav id="sub-nav" class="alignright">
-      <form class="search" action="http://google.com/search" method="get">
-        <input class="alignright" type="text" name="q" results="0">
-        <input type="hidden" name="q" value="site:gotofritz.net">
-      </form>
-    </nav>
-  </header>
-
-
-<div id="content" class="inner">
-  <article class="post">
-    <h1 class="title">HTML scaffolding in Buster.js</h1>
-    <div>
+<article>
+  <section class="intro">
+    <!--
       <div class="meta">
         <div class="date">
-          <time datetime="2012-11-26T00:13:00+01:00" pubdate>2012-11-26</time>
+          <time datetime="2017-08-29T13:44:00+02:00" pubdate>2017-08-29</time>
         </div>
         <div class="tags">
+          security,
+          frontend
         </div>
       </div>
-      <div class="entry-content">
-<div class="archive">This post is too old to be of any use. It has been archived.</div>
-<p>I am a fan of <a href="http://busterjs.org">buster.js</a>, the JS testing framework influenced by JSTestDriver but taking things much further. It is however still a bit cutting edge. The <a href="http://docs.busterjs.org/en/latest/modules/buster-configuration/#resource" title="[new window] buster-configuration — Buster.JS 0.6.2 documentation" target="_blank">resources section of Buster.js documentation</a>, for example, is quite dense and cryptic. Here&#39;s how to use a static HTML file as the basis of your tests.
-<!--more--></p>
-<p>Assume your project sits in wwwroot/, and your tests in tests/ next to it. Inside tests/ there is a folder with the HTML fixtures you want to use, tests/fixtures/index.html. Then in your config file, tests/buster.js, you simply add a resource pointing to it</p>
+       -->
+    <div class="post-meta">
+      <time datetime="2012-11-26T00:13:00+01:00" pubdate>2012-11-26</time>
+      //
+      <div class="tags">
+      </div>
+    </div>
+    <h1>HTML scaffolding in Buster.js</h1>
+    <h2>I am a fan of buster.js, the JS testing framework influenced by JSTestDriver but taking things much further. It is however still a bit cutting edge. The resources section of Buster.js documentation, for example, is quite dense and cryptic. Here’s how to use a static HTML file as the basis of your tests.</h2>
+
+  </section>
+  <section class="post-content">
+    Assume your project sits in wwwroot/, and your tests in tests/ next to it. Inside tests/ there is a folder with the HTML fixtures you want to use, tests/fixtures/index.html. Then in your config file, tests/buster.js, you simply add a resource pointing to it</p>
 <pre><code>var config = module.exports;
 
 config[&quot;My tests&quot;] = {
@@ -66,57 +68,24 @@ config[&quot;My tests&quot;] = {
             &quot;Content-Type&quot;: &quot;text/html&quot;
         }
     }]
-}
-</code></pre>
-      </div>
+}</code></pre>
+  </section>
+
+
     </div>
-  </article>
-
-
-<!-- <section id="comment">
-    <h1 class="title">Comments</h1>
-    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-</div>
-</section>
-
   </div>
-  -->
-  <footer id="footer" class="inner">Copyright &copy; 2016
+</div>
 
-    Fritz Stelluto
-
-</footer>
-<!--
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script type="text/javascript">
-      var disqus_shortname = 'goto-fritz';
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-11254155-2']);
+  _gaq.push(['_trackPageview']);
 
-
-        // var disqus_developer = 1;
-        var disqus_identifier = 'http://gotofritz.net/blog/geekery/backing-up-hard-disk-os-x/';
-        var disqus_url = 'http://gotofritz.net/blog/geekery/backing-up-hard-disk-os-x/';
-        var disqus_script = 'embed.js';
-
-    (function () {
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    }());
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
 </script>
--->
-
-
-  <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-11254155-2']);
-    _gaq.push(['_trackPageview']);
-
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
-
 </body>
 </html>

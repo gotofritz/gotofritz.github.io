@@ -11,117 +11,83 @@
   <link href="/assets/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 </head>
 
-<body ontouchstart="">
-  <header id="header" class="inner">
-    <nav id="main-nav">
-      <div>
-        <a href="/">home</a>
-        <a href="/blog/">blog</a>
-      </div>
-    </nav>
+<body class="content-post"">
+  <div class="gradient-container">
+    <main class="panel-container">
+      <div class="content">
+        <nav class="topnav">
+          <div itemscope itemtype="http://schema.org/Person" class="vcard group-of-links">
+            <a href="/">home</a>
+            <a href="/fritz-stelluto_resume.pdf" title="my CV as a PDF">search</a>
+          </div>
+        </nav>
 
-    <nav id="sub-nav" class="alignright">
-      <form class="search" action="http://google.com/search" method="get">
-        <input class="alignright" type="text" name="q" results="0">
-        <input type="hidden" name="q" value="site:gotofritz.net">
-      </form>
-    </nav>
-  </header>
-
-
-<div id="content" class="inner">
-  <article class="post">
-    <h1 class="title">CSS3 transitions callbacks</h1>
-    <div>
+<article>
+  <section class="intro">
+    <!--
       <div class="meta">
         <div class="date">
-          <time datetime="2011-07-08T12:38:00+02:00" pubdate>2011-07-08</time>
+          <time datetime="2017-08-29T13:44:00+02:00" pubdate>2017-08-29</time>
         </div>
         <div class="tags">
-          css3,
-          javascript
+          security,
+          frontend
         </div>
       </div>
-      <div class="entry-content">
-    <div class="archive">This post is old, and probably obsolete</div>
-<p>CSS3 transitions fire off a TransitionEnd event when they end, so that you can attach a Javascript handler to it. The only (minor) inconvenient is that the event takes different names depending on the platform.
-<!--more--></p>
-<h2 id="different-event-names-on-different-browsers">Different event names on different browsers</h2>
-<p>The events names are &#39;transitionend&#39; (FF), &#39;OTransitionEnd&#39; (Opera), &#39;webkitTransitionEnd&#39; (Webkit). IE9 and lower do not support this, although there are <a href="http://blogs.msdn.com/b/ie/archive/2011/04/12/native-html5-first-ie10-platform-preview-available-for-download.aspx">vague promises IE10 will</a>.</p>
+       -->
+    <div class="post-meta">
+      <time datetime="2011-07-08T12:38:00+02:00" pubdate>2011-07-08</time>
+      //
+      <div class="tags">
+        css3,
+        javascript
+      </div>
+    </div>
+    <h1>CSS3 transitions callbacks</h1>
+    <h2>CSS3 transitions fire off a TransitionEnd event when they end, so that you can attach a Javascript handler to it. The only (minor) inconvenient is that the event takes different names depending on the platform.</h2>
+
+  </section>
+  <section class="post-content">
+    <h2 id="different-event-names-on-different-browsers">Different event names on different browsers</h2>
+<p>The events names are ‘transitionend’ (FF), ‘OTransitionEnd’ (Opera), ‘webkitTransitionEnd’ (Webkit). IE9 and lower do not support this, although there are <a pppp href="http://blogs.msdn.com/b/ie/archive/2011/04/12/native-html5-first-ie10-platform-preview-available-for-download.aspx">vague promises IE10 will</a>.</p>
 <p>The easiest but less elegant approach would be to add event handlers for all of the above cases - in vanilla Javascript:</p>
 <pre><code>var el = document.querySelector( &quot;...&quot; ); //some element(s)
 el.addEventListener(webkitTransitionEnd&#39;, onTransitionEnd, false );
 el.addEventListener(transitionend&#39;, onTransitionEnd, false );
-el.addEventListener(OTransitionEnd&#39;, onTransitionEnd, false );
-</code></pre><p>Or one can use a sniffer to determine which event name to use</p>
+el.addEventListener(OTransitionEnd&#39;, onTransitionEnd, false );</code></pre><p>Or one can use a sniffer to determine which event name to use</p>
 <pre><code>var onTransitionEnd = function (e){ alert(&#39;TRANSITION FINISHED&#39;); };
 var eventName = document.body.style.webkitBorderRadius
   ? &quot;webkitTransitionEnd&quot;
   : &quot;transitionend&quot;;
-el.addEventListener(eventName, onTransitionEnd, false);
-</code></pre><p>In jQuery</p>
+el.addEventListener(eventName, onTransitionEnd, false);</code></pre><p>In jQuery</p>
 <pre><code>var onTransitionEnd = function (e){ alert(&#39;TRANSITION FINISHED&#39;); };
 var eventName = document.body.style.webkitBorderRadius
   ? &quot;webkitTransitionEnd&quot;
   : &quot;transitionend&quot;;
-$( document.body ).on( eventName, onTransitionEnd );
-</code></pre><h2 id="fallback-when-css-transitions-are-not-available">Fallback when CSS transitions are not available</h2>
-<p>Of course we can&#39;t just ignore IE - they are (still!) the most used web browser out there. My preferred strategy is to use modernizr as a sniffer, and fallback on your framework&#39;s animation methods if not supported.</p>
+$( document.body ).on( eventName, onTransitionEnd );</code></pre><h2 id="fallback-when-css-transitions-are-not-available">Fallback when CSS transitions are not available</h2>
+<p>Of course we can’t just ignore IE - they are (still!) the most used web browser out there. My preferred strategy is to use modernizr as a sniffer, and fallback on your framework’s animation methods if not supported.</p>
 <pre><code>if( Modernizr.csstransitions ) {
   //use them if available
 } else {
   //use your preferred js animation functions
-}
-</code></pre>
-      </div>
+}</code></pre>
+  </section>
+
+
     </div>
-  </article>
-
-
-<!-- <section id="comment">
-    <h1 class="title">Comments</h1>
-    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-</div>
-</section>
-
   </div>
-  -->
-  <footer id="footer" class="inner">Copyright &copy; 2016
+</div>
 
-    Fritz Stelluto
-
-</footer>
-<!--
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script type="text/javascript">
-      var disqus_shortname = 'goto-fritz';
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-11254155-2']);
+  _gaq.push(['_trackPageview']);
 
-
-        // var disqus_developer = 1;
-        var disqus_identifier = 'http://gotofritz.net/blog/geekery/backing-up-hard-disk-os-x/';
-        var disqus_url = 'http://gotofritz.net/blog/geekery/backing-up-hard-disk-os-x/';
-        var disqus_script = 'embed.js';
-
-    (function () {
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    }());
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
 </script>
--->
-
-
-  <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-11254155-2']);
-    _gaq.push(['_trackPageview']);
-
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
-
 </body>
 </html>

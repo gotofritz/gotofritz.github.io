@@ -11,49 +11,51 @@
   <link href="/assets/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 </head>
 
-<body ontouchstart="">
-  <header id="header" class="inner">
-    <nav id="main-nav">
-      <div>
-        <a href="/">home</a>
-        <a href="/blog/">blog</a>
-      </div>
-    </nav>
+<body class="content-post"">
+  <div class="gradient-container">
+    <main class="panel-container">
+      <div class="content">
+        <nav class="topnav">
+          <div itemscope itemtype="http://schema.org/Person" class="vcard group-of-links">
+            <a href="/">home</a>
+            <a href="/fritz-stelluto_resume.pdf" title="my CV as a PDF">search</a>
+          </div>
+        </nav>
 
-    <nav id="sub-nav" class="alignright">
-      <form class="search" action="http://google.com/search" method="get">
-        <input class="alignright" type="text" name="q" results="0">
-        <input type="hidden" name="q" value="site:gotofritz.net">
-      </form>
-    </nav>
-  </header>
-
-
-<div id="content" class="inner">
-  <article class="post">
-    <h1 class="title">German language resources</h1>
-    <div>
+<article>
+  <section class="intro">
+    <!--
       <div class="meta">
         <div class="date">
-          <time datetime="2012-07-21T15:12:00+02:00" pubdate>2012-07-21</time>
+          <time datetime="2017-08-29T13:44:00+02:00" pubdate>2017-08-29</time>
         </div>
         <div class="tags">
-          german
+          security,
+          frontend
         </div>
       </div>
-      <div class="entry-content">
-    
-<p>These are the resources  I use in my efforts to learn German. Ich hoffe, dass sie nützlich sind.
-<!--more--></p>
-<dl class="normal">
+       -->
+    <div class="post-meta">
+      <time datetime="2012-07-21T15:12:00+02:00" pubdate>2012-07-21</time>
+      //
+      <div class="tags">
+        german
+      </div>
+    </div>
+    <h1>German language resources</h1>
+    <h2>These are the resources  I use in my efforts to learn German. Ich hoffe, dass sie nützlich sind.</h2>
+
+  </section>
+  <section class="post-content">
+    <dl class="normal">
 <dt><a href="http://www.pons.eu/">Pons</a></dt>
 <dd>Pons has quickly become my online <strong>English-German dictionary</strong> of choice - it beats the others hands down. It has <strong>pronunciation samples</strong>, <strong>sample sentences</strong>, phonetic alphabet, ...</dt>
 
 <dt><a href="http://bildwoerterbuch.pons.eu/static/all/bildwoerterbuch_startseite">Pons picture lexicon (Bildwörterbuch)</a></dt>
 <dd>...and a <strong>picture dictionary</strong>. Helps a lot with building up a vocabulary, an important part of a language learning.</dt>
 
-<dt><a href="http://translate.google.com/#en|de|">[en] -&gt; [de]</a><br>
-<a href="http://translate.google.com/#de|en|">[de] -&gt; [en]</a></dt>
+<dt><a href="http://translate.google.com/#en|de|">[en] -> [de]</a><br>
+<a href="http://translate.google.com/#de|en|">[de] -> [en]</a></dt>
 <dd>Google <strong>translation</strong>, often quite wrong but still very useful</dt>
 
 <dt><a href="http://www.forvo.com/">Forvo</a></dt>
@@ -69,7 +71,7 @@
 <dd>A <strong>German dictionary</strong> with <strong>untranslated sample sentences</strong></dt>
 
 <dt><a href="http://www.duden.de/">Duden dictionary</a></dt>
-<dd>Another good <strong>dictionary</strong>, although I don&#39;t use it as much</dt>
+<dd>Another good <strong>dictionary</strong>, although I don't use it as much</dt>
 
 <dt><a href="http://www.dwds.de/">DWDS</a></dt>
 <dd>Has a lot of info in there, in a fiddly interface: <strong>German dictionary</strong>, <strong>untranslated sample sentences</strong> scraped from newspapers, <strong>German thesaurus</strong>, <strong>etymological dictionary</strong>,  <strong>pronunciation samples</strong>, even <strong>statistics</strong> on how word usage changed throughout the century</dt>
@@ -81,10 +83,10 @@
 <dd>Old school Flash app with animated diagrams and <strong>pronunciation samples</strong>.</dt>
 
 <dt><a href="http://www.youtube.com/user/easyonlinegerman">Easy online German - YouTube</a></dt>
-<dd>A series of <strong>pronunciation sample</strong> videos put on youtube by a woman called Sonja. She&#39;s very thorough, and has easy to follow <strong>pronunciation tips</strong></dt>
+<dd>A series of <strong>pronunciation sample</strong> videos put on youtube by a woman called Sonja. She's very thorough, and has easy to follow <strong>pronunciation tips</strong></dt>
 
 <dt><a href="http://www.youtube.com/watch?v=wASqDHXjYFQ&amp;feature=related">The Global Experience German guide</a></dt>
-<dd>A series of <strong>pronunciation sample</strong> videos explained in German with subtitles. Not as good as Sonja&#39;s.</dt>
+<dd>A series of <strong>pronunciation sample</strong> videos explained in German with subtitles. Not as good as Sonja's.</dt>
 
 <dt><a href="http://duolingo.com/">Duolingo</a></dt>
 <dd>A complete <strong>German course</strong> like the commercial Rosetta Stone, but free.</dt>
@@ -99,60 +101,23 @@
 <dd>A <strong>forum</strong>, can be useful some times, although like in all forums there is some weird stuff in there</dt>
 
 </dl>
+  </section>
 
 
-
-
-
-      </div>
     </div>
-  </article>
-
-
-<!-- <section id="comment">
-    <h1 class="title">Comments</h1>
-    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-</div>
-</section>
-
   </div>
-  -->
-  <footer id="footer" class="inner">Copyright &copy; 2016
+</div>
 
-    Fritz Stelluto
-
-</footer>
-<!--
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script type="text/javascript">
-      var disqus_shortname = 'goto-fritz';
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-11254155-2']);
+  _gaq.push(['_trackPageview']);
 
-
-        // var disqus_developer = 1;
-        var disqus_identifier = 'http://gotofritz.net/blog/geekery/backing-up-hard-disk-os-x/';
-        var disqus_url = 'http://gotofritz.net/blog/geekery/backing-up-hard-disk-os-x/';
-        var disqus_script = 'embed.js';
-
-    (function () {
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    }());
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
 </script>
--->
-
-
-  <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-11254155-2']);
-    _gaq.push(['_trackPageview']);
-
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
-
 </body>
 </html>

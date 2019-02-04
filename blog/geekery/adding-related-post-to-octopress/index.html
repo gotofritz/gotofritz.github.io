@@ -4,49 +4,51 @@
   <meta charset="utf-8">
   <title>Adding Related Post to Octopress || Fritz Stelluto</title>
   <meta name="author" content="gotofritz">
-  <meta name="description" content="These are the simple steps I followed to add a &amp;quot;related posts&amp;quot; block to posts in my Octopress blog.">
+  <meta name="description" content="These are the simple steps I followed to add a “related posts” block to posts in my Octopress blog.">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <link href="/assets/favicon.ico" rel="shortcut icon">
   <link rel="icon" href="/assets/favicon.gif" type="image/gif" />
   <link href="/assets/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 </head>
 
-<body ontouchstart="">
-  <header id="header" class="inner">
-    <nav id="main-nav">
-      <div>
-        <a href="/">home</a>
-        <a href="/blog/">blog</a>
-      </div>
-    </nav>
+<body class="content-post"">
+  <div class="gradient-container">
+    <main class="panel-container">
+      <div class="content">
+        <nav class="topnav">
+          <div itemscope itemtype="http://schema.org/Person" class="vcard group-of-links">
+            <a href="/">home</a>
+            <a href="/fritz-stelluto_resume.pdf" title="my CV as a PDF">search</a>
+          </div>
+        </nav>
 
-    <nav id="sub-nav" class="alignright">
-      <form class="search" action="http://google.com/search" method="get">
-        <input class="alignright" type="text" name="q" results="0">
-        <input type="hidden" name="q" value="site:gotofritz.net">
-      </form>
-    </nav>
-  </header>
-
-
-<div id="content" class="inner">
-  <article class="post">
-    <h1 class="title">Adding Related Post to Octopress</h1>
-    <div>
+<article>
+  <section class="intro">
+    <!--
       <div class="meta">
         <div class="date">
-          <time datetime="2012-10-07T00:58:00+02:00" pubdate>2012-10-07</time>
+          <time datetime="2017-08-29T13:44:00+02:00" pubdate>2017-08-29</time>
         </div>
         <div class="tags">
-          octopress
+          security,
+          frontend
         </div>
       </div>
-      <div class="entry-content">
-<div class="archive">This post is too old to be of any use. It has been archived.</div>
-<p>These are the <del>simple</del> steps I followed to add a &quot;related posts&quot; block to posts in my Octopress blog.
-<!--more--></p>
-<h2 id="changing-the-template">Changing the template</h2>
-<p>Jekyll has &#39;related posts&#39; functionality already, all I needed to do was to use it in the template. The code below, adapted from the blog index, displays the block if there are at least two related posts. I added it to post.html.</p>
+       -->
+    <div class="post-meta">
+      <time datetime="2012-10-07T00:58:00+02:00" pubdate>2012-10-07</time>
+      //
+      <div class="tags">
+        octopress
+      </div>
+    </div>
+    <h1>Adding Related Post to Octopress</h1>
+    <h2>These are the simple steps I followed to add a “related posts” block to posts in my Octopress blog.</h2>
+
+  </section>
+  <section class="post-content">
+    <h2 id="changing-the-template">Changing the template</h2>
+<p>Jekyll has ‘related posts’ functionality already, all I needed to do was to use it in the template. The code below, adapted from the blog index, displays the block if there are at least two related posts. I added it to post.html.</p>
 <pre><code>{% if site.related_posts.size &gt; 1 %}
 &lt;article class=&quot;archives&quot;&gt;
   &lt;div class=&quot;related-posts&quot;&gt;
@@ -64,14 +66,12 @@
     {% endfor %}
   &lt;/div&gt;
 &lt;/article&gt;
-{% endif %}
-</code></pre><p>Did the necessary SASS amends, generated the blog, and it was all there. Except that the related posts where simply the latest posts. For a better list, I needed to run jekyll with lsi.</p>
+{% endif %}</code></pre><p>Did the necessary SASS amends, generated the blog, and it was all there. Except that the related posts where simply the latest posts. For a better list, I needed to run jekyll with lsi.</p>
 <h2 id="enabling-related-posts-in-jekyll-and-octopress">Enabling related posts in Jekyll and Octopress</h2>
-<p>The --lsi option performs a proper statistical analysis of the posts to determine the best related posts. Turns out Octopress can already tell Jekyll to turn lsi on - it&#39;s just a matter of adding a new property somewhere in the _config.yml file</p>
+<p>The –lsi option performs a proper statistical analysis of the posts to determine the best related posts. Turns out Octopress can already tell Jekyll to turn lsi on - it’s just a matter of adding a new property somewhere in the _config.yml file</p>
 <pre><code>...
 lsi: true
-...
-</code></pre><p>I regenerated the blog and... after an hour it <i>still</i> hadn&#39;t generated the site. Not good. Time to try and install gsl.</p>
+...</code></pre><p>I regenerated the blog and… after an hour it <i>still</i> hadn’t generated the site. Not good. Time to try and install gsl.</p>
 <h2 id="install-gsl">Install GSL</h2>
 <p>GSL is a scientific maths library which Ruby can use to speed up the calculations. Hopefully that will save the day.</p>
 <pre><code>&gt; brew install gsl
@@ -89,8 +89,7 @@ Error: The `brew link` step did not complete successfully
 The formula built, but is not symlinked into /usr/local
 You can try again using `brew link gsl&#39;
 ==&gt; Summary
-/usr/local/Cellar/gsl/1.15: 237 files, 7.1M, built in 88 seconds
-</code></pre><p>So homebrew wasn&#39;t happy - well, it never is. A bit of tweaking and googling produced the following</p>
+/usr/local/Cellar/gsl/1.15: 237 files, 7.1M, built in 88 seconds</code></pre><p>So homebrew wasn’t happy - well, it never is. A bit of tweaking and googling produced the following</p>
 <pre><code>&gt; sudo chmod 775 /usr/local/include
 &gt; brew link gsl
 Linking /usr/local/Cellar/gsl/1.15... 18 symlinks created
@@ -98,8 +97,7 @@ Linking /usr/local/Cellar/gsl/1.15... 18 symlinks created
 Building native extensions.  This could take a while...
 ERROR:  Error installing gsl:
     ERROR: Failed to build gem native extension.
-    ....(more stuf)
-</code></pre><p>Now gsl is installed, but the gem is not happy. A bit of research revealed the problem is that the ruby gem is not compatible with the latest version of gsl, which is what homebrew installs. To downgrade it, I followed the <a href="http://hi.baidu.com/rainchen/item/e9f24fc009c227340831c6a2" title="[new window] how to install gem gsl -v '1.14.7' on Mac OS_卧得罚_百度空间" target="_blank">instructions on this post</a> and it seemd to work (kinda)</p>
+    ....(more stuf)</code></pre><p>Now gsl is installed, but the gem is not happy. A bit of research revealed the problem is that the ruby gem is not compatible with the latest version of gsl, which is what homebrew installs. To downgrade it, I followed the <a href="http://hi.baidu.com/rainchen/item/e9f24fc009c227340831c6a2" title="[new window] how to install gem gsl -v '1.14.7' on Mac OS_卧得罚_百度空间" target="_blank">instructions on this post</a> and it seemd to work (kinda)</p>
 <pre><code>&gt; brew uninstall gsl
 &gt; brew update
 &gt; brew edit gsl
@@ -115,67 +113,32 @@ unable to convert &quot;\x81&quot; from ASCII-8BIT to UTF-8 for rdoc/fit.rdoc, s
 unable to convert &quot;\x81&quot; from ASCII-8BIT to UTF-8 for rdoc/ndlinear.rdoc, skipping
 Installing RDoc documentation for gsl-1.14.7...
 unable to convert &quot;\x81&quot; from ASCII-8BIT to UTF-8 for rdoc/fit.rdoc, skipping
-unable to convert &quot;\x81&quot; from ASCII-8BIT to UTF-8 for rdoc/ndlinear.rdoc, skipping
-</code></pre><p>Well, look reasonable enough (who cares about manuals, right). Typing <code>gsl-config</code> on the command line also returned a a command, showing gsl was installed correctly. But then when generating the site...</p>
+unable to convert &quot;\x81&quot; from ASCII-8BIT to UTF-8 for rdoc/ndlinear.rdoc, skipping</code></pre><p>Well, look reasonable enough (who cares about manuals, right). Typing <code>gsl-config</code> on the command line also returned a a command, showing gsl was installed correctly. But then when generating the site…</p>
 <pre><code>rake generate
 ## Generating Site with Jekyll
 unchanged sass/screen.scss
 /Users/ME/.rvm/gems/ruby-1.9.3-p194/gems/maruku-0.6.0/lib/maruku/input/parse_doc.rb:22:in `&lt;top (required)&gt;&#39;: iconv will be deprecated in the future, use String#encode instead.
 Configuration from /Users/ME/work/octopress/_config.yml
-Notice: for 10x faster LSI support, please install http://rb-gsl.rubyforge.org/
-</code></pre><p>So that was a waste of time. I <a href="https://github.com/mojombo/jekyll/issues/652" title="[new window] Jekyll --lsi unable to find gsl even though it is installed · Issue #652 · mojombo/jekyll" target="_blank">filed a bug report</a> and left it at that.</p>
+Notice: for 10x faster LSI support, please install http://rb-gsl.rubyforge.org/</code></pre><p>So that was a waste of time. I <a href="https://github.com/mojombo/jekyll/issues/652" title="[new window] Jekyll --lsi unable to find gsl even though it is installed · Issue #652 · mojombo/jekyll" target="_blank">filed a bug report</a> and left it at that.</p>
 <h2 id="a-related-posts-plugin">A Related Posts plugin</h2>
-<p>Lawrence Woodman has created a simpler <a href="http://techtinkering.com/2011/08/17/improving-related-posts-on-jekyll/" title="[new window] Improving the related_posts feature of jekyll" target="_blank">related_posts plugin</a> which looks at tags instead of doing complex analysis. I downloaded that simple file to my plugin directory, regenerated the site, and that was that. A lot of the posts do not have tags at all, but the template doesn&#39;t print any &quot;related posts&quot; HTML at all unless there are at least two of them, so that&#39;s alright. I actually like this system better than lsi, because I can control what&#39;s related to what by creating tags.</p>
+<p>Lawrence Woodman has created a simpler <a href="http://techtinkering.com/2011/08/17/improving-related-posts-on-jekyll/" title="[new window] Improving the related_posts feature of jekyll" target="_blank">related_posts plugin</a> which looks at tags instead of doing complex analysis. I downloaded that simple file to my plugin directory, regenerated the site, and that was that. A lot of the posts do not have tags at all, but the template doesn’t print any “related posts” HTML at all unless there are at least two of them, so that’s alright. I actually like this system better than lsi, because I can control what’s related to what by creating tags.</p>
+  </section>
 
-      </div>
+
     </div>
-  </article>
-
-
-<!-- <section id="comment">
-    <h1 class="title">Comments</h1>
-    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-</div>
-</section>
-
   </div>
-  -->
-  <footer id="footer" class="inner">Copyright &copy; 2016
+</div>
 
-    Fritz Stelluto
-
-</footer>
-<!--
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script type="text/javascript">
-      var disqus_shortname = 'goto-fritz';
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-11254155-2']);
+  _gaq.push(['_trackPageview']);
 
-
-        // var disqus_developer = 1;
-        var disqus_identifier = 'http://gotofritz.net/blog/geekery/backing-up-hard-disk-os-x/';
-        var disqus_url = 'http://gotofritz.net/blog/geekery/backing-up-hard-disk-os-x/';
-        var disqus_script = 'embed.js';
-
-    (function () {
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    }());
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
 </script>
--->
-
-
-  <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-11254155-2']);
-    _gaq.push(['_trackPageview']);
-
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
-
 </body>
 </html>

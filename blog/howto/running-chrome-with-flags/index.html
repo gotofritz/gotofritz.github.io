@@ -4,104 +4,71 @@
   <meta charset="utf-8">
   <title>Running Chrome with flags || Fritz Stelluto</title>
   <meta name="author" content="gotofritz">
-  <meta name="description" content="Some of the more bleeding edge features of Chrome are switched off by default. Here&amp;#39;s how to switch them on.">
+  <meta name="description" content="Some of the more bleeding edge features of Chrome are switched off by default. Here’s how to switch them on.">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <link href="/assets/favicon.ico" rel="shortcut icon">
   <link rel="icon" href="/assets/favicon.gif" type="image/gif" />
   <link href="/assets/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 </head>
 
-<body ontouchstart="">
-  <header id="header" class="inner">
-    <nav id="main-nav">
-      <div>
-        <a href="/">home</a>
-        <a href="/blog/">blog</a>
-      </div>
-    </nav>
+<body class="content-post"">
+  <div class="gradient-container">
+    <main class="panel-container">
+      <div class="content">
+        <nav class="topnav">
+          <div itemscope itemtype="http://schema.org/Person" class="vcard group-of-links">
+            <a href="/">home</a>
+            <a href="/fritz-stelluto_resume.pdf" title="my CV as a PDF">search</a>
+          </div>
+        </nav>
 
-    <nav id="sub-nav" class="alignright">
-      <form class="search" action="http://google.com/search" method="get">
-        <input class="alignright" type="text" name="q" results="0">
-        <input type="hidden" name="q" value="site:gotofritz.net">
-      </form>
-    </nav>
-  </header>
-
-
-<div id="content" class="inner">
-  <article class="post">
-    <h1 class="title">Running Chrome with flags</h1>
-    <div>
+<article>
+  <section class="intro">
+    <!--
       <div class="meta">
         <div class="date">
-          <time datetime="2011-07-08T02:13:00+02:00" pubdate>2011-07-08</time>
+          <time datetime="2017-08-29T13:44:00+02:00" pubdate>2017-08-29</time>
         </div>
         <div class="tags">
-          chrome
+          security,
+          frontend
         </div>
       </div>
-      <div class="entry-content">
-    
-<p>Some of the more bleeding edge features of Chrome are switched off by default. Here&#39;s how to switch them on.
-<!--more--></p>
-<p>You can switch some on by visiting &#39;about:flags&#39; in Chrome. For the rest, you&#39;ll have to start the browser from the command line and type the option manually.</p>
-<p>On a mac you do that by typing</p>
-<pre><code>open -a /Applications/Google\ Chrome.app/ --args --YOUR-FLAGS-HERE
-</code></pre><p>Here&#39;s <a href="http://peter.sh/experiments/chromiu-command-line-switches/">a list of Chrome command line switches</a></p>
-<p>If you find you are always starting up Chrome with the same flags, it may be an idea to create an alias in Terminal: `nano ~/.profile</p>
-<pre><code>alias chromeflag=&#39;open /Applications/Google\ Chrome.app --args --YOUR-SWITCH-HERE&#39;
-</code></pre><p>From then on you can just type &#39;chromeflag&#39; to start it up.</p>
-
+       -->
+    <div class="post-meta">
+      <time datetime="2011-07-08T02:13:00+02:00" pubdate>2011-07-08</time>
+      //
+      <div class="tags">
+        chrome
       </div>
     </div>
-  </article>
+    <h1>Running Chrome with flags</h1>
+    <h2>Some of the more bleeding edge features of Chrome are switched off by default. Here’s how to switch them on.</h2>
+
+  </section>
+  <section class="post-content">
+    You can switch some on by visiting ‘about:flags’ in Chrome. For the rest, you’ll have to start the browser from the command line and type the option manually.</p>
+<p>On a mac you do that by typing</p>
+<pre><code>open -a /Applications/Google\ Chrome.app/ --args --YOUR-FLAGS-HERE</code></pre><p>Here’s <a pppp href="http://peter.sh/experiments/chromiu-command-line-switches/">a list of Chrome command line switches</a></p>
+<p>If you find you are always starting up Chrome with the same flags, it may be an idea to create an alias in Terminal: `nano ~/.profile</p>
+<pre><code>alias chromeflag=&#39;open /Applications/Google\ Chrome.app --args --YOUR-SWITCH-HERE&#39;</code></pre><p>From then on you can just type ‘chromeflag’ to start it up.</p>
+  </section>
 
 
-<!-- <section id="comment">
-    <h1 class="title">Comments</h1>
-    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-</div>
-</section>
-
+    </div>
   </div>
-  -->
-  <footer id="footer" class="inner">Copyright &copy; 2016
+</div>
 
-    Fritz Stelluto
-
-</footer>
-<!--
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script type="text/javascript">
-      var disqus_shortname = 'goto-fritz';
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-11254155-2']);
+  _gaq.push(['_trackPageview']);
 
-
-        // var disqus_developer = 1;
-        var disqus_identifier = 'http://gotofritz.net/blog/geekery/backing-up-hard-disk-os-x/';
-        var disqus_url = 'http://gotofritz.net/blog/geekery/backing-up-hard-disk-os-x/';
-        var disqus_script = 'embed.js';
-
-    (function () {
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    }());
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
 </script>
--->
-
-
-  <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-11254155-2']);
-    _gaq.push(['_trackPageview']);
-
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
-
 </body>
 </html>

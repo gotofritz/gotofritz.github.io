@@ -44,19 +44,18 @@
       </div>
       <div class="entry-content">
     
-<p>You know the story. You try to do <code>npm install hipster-package</code> on OS X and you get a whole load of errors; the easy way out is to just use <code>sudo npm install</code>. Everyone, however, keep saying how that is bad idea. But how do you make npm work without sudo? It&#39;s quite simple actually.
-<!--more--></p>
+<p>You know the story. You try to do <code>npm install hipster-package</code> on OS X and you get a whole load of errors; the easy way out is to just use <code>sudo npm install</code>. Everyone, however, keep saying how that is bad idea. But how do you make npm work without sudo? It&#39;s quite simple actually.</p>
+<!--more-->
+
 <h2 id="on-your-dev-machine">On your dev machine</h2>
 <p>If you are the typical js developer who works on OS X, all you need to do is just change the owner of the node binaries</p>
 <pre><code># this should solve the problem
 sudo chown -R MY_USER_NAME /usr/local
 
 # this may also help
-sudo chmod -R 777 ~/.npm
-</code></pre><p>If you are working on projects and someone has already checked in a package.json run with sudo, you need to make sure the whole team changes the permissions of at the same time</p>
+sudo chmod -R 777 ~/.npm</code></pre><p>If you are working on projects and someone has already checked in a package.json run with sudo, you need to make sure the whole team changes the permissions of at the same time</p>
 <pre><code># if someone has checked in a version of package.json with the wrong permissions
-chmod -775 package.json
-</code></pre><p>Unix purists will find this hacky; and rightly so. The <em>proper</em> way of doing is to create a group for everyone who should be allowed to run npm, even if it&#39;s just you. However for a simple dev machine that is good enough.</p>
+chmod -775 package.json</code></pre><p>Unix purists will find this hacky; and rightly so. The <em>proper</em> way of doing is to create a group for everyone who should be allowed to run npm, even if it&#39;s just you. However for a simple dev machine that is good enough.</p>
 
       </div>
     </div>

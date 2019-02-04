@@ -11,44 +11,45 @@
   <link href="/assets/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 </head>
 
-<body ontouchstart="">
-  <header id="header" class="inner">
-    <nav id="main-nav">
-      <div>
-        <a href="/">home</a>
-        <a href="/blog/">blog</a>
-      </div>
-    </nav>
+<body class="content-post"">
+  <div class="gradient-container">
+    <main class="panel-container">
+      <div class="content">
+        <nav class="topnav">
+          <div itemscope itemtype="http://schema.org/Person" class="vcard group-of-links">
+            <a href="/">home</a>
+            <a href="/fritz-stelluto_resume.pdf" title="my CV as a PDF">search</a>
+          </div>
+        </nav>
 
-    <nav id="sub-nav" class="alignright">
-      <form class="search" action="http://google.com/search" method="get">
-        <input class="alignright" type="text" name="q" results="0">
-        <input type="hidden" name="q" value="site:gotofritz.net">
-      </form>
-    </nav>
-  </header>
-
-
-<div id="content" class="inner">
-  <article class="post">
-    <h1 class="title">Sharing JSHint settings in Grunt</h1>
-    <div>
+<article>
+  <section class="intro">
+    <!--
       <div class="meta">
         <div class="date">
-          <time datetime="2013-11-03T22:08:00+01:00" pubdate>2013-11-03</time>
+          <time datetime="2017-08-29T13:44:00+02:00" pubdate>2017-08-29</time>
         </div>
         <div class="tags">
-          grunt
+          security,
+          frontend
         </div>
       </div>
-      <div class="entry-content">
-<div class="archive">This post is too old to be of any use. It has been archived.</div>
-<p>JSHint settings can get quite long and clog a Gruntfile. Luckily it is fairly simple to move them to their own file.
-<!--more--></p>
-<h2 id="create-a-json-file-with-jshint-settings">Create a JSON file with JSHint settings</h2>
-<p>Just copy your standard .jshintrc file, or create one (<a href="https://github.com/jshint/jshint/blob/master/examples/.jshintrc" title="[new window] jshint/examples/.jshintrc at master · jshint/jshint" target="_blank">a good .jshintrc file</a> to use as a starting point can be found on GitHub).
-Wrap the options in an object, and save the file somewhere sensible.</p>
-<p>I save the file as JSON, which strictly speaking, means it has no comments (although grunt doesn&#39;t complaing if it does). Here&#39;s my standard .jshintrc</p>
+       -->
+    <div class="post-meta">
+      <time datetime="2013-11-03T22:08:00+01:00" pubdate>2013-11-03</time>
+      //
+      <div class="tags">
+        grunt
+      </div>
+    </div>
+    <h1>Sharing JSHint settings in Grunt</h1>
+    <h2>JSHint settings can get quite long and clog a Gruntfile. Luckily it is fairly simple to move them to their own file.</h2>
+
+  </section>
+  <section class="post-content">
+    <h2 id="create-a-json-file-with-jshint-settings">Create a JSON file with JSHint settings</h2>
+<p>Just copy your standard .jshintrc file, or create one (<a href="https://github.com/jshint/jshint/blob/master/examples/.jshintrc" title="[new window] jshint/examples/.jshintrc at master · jshint/jshint" target="_blank">a good .jshintrc file</a> to use as a starting point can be found on GitHub).<br>Wrap the options in an object, and save the file somewhere sensible.</p>
+<p>I save the file as JSON, which strictly speaking, means it has no comments (although grunt doesn’t complaing if it does). Here’s my standard .jshintrc</p>
 <pre><code>{
   &quot;options&quot;: {
     &quot;bitwise&quot;: true,
@@ -110,63 +111,29 @@ Wrap the options in an object, and save the file somewhere sensible.</p>
       &quot;sinon&quot;: true
     }
   }
-}
-</code></pre><h2 id="use-require-to-include-the-settings-into-the-gruntfile">Use require to include the settings into the Gruntfile</h2>
+}</code></pre><h2 id="use-require-to-include-the-settings-into-the-gruntfile">Use require to include the settings into the Gruntfile</h2>
 <p>The rest is easy - as grunt is node.js, just use <code>require</code> to import the settings:</p>
 <pre><code>jshint: {
   options: require( &quot;./jshint.json&quot; ).options,
   all: [&#39;Gruntfile.js&#39;, &#39;lib/**/*.js&#39;, &#39;test/**/*.js&#39;]
-}
-</code></pre>
-      </div>
+}</code></pre>
+  </section>
+
+
     </div>
-  </article>
-
-
-<!-- <section id="comment">
-    <h1 class="title">Comments</h1>
-    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-</div>
-</section>
-
   </div>
-  -->
-  <footer id="footer" class="inner">Copyright &copy; 2016
+</div>
 
-    Fritz Stelluto
-
-</footer>
-<!--
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script type="text/javascript">
-      var disqus_shortname = 'goto-fritz';
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-11254155-2']);
+  _gaq.push(['_trackPageview']);
 
-
-        // var disqus_developer = 1;
-        var disqus_identifier = 'http://gotofritz.net/blog/geekery/backing-up-hard-disk-os-x/';
-        var disqus_url = 'http://gotofritz.net/blog/geekery/backing-up-hard-disk-os-x/';
-        var disqus_script = 'embed.js';
-
-    (function () {
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    }());
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
 </script>
--->
-
-
-  <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-11254155-2']);
-    _gaq.push(['_trackPageview']);
-
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
-
 </body>
 </html>

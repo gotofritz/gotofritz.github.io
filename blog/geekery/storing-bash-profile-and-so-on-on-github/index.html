@@ -43,16 +43,16 @@
       </div>
       <div class="entry-content">
     
-<p>Storing your CLI config files (.bash_profile and all the rest) on github makes sense - as a backup, but also to compare and learn.
-<!--more--></p>
+<p>Storing your CLI config files (.bash_profile and all the rest) on github makes sense - as a backup, but also to compare and learn.</p>
+<!--more-->
+
 <p>I first learned about them from <a href="https://github.com/mathiasbynens/dotfiles">Mathias Bynes</a>, of jsPerf fame and so I cloned his project and created <a href="https://github.com/gotofritz/dotfiles">my own dotfiles</a>. Meanwhile <a href="https://dotfiles.github.io/">it has become a thing</a></p>
 <h2 id="using-git-and-the-bootstrap-script">Using Git and the bootstrap script</h2>
 <p>I have a cloned version of the dotfile directory on my machine. To update</p>
 <pre><code>cd path/to/dotfile/clone
 git pull origin master
 ./bootstrap.sh #./bootstrap.sh -f to avoid the prompt
-. ~/.bash_profile
-</code></pre><h2 id="path">Path</h2>
+. ~/.bash_profile</code></pre><h2 id="path">Path</h2>
 <p>I have no problem with putting the path under github - there&#39;s no confidential stuff in there.</p>
 <h2 id="add-custom-commands-without-creating-a-new-fork">Add custom commands without creating a new fork</h2>
 <p>If <code>~/.extra</code> exists, it will be sourced along with the other files. You can use this to add a few custom commands without the need to fork this entire repository, or to add commands you don’t want to commit to a public repository.</p>
@@ -64,18 +64,14 @@ GIT_COMMITTER_NAME=&quot;$GIT_AUTHOR_NAME&quot;
 git config --global user.name &quot;$GIT_AUTHOR_NAME&quot;
 GIT_AUTHOR_EMAIL=&quot;xxxxxxx&quot;
 GIT_COMMITTER_EMAIL=&quot;$GIT_AUTHOR_EMAIL&quot;
-git config --global user.email &quot;$GIT_AUTHOR_EMAIL&quot;
-</code></pre><p>You could also use <code>~/.extra</code> to override settings, functions and aliases from my dotfiles repository. It’s probably better to <a href="https://github.com/mathiasbynens/dotfiles/fork">fork this repository</a> instead, though.</p>
+git config --global user.email &quot;$GIT_AUTHOR_EMAIL&quot;</code></pre><p>You could also use <code>~/.extra</code> to override settings, functions and aliases from my dotfiles repository. It’s probably better to <a href="https://github.com/mathiasbynens/dotfiles/fork">fork this repository</a> instead, though.</p>
 <h2 id="sensible-os-x-defaults">Sensible OS X defaults</h2>
 <p>When setting up a new Mac, you may want to set some sensible OS X defaults:</p>
-<pre><code>./.osx
-</code></pre><h2 id="install-homebrew-formulae">Install Homebrew formulae</h2>
+<pre><code>./.osx</code></pre><h2 id="install-homebrew-formulae">Install Homebrew formulae</h2>
 <p>When setting up a new Mac, you may want to install some common <a href="http://brew.sh/">Homebrew</a> formulae (after installing Homebrew, of course):</p>
-<pre><code>brew bundle ~/Brewfile
-</code></pre><h2 id="install-native-apps-with-brew-cask-">Install native apps with <code>brew cask</code></h2>
+<pre><code>brew bundle ~/Brewfile</code></pre><h2 id="install-native-apps-with-brew-cask">Install native apps with <code>brew cask</code></h2>
 <p>You could also install native apps with <a href="https://github.com/phinze/homebrew-cask"><code>brew cask</code></a>:</p>
-<pre><code>./.cask
-</code></pre>
+<pre><code>./.cask</code></pre>
       </div>
     </div>
   </article>

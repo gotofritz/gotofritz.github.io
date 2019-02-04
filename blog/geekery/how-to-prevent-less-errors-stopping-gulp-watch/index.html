@@ -4,49 +4,51 @@
   <meta charset="utf-8">
   <title>How to prevent Less errors stopping gulp watch || Fritz Stelluto</title>
   <meta name="author" content="gotofritz">
-  <meta name="description" content="A gulp watch task will stop as soon as you have a Less error. Here&amp;#39;s I how prevented that.">
+  <meta name="description" content="A gulp watch task will stop as soon as you have a Less error. Here’s I how prevented that.">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <link href="/assets/favicon.ico" rel="shortcut icon">
   <link rel="icon" href="/assets/favicon.gif" type="image/gif" />
   <link href="/assets/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 </head>
 
-<body ontouchstart="">
-  <header id="header" class="inner">
-    <nav id="main-nav">
-      <div>
-        <a href="/">home</a>
-        <a href="/blog/">blog</a>
-      </div>
-    </nav>
+<body class="content-post"">
+  <div class="gradient-container">
+    <main class="panel-container">
+      <div class="content">
+        <nav class="topnav">
+          <div itemscope itemtype="http://schema.org/Person" class="vcard group-of-links">
+            <a href="/">home</a>
+            <a href="/fritz-stelluto_resume.pdf" title="my CV as a PDF">search</a>
+          </div>
+        </nav>
 
-    <nav id="sub-nav" class="alignright">
-      <form class="search" action="http://google.com/search" method="get">
-        <input class="alignright" type="text" name="q" results="0">
-        <input type="hidden" name="q" value="site:gotofritz.net">
-      </form>
-    </nav>
-  </header>
-
-
-<div id="content" class="inner">
-  <article class="post">
-    <h1 class="title">How to prevent Less errors stopping gulp watch</h1>
-    <div>
+<article>
+  <section class="intro">
+    <!--
       <div class="meta">
         <div class="date">
-          <time datetime="2015-06-19T00:56:00+02:00" pubdate>2015-06-19</time>
+          <time datetime="2017-08-29T13:44:00+02:00" pubdate>2017-08-29</time>
         </div>
         <div class="tags">
-          gulp,
-          less
+          security,
+          frontend
         </div>
       </div>
-      <div class="entry-content">
-    <div class="archive">This post is old, and probably obsolete</div>
-<p>A <code>gulp watch</code> task will stop as soon as you have a Less error. Here&#39;s I how prevented that.
-<!--more--></p>
-<h2 id="a-simple-gulp-less-task">A simple gulp less task</h2>
+       -->
+    <div class="post-meta">
+      <time datetime="2015-06-19T00:56:00+02:00" pubdate>2015-06-19</time>
+      //
+      <div class="tags">
+        gulp,
+        less
+      </div>
+    </div>
+    <h1>How to prevent Less errors stopping gulp watch</h1>
+    <h2>A gulp watch task will stop as soon as you have a Less error. Here’s I how prevented that.</h2>
+
+  </section>
+  <section class="post-content">
+    <h2 id="a-simple-gulp-less-task">A simple gulp less task</h2>
 <p>Here is a simple gulp less task that runs manually by typing <code>gulp css:less</code>:</p>
 <pre><code>var less = require(&quot;gulp-less&quot;);
 
@@ -59,8 +61,7 @@ gulp.task(“css:less&quot;, function (cb) {
   .src(“./less/**/*.less&quot;)
   .pipe(less(lessArgs))
   .pipe(gulp.dest(&quot;dist/&quot;));
-});
-</code></pre><h2 id="a-simple-gulp-watch-task">A simple &quot;gulp watch&quot; task</h2>
+});</code></pre><h2 id="a-simple-gulp-watch-task">A simple “gulp watch” task</h2>
 <p>Here is a simple watch version of the task - it will watch less files, and rerun the task whenever a file is changed:</p>
 <pre><code>var less = require(&quot;gulp-less&quot;);
 var watch = require(&quot;gulp-watch&quot;);
@@ -75,15 +76,14 @@ gulp.task(&quot;css:watch&quot;, function (cb) {
   .pipe(watch(“./less/**/*.less&quot;))
   .pipe(less(lessArgs))
   .pipe(gulp.dest(&quot;dist/&quot;));
-});
-</code></pre><h2 id="the-gulp-less-plugin-documentation-doesn-t-help">The gulp-less plugin documentation doesn’t help</h2>
-<p>The <a href="https://www.npmjs.com/package/gulp-less">gulp-less plugin documentation</a> states</p>
+});</code></pre><h2 id="the-gulp-less-plugin-documentation-doesn-t-help">The gulp-less plugin documentation doesn’t help</h2>
+<p>The <a pppp href="https://www.npmjs.com/package/gulp-less">gulp-less plugin documentation</a> states</p>
 <blockquote>
-<p>By default, a gulp task will fail and all streams will halt when an error happens.To change this behavior check out the error handling documentation <a href="https://github.com/gulpjs/gulp/blob/master/docs/recipes/combining-streams-to-handle-errors.md">here</a></p>
+<p>By default, a gulp task will fail and all streams will halt when an error happens.To change this behavior check out the error handling documentation <a pppp href="https://github.com/gulpjs/gulp/blob/master/docs/recipes/combining-streams-to-handle-errors.md">here</a></p>
 </blockquote>
 <p>But don’t waste your time installing the <code>stream-combiner2</code> plugin - it doesn’t work.</p>
-<p><code>Plumber</code>, which  I came across when googling for the issue (you’ll probably end up <a href="https://github.com/gulpjs/gulp/issues/259">in this github issue</a>  sooner or later if you google for this) didn&#39;t help either.</p>
-<h2 id="how-to-stop-gulp-watch-dying-when-on-a-less-or-sass-error">How to stop &quot;gulp watch&quot; dying when on a Less or Sass error</h2>
+<p><code>Plumber</code>, which  I came across when googling for the issue (you’ll probably end up <a pppp href="https://github.com/gulpjs/gulp/issues/259">in this github issue</a>  sooner or later if you google for this) didn’t help either.</p>
+<h2 id="how-to-stop-gulp-watch-dying-when-on-a-less-or-sass-error">How to stop “gulp watch” dying when on a Less or Sass error</h2>
 <p>The solution that worked for me was to create a function which handles the error and make the function emit the error. Then attach directly to the less task:</p>
 <pre><code>var gutil = require(&quot;gulp-util&quot;);
 var less = require(&quot;gulp-less&quot;);
@@ -103,58 +103,24 @@ gulp.task(taskName, function jsLint() {
   .pipe(watch(“./less/**/*.less&quot;))
   .pipe(less(lessArgs).on(&#39;error&#39;, onError))
   .pipe(gulp.dest(&quot;dist/&quot;));
-});
-</code></pre><p>In the example above, the function is <code>onError</code> - is the “this.emit” that does the magic. <code>gutil.log</code> is only eye candy. The onError function is connected to less with <code>.on(“error”, onError)</code>. And that’s all there is to it.</p>
+});</code></pre><p>In the example above, the function is <code>onError</code> - is the “this.emit” that does the magic. <code>gutil.log</code> is only eye candy. The onError function is connected to less with <code>.on(“error”, onError)</code>. And that’s all there is to it.</p>
+  </section>
 
-      </div>
+
     </div>
-  </article>
-
-
-<!-- <section id="comment">
-    <h1 class="title">Comments</h1>
-    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-</div>
-</section>
-
   </div>
-  -->
-  <footer id="footer" class="inner">Copyright &copy; 2016
+</div>
 
-    Fritz Stelluto
-
-</footer>
-<!--
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script type="text/javascript">
-      var disqus_shortname = 'goto-fritz';
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-11254155-2']);
+  _gaq.push(['_trackPageview']);
 
-
-        // var disqus_developer = 1;
-        var disqus_identifier = 'http://gotofritz.net/blog/geekery/backing-up-hard-disk-os-x/';
-        var disqus_url = 'http://gotofritz.net/blog/geekery/backing-up-hard-disk-os-x/';
-        var disqus_script = 'embed.js';
-
-    (function () {
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    }());
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
 </script>
--->
-
-
-  <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-11254155-2']);
-    _gaq.push(['_trackPageview']);
-
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
-
 </body>
 </html>

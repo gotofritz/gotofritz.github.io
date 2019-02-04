@@ -44,8 +44,9 @@
       </div>
       <div class="entry-content">
     
-<p>A quick way to remove duplicates in JS in ES5. It <a href="http://kangax.github.com/es5-compat-table/">needs an array.filter polyfill for IE &lt; 9</a>
-<!--more--></p>
+<p>A quick way to remove duplicates in JS in ES5. It <a href="http://kangax.github.com/es5-compat-table/">needs an array.filter polyfill for IE &lt; 9</a></p>
+<!--more-->
+
 <p>As long as the order  doesn&#39;t matter</p>
 <pre><code>//A quick way to remove duplicates in JS. It needs an array.filter polyfill for IE &lt; 9
 var arrayToFilter = [ 4, 5, 5, 5, 2, 1, 3, 1, 1, 2, 1, 3 ];
@@ -53,8 +54,7 @@ arrayToFilter.
   sort().
   filter(function (element, i, arr) {
     return (i === 0) || (element !== arr[i-1]);
-  });
-</code></pre>
+  });</code></pre>
       </div>
     </div>
   </article>

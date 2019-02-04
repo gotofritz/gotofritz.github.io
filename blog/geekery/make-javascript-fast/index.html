@@ -42,17 +42,16 @@
       </div>
       <div class="entry-content">
     
-<p>Mozilla&#39;s David Mandelin has published <a href="http://people.mozilla.com/~dmandelin/KnowYourEngines_Velocity2011.pdf">an interesting slideshow about JS optimization</a>. Here are the takeaway points in case it disappears.
+<p>Mozilla&#39;s David Mandelin has published <a href="http://people.mozilla.com/~dmandelin/KnowYourEngines_Velocity2011.pdf">an interesting slideshow about JS optimization</a>. Here are the takeaway points in case it disappears.</p>
 <!--more-->
-The takeaway points:</p>
+<p>The takeaway points:</p>
 <h3 id="treat-variables-as-if-they-were-strongly-typed">Treat variables as if they were strongly typed</h3>
 <p>E.g., if var a=1 don&#39;t assign a string to a later on</p>
 <h3 id="use-objects-of-the-same-shape-">Use objects of the same &#39;shape&#39;</h3>
 <p>E.g.,</p>
 <pre><code>var obj1 = { a:1, b:2, c:3 };
 var obj2 = { a:2, b:78, c:19 };
-var obj3 = { a:5, d:&quot;oh noes&quot; };
-</code></pre><p>obj1 and obj2 have the same shape, obj3 doesn&#39;t.</p>
+var obj3 = { a:5, d:&quot;oh noes&quot; };</code></pre><p>obj1 and obj2 have the same shape, obj3 doesn&#39;t.</p>
 <h3 id="prototype-chain">Prototype chain</h3>
 <p>The prototype chain is preferable to deeply nested closures, because the steps to fetch variables are cached with prototype chains, whereas they are not with closures</p>
 <h3 id="short-lived-objects">Short lived objects</h3>

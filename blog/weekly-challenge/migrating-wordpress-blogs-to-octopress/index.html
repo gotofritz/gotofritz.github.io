@@ -4,375 +4,331 @@
   <meta charset="utf-8">
   <title>Migrating Wordpress blogs to Octopress || Fritz Stelluto</title>
   <meta name="author" content="gotofritz">
-  <meta name="description" content="This week&amp;#39;s challenge: liberating my site from Wordpress&amp;#39; clumsy grasp.">
+  <meta name="description" content="This week&amp;#x2019;s challenge: liberating my site from Wordpress&amp;#x2019; clumsy grasp.">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <link href="/assets/favicon.ico" rel="shortcut icon">
   <link rel="icon" href="/assets/favicon.gif" type="image/gif" />
   <link href="/assets/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 </head>
 
-<body ontouchstart="">
-  <header id="header" class="inner">
-    <nav id="main-nav">
-      <div>
-        <a href="/">home</a>
-        <a href="/blog/">blog</a>
-      </div>
-    </nav>
+<body class="content-post"">
+  <div class="gradient-container">
+    <main class="panel-container">
+      <div class="content">
+        <nav class="topnav">
+          <div itemscope itemtype="http://schema.org/Person" class="vcard group-of-links">
+            <a href="/">home</a>
+            <a href="/fritz-stelluto_resume.pdf" title="my CV as a PDF">search</a>
+          </div>
+        </nav>
 
-    <nav id="sub-nav" class="alignright">
-      <form class="search" action="http://google.com/search" method="get">
-        <input class="alignright" type="text" name="q" results="0">
-        <input type="hidden" name="q" value="site:gotofritz.net">
-      </form>
-    </nav>
-  </header>
-
-
-<div id="content" class="inner">
-  <article class="post">
-    <h1 class="title">Migrating Wordpress blogs to Octopress</h1>
-    <div>
+<article>
+  <section class="intro">
+    <!--
       <div class="meta">
         <div class="date">
-          <time datetime="2012-09-16T14:26:00+02:00" pubdate>2012-09-16</time>
+          <time datetime="2017-08-29T13:44:00+02:00" pubdate>2017-08-29</time>
         </div>
         <div class="tags">
-          octopress
+          security,
+          frontend
         </div>
       </div>
-      <div class="entry-content">
-    
-<p>This week&#39;s challenge: liberating my site from Wordpress&#39; clumsy grasp.<!--more--></p>
+       -->
+    <div class="post-meta">
+      <time datetime="2012-09-16T14:26:00+02:00" pubdate>2012-09-16</time>
+      //
+      <div class="tags">
+        octopress
+      </div>
+    </div>
+    <h1>Migrating Wordpress blogs to Octopress</h1>
+    <h2>This week&#x2019;s challenge: liberating my site from Wordpress&#x2019; clumsy grasp.</h2>
+
+  </section>
+  <section class="post-content">
+    </p>
 <h2 id="about-the-challenge">About the challenge</h2>
-<p>This has been said many times before: it&#39;s fantastic how Wordpress allowed so many people the ability to publish their content on the internet for free. For all the criticism, let&#39;s not forget how many people gave their free time to developing Wordpress. But the world has moved on and I can&#39;t stand the platform anymore. So I am moving to Octopress.</p>
+<p>This has been said many times before: it&#x2019;s fantastic how Wordpress allowed so many people the ability to publish their content on the internet for free. For all the criticism, let&#x2019;s not forget how many people gave their free time to developing Wordpress. But the world has moved on and I can&#x2019;t stand the platform anymore. So I am moving to Octopress.</p>
 <h2 id="installing-octopress">Installing Octopress</h2>
 <p>I simply followed the instructions on the <a href="http://octopress.org/docs/setup/" title="[new window] Octopress Setup - Octopress" target="_blank">Octopress setup page</a>, using rvm to upgrade ruby, and it all went well.</p>
 <h2 id="configuring-octopress">Configuring Octopress</h2>
-<p>Next I edited the _config.yml file - again, no major surprises there. I used &quot;$F, %a&quot;&quot; as the date format ( 2004-12-25, Mon ) and /:categories/:title/ as the permalink structure.</p>
+<p>Next I edited the _config.yml file - again, no major surprises there. I used &#x201C;$F, %a&#x201D;&#x201D; as the date format ( 2004-12-25, Mon ) and /:categories/:title/ as the permalink structure.</p>
 <h2 id="creating-test-blogs">Creating test blogs</h2>
-<p>I created the first test file:
-<code>bash
-$ rake new_post[&quot;Test 1, I will probably delete this&quot;]
+<p>I created the first test file:</p>
+<pre class="language-bash"><code class="language-bash">$ rake new_post<span class="token punctuation">[</span><span class="token string">&quot;Test 1, I will probably delete this&quot;</span><span class="token punctuation">]</span>
 Creating new post: source/_posts/2012-09-15-test-1.markdown
-subl source/_posts/2012-09-15-test-1.markdown</code></p>
+subl source/_posts/2012-09-15-test-1.markdown</code></pre>
 <p>which opeened the file in Sublime Text 2. I added a single category and a some sample text.</p>
-<h2 id="-bash">``` bash</h2>
-<p>layout: post.hbs
-title: &quot;Test 1&quot;
+<pre class="language-bash"><code class="language-bash">---
+layout: post.hbs
+title: <span class="token string">&quot;Test 1&quot;</span>
 date: 2012-09-15 17:34
-comments: true</p>
-<h2 id="categories-geekery">categories: geekery</h2>
-<p>This is my first test.
-<!--more-->
-And this is what it is all about.
-```</p>
-<p>I generated the site with
-``` bash
-$rake generate</p>
-<h2 id="generating-site-with-jekyll">Generating Site with Jekyll</h2>
-<p>directory source/stylesheets/
+comments: <span class="token boolean">true</span>
+categories: geekery
+---
+This is my first test.
+<span class="token operator">&lt;</span><span class="token operator">!</span>--more--<span class="token operator">&gt;</span>
+And this is what it is all about.</code></pre>
+<p>I generated the site with</p>
+<pre class="language-bash"><code class="language-bash"><span class="token variable">$rake</span> generate
+<span class="token comment">## Generating Site with Jekyll</span>
+directory source/stylesheets/
    create source/stylesheets/screen.css
-/Users/ME/.rvm/gems/ruby-1.9.3-p194/gems/maruku-0.6.0/lib/maruku/input/parse_doc.rb:22:in `<top (required)>&#39;: iconv will be deprecated in the future, use String#encode instead.
+/Users/ME/.rvm/gems/ruby-1.9.3-p194/gems/maruku-0.6.0/lib/maruku/input/parse_doc.rb:22:in `<span class="token operator">&lt;</span>top <span class="token punctuation">(</span>required<span class="token punctuation">)</span><span class="token operator">&gt;</span>&apos;: <span class="token function">iconv</span> will be deprecated <span class="token keyword">in</span> the future, use String<span class="token comment">#encode instead.</span>
 Configuration from /Users/ME/work/octopress/_config.yml
-Building site: source -&gt; public
-Successfully generated site: source -&gt; public</p>
-<p>$open public/index.html
-```
-It launched the static file into a browser. It looked like all the bits are there, but of course the images etc aren&#39;t because the app needs a web server. I could just deploy everything to Apache, but there is a more convenient way.</p>
+Building site: <span class="token function">source</span> -<span class="token operator">&gt;</span> public
+Successfully generated site: <span class="token function">source</span> -<span class="token operator">&gt;</span> public
+
+<span class="token variable">$open</span> public/index.html</code></pre>
+<p>It launched the static file into a browser. It looked like all the bits are there, but of course the images etc aren&#x2019;t because the app needs a web server. I could just deploy everything to Apache, but there is a more convenient way.</p>
 <h2 id="previewing-octopress-with-pow">Previewing Octopress with POW</h2>
-<p>Octopress is a rack app, and can be viewed wtih <a href="http://pow.cx/" title="[new window] Pow: Zero-configuration Rack server for Mac OS X" target="_blank">Pow</a>, the simplest of rack servers. I installed it as per the instructions, then started rake to automatically deploy to it when I save.
-<code>bash
-curl get.pow.cx | sh
-cd ~/.pow
-ln -s ~/work/octopress octopress
-rake watch</code></p>
+<p>Octopress is a rack app, and can be viewed wtih <a href="http://pow.cx/" title="[new window] Pow: Zero-configuration Rack server for Mac OS X" target="_blank">Pow</a>, the simplest of rack servers. I installed it as per the instructions, then started rake to automatically deploy to it when I save.</p>
+<pre class="language-bash"><code class="language-bash"><span class="token function">curl</span> get.pow.cx <span class="token operator">|</span> sh
+<span class="token function">cd</span> ~/.pow
+<span class="token function">ln</span> -s ~/work/octopress octopress
+rake <span class="token function">watch</span></code></pre>
 <h2 id="changing-octopress-theme">Changing Octopress theme</h2>
-<p>Wanted to try a different theme, so went for the <a href="http://zespia.tw/Octopress-Theme-Slash/" title="[new window] Slash — a minimal theme for Octopress" target="_blank">Slash Octopress theme</a>. The instructions are pretty simple, but had to remember to stop watching the octopress folder before running the commands.
-<code>bash
-$ cd octopress
-$ git clone git://github.com/tommy351/Octopress-Theme-Slash.git .themes/slash
-$ rake install[&#39;slash&#39;]
+<p>Wanted to try a different theme, so went for the <a href="http://zespia.tw/Octopress-Theme-Slash/" title="[new window] Slash &#x2014; a minimal theme for Octopress" target="_blank">Slash Octopress theme</a>. The instructions are pretty simple, but had to remember to stop watching the octopress folder before running the commands.</p>
+<pre class="language-bash"><code class="language-bash">$ <span class="token function">cd</span> octopress
+$ <span class="token function">git</span> clone git://github.com/tommy351/Octopress-Theme-Slash.git .themes/slash
+$ rake install<span class="token punctuation">[</span><span class="token string">&apos;slash&apos;</span><span class="token punctuation">]</span>
 $ rake generate
-$ rake watch</code></p>
+$ rake <span class="token function">watch</span></code></pre>
 <h2 id="liberating-data-from-wordpress-blogs">Liberating data from Wordpress blogs</h2>
-<p>Now the laborious parts. First of all, got the <a href="https://github.com/thomasf/exitwp" title="[new window] thomasf/exitwp · GitHub" target="_blank">Exitwp</a> plugin from github
-<code>bash
-git clone https://github.com/thomasf/exitwp.git</code>
-Then I logged onto the Wordpress admin console (for the last time!) and in <tt>wp-admin/export.php</tt> I clicked on &quot;Download Export File&quot;. I saved the xml files into the wordpress-xml directory I just cloned from github.</p>
-<p>I run the XML through xmlint as suggested, although without a DTD I am not sure what I was looking for
-<code>bash
-$ xmllint --noout wordpress-xml/*.xml</code></p>
-<p>Installed dependencies - but first had to <a href="http://guide.python-distribute.org/installation.html" title="[new window] Installing the Package Tools — The Hitchhiker's Guide to Packaging v1.0 documentation" target="_blank">install Pip</a>.
-<code>bash
-$ curl -O http://pypi.python.org/packages/source/p/pip/pip-0.7.2.tar.gz
-$ tar xzf pip-0.7.2.tar.gz
-$ cd pip-0.7.2
-$ python setup.py install
-$ cd exitwp/
-$ sudo pip install --upgrade  -r pip_requirements.txt</code></p>
-<p>Edited the config.yaml file - changed download_images to true, and added a few filters:
-{% raw %}
-``` bash</p>
-<h1 id="replace-certain-patterns-in-body">Replace certain patterns in body</h1>
-<h1 id="simply-replace-the-key-with-its-value">Simply replace the key with its value</h1>
-<p>body_replace: {
-    &#39;[python]&#39;: &#39;{% codeblock lang:python %}&#39;,
-    &#39;[/python]&#39;: &#39;{% endcodeblock %}&#39;,
-    &#39;[bash]&#39;: &#39;{% codeblock lang:bash %}&#39;,
-    &#39;[/bash]&#39;: &#39;{% endcodeblock %}&#39;,
-    &#39;[js]&#39;: &#39;{% codeblock lang:js %}&#39;,
-    &#39;[/js]&#39;: &#39;{% endcodeblock %}&#39;,
-    &#39;[ruby]&#39;: &#39;{% codeblock lang:ruby %}&#39;,
-    &#39;[/ruby]&#39;: &#39;{% endcodeblock %}&#39;,
-    &#39;[xml]&#39;: &#39;{% codeblock lang:xml %}&#39;,
-    &#39;[/xml]&#39;: &#39;{% endcodeblock %}&#39;,
-    &#39;[css]&#39;: &#39;{% codeblock lang:css %}&#39;,
-    &#39;[/css]&#39;: &#39;{% endcodeblock %}&#39;,
-    &#39;[html]&#39;: &#39;{% codeblock lang:html %}&#39;,
-    &#39;[/html]&#39;: &#39;{% endcodeblock %}&#39;,
-    &#39;[yaml]&#39;: &#39;{% codeblock lang:yaml %}&#39;,
-    &#39;[/yaml]&#39;: &#39;{% endcodeblock %}&#39;,
-    &#39;[php]&#39;: &#39;{% codeblock lang:php %}&#39;,
-    &#39;[/php]&#39;: &#39;{% endcodeblock %}&#39;
-}
-```
-{% endraw %}</p>
-<p>Finally, run the converter command.
-<code>bash
-python exitwp.py</code></p>
-<p>It is quite good - it mostly does a good job, and the lists the files it couldn&#39;t parse at the end. I only had 6 out of 400 posts, which is quite something.</p>
-<p>Even the files it couldn&#39;t convert, it still created them with the right front matter, so all I needed to take care of is the HTML to markdown conversion. I used <a href="http://johnmacfarlane.net/pandoc/README.html" title="[new window] Pandoc - Pandoc User’s Guide" target="_blank">Pandoc, a remarkable conversion tool</a> for that. I pasted the HTML from the Wordpress window to a file called text.html, run the command below, then pasted the text.md file into the correct jekyll post file.</p>
-<p><code>bash
-$ pandoc -f html -t markdown text.html  &gt; text.md
-$ subl text.md</code></p>
-<p>The only issue is that a the &lt;!--more--&gt; excerpt thing was missing for most posts. I bit the bullet and added it manually to all the files - it only took me half a hour, nothing too dramatic.</p>
+<p>Now the laborious parts. First of all, got the <a href="https://github.com/thomasf/exitwp" title="[new window] thomasf/exitwp &#xB7; GitHub" target="_blank">Exitwp</a> plugin from github</p>
+<pre class="language-bash"><code class="language-bash"><span class="token function">git</span> clone https://github.com/thomasf/exitwp.git</code></pre>
+<p>Then I logged onto the Wordpress admin console (for the last time!) and in <tt>wp-admin/export.php</tt> I clicked on &#x201C;Download Export File&#x201D;. I saved the xml files into the wordpress-xml directory I just cloned from github.</p>
+<p>I run the XML through xmlint as suggested, although without a DTD I am not sure what I was looking for</p>
+<pre class="language-bash"><code class="language-bash">$ xmllint --noout wordpress-xml/*.xml</code></pre>
+<p>Installed dependencies - but first had to <a href="http://guide.python-distribute.org/installation.html" title="[new window] Installing the Package Tools &#x2014; The Hitchhiker&apos;s Guide to Packaging v1.0 documentation" target="_blank">install Pip</a>.</p>
+<pre class="language-bash"><code class="language-bash">$ <span class="token function">curl</span> -O http://pypi.python.org/packages/source/p/pip/pip-0.7.2.tar.gz
+$ <span class="token function">tar</span> xzf pip-0.7.2.tar.gz
+$ <span class="token function">cd</span> pip-0.7.2
+$ python setup.py <span class="token function">install</span>
+$ <span class="token function">cd</span> exitwp/
+$ <span class="token function">sudo</span> pip <span class="token function">install</span> --upgrade  -r pip_requirements.txt</code></pre>
+<p>Edited the config.yaml file - changed download_images to true, and added a few filters:<br>{% raw %}</p>
+<pre class="language-bash"><code class="language-bash"><span class="token comment"># Replace certain patterns in body</span>
+<span class="token comment"># Simply replace the key with its value</span>
+body_replace: <span class="token punctuation">{</span>
+    <span class="token string">&apos;[python]&apos;</span><span class="token keyword">:</span> <span class="token string">&apos;{% codeblock lang:python %}&apos;</span>,
+    <span class="token string">&apos;[/python]&apos;</span><span class="token keyword">:</span> <span class="token string">&apos;{% endcodeblock %}&apos;</span>,
+    <span class="token string">&apos;[bash]&apos;</span><span class="token keyword">:</span> <span class="token string">&apos;{% codeblock lang:bash %}&apos;</span>,
+    <span class="token string">&apos;[/bash]&apos;</span><span class="token keyword">:</span> <span class="token string">&apos;{% endcodeblock %}&apos;</span>,
+    <span class="token string">&apos;[js]&apos;</span><span class="token keyword">:</span> <span class="token string">&apos;{% codeblock lang:js %}&apos;</span>,
+    <span class="token string">&apos;[/js]&apos;</span><span class="token keyword">:</span> <span class="token string">&apos;{% endcodeblock %}&apos;</span>,
+    <span class="token string">&apos;[ruby]&apos;</span><span class="token keyword">:</span> <span class="token string">&apos;{% codeblock lang:ruby %}&apos;</span>,
+    <span class="token string">&apos;[/ruby]&apos;</span><span class="token keyword">:</span> <span class="token string">&apos;{% endcodeblock %}&apos;</span>,
+    <span class="token string">&apos;[xml]&apos;</span><span class="token keyword">:</span> <span class="token string">&apos;{% codeblock lang:xml %}&apos;</span>,
+    <span class="token string">&apos;[/xml]&apos;</span><span class="token keyword">:</span> <span class="token string">&apos;{% endcodeblock %}&apos;</span>,
+    <span class="token string">&apos;[css]&apos;</span><span class="token keyword">:</span> <span class="token string">&apos;{% codeblock lang:css %}&apos;</span>,
+    <span class="token string">&apos;[/css]&apos;</span><span class="token keyword">:</span> <span class="token string">&apos;{% endcodeblock %}&apos;</span>,
+    <span class="token string">&apos;[html]&apos;</span><span class="token keyword">:</span> <span class="token string">&apos;{% codeblock lang:html %}&apos;</span>,
+    <span class="token string">&apos;[/html]&apos;</span><span class="token keyword">:</span> <span class="token string">&apos;{% endcodeblock %}&apos;</span>,
+    <span class="token string">&apos;[yaml]&apos;</span><span class="token keyword">:</span> <span class="token string">&apos;{% codeblock lang:yaml %}&apos;</span>,
+    <span class="token string">&apos;[/yaml]&apos;</span><span class="token keyword">:</span> <span class="token string">&apos;{% endcodeblock %}&apos;</span>,
+    <span class="token string">&apos;[php]&apos;</span><span class="token keyword">:</span> <span class="token string">&apos;{% codeblock lang:php %}&apos;</span>,
+    <span class="token string">&apos;[/php]&apos;</span><span class="token keyword">:</span> <span class="token string">&apos;{% endcodeblock %}&apos;</span>
+<span class="token punctuation">}</span></code></pre>
+<p>{% endraw %}</p>
+<p>Finally, run the converter command.</p>
+<pre class="language-bash"><code class="language-bash">python exitwp.py</code></pre>
+<p>It is quite good - it mostly does a good job, and the lists the files it couldn&#x2019;t parse at the end. I only had 6 out of 400 posts, which is quite something.</p>
+<p>Even the files it couldn&#x2019;t convert, it still created them with the right front matter, so all I needed to take care of is the HTML to markdown conversion. I used <a href="http://johnmacfarlane.net/pandoc/README.html" title="[new window] Pandoc - Pandoc User&#x2019;s Guide" target="_blank">Pandoc, a remarkable conversion tool</a> for that. I pasted the HTML from the Wordpress window to a file called text.html, run the command below, then pasted the text.md file into the correct jekyll post file.</p>
+<pre class="language-bash"><code class="language-bash">$ pandoc -f html -t markdown text.html  <span class="token operator">&gt;</span> text.md
+$ subl text.md</code></pre>
+<p>The only issue is that a the &lt;!&#x2013;more&#x2013;&gt; excerpt thing was missing for most posts. I bit the bullet and added it manually to all the files - it only took me half a hour, nothing too dramatic.</p>
 <h2 id="combining-multiple-octopress-blogs">Combining multiple Octopress blogs</h2>
-<p>With the basics out of the way, it&#39;s time to fine tune things. I actually had two instances of Wordpress running two separate subsites - a blog and a portfolio site with a common homepage. I was hoping to be able to combine them when WP 3.0 came out, but managing the subdomains was too painful so I never did. I want to keep that setup for now, as I am planning to do a lot of reorganizing of the portfolio site, but not the blog. Octopress is not set up to manage multiple blogs, but eventually found a way.</p>
+<p>With the basics out of the way, it&#x2019;s time to fine tune things. I actually had two instances of Wordpress running two separate subsites - a blog and a portfolio site with a common homepage. I was hoping to be able to combine them when WP 3.0 came out, but managing the subdomains was too painful so I never did. I want to keep that setup for now, as I am planning to do a lot of reorganizing of the portfolio site, but not the blog. Octopress is not set up to manage multiple blogs, but eventually found a way.</p>
 <p>My starting point was two separate octopress instances, Octo1/ and Octo2/, sitting side by side.</p>
-<p>First of all I tried deploying both to a third folder octopress_deploy. That had the undesirable side effect of duplicating assets - there&#39;ll be two versions of images, css, and so on. But also, rake watch didn&#39;t work anymore. I found watch very useful so that wasn&#39;t good.</p>
-<p>Then I tried the technique suggested on this <a href="https://github.com/imathis/octopress/issues/708" title="[new window] 2 Blogs in 1 Domain · Issue #708 · imathis/octopress" target="_blank">Octopress github page</a>. This makes the rake watch task work again, but doesn&#39;t solve the repeated assets issue. I guess I would have to edit the themes for that, something I can do later.</p>
-<p>So the main site is the blog. It is a vanilla Octopress site, except that the links have the structure
-<code>yaml
-root: /
-permalink: /blog/:categories/:title/</code>
-The portfolio site is published to the SOURCE of the main site - so that when the main site is generated, it copies along the portfolio site files too.</p>
-<p><code>yaml
-root: /work
-permalink: /work/:categories/:title/
-source: source</code>
-The rakefile for the portfolio site was amended accordingly, so that the generate publishes to the correct directory (again, notice the &#39;source&#39; in the path)
-<code>ruby
-public_dir      = &quot;~/work/octopress/source/work&quot;    # compiled site directory</code>
-So that almost creates the structure I want:
-<code>gotofritz.net/ -&gt; homepage, with links to blog entries and a single link to the portfolio site in the main nav
+<p>First of all I tried deploying both to a third folder octopress_deploy. That had the undesirable side effect of duplicating assets - there&#x2019;ll be two versions of images, css, and so on. But also, rake watch didn&#x2019;t work anymore. I found watch very useful so that wasn&#x2019;t good.</p>
+<p>Then I tried the technique suggested on this <a href="https://github.com/imathis/octopress/issues/708" title="[new window] 2 Blogs in 1 Domain &#xB7; Issue #708 &#xB7; imathis/octopress" target="_blank">Octopress github page</a>. This makes the rake watch task work again, but doesn&#x2019;t solve the repeated assets issue. I guess I would have to edit the themes for that, something I can do later.</p>
+<p>So the main site is the blog. It is a vanilla Octopress site, except that the links have the structure</p>
+<pre class="language-yaml"><code class="language-yaml"><span class="token key atrule">root</span><span class="token punctuation">:</span> /
+<span class="token key atrule">permalink</span><span class="token punctuation">:</span> /blog/<span class="token punctuation">:</span>categories/<span class="token punctuation">:</span>title/</code></pre>
+<p>The portfolio site is published to the SOURCE of the main site - so that when the main site is generated, it copies along the portfolio site files too.</p>
+<pre class="language-yaml"><code class="language-yaml"><span class="token key atrule">root</span><span class="token punctuation">:</span> /work
+<span class="token key atrule">permalink</span><span class="token punctuation">:</span> /work/<span class="token punctuation">:</span>categories/<span class="token punctuation">:</span>title/
+<span class="token key atrule">source</span><span class="token punctuation">:</span> source</code></pre>
+<p>The rakefile for the portfolio site was amended accordingly, so that the generate publishes to the correct directory (again, notice the &#x2018;source&#x2019; in the path)</p>
+<pre class="language-ruby"><code class="language-ruby">public_dir      <span class="token operator">=</span> <span class="token string">&quot;~/work/octopress/source/work&quot;</span>    <span class="token comment"># compiled site directory</span></code></pre>
+<p>So that almost creates the structure I want:</p>
+<pre><code>gotofritz.net/ -&gt; homepage, with links to blog entries and a single link to the portfolio site in the main nav
 gotofritz.net/blog/ -&gt; blog homepage - MISSING
 gotofritz.net/blog/blah/blah-blah -&gt; blog entries
 ....
 gotofritz.net/work/ -&gt; portfolio homepage
 gotofritz.net/work/blah/blah-blah -&gt; portfolio entries
-...</code>
-Now I need a way to generate the missing blog summary page. I thought I could use the archive for that, since I don&#39;t use it for anyehing else. It turns out I can just move the index.html inside source/blog/archives to source/blog - that&#39;s my blog index page, there and then. Of course it uses a different template, but that&#39;s ok for now.</p>
-<p>Finally, some tweaks to the theme files. Changed <tt>octopress_blog/source/_includes/custom/navigation.html</tt> removing Archives links and changing url for blog links. Did the same on <tt>octopress_work/source/_includes/custom/navigation.html</tt>. Updated the favicons and head.html. Changed some image paths in the scss for the buttons in the top navigation bar - removed the Rails image-url( helper and replaced it with an hard coded URL. It&#39;s good enough for now.</p>
-<p>Added an intro message in the homepage by editing the default.html page
-{% raw %}
-<code>{% if &quot;/index.html&quot; == page.url %}
+...</code></pre><p>Now I need a way to generate the missing blog summary page. I thought I could use the archive for that, since I don&#x2019;t use it for anyehing else. It turns out I can just move the index.html inside source/blog/archives to source/blog - that&#x2019;s my blog index page, there and then. Of course it uses a different template, but that&#x2019;s ok for now.</p>
+<p>Finally, some tweaks to the theme files. Changed <tt>octopress_blog/source/<em>includes/custom/navigation.html</em></tt> removing Archives links and changing url for blog links. Did the same on <tt>octopresswork/source/_includes/custom/navigation.html</tt>. Updated the favicons and head.html. Changed some image paths in the scss for the buttons in the top navigation bar - removed the Rails image-url( helper and replaced it with an hard coded URL. It&#x2019;s good enough for now.</p>
+<p>Added an intro message in the homepage by editing the default.html page<br>{% raw %}</p>
+<pre><code>{% if &quot;/index.html&quot; == page.url %}
 Hello my name is fritz. blah blah
-{% endif %}</code>
-{% endraw %}</p>
-<p>That&#39;s pretty much it for now.</p>
+{% endif %}</code></pre><p>{% endraw %}</p>
+<p>That&#x2019;s pretty much it for now.</p>
 <h2 id="merging-sitemaps">Merging sitemaps</h2>
-<p>One issue with merging multiple blogs is that each comes with its own sitemap.xml file, and they&#39;ll need to be merged. After <a href="https://github.com/imathis/octopress/issues/708" title="[new window] 2 Blogs in 1 Domain · Issue #708 · imathis/octopress" target="_blank">a discussion on GitHub</a> I came up with these amends to the rakefile, which basically merge all the sitemap.xml files it finds inside the public/ directory, and runs at the end of the generate task
-``` ruby
-is_multiblog    = true        # runs some extra tasks for blogs</p>
-<h1 id="-">...</h1>
-<p>desc &quot;Generate jekyll site&quot;
-task :generate do
-  raise &quot;### You haven&#39;t set anything up yet. First run <code>rake install</code> to set up an Octopress theme.&quot; unless File.directory?(source_dir)
-  puts &quot;## Generating Site with Jekyll&quot;
-  system &quot;compass compile --css-dir #{source_dir}/stylesheets&quot;
-  system &quot;jekyll&quot;
-  if( defined? is_multiblog and is_multiblog )
-    Rake::Task[:merge_sitemaps].execute
-  end
-end</p>
-<h1 id="-">....</h1>
-<p>desc &quot;merges all the sitemaps it finds inside public. Useuful if you have more than one blog under the same site. Idea from https://github.com/imathis/octopress/issues/708&quot;
-task :merge_sitemaps do
-  root_dir = &quot;public&quot;
-  howmany  = 0
-  header   = []
-  trailer  = []
-  alllines = []
-  lines    = []
-  Dir.glob( root_dir + &quot;/**/sitemap.xml&quot; ).each{ |sitemap|
-    lines    = (IO.readlines sitemap)
-    header   = lines.slice!( 0..1 )
-    trailer  = [ lines.slice!( -1 ) ]
-    alllines = alllines + lines
-    howmany  += 1
-    File.delete sitemap
-  }
-  File.open( root_dir + &quot;/sitemap.xml&quot;, &#39;w&#39; ) do |f|
-    f.write ( header + alllines + trailer ).join( &quot;\n&quot; )
-  end
-  puts &quot;Merged #{howmany} sitemaps onto #{root_dir}/sitemap.xml&quot;
-end
-```</p>
-<p>I made <a href="https://developer.apple.com/downloads/index.action#">a pull request for this Octopress change</a>, should anyone be interested</p>
+<p>One issue with merging multiple blogs is that each comes with its own sitemap.xml file, and they&#x2019;ll need to be merged. After <a href="https://github.com/imathis/octopress/issues/708" title="[new window] 2 Blogs in 1 Domain &#xB7; Issue #708 &#xB7; imathis/octopress" target="_blank">a discussion on GitHub</a> I came up with these amends to the rakefile, which basically merge all the sitemap.xml files it finds inside the public/ directory, and runs at the end of the generate task</p>
+<pre class="language-ruby"><code class="language-ruby">is_multiblog    <span class="token operator">=</span> <span class="token keyword">true</span>        <span class="token comment"># runs some extra tasks for blogs</span>
+<span class="token comment"># ...</span>
+
+desc <span class="token string">&quot;Generate jekyll site&quot;</span>
+task <span class="token symbol">:generate</span> <span class="token keyword">do</span>
+  <span class="token keyword">raise</span> <span class="token string">&quot;### You haven&apos;t set anything up yet. First run `rake install` to set up an Octopress theme.&quot;</span> <span class="token keyword">unless</span> <span class="token builtin">File</span><span class="token punctuation">.</span>directory<span class="token operator">?</span><span class="token punctuation">(</span>source_dir<span class="token punctuation">)</span>
+  puts <span class="token string">&quot;## Generating Site with Jekyll&quot;</span>
+  system <span class="token string">&quot;compass compile --css-dir <span class="token interpolation"><span class="token delimiter tag">#{</span>source_dir<span class="token delimiter tag">}</span></span>/stylesheets&quot;</span>
+  system <span class="token string">&quot;jekyll&quot;</span>
+  <span class="token keyword">if</span><span class="token punctuation">(</span> <span class="token keyword">defined</span><span class="token operator">?</span> is_multiblog <span class="token keyword">and</span> is_multiblog <span class="token punctuation">)</span>
+    <span class="token constant">Rake</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token constant">Task</span><span class="token punctuation">[</span><span class="token symbol">:merge_sitemaps</span><span class="token punctuation">]</span><span class="token punctuation">.</span>execute
+  <span class="token keyword">end</span>
+<span class="token keyword">end</span>
+
+<span class="token comment"># ....</span>
+
+desc <span class="token string">&quot;merges all the sitemaps it finds inside public. Useuful if you have more than one blog under the same site. Idea from https://github.com/imathis/octopress/issues/708&quot;</span>
+task <span class="token symbol">:merge_sitemaps</span> <span class="token keyword">do</span>
+  root_dir <span class="token operator">=</span> <span class="token string">&quot;public&quot;</span>
+  howmany  <span class="token operator">=</span> <span class="token number">0</span>
+  header   <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+  trailer  <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+  alllines <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+  lines    <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+  <span class="token builtin">Dir</span><span class="token punctuation">.</span><span class="token function">glob</span><span class="token punctuation">(</span> root_dir <span class="token operator">+</span> <span class="token string">&quot;/**/sitemap.xml&quot;</span> <span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token keyword">each</span><span class="token punctuation">{</span> <span class="token operator">|</span>sitemap<span class="token operator">|</span>
+    lines    <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token builtin">IO</span><span class="token punctuation">.</span>readlines sitemap<span class="token punctuation">)</span>
+    header   <span class="token operator">=</span> lines<span class="token punctuation">.</span>slice<span class="token operator">!</span><span class="token punctuation">(</span> <span class="token number">0.</span><span class="token number">.1</span> <span class="token punctuation">)</span>
+    trailer  <span class="token operator">=</span> <span class="token punctuation">[</span> lines<span class="token punctuation">.</span>slice<span class="token operator">!</span><span class="token punctuation">(</span> <span class="token operator">-</span><span class="token number">1</span> <span class="token punctuation">)</span> <span class="token punctuation">]</span>
+    alllines <span class="token operator">=</span> alllines <span class="token operator">+</span> lines
+    howmany  <span class="token operator">+</span><span class="token operator">=</span> <span class="token number">1</span>
+    <span class="token builtin">File</span><span class="token punctuation">.</span>delete sitemap
+  <span class="token punctuation">}</span>
+  <span class="token builtin">File</span><span class="token punctuation">.</span><span class="token function">open</span><span class="token punctuation">(</span> root_dir <span class="token operator">+</span> <span class="token string">&quot;/sitemap.xml&quot;</span><span class="token punctuation">,</span> <span class="token string">&apos;w&apos;</span> <span class="token punctuation">)</span> <span class="token keyword">do</span> <span class="token operator">|</span>f<span class="token operator">|</span>
+    f<span class="token punctuation">.</span>write <span class="token punctuation">(</span> header <span class="token operator">+</span> alllines <span class="token operator">+</span> trailer <span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span> <span class="token string">&quot;\n&quot;</span> <span class="token punctuation">)</span>
+  <span class="token keyword">end</span>
+  puts <span class="token string">&quot;Merged <span class="token interpolation"><span class="token delimiter tag">#{</span>howmany<span class="token delimiter tag">}</span></span> sitemaps onto <span class="token interpolation"><span class="token delimiter tag">#{</span>root_dir<span class="token delimiter tag">}</span></span>/sitemap.xml&quot;</span>
+<span class="token keyword">end</span></code></pre>
+<p>I made <a pppp="" href="https://developer.apple.com/downloads/index.action#">a pull request for this Octopress change</a>, should anyone be interested</p>
 <h2 id="fixing-bad-seo-in-octopress-permalinks-with-categories">Fixing bad SEO in Octopress permalinks with categories</h2>
-<p>Another problem with Jekyll / Octopress is that it doesn&#39;t do a good job of creating permalinks with categories in them. It puts the category human readable name as the permalink, rather than a URL friendly version as per the post title. So, if you have a category &quot;Café dreams&quot; and post &quot;My favourite Café&quot;, and your structure is /:categories/:title, then your permalink will include <code>/Café Dreams/my-favourite-cafe</code> instead of  <code>/cafe-dreams/my-favourite-cafe</code>. There are two separate aspects to it, with two different solutions - fixing the legacy Wordpress pages, and ensuring all future pages do not suffer from this issue.</p>
+<p>Another problem with Jekyll / Octopress is that it doesn&#x2019;t do a good job of creating permalinks with categories in them. It puts the category human readable name as the permalink, rather than a URL friendly version as per the post title. So, if you have a category &#x201C;Caf&#xE9; dreams&#x201D; and post &#x201C;My favourite Caf&#xE9;&#x201D;, and your structure is /:categories/:title, then your permalink will include <code>/Caf&#xE9; Dreams/my-favourite-cafe</code> instead of  <code>/cafe-dreams/my-favourite-cafe</code>. There are two separate aspects to it, with two different solutions - fixing the legacy Wordpress pages, and ensuring all future pages do not suffer from this issue.</p>
 <h3 id="generating-octopress-permalinks-from-legacy-wordpress-slugs">Generating Octopress permalinks from legacy Wordpress slugs</h3>
-<p>This is a semi-manual batch job, but there isn&#39;t really an easy way to do it. The good thing is that all the posts have a Wordpress slug: field, so I can use that to create the title from. I create a temporary rake task for this. It worked ok, bar a couple of files which I fixed manually.
-``` ruby
-desc &quot;fix permalinks&quot;
-task :fix do</p>
-<p>  howmany = 0</p>
-<h1 id="get-all-files">get all files</h1>
-<p>  Dir.glob( &quot;#{source_dir}/#{posts_dir}/**&quot; ).each{ |post|</p>
-<pre><code>  #get frontmatter
-  stream = File.open( post )
-  frontmatter = YAML::load( stream )
-  stream.close
+<p>This is a semi-manual batch job, but there isn&#x2019;t really an easy way to do it. The good thing is that all the posts have a Wordpress slug: field, so I can use that to create the title from. I create a temporary rake task for this. It worked ok, bar a couple of files which I fixed manually.</p>
+<pre class="language-ruby"><code class="language-ruby">desc <span class="token string">&quot;fix permalinks&quot;</span>
+task <span class="token symbol">:fix</span> <span class="token keyword">do</span>
 
-  #only create permalink if not there
-  if( frontmatter[&quot;permalink&quot;] or !frontmatter.has_key?(&quot;slug&quot;) )
-    next
-  end
+  howmany <span class="token operator">=</span> <span class="token number">0</span>
 
-  #generate permalink - regex is from category_generator.rb
-  catSlug = frontmatter[&quot;categories&quot;][0].gsub(/_|\P{Word}/, &#39;-&#39;).gsub(/-{2,}/, &#39;-&#39;).downcase
-  frontmatter[&quot;permalink&quot;] = &quot;blog/&quot; + catSlug + &quot;/&quot; + frontmatter[&quot;slug&quot;]
+  <span class="token comment">#get all files</span>
+  <span class="token builtin">Dir</span><span class="token punctuation">.</span><span class="token function">glob</span><span class="token punctuation">(</span> <span class="token string">&quot;<span class="token interpolation"><span class="token delimiter tag">#{</span>source_dir<span class="token delimiter tag">}</span></span>/<span class="token interpolation"><span class="token delimiter tag">#{</span>posts_dir<span class="token delimiter tag">}</span></span>/**&quot;</span> <span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token keyword">each</span><span class="token punctuation">{</span> <span class="token operator">|</span>post<span class="token operator">|</span>
 
-  #gets rest of file
-  content = File.read( post ).gsub( /^---.+:?---/m, &quot;&quot; )
+      <span class="token comment">#get frontmatter</span>
+      stream <span class="token operator">=</span> <span class="token builtin">File</span><span class="token punctuation">.</span><span class="token function">open</span><span class="token punctuation">(</span> post <span class="token punctuation">)</span>
+      frontmatter <span class="token operator">=</span> <span class="token constant">YAML</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">load</span><span class="token punctuation">(</span> stream <span class="token punctuation">)</span>
+      stream<span class="token punctuation">.</span>close
 
-  #updates file
-  File.open( post, &quot;w&quot;) { |file|
-    file.puts frontmatter.to_yaml + &quot;---&quot; + content
-  }
+      <span class="token comment">#only create permalink if not there</span>
+      <span class="token keyword">if</span><span class="token punctuation">(</span> frontmatter<span class="token punctuation">[</span><span class="token string">&quot;permalink&quot;</span><span class="token punctuation">]</span> <span class="token keyword">or</span> <span class="token operator">!</span>frontmatter<span class="token punctuation">.</span>has_key<span class="token operator">?</span><span class="token punctuation">(</span><span class="token string">&quot;slug&quot;</span><span class="token punctuation">)</span> <span class="token punctuation">)</span>
+        <span class="token keyword">next</span>
+      <span class="token keyword">end</span>
 
-  howmany += 1
-</code></pre><p>  }
-  puts &quot;Update #{howmany} files&quot;</p>
-<p>end
-```</p>
+      <span class="token comment">#generate permalink - regex is from category_generator.rb</span>
+      catSlug <span class="token operator">=</span> frontmatter<span class="token punctuation">[</span><span class="token string">&quot;categories&quot;</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">gsub</span><span class="token punctuation">(</span><span class="token regex">/_|\P{Word}/</span><span class="token punctuation">,</span> <span class="token string">&apos;-&apos;</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">gsub</span><span class="token punctuation">(</span><span class="token regex">/-{2,}/</span><span class="token punctuation">,</span> <span class="token string">&apos;-&apos;</span><span class="token punctuation">)</span><span class="token punctuation">.</span>downcase
+      frontmatter<span class="token punctuation">[</span><span class="token string">&quot;permalink&quot;</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">&quot;blog/&quot;</span> <span class="token operator">+</span> catSlug <span class="token operator">+</span> <span class="token string">&quot;/&quot;</span> <span class="token operator">+</span> frontmatter<span class="token punctuation">[</span><span class="token string">&quot;slug&quot;</span><span class="token punctuation">]</span>
+
+      <span class="token comment">#gets rest of file</span>
+      content <span class="token operator">=</span> <span class="token builtin">File</span><span class="token punctuation">.</span><span class="token function">read</span><span class="token punctuation">(</span> post <span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">gsub</span><span class="token punctuation">(</span> <span class="token regex">/^---.+:?---/m</span><span class="token punctuation">,</span> <span class="token string">&quot;&quot;</span> <span class="token punctuation">)</span>
+
+      <span class="token comment">#updates file</span>
+      <span class="token builtin">File</span><span class="token punctuation">.</span><span class="token function">open</span><span class="token punctuation">(</span> post<span class="token punctuation">,</span> <span class="token string">&quot;w&quot;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token operator">|</span>file<span class="token operator">|</span>
+        file<span class="token punctuation">.</span>puts frontmatter<span class="token punctuation">.</span>to_yaml <span class="token operator">+</span> <span class="token string">&quot;---&quot;</span> <span class="token operator">+</span> content
+      <span class="token punctuation">}</span>
+
+      howmany <span class="token operator">+</span><span class="token operator">=</span> <span class="token number">1</span>
+  <span class="token punctuation">}</span>
+  puts <span class="token string">&quot;Update <span class="token interpolation"><span class="token delimiter tag">#{</span>howmany<span class="token delimiter tag">}</span></span> files&quot;</span>
+
+<span class="token keyword">end</span></code></pre>
 <h3 id="ensuring-new-octopress-pages-have-an-seo-friendly-link-with-category">Ensuring new Octopress pages have an SEO friendly link with category</h3>
-<p>In order to ensure all new Octopress posts do not suffer from the same bad permalink problem, I amended the rake new_post task to take an optonial second parameter, category. So you can call it like this
-<code>bash
-rake new_post[&quot;is coffee passé?&quot;,&quot;Café Dreams&quot;]</code>
-and it will generate this front matter below. Notice that rake will complain if there are any blank spaces between the two square brackets.
-While I was at it I added an &#39;editor&#39; variable (in my case, &quot;subl&quot;) to open the newly created file with.</p>
-<h2 id="-yaml">``` yaml</h2>
-<p>layout: post.hbs
-title: &quot;is coffee passé?&quot;
-date: 2012-09-20 17:14
-comments: true
-categories:
-- Café Dreams</p>
-<h2 id="permalink-blog-cafe-dreams-is-coffee-passe-">permalink: /blog/cafe-dreams/is-coffee-passe/</h2>
-<p>```
-Note that I had to the encoding as the first line, to avoid the regular expression choking on umlauts etc</p>
-<p>``` ruby</p>
-<h1 id="encoding-utf-8">encoding: utf-8</h1>
-<p>```
-The code for the rake is below.</p>
-<p>``` ruby</p>
-<h1 id="usage-rake-new_post-my-new-post-or-rake-new_post-my-new-post-or-rake-new_post-defaults-to-new-post-">usage rake new_post[my-new-post] or rake new_post[&#39;my new post&#39;] or rake new_post (defaults to &quot;new-post&quot;)</h1>
-<p>desc &quot;Begin a new post in #{source_dir}/#{posts_dir}&quot;
-task :new_post, :title, :category do |t, args|
-  raise &quot;### You haven&#39;t set anything up yet. First run <code>rake install</code> to set up an Octopress theme.&quot; unless File.directory?(source_dir)
-  mkdir_p &quot;#{source_dir}/#{posts_dir}&quot;
-  args.with_defaults(:title =&gt; &#39;new-post&#39;, :category =&gt; &quot;&quot;)
-  title = args.title
-  filename = &quot;#{source_dir}/#{posts_dir}/#{Time.now.strftime(&#39;%Y-%m-%d&#39;)}-#{title.to_url}.#{new_post_ext}&quot;
-  if File.exist?(filename)
-    abort(&quot;rake aborted!&quot;) if ask(&quot;#{filename} already exists. Do you want to overwrite?&quot;, [&#39;y&#39;, &#39;n&#39;]) == &#39;n&#39;
-  end</p>
-<p>  permalink = &quot;&quot;</p>
-<h1 id="get-config">get config</h1>
-<p>  stream = File.open( &quot;_config.yml&quot; )
-  configYml = YAML::load( stream )
-  stream.close</p>
-<h1 id="does-it-need-to-fix-the-permalink-">does it need to fix the permalink?</h1>
-<p>  if /:categories\b/.match( configYml[&quot;permalink&quot;] ) and !/:((year)|(date)|(month)|(day)|(pretty))\b/.match( configYml[&quot;permalink&quot;] )
-    permalink = &quot;permalink: &quot; + configYml[&quot;permalink&quot;]
-                    .gsub(/:categories/, args.category.to_url )
-                    .gsub(/:title/, title.to_url )
-  end</p>
-<p>  puts &quot;Creating new post: #{filename}&quot;
-  open(filename, &#39;w&#39;) do |post|
-    post.puts &quot;---&quot;
-    post.puts &quot;layout: post&quot;
-    post.puts &quot;title: \&quot;#{title.gsub(/&amp;/,&#39;&amp;&#39;)}\&quot;&quot;
-    post.puts &quot;date: #{Time.now.strftime(&#39;%Y-%m-%d %H:%M&#39;)}&quot;
-    post.puts &quot;comments: true&quot;
-    post.puts &quot;categories: &quot;
-    if &quot;&quot; != args[&quot;category&quot;]
-      post.puts &quot;- #{args.category}&quot;
-    end
-    if permalink
-      post.puts permalink
-    end
-    post.puts &quot;---&quot;
-  end</p>
-<h1 id="open-straight-away">open straight away</h1>
-<p>  if defined? editor
-    system &quot;#{editor} #{filename}&quot;
-  end
-end
-```</p>
-<p>There are plenty more small adjustements to do, but this is it for now. Now it&#39;s time for <a href="../hosting-octopress-nginx/">part 2: depoly to an Nginx server</a></p>
+<p>In order to ensure all new Octopress posts do not suffer from the same bad permalink problem, I amended the rake new_post task to take an optonial second parameter, category. So you can call it like this</p>
+<pre class="language-bash"><code class="language-bash">rake new_post<span class="token punctuation">[</span><span class="token string">&quot;is coffee pass&#xE9;?&quot;</span>,<span class="token string">&quot;Caf&#xE9; Dreams&quot;</span><span class="token punctuation">]</span></code></pre>
+<p>and it will generate this front matter below. Notice that rake will complain if there are any blank spaces between the two square brackets.<br>While I was at it I added an &#x2018;editor&#x2019; variable (in my case, &#x201C;subl&#x201D;) to open the newly created file with.</p>
+<pre class="language-yaml"><code class="language-yaml"><span class="token punctuation">---</span>
+<span class="token key atrule">layout</span><span class="token punctuation">:</span> post.hbs
+<span class="token key atrule">title</span><span class="token punctuation">:</span> <span class="token string">&quot;is coffee pass&#xE9;?&quot;</span>
+<span class="token key atrule">date</span><span class="token punctuation">:</span> 2012<span class="token punctuation">-</span>09<span class="token punctuation">-</span>20 17<span class="token punctuation">:</span><span class="token number">14</span>
+<span class="token key atrule">comments</span><span class="token punctuation">:</span> <span class="token boolean important">true</span>
+<span class="token key atrule">categories</span><span class="token punctuation">:</span>
+<span class="token punctuation">-</span> Caf&#xE9; Dreams
+<span class="token key atrule">permalink</span><span class="token punctuation">:</span> /blog/cafe<span class="token punctuation">-</span>dreams/is<span class="token punctuation">-</span>coffee<span class="token punctuation">-</span>passe/
+<span class="token punctuation">---</span></code></pre>
+<p>Note that I had to the encoding as the first line, to avoid the regular expression choking on umlauts etc</p>
+<pre class="language-ruby"><code class="language-ruby"><span class="token comment"># encoding: utf-8</span></code></pre>
+<p>The code for the rake is below.</p>
+<pre class="language-ruby"><code class="language-ruby"><span class="token comment"># usage rake new_post[my-new-post] or rake new_post[&apos;my new post&apos;] or rake new_post (defaults to &quot;new-post&quot;)</span>
+desc <span class="token string">&quot;Begin a new post in <span class="token interpolation"><span class="token delimiter tag">#{</span>source_dir<span class="token delimiter tag">}</span></span>/<span class="token interpolation"><span class="token delimiter tag">#{</span>posts_dir<span class="token delimiter tag">}</span></span>&quot;</span>
+task <span class="token symbol">:new_post</span><span class="token punctuation">,</span> <span class="token symbol">:title</span><span class="token punctuation">,</span> <span class="token symbol">:category</span> <span class="token keyword">do</span> <span class="token operator">|</span>t<span class="token punctuation">,</span> args<span class="token operator">|</span>
+  <span class="token keyword">raise</span> <span class="token string">&quot;### You haven&apos;t set anything up yet. First run `rake install` to set up an Octopress theme.&quot;</span> <span class="token keyword">unless</span> <span class="token builtin">File</span><span class="token punctuation">.</span>directory<span class="token operator">?</span><span class="token punctuation">(</span>source_dir<span class="token punctuation">)</span>
+  mkdir_p <span class="token string">&quot;<span class="token interpolation"><span class="token delimiter tag">#{</span>source_dir<span class="token delimiter tag">}</span></span>/<span class="token interpolation"><span class="token delimiter tag">#{</span>posts_dir<span class="token delimiter tag">}</span></span>&quot;</span>
+  args<span class="token punctuation">.</span><span class="token function">with_defaults</span><span class="token punctuation">(</span><span class="token symbol">:title</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token string">&apos;new-post&apos;</span><span class="token punctuation">,</span> <span class="token symbol">:category</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">)</span>
+  title <span class="token operator">=</span> args<span class="token punctuation">.</span>title
+  filename <span class="token operator">=</span> <span class="token string">&quot;<span class="token interpolation"><span class="token delimiter tag">#{</span>source_dir<span class="token delimiter tag">}</span></span>/<span class="token interpolation"><span class="token delimiter tag">#{</span>posts_dir<span class="token delimiter tag">}</span></span>/<span class="token interpolation"><span class="token delimiter tag">#{</span>Time<span class="token punctuation">.</span>now<span class="token punctuation">.</span><span class="token function">strftime</span><span class="token punctuation">(</span><span class="token string">&apos;%Y-%m-%d&apos;</span><span class="token punctuation">)</span><span class="token delimiter tag">}</span></span>-<span class="token interpolation"><span class="token delimiter tag">#{</span>title<span class="token punctuation">.</span>to_url<span class="token delimiter tag">}</span></span>.<span class="token interpolation"><span class="token delimiter tag">#{</span>new_post_ext<span class="token delimiter tag">}</span></span>&quot;</span>
+  <span class="token keyword">if</span> <span class="token builtin">File</span><span class="token punctuation">.</span>exist<span class="token operator">?</span><span class="token punctuation">(</span>filename<span class="token punctuation">)</span>
+    <span class="token function">abort</span><span class="token punctuation">(</span><span class="token string">&quot;rake aborted!&quot;</span><span class="token punctuation">)</span> <span class="token keyword">if</span> <span class="token function">ask</span><span class="token punctuation">(</span><span class="token string">&quot;<span class="token interpolation"><span class="token delimiter tag">#{</span>filename<span class="token delimiter tag">}</span></span> already exists. Do you want to overwrite?&quot;</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token string">&apos;y&apos;</span><span class="token punctuation">,</span> <span class="token string">&apos;n&apos;</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token string">&apos;n&apos;</span>
+  <span class="token keyword">end</span>
 
-      </div>
+  permalink <span class="token operator">=</span> <span class="token string">&quot;&quot;</span>
+
+  <span class="token comment">#get config</span>
+  stream <span class="token operator">=</span> <span class="token builtin">File</span><span class="token punctuation">.</span><span class="token function">open</span><span class="token punctuation">(</span> <span class="token string">&quot;_config.yml&quot;</span> <span class="token punctuation">)</span>
+  configYml <span class="token operator">=</span> <span class="token constant">YAML</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">load</span><span class="token punctuation">(</span> stream <span class="token punctuation">)</span>
+  stream<span class="token punctuation">.</span>close
+
+  <span class="token comment">#does it need to fix the permalink?</span>
+  <span class="token keyword">if</span> <span class="token regex">/:categories\b/</span><span class="token punctuation">.</span><span class="token function">match</span><span class="token punctuation">(</span> configYml<span class="token punctuation">[</span><span class="token string">&quot;permalink&quot;</span><span class="token punctuation">]</span> <span class="token punctuation">)</span> <span class="token keyword">and</span> <span class="token operator">!</span><span class="token regex">/:((year)|(date)|(month)|(day)|(pretty))\b/</span><span class="token punctuation">.</span><span class="token function">match</span><span class="token punctuation">(</span> configYml<span class="token punctuation">[</span><span class="token string">&quot;permalink&quot;</span><span class="token punctuation">]</span> <span class="token punctuation">)</span>
+    permalink <span class="token operator">=</span> <span class="token string">&quot;permalink: &quot;</span> <span class="token operator">+</span> configYml<span class="token punctuation">[</span><span class="token string">&quot;permalink&quot;</span><span class="token punctuation">]</span>
+                    <span class="token punctuation">.</span><span class="token function">gsub</span><span class="token punctuation">(</span><span class="token regex">/:categories/</span><span class="token punctuation">,</span> args<span class="token punctuation">.</span>category<span class="token punctuation">.</span>to_url <span class="token punctuation">)</span>
+                    <span class="token punctuation">.</span><span class="token function">gsub</span><span class="token punctuation">(</span><span class="token regex">/:title/</span><span class="token punctuation">,</span> title<span class="token punctuation">.</span>to_url <span class="token punctuation">)</span>
+  <span class="token keyword">end</span>
+
+
+  puts <span class="token string">&quot;Creating new post: <span class="token interpolation"><span class="token delimiter tag">#{</span>filename<span class="token delimiter tag">}</span></span>&quot;</span>
+  <span class="token function">open</span><span class="token punctuation">(</span>filename<span class="token punctuation">,</span> <span class="token string">&apos;w&apos;</span><span class="token punctuation">)</span> <span class="token keyword">do</span> <span class="token operator">|</span>post<span class="token operator">|</span>
+    post<span class="token punctuation">.</span>puts <span class="token string">&quot;---&quot;</span>
+    post<span class="token punctuation">.</span>puts <span class="token string">&quot;layout: post&quot;</span>
+    post<span class="token punctuation">.</span>puts <span class="token string">&quot;title: \&quot;<span class="token interpolation"><span class="token delimiter tag">#{</span>title<span class="token punctuation">.</span><span class="token function">gsub</span><span class="token punctuation">(</span><span class="token operator">/</span><span class="token operator">&amp;</span><span class="token operator">/</span><span class="token punctuation">,</span><span class="token string">&apos;&amp;amp;&apos;</span><span class="token punctuation">)</span><span class="token delimiter tag">}</span></span>\&quot;&quot;</span>
+    post<span class="token punctuation">.</span>puts <span class="token string">&quot;date: <span class="token interpolation"><span class="token delimiter tag">#{</span>Time<span class="token punctuation">.</span>now<span class="token punctuation">.</span><span class="token function">strftime</span><span class="token punctuation">(</span><span class="token string">&apos;%Y-%m-%d %H:%M&apos;</span><span class="token punctuation">)</span><span class="token delimiter tag">}</span></span>&quot;</span>
+    post<span class="token punctuation">.</span>puts <span class="token string">&quot;comments: true&quot;</span>
+    post<span class="token punctuation">.</span>puts <span class="token string">&quot;categories: &quot;</span>
+    <span class="token keyword">if</span> <span class="token string">&quot;&quot;</span> <span class="token operator">!=</span> args<span class="token punctuation">[</span><span class="token string">&quot;category&quot;</span><span class="token punctuation">]</span>
+      post<span class="token punctuation">.</span>puts <span class="token string">&quot;- <span class="token interpolation"><span class="token delimiter tag">#{</span>args<span class="token punctuation">.</span>category<span class="token delimiter tag">}</span></span>&quot;</span>
+    <span class="token keyword">end</span>
+    <span class="token keyword">if</span> permalink
+      post<span class="token punctuation">.</span>puts permalink
+    <span class="token keyword">end</span>
+    post<span class="token punctuation">.</span>puts <span class="token string">&quot;---&quot;</span>
+  <span class="token keyword">end</span>
+
+  <span class="token comment">#open straight away</span>
+  <span class="token keyword">if</span> <span class="token keyword">defined</span><span class="token operator">?</span> editor
+    system <span class="token string">&quot;<span class="token interpolation"><span class="token delimiter tag">#{</span>editor<span class="token delimiter tag">}</span></span> <span class="token interpolation"><span class="token delimiter tag">#{</span>filename<span class="token delimiter tag">}</span></span>&quot;</span>
+  <span class="token keyword">end</span>
+<span class="token keyword">end</span></code></pre>
+<p>There are plenty more small adjustements to do, but this is it for now. Now it&#x2019;s time for <a pppp="" href="../hosting-octopress-nginx/">part 2: depoly to an Nginx server</a></p>
+  </section>
+
+
     </div>
-  </article>
-
-
-<!-- <section id="comment">
-    <h1 class="title">Comments</h1>
-    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-</div>
-</section>
-
   </div>
-  -->
-  <footer id="footer" class="inner">Copyright &copy; 2016
+</div>
 
-    Fritz Stelluto
-
-</footer>
-<!--
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script type="text/javascript">
-      var disqus_shortname = 'goto-fritz';
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-11254155-2']);
+  _gaq.push(['_trackPageview']);
 
-
-        // var disqus_developer = 1;
-        var disqus_identifier = 'http://gotofritz.net/blog/geekery/backing-up-hard-disk-os-x/';
-        var disqus_url = 'http://gotofritz.net/blog/geekery/backing-up-hard-disk-os-x/';
-        var disqus_script = 'embed.js';
-
-    (function () {
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    }());
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
 </script>
--->
-
-
-  <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-11254155-2']);
-    _gaq.push(['_trackPageview']);
-
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
-
 </body>
 </html>

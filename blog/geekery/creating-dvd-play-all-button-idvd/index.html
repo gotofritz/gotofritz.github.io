@@ -4,111 +4,80 @@
   <meta charset="utf-8">
   <title>Creating a DVD with a Play All button in iDVD || Fritz Stelluto</title>
   <meta name="author" content="gotofritz">
-  <meta name="description" content="iDVD? Yeah, so passè, it doesn&amp;#39;t even ship with Mountain Lion anymore. Still, if you are lucky enough to have an older version of OS X, here&amp;#39;s how to add a &amp;quot;Play All&amp;quot; button to a DVD created with iDVD.">
+  <meta name="description" content="iDVD? Yeah, so passè, it doesn’t even ship with Mountain Lion anymore. Still, if you are lucky enough to have an older version of OS X, here’s how to add a “Play All” button to a DVD created with iDVD.">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <link href="/assets/favicon.ico" rel="shortcut icon">
   <link rel="icon" href="/assets/favicon.gif" type="image/gif" />
   <link href="/assets/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 </head>
 
-<body ontouchstart="">
-  <header id="header" class="inner">
-    <nav id="main-nav">
-      <div>
-        <a href="/">home</a>
-        <a href="/blog/">blog</a>
-      </div>
-    </nav>
+<body class="content-post"">
+  <div class="gradient-container">
+    <main class="panel-container">
+      <div class="content">
+        <nav class="topnav">
+          <div itemscope itemtype="http://schema.org/Person" class="vcard group-of-links">
+            <a href="/">home</a>
+            <a href="/fritz-stelluto_resume.pdf" title="my CV as a PDF">search</a>
+          </div>
+        </nav>
 
-    <nav id="sub-nav" class="alignright">
-      <form class="search" action="http://google.com/search" method="get">
-        <input class="alignright" type="text" name="q" results="0">
-        <input type="hidden" name="q" value="site:gotofritz.net">
-      </form>
-    </nav>
-  </header>
-
-
-<div id="content" class="inner">
-  <article class="post">
-    <h1 class="title">Creating a DVD with a Play All button in iDVD</h1>
-    <div>
+<article>
+  <section class="intro">
+    <!--
       <div class="meta">
         <div class="date">
-          <time datetime="2013-12-29T01:46:00+01:00" pubdate>2013-12-29</time>
+          <time datetime="2017-08-29T13:44:00+02:00" pubdate>2017-08-29</time>
         </div>
         <div class="tags">
+          security,
+          frontend
         </div>
       </div>
-      <div class="entry-content">
-<div class="archive">This post is too old to be of any use. It has been archived.</div>
-<p>iDVD? Yeah, so passè, it doesn&#39;t even ship with Mountain Lion anymore. Still, if you are lucky enough to have an older version of OS X, here&#39;s how to add a &quot;Play All&quot; button to a DVD created with iDVD.
-<!--more--></p>
-<h2 id="use-imovie-not-idvd-to-create-your-movie">Use iMovie, not iDVD to create your movie</h2>
-<p>The simple truth is that iDVD does not have the ability to add a &quot;Play all&quot; button to a DVD. Strange but true. And don&#39;t expect that to change any time soon - Apple is phasing out iDVD altogether (DVD are soooo 2000s, aren&#39;t they?) in fact Mountain Lion doesn&#39;t ship with it.</p>
-<p>Luckily, iDVD can read iMovie&#39;s chapter markers, and when it sees them it will automagically create a &quot;Play all&quot; and a &quot;Select scene&quot; buttons. Therefore, you need to work with iMovie.</p>
-<h2 id="use-mpeg-streamclip-to-get-your-videos-into-imovie">Use MPEG Streamclip to get your videos into iMovie</h2>
-<p>If you have problems importing videos into iMovie, for example the movies are greyed out in the file dialog that comes up when you try <code>Import &gt; Movies...</code>, it&#39;s probably because of the wrong codec. Even if the clip is a .mov file, it may still use a codec that is not supported (.mov is a container for all sort of movie formats, rather than a format of its own).</p>
-<p>The best thing to do in those cases is to use a video converter such as <a href="http://www.squared5.com/svideo/mpeg-streamclip-mac.html" title="[new window] Squared 5 - MPEG Streamclip video converter for Mac OS X" target="_blank">MPEG Streamclip</a> to convert the videos first. I like using MPEG streamclip to do some initial clean up of clips as well, as you can use the arrow keys to move one frame at the time.</p>
-<h2 id="setup-imovie-to-use-the-chapter-markers">Setup iMovie to use the Chapter Markers</h2>
-<p>Chapter markers are not enabled by default in iMovie, you need to go into the Preferences and tick &quot;Show Advanced Tools&quot; for some reason. Then you&#39;ll see two tiny orange boxes in the top right corner of the timeline panel. The rightmost one is the markers button. Note that it is not a button as such, it is more like a constant supply of markers that you need to drag to wherever you need it on the timeline. Normally that would be at the beginning of each of the clip.</p>
-<p>Experienced users suggests you don&#39;t use a marker for the very beginning of the movie (one will be generated for you, and if you do it will confuse iDVD), nor inside a fade between clips.</p>
-<h2 id="export-the-movie-for-idvd">Export the movie for iDVD</h2>
-<p>After you are done with editing the video and adding markers wherever you need them, select <code>Share &gt; Media Browser...</code> and tick on &quot;large&quot;. This is supposed to give better results than just sharing to iDVD directly.</p>
-<h2 id="import-the-movie-into-idvd">Import the movie into iDVD</h2>
-<p>iMovie is an odd program, it doesn&#39;t have a &quot;Save&quot; menu entry, and when you share a movie it doesn&#39;t even allow you to name it or decide where to put it. So, where does iMovie store the media browser files? They go inside the project file itself, which you&#39;ll find in your Movies folder inside <code>iMovie Projects</code>. The project file in there (of type .rcproject, if you have Show File Suffix enabled in OS X) is actually a folder in disguise. To open it as a folder, right click on it, select <code>Show Package Contents</code>, and a Finder window will open there. The movie you are looking for is inside the <code>Movies</code> folder, called <code>large.m4v</code>.</p>
-<p>Now you can open iDVD, set up your project (make sure the aspect ration, 4:3 or 16:9, is the same as you have set in iMovie!), and choose <code>Import &gt; Movies</code>. When the file dialog is open, go to Finder, and drag the large.m4v file onto the iDVD file dialog.</p>
-<p>Now you have your DVD setup with all the buttons you need, which you can rename and move about as required.</p>
-
+       -->
+    <div class="post-meta">
+      <time datetime="2013-12-29T01:46:00+01:00" pubdate>2013-12-29</time>
+      //
+      <div class="tags">
       </div>
     </div>
-  </article>
+    <h1>Creating a DVD with a Play All button in iDVD</h1>
+    <h2>iDVD? Yeah, so passè, it doesn’t even ship with Mountain Lion anymore. Still, if you are lucky enough to have an older version of OS X, here’s how to add a “Play All” button to a DVD created with iDVD.</h2>
+
+  </section>
+  <section class="post-content">
+    <h2 id="use-imovie-not-idvd-to-create-your-movie">Use iMovie, not iDVD to create your movie</h2>
+<p>The simple truth is that iDVD does not have the ability to add a “Play all” button to a DVD. Strange but true. And don’t expect that to change any time soon - Apple is phasing out iDVD altogether (DVD are soooo 2000s, aren’t they?) in fact Mountain Lion doesn’t ship with it.</p>
+<p>Luckily, iDVD can read iMovie’s chapter markers, and when it sees them it will automagically create a “Play all” and a “Select scene” buttons. Therefore, you need to work with iMovie.</p>
+<h2 id="use-mpeg-streamclip-to-get-your-videos-into-imovie">Use MPEG Streamclip to get your videos into iMovie</h2>
+<p>If you have problems importing videos into iMovie, for example the movies are greyed out in the file dialog that comes up when you try <code>Import &gt; Movies...</code>, it’s probably because of the wrong codec. Even if the clip is a .mov file, it may still use a codec that is not supported (.mov is a container for all sort of movie formats, rather than a format of its own).</p>
+<p>The best thing to do in those cases is to use a video converter such as <a href="http://www.squared5.com/svideo/mpeg-streamclip-mac.html" title="[new window] Squared 5 - MPEG Streamclip video converter for Mac OS X" target="_blank">MPEG Streamclip</a> to convert the videos first. I like using MPEG streamclip to do some initial clean up of clips as well, as you can use the arrow keys to move one frame at the time.</p>
+<h2 id="setup-imovie-to-use-the-chapter-markers">Setup iMovie to use the Chapter Markers</h2>
+<p>Chapter markers are not enabled by default in iMovie, you need to go into the Preferences and tick “Show Advanced Tools” for some reason. Then you’ll see two tiny orange boxes in the top right corner of the timeline panel. The rightmost one is the markers button. Note that it is not a button as such, it is more like a constant supply of markers that you need to drag to wherever you need it on the timeline. Normally that would be at the beginning of each of the clip.</p>
+<p>Experienced users suggests you don’t use a marker for the very beginning of the movie (one will be generated for you, and if you do it will confuse iDVD), nor inside a fade between clips.</p>
+<h2 id="export-the-movie-for-idvd">Export the movie for iDVD</h2>
+<p>After you are done with editing the video and adding markers wherever you need them, select <code>Share &gt; Media Browser...</code> and tick on “large”. This is supposed to give better results than just sharing to iDVD directly.</p>
+<h2 id="import-the-movie-into-idvd">Import the movie into iDVD</h2>
+<p>iMovie is an odd program, it doesn’t have a “Save” menu entry, and when you share a movie it doesn’t even allow you to name it or decide where to put it. So, where does iMovie store the media browser files? They go inside the project file itself, which you’ll find in your Movies folder inside <code>iMovie Projects</code>. The project file in there (of type .rcproject, if you have Show File Suffix enabled in OS X) is actually a folder in disguise. To open it as a folder, right click on it, select <code>Show Package Contents</code>, and a Finder window will open there. The movie you are looking for is inside the <code>Movies</code> folder, called <code>large.m4v</code>.</p>
+<p>Now you can open iDVD, set up your project (make sure the aspect ration, 4:3 or 16:9, is the same as you have set in iMovie!), and choose <code>Import &gt; Movies</code>. When the file dialog is open, go to Finder, and drag the large.m4v file onto the iDVD file dialog.</p>
+<p>Now you have your DVD setup with all the buttons you need, which you can rename and move about as required.</p>
+  </section>
 
 
-<!-- <section id="comment">
-    <h1 class="title">Comments</h1>
-    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-</div>
-</section>
-
+    </div>
   </div>
-  -->
-  <footer id="footer" class="inner">Copyright &copy; 2016
+</div>
 
-    Fritz Stelluto
-
-</footer>
-<!--
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script type="text/javascript">
-      var disqus_shortname = 'goto-fritz';
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-11254155-2']);
+  _gaq.push(['_trackPageview']);
 
-
-        // var disqus_developer = 1;
-        var disqus_identifier = 'http://gotofritz.net/blog/geekery/backing-up-hard-disk-os-x/';
-        var disqus_url = 'http://gotofritz.net/blog/geekery/backing-up-hard-disk-os-x/';
-        var disqus_script = 'embed.js';
-
-    (function () {
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    }());
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
 </script>
--->
-
-
-  <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-11254155-2']);
-    _gaq.push(['_trackPageview']);
-
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
-
 </body>
 </html>

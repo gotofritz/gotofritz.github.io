@@ -42,8 +42,9 @@
       </div>
       <div class="entry-content">
     
-<p>Sometimes you need to install an older version of a package with <a href="http://mxcl.github.io/homebrew/" title="[new window] Homebrew — MacPorts driving you to drink? Try Homebrew!" target="_blank">Homebrew</a>. Here&#39;s how I installed version 1.7.10 of Subversion.
-<!--more--></p>
+<p>Sometimes you need to install an older version of a package with <a href="http://mxcl.github.io/homebrew/" title="[new window] Homebrew — MacPorts driving you to drink? Try Homebrew!" target="_blank">Homebrew</a>. Here&#39;s how I installed version 1.7.10 of Subversion.</p>
+<!--more-->
+
 <h2 id="why-">Why?</h2>
 <p>I couldn&#39;t connect to my company&#39;s repository using the latest 1.8.0 - svn failed with the message <code>svn: E120171: Error running context: An error occurred during SSL communication</code>. A quick <a href="https://duckduckgo.com/" title="[new window] Search DuckDuckGo - they respect your privacy, unlike google" target="_blank">DuckDuckGo</a> (gosh that&#39;s a mouthful) took me to <a href="https://groups.google.com/forum/#!topic/subversion-development/13KWf3N2myk" title="[new window] RE: svn commit: r1501049 - in /subversion/trunk/subversion: include/svn_error_codes.h libsvn_ra_serf/util_error.c - Google Groups" target="_blank">some mail group where Subversion developers bicker among themselves</a>, but no solution. So I went down to a known stabler version.</p>
 <p>All the information here comes from <a href="http://stackoverflow.com/questions/3987683/homebrew-install-specific-version-of-formula" title="[new window] Homebrew install specific version of formula? - Stack Overflow" target="_blank">this SO answer</a>.</p>
@@ -61,7 +62,7 @@ homebrew/versions/subversion16  homebrew/versions/subversion17</code></p>
 <p>The above tells you what svn packages are available. Note that searching for <code>svn</code> instead of <code>subversion</code> returns the current version only for some reason.
 So that tells me that svn 1.7.something is called <code>subversion17</code> in Homebrew world, and it can be found into <code>versions</code></p>
 <h2 id="install-old-versions">Install old versions</h2>
-<p>``` bash
+<p><code>`</code> bash
 $ brew tap homebrew/versions
 Cloning into &#39;/usr/local/Library/Taps/homebrew-versions&#39;...
 remote: Counting objects: 1022, done.
@@ -83,7 +84,7 @@ Bash completion has been installed to:
   /usr/local/etc/bash_completion.d
 ==&gt; Summary
 /usr/local/Cellar/subversion17/1.7.10: 106 files, 7.7M, built in 3.1 minutes</p>
-<p>```</p>
+<p><code>`</code></p>
 <p>Before you install a version you need to enable the whole &quot;getting old versions&quot; thing - you do that with the <code>tap</code> command. Afterwards, it&#39;s just a matter of installing the package I found earlier.</p>
 <h2 id="that-s-it">That&#39;s it</h2>
 <p>Job done.</p>

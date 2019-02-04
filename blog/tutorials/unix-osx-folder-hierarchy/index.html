@@ -4,57 +4,59 @@
   <meta charset="utf-8">
   <title>The Unix side of OS X || Fritz Stelluto</title>
   <meta name="author" content="gotofritz">
-  <meta name="description" content="The great thing about OS X is that it has Unix under the bonnet. But, knowing where to put things can be confusing if you are new to it. Here&amp;#39;s a quick guide to the Unix folders in OS X.">
+  <meta name="description" content="The great thing about OS X is that it has Unix under the bonnet. But, knowing where to put things can be confusing if you are new to it. Here’s a quick guide to the Unix folders in OS X.">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <link href="/assets/favicon.ico" rel="shortcut icon">
   <link rel="icon" href="/assets/favicon.gif" type="image/gif" />
   <link href="/assets/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 </head>
 
-<body ontouchstart="">
-  <header id="header" class="inner">
-    <nav id="main-nav">
-      <div>
-        <a href="/">home</a>
-        <a href="/blog/">blog</a>
-      </div>
-    </nav>
+<body class="content-post"">
+  <div class="gradient-container">
+    <main class="panel-container">
+      <div class="content">
+        <nav class="topnav">
+          <div itemscope itemtype="http://schema.org/Person" class="vcard group-of-links">
+            <a href="/">home</a>
+            <a href="/fritz-stelluto_resume.pdf" title="my CV as a PDF">search</a>
+          </div>
+        </nav>
 
-    <nav id="sub-nav" class="alignright">
-      <form class="search" action="http://google.com/search" method="get">
-        <input class="alignright" type="text" name="q" results="0">
-        <input type="hidden" name="q" value="site:gotofritz.net">
-      </form>
-    </nav>
-  </header>
-
-
-<div id="content" class="inner">
-  <article class="post">
-    <h1 class="title">The Unix side of OS X</h1>
-    <div>
+<article>
+  <section class="intro">
+    <!--
       <div class="meta">
         <div class="date">
-          <time datetime="2010-07-20T16:01:00+02:00" pubdate>2010-07-20</time>
+          <time datetime="2017-08-29T13:44:00+02:00" pubdate>2017-08-29</time>
         </div>
         <div class="tags">
-          os x,
-          unix
+          security,
+          frontend
         </div>
       </div>
-      <div class="entry-content">
-    
-<p>The great thing about OS X is that it has Unix under the bonnet. But, knowing where to put things can be confusing if you are new to it. Here&#39;s a quick guide to the Unix folders in OS X.
-<!--more--></p>
-<h2 id="using-apple-terminal">Using Apple Terminal</h2>
-<p>I assume you know how to use the Terminal to look around OS X. If not, then find Terminal in Applications / Utilities, go in the preferences to change the window background colours to something geekier, and have a look at one of the many Unix primers out there, like this <a href="http://www.ee.surrey.ac.uk/Teaching/Unix/">UNIX Tutorial for Beginners</a> from the University of Surrey. Or even better, <a href="http://www.matisse.net/OSX/">Matisse Enzer</a> gives away the <a href="http://www.matisse.net/OSX/umox/chap.two.pdf">PDF of the chapter covering the Terminal from his Unix for Mac OS X 10.4 Tiger book</a>. The good thing about Unix - it doesn&#39;t change that much. Those guides are still relevant.</p>
+       -->
+    <div class="post-meta">
+      <time datetime="2010-07-20T16:01:00+02:00" pubdate>2010-07-20</time>
+      //
+      <div class="tags">
+        os x,
+        unix
+      </div>
+    </div>
+    <h1>The Unix side of OS X</h1>
+    <h2>The great thing about OS X is that it has Unix under the bonnet. But, knowing where to put things can be confusing if you are new to it. Here’s a quick guide to the Unix folders in OS X.</h2>
+
+  </section>
+  <section class="post-content">
+    <h2 id="using-apple-terminal">Using Apple Terminal</h2>
+<p>I assume you know how to use the Terminal to look around OS X. If not, then find Terminal in Applications / Utilities, go in the preferences to change the window background colours to something geekier, and have a look at one of the many Unix primers out there, like this <a pppp href="http://www.ee.surrey.ac.uk/Teaching/Unix/">UNIX Tutorial for Beginners</a> from the University of Surrey. Or even better, <a pppp href="http://www.matisse.net/OSX/">Matisse Enzer</a> gives away the <a pppp href="http://www.matisse.net/OSX/umox/chap.two.pdf">PDF of the chapter covering the Terminal from his Unix for Mac OS X 10.4 Tiger book</a>. The good thing about Unix - it doesn’t change that much. Those guides are still relevant.</p>
 <p>OS X uses a simple naming convention for folder names: if they start with an upper case letter (e.g., /Users) they are Apple ones, otherwise (e.g. /usr) they are Unix. More or less.</p>
 <h2 id="os-x-folder-structure">OS X folder structure</h2>
 <p>You should be already familiar with most of these.</p>
 <dl class="code-breakdown">
 <dt>/Applications</dt>
-<dd>Cocoa and Carbon apps. OS X applications are in fact directories that looks like files. If you list them on Terminal you can see what&#39;s in these folders, for example:
-        <code>ls /Applications/Chess.app/Contents/</code> (you can also get to that by ctrl-clicking on the app in Finder and choosing &#39;show package content&#39;)</dd>
+<dd>Cocoa and Carbon apps. OS X applications are in fact directories that looks like files. If you list them on Terminal you can see what's in these folders, for example:
+        `ls /Applications/Chess.app/Contents/` (you can also get to that by ctrl-clicking on the app in Finder and choosing 'show package content')</dd>
 
 <dt>/Library</dt>
 <dd>Frameworks and components for third party applications. It also includes a /Library/Fonts folder, with all the fancy fonts installed for all users.</dd>
@@ -63,10 +65,10 @@
 <dd>Frameworks and components used by OS X. It also includes a /System/Library/Fonts folder, with the minimum set of system fonts shared by all users. If you delete any fonts from here you are in trouble.</dd>
 
 <dt>/Users</dt>
-<dd>Users&#39; folders, hidden from each other. And yes - they also have their own fonts folder ( /Users/username/Library/Fonts ) which are loaded up when you login as that user.</dd>
+<dd>Users' folders, hidden from each other. And yes - they also have their own fonts folder ( /Users/username/Library/Fonts ) which are loaded up when you login as that user.</dd>
 
 <dt>/.Spotlight-V100</dt>
-<dd>A hidden folder that stores Spotlight&#39;s indexed metadata. Each OS X file and folder is associated with metadata - you can view it in the command line with the command mdls, e.g. <code>mdls ~/</code> You can query the metadata index created by spotlight directly on the command line with the command mdfind.</dd>
+<dd>A hidden folder that stores Spotlight's indexed metadata. Each OS X file and folder is associated with metadata - you can view it in the command line with the command mdls, e.g. `mdls ~/` You can query the metadata index created by spotlight directly on the command line with the command mdfind.</dd>
 
 </dl>
 
@@ -79,7 +81,7 @@
 
 
 <h2 id="freebsd-folder-structure">FreeBSD folder structure</h2>
-<p>Unix is an old system - when it was created every byte counted, which is why they called directories &#39;usr&#39; and not &#39;user&#39;, to save just the one letter. It also made sense to keep what changed often and needed regular backing up separate from what changes rarely. After all, <a href="http://www.tallrite.com/weblog/blogimages/refs2007/5MbHardDrive1956.jpg">this was the equivalent of four floppy disk</a> in those days. Mind you, that makes sense even today, as disk storage may be cheap but backing up isn&#39;t.</p>
+<p>Unix is an old system - when it was created every byte counted, which is why they called directories ‘usr’ and not ‘user’, to save just the one letter. It also made sense to keep what changed often and needed regular backing up separate from what changes rarely. After all, <a pppp href="http://www.tallrite.com/weblog/blogimages/refs2007/5MbHardDrive1956.jpg">this was the equivalent of four floppy disk</a> in those days. Mind you, that makes sense even today, as disk storage may be cheap but backing up isn’t.</p>
 <dl class="code-breakdown">
 <dt>/</dt>
 <dd>This should contain the minimum needed to boot, restore and repair the filesystem. The idea is to be able to have all the core files on small portable storage device.</dd>
@@ -87,9 +89,7 @@
 <dt>/bin</dt>
 <dd>binaries used by admins and normal users. This is not the complete set of all the commands available on the system - just the minimum needed for booting and restoring (the rest are in separate places, see below). For example, in OS X 10.6 these are:
 
-        [ bash cat chmod cp csh date dd df domainname echo ed expr hostname kill ksh launchctl link ln ls mkdir mv pax ps pwd rcp rm rmdir sh sleep stty sync tcsh test unlink unrar wait4path zsh</dd>
-
-<dt>/dev</dt>
+<pre><code>    [ bash cat chmod cp csh date dd df domainname echo ed expr hostname kill ksh launchctl link ln ls mkdir mv pax ps pwd rcp rm rmdir sh sleep stty sync tcsh test unlink unrar wait4path zsh&lt;/dd&gt;</code></pre><dt>/dev</dt>
 <dd>devices - i.e., drivers. In Unix they are setup to look and act as if they were files</dd>
 
 <dt>/etc</dt>
@@ -101,19 +101,17 @@
 <dt>/sbin</dt>
 <dd>system binaries. These are only used by root or the system. This is the minimum set needed for booting / restoring the system. The other system binaries are in /usr/sbin and /usr/local/sbin
 
-        Typical examples include mount, reboot, fsck</dd>
-
-<dt>/tmp</dt>
-<dd>temporary files. These are deleted when the system reboots. /var/tmp is an alternative that doesn&#39;t.</dd>
+<pre><code>    Typical examples include mount, reboot, fsck&lt;/dd&gt;</code></pre><dt>/tmp</dt>
+<dd>temporary files. These are deleted when the system reboots. /var/tmp is an alternative that doesn't.</dd>
 
 <dt>/usr</dt>
-<dd>Non root hierarchy. Static, i.e. shouldn&#39;t need to change unless an admin installs something.</dd>
+<dd>Non root hierarchy. Static, i.e. shouldn't need to change unless an admin installs something.</dd>
 
 <dt>/usr/bin</dt>
-<dd>This is where most commands available to all users are. There&#39;s loads and loads of them, from python to who to calendar to ssh...</dd>
+<dd>This is where most commands available to all users are. There's loads and loads of them, from python to who to calendar to ssh...</dd>
 
 <dt>/usr/include</dt>
-<dd>These are include libraries used by C programs. Of no interest to most users. C libraries get special treatment because at the time Unix was created C was &#39;the&#39; programming language - indeed, early implementation of Unix were written in C, as opposed to assembly as it was then the norm.</dd>
+<dd>These are include libraries used by C programs. Of no interest to most users. C libraries get special treatment because at the time Unix was created C was 'the' programming language - indeed, early implementation of Unix were written in C, as opposed to assembly as it was then the norm.</dd>
 
 <dt>/usr/lib</dt>
 <dd>These are dynamic libraries used by packages and programs. Normally created as a side effect of installations.</dd>
@@ -121,14 +119,12 @@
 <dt>/usr/local</dt>
 <dd>This is where software for a specific machine should go. For example mysql, php5, etc. Within this folder the same hierarchy as root holds:
 
-        /usr/local/bin for binaries,<br>
-        /usr/local/etc for config files,<br>
-        /usr/local/include for C libraries,<br>
-        /usr/local/lib for shared binaries that are not exectuded directly,<br>
-        /usr/local/sbin for system libraries run locally<br>
-        /usr/local/share for read only libraries</dd>
-
-<dt>/usr/share</dt>
+<pre><code>    /usr/local/bin for binaries,&lt;br&gt;
+    /usr/local/etc for config files,&lt;br&gt;
+    /usr/local/include for C libraries,&lt;br&gt;
+    /usr/local/lib for shared binaries that are not exectuded directly,&lt;br&gt;
+    /usr/local/sbin for system libraries run locally&lt;br&gt;
+    /usr/local/share for read only libraries&lt;/dd&gt;</code></pre><dt>/usr/share</dt>
 <dd>Read only files, like man pages. If you install a geo-location library like GeoIP, its data could go here</dd>
 
 <dt>/usr/X11 and /usr/X11R6</dt>
@@ -138,7 +134,7 @@
 <dd>Variable data. The opposite of static, i.e. users (or the system) change them all the time</dd>
 
 <dt>/var/lib</dt>
-<dd>This is non-shareable state information for apps. Users shouldn&#39;t need to touch this</dd>
+<dd>This is non-shareable state information for apps. Users shouldn't need to touch this</dd>
 
 <dt>/var/log</dt>
 <dd>Log files, for example from your Apache web server</dd>
@@ -163,57 +159,24 @@
 
 <h2 id="more-information">More information</h2>
 <p>That should give you a fair idea of what goes where, and why the Apache webserver config files are, say, in /etc/apache2/</p>
-<p>There&#39;s plenty information online about Unix  - for example you can start from the article <a href="http://www.pathname.com/fhs/pub/fhs-2.3.html">Filesystem Hierarchy Standard</a>.</p>
+<p>There’s plenty information online about Unix  - for example you can start from the article <a pppp href="http://www.pathname.com/fhs/pub/fhs-2.3.html">Filesystem Hierarchy Standard</a>.</p>
+  </section>
 
-      </div>
+
     </div>
-  </article>
-
-
-<!-- <section id="comment">
-    <h1 class="title">Comments</h1>
-    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-</div>
-</section>
-
   </div>
-  -->
-  <footer id="footer" class="inner">Copyright &copy; 2016
+</div>
 
-    Fritz Stelluto
-
-</footer>
-<!--
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script type="text/javascript">
-      var disqus_shortname = 'goto-fritz';
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-11254155-2']);
+  _gaq.push(['_trackPageview']);
 
-
-        // var disqus_developer = 1;
-        var disqus_identifier = 'http://gotofritz.net/blog/geekery/backing-up-hard-disk-os-x/';
-        var disqus_url = 'http://gotofritz.net/blog/geekery/backing-up-hard-disk-os-x/';
-        var disqus_script = 'embed.js';
-
-    (function () {
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    }());
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
 </script>
--->
-
-
-  <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-11254155-2']);
-    _gaq.push(['_trackPageview']);
-
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
-
 </body>
 </html>

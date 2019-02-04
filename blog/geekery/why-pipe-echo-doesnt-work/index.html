@@ -4,8 +4,7 @@
   <meta charset="utf-8">
   <title>Why doesn&#x27;t ls | echo work? || Fritz Stelluto</title>
   <meta name="author" content="gotofritz">
-  <meta name="description" content="&amp;gt; ls | echo
-Those new to bash often wonder why piping a command to echo doesn&amp;#39;t do anything. Here&amp;#39;s a quick explanation.">
+  <meta name="description" content="&amp;gt; ls | echoThose new to bash often wonder why piping a command to echo doesn&amp;#39;t do anything. Here&amp;#39;s a quick explanation.">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <link href="/assets/favicon.ico" rel="shortcut icon">
   <link rel="icon" href="/assets/favicon.gif" type="image/gif" />
@@ -44,15 +43,13 @@ Those new to bash often wonder why piping a command to echo doesn&amp;#39;t do a
       </div>
       <div class="entry-content">
     
-<pre><code>&gt; ls | echo
-</code></pre><p>Those new to bash often wonder why piping a command to <code>echo</code> doesn&#39;t do anything. Here&#39;s a quick explanation.
-<!--more--></p>
+<pre><code>&gt; ls | echo</code></pre><p>Those new to bash often wonder why piping a command to <code>echo</code> doesn&#39;t do anything. Here&#39;s a quick explanation.</p>
+<!--more-->
 <h2 id="streams-vs-arguments">Streams vs. Arguments</h2>
 <h3 id="bash-commands-are-just-programs">Bash commands are just programs</h3>
-<p>Bash commands are small (mostly..) independent programs which in theory <a href="https://en.wikipedia.org/wiki/Unix_philosophy#Do_One_Thing_and_Do_It_Well]">&quot;do one  thing and do it well&quot;</a>. To prove this, you can find out where they are in the filesystem with <code>which</code></p>
+<p>Bash commands are small (mostly..) independent programs which in theory <a href="https://en.wikipedia.org/wiki/Unix_philosophy#Do_One_Thing_and_Do_It_Well%5D">&quot;do one  thing and do it well&quot;</a>. To prove this, you can find out where they are in the filesystem with <code>which</code></p>
 <pre><code>&gt; which ls
-/usr/local/opt/coreutils/libexec/gnubin/ls
-</code></pre><p>(but you can&#39;t look inside because they are compiled binaries)</p>
+/usr/local/opt/coreutils/libexec/gnubin/ls</code></pre><p>(but you can&#39;t look inside because they are compiled binaries)</p>
 <h3 id="standard-unix-streams">Standard Unix streams</h3>
 <p>In the early days of Unix, operators used dumb terminals to connect to the huge, centralised monsters which is what computers were back then. These terminals consisted of a keyboard and a monitor (or printer) and little else - they were basically one of those <a href="https://upload.wikimedia.org/wikipedia/commons/8/87/Televideo925Terminal.jpg">fat screens</a> you see in old movies. The remote computer would happily wait around for all the characters typed by the operator at their own speed, without negative effects if the terminal was too slow in sending characters and without expecting an end. These connections, and the characters traveling on them, were called <i>streams</i>. Streams were then abstracted, so that writing to or reading from a stream is exactly the same as doing it to a file.</p>
 <p>In modern computers the same functionality as the terminal is carried out by a small dedicated program, which is referred as either &quot;the shell&quot;, &quot;the command line&quot;, &quot;the CLI (command line interface)&quot; or, on OS X, &quot;Terminal&quot;. The CLI app uses streams to communicate with other parts of the system, like the keyboard or the network.  The three default streams available on Unix terminals are STDIN to read from (the keyboard), STDOUT to write to (the shell), and STDERR to write errors to (also the shell). Standard behaviour can be easily changed, so that an app can be made to write to a file instead of the STDOUT stream, for example. </p>
@@ -64,8 +61,7 @@ hello
 # this command wasn&#39;t understood - error message printed to STDERR (which
 # in Terminal is exactly the same window as STDOUT)
 &gt; gibberish
--bash: gibberish: command not found
-</code></pre><p>The bash commends we saw earlier, &#39;ls&#39; or &#39;grep&#39; or &#39;echo&#39;, will also get the same STDOUT, STDIN and STDERR as Terminal - depending on the program, you may get the same output twice.</p>
+-bash: gibberish: command not found</code></pre><p>The bash commends we saw earlier, &#39;ls&#39; or &#39;grep&#39; or &#39;echo&#39;, will also get the same STDOUT, STDIN and STDERR as Terminal - depending on the program, you may get the same output twice.</p>
 <pre><code># program &quot;cat&quot; recognized and started
 &gt; cat
 # it just sits there and collects everything you type in STDIN until
@@ -76,8 +72,7 @@ line1 # printed to STDOUT by shell window as you type
 line1 # printed to STDOUT by cat when you typed &lt;RETURN&gt;
 line2 # printed to STDOUT by shell window as you type
 line2 # etc
-# to quit the shell program normally you use &lt;CTRL-C&gt;
-</code></pre><h3 id="streams-redirection">Streams redirection</h3>
+# to quit the shell program normally you use &lt;CTRL-C&gt;</code></pre><h3 id="streams-redirection">Streams redirection</h3>
 <p>You can easily redirect one of the three standard streams to something else - typically a file. To redirect STDOUT, use &gt;</p>
 <pre><code># program cat recognized; STDOUT redirected to a file
 &gt; cat &gt; test.txt
@@ -89,23 +84,20 @@ line2 # printed to STDOUT by shell window as you type
 # to quit the shell program normally you use &lt;CTRL-C&gt;
 &gt;
 # if you open your text file, it will have the text you have just typed inside
-&gt; open test.txt
-</code></pre><p>STDIN is redirected with &lt;</p>
+&gt; open test.txt</code></pre><p>STDIN is redirected with &lt;</p>
 <pre><code># program cat recognized; instead of taking STDIN from keyboard, use a file
 &gt; cat &lt; test.txt
 # all the text in the file is printed out in one go
 line1
 line2
-line3
-</code></pre><p>STDERR is redirected with 2&gt;</p>
+line3</code></pre><p>STDERR is redirected with 2&gt;</p>
 <pre><code># error printed to STDERR
 &gt; cat gibberish
 cat: gibberish: No such file or directory
 # STDERR redirected to &quot;the null device&quot;, i.e. an address on Unix systems
 # that absorbs all error messages and suppresses them
 &gt; cat gibberish 2&gt; /dev/null
-# no output - it&#39;s disappeared into /dev/null
-</code></pre><h3 id="program-arguments">Program arguments</h3>
+# no output - it&#39;s disappeared into /dev/null</code></pre><h3 id="program-arguments">Program arguments</h3>
 <p>Programs can also have <i>arguments</i> - these are values that are typically typed in and passed to the program by Bash as an array. Arguments are space separated (you can use quotation marks to include a space as part of the argument).</p>
 <pre><code># program &quot;echo&quot; called, and 3 arguments passed to it - a, b, and c
 &gt; echo  a b c
@@ -116,14 +108,12 @@ a b c
 &gt; echo &quot;What’s it going to be then, eh?&quot;
 # in the case of echo, the result looks exactly the same. It may not do for other programs
 What’s it going to be then, eh?
-&gt;
-</code></pre><p>A lot of programs support both arguments and STDIN / STDOUT; but they don&#39;t have to. Take grep for example - a program that prints out the input if it matches a pattern. When you run it, it looks at how many arguments it was passed to decide what to do:</p>
+&gt;</code></pre><p>A lot of programs support both arguments and STDIN / STDOUT; but they don&#39;t have to. Take grep for example - a program that prints out the input if it matches a pattern. When you run it, it looks at how many arguments it was passed to decide what to do:</p>
 <pre><code># grep called with two arguments: export and ~/.bash_profile
 &gt; grep &quot;export&quot; ~/.bash_profile
 # it runs on the file .bash_profile in your home folder (~/) and prints out each
 # line that matches the pattern
-export PATH=&quot;$HOME/bin:$PATH&quot;
-</code></pre><p>When it detects two arguments, it treats the first  as a pattern, and the second as the path of a file to open and read line by line. It then prints any line in the file that include the pattern</p>
+export PATH=&quot;$HOME/bin:$PATH&quot;</code></pre><p>When it detects two arguments, it treats the first  as a pattern, and the second as the path of a file to open and read line by line. It then prints any line in the file that include the pattern</p>
 <p>But grep also supports STDIN:</p>
 <pre><code># grep called with only one argument: export. Instead of connecting to a file,
 # it waits for input on STDIN
@@ -133,38 +123,32 @@ I am now typing something
 # still Terminal...
 grep is looking for the string export - will it find it?
 # grep has detected &quot;export&quot; in its STDIN - so it prints it to STDOUT
-grep is looking for the string export - will it find it?
-</code></pre><p>With only one argument, the programmers who created <code>grep</code> decided to treat the first argument as a pattern as before, and to wait for input from STDIN. It makes sense since with only one argument it wouldn&#39;t know which file to open. In the example above I start typing some random stuff and press return, and when grep finds the string matching the patter in my text it will spit out the string again.</p>
+grep is looking for the string export - will it find it?</code></pre><p>With only one argument, the programmers who created <code>grep</code> decided to treat the first argument as a pattern as before, and to wait for input from STDIN. It makes sense since with only one argument it wouldn&#39;t know which file to open. In the example above I start typing some random stuff and press return, and when grep finds the string matching the patter in my text it will spit out the string again.</p>
 <h3 id="streams-piping">Streams piping</h3>
 <p>What makes Unix so useful is that you can connect small programs together by joining the STDOUT of a program with the STDIN of another - using the pipe character, <code>|</code>, and because streams are treated like files, it will just work. But you already knew that.</p>
 <pre><code># the STDOUT of the ps program is connected to the STDIN of grep
 &gt; ps -ef | grep httpd
-....
-</code></pre><h2 id="why-can-t-you-pipe-a-command-to-echo-">Why can&#39;t you pipe a command to echo?</h2>
+....</code></pre><h2 id="why-can-t-you-pipe-a-command-to-echo-">Why can&#39;t you pipe a command to echo?</h2>
 <p>With all that out of the way, the explanation is quite simple - piping commands to <code>echo</code> does not work, because echo was not programmed to care about STDIN. All it&#39;s wired up to do is to take the <i>arguments</i> and copy them to STDOUT.</p>
 <pre><code># ls puts the output on STDOUT, which is connected to echo&#39;s STDIN
 # but echo ignores STDIN, all it cares about is command line arguments
-&gt; ls | echo
-</code></pre><p>So if your command ignores STDIN, what you have to do is to find a different one which does the same thing, but also reads from STDIN. In the case of echo, that substitute is <code>cat</code>, which as we saw above, does what echo does, but using STDIN as input:</p>
+&gt; ls | echo</code></pre><p>So if your command ignores STDIN, what you have to do is to find a different one which does the same thing, but also reads from STDIN. In the case of echo, that substitute is <code>cat</code>, which as we saw above, does what echo does, but using STDIN as input:</p>
 <pre><code>&gt; ls ~/ | cat
 Applications
 Desktop
-...
-</code></pre><p>But that&#39;s not the whole story.</p>
+...</code></pre><p>But that&#39;s not the whole story.</p>
 <h2 id="using-xargs-to-transform-stdin-to-arguments">Using xargs to transform STDIN to arguments</h2>
 <p>Turns out you <i>can</i> pipe to echo, if you use <code>xargs</code>. Xargs is a command that takes STDIN and turns it into arguments for a <i>command</i> (if it finds no command it will use echo). So:</p>
 <pre><code># xargs is basically creating the command: echo Applications Desktop Documents ...
 &gt; ls ~/ | xargs echo
-Applications Desktop Documents ...
-</code></pre><p>Notice the difference between <code>cat</code> and <code>xargs</code>. cat adds newlines - it treats each space separated word as a different input. xargs instead removes newlines - part of its purpose is to normalize blank spaces, tabs and newlines into a consistent format.</p>
+Applications Desktop Documents ...</code></pre><p>Notice the difference between <code>cat</code> and <code>xargs</code>. cat adds newlines - it treats each space separated word as a different input. xargs instead removes newlines - part of its purpose is to normalize blank spaces, tabs and newlines into a consistent format.</p>
 <p>You can see that better by passing the argument -1 to ls, which prints the arguments one per line:</p>
 <pre><code>&gt; ls -1 ~/
 Applications
 Desktop
 ...
 &gt;  ls -1 ~/ | xargs echo
-Applications Desktop Documents ...
-</code></pre><h2 id="further-reading">Further reading</h2>
+Applications Desktop Documents ...</code></pre><h2 id="further-reading">Further reading</h2>
 <p>There is lots of info around the web, here are a couple of simple links:</p>
 <ul>
 <li><a href="https://gigaom.com/2009/07/01/dig-into-unix-standard-streams/">Dig Into Unix: Standard Streams</a></li>

@@ -4,50 +4,52 @@
   <meta charset="utf-8">
   <title>How to generate an error in a Gulp task || Fritz Stelluto</title>
   <meta name="author" content="gotofritz">
-  <meta name="description" content="When writing a Gulp task that doesn&amp;#39;t involve streams, how do you throw an error?">
+  <meta name="description" content="When writing a Gulp task that doesn’t involve streams, how do you throw an error?">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <link href="/assets/favicon.ico" rel="shortcut icon">
   <link rel="icon" href="/assets/favicon.gif" type="image/gif" />
   <link href="/assets/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 </head>
 
-<body ontouchstart="">
-  <header id="header" class="inner">
-    <nav id="main-nav">
-      <div>
-        <a href="/">home</a>
-        <a href="/blog/">blog</a>
-      </div>
-    </nav>
+<body class="content-post"">
+  <div class="gradient-container">
+    <main class="panel-container">
+      <div class="content">
+        <nav class="topnav">
+          <div itemscope itemtype="http://schema.org/Person" class="vcard group-of-links">
+            <a href="/">home</a>
+            <a href="/fritz-stelluto_resume.pdf" title="my CV as a PDF">search</a>
+          </div>
+        </nav>
 
-    <nav id="sub-nav" class="alignright">
-      <form class="search" action="http://google.com/search" method="get">
-        <input class="alignright" type="text" name="q" results="0">
-        <input type="hidden" name="q" value="site:gotofritz.net">
-      </form>
-    </nav>
-  </header>
-
-
-<div id="content" class="inner">
-  <article class="post">
-    <h1 class="title">How to generate an error in a Gulp task</h1>
-    <div>
+<article>
+  <section class="intro">
+    <!--
       <div class="meta">
         <div class="date">
-          <time datetime="2015-04-27T12:29:00+02:00" pubdate>2015-04-27</time>
+          <time datetime="2017-08-29T13:44:00+02:00" pubdate>2017-08-29</time>
         </div>
         <div class="tags">
-          gulp
+          security,
+          frontend
         </div>
       </div>
-      <div class="entry-content">
-    <div class="archive">This post is old, and probably obsolete</div>
-<p>When writing a Gulp task that doesn&#39;t involve streams, how do you throw an error?
-<!--more--></p>
-<h2 id="motivation">Motivation</h2>
-<p><a href="http://gulpjs.com/">Gulp</a>, is a popular javscript build tool for web development. Gulp tasks are based around <a href="https://github.com/substack/stream-handbook">streams</a>; but sometimes streams are too clumsy when you want to do a simple task. Say you want to check a JSON file conforms to certain rule. It&#39;s much easier to require the file, check what you need to check, and then throw an error if you need to than it is opening the file as a stream and validating it.</p>
-<p>But how do you throw an error in Gulp &quot;the proper way&quot;, i.e. not just by throwing a standard JS error?</p>
+       -->
+    <div class="post-meta">
+      <time datetime="2015-04-27T12:29:00+02:00" pubdate>2015-04-27</time>
+      //
+      <div class="tags">
+        gulp
+      </div>
+    </div>
+    <h1>How to generate an error in a Gulp task</h1>
+    <h2>When writing a Gulp task that doesn’t involve streams, how do you throw an error?</h2>
+
+  </section>
+  <section class="post-content">
+    <h2 id="motivation">Motivation</h2>
+<p><a pppp href="http://gulpjs.com/">Gulp</a>, is a popular javscript build tool for web development. Gulp tasks are based around <a pppp href="https://github.com/substack/stream-handbook">streams</a>; but sometimes streams are too clumsy when you want to do a simple task. Say you want to check a JSON file conforms to certain rule. It’s much easier to require the file, check what you need to check, and then throw an error if you need to than it is opening the file as a stream and validating it.</p>
+<p>But how do you throw an error in Gulp “the proper way”, i.e. not just by throwing a standard JS error?</p>
 <h2 id="validating-a-package-json-file">Validating a package.json file</h2>
 <p>I had to validate a package json file to make sure all packages were installed with the <code>--save-dev</code> flag. In other words, all dependencies should be in exact semantic format, <code>1.2.3</code> instead of the default <code>^1.2.3</code> or <code>~1.2.3</code>. It is simply enough in plain node, without the extra complication of streams - you require package.json, then test each dependency.</p>
 <pre><code>gulp.task(taskName, function (cb) {
@@ -74,62 +76,27 @@
       }
     });
   });
-});
-</code></pre><h2 id="throwing-an-error-with-gulp">Throwing an error with gulp</h2>
-<p>The easiset way to throw a gulp-y error is to use <code>gulp-util</code>, which has a PluginError that can be thrown. <a href="https://github.com/gulpjs/gulp-util#user-content-new-pluginerrorpluginname-message-options">Here is the documentation for PluginError</a>. <code>plugin</code> and <code>message</code> get outputted on separate lines; they are basically a title message and a message body.
-There are also a couple of options that can be passed, do refer to the documentation.</p>
+});</code></pre><h2 id="throwing-an-error-with-gulp">Throwing an error with gulp</h2>
+<p>The easiset way to throw a gulp-y error is to use <code>gulp-util</code>, which has a PluginError that can be thrown. <a pppp href="https://github.com/gulpjs/gulp-util#user-content-new-pluginerrorpluginname-message-options">Here is the documentation for PluginError</a>. <code>plugin</code> and <code>message</code> get outputted on separate lines; they are basically a title message and a message body.<br>There are also a couple of options that can be passed, do refer to the documentation.</p>
 <h2 id="this-is-not-using-gulp-the-way-it-was-meant-to-be">This is not using gulp the way it was meant to be</h2>
-<p>There isn&#39;t always a benefit in turning simple problems into a stream problem. Hope this info was useful.</p>
+<p>There isn’t always a benefit in turning simple problems into a stream problem. Hope this info was useful.</p>
+  </section>
 
-      </div>
+
     </div>
-  </article>
-
-
-<!-- <section id="comment">
-    <h1 class="title">Comments</h1>
-    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-</div>
-</section>
-
   </div>
-  -->
-  <footer id="footer" class="inner">Copyright &copy; 2016
+</div>
 
-    Fritz Stelluto
-
-</footer>
-<!--
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script type="text/javascript">
-      var disqus_shortname = 'goto-fritz';
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-11254155-2']);
+  _gaq.push(['_trackPageview']);
 
-
-        // var disqus_developer = 1;
-        var disqus_identifier = 'http://gotofritz.net/blog/geekery/backing-up-hard-disk-os-x/';
-        var disqus_url = 'http://gotofritz.net/blog/geekery/backing-up-hard-disk-os-x/';
-        var disqus_script = 'embed.js';
-
-    (function () {
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    }());
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
 </script>
--->
-
-
-  <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-11254155-2']);
-    _gaq.push(['_trackPageview']);
-
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
-
 </body>
 </html>

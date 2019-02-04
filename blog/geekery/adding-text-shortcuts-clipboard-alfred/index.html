@@ -11,48 +11,50 @@
   <link href="/assets/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 </head>
 
-<body ontouchstart="">
-  <header id="header" class="inner">
-    <nav id="main-nav">
-      <div>
-        <a href="/">home</a>
-        <a href="/blog/">blog</a>
-      </div>
-    </nav>
+<body class="content-post"">
+  <div class="gradient-container">
+    <main class="panel-container">
+      <div class="content">
+        <nav class="topnav">
+          <div itemscope itemtype="http://schema.org/Person" class="vcard group-of-links">
+            <a href="/">home</a>
+            <a href="/fritz-stelluto_resume.pdf" title="my CV as a PDF">search</a>
+          </div>
+        </nav>
 
-    <nav id="sub-nav" class="alignright">
-      <form class="search" action="http://google.com/search" method="get">
-        <input class="alignright" type="text" name="q" results="0">
-        <input type="hidden" name="q" value="site:gotofritz.net">
-      </form>
-    </nav>
-  </header>
-
-
-<div id="content" class="inner">
-  <article class="post">
-    <h1 class="title">Adding useful text shortcuts to the clipboard with Alfred</h1>
-    <div>
+<article>
+  <section class="intro">
+    <!--
       <div class="meta">
         <div class="date">
-          <time datetime="2013-12-15T17:30:00+01:00" pubdate>2013-12-15</time>
+          <time datetime="2017-08-29T13:44:00+02:00" pubdate>2017-08-29</time>
         </div>
         <div class="tags">
-          alfreadapp
+          security,
+          frontend
         </div>
       </div>
-      <div class="entry-content">
-<div class="archive">This post is too old to be of any use. It has been archived.</div>
-<p><a href="http://support.alfredapp.com/workflows" title="[new window] Workflows - Alfred v2 Support" target="_blank">Alfred Worflows</a> can be useful in creating strings and pushing them immediately to the clipboard, so that they are available without moving the hands from the keyboard.
-<!--more--></p>
-<h2 id="pushing-formatted-date-into-the-clipboard">Pushing formatted date into the clipboard</h2>
+       -->
+    <div class="post-meta">
+      <time datetime="2013-12-15T17:30:00+01:00" pubdate>2013-12-15</time>
+      //
+      <div class="tags">
+        alfreadapp
+      </div>
+    </div>
+    <h1>Adding useful text shortcuts to the clipboard with Alfred</h1>
+    <h2>Alfred Worflows can be useful in creating strings and pushing them immediately to the clipboard, so that they are available without moving the hands from the keyboard.</h2>
+
+  </section>
+  <section class="post-content">
+    <h2 id="pushing-formatted-date-into-the-clipboard">Pushing formatted date into the clipboard</h2>
 <p>For example, I often use dates in the format <code>[yyyy-mm-dd]</code> in various documents and homemade apps. Since it is something I do quite regularly, an Alfred workflow may be a good idea. Something simple, something that works out a date and puts it in the clipboard, and pastes it in the frontmost app if it can.</p>
 <h2 id="creating-the-a-workflow">Creating the a workflow</h2>
 <p>In Alfred, in the workflows tab, I clicked on the <code>+</code> button at the bottom of the <abbr title="Left Hand Side">LHS</a> panel (1), and selected <code>blank workflow</code>. I filled in some details and clicked <code>save</code></p>
-<p>Then I clicked on the plus button at the top of the <abbr title="Right Hand Side">RHS</a> panel (2), and selected from &#39;inputs&#39; a &#39;keyword&#39;, from &#39;actions&#39; a &#39;run script&#39;, and from &#39;outputs&#39; a &#39;copy to clipboard&#39;. I dragged from the kink in &#39;keyword&#39; to &#39;run script&#39; to connect them, then did the same to connect &#39;copy to clipboard&#39;. Then I double clicked on each in turn to edit.</p>
+<p>Then I clicked on the plus button at the top of the <abbr title="Right Hand Side">RHS</a> panel (2), and selected from ‘inputs’ a ‘keyword’, from ‘actions’ a ‘run script’, and from ‘outputs’ a ‘copy to clipboard’. I dragged from the kink in ‘keyword’ to ‘run script’ to connect them, then did the same to connect ‘copy to clipboard’. Then I double clicked on each in turn to edit.</p>
 <p>{% img /images/adding-text-shortcuts-clipboard-alfred.png 800 522 [screenshot of the alfred workflow] %}</p>
 <h2 id="the-keyword-object">The Keyword object</h2>
-<p>The <code>keyword</code> argument is the actual keyword that you type in Alfred to run the command, I used &quot;today&quot;. I also ticked &quot;with space&quot; and selected &quot;argument optional&quot; from the dropdown next to it. This means that I can call the argument as &quot;today +2&quot; or &quot;today y&quot; for example, to get the date two days from now or yesterday. &quot;With space&quot; ensures the space between &quot;today&quot; and the next work is considered part of the keyword and not the argument. The argument itself can be used in the script as the special string &quot;{query}&quot;.</p>
+<p>The <code>keyword</code> argument is the actual keyword that you type in Alfred to run the command, I used “today”. I also ticked “with space” and selected “argument optional” from the dropdown next to it. This means that I can call the argument as “today +2” or “today y” for example, to get the date two days from now or yesterday. “With space” ensures the space between “today” and the next work is considered part of the keyword and not the argument. The argument itself can be used in the script as the special string “{query}”.</p>
 <p>The <code>title</code> and <code>subtext</code> appear in the Alfred dropdown when you are typing the keyword.</p>
 <h2 id="the-run-script-object">The Run Script object</h2>
 <p>I selected PHP as the language, left all the checkboxes as they were, and entered the following script. Not the most sophisticated script, but before I invest time to make it slick I want to make sure I actually need it.</p>
@@ -106,61 +108,27 @@
     break;
 
 }
-print date(&quot;[Y-m-d]&quot;, $when);
-</code></pre><h2 id="the-copy-to-clipboard-object">The Copy To Clipboard object</h2>
-<p>For this I only ticked the &#39;Automatically paste to front most app&#39; tickbox.</p>
+print date(&quot;[Y-m-d]&quot;, $when);</code></pre><h2 id="the-copy-to-clipboard-object">The Copy To Clipboard object</h2>
+<p>For this I only ticked the ‘Automatically paste to front most app’ tickbox.</p>
 <h2 id="job-done">Job done</h2>
-<p>Creating the workflow was quite quick, and since I store the Alfred preferences in my Dropbox folder, I can easily share them with my work computer. So now I can easily type &quot;ALT-Space today RETURN&quot; to insert a date in the document I am writing, or any of the more complicated ones like &quot;today -3&quot; or &quot;today n&quot; (although I probably won&#39;t need those).</p>
+<p>Creating the workflow was quite quick, and since I store the Alfred preferences in my Dropbox folder, I can easily share them with my work computer. So now I can easily type “ALT-Space today RETURN” to insert a date in the document I am writing, or any of the more complicated ones like “today -3” or “today n” (although I probably won’t need those).</p>
+  </section>
 
-      </div>
+
     </div>
-  </article>
-
-
-<!-- <section id="comment">
-    <h1 class="title">Comments</h1>
-    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-</div>
-</section>
-
   </div>
-  -->
-  <footer id="footer" class="inner">Copyright &copy; 2016
+</div>
 
-    Fritz Stelluto
-
-</footer>
-<!--
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script type="text/javascript">
-      var disqus_shortname = 'goto-fritz';
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-11254155-2']);
+  _gaq.push(['_trackPageview']);
 
-
-        // var disqus_developer = 1;
-        var disqus_identifier = 'http://gotofritz.net/blog/geekery/backing-up-hard-disk-os-x/';
-        var disqus_url = 'http://gotofritz.net/blog/geekery/backing-up-hard-disk-os-x/';
-        var disqus_script = 'embed.js';
-
-    (function () {
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    }());
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
 </script>
--->
-
-
-  <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-11254155-2']);
-    _gaq.push(['_trackPageview']);
-
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
-
 </body>
 </html>

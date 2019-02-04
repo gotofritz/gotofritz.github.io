@@ -44,51 +44,54 @@
       </div>
       <div class="entry-content">
     
-<p>An example of how to use functions in JS regular expressions is to imitate the /e flag other languages have.
-<!--more--></p>
+<p>An example of how to use functions in JS regular expressions is to imitate the /e flag other languages have.</p>
+<!--more-->
+
 <pre><code>&quot;abb Cdd-Eff.ghh 1AAA&quot;.toLowerCase()
   .replace(/(^|[^a-z0-9-])([a-z])/g,
     function(m, m1, m2, p) {
       return m1 + m2.toUpperCase();
     });
-//output: Abb Cdd-eff.Ghh 1aaa
-</code></pre><p>Breaking it down:</p>
-<p><ul class="code-breakdown"></p>
-<p><dt>&quot;abb Cdd-Eff.ghh 1AAA&quot;</dt></p>
+//output: Abb Cdd-eff.Ghh 1aaa</code></pre><p>Breaking it down:</p>
+<ul class="code-breakdown">
+<dt>"abb Cdd-Eff.ghh 1AAA"</dt>
 <dd>an anonymous string literal I am using on the console to test</dd>
 
-<p><dt>.toLowerCase()</dt></p>
-<dd>make it all lower case first. Normal string methods apply even to anonymous strings not initialised with new String( &quot;blah&quot; );</dd>
+<dt>.toLowerCase()</dt>
+<dd>make it all lower case first. Normal string methods apply even to anonymous strings not initialised with new String( "blah" );</dd>
 
-<p><dt>.replace(</dt></p>
+<dt>.replace(</dt>
 <dd>start the regular expression fun</dd>
 
-<p><dt>/ .... /g</dt></p>
+<dt>/ .... /g</dt>
 <dd>replace takes either a regular expression or a string (which will be transformed into a regular expression) as first argument. Here a regular expression with the flag g, global, is used, meaning the regular expression wil be run until the end of the string and all matches collected</dd>
 
-<p><dt>(^</dt></p>
+<dt>(^</dt>
 <dd>match whatever is before the beginning of a word - the start of the string...</dd>
 
-<p><dt>|</dt></p>
+<dt>|</dt>
 <dd>...or...</dd>
 
-<p><dt>[^a-z0-9-])</dt></p>
+<dt>[^a-z0-9-])</dt>
 <dd>a character which is neither a letter, a digit, nor the dash. Note that the dash between a-z and 0-9 represents a range, while the one at the very end is just a dash</dd>
 
-<p><dt>, function(</dt></p>
+<dt>, function(</dt>
 <dd>the second arguments to replace is often a string, but it can also be a function. As the RegExp was created with the g flag, this function will be called for every match - i.e., in this case, for every word.</dd>
 
-<p><dt>m,</dt></p>
+<dt>m,</dt>
 <dd>the arguments passed to the function are similar to those returned by the match method. The first one is the complete matched string (not used in this function)</dd>
 
-<p><dt>m1, m2</dt></p>
+<dt>m1, m2</dt>
 <dd>these are matches - i.e. the expression inside the parentheses, i.e. the character before the start of a word and the first character of the word respectively</dd>
 
-<p><dt>p)</dt></p>
+<dt>p)</dt>
 <dd>the last argument is the position in the string where the match start - not used in this function</dd>
 
-<p><dt class="long-line">{ return m1 + m2.toUpperCase(); }</dt></p>
-<p><dd class="long-line">the body of the function puts strings back into the initial, anonymous strings with some manipulation. m1 is puts back where it was found,  and m2 is capitalized before putting it back. The remaining characters were not matched therefore will not be touched.</p>
+<dt class="long-line">{ return m1 + m2.toUpperCase(); }</dt>
+<dd class="long-line">the body of the function puts strings back into the initial, anonymous strings with some manipulation. m1 is puts back where it was found,  and m2 is capitalized before putting it back. The remaining characters were not matched therefore will not be touched.
+
+
+
 <p>Note that this regular expression is not UTF safe, i.e. special characters such as umlauts etc will not be treated correctly.</p>
 
       </div>

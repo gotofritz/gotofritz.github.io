@@ -44,16 +44,17 @@
       </div>
       <div class="entry-content">
     
-<p>Finding files that were changed in the last day, sorted by size, using <a href="http://en.wikipedia.org/wiki/Apple_Terminal">Apple&#39;s Terminal</a>
-<!--more--></p>
+<p>Finding files that were changed in the last day, sorted by size, using <a href="http://en.wikipedia.org/wiki/Apple_Terminal">Apple&#39;s Terminal</a></p>
+<!--more-->
+
+
 <h2 id="find-command">find command</h2>
 <p>To list files that were changed in the last day, sorted by size, using <a href="http://en.wikipedia.org/wiki/Apple_Terminal">Apple&#39;s Terminal</a>, or any Unix / Linux <a href="http://en.wikipedia.org/wiki/Bash">bash</a> shell:</p>
-<pre><code>sudo find / -type f -mtime -1 -print0 | xargs -0 du -sk | sort -nr
-</code></pre><p>(thanks <a href="http://twitter.com/mynamewasgone">mynamewasgone</a>!)</p>
+<pre><code>sudo find / -type f -mtime -1 -print0 | xargs -0 du -sk | sort -nr</code></pre><p>(thanks <a href="http://twitter.com/mynamewasgone">mynamewasgone</a>!)</p>
 <h2 id="command-breakdown">Command breakdown</h2>
 <dl class="code-breakdown">
 <dt>sudo</dt>
-<dd>run in superuser mode - allows you to reach hidden system folders (if that&#39;s what you need). You&#39;ll be asked for your password</dd>
+<dd>run in superuser mode - allows you to reach hidden system folders (if that's what you need). You'll be asked for your password</dd>
 
 <dt>find /</dt>
 <dd>use the powerful <a href="http://en.wikipedia.org/wiki/Find" title="[new window] find - Wikipedia, the free encyclopedia" target="_blank">find</a> command, starting from the root of the computer - in other words, search everywhere (which may not be a good idea if you are connected to a network or have a massive hard disk connected to your machine)</dd>
@@ -91,8 +92,7 @@
 
 <h2 id="find-exec-is-slow">Find -exec is slow</h2>
 <p>Originally I did everything within find, using the -exec flag.</p>
-<pre><code>sudo find / -type f -mtime -1 -exec du -sk {} \; | sort -nr
-</code></pre><p>But as <a href="http://twitter.com/mynamewasgone">mynamewasgone</a> pointed out, <a href="http://dpaste.com/hold/116132/">find -exec is slow</a></p>
+<pre><code>sudo find / -type f -mtime -1 -exec du -sk {} \; | sort -nr</code></pre><p>But as <a href="http://twitter.com/mynamewasgone">mynamewasgone</a> pointed out, <a href="http://dpaste.com/hold/116132/">find -exec is slow</a></p>
 
       </div>
     </div>

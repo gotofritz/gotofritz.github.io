@@ -11,55 +11,55 @@
   <link href="/assets/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 </head>
 
-<body ontouchstart="">
-  <header id="header" class="inner">
-    <nav id="main-nav">
-      <div>
-        <a href="/">home</a>
-        <a href="/blog/">blog</a>
-      </div>
-    </nav>
+<body class="content-post"">
+  <div class="gradient-container">
+    <main class="panel-container">
+      <div class="content">
+        <nav class="topnav">
+          <div itemscope itemtype="http://schema.org/Person" class="vcard group-of-links">
+            <a href="/">home</a>
+            <a href="/fritz-stelluto_resume.pdf" title="my CV as a PDF">search</a>
+          </div>
+        </nav>
 
-    <nav id="sub-nav" class="alignright">
-      <form class="search" action="http://google.com/search" method="get">
-        <input class="alignright" type="text" name="q" results="0">
-        <input type="hidden" name="q" value="site:gotofritz.net">
-      </form>
-    </nav>
-  </header>
-
-
-<div id="content" class="inner">
-  <article class="post">
-    <h1 class="title">Hosting Octopress on nginx</h1>
-    <div>
+<article>
+  <section class="intro">
+    <!--
       <div class="meta">
         <div class="date">
-          <time datetime="2012-09-21T19:24:00+02:00" pubdate>2012-09-21</time>
+          <time datetime="2017-08-29T13:44:00+02:00" pubdate>2017-08-29</time>
         </div>
         <div class="tags">
-          octopress,
-          nginx
+          security,
+          frontend
         </div>
       </div>
-      <div class="entry-content">
-<div class="archive">This post is too old to be of any use. It has been archived.</div>
-<p>The best thing about Octopress is that it makes it easier to switch to one of the servers out there which are faster than Apache - Nginx, lighttpd, or services such as Amazon S3. I went for nginx.
-<!--more--></p>
-<h2 id="deploying-octopress-to-my-server">Deploying Octopress to my server</h2>
+       -->
+    <div class="post-meta">
+      <time datetime="2012-09-21T19:24:00+02:00" pubdate>2012-09-21</time>
+      //
+      <div class="tags">
+        octopress,
+        nginx
+      </div>
+    </div>
+    <h1>Hosting Octopress on nginx</h1>
+    <h2>The best thing about Octopress is that it makes it easier to switch to one of the servers out there which are faster than Apache - Nginx, lighttpd, or services such as Amazon S3. I went for nginx.</h2>
+
+  </section>
+  <section class="post-content">
+    <h2 id="deploying-octopress-to-my-server">Deploying Octopress to my server</h2>
 <p>For now I want to self-host my site on my <a href="http://www.linode.com/" title="[new window] Linode - Xen VPS Hosting" target="_blank">Linode</a>. Since both my server and my local machines are fresh installs, I first needed to <a href="/blog/geekery/basic-user-admin-linode/" title="Basic user admin in an Ubuntu Linode">set up users, SSH keys</a> and suchlike.</p>
 <p>With that done, I toyed with the idea of deploying Octopress via Dropbox - I mean, could it get any easier? Just symlink the public folder into dropbox</p>
-<pre><code>ln -s /path/to/octopress/Public /Users/ME/Dropbox/gotofritz.net
-</code></pre><p>and then <a href="https://www.dropbox.com/install?os=lnx" title="[new window] Dropbox - Download Dropbox - Simplify your life" target="_blank">install Dropbox on the server</a> and do the same on that side. But somehow I felt reluctant to do that.</p>
+<pre><code>ln -s /path/to/octopress/Public /Users/ME/Dropbox/gotofritz.net</code></pre><p>and then <a href="https://www.dropbox.com/install?os=lnx" title="[new window] Dropbox - Download Dropbox - Simplify your life" target="_blank">install Dropbox on the server</a> and do the same on that side. But somehow I felt reluctant to do that.</p>
 <p>Instead I picked rsync as the deploy method.</p>
 <h2 id="deploying-octopress-with-rsync">Deploying Octopress with rsync</h2>
-<p>It&#39;s really as simple as the <a href="http://octopress.org/docs/deploying/rsync/" title="[new window] Deploying with rsync - Octopress" target="_blank">instructions on the Octopress site</a> say - you change a couple of settings in the Rakefile, and then you run <tt>rake deploy</tt>.</p>
+<p>It’s really as simple as the <a href="http://octopress.org/docs/deploying/rsync/" title="[new window] Deploying with rsync - Octopress" target="_blank">instructions on the Octopress site</a> say - you change a couple of settings in the Rakefile, and then you run <tt>rake deploy</tt>.</p>
 <h2 id="hosting-octopress-on-nginx">Hosting Octopress on nginx</h2>
 <h3 id="installing-nginx-on-ubuntu">Installing nginx on Ubuntu</h3>
-<p>I didn&#39;t have nginx on my server, so I installed it and started it a version which includes <a href="http://code.google.com/p/naxsi/" title="[new window] naxsi - Naxsi is an open source, high performance, low rules maintenance, Web Application Firewall module for Nginx - Google Project Hosting" target="_blank">naxsi, an nginx firewall</a>.</p>
+<p>I didn’t have nginx on my server, so I installed it and started it a version which includes <a href="http://code.google.com/p/naxsi/" title="[new window] naxsi - Naxsi is an open source, high performance, low rules maintenance, Web Application Firewall module for Nginx - Google Project Hosting" target="_blank">naxsi, an nginx firewall</a>.</p>
 <pre><code>apt-get install nginx-naxsi
-/etc/init.d/nginx start
-</code></pre><p>I then changed some of the settings in /etc/nginx/nginx.conf - enabled gizipping, added the location of the log files, nothing too weird.</p>
+/etc/init.d/nginx start</code></pre><p>I then changed some of the settings in /etc/nginx/nginx.conf - enabled gizipping, added the location of the log files, nothing too weird.</p>
 <p>Then I created a config file in /etc/nginx/sites-available/gotofritz.net</p>
 <pre><code>server {
     listen       80;
@@ -139,61 +139,26 @@ server {
     log_not_found off;
     }
 
-}
-</code></pre><p>Created a symlink between sites-available and sites-enabled, then restarted the server</p>
+}</code></pre><p>Created a symlink between sites-available and sites-enabled, then restarted the server</p>
 <pre><code>ln -s ../sites-enabled/gotofritz.net gotofritz.net
-sudo /etc/init.d/nginx restart
-</code></pre><p>Anf off we go. Check out the speed - it&#39;s actually faster to load the page from my Linode in the UK than it is to load it locally on my machine using Pow.</p>
+sudo /etc/init.d/nginx restart</code></pre><p>Anf off we go. Check out the speed - it’s actually faster to load the page from my Linode in the UK than it is to load it locally on my machine using Pow.</p>
+  </section>
 
-      </div>
+
     </div>
-  </article>
-
-
-<!-- <section id="comment">
-    <h1 class="title">Comments</h1>
-    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-</div>
-</section>
-
   </div>
-  -->
-  <footer id="footer" class="inner">Copyright &copy; 2016
+</div>
 
-    Fritz Stelluto
-
-</footer>
-<!--
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script type="text/javascript">
-      var disqus_shortname = 'goto-fritz';
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-11254155-2']);
+  _gaq.push(['_trackPageview']);
 
-
-        // var disqus_developer = 1;
-        var disqus_identifier = 'http://gotofritz.net/blog/geekery/backing-up-hard-disk-os-x/';
-        var disqus_url = 'http://gotofritz.net/blog/geekery/backing-up-hard-disk-os-x/';
-        var disqus_script = 'embed.js';
-
-    (function () {
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    }());
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
 </script>
--->
-
-
-  <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-11254155-2']);
-    _gaq.push(['_trackPageview']);
-
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
-
 </body>
 </html>

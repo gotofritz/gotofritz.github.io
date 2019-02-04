@@ -44,8 +44,9 @@
       </div>
       <div class="entry-content">
     
-<p>Summary notes from a lecture about scaling PHP apps.
-<!--more--></p>
+<p>Summary notes from a lecture about scaling PHP apps.</p>
+<!--more-->
+
 <p>Can&#39;t remember who gave the lecture, but you can tell it was a couple of years ago because neither cloud services nor NoSQL get much of a mention. It also doesn&#39;t mention tools such as <a href="https://www.varnish-cache.org/">Varnish</a>. Most of the information is still relevant though.</p>
 <h2 id="scaling">Scaling</h2>
 <p> Scaling means enabling your application to grow as traffic grows.</p>
@@ -102,8 +103,7 @@ It&#39;s simple but not ideal, as you must create a web server even if all you w
         return new PDO($dsn, USER, PASS);
     }
 }
-$db = DB::getConnection(&#39;read&#39;);{% endcodeblock %}
-</code></pre><h3 id="stage-5-slave-pools">STAGE 5: slave pools</h3>
+$db = DB::getConnection(&#39;read&#39;);{% endcodeblock %}</code></pre><h3 id="stage-5-slave-pools">STAGE 5: slave pools</h3>
 <p>Pools increases the likelihood that queries gets cached on a given server. Another benefit is that if certain queries need improving performance, you can add servers to that particular pool.
 Different approaches:</p>
 <ul>

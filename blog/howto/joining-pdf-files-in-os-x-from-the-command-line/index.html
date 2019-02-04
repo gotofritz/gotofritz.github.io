@@ -44,8 +44,10 @@
       </div>
       <div class="entry-content">
     
-<p>In OS X, PDF files can be concatenated manually  using Preview. But if you are happy using Terminal there&#39;s an easier way, thanks to a Python script installed by default in /System/Library/Automator
-<!--more--></p>
+<p>In OS X, PDF files can be concatenated manually  using Preview. But if you are happy using Terminal there&#39;s an easier way, thanks to a Python script installed by default in /System/Library/Automator</p>
+<!--more-->
+
+
 <h2 id="combining-pdf-files-manually-using-preview">Combining PDF files manually using Preview</h2>
 <p>Preview allows PDF files to be combined by dragging and dropping, as long as you are careful when do it - or it won&#39;t work.</p>
 <p>First of all, open the first PDF file in Preview as per normal. Then drag each of the other PDFs in turn, over the last page thumbnail in the drawer. This is where you need to be careful - you need to drop the document <em>over</em> the thumbnail of the previous document last page, not underneath it. Otherwise Preview will treat them as separate document and won&#39;t merge them. The difference is quite easy to spot - when doing it right Preview will show a border around the thumbnail in the sidebar, instead of a line underneath it - see image below.</p>
@@ -54,15 +56,11 @@
 <p>So that works well - slightly laborious but easy for everyone to understand.</p>
 <h2 id="combining-pdf-files-on-the-command-line-in-osx">Combining PDF files on the command line in OSX</h2>
 <p>It turns out that from Tiger onwards, OSX ships with a Python script that does exactly what you need. The script is already executable, and Python is pre-installed on OS X, so all you need to do to run it is opening the Terminal and typing</p>
-<pre><code>&quot;/System/Library/Automator/Combine PDF Pages.action/Contents/Resources/join.py&quot; -o PATH/TO/YOUR/MERGED/FILE.pdf /PATH/TO/ORIGINAL/1.pdf /PATH/TO/ANOTHER/2.pdf /PATH/TO/A/WHOLE/DIR/*.pdf
-</code></pre><p><a href="http://www.cs.cmu.edu/~benhdj/Mac/unix.html#joinPDF">Benjamin Han</a> recommends setting up a <a href="http://is.gd/dqddx">symbolic link</a> to make typing easier. I prefer putting the link in /usr/local/bin, as it is in the $PATH and therefore I can run the command from anywhere. To setup the link, you need to navigate to the directory where you want the link.</p>
+<pre><code>&quot;/System/Library/Automator/Combine PDF Pages.action/Contents/Resources/join.py&quot; -o PATH/TO/YOUR/MERGED/FILE.pdf /PATH/TO/ORIGINAL/1.pdf /PATH/TO/ANOTHER/2.pdf /PATH/TO/A/WHOLE/DIR/*.pdf</code></pre><p><a href="http://www.cs.cmu.edu/~benhdj/Mac/unix.html#joinPDF">Benjamin Han</a> recommends setting up a <a href="http://is.gd/dqddx">symbolic link</a> to make typing easier. I prefer putting the link in /usr/local/bin, as it is in the $PATH and therefore I can run the command from anywhere. To setup the link, you need to navigate to the directory where you want the link.</p>
 <pre><code>cd /usr/local/bin
-sudo ln &quot;/System/Library/Automator/Combine PDF Pages.action/Contents/Resources/join.py&quot; PDFconcat
-</code></pre><p>Terminal will ask you for your password (you need Admin rights to do this). After the command is run, you will be able to concatenate PDF files anywhere on Terminal by typing</p>
-<pre><code>PDFconcat -o PATH/TO/YOUR/MERGED/FILE.pdf /PATH/TO/ORIGINAL/1.pdf /PATH/TO/ANOTHER/2.pdf /PATH/TO/A/WHOLE/DIR/*.pdf
-</code></pre><p>You can even pass a &#39;shuffle&#39; argument to make the script take one page per document in turn instead:</p>
-<pre><code>PDFconcat -s -o PATH/TO/YOUR/MERGED/FILE.pdf  /PATH/TO/DIR/*.pdf
-</code></pre>
+sudo ln &quot;/System/Library/Automator/Combine PDF Pages.action/Contents/Resources/join.py&quot; PDFconcat</code></pre><p>Terminal will ask you for your password (you need Admin rights to do this). After the command is run, you will be able to concatenate PDF files anywhere on Terminal by typing</p>
+<pre><code>PDFconcat -o PATH/TO/YOUR/MERGED/FILE.pdf /PATH/TO/ORIGINAL/1.pdf /PATH/TO/ANOTHER/2.pdf /PATH/TO/A/WHOLE/DIR/*.pdf</code></pre><p>You can even pass a &#39;shuffle&#39; argument to make the script take one page per document in turn instead:</p>
+<pre><code>PDFconcat -s -o PATH/TO/YOUR/MERGED/FILE.pdf  /PATH/TO/DIR/*.pdf</code></pre>
       </div>
     </div>
   </article>
