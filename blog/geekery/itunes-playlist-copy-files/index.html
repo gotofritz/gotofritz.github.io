@@ -45,9 +45,8 @@
       </div>
       <div class="entry-content">
 <div class="archive">This post is too old to be of any use. It has been archived.</div>
-<p>A quick and dirty Node script to copy the files in an iTunes playlist to a folder, in random order and without preserving file names. I use it to copy music to my flashcard to listen to it in non-Apple hardware.</p>
-<!--more-->
-
+<p>A quick and dirty Node script to copy the files in an iTunes playlist to a folder, in random order and without preserving file names. I use it to copy music to my flashcard to listen to it in non-Apple hardware.
+<!--more--></p>
 <h2 id="getting-the-playlist">Getting the playlist</h2>
 <p>I generate my playlist in iTunes, then export them as XML by right clicking on the playlist name and selecting &quot;Export...&quot; from the contextual menu. At the end of this step I have an XML file which looks like</p>
 <pre><code>    &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
@@ -93,41 +92,47 @@
                 &lt;key&gt;Location&lt;/key&gt;&lt;string&gt;file://localhost/Volumes/HD1T2/Music/Music/1619%20FB/Sound%20Of%20Funk%20Vol%202/14%20World.mp3&lt;/string&gt;
                 &lt;key&gt;File Folder Count&lt;/key&gt;&lt;integer&gt;5&lt;/integer&gt;
                 &lt;key&gt;Library Folder Count&lt;/key&gt;&lt;integer&gt;1&lt;/integer&gt;
-            &lt;/dict&gt;</code></pre><h2 id="filtering-the-file-names-from-the-itunes-xml-export">Filtering the file names from the iTunes xml export</h2>
+            &lt;/dict&gt;
+</code></pre><h2 id="filtering-the-file-names-from-the-itunes-xml-export">Filtering the file names from the iTunes xml export</h2>
 <p>I am only interested in files, so I switch to Terminal to extract the lines with the file paths from the XML document, and discard everything else. I use <a href="https://github.com/ggreer/the_silver_searcher">ag</a> and <a href="http://www.grymoire.com/Unix/Sed.html">sed</a> for that.</p>
-<pre><code>    ag &quot;Location&lt;/key&gt;&lt;string&gt;file://&quot; /Users/ME/Desktop/export.xml | sed -f itunes.sed  &gt; /Users/ME/Desktop/export_sed.xml</code></pre><p>The command can be broken down as:</p>
+<pre><code>    ag &quot;Location&lt;/key&gt;&lt;string&gt;file://&quot; /Users/ME/Desktop/export.xml | sed -f itunes.sed  &gt; /Users/ME/Desktop/export_sed.xml
+</code></pre><p>The command can be broken down as:</p>
 <dl class="code-breakdown">
     <dt>ag</dt>
-    <dd><a href="https://github.com/ggreer/the_silver_searcher" title="[new window] ggreer/the_silver_searcher" target="_blank">ag</a> is faster than <a href="http://beyondgrep.com/" title="[new window] Beyond grep: ack 2.04, a source code search tool for programmers" target="_blank">ack</a>, which is faster than grep. It lets you find strings inside files, and it's dead easy to install.</dd>
+    <dd><a href="https://github.com/ggreer/the_silver_searcher" title="[new window] ggreer/the_silver_searcher" target="_blank">ag</a> is faster than <a href="http://beyondgrep.com/" title="[new window] Beyond grep: ack 2.04, a source code search tool for programmers" target="_blank">ack</a>, which is faster than grep. It lets you find strings inside files, and it&#39;s dead easy to install.</dd>
 
-<pre><code>&lt;dt class=&quot;long-line&quot;&gt;&quot;Location&amp;lt;/key&amp;gt;&amp;lt;string&amp;gt;file://&quot;&lt;/dt&gt;
-&lt;dd class=&quot;long-line&quot;&gt;this is the XML fragment before each file path. I put &quot;location&quot; because there are other paths.&lt;/dd&gt;
+    <dt class="long-line">&quot;Location&lt;/key&gt;&lt;string&gt;file://&quot;</dt>
+    <dd class="long-line">this is the XML fragment before each file path. I put &quot;location&quot; because there are other paths.</dd>
 
-&lt;dt&gt;|&lt;/dt&gt;
-&lt;dd&gt;pipe, like always in Unix, get the output of what&#39;s on the left and feed it as input to what&#39;s on the right&lt;/dd&gt;
+    <dt>|</dt>
+    <dd>pipe, like always in Unix, get the output of what&#39;s on the left and feed it as input to what&#39;s on the right</dd>
 
-&lt;dt&gt;&lt;a href=&quot;http://www.grymoire.com/Unix/Sed.html&quot; title=&quot;[new window] Sed - An Introduction and Tutorial&quot; target=&quot;_blank&quot;&gt;sed&lt;/a&gt;&lt;/dt&gt;
-&lt;dd&gt;&lt;b&gt;s&lt;/b&gt;tream &lt;b&gt;ed&lt;/b&gt;itor, another comand line tool that web developers don&#39;t use enough IMHO. It comes by default with all Unix systems, including OS X. You give it (a) file(s), it applies text manipulations to it end you can save the results in another file. The manipulation themselves can be saved in a file...&lt;/dd&gt;
+    <dt><a href="http://www.grymoire.com/Unix/Sed.html" title="[new window] Sed - An Introduction and Tutorial" target="_blank">sed</a></dt>
+    <dd><b>s</b>tream <b>ed</b>itor, another comand line tool that web developers don&#39;t use enough IMHO. It comes by default with all Unix systems, including OS X. You give it (a) file(s), it applies text manipulations to it end you can save the results in another file. The manipulation themselves can be saved in a file...</dd>
 
-&lt;dt&gt;-f itunes.sed&lt;/dt&gt;
-&lt;dd&gt;...which is exactly what I am doing here, so I can reuse it later (see below)&lt;/dd&gt;
+    <dt>-f itunes.sed</dt>
+    <dd>...which is exactly what I am doing here, so I can reuse it later (see below)</dd>
 
-&lt;dt class=&quot;long-line&quot;&gt;&amp;gt; /Users/ME/Desktop/export_sed.xml&lt;/dt&gt;
-&lt;dd class=&quot;long-line&quot;&gt;this is where the output goes&lt;/dd&gt;</code></pre></dl>
+    <dt class="long-line">&gt; /Users/ME/Desktop/export_sed.xml</dt>
+    <dd class="long-line">this is where the output goes</dd>
+</dl>
 
 <p>The regular expression used is in a file (it makes developing it easier). The path to my music folder is hard coded. Note that regular expressions in the OS X version of sed are pretty basic, you don&#39;t have &quot;+&quot; for example.</p>
-<pre><code>s|^.*file://localhost\(/Volumes/HD1T2/Music/Music/.*\.[wmM][a4pP][3aAv]\).*$|\1|</code></pre><p>After that I am left a text file with a list of file paths in iTunes weird URL encoding variant.</p>
+<pre><code>s|^.*file://localhost\(/Volumes/HD1T2/Music/Music/.*\.[wmM][a4pP][3aAv]\).*$|\1|
+</code></pre><p>After that I am left a text file with a list of file paths in iTunes weird URL encoding variant.</p>
 <pre><code>/Volumes/HD1T2/Music/Music/1619%20FB/Sound%20Of%20Funk%20Vol%202/14%20World.mp3
 /Volumes/HD1T2/Music/Music/4%20Hero%20+%20Carina%20Andersson/Creating%20Patterns/14%20Les%20Fleur.mp3
 /Volumes/HD1T2/Music/Music/4%20Hero/Two%20Pages/1-07%20Spirits%20In%20Transit.mp3
 /Volumes/HD1T2/Music/Music/4%20Hero/Two%20Pages/1-09%20Star%20Chasers.mp3
 /Volumes/HD1T2/Music/Music/4%20Hero/Two%20Pages%20Reinterpretations/01%20Planetaria%20(Hefner%20Remix).mp3
 /Volumes/HD1T2/Music/Music/A%20Guy%20Called%20Gerald/Essence/15%20Landed.mp3
-...</code></pre><h2 id="randomizing-the-list-with-node">Randomizing the list with node</h2>
+...
+</code></pre><h2 id="randomizing-the-list-with-node">Randomizing the list with node</h2>
 <p>I run the node script <a href="https://gist.github.com/gotofritz/5994589#file-music_from_itunes-js" title="[new window] Copying the files from iTunes playlist to a folder" target="_blank">music_from_itunes</a> from Terminal</p>
 <pre><code>cd /path/to
 chmod 775 music_from_itunes
-./music_from_itunes</code></pre><p>I tried using the <code>lazy</code> modules to read the file as a stream instead of gobbling it up into an array in one go, but something is odd with my npm installation, and I didn&#39;t have time to work out what. So I wrote it using only standard modules, plus one of mine. It will load the complete list in memory, shuffle it, and then print out a bash file to copy these shuffled files to an external hard disk. Note that all paths are hard coded at the top of the file.</p>
+./music_from_itunes
+</code></pre><p>I tried using the <code>lazy</code> modules to read the file as a stream instead of gobbling it up into an array in one go, but something is odd with my npm installation, and I didn&#39;t have time to work out what. So I wrote it using only standard modules, plus one of mine. It will load the complete list in memory, shuffle it, and then print out a bash file to copy these shuffled files to an external hard disk. Note that all paths are hard coded at the top of the file.</p>
 <p>The <a href="https://gist.github.com/gotofritz/5994589#file-mandoline_helper-js" title="[new window] Copying the files from iTunes playlist to a folder" target="_blank">mandoline_helper</a> module I wrote is a container for all my iTunes related scripts, it&#39;s all rough and ready stuff focusing on functional style js.</p>
 <p>At the end of this step I am left with a bash file, which is a collection of copy instructions.</p>
 <pre><code>cp &quot;/Volumes/HD1T2/Music/Music/James Brown _ JB&#39;s/Hell/My Thang.mp3&quot; &quot;/Volumes/SD/MUSIC/0001.mp3&quot;
@@ -135,10 +140,12 @@ cp &quot;/Volumes/HD1T2/Music/Music/Cham/DJ Zhao_ Balmyard Rockers Mix/Funny Man
 cp &quot;/Volumes/HD1T2/Music/Music/Last Step/Sacred Symbols of Mu CD2/10 Lives With Angel.mp3&quot; &quot;/Volumes/SD/MUSIC/0003.mp3&quot;
 cp &quot;/Volumes/HD1T2/Music/Music/Smokeringz/Professor Tsungs Art Of Science Funktion/10 Flytronix.mp3&quot; &quot;/Volumes/SD/MUSIC/0004.mp3&quot;
 cp &quot;/Volumes/HD1T2/Music/Music/Compilations/Hip Hop Don&#39;t Stop - The Greatest/19 Egg Trippin&#39;.mp3&quot; &quot;/Volumes/SD/MUSIC/0005.mp3&quot;
-...</code></pre><h2 id="doing-the-actual-copy">Doing the actual copy</h2>
+...
+</code></pre><h2 id="doing-the-actual-copy">Doing the actual copy</h2>
 <p>The output of the last step is a file in my home directory called <code>bash_files.sh</code>. I simply run that, and roughly one hour later (for a 16GB flash drive) it&#39;s all done.</p>
 <pre><code>cd
-./bash_files.sh</code></pre><h2 id="it-mostly-works">It (mostly) works</h2>
+./bash_files.sh
+</code></pre><h2 id="it-mostly-works">It (mostly) works</h2>
 <p>I run it on playlists of up to 5000 items and it worked ok, with only 1% of files that couldn&#39;t be copied (weird character encoding introduced by iTunes that couldn&#39;t be decoded easily). I can live with that.</p>
 <p>Obviously there are lots of possible improvements, but I only had a window of a couple of hours and it was great just to get something that did the job.</p>
 

@@ -44,34 +44,35 @@
       </div>
       <div class="entry-content">
     
-<p>Sometimes you need to copy your local version of a project under subversion to a new location, without all the .svn stuff. Here&#39;s a couple of ways of doing it.</p>
-<!--more-->
-
+<p>Sometimes you need to copy your local version of a project under subversion to a new location, without all the .svn stuff. Here&#39;s a couple of ways of doing it.
+<!--more--></p>
 <p>TL;DR</p>
 <pre><code>&gt; cd DIR_FROM
-&gt; find .  \! \( -name . -or -name &quot;.svn&quot; -or -path &quot;*/.svn/*&quot; \) -print  | cpio -padv PTH_TO</code></pre><h2 id="finding-files-matching-a-set-of-conditions">Finding files matching a set of conditions</h2>
+&gt; find .  \! \( -name . -or -name &quot;.svn&quot; -or -path &quot;*/.svn/*&quot; \) -print  | cpio -padv PTH_TO
+</code></pre><h2 id="finding-files-matching-a-set-of-conditions">Finding files matching a set of conditions</h2>
 <p>The shell command to find files matching certain conditions is called, unsurprisingly, <a href="http://unixhelp.ed.ac.uk/CGI/man-cgi?find">find</a>, a powerful command. It includes &#39;actions&#39; which can be performed on the found files. The command below finds all the files we want to copy and ignores the rest.</p>
-<pre><code>find DIR_FROM \! \( -path &quot;*/.svn/*&quot; -or -name &quot;.svn&quot; \) -print</code></pre><p>It breaks down as</p>
+<pre><code>find DIR_FROM \! \( -path &quot;*/.svn/*&quot; -or -name &quot;.svn&quot; \) -print
+</code></pre><p>It breaks down as</p>
 <dl class="code-breakdown">
 <dt>find DIR_FROM</dt>
 <dd>run the find command, searching in DIR_FROM (in OS X, you can just drag DIR_FROM from the Finder to the Terminal window instead of typing it all out)</dd>
 
-<dt>\\!</dt>
+<dt>\!</dt>
 <dd>since we are ignoring files, use ! (negative) to find files which do NOT match the pattern. The slash is needed, because esclamation marks mean something to Terminal, and we want Terminal to ignore that</dd>
 
-<dt>\\( </dt>
+<dt>\( </dt>
 <dd>the parenthesis groups conditions together, since we have more than one. Again, the slash is needed because we want Terminal to ignore its special meaning</dd>
 
-<dt>-path "*/.svn/*"</dt>
-<dd>this is the condition "the path includes '/.svn' anywhere in it"</dd>
+<dt>-path &quot;<em>/.svn/</em>&quot;</dt>
+<dd>this is the condition &quot;the path includes &#39;/.svn&#39; anywhere in it&quot;</dd>
 
 <dt>-or</dt>
 <dd>adds conditions together, matching any of them</dd>
 
-<dt>-name ".svn"</dt>
-<dd>this is the condition "the name of the files is exactly '.svn'</dd>
+<dt>-name &quot;.svn&quot;</dt>
+<dd>this is the condition &quot;the name of the files is exactly &#39;.svn&#39;</dd>
 
-<dt>\\)</dt>
+<dt>\)</dt>
 <dd>ends the group of condition. The negative ! applies to all of them.</dd>
 
 <dt>-print</dt>
@@ -82,12 +83,13 @@
 <p>In an ideal world, I&#39;d run the find command above with &quot;-print&quot;, check it&#39;s ok, then I&#39;d run it again with &quot;-copy&quot;. Except that there is no &quot;-copy&quot; action, so it&#39;s back to <code>man find</code> to work out an action that will help.</p>
 <p>It turns out the simplest way is to copy all files first, then find the .svn ones and use the &#39;-delete&#39; action to get rid of them.</p>
 <pre><code>cp -R DIR_FROM DIR_TO
-find DIR_FROM \( -path &quot;*/.svn/*&quot; -or -name &quot;.svn&quot; \) -delete</code></pre><dl class="code-breakdown">
+find DIR_FROM \( -path &quot;*/.svn/*&quot; -or -name &quot;.svn&quot; \) -delete
+</code></pre><dl class="code-breakdown">
 <dt>cp -R DIR_FROM DIR_TO</dt>
-<dd>this is how you copy a directory in Terminal. cp is the command to copy files on the shell, but it won't do directories. cp -R is used to copy directories. R stands for "recursive", it is common to many other shell commands</dd>
+<dd>this is how you copy a directory in Terminal. cp is the command to copy files on the shell, but it won&#39;t do directories. cp -R is used to copy directories. R stands for &quot;recursive&quot;, it is common to many other shell commands</dd>
 
-<dt class="long-line">find DIR_TO \( -path "*/.svn/*" -or -name ".svn" \)</dt>
-<dd class="long-line">almost as before - but note there is no \! this time. That's because we want to find the files we don't need, rather than ignore them.</dd>
+<dt class="long-line">find DIR_TO ( -path &quot;<em>/.svn/</em>&quot; -or -name &quot;.svn&quot; )</dt>
+<dd class="long-line">almost as before - but note there is no ! this time. That&#39;s because we want to find the files we don&#39;t need, rather than ignore them.</dd>
 
 <dt>-delete</dt>
 <dd>deletes the files it finds. I suggest to try it with -print first, just to double check</dd>
@@ -98,16 +100,19 @@ find DIR_FROM \( -path &quot;*/.svn/*&quot; -or -name &quot;.svn&quot; \) -delet
 <p>The above works fine, but read on for another way of doing it.</p>
 <h2 id="finding-files-and-passimg-them-to-the-cp-command">Finding files and passimg them to the cp command</h2>
 <p>My initial approach when trying to move files across was to use find with the &#39;-exec&#39; action and the cp command, like this:</p>
-<pre><code>find DIR_FROM \! \( -path &quot;*/.svn/*&quot; -or -name &quot;.svn&quot; \) -exec cp {} DIR_TO \;</code></pre><p>This looks good at first, but there&#39;s a problem - it finds and copies the files, but it doesn&#39;t preserve the directory structure, and the files end up all in the same directory. Apparently on Linux you can tell cp to preserve the directory structure with the -b --parent option, but this doesn&#39;t work on OS X.</p>
-<pre><code>find DIR_FROM \! \( -path &quot;*/.svn/*&quot; -or -name &quot;.svn&quot; \) -exec cp -b --parent {} DIR_TO \;</code></pre><h2 id="using-cpio-to-copy-files">Using cpio to copy files</h2>
+<pre><code>find DIR_FROM \! \( -path &quot;*/.svn/*&quot; -or -name &quot;.svn&quot; \) -exec cp {} DIR_TO \;
+</code></pre><p>This looks good at first, but there&#39;s a problem - it finds and copies the files, but it doesn&#39;t preserve the directory structure, and the files end up all in the same directory. Apparently on Linux you can tell cp to preserve the directory structure with the -b --parent option, but this doesn&#39;t work on OS X.</p>
+<pre><code>find DIR_FROM \! \( -path &quot;*/.svn/*&quot; -or -name &quot;.svn&quot; \) -exec cp -b --parent {} DIR_TO \;
+</code></pre><h2 id="using-cpio-to-copy-files">Using cpio to copy files</h2>
 <p><a href="http://en.wikipedia.org/wiki/Cpio">cpio</a> is an archiving utility similar to tar, but it has an important difference - it can copy files into and archive and then out again to a different location, without actually creating an archive in between. In other words, it copies directory structures. The only snag is that you have to cd to the directory where you are copying from.</p>
 <pre><code>cd DIR_FROM
-find .  \! \( -name . -or -name &quot;.svn&quot; -or -path &quot;*/.svn/*&quot; \) -print  | cpio -padv PTH_TO</code></pre><dl class="code-breakdown">
+find .  \! \( -name . -or -name &quot;.svn&quot; -or -path &quot;*/.svn/*&quot; \) -print  | cpio -padv PTH_TO
+</code></pre><dl class="code-breakdown">
 <dt>cd DIR_FROM</dt>
 <dd>move to the directory you are copying - this is where the directory structure will be calculated from</dd>
 
-<dt class="long-line">find . \! \(  -name . -or -path "*/.svn/*" -or -name ".svn" \)</dt>
-<dd class="long-line">similar to the previous find command, but note how DIR_FROM is replaced with '.', which means 'here'. Also, there is an extra condition, `-name .`, without which empty .svn directories would be created.</dd>
+<dt class="long-line">find . ! (  -name . -or -path &quot;<em>/.svn/</em>&quot; -or -name &quot;.svn&quot; )</dt>
+<dd class="long-line">similar to the previous find command, but note how DIR_FROM is replaced with &#39;.&#39;, which means &#39;here&#39;. Also, there is an extra condition, <code>-name .</code>, without which empty .svn directories would be created.</dd>
 
 <dt>-print </dt>
 <dd>prints out the filename</dd>
@@ -116,7 +121,7 @@ find .  \! \( -name . -or -name &quot;.svn&quot; -or -path &quot;*/.svn/*&quot; 
 <dd>pass the results of the command on the left (find) to the one on the right (cpio)</dd>
 
 <dt>cpio -padv PTH_TO</dt>
-<dd>run the cpio command in 'move files across' mode (p) with options d (create directory structure) -a (reset access time on copied files) -v (verbose, i.e., show me what you are doing)</dd>
+<dd>run the cpio command in &#39;move files across&#39; mode (p) with options d (create directory structure) -a (reset access time on copied files) -v (verbose, i.e., show me what you are doing)</dd>
 </dl>
 
 <p>And that&#39;s that - exciting Unix fun.</p>

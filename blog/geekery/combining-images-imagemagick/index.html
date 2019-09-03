@@ -43,15 +43,12 @@
       </div>
       <div class="entry-content">
     
-<p>Assorted <a href="http://www.imagemagick.org/script/index.php">ImageMagick</a> commands for combining images  - I use them for <a href="https://plus.google.com/photos/110774321469459636302/albums/5664439956403233889">screenshots of interesting sites</a>.</p>
-<!--more-->
-
-
-
-
+<p>Assorted <a href="http://www.imagemagick.org/script/index.php">ImageMagick</a> commands for combining images  - I use them for <a href="https://plus.google.com/photos/110774321469459636302/albums/5664439956403233889">screenshots of interesting sites</a>.
+<!--more--></p>
 <h2 id="combining-images-vertically-with-a-line-separating-them">Combining images vertically with a line separating them</h2>
 <p>This is useful for combining a few images into a single vertical strip, with a 10px white border between each image, like the portrait photos from photo boots.</p>
-<pre><code>convert *.png[400x400] -splice 0x10 -background &quot;#ffffff&quot;  -append  -crop -0+10 output.png</code></pre><dl class="code-breakdown">
+<pre><code>convert *.png[400x400] -splice 0x10 -background &quot;#ffffff&quot;  -append  -crop -0+10 output.png
+</code></pre><dl class="code-breakdown">
   <dt>convert</dt>
   <dd>calls up one of the ImageMagick commands, convert</dd>
 
@@ -61,7 +58,7 @@
   <dt>-splice 0x10</dt>
   <dd>add a 10px vertical border to each image</dd>
 
-  <dt>-background "#ffffff"</dt>
+  <dt>-background &quot;#ffffff&quot;</dt>
   <dd>make that border white (using HTML color ocde)</dd>
 
   <dt>-append</dt>
@@ -78,7 +75,8 @@
 
 <h2 id="removing-window-artefacts-from-the-top-of-the-images-first">Removing window artefacts from the top of the images first</h2>
 <p>If you have, say, a bunch of screenshots with the address bar etc at the top, you need to modify the command to get rid of it first. This time you can&#39;t use the shortcut resize.</p>
-<pre><code>convert *.png -gravity south -splice 0x111 -shave 0x111 -resize 400x400  -splice 0x10 -background &quot;#ffffff&quot;  -append  -crop -0+10 output.png</code></pre><dl class="code-breakdown">
+<pre><code>convert *.png -gravity south -splice 0x111 -shave 0x111 -resize 400x400  -splice 0x10 -background &quot;#ffffff&quot;  -append  -crop -0+10 output.png
+</code></pre><dl class="code-breakdown">
   <dt>convert</dt>
   <dd>calls up one of the ImageMagick commands, convert</dd>
 
@@ -89,7 +87,7 @@
   <dd>aligns the next command(s) bottom</dd>
 
   <dt>-splice 0x111</dt>
-  <dd>because I need to remove 111px from the top of the image (that's the Chrome toolbar on a Mac - different values would apply for different situations), it turns out to be easier to add the same amount to the bottom, then deal with top and bottom as one with the next command</dd>
+  <dd>because I need to remove 111px from the top of the image (that&#39;s the Chrome toolbar on a Mac - different values would apply for different situations), it turns out to be easier to add the same amount to the bottom, then deal with top and bottom as one with the next command</dd>
 
   <dt>-shave 0x111</dt>
   <dd>This removes 111px from the top and bottom; -shave is easier to work with than -crop</dd>
@@ -100,7 +98,7 @@
   <dt>-splice 0x10</dt>
   <dd>add a 10px vertical border to each image</dd>
 
-  <dt>-background "#ffffff"</dt>
+  <dt>-background &quot;#ffffff&quot;</dt>
   <dd>make that border white (using HTML color ocde)</dd>
 
   <dt>-append</dt>
@@ -120,7 +118,8 @@
 
 <h2 id="combining-images-into-an-animated-gif">Combining images into an animated gif</h2>
 <p>If instead you&#39;d rather create an animated gif, here&#39;s the simplest way to do it - without any of the powerful options that ImageMagick offers.</p>
-<pre><code>convert *.png -gravity south -splice 0x111 -shave 0x111 -resize 400x400  -set delay 300 output.gif</code></pre><dl class="code-breakdown">
+<pre><code>convert *.png -gravity south -splice 0x111 -shave 0x111 -resize 400x400  -set delay 300 output.gif
+</code></pre><dl class="code-breakdown">
   <dt>convert</dt>
   <dd>calls up one of the ImageMagick commands, </dd>
 
@@ -131,7 +130,7 @@
   <dd>aligns the next command(s) bottom</dd>
 
   <dt>-splice 0x111</dt>
-  <dd>because I need to remove 111px from the top of the image (that's the Chrome toolbar on a Mac - different values would apply for different situations), it turns out to be easier to add the same amount to the bottom, then deal with top and bottom as one with the next command</dd>
+  <dd>because I need to remove 111px from the top of the image (that&#39;s the Chrome toolbar on a Mac - different values would apply for different situations), it turns out to be easier to add the same amount to the bottom, then deal with top and bottom as one with the next command</dd>
 
   <dt>-shave 0x111</dt>
   <dd>This removes 111px from the top and bottom; -shave is easier to work with than -crop</dd>
@@ -143,13 +142,14 @@
   <dd>adds a three seconds delay between all images</dd>
 
   <dt>output.gif</dt>
-  <dd>that's it - because a list of images and a delay were supplied, ImageMagick automatically converts to an animated gif.</dd>
+  <dd>that&#39;s it - because a list of images and a delay were supplied, ImageMagick automatically converts to an animated gif.</dd>
 
   </dl>
 
 <h2 id="cropping-a-set-of-images-to-the-same-size-and-animating-them">Cropping a set of images to the same size and animating them</h2>
 <p>If the images in the gif are of different size you may want to do something about that. Here they are cropped to a minimum common size, the extra pixels discarded.</p>
-<pre><code>convert *.png -resize 800x500^ -gravity center -crop  800x500+0+0 +repage -set delay 300 output.gif</code></pre><dl class="code-breakdown">
+<pre><code>convert *.png -resize 800x500^ -gravity center -crop  800x500+0+0 +repage -set delay 300 output.gif
+</code></pre><dl class="code-breakdown">
   <dt>convert</dt>
   <dd>calls up one of the ImageMagick commands, </dd>
 
@@ -172,7 +172,7 @@
   <dd>adds a three seconds delay between all images</dd>
 
   <dt>output.gif</dt>
-  <dd>that's it - because a list of images and a delay were supplied, ImageMagick automatically converts to an animated gif.</dd>
+  <dd>that&#39;s it - because a list of images and a delay were supplied, ImageMagick automatically converts to an animated gif.</dd>
 
   </dl>
 
@@ -183,19 +183,20 @@
 <h2 id="arranging-images-in-a-grid">Arranging images in a grid</h2>
 <p>This is actually two commands, one after the other - one to resize and crop the images, the other to arrange them.</p>
 <pre><code>convert *.png -gravity south -splice 0x111 -shave 0x111 -resize 400x400  converted.png
-montage converted*.png -mode concatenate  -tile 2x2  output.png</code></pre><dl class="code-breakdown">
+montage converted*.png -mode concatenate  -tile 2x2  output.png
+</code></pre><dl class="code-breakdown">
 
   <dt>convert</dt>
   <dd>calls up one of the ImageMagick commands, convert</dd>
 
-  <dt>*.png </dt>
+  <dt><em>.png </dt>
   <dd>an expression using wildcards to match all png images in the current folder</dd>
 
   <dt>-gravity south</dt>
   <dd>aligns the next command(s) bottom</dd>
 
   <dt>-splice 0x111</dt>
-  <dd>because I need to remove 111px from the top of the image (that's the Chrome toolbar on a Mac - different values would apply for different situations), it turns out to be easier to add the same amount to the bottom, then deal with top and bottom as one with the next command</dd>
+  <dd>because I need to remove 111px from the top of the image (that&#39;s the Chrome toolbar on a Mac - different values would apply for different situations), it turns out to be easier to add the same amount to the bottom, then deal with top and bottom as one with the next command</dd>
 
   <dt>-shave 0x111</dt>
   <dd>This removes 111px from the top and bottom; -shave is easier to work with than -crop</dd>
@@ -209,8 +210,8 @@ montage converted*.png -mode concatenate  -tile 2x2  output.png</code></pre><dl 
   <dt>montage</dt>
   <dd>calls up one of the ImageMagick commands, montage</dd>
 
-  <dt>converted*.png</dt>
-  <dd>this time only match the images whose name start with 'converted', i.e. the ones created by the previous command</dd>
+  <dt>converted</em>.png</dt>
+  <dd>this time only match the images whose name start with &#39;converted&#39;, i.e. the ones created by the previous command</dd>
 
   <dt>-mode concatenate</dt>
   <dd>arranges them in a grid</dd>

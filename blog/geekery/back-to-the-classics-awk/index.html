@@ -44,9 +44,8 @@
       </div>
       <div class="entry-content">
     
-<p>In this age of npm and github and easily available modules in any language of your choice, it is easy to forget the old Unix workhorses. Here&#39;s a look at awk, a shell utility that allows you to treat and manipulate text files as if they were databases. In <a href="/blog/geekery/a-selection-of-akw-scripts/">Part 2</a> there are a few sample scripts.</p>
-<!--more-->
-
+<p>In this age of npm and github and easily available modules in any language of your choice, it is easy to forget the old Unix workhorses. Here&#39;s a look at awk, a shell utility that allows you to treat and manipulate text files as if they were databases. In <a href="/blog/geekery/a-selection-of-akw-scripts/">Part 2</a> there are a few sample scripts.
+<!--more--></p>
 <h2 id="what-is-awk-">What is awk?</h2>
 <p><code>Awk</code> is both the name of the command line utility, and the language used for it. It was invented at Bells Labs at the peak of punk rock, 1977, and its name is simply the initials of its three creators. Awk reads input (a file, or a stream) one line (one &quot;record&quot;) at the time, splits it into fields by blank space (these are all defaults that can be changed), and then uses the instructions in the awk language to manipulate these fields and generate some output. The ability to read files as streams is a big plus - it means the memory footprint is the same if you read a file of 1Kb or 200Tb; for a larger file it will just take longer.</p>
 <p>Awk is standard with the version of bash that comes with OS X, and several others. There is another variant which is widespread - gawk, GNU awk. It is actually better than the original, because it offers array sort and length functions, the ability to include files, and more flexible rules for splitting input in fields. Here I will limit myself to the standard awk.</p>
@@ -59,7 +58,8 @@
 It was a bright cold day in April, and the clocks were striking thirteen.
 # now awk kicks in and runs the program on the input
 # {print} simply prints the input line as it is, so here it is again
-It was a bright cold day in April, and the clocks were striking thirteen.</code></pre><p>The strong point of <code>awk</code> is that it automatically splits lines of text as if they were &quot;columns&quot; in a spreadsheet and assigns each column to a variable (a &quot;field&quot;). Then you can manipulate them and spit them out</p>
+It was a bright cold day in April, and the clocks were striking thirteen.
+</code></pre><p>The strong point of <code>awk</code> is that it automatically splits lines of text as if they were &quot;columns&quot; in a spreadsheet and assigns each column to a variable (a &quot;field&quot;). Then you can manipulate them and spit them out</p>
 <pre><code># awk loads a slightly more complex program and waits
 &gt; awk &#39;{print $3 &quot;: &quot; $1 + $2}&#39;
 # waiting for a &lt;RETURN&gt; outside a &#39;&#39;
@@ -72,7 +72,8 @@ Toronto: 30
 # now it waits for the next line
 20 30 Miami
 # same program run on it
-Miami: 50</code></pre><p>Despite its simplicity, you can take awk quite far - for example creating <a href="http://awk.info/?doc/story.html">a random sci-fi plot generator</a>.</p>
+Miami: 50
+</code></pre><p>Despite its simplicity, you can take awk quite far - for example creating <a href="http://awk.info/?doc/story.html">a random sci-fi plot generator</a>.</p>
 <h2 id="running-awk-programs-and-redirecting-input-output">Running awk programs and redirecting input, output</h2>
 <p>Running awk on STDIN is not very useful, but of course you can use Unix magic to redirect the input and / or output of the program</p>
 <pre><code># awk will treat the second argument as a path to a file to read from
@@ -110,7 +111,8 @@ Miami: 50</code></pre><p>Despite its simplicity, you can take awk quite far - fo
 # the simple awk program on it
 &gt; curl http://is.gd/eUrbOZ | awk &#39;{print}&#39;
 Forename,Surname,Description on ballot paper,Constituency Name,PANo,Votes,Share
-... # etc</code></pre><h2 id="anatomy-of-an-awk-program">Anatomy of an awk program</h2>
+... # etc
+</code></pre><h2 id="anatomy-of-an-awk-program">Anatomy of an awk program</h2>
 <p>So far the awk example consisted of simple one liners - but awk programs can consist of several instructions (&quot;actions&quot;). You can still write them out on the shell:</p>
 <pre><code># note: the &quot;&gt;&quot; is added automatically when hitting return inside a &#39;&#39;,
 # and the space between &gt; and { was added manually to make it line up
@@ -122,17 +124,21 @@ Forename,Surname,Description on ballot paper,Constituency Name,PANo,Votes,Share
 oh # typed by you
 oh # printed by awk 3 times
 oh
-oh</code></pre><p>In this tutorial I will put the awk program in its own file and load it from the command line - just to make formatting easier and allow comments. The file loaded here has suffix &quot;.awk&quot; but that&#39;s irrelevant, it could be any filename.</p>
-<pre><code>&gt; awk -f example.awk some_input_text.txt</code></pre><p>An awk program consists of a list of actions, one after the other, and typically one per line (they can be broken up though). There are two special types of actions - BEGIN actions are executed only once, before the text is scanned, and END only once, afterwards. All other actions are executed in order on every line of text. Assume your input file includes increasing integers, one per line</p>
+oh
+</code></pre><p>In this tutorial I will put the awk program in its own file and load it from the command line - just to make formatting easier and allow comments. The file loaded here has suffix &quot;.awk&quot; but that&#39;s irrelevant, it could be any filename.</p>
+<pre><code>&gt; awk -f example.awk some_input_text.txt
+</code></pre><p>An awk program consists of a list of actions, one after the other, and typically one per line (they can be broken up though). There are two special types of actions - BEGIN actions are executed only once, before the text is scanned, and END only once, afterwards. All other actions are executed in order on every line of text. Assume your input file includes increasing integers, one per line</p>
 <pre><code>1
 2
-3</code></pre><p>Then the program below</p>
+3
+</code></pre><p>Then the program below</p>
 <pre><code>BEGIN { print &quot;START!&quot; }
 {print &quot;--------------&quot;}
 {print}
 {print}
 {print}
-END { print &quot;END!&quot; }</code></pre><p>Would produce</p>
+END { print &quot;END!&quot; }
+</code></pre><p>Would produce</p>
 <pre><code>START!
 --------------
 1
@@ -146,14 +152,16 @@ END { print &quot;END!&quot; }</code></pre><p>Would produce</p>
 3
 3
 3
-END!</code></pre><p>Note that actions can be in any order (they will be executed in the order they are written) and there can be multiple BEGIN and END, so the following is also a legal program.</p>
+END!
+</code></pre><p>Note that actions can be in any order (they will be executed in the order they are written) and there can be multiple BEGIN and END, so the following is also a legal program.</p>
 <pre><code>{print &quot;--------------&quot;}
 {print}
 END { print &quot;END!&quot; }
 BEGIN { print &quot;START!&quot; }
 {print}
 END { print &quot;Copyright 2005&quot; }
-{print}</code></pre><p>The way the program is dealt with is:</p>
+{print}
+</code></pre><p>The way the program is dealt with is:</p>
 <ul>
 <li>all the BEGIN actions are executed, in order</li>
 <li>input is read one line at the time, and for each line<ul>
@@ -184,7 +192,8 @@ BEGIN { print &quot;STA&quot;
 -&gt; STA
   RT
 -&gt; STA
-  RT</code></pre><h2 id="variables">Variables</h2>
+  RT
+</code></pre><h2 id="variables">Variables</h2>
 <p>Awk makes several variables available to the programs - some are loaded when the program is launched, some are updated with each line read, some are created by the program itself.</p>
 <h3 id="field-variables">Field Variables</h3>
 <p>Whenever awk reads a line, it splits it into &quot;fields&quot; by white-space / tab (this is the default and can be overridden), Then each field is copied to a variable $1, $2, .... in order - there is no limit. Additionally, $0 contains the whole line.</p>
@@ -199,7 +208,8 @@ BEGIN { print &quot;STA&quot;
 
 # only prints some fields we are interested in
 { print $1 &quot; &quot; $3 }
--&gt; 1 3</code></pre><p>The field number doesn&#39;t have to be a constant - it can be an expression or a variable. For example, the global variable NF contains the number of the last field and is updated which every line read. So if there are 7 fields, NF would be 7, and $NF would be $7, i.e. the last field</p>
+-&gt; 1 3
+</code></pre><p>The field number doesn&#39;t have to be a constant - it can be an expression or a variable. For example, the global variable NF contains the number of the last field and is updated which every line read. So if there are 7 fields, NF would be 7, and $NF would be $7, i.e. the last field</p>
 <pre><code># assume this file
 1 2 3 4 5 6 7
 
@@ -212,7 +222,8 @@ BEGIN { print &quot;STA&quot;
 #
 # print the last two fields
 {print $(NF-1) &quot; &quot; $NF}
--&gt; 6 7</code></pre><p>Another useful global variable that gets updated for each record is NR - this is the record number</p>
+-&gt; 6 7
+</code></pre><p>Another useful global variable that gets updated for each record is NR - this is the record number</p>
 <pre><code># feed a four line input into awk
 &gt; echo &#39;a
 &gt; b
@@ -222,19 +233,22 @@ BEGIN { print &quot;STA&quot;
 1) a
 2) b
 3) c
-4) d</code></pre><p>You can assign to a field variable with the &#39;=&#39; operator, thereby changing the record content:</p>
+4) d
+</code></pre><p>You can assign to a field variable with the &#39;=&#39; operator, thereby changing the record content:</p>
 <pre><code># adding something to a field - will only works if it&#39;s a number
 {$3 = ($3 + 100)
 # now print the updated line
 print $0}
--&gt; 1 2 103 4 5 6 7</code></pre><p>If you assign to a field variable that doesn&#39;t exist, it will be added to the record</p>
+-&gt; 1 2 103 4 5 6 7
+</code></pre><p>If you assign to a field variable that doesn&#39;t exist, it will be added to the record</p>
 <pre><code># the record only contains $1 and $2;
 &gt; echo 1 2 | awk &#39;{print $0}&#39;
 &gt; 1 2
 &gt;
 # the program adds two new fields
 &gt; echo 1 2 | awk &#39;{$3 = 3; $4 = 4; print $0}&#39;
-&gt; 1 2 3 4</code></pre><h3 id="global-variables">Global variables</h3>
+&gt; 1 2 3 4
+</code></pre><h3 id="global-variables">Global variables</h3>
 <p>A few variables are set when the program is launched. Here&#39;s a very short list - if you need to play with these you probably want to get yourself a book on awk.</p>
 <table>
   <tr>
@@ -255,7 +269,8 @@ print $0}
 # then prints it at the end
 &gt; ls -la | awk &#39;    { total += $5 }
                 END { print total }&#39;
--&gt; 158448</code></pre><h3 id="arrays">Arrays</h3>
+-&gt; 158448
+</code></pre><h3 id="arrays">Arrays</h3>
 <p>Awk has associative arrays, similar to PHP&#39;s or Javascript. You create an array by using it, no need to initialize it.</p>
 <pre><code># assume this file
 10 Life changes fast
@@ -272,7 +287,8 @@ my_array[30] = &quot;You sit down to dinner and life as you know it ends&quot;
 my_array[40] = &quot;The question of self-pity&quot;
 
 # string keys are also possible
-{ my_array[&quot;name&quot;] = &quot;Homer&quot; }</code></pre><p>One thing that is different in awk is that multidimensional arrays use a single set of square brackets to wrap both indices</p>
+{ my_array[&quot;name&quot;] = &quot;Homer&quot; }
+</code></pre><p>One thing that is different in awk is that multidimensional arrays use a single set of square brackets to wrap both indices</p>
 <pre><code># assume this file
 dad homer
 mum marge
@@ -283,7 +299,8 @@ son bart
 -&gt; creates
 family[&quot;simpsons&quot;,&quot;dad&quot;] = &quot;homer&quot;
 family[&quot;simpsons&quot;,&quot;mum&quot;] = &quot;marge&quot;
-family[&quot;simpsons&quot;,&quot;son&quot;] = &quot;bart&quot;</code></pre><p>Note that arrays in awk are pretty awkward. There are no built in functions to deal with them except for the for ... in loop. If you need to sort, or even just find out the length, you&#39;ll have to write your own functions. There are a couple in <a href="/blog/geekery/a-selection-of-akw-scripts/">Part 2</a>. Alternatively, use gawk which has <a href="https://www.gnu.org/software/gawk/manual/gawk.html#Arrays">better array handling</a>.</p>
+family[&quot;simpsons&quot;,&quot;son&quot;] = &quot;bart&quot;
+</code></pre><p>Note that arrays in awk are pretty awkward. There are no built in functions to deal with them except for the for ... in loop. If you need to sort, or even just find out the length, you&#39;ll have to write your own functions. There are a couple in <a href="/blog/geekery/a-selection-of-akw-scripts/">Part 2</a>. Alternatively, use gawk which has <a href="https://www.gnu.org/software/gawk/manual/gawk.html#Arrays">better array handling</a>.</p>
 <h3 id="regular-expressions">Regular expressions</h3>
 <p>A regular expression (regexp) is a mini programming language which is used to describe variable strings; it is embedded in most programming languages.
 Regexps are enclosed in slashes and use a combination of literal characters and punctuation to describe strings. The operator ~ is used to match a regexp, and !~ to ensure it is not matched.</p>
@@ -329,7 +346,8 @@ Regexps are enclosed in slashes and use a combination of literal characters and 
 # the following matches &lt; followed by one or more (+) of anything except &gt;, then &gt;
 # then zero or more (*) of anything except &lt;
 # then &lt;/ followed by one or more (+) of anything except &gt;, then &gt;
-# then an optional .</code></pre><h2 id="statements-operators-and-function">Statements, operators, and function</h2>
+# then an optional .
+</code></pre><h2 id="statements-operators-and-function">Statements, operators, and function</h2>
 <h3 id="control-statements">Control statements</h3>
 <p>Awk has the usual loops and conditionals familiar from C. Braces are optional for single nested statements</p>
 <pre><code># braces are optional for single statements
@@ -344,13 +362,15 @@ for (capital_city in country) {
 if (NR % 2 == 0) {
   $2 = $1 * 2
   print $0
-}</code></pre><h4 id="if-else">if-else</h4>
+}
+</code></pre><h4 id="if-else">if-else</h4>
 <p>Awk doesn&#39;t have booleans. Instead it treats the number 0 or the empty string &quot;&quot; as false, and any other value (including the string &quot;0&quot;) as true. The comparison operators are the familiar ones, with double equal sign for equality, plus the tilde ~ and !~ for regular expression matching, and &quot;in&quot; for array existence</p>
 <pre><code>{ if ($1 == &quot;full&quot;) ... }
 { if ($2 &lt; 0.5) ... }
 { if ($0 ~ /Republican/) print $0 } ... # matches regexp
 { if ($1 !~ /Completed/) print $0 } ... # rejects regexp
-{ if (capital_city in country) print country[&quot;capital_city&quot;] }</code></pre><h4 id="loops">loops</h4>
+{ if (capital_city in country) print country[&quot;capital_city&quot;] }
+</code></pre><h4 id="loops">loops</h4>
 <p>Awk has both for and while loops (including do-while). Additionally, there is the for-in loop for sparse arrays</p>
 <pre><code># assume file
 1 10 100
@@ -382,11 +402,13 @@ if (NR % 2 == 0) {
 END {
   for (line in lines)
     print line
-}</code></pre><p><code>break</code> and <code>continue</code> statements are available to exit a loop prematurely or skipping an iteration respectively.</p>
+}
+</code></pre><p><code>break</code> and <code>continue</code> statements are available to exit a loop prematurely or skipping an iteration respectively.</p>
 <h4 id="next">next</h4>
 <p><code>next</code> is used to stop precessing a record and moving on to the next</p>
 <pre><code>{ if ($5 == &quot;&quot;) next }
-{ print $5 $4 }</code></pre><h3 id="awk-numeric-operators">Awk numeric operators</h3>
+{ print $5 $4 }
+</code></pre><h3 id="awk-numeric-operators">Awk numeric operators</h3>
 <p>The usual maths operators can be used: +, -, /, * , ++, -- plus % for modulus, ^ for exponentiation. Unary + converts to a number</p>
 <pre><code>echo &quot;1
 &gt; 2
@@ -395,7 +417,8 @@ END {
 1
 4
 9
-16</code></pre><h3 id="string-concatenation">String concatenation</h3>
+16
+</code></pre><h3 id="string-concatenation">String concatenation</h3>
 <p>Concatenating string in awk is slightly weird. There is no string concatenation operator; just put the strings next to each other. Because of that it is recommended to use parenthesis except for trivial cases. Alternatively, <code>print</code> can take multiple comma separated arguments - and they will be printed with a space separating them</p>
 <pre><code># assume this file
 1
@@ -424,7 +447,8 @@ END {
 1--
 2--
 3--
-4--</code></pre><h3 id="built-in-functions">Built in functions</h3>
+4--
+</code></pre><h3 id="built-in-functions">Built in functions</h3>
 <p>There are a number of built in functions: numeric ones like cosine, square root, random; string functions like print or string length; time functions and bitwise functions. You can easily find out what they are by looking at the output of <code>man awk</code>.</p>
 <p>Worth nothing that besides <code>print</code> awk also offers <code>printf</code>, i.e. &quot;print formatted&quot;. Printf is common to many Unix tools and languages. You give a string with some placeholders and rules, and then you pass variables to &quot;plug in&quot; those placeholders. The important thing is the rules, which control things like right alignment, decimal precision, zero padding for numbers, etc. A statement looks like this:</p>
 <pre><code>{ printf &quot;%-10s %04.3f%% \n&quot;, $1, $2 }
@@ -434,7 +458,8 @@ END {
 #        characters (7) and is padded with zeroes if too small (0) and has
 #        3 decimals (3) and minimum 3 in the integer part (7 - 3 decimals - the point)
 # %% if you want to print an actual %, you need to type it twice %%
-# \n you need to supply the new line manually</code></pre><p><a href="http://www.math.utah.edu/docs/info/gawk_7.html#SEC61">More information on printf</a>.</p>
+# \n you need to supply the new line manually
+</code></pre><p><a href="http://www.math.utah.edu/docs/info/gawk_7.html#SEC61">More information on printf</a>.</p>
 <h3 id="user-defined-functions">User defined functions</h3>
 <p>You can define functions anywhere in your code, outside actions. They are pretty similar to Javascript</p>
 <pre><code># define funtion outside rules - could be at the bottom of file
@@ -443,7 +468,8 @@ function my_func(field_content) {
 }
 
 # now use in rules
-{my_func($1)}</code></pre><h2 id="patterns">Patterns</h2>
+{my_func($1)}
+</code></pre><h2 id="patterns">Patterns</h2>
 <p>Previously I described an awk program as a series of actions, with the special case of BEGIN and END. That&#39;s not entirely correct. An awk program consists of a sequence of actions and optional <em>patterns</em>; BEGIN and END are two special patterns. Incidentally, there is also a BEGINFILE and ENDFILE, for when processing more than one file at the time.</p>
 <p>BEGIN and END are special because they identify actions which are not executed for every line of input, but before or after the whole program is run. The other patterns are used on every line to determine whether the action should be run for that particular line or not. Patterns are espressions that return false (i.e., 0 or &quot;&quot;) or true (anything else). When the pattern returns true, the rules is executed.</p>
 <h3 id="regular-expression-patterns">Regular expression patterns</h3>
@@ -456,24 +482,29 @@ function my_func(field_content) {
 ! /@gmail\./ { print $0 }
 
 # prints lines with an @ and the sequence 0160
-/@/ &amp;&amp; /0160/ { print }</code></pre><p>The regular expressions above are a shortcut for <code>$0 ~ /pattern/</code>, i.e. &quot;apply the regexp to whole line&quot;. Similar rules can be made for individual fields...</p>
+/@/ &amp;&amp; /0160/ { print }
+</code></pre><p>The regular expressions above are a shortcut for <code>$0 ~ /pattern/</code>, i.e. &quot;apply the regexp to whole line&quot;. Similar rules can be made for individual fields...</p>
 <pre><code># matches only the regx on one field
-$1 ~ /Anthony/ { print }</code></pre><p>..and all expressions seen so far</p>
+$1 ~ /Anthony/ { print }
+</code></pre><p>..and all expressions seen so far</p>
 <pre><code># print even lines
 NR % 2 == 0 { print }
 
 # print only if length of 1st field is greater than 3
 # length is a string function mentioned above
-length($1) &gt; 3 { print }</code></pre><p>The reason we have been able to run program without patterns is because there is a special pattern, the empty pattern, which matches every line. In fact we could have a program which is just a pattern; the default action <code>{print}</code> would be executed.</p>
+length($1) &gt; 3 { print }
+</code></pre><p>The reason we have been able to run program without patterns is because there is a special pattern, the empty pattern, which matches every line. In fact we could have a program which is just a pattern; the default action <code>{print}</code> would be executed.</p>
 <pre><code># prints whole line, default action
-$1 == &quot;complete&quot;</code></pre><h2 id="splitting-records-and-fields-differently-from-default">Splitting records and fields differently from default</h2>
+$1 == &quot;complete&quot;
+</code></pre><h2 id="splitting-records-and-fields-differently-from-default">Splitting records and fields differently from default</h2>
 <p>By default awk treats each line as a record. In reality what it does is to split the input by a record separator, stored in the variable RS, which happens to be the new line character. You can change that in an awk program.</p>
 <pre><code># separate records by semicolon
 &gt; echo &quot;1 2 3;4 5 6;7 8 9&quot; | awk &#39;BEGIN {RS = &quot;;&quot; }
 &gt;                                 {print}&#39;
 1 2 3
 4 5 6
-7 8 9</code></pre><p>Something similar is possible with the field separator, which is stored in the variable FS. By default it is equal to the regexp <code>[ \t\n]+</code>, i.e. any number of consectuve spaces of any type. Note that in reality awk cheats - leaving FS default doesn&#39;t just mean setting it to <code>[ \t\n]+</code>, but also trimming $0 of leading and trailing empty space before processing it.</p>
+7 8 9
+</code></pre><p>Something similar is possible with the field separator, which is stored in the variable FS. By default it is equal to the regexp <code>[ \t\n]+</code>, i.e. any number of consectuve spaces of any type. Note that in reality awk cheats - leaving FS default doesn&#39;t just mean setting it to <code>[ \t\n]+</code>, but also trimming $0 of leading and trailing empty space before processing it.</p>
 <pre><code># separate fields by comma
 &gt; echo &quot;1,2,3
 4,5,6
@@ -481,7 +512,8 @@ $1 == &quot;complete&quot;</code></pre><h2 id="splitting-records-and-fields-diff
 &gt;             {print}&#39;
 1,2,3
 4,5,6
-7,8,9</code></pre><p>You can combine the two together if, for example, your data has one field per line and records are separated by multiple lines - an empty RS means &quot;any number of consecutive \n &quot;&quot;</p>
+7,8,9
+</code></pre><p>You can combine the two together if, for example, your data has one field per line and records are separated by multiple lines - an empty RS means &quot;any number of consecutive \n &quot;&quot;</p>
 <pre><code># assume this data
 homer simpson
 dad
@@ -494,7 +526,8 @@ BEGIN {RS=&quot;&quot;; FS=&quot;\n&quot;}
 { print $1 &quot; (&quot; $2 &quot;)&quot; }
 
 -&gt; homer simpson (dad)
-  marge simpson (mum)</code></pre><h2 id="passing-option-to-awk">Passing option to awk</h2>
+  marge simpson (mum)
+</code></pre><h2 id="passing-option-to-awk">Passing option to awk</h2>
 <p>A field separator (but not a record separator) can be also passed to an awk program in two ways. First of all, awk has a special option for it, -F (note that there is no space between it and the separator). And awk allow passing of variables with the -v syntax, so you could just pass FS that way.</p>
 <pre><code># change separator from within program
 BEGIN {FS = &quot;,&quot; }
@@ -513,7 +546,8 @@ BEGIN {FS = &quot;,&quot; }
 
 # in fact you can pass any variable of your choice with -v
 &gt; echo &quot;&quot; | awk -v WHAT=&quot;grow up&quot; &#39;{print &quot;All children, except one, &quot; WHAT}&#39;
-All children, except one, grow up</code></pre><h2 id="reading-csv-files-in-awk">Reading CSV files in awk</h2>
+All children, except one, grow up
+</code></pre><h2 id="reading-csv-files-in-awk">Reading CSV files in awk</h2>
 <p>The naive approach would be to simply set FS=&quot;,&quot; - but that doesn&#39;t cover the fact that some fields are surrounded by quotation marks and others aren&#39;t, and sometimes you have newlines and / or commas inside a field. <a href="http://www.linuxquestions.org/questions/programming-9/awk-with-csv-files-881103/">Here are some examples scripts</a> people have put together to solve the issues. They are also good examples of fairly complex awk scripts.</p>
 <p>Personally I think that&#39;s taking things too far - if you have to force awk to create arrays to store  manipulated record fragments you may as well use a fully fledged scripting language.</p>
 <p>Another approach is to use gawk, and <a href="https://www.gnu.org/software/gawk/manual/gawk.html#Splitting-By-Content">its FPAT variable</a></p>

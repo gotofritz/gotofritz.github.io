@@ -44,9 +44,8 @@
       </div>
       <div class="entry-content">
     <div class="archive">This post is old, and probably obsolete</div>
-<p>Before abandoning <a href="https://code.google.com/p/js-test-driver/">JsTestDriver</a> (hello <a href="http://karma-runner.github.io/0.10/">karma!</a>), here&#39;s a summary of my setup and <a href="https://github.com/gotofritz/jstestdriver-boilerplate%22">a boilerplate</a> for future reference.</p>
-<!--more-->
-
+<p>Before abandoning <a href="https://code.google.com/p/js-test-driver/">JsTestDriver</a> (hello <a href="http://karma-runner.github.io/0.10/">karma!</a>), here&#39;s a summary of my setup and <a href="https://github.com/gotofritz/jstestdriver-boilerplate&quot;">a boilerplate</a> for future reference.
+<!--more--></p>
 <h2 id="why-use-jstestdriver-jstd-anyway-">Why use JsTestDriver (JSTD), anyway?</h2>
 <p>For a couple of years JSTD was the best option in town for running JS unit tests. The best thing about it: it is just a jar file, so it runs everywhere - all the more modern alternatives require node.js, which is not always feasible. So JSTD remains my Plan B in those cases. And it is very nifty, it does pretty much everything all the shinier hipster tools do.</p>
 <h2 id="why-give-up-on-jstestdriver-">Why give up on JsTestDriver?</h2>
@@ -69,7 +68,8 @@
   +--/mocks           # mocking application&#39;s classes
   +--/tests           # the actual tests
   jstd.conf           # configuration file
-  jstd-runner.sh   # runner</code></pre><p>The <code>bin</code> folder may or may not be under subversion, this depends on the team&#39;s philosophy (many object to the idea in principle, but it&#39;s only a couple of rarely changing jars).</p>
+  jstd-runner.sh   # runner
+</code></pre><p>The <code>bin</code> folder may or may not be under subversion, this depends on the team&#39;s philosophy (many object to the idea in principle, but it&#39;s only a couple of rarely changing jars).</p>
 <p>I use JSTD with Jasmine, partly because of the useful <code>jasmine-jquery</code> plugin, which, among other things, allow fixtures to be served easily. I also like sinon for extra mocking power. Also, decoupling the runner from the test library allows me to switch from JSTD to, say, Karma easily.</p>
 <h2 id="the-jstd-configuration-file-jstd-conf">The JSTD configuration file, jstd.conf</h2>
 <p>The config file <a href="https://github.com/gotofritz/jstestdriver-boilerplate/blob/master/test/jstd.conf">jstd.cong</a> is written in YAML, which is much nicer than XML. Nothing exciting here - <code>load</code> is for the under test files, <code>test</code> is for test libraries and the tests itself, and <code>serve</code> is for fixtures. Note that the coverage plugin is commented out because broken.</p>
@@ -82,7 +82,8 @@
 ./jstd-runner.sh local stop   # will stop the server when finished for
                               # the day
 ./jstd-runner.sh headless     # will start the server, run the tests with
-                              # PhantomJS, and stop the server</code></pre><p>The script is improved a little  bit with every project - the next improvement would be to run <code>start</code> automatically if there is no server running and you type <code>run</code>, and also to allow to pass extra arguments in the command to the jar.</p>
+                              # PhantomJS, and stop the server
+</code></pre><p>The script is improved a little  bit with every project - the next improvement would be to run <code>start</code> automatically if there is no server running and you type <code>run</code>, and also to allow to pass extra arguments in the command to the jar.</p>
 <h2 id="code-to-be-tested">Code to be tested</h2>
 <p>The source code is a single JS file with a minimalistic object, <a href="https://github.com/gotofritz/jstestdriver-boilerplate/blob/master/src/js/example.js">example.js</a>.</p>
 <h2 id="html-and-json-fixtures">HTML and JSON Fixtures</h2>

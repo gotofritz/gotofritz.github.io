@@ -43,10 +43,8 @@
       </div>
       <div class="entry-content">
     <div class="archive">This post is old, and probably obsolete</div>
-<p>To have an ASP page send an email with non-ASCII European text (Cyrillic, Greek, Czech, etc) you&#39;ll need to use UTF-8.</p>
-<!--more-->
-
-
+<p>To have an ASP page send an email with non-ASCII European text (Cyrillic, Greek, Czech, etc) you&#39;ll need to use UTF-8.
+<!--more--></p>
 <h2 id="saving-source-files-as-utf-8">Saving Source Files As UTF-8</h2>
 <p>First all, make sure you save the actual ASP files itself as UTF-8, and make sure it is the correct type of UTF-8 (i.e., not &quot;UTF-8 no BOM&quot;). Then you need to specify the character encoding for the page itself. If you saved the page as UTF-8, then you can use the codepage attribute in the language tag as follows:
 <code>&lt;%@ Language=JScript CodePage=65001 %&gt;</code></p>
@@ -66,7 +64,8 @@ objMail.Cc       = &#39;cc@example.com&#39;;
 objMail.Subject  = &#39;Text email&#39;;
 objMail.TextBody = &#39;Hello. just a text email&#39;;
 objMail.HTMLBody = &#39; ... &#39;;
-objMail.AddAttachment( &#39;asd&#39; );</code></pre>
+objMail.AddAttachment( &#39;asd&#39; );
+</code></pre>
       </div>
     </div>
   </article>

@@ -44,9 +44,8 @@
       </div>
       <div class="entry-content">
     
-<p>There are no flags to match multi-line text is in JS. But it can be done with a character class.</p>
-<!--more-->
-
+<p>There are no flags to match multi-line text is in JS. But it can be done with a character class.
+<!--more--></p>
 <h2 id="in-javascript-newlines-are-not-matched-by-">In javascript, newlines are not matched by .</h2>
 <p>In both the cases below we expect <code>\d.line</code> to match <code>0\nline</code> but it doesn&#39;t work - because newlines are not matched by the <code>.</code> character class.</p>
 <pre><code>&quot;line 0\nline1&quot;.match(/\d.line/)
@@ -55,7 +54,8 @@
 // ES6
 `line 0
 line1`.match(/\d.line/)
-// null</code></pre><h2 id="-matches-newlines-in-javascript-regular-expressions">[^] matches newlines in javascript regular expressions</h2>
+// null
+</code></pre><h2 id="-matches-newlines-in-javascript-regular-expressions">[^] matches newlines in javascript regular expressions</h2>
 <p>Use the <code>[^]</code> character class, which is equivalent to <code>.</code> but with the newline added in</p>
 <pre><code>&quot;line 0\nline1&quot;.match(/\d[^]line/)
 // [&quot;0
@@ -66,7 +66,8 @@ line1`.match(/\d.line/)
 `line 0
 line1`.match(/\d[^]line/)
 // [&quot;0
-// line&quot;]</code></pre><p>For more info, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp#character-classes">visit the relevant MDN page</a></p>
+// line&quot;]
+</code></pre><p>For more info, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp#character-classes">visit the relevant MDN page</a></p>
 
       </div>
     </div>

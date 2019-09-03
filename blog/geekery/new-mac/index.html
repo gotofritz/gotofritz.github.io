@@ -80,19 +80,19 @@ usr/local/lib/ruby/gems/2.3.0/gems/bundler-1.12.5/lib/bundler/resolver.rb:356:in
 gem install minima
 it works! but
 Liquid Exception: Liquid syntax error (line 10): Unknown tag &amp;#39;gist&amp;#39;
--- made a plugin directory and copied a gisttag.rb
+-- made a _plugin directory and copied a gist_tag.rb
 it works, but better
 -- added gem &amp;#39;jekyll-gist&amp;#39; to gemfile
 -- run &amp;#39;bundle&amp;#39;
 it works but
-Jekyll::Converters::Markdown encountered an error while converting &amp;#39;posts/2006-05-....markdown&amp;#39;: &amp;quot;\xC2&amp;quot; from ASCII-8BIT to UTF-8
+Jekyll::Converters::Markdown encountered an error while converting &amp;#39;_posts/2006-05-....markdown&amp;#39;: &amp;quot;\xC2&amp;quot; from ASCII-8BIT to UTF-8
 -- manually converted
 it works (will manually have to convert them all!) but
 Liquid Exception: Gist replied with 404 for https://gist.githubusercontent.com/raw/....
 -- removed
 works but
 Liquid Exception: Liquid syntax error (line 9): Unknown tag &amp;#39;codeblock&amp;#39; in
--- copied codeblock.rb to _plugins
+-- copied code_block.rb to _plugins
 Nooooooo! it&amp;#39;s not enough. It has dependencies to pygment. I must start using rouge - which means manually chaning 000s files!
 
 
@@ -214,19 +214,19 @@ usr/local/lib/ruby/gems/2.3.0/gems/bundler-1.12.5/lib/bundler/resolver.rb:356:in
 gem install minima
 it works! but
 Liquid Exception: Liquid syntax error (line 10): Unknown tag &#39;gist&#39;
--- made a <em>plugin directory and copied a gist</em>tag.rb
+-- made a _plugin directory and copied a gist_tag.rb
 it works, but better
 -- added gem &#39;jekyll-gist&#39; to gemfile
 -- run &#39;bundle&#39;
 it works but
-Jekyll::Converters::Markdown encountered an error while converting &#39;<em>posts/2006-05-....markdown&#39;: &quot;\xC2&quot; from ASCII-8BIT to UTF-8
+Jekyll::Converters::Markdown encountered an error while converting &#39;_posts/2006-05-....markdown&#39;: &quot;\xC2&quot; from ASCII-8BIT to UTF-8
 -- manually converted
 it works (will manually have to convert them all!) but
 Liquid Exception: Gist replied with 404 for https://gist.githubusercontent.com/raw/....
 -- removed
 works but
 Liquid Exception: Liquid syntax error (line 9): Unknown tag &#39;codeblock&#39; in
--- copied code</em>block.rb to _plugins
+-- copied code_block.rb to _plugins
 Nooooooo! it&#39;s not enough. It has dependencies to pygment. I must start using rouge - which means manually chaning 000s files!</p>
 </blockquote>
 </li>

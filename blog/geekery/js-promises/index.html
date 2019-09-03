@@ -44,8 +44,8 @@
       </div>
       <div class="entry-content">
 <div class="archive">This post is too old to be of any use. It has been archived.</div>
-<p>A <em>promise</em> in javascript is a wrapper around async code, i.e. code that will be completed at some unspecified time in the future. It allows the next step to be scheduled easily. They are an upgrade from the traditional <em>callbacks</em>.</p>
-<!--more-->
+<p>A <em>promise</em> in javascript is a wrapper around async code, i.e. code that will be completed at some unspecified time in the future. It allows the next step to be scheduled easily. They are an upgrade from the traditional <em>callbacks</em>.
+<!--more--></p>
 <h2 id="sync-asynchronouse-operations">Sync, Asynchronouse operations</h2>
 <p>[TODO] ajax, setTimeout, node&#39;s fs</p>
 <h2 id="the-pyramid-of-doom-callback-hell">The pyramid of doom / Callback hell</h2>
@@ -55,10 +55,10 @@
 <p>http://wiki.commonjs.org/wiki/Promises/A</p>
 <h2 id="creating-and-using-a-promise">Creating and using a promise</h2>
 <p>The Promise constructor is available since ES6, but there aren&#39;t actually that many promises available in the language:
-* window.fetch returns a promise - however it is not supported by all browsers
-* ES2017 will get <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function">async</a>
-* jQuery.ajax and related function are probably the most popular promises &quot;in the wild&quot;
-* that&#39;s it (there are of course third party libraries that return promises, but they are not built in into the language)</p>
+<em> window.fetch returns a promise - however it is not supported by all browsers
+</em> ES2017 will get <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function">async</a>
+<em> jQuery.ajax and related function are probably the most popular promises &quot;in the wild&quot;
+</em> that&#39;s it (there are of course third party libraries that return promises, but they are not built in into the language)</p>
 <p>So in most cases working with promises means creating your own. There are therefore two steps - <em>creating</em> a promise, and <em>using</em> the promise.</p>
 <p>A promise is a black box which you create by passing a function to the Promise constructor. In the function there is typically an async function, but doesn&#39;t have to be. A promise has a <code>state</code>, which is <em>pending</em> when the promise is created, and <em>resolved</em> when the promise is ready to move to the next step. However, that state is off limit - as we said, promises are black boxes, you can&#39;t look their state to see whether the async function is finished. All you can do is to chain other promises after it, which will be run when the current promise is finished, and wait.</p>
 <p><code>var myPromise = new Promise(() =&gt; { console.log(&#39;promise running&#39;); return &#39;promise executed&#39; });
@@ -332,7 +332,8 @@ request.onerror = function() {
   reject(Error(&#39;No response from server&#39;));
 };
 
-request.send();</code></pre><p>  });
+request.send();
+</code></pre><p>  });
 };</p>
 <p>fetch(&#39;https://baconipsum.com/api/?type=all-meat&amp;paras=3&amp;start-with-lorem=1&amp;format=html&#39;)
   .then(() =&gt; console.log(&#39;SUCCESS&#39;))
@@ -360,7 +361,8 @@ request.onerror = function() {
   reject(Error(&#39;No response from server&#39;));
 };
 
-request.send();</code></pre><p>  });
+request.send();
+</code></pre><p>  });
 };</p>
 <p>const handleErrors = (err) =&gt; {
   console.log(&#39;ERROR&#39;, err);
@@ -427,7 +429,8 @@ Promise.resolve(&#39;https://www.reddit.com/r/theonion/top/.json?sort=top&amp;t=
   //
   // ----
   //
-  // ..etc...</code></pre><p>The chain starts with a <code>Promise.resolve</code>. This is a shortcut for transforming a simple value into a promise to allow chaining. It is equivalent to</p>
+  // ..etc...
+</code></pre><p>The chain starts with a <code>Promise.resolve</code>. This is a shortcut for transforming a simple value into a promise to allow chaining. It is equivalent to</p>
 <pre><code>const startOffChain = (url) =&gt; {
   return new Promise((resolve) =&gt; {
     resolve(url);
@@ -435,11 +438,13 @@ Promise.resolve(&#39;https://www.reddit.com/r/theonion/top/.json?sort=top&amp;t=
 };
 
 startOffChain(&#39;https://www.reddit.com/r/KenM/top/.json?sort=top&amp;t=all&#39;)
-  .then(fetch)</code></pre><p>It is much shorter. There is also an equivalent <code>Promise.reject</code>.</p>
+  .then(fetch)
+</code></pre><p>It is much shorter. There is also an equivalent <code>Promise.reject</code>.</p>
 <p>In reality there would have been no need to create a <em>startOffChain</em> method, I could have started the chain with <em>fetch</em> which already returns a promise. But I simply liked the consistency of having <code>.then(fetch)</code> twice instead of this</p>
 <pre><code>fetch(&#39;https://www.reddit.com/r/KenM/top/.json?sort=top&amp;t=all&#39;)
   .then(...)
-  .then(fetch)</code></pre><p>The functions which extract data from the JSON are anonymous functions defined inside the <code>.then</code> - it makes sense, as they are very specific functions used once. But one could just as well assign them to a variable and use just use a reference in the chain.</p>
+  .then(fetch)
+</code></pre><p>The functions which extract data from the JSON are anonymous functions defined inside the <code>.then</code> - it makes sense, as they are very specific functions used once. But one could just as well assign them to a variable and use just use a reference in the chain.</p>
 <pre><code>const processFirstBlock = (request) =&gt; {
   const jsonData = JSON.parse(request.responseText);
   ... etc
@@ -450,7 +455,8 @@ Promise.resolve(&#39;https://www.reddit.com/r/KenM/top/.json?sort=top&amp;t=all&
   .then(processFirstBlock)
   .then(fetch)
   .then(processSecondBlock)
-  .catch(handleError)</code></pre><p>That very function returns a Promise.resolve to allow chaining. But it is in fact unnecessary; a promise will automatically promisify a return value, so one could just as well write</p>
+  .catch(handleError)
+</code></pre><p>That very function returns a Promise.resolve to allow chaining. But it is in fact unnecessary; a promise will automatically promisify a return value, so one could just as well write</p>
 <pre><code>.then((request) =&gt; {
     const jsonData = JSON.parse(request.responseText);
     const topStory = jsonData.data.children[0].data;
@@ -458,7 +464,8 @@ Promise.resolve(&#39;https://www.reddit.com/r/KenM/top/.json?sort=top&amp;t=all&
     const url = `https://www.reddit.com/${topStory.permalink}.json`;
     console.log(url)
     return url;  // instead of return Promise.resolve(url);
-  })</code></pre><h2 id="using-promises-to-open-or-create-a-file">Using promises to open or create a file</h2>
+  })
+</code></pre><h2 id="using-promises-to-open-or-create-a-file">Using promises to open or create a file</h2>
 <p>So chains are good for sequences of actions. And if one of the steps involves passing some variable from one step to the next, you can just use Promise.resolve or Promise.reject. In the example below a file is opened, created if not existing, manipulated and rewritten.</p>
 <p><code>`</code>
 const fs = require(&#39;fs&#39;);
@@ -493,7 +500,8 @@ Promise.resolve(DATA_PTH)</p>
       resolve(DEFAULT_DATA)
     }
   })
-})</code></pre><p>  })</p>
+})
+</code></pre><p>  })</p>
 <p>// handle file content, whichever way it was created
   .then((json) =&gt; {
     json[random_letter()] = ~~(1000 * Math.random());
@@ -544,7 +552,8 @@ var getFileContent = (url) =&gt; {
 
 getFileContent(&#39;some url&#39;)
   .then(...)
-  .catch(...)</code></pre><h2 id="promise-all">Promise.all</h2>
+  .catch(...)
+</code></pre><h2 id="promise-all">Promise.all</h2>
 <p>Promise chains are used to execute functions serially. For executing them in parallel, there is <code>Promise.all</code>. Promises.all takes an array of promises, runs them in parallel, and when all are run it passes an array of results, in the same order as the corresponding promises, to the next block. If any promise fails, it jumps to the <code>catch</code> block and doesn&#39;t return any results.</p>
 <p>In the example below the function <code>fetch</code> from earlier is used to create an array of promises taking an array of reddit URL strings (always a good source of mock data) as starting point. The then block logs the name of the subreddit, which should correspond to the jsonPath</p>
 <pre><code>const jsonPaths = [ &#39;theonion&#39;, &#39;riddles&#39;, &#39;antijokes&#39; ];
@@ -569,18 +578,21 @@ Promise.all(jsonPromises)
 // -&gt; same order as jsonPaths
 // VM213:6 TheOnion
 // VM213:6 riddles
-// VM213:6 AntiJokes</code></pre><h2 id="promise-race">Promise.race</h2>
+// VM213:6 AntiJokes
+</code></pre><h2 id="promise-race">Promise.race</h2>
 <p><code>Promise.race</code> is the least useful of the lot. At first sight it looks like it can be used, say to fetch data from the fastest of alternative locations</p>
 <pre><code>Promise.race([
   getFromThisNetwork(url),
   getFromThatNetwork(url),
   getFromLocalStorage(url)
-]);</code></pre><p>But the problem is that if there are any errors in any of the functions, even the slowest which wasn&#39;t going to be used, the promise jumps to the <code>.catch</code>. So that&#39;s not good.</p>
+]);
+</code></pre><p>But the problem is that if there are any errors in any of the functions, even the slowest which wasn&#39;t going to be used, the promise jumps to the <code>.catch</code>. So that&#39;s not good.</p>
 <p>The only two uses I know for Promise.race are to time-limit an async function</p>
 <pre><code>Promise.race([
   new Promise((resolve, reject) =&gt; setTimout(() =&gt; reject(Error(&#39;time limited!&#39;))), TIME_LIMIT),
   theAsyncFunctionYouWantToLimit()
-])</code></pre><p>Another use of Promise race is in this <a href="https://esdiscuss.org/topic/cancel-promise-pattern-no-cancellable-promises">proposal by Jan-Ivar Bruaroey</a>, which comes with a <a href="https://jsfiddle.net/jib1/jz33qs32/">fiddle</a>. A similar example is this implementation of search suggestion:</p>
+])
+</code></pre><p>Another use of Promise race is in this <a href="https://esdiscuss.org/topic/cancel-promise-pattern-no-cancellable-promises">proposal by Jan-Ivar Bruaroey</a>, which comes with a <a href="https://jsfiddle.net/jib1/jz33qs32/">fiddle</a>. A similar example is this implementation of search suggestion:</p>
 <pre><code>&lt;!-- HTML --&gt;
 Search: &lt;input id=&quot;input&quot;&gt;
 
@@ -604,7 +616,8 @@ function getSearchResults(term) {
     setTimeout(() =&gt; resolve([term.toLowerCase(), term.toUpperCase()]), timeout);
   });
 }
-// from https://stackoverflow.com/questions/30233302/promise-is-it-possible-to-force-cancel-a-promise/41417429#41417429</code></pre><h1 id="todo">TODO</h1>
+// from https://stackoverflow.com/questions/30233302/promise-is-it-possible-to-force-cancel-a-promise/41417429#41417429
+</code></pre><h1 id="todo">TODO</h1>
 <p>start going through other do.first</p>
 <p>http://stackoverflow.com/a/41417429/345007</p>
 <h2 id="jquery-s-deferred">jQuery&#39;s Deferred</h2>
@@ -634,7 +647,8 @@ asyncEvent().resolve();
 asyncEventPromise().resolve();
 
 // but you can attach listeners
-asyncEventPromise().then(() =&gt; console.log(&#39;yeah&#39;));</code></pre><p><code>$.Deferred</code> was used under the hood for Ajax calls, and it was probably a lot of dev&#39;s first encounter with something promise-like back then</p>
+asyncEventPromise().then(() =&gt; console.log(&#39;yeah&#39;));
+</code></pre><p><code>$.Deferred</code> was used under the hood for Ajax calls, and it was probably a lot of dev&#39;s first encounter with something promise-like back then</p>
 <pre><code>$.getJSON( &quot;example.json&quot;, function() {
   console.log( &quot;success&quot; );
 })
@@ -646,7 +660,8 @@ asyncEventPromise().then(() =&gt; console.log(&#39;yeah&#39;));</code></pre><p><
 })
 .always(function() {
   console.log( &quot;complete&quot; );
-});</code></pre><p>You used <code>$.when</code> instead of Promise.all to execute a bunch of deferred in parallel</p>
+});
+</code></pre><p>You used <code>$.when</code> instead of Promise.all to execute a bunch of deferred in parallel</p>
 <pre><code>$.when(
   $.getJSON( &quot;/this.json&quot; ),
   $.getJSON( &quot;/that.json&quot; ),
@@ -657,7 +672,8 @@ asyncEventPromise().then(() =&gt; console.log(&#39;yeah&#39;));</code></pre><p><
 })
 .fail(function() {
   console.log( &quot;error&quot; );
-});</code></pre><p>jQuery 1.7 introduced the very useful <a href="http://api.jquery.com/deferred.progress/">deferred.progress</a> and <a href="http://api.jquery.com/deferred.notify/">deferred.notify</a> which allow progress of the async function to be tracked.</p>
+});
+</code></pre><p>jQuery 1.7 introduced the very useful <a href="http://api.jquery.com/deferred.progress/">deferred.progress</a> and <a href="http://api.jquery.com/deferred.notify/">deferred.notify</a> which allow progress of the async function to be tracked.</p>
 <p>There is <a href="https://msdn.microsoft.com/en-us/magazine/gg723713.aspx">an old article by Add Osmany about $.Deferred</a>, and of course useful pages in the jQuery documentation:</p>
 <ul>
 <li><a href="http://learn.jquery.com/ajax/">jQuery Ajax Tutorial</a></li>

@@ -44,44 +44,69 @@
       </div>
       <div class="entry-content">
     
-<p>When I&#39;m messing about with React I often need a loading component as a placeholder. Here I create a simple one with no dependencies<!--more--></p>
-<h2 id="a-bascic-html-js-spinning-loader">A bascic HTML / JS spinning loader</h2>
-<p>The simplest possible loader I can think of is a rotating partial disk. It&#39;s just a single div with some CSS; the only complication is the animation.</p>
-<p>Start by creating a circle; with CSS you can do that simply by setting the border-radius of a div to 50%.</p>
-<p><code>.loading {
-  border-radiust: 50%;
+<p>When I&#39;m messing about with React I often need a loading component as a placeholder. Here I create a simple one with no dependencies
+<!--more--></p>
+<h2 id="a-pure-css-spinning-loader">A pure CSS spinning loader</h2>
+<p>The simplest possible loader I can think of is a spinning broken circle. With CSS you can create a circle simply by setting the border-radius of a div to 50%. You also need a few other CSS rules like the border-color, width and height (make sure they are the same!)</p>
+<pre><code class="language-css">.loading {
   border: 10px solid red;
+  border-radius: 50%;
+  border-left-color: transparent;
   display: inline-block;
   height: 50px;
   width: 50px;
-}</code></p>
-<p>You also need a few other CSS rules like the border-color, width and height (make sure they are the same!) and so on. To remove a section of the circle, just remove one of the borders by making its colour transparent - I have removed boorder-left - and there you have it!</p>
+}
+</code></pre>
+
+<p>To break the circle, just remove one of the borders by making its colour transparent - I have removed boorder-left - and there you have it</p>
 <p>To animate it you need a keyframes object with the state at the beginning and end of the cycle. Even better, you don&#39;t even need the &#39;from&#39; state, it is just the initial state as defined in the other styles. Then you refer to those keyframe with the animation rule</p>
-<p><code>.loading {
-  animation: 1s linear infinite gotofritz-spin; and bingo!
+<pre><code class="language-css">.loading {
+  animation: 1s linear infinite gotofritz-spin;
   ....
-}</code></p>
+}
+
+@keyframes gotofritz-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+</code></pre>
+
+<p>In the code sample below I have slightly rearranged the CSS, and introduced the <code>backface-visibility: hidden</code> property to force the animation in its own rendering layer. This is a performance enhancement that makes more sense if the spinner is animating over a complex background, and it means the background won&#39;t need to be rerendered all the time.</p>
 <p data-height="265" data-theme-id="light" data-slug-hash="rZMBzR" data-default-tab="css,result" data-user="gotofritz" data-pen-title="The Simplest React Loader - step 1" class="codepen">See the Pen <a href="https://codepen.io/gotofritz/pen/rZMBzR/">The Simplest React Loader - step 1</a> by gotofritz (<a href="https://codepen.io/gotofritz">@gotofritz</a>) on <a href="https://codepen.io">CodePen</a>.</p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
-<h2 id="introducing-react">Introducing React</h2>
-<p>As a first step I will remove the HTML completely, introduce React and have it render the div that was priorly in the HTML. It will be a simple one line stateless, functional component, attached directly to the body</p>
-<pre><code>function Loading() {
-return &lt;div className=&quot;loading&quot; /&gt;;
+## Replacing the HTML with a functional React component
+
+As a first step I will remove the HTML completely, introduce React and have it render the div that was priorly in the HTML. It will be a simple one line stateless, functional component, attached directly to the body
+
+<pre><code class="language-jsx">function Loading() {
+  return <div className="loading"></div>;
 }
 
-ReactDOM.render(&lt;Loading /&gt;, document.getElementsByTagName(&#39;body&#39;)[0]);</code></pre><p>So the HTML is gone; now I need to make the CSS disappear, as I want to have a simple one file component that doesn&#39;t make any assumptios about how the CSS is handled. For the first part I just turn the CSS into a JS object, and pass it to the component. I can even have some of the CSS set by props</p>
-<pre><code>function Loading({ size = 50} = props) {
-    const style = {
-        display: &#39;inline-block&#39;,
-        width: `${size}px`,
-        ...
-    }
-}
 ReactDOM.render(
-    &lt;Loading size=&quot;50&quot; /&gt;,
-    document.getElementsByTagName(&#39;body&#39;)[0]
-);</code></pre><p>The only thing left to add the animation itself to the component.</p>
+  <Loading>,
+  document.getElementsByTagName(&#39;body&#39;)[0]
+);
+</code></pre>
+
+
+So the HTML is gone; now I need to make the CSS disappear, as I want to have a simple one file component that doesn&#39;t make any assumptios about how the CSS is handled. For the first part I just turn the CSS into a JS object, and pass it to the component. I can even have some of the CSS set by props
+
+    function Loading({ size = 50} = props) {
+        const style = {
+            display: &#39;inline-block&#39;,
+            width: <code>${size}px</code>,
+            ...
+        }
+    }
+    ReactDOM.render(
+        <Loading size="50" />,
+        document.getElementsByTagName(&#39;body&#39;)[0]
+    );
+
+The only thing left to add the animation itself to the component.
+
 <p data-height="265" data-theme-id="light" data-slug-hash="mGrdeX" data-default-tab="js,result" data-user="gotofritz" data-pen-title="The Simplest React Loader - step 2" class="codepen">See the Pen <a href="https://codepen.io/gotofritz/pen/mGrdeX/">The Simplest React Loader - step 2</a> by gotofritz (<a href="https://codepen.io/gotofritz">@gotofritz</a>) on <a href="https://codepen.io">CodePen</a>.</p>
 
 <h2 id="adding-keframes-to-the-inline-style-of-the-react-component">Adding keframes to the inline style of the React component</h2>

@@ -43,14 +43,14 @@
       </div>
       <div class="entry-content">
     
-<p>To have a $ in your replace strings in Javascript regular expressions, it needs to be escaped with another $</p>
-<!--more-->
-
+<p>To have a $ in your replace strings in Javascript regular expressions, it needs to be escaped with another $
+<!--more--></p>
 <p>I.e., <code>$$</code>, not <code>\$</code>. In other words, the escape character for the RegExp &quot;language&quot; is $, even within Javascript, not the standard slash \</p>
 <pre><code>&quot;I &lt;feeling&gt; that&quot;.replace( /&lt;(.+?)&gt;/g, &quot;\$$1&quot; );
 //won&#39;t work - will produce &quot;&quot;I $1 that&quot;&quot;
 &quot;I &lt;feeling&gt; that&quot;.replace( /&lt;(.+?)&gt;/g, &quot;$$$1&quot; );
-//works - &quot;I $feeling that&quot;</code></pre>
+//works - &quot;I $feeling that&quot;
+</code></pre>
       </div>
     </div>
   </article>

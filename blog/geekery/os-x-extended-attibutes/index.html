@@ -44,9 +44,8 @@
       </div>
       <div class="entry-content">
     
-<p>Extended attributes store extra information about files in OS X. They replaced resource forks. Sometimes those extra hidden files confuse peripherals (e.g. mp3 players) that were not setup to deal with them.  Here are some terminal commands to handle them.</p>
-<!--more-->
-
+<p>Extended attributes store extra information about files in OS X. They replaced resource forks. Sometimes those extra hidden files confuse peripherals (e.g. mp3 players) that were not setup to deal with them.  Here are some terminal commands to handle them.
+<!--more--></p>
 <blockquote>
 <p>ls -al
         -rw-r--r--@   1 me  staff     962 22 Aug 22:06 .bash_profile
@@ -69,10 +68,12 @@ drwx------+   7 me  staff     238 25 Aug 09:42 Downloads
 drwx------@  20 me  staff     680 25 Aug 09:42 Dropbox
 com.apple.FinderInfo      32
 drwxr-xr-x@  20 me  staff     680 25 Aug 09:42 Google Drive
-com.apple.FinderInfo      32</code></pre><p>On OS X the ls command has an @ option, which lists the extended property for each entry, if any.</p>
+com.apple.FinderInfo      32
+</code></pre><p>On OS X the ls command has an @ option, which lists the extended property for each entry, if any.</p>
 <pre><code>&gt; xattr *
 Dropbox: com.apple.FinderInfo
-Google Drive: com.apple.FinderInfo</code></pre><p>The xattr command lets you interact with the extended attributes. Just running it by itself it will list them all, Note that it doesn&#39;t handle hidden files though.</p>
+Google Drive: com.apple.FinderInfo
+</code></pre><p>The xattr command lets you interact with the extended attributes. Just running it by itself it will list them all, Note that it doesn&#39;t handle hidden files though.</p>
 <pre><code>&gt; xattr -l *
 Dropbox: com.apple.FinderInfo:
 00000000  00 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00  |................|
@@ -81,9 +82,11 @@ Dropbox: com.apple.FinderInfo:
 Google Drive: com.apple.FinderInfo:
 00000000  00 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00  |................|
 00000010  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  |................|
-00000020</code></pre><p>The -l flag lets shows the content for all extended properties for a file. They are not always hex data.</p>
+00000020
+</code></pre><p>The -l flag lets shows the content for all extended properties for a file. They are not always hex data.</p>
 <pre><code>&gt; xattr -p com.apple.TextEncoding .bash_profile
-UTF-8;134217984</code></pre><p>The -p flag lists the content of a specific extended attribute (in this case, com.apple.TextEncoding) for a specific file (in this case .bash_profile). This particular attribute is a string.</p>
+UTF-8;134217984
+</code></pre><p>The -p flag lists the content of a specific extended attribute (in this case, com.apple.TextEncoding) for a specific file (in this case .bash_profile). This particular attribute is a string.</p>
 <pre><code>&gt; xattr -w test &quot;what is this&quot; .bash_profile
 &gt; xattr -l .bash_profile
 com.apple.FinderInfo:
@@ -91,14 +94,16 @@ com.apple.FinderInfo:
 00000010  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  |................|
 00000020
 com.apple.TextEncoding: UTF-8;134217984
-test: what is this</code></pre><p>-w allows you create your own extended attributes. Here one is written and then read out.</p>
+test: what is this
+</code></pre><p>-w allows you create your own extended attributes. Here one is written and then read out.</p>
 <pre><code>&gt; xattr -d test .bash_profile
 &gt; xattr -l .bash_profile
 com.apple.FinderInfo:
 00000000  54 45 58 54 00 00 00 00 00 00 00 00 00 00 00 00  |TEXT............|
 00000010  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  |................|
 00000020
-com.apple.TextEncoding: UTF-8;134217984</code></pre><p>-d complements -w by allowing one to delete an extended attribute.</p>
+com.apple.TextEncoding: UTF-8;134217984
+</code></pre><p>-d complements -w by allowing one to delete an extended attribute.</p>
 <blockquote>
 <p>xattr -d com.apple.FinderInfo *</p>
 </blockquote>

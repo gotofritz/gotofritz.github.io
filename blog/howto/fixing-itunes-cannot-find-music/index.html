@@ -44,10 +44,8 @@
       </div>
       <div class="entry-content">
 <div class="archive">This post is too old to be of any use. It has been archived.</div>
-<p>I have all my music on a hard disk, and occasionally iTunes resets the music library location to my home folder - just like that, without asking. So once again I find myself having to fix iTunes, because it can&#39;t find the songs and it shows me the dreaded exclamation marks instead. Here&#39;s what I do to fix it.</p>
-<!--more-->
-
-
+<p>I have all my music on a hard disk, and occasionally iTunes resets the music library location to my home folder - just like that, without asking. So once again I find myself having to fix iTunes, because it can&#39;t find the songs and it shows me the dreaded exclamation marks instead. Here&#39;s what I do to fix it.
+<!--more--></p>
 <p><strong>Disclaimer:</strong> If you follow the instructions on this post, you do so at your own risk. I suggest you backup all the files involved.</p>
 <h2 id="reset-the-itunes-library">Reset the iTunes Library</h2>
 <p> Open the iTunes music folder in Finder ( it&#39;s in your home folder / Music / iTunes) and drag iTunes Music Library.xml and iTunes Library.itl out on the desktop. This will reset iTunes next time you start it, but don&#39;t start it yet. We&#39;ll be working on the xml file, whilte the itl file is just there for backup.</p>
@@ -55,7 +53,8 @@
 <p>Has iTunes changed the location from your hard disk to your home folder? Bastard. In the iTunes preferences &gt; Advanced, click on &quot;change&quot; next to the &quot;iTunes music folder location&quot;, and select your hard disk. I leep &quot;Keep music folder organized&quot; unticked.</p>
 <h2 id="look-inside-itunes-liberary-to-see-what-the-problem-is">Look inside iTunes Liberary to see what the problem is</h2>
 <p>If your iTunes library is huge, it&#39;s a good idea to use Terminal to look at the first few lines, which you can do easily with</p>
-<pre><code>head -n100 /Users/ME/Desktop/iTunes\ Music\ Library.xml</code></pre><p>(you can just type &quot;head -n100 &quot; and drag the file onto Terminal to let OS X type out the name for you)</p>
+<pre><code>head -n100 /Users/ME/Desktop/iTunes\ Music\ Library.xml
+</code></pre><p>(you can just type &quot;head -n100 &quot; and drag the file onto Terminal to let OS X type out the name for you)</p>
 <p>The output will be something along the lines of</p>
 <pre><code>    &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
     &lt;!DOCTYPE plist PUBLIC &quot;-//Apple Computer//DTD PLIST 1.0//EN&quot; &quot;http://www.apple.com/DTDs/PropertyList-1.0.dtd&quot;&gt;
@@ -100,16 +99,18 @@
                 &lt;key&gt;Persistent ID&lt;/key&gt;&lt;string&gt;E5B52C3DE807B7DC&lt;/string&gt;
                 &lt;key&gt;Track Type&lt;/key&gt;&lt;string&gt;File&lt;/string&gt;
                 &lt;key&gt;File Type&lt;/key&gt;&lt;integer&gt;1297106739&lt;/integer&gt;
-                &lt;key&gt;Location&lt;/key&gt;&lt;string&gt;file://localhost/Users/ME/Music/iTunes/iTunes%20Media/Music/Ski/Jazzanova_%20The%20Remixes,%201997-2000/Fifths%20(Jazzanova%206%20Sickth%20Mix).mp3&lt;/string&gt;</code></pre><p>You need to look out for the file:// bit of the xml. Here it is telling me that it is looking into /Users/ME/Music/, i.e. my home folder instead of my external hard disk. Bastard.</p>
+                &lt;key&gt;Location&lt;/key&gt;&lt;string&gt;file://localhost/Users/ME/Music/iTunes/iTunes%20Media/Music/Ski/Jazzanova_%20The%20Remixes,%201997-2000/Fifths%20(Jazzanova%206%20Sickth%20Mix).mp3&lt;/string&gt;
+</code></pre><p>You need to look out for the file:// bit of the xml. Here it is telling me that it is looking into /Users/ME/Music/, i.e. my home folder instead of my external hard disk. Bastard.</p>
 <h2 id="use-sed-to-fix-the-path-and-create-a-new-xml-file">Use sed to fix the path and create a new xml file</h2>
 <p><a href="http://www.grymoire.com/Unix/Sed.html">sed</a> is a nifty unix utility which you can use from Terminal. It can open a file, go through it line by line, change things on each line, and then put the result in another file. At least, that&#39;s how I am using it here.</p>
-<pre><code>    sed &#39;s/file:\/\/localhost\/Users\/ME\/Music\/iTunes\/iTunes%20Media\//file:\/\/localhost\/Volumes\/HD1T\//&#39;  &lt; /Users/ME/Desktop/iTunes\ Music\ Library.xml  &gt; /Users/ME/Music/iTunes/iTunes\ Music\ Library.xml</code></pre><p>Here&#39;s a breakdown of what the command does.</p>
+<pre><code>    sed &#39;s/file:\/\/localhost\/Users\/ME\/Music\/iTunes\/iTunes%20Media\//file:\/\/localhost\/Volumes\/HD1T\//&#39;  &lt; /Users/ME/Desktop/iTunes\ Music\ Library.xml  &gt; /Users/ME/Music/iTunes/iTunes\ Music\ Library.xml
+</code></pre><p>Here&#39;s a breakdown of what the command does.</p>
 <dl class="code-breakdown">
   <dt>sed</dt>
   <dd>calls the sed command - it stands for <b>S</b>tream <b>ED</b>itor</dd>
 
-  <dt>'s/.../..../'</dt>
-  <dd>sed will itself need instructions, which are strings hence the ' (apostrophe). s/a/b/ means "if you find an a, substitue it with b"</dd>
+  <dt>&#39;s/.../..../&#39;</dt>
+  <dd>sed will itself need instructions, which are strings hence the &#39; (apostrophe). s/a/b/ means &quot;if you find an a, substitue it with b&quot;</dd>
 
   <dt class="long-line">file:\/\/localhost\/Users\/ME...</dt>
   <dd class="long-line">this is the string we are looking for. Note that given that forward slashes are used by sed for s/.../.../,  if you need them in the string you have to escape them with backward slashes</dd>
@@ -118,10 +119,10 @@
   <dd class="long-line">the string we are replacing with</dd>
 
   <dt class="long-line">&lt; /Users/ME/Desktop/iTunes\ Music\ Library.xml</dt>
-  <dd class="long-line">The less than sign means "use this file as input" - in this case, the xml file I had dragged to the Desktop</dd>
+  <dd class="long-line">The less than sign means &quot;use this file as input&quot; - in this case, the xml file I had dragged to the Desktop</dd>
 
   <dt class="long-line">&gt;  /Users/ME/Music/iTunes/iTunes\ Music\ Library.xml</dt>
-  <dd class="long-line">and this means "create this file as output". We are asking sed to recreate the xml library file from the one on the desktop, but changing some bits around as it does so</dd>
+  <dd class="long-line">and this means &quot;create this file as output&quot;. We are asking sed to recreate the xml library file from the one on the desktop, but changing some bits around as it does so</dd>
 
 </dl>
 
@@ -129,7 +130,8 @@
 
 <h2 id="create-a-broken-itunes-library">Create a broken iTunes library</h2>
 <p>Now this is important - if you just start iTunes now, with the new .xml file there and no .itl file there, nothing will happen. iTunes will ignore  the xml file, and just reset to an empty library. But if iTunes finds a broken .itl file, it will use the .xml file we just fiddled with to recreate the .itl file.  The easiest way to create a broken .itl file is from terminal:</p>
-<pre><code>touch /Users/ME/Music/iTunes/iTunes\ Library.itl</code></pre><p>which will create an empty file - broken enough for iTunes.</p>
+<pre><code>touch /Users/ME/Music/iTunes/iTunes\ Library.itl
+</code></pre><p>which will create an empty file - broken enough for iTunes.</p>
 <h2 id="restart-itunes">Restart iTunes</h2>
 <p>Now iTunes will finally pay attention to the xml file - it will show a dialog saying &#39;Importing &#39;iTunes Music  Library.xml&#39;...&quot;
 This may take a while, even though it isn&#39;t actually copying mp3 files around.</p>
