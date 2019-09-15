@@ -1,0 +1,421 @@
+<!DOCTYPE HTML><html><head><meta charset=utf-8><title>Back to the classics: awk || gotofritz</title><meta name=author content=gotofritz><meta name=description content="In this age of npm and github and easily available modules in any language of your choice, it is easy to forget the old Unix workhorses. Here&amp;#x2019;s a look at awk, a shell utility that allows you to treat and manipulate text files as if they were databases. In Part 2 there are a few sample scripts."><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><link href=/assets/favicon.ico rel="shortcut icon"><link rel=icon href=/assets/favicon.gif type=image/gif><link href=/assets/css/screen.css media="screen, projection" rel=stylesheet type=text/css></head><body class=content-post><div class=gradient-container><main class=panel-container><div class=content><nav class=flat-nav><div itemscope itemtype=http://schema.org/Person class="vcard group-of-links"><a href=/ >home</a><form class=search action=http://google.com/search><input id=search-str name=q results=0 placeholder=search> <input type=hidden name=q value=site:gotofritz.net></form></div></nav><article><section class=intro><div class=post-meta><time datetime=2015-07-15T23:19:00+02:00 pubdate>2015-07-15</time> //<div class=tags>cli, awk</div></div><h1>Back to the classics: awk</h1><h2>In this age of npm and github and easily available modules in any language of your choice, it is easy to forget the old Unix workhorses. Here&#x2019;s a look at awk, a shell utility that allows you to treat and manipulate text files as if they were databases. In Part 2 there are a few sample scripts.</h2></section><section class=post-content><h2 id=what-is-awk>What is awk?</h2><p><code>Awk</code> is both the name of the command line utility, and the language used for it. It was invented at Bells Labs at the peak of punk rock, 1977, and its name is simply the initials of its three creators. Awk reads input (a file, or a stream) one line (one &#x201C;record&#x201D;) at the time, splits it into fields by blank space (these are all defaults that can be changed), and then uses the instructions in the awk language to manipulate these fields and generate some output. The ability to read files as streams is a big plus - it means the memory footprint is the same if you read a file of 1Kb or 200Tb; for a larger file it will just take longer.</p><p>Awk is standard with the version of bash that comes with OS X, and several others. There is another variant which is widespread - gawk, GNU awk. It is actually better than the original, because it offers array sort and length functions, the ability to include files, and more flexible rules for splitting input in fields. Here I will limit myself to the standard awk.</p><h3 id=example-awk-in-action>Example awk in action</h3><p>Here&#x2019;s what the simplest awk program looks like - this is basically <code>cat</code></p><pre class=language-bash><code class=language-bash><span class="token comment"># awk loads the short program: {print} and wait for user to type stuff</span>
+<span class="token operator">&gt;</span> <span class="token function">awk</span> <span class="token string">&apos;{print}&apos;</span>
+<span class="token comment"># as you type, the shell prints out what you are typing.</span>
+<span class="token comment"># Awk is waiting for a &lt;RETURN&gt; outside a &apos;&apos;</span>
+It was a bright cold day <span class="token keyword">in</span> April.
+<span class="token comment"># now awk kicks in and runs the program on the input</span>
+<span class="token comment"># {print} simply prints the input line as it is, so here it is again</span>
+It was a bright cold day <span class="token keyword">in</span> April.
+</code></pre><p>The strong point of <code>awk</code> is that it automatically splits lines of text as if they were &#x201C;columns&#x201D; in a spreadsheet and assigns each column to a variable (a &#x201C;field&#x201D;). Then you can manipulate them and spit them out</p><pre class=language-bash><code class=language-bash><span class="token comment"># awk loads a slightly more complex program and waits</span>
+<span class="token operator">&gt;</span> <span class="token function">awk</span> <span class="token string">&apos;{print <span class="token variable">$3</span> &quot;: &quot; <span class="token variable">$1</span> + <span class="token variable">$2</span>}&apos;</span>
+<span class="token comment"># waiting for a &lt;return&gt; outside a &apos;&apos;</span>
+<span class="token number">10</span> <span class="token number">20</span> Toronto
+<span class="token comment"># this line is split into 3 &quot;columns&quot;, and</span>
+<span class="token comment"># 10 is assigned to $1, 20 to $2, and Toronto to $3</span>
+<span class="token comment"># then the program {print &quot;$3: &quot; $1 + $2} is run:</span>
+<span class="token comment"># it adds $1 + $2 and</span>
+<span class="token comment"># prints the result out, with some extra text (the :)</span>
+Toronto: <span class="token number">30</span>
+<span class="token comment"># now it waits for the next line</span>
+<span class="token number">20</span> <span class="token number">30</span> Miami
+<span class="token comment"># same program run on it</span>
+Miami: <span class="token number">50</span>
+<span class="token operator">&lt;</span>/return<span class="token operator">&gt;</span></code></pre><p>Despite its simplicity, you can take awk quite far - for example creating <a href=http://awk.info/?doc/story.html>a random sci-fi plot generator</a>.</p><h2 id=running-awk-programs-and-redirecting-input-output>Running awk programs and redirecting input, output</h2><p>Running awk on STDIN is not very useful, but of course you can use Unix magic to redirect the input and / or output of the program</p><pre class=language-bash><code class=language-bash><span class="token comment"># awk will treat the second argument as a path to a file to read from</span>
+<span class="token operator">&gt;</span> <span class="token function">awk</span> <span class="token string">&apos;{print}&apos;</span> some_data.txt
+<span class="token punctuation">..</span>. <span class="token comment"># prints whatever was in some_data.txt</span>
+
+<span class="token comment"># exactly the same thing but done differently:</span>
+<span class="token comment"># redirecting file to STDIN</span>
+<span class="token operator">&gt;</span> <span class="token function">awk</span> <span class="token string">&apos;{print}&apos;</span> <span class="token operator">&lt;</span> some_data.txt
+<span class="token punctuation">..</span>. <span class="token comment"># prints whatever was in some_data.txt</span>
+
+<span class="token comment"># you can read several files, in order</span>
+<span class="token operator">&gt;</span> <span class="token function">awk</span> <span class="token string">&apos;{print}&apos;</span> some_data.txt more_data.txt
+<span class="token punctuation">..</span>.
+
+<span class="token comment"># now the processed data goes to a separate file</span>
+<span class="token operator">&gt;</span> <span class="token function">awk</span> <span class="token string">&apos;{print}&apos;</span> some_data.txt <span class="token operator">&gt;</span> result.txt
+
+<span class="token comment"># the awk program itself can be loaded to a file:</span>
+<span class="token comment"># here this file is created</span>
+<span class="token operator">&gt;</span> <span class="token builtin class-name">echo</span> <span class="token string">&apos;{print}&apos;</span> <span class="token operator">&gt;</span> awk.txt
+<span class="token comment"># passing the command on to awk with the -f option</span>
+<span class="token operator">&gt;</span> <span class="token function">awk</span> -f awk.txt some_data.txt <span class="token operator">&gt;</span> result.txt
+
+<span class="token comment"># mixing STDIN with files. The &quot;-&quot; is substituted by STDIN,</span>
+<span class="token comment"># which is dealt with after some_data.txt</span>
+<span class="token operator">&gt;</span> <span class="token function">ls</span> -l <span class="token operator">|</span> <span class="token function">awk</span> <span class="token string">&apos;{print}&apos;</span> some_data.txt - more_data.txt
+<span class="token operator">&gt;</span> <span class="token punctuation">..</span>. <span class="token comment"># prints all lines from some_data.txt</span>
+<span class="token operator">&gt;</span> <span class="token punctuation">..</span>. <span class="token comment"># prints result of ls -l (this is the &quot;-&quot;)</span>
+<span class="token operator">&gt;</span> <span class="token punctuation">..</span>. <span class="token comment"># prints all lines from more_data.txt</span>
+
+<span class="token comment"># pass some text into awk, then run an awk program on it</span>
+<span class="token operator">&gt;</span> <span class="token builtin class-name">echo</span> <span class="token string">&apos;1 2 3&apos;</span> <span class="token operator">|</span> <span class="token function">awk</span> <span class="token string">&apos;{print}&apos;</span>
+<span class="token operator">&gt;</span> <span class="token number">1</span> <span class="token number">2</span> <span class="token number">3</span>
+
+<span class="token comment"># using the curl util to download a csv file, piping it to awk,</span>
+<span class="token comment"># and running the simple awk program on it</span>
+<span class="token operator">&gt;</span> <span class="token function">curl</span> http://is.gd/eUrbOZ <span class="token operator">|</span> <span class="token function">awk</span> <span class="token string">&apos;{print}&apos;</span>
+Forename,Surname,Description on ballot paper,Constituency Name,PANo,Votes,Share
+<span class="token punctuation">..</span>. <span class="token comment"># etc</span>
+</code></pre><h2 id=anatomy-of-an-awk-program>Anatomy of an awk program</h2><p>So far the awk example consisted of simple one liners - but awk programs can consist of several instructions (&#x201C;actions&#x201D;). You can still write them out on the shell:</p><pre class=language-bash><code class=language-bash><span class="token comment"># note: the &quot;&gt;&quot; is added automatically when hitting return inside a &apos;&apos;,</span>
+<span class="token comment"># and the space between &gt; and { was added manually to make it line up</span>
+<span class="token operator">&gt;</span> <span class="token function">awk</span> <span class="token string">&apos;{print}
+&gt;      {print}
+&gt;      {print}&apos;</span>
+<span class="token comment"># now that the closing &apos; was typed, awk kicks in. this programs simply</span>
+<span class="token comment"># prints out whatever you type three times</span>
+oh <span class="token comment"># typed by you</span>
+oh <span class="token comment"># printed by awk 3 times</span>
+oh
+oh
+</code></pre><p>In this tutorial I will put the awk program in its own file and load it from the command line - just to make formatting easier and allow comments. The file loaded here has suffix &#x201C;.awk&#x201D; but that&#x2019;s irrelevant, it could be any filename.</p><pre class=language-bash><code class=language-bash><span class="token operator">&gt;</span> <span class="token function">awk</span> -f example.awk some_input_text.txt
+</code></pre><p>An awk program consists of a list of actions, one after the other, and typically one per line (they can be broken up though). There are two special types of actions - BEGIN actions are executed only once, before the text is scanned, and END only once, afterwards. All other actions are executed in order on every line of text. Assume your input file includes increasing integers, one per line</p><pre class=language-bash><code class=language-bash><span class="token number">1</span>
+<span class="token number">2</span>
+<span class="token number">3</span>
+</code></pre><p>Then the program below</p><pre class=language-bash><code class=language-bash>BEGIN <span class="token punctuation">{</span> print <span class="token string">&quot;START!&quot;</span> <span class="token punctuation">}</span>
+<span class="token punctuation">{</span>print <span class="token string">&quot;--------------&quot;</span><span class="token punctuation">}</span>
+<span class="token punctuation">{</span>print<span class="token punctuation">}</span>
+<span class="token punctuation">{</span>print<span class="token punctuation">}</span>
+<span class="token punctuation">{</span>print<span class="token punctuation">}</span>
+END <span class="token punctuation">{</span> print <span class="token string">&quot;END!&quot;</span> <span class="token punctuation">}</span>
+</code></pre><p>Would produce</p><pre class=language-bash><code class=language-bash>START<span class="token operator">!</span>
+--------------
+<span class="token number">1</span>
+<span class="token number">1</span>
+<span class="token number">1</span>
+--------------
+<span class="token number">2</span>
+<span class="token number">2</span>
+<span class="token number">2</span>
+--------------
+<span class="token number">3</span>
+<span class="token number">3</span>
+<span class="token number">3</span>
+END<span class="token operator">!</span>
+</code></pre><p>Note that actions can be in any order (they will be executed in the order they are written) and there can be multiple BEGIN and END, so the following is also a legal program.</p><pre class=language-bash><code class=language-bash><span class="token punctuation">{</span>print <span class="token string">&quot;--------------&quot;</span><span class="token punctuation">}</span>
+<span class="token punctuation">{</span>print<span class="token punctuation">}</span>
+END <span class="token punctuation">{</span> print <span class="token string">&quot;END!&quot;</span> <span class="token punctuation">}</span>
+BEGIN <span class="token punctuation">{</span> print <span class="token string">&quot;START!&quot;</span> <span class="token punctuation">}</span>
+<span class="token punctuation">{</span>print<span class="token punctuation">}</span>
+END <span class="token punctuation">{</span> print <span class="token string">&quot;Copyright 2005&quot;</span> <span class="token punctuation">}</span>
+<span class="token punctuation">{</span>print<span class="token punctuation">}</span>
+</code></pre><p>The way the program is dealt with is:</p><ul><li>all the BEGIN actions are executed, in order</li><li>input is read one line at the time, and for each line<ul><li>the line is split into fields</li><li>each action, in turn, is run on the fields</li></ul></li><li>all the END actions are run at the end</li></ul><p>Inside the actions awk offers what most programming languages offer - variable, loops, tests, etc.</p><h3 id=actions-formatting>Actions formatting</h3><p>Awk follows Unix conventions on most things, so in case of doubt whatever works in Bash scripts tends to work.</p><pre class=language-bash><code class=language-bash><span class="token comment"># a &apos;normal&apos; one lne</span>
+BEGIN <span class="token punctuation">{</span> print <span class="token string">&quot;START&quot;</span> <span class="token punctuation">}</span>
+<span class="token comment"># you can add newlines for formatting - this is equivalent to the above</span>
+BEGIN <span class="token punctuation">{</span>
+  print <span class="token string">&quot;START&quot;</span>
+<span class="token punctuation">}</span>
+-<span class="token operator">&gt;</span> START
+-<span class="token operator">&gt;</span> START
+
+<span class="token comment"># as in Bash scripts, you can use the semicolon to separate multiple statements</span>
+<span class="token comment"># on the same line...</span>
+BEGIN <span class="token punctuation">{</span> print <span class="token string">&quot;STA&quot;</span><span class="token punctuation">;</span> print <span class="token string">&quot;RT&quot;</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+<span class="token comment"># or you can write them one per line, with or without semicolon</span>
+BEGIN <span class="token punctuation">{</span> print <span class="token string">&quot;STA&quot;</span>
+        print <span class="token string">&quot;RT&quot;</span> <span class="token punctuation">}</span>
+-<span class="token operator">&gt;</span> STA
+  RT
+-<span class="token operator">&gt;</span> STA
+  RT
+</code></pre><h2 id=variables>Variables</h2><p>Awk makes several variables available to the programs - some are loaded when the program is launched, some are updated with each line read, some are created by the program itself.</p><h3 id=field-variables>Field Variables</h3><p>Whenever awk reads a line, it splits it into &#x201C;fields&#x201D; by white-space / tab (this is the default and can be overridden), Then each field is copied to a variable $1, $2, &#x2026;. in order - there is no limit. Additionally, $0 contains the whole line.</p><pre class=language-bash><code class=language-bash><span class="token comment"># assume this file</span>
+<span class="token number">1</span> <span class="token number">2</span> <span class="token number">3</span> <span class="token number">4</span> <span class="token number">5</span> <span class="token number">6</span> <span class="token number">7</span>
+
+<span class="token comment"># the following two lines are equivalent</span>
+<span class="token punctuation">{</span> print <span class="token punctuation">}</span>
+<span class="token punctuation">{</span> print <span class="token variable">$0</span> <span class="token punctuation">}</span>
+-<span class="token operator">&gt;</span> <span class="token number">1</span> <span class="token number">2</span> <span class="token number">3</span> <span class="token number">4</span> <span class="token number">5</span> <span class="token number">6</span> <span class="token number">7</span>
+-<span class="token operator">&gt;</span> <span class="token number">1</span> <span class="token number">2</span> <span class="token number">3</span> <span class="token number">4</span> <span class="token number">5</span> <span class="token number">6</span> <span class="token number">7</span>
+
+<span class="token comment"># only prints some fields we are interested in</span>
+<span class="token punctuation">{</span> print <span class="token variable">$1</span> <span class="token string">&quot; &quot;</span> <span class="token variable">$3</span> <span class="token punctuation">}</span>
+-<span class="token operator">&gt;</span> <span class="token number">1</span> <span class="token number">3</span>
+</code></pre><p>The field number doesn&#x2019;t have to be a constant - it can be an expression or a variable. For example, the global variable NF contains the number of the last field and is updated which every line read. So if there are 7 fields, NF would be 7, and $NF would be $7, i.e. the last field</p><pre class=language-bash><code class=language-bash><span class="token comment"># assume this file</span>
+<span class="token number">1</span> <span class="token number">2</span> <span class="token number">3</span> <span class="token number">4</span> <span class="token number">5</span> <span class="token number">6</span> <span class="token number">7</span>
+
+<span class="token comment"># both mean first and last field - but the first version only works if there are</span>
+<span class="token comment"># 7 fields, the second always works</span>
+<span class="token punctuation">{</span>print <span class="token variable">$1</span> <span class="token string">&quot; &quot;</span> <span class="token variable">$7</span><span class="token punctuation">}</span>
+<span class="token punctuation">{</span>print <span class="token variable">$1</span> <span class="token string">&quot; &quot;</span> <span class="token variable">$NF</span><span class="token punctuation">}</span>
+-<span class="token operator">&gt;</span> <span class="token number">1</span> <span class="token number">7</span>
+-<span class="token operator">&gt;</span> <span class="token number">1</span> <span class="token number">7</span>
+<span class="token comment">#</span>
+<span class="token comment"># print the last two fields</span>
+<span class="token punctuation">{</span>print <span class="token variable"><span class="token variable">$(</span>NF-1<span class="token variable">)</span></span> <span class="token string">&quot; &quot;</span> <span class="token variable">$NF</span><span class="token punctuation">}</span>
+-<span class="token operator">&gt;</span> <span class="token number">6</span> <span class="token number">7</span>
+</code></pre><p>Another useful global variable that gets updated for each record is NR - this is the record number</p><pre class=language-bash><code class=language-bash><span class="token comment"># feed a four line input into awk</span>
+<span class="token operator">&gt;</span> <span class="token builtin class-name">echo</span> <span class="token string">&apos;a
+&gt; b
+&gt; c
+&gt; d&apos;</span> <span class="token operator">|</span> <span class="token function">awk</span> <span class="token string">&apos;{print NR &quot;) &quot; <span class="token variable">$1</span>}&apos;</span>
+<span class="token comment"># it prints the line number, ), and the first (and only) field</span>
+<span class="token number">1</span><span class="token punctuation">)</span> a
+<span class="token number">2</span><span class="token punctuation">)</span> b
+<span class="token number">3</span><span class="token punctuation">)</span> c
+<span class="token number">4</span><span class="token punctuation">)</span> d
+</code></pre><p>You can assign to a field variable with the &#x2018;=&#x2019; operator, thereby changing the record content:</p><pre class=language-bash><code class=language-bash><span class="token comment"># adding something to a field</span>
+<span class="token comment"># will only works if it&apos;s a number</span>
+<span class="token punctuation">{</span><span class="token variable">$3</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token variable">$3</span> + <span class="token number">100</span><span class="token punctuation">)</span>
+<span class="token comment"># now print the updated line</span>
+print <span class="token variable">$0</span><span class="token punctuation">}</span>
+-<span class="token operator">&gt;</span> <span class="token number">1</span> <span class="token number">2</span> <span class="token number">103</span> <span class="token number">4</span> <span class="token number">5</span> <span class="token number">6</span> <span class="token number">7</span>
+</code></pre><p>If you assign to a field variable that doesn&#x2019;t exist, it will be added to the record</p><pre class=language-bash><code class=language-bash><span class="token comment"># the record only contains $1 and $2;</span>
+<span class="token operator">&gt;</span> <span class="token builtin class-name">echo</span> <span class="token number">1</span> <span class="token number">2</span> <span class="token operator">|</span> <span class="token function">awk</span> <span class="token string">&apos;{print <span class="token variable">$0</span>}&apos;</span>
+<span class="token operator">&gt;</span> <span class="token number">1</span> <span class="token number">2</span>
+<span class="token operator">&gt;</span>
+<span class="token comment"># the program adds two new fields</span>
+<span class="token operator">&gt;</span> <span class="token builtin class-name">echo</span> <span class="token number">1</span> <span class="token number">2</span> <span class="token operator">|</span> <span class="token function">awk</span> <span class="token string">&apos;{<span class="token variable">$3</span> = 3; <span class="token variable">$4</span> = 4; print <span class="token variable">$0</span>}&apos;</span>
+<span class="token operator">&gt;</span> <span class="token number">1</span> <span class="token number">2</span> <span class="token number">3</span> <span class="token number">4</span>
+</code></pre><h3 id=global-variables>Global variables</h3><p>A few variables are set when the program is launched. Here&#x2019;s a very short list - if you need to play with these you probably want to get yourself a book on awk.</p><table><tr><th>Variable</th><th></th></tr><tr><td>ARGV</td><td>array of command line arguments</td></tr><tr><td>ARGC</td><td>number of command line arguments</td></tr><tr><td>ENVIRON</td><td>associative array with environment. Depends on system</td></tr><tr><td>FILENAME</td><td>self explanatory</td></tr></table><h3 id=user-defined-variables>User defined variables</h3><p>To create your own variable, just start assigning to them with the &#x2018;=&#x2019; operator - awk will initialize them to an emptry string (which becomes a 0 if used in numeric context). The type of variable is dynamic and can vary during its lifetime.</p><p>In the example below, awk is used on the ls command to find the total size of a folder.</p><pre class=language-bash><code class=language-bash><span class="token comment"># ls -la returns listings in the form:</span>
+<span class="token comment"># -rw-rw-r--    1 gotofritz staff   1513 Dec 15  2013 .bash_profile</span>
+<span class="token comment"># awk simply collects each filesize and adds it to a running total,</span>
+<span class="token comment"># then prints it at the end</span>
+<span class="token operator">&gt;</span> <span class="token function">ls</span> -la <span class="token operator">|</span> <span class="token function">awk</span> <span class="token string">&apos;    { total += <span class="token variable">$5</span> }
+                END { print total }&apos;</span>
+-<span class="token operator">&gt;</span> <span class="token number">158448</span>
+</code></pre><h3 id=arrays>Arrays</h3><p>Awk has associative arrays, similar to PHP&#x2019;s or Javascript. You create an array by using it, no need to initialize it.</p><pre class=language-bash><code class=language-bash><span class="token comment"># assume this file</span>
+<span class="token number">10</span> Life changes fast
+<span class="token number">20</span> Life changes <span class="token keyword">in</span> the instant
+<span class="token number">30</span> You sit down to dinner and life as you know it ends
+<span class="token number">40</span> The question of self-pity
+
+<span class="token comment"># creates my_array and inserts all lines into it</span>
+<span class="token punctuation">{</span> my_array<span class="token punctuation">[</span><span class="token variable">$1</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token variable">$2</span> <span class="token punctuation">}</span>
+<span class="token comment"># creates - note that array is sparse</span>
+my_array<span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">&quot;Life changes fast&quot;</span>
+my_array<span class="token punctuation">[</span><span class="token number">20</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">&quot;Life changes in the instant&quot;</span>
+my_array<span class="token punctuation">[</span><span class="token number">30</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">&quot;You sit down to dinner and life as you know it ends&quot;</span>
+my_array<span class="token punctuation">[</span><span class="token number">40</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">&quot;The question of self-pity&quot;</span>
+
+<span class="token comment"># string keys are also possible</span>
+<span class="token punctuation">{</span> my_array<span class="token punctuation">[</span><span class="token string">&quot;name&quot;</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">&quot;Homer&quot;</span> <span class="token punctuation">}</span>
+</code></pre><p>One thing that is different in awk is that multidimensional arrays use a single set of square brackets to wrap both indices</p><pre class=language-bash><code class=language-bash><span class="token comment"># assume this file</span>
+dad homer
+mum marge
+son bart
+
+<span class="token comment"># creates a two dimensional array</span>
+<span class="token punctuation">{</span> family<span class="token punctuation">[</span><span class="token string">&quot;simpsons&quot;</span>,<span class="token variable">$1</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token variable">$2</span> <span class="token punctuation">}</span>
+-<span class="token operator">&gt;</span> creates
+family<span class="token punctuation">[</span><span class="token string">&quot;simpsons&quot;</span>,<span class="token string">&quot;dad&quot;</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">&quot;homer&quot;</span>
+family<span class="token punctuation">[</span><span class="token string">&quot;simpsons&quot;</span>,<span class="token string">&quot;mum&quot;</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">&quot;marge&quot;</span>
+family<span class="token punctuation">[</span><span class="token string">&quot;simpsons&quot;</span>,<span class="token string">&quot;son&quot;</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">&quot;bart&quot;</span>
+</code></pre><p>Note that arrays in awk are pretty awkward. There are no built in functions to deal with them except for the for &#x2026; in loop. If you need to sort, or even just find out the length, you&#x2019;ll have to write your own functions. There are a couple in <a href=/blog/geekery/a-selection-of-akw-scripts/ >Part 2</a>. Alternatively, use gawk which has <a href=https://www.gnu.org/software/gawk/manual/gawk.html#Arrays>better array handling</a>.</p><h3 id=regular-expressions>Regular expressions</h3><p>A regular expression (regexp) is a mini programming language which is used to describe variable strings; it is embedded in most programming languages.<br>Regexps are enclosed in slashes and use a combination of literal characters and punctuation to describe strings. The operator ~ is used to match a regexp, and !~ to ensure it is not matched.</p><p>Regular expressions is a complicated topic of its own; here is just a quick introduction</p><pre class=language-bash><code class=language-bash><span class="token comment"># print all lines with &quot;gmail&quot; in the 1st field</span>
+<span class="token punctuation">{</span> <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$1</span> ~ /gmail/<span class="token punctuation">)</span> print<span class="token punctuation">}</span>
+
+<span class="token comment"># prints all lines EXCEPT those with &quot;gmail&quot;</span>
+<span class="token punctuation">{</span> <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$1</span> <span class="token operator">!</span>~ /gmail/<span class="token punctuation">)</span> print<span class="token punctuation">}</span>
+
+<span class="token comment"># ^ indicates start of string.</span>
+<span class="token comment"># this matches &quot;tom&quot; &quot;tomato&quot; but not &quot;atom&quot;</span>
+<span class="token punctuation">{</span> <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$1</span> ~ /^tom/<span class="token punctuation">)</span> print<span class="token punctuation">}</span>
+
+<span class="token comment"># $ indicates end of string</span>
+<span class="token comment"># this matches &quot;tom&quot;, &quot;atom&quot; but not &quot;tomato&quot;</span>
+<span class="token punctuation">{</span> <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$1</span> ~ /tom$/<span class="token punctuation">)</span> print<span class="token punctuation">}</span>
+
+<span class="token comment"># this matches &quot;tom&quot;, not &quot;atom&quot; and not &quot;tomato&quot;</span>
+<span class="token punctuation">{</span> <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$1</span> ~ /^tom$/<span class="token punctuation">)</span> print<span class="token punctuation">}</span>
+
+<span class="token comment"># . matches any character.</span>
+<span class="token comment"># this matches &quot;bear&quot; &quot;boar&quot; but not &quot;bar&quot;</span>
+<span class="token punctuation">{</span> <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$1</span> ~ /b<span class="token punctuation">..</span>r/<span class="token punctuation">)</span> print<span class="token punctuation">}</span>
+
+<span class="token comment"># [ABC] matches one character from the set &quot;A&quot;, &quot;B&quot;, &quot;C&quot;</span>
+<span class="token comment"># this matches &quot;boar&quot; &quot;bear&quot; but not &quot;blar&quot;</span>
+<span class="token punctuation">{</span> <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$1</span> ~ /b<span class="token punctuation">[</span>oe<span class="token punctuation">]</span>ar/<span class="token punctuation">)</span> print<span class="token punctuation">}</span>
+
+<span class="token comment"># [^ABC] matches one character which is anything except &quot;A&quot;, &quot;B&quot;, &quot;C&quot;</span>
+<span class="token comment"># this matches &quot;blar&quot; but neither &quot;boar&quot; nor &quot;bear&quot;</span>
+<span class="token punctuation">{</span> <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$1</span> ~ /b<span class="token punctuation">[</span>^oe<span class="token punctuation">]</span>ar/<span class="token punctuation">)</span> print<span class="token punctuation">}</span>
+
+<span class="token comment"># (abc) groups the expression abc as a unit.</span>
+<span class="token comment"># | is an &quot;or&quot;</span>
+<span class="token comment"># \ is used to scape special characters, i.e. treat them as normal characters</span>
+<span class="token comment"># in this case we want to treat the &apos;.&apos; as a period and not &quot;any character&quot;</span>
+<span class="token comment"># the following matches @gmail.com or @yahoo.com</span>
+<span class="token punctuation">{</span> <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$1</span> ~ /@<span class="token punctuation">(</span>gmail<span class="token punctuation">)</span><span class="token operator">|</span><span class="token punctuation">(</span>yahoo<span class="token punctuation">)</span><span class="token punctuation">\</span>.com/<span class="token punctuation">)</span> print<span class="token punctuation">}</span>
+
+<span class="token comment"># * means repeat zero or more. + is repeat once or more. ? is repeat 0 or 1</span>
+<span class="token punctuation">{</span> <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$1</span> ~ /<span class="token operator">&lt;</span><span class="token punctuation">[</span>^<span class="token operator">&gt;</span><span class="token punctuation">]</span>+<span class="token operator">&gt;</span><span class="token punctuation">[</span>^<span class="token operator">&lt;</span><span class="token punctuation">]</span>*<span class="token operator">&lt;</span> <span class="token punctuation">[</span>^<span class="token operator">&gt;</span><span class="token punctuation">]</span>+<span class="token operator">&gt;</span><span class="token punctuation">\</span>.?/<span class="token punctuation">)</span> print <span class="token punctuation">}</span>
+<span class="token comment"># the following matches &lt; followed by one or more (+) of anything except &gt;, then &gt;</span>
+<span class="token comment"># then zero or more (*) of anything except &lt;</span>
+<span class="token comment"># then , then &gt;</span>
+<span class="token comment"># then an optional .</span>
+<span class="token operator">&lt;</span>/<span class="token punctuation">]</span>*<span class="token operator">&lt;&gt;</span><span class="token operator">&lt;</span>/<span class="token punctuation">[</span>^<span class="token operator">&gt;</span></code></pre><h2 id=statements-operators-and-function>Statements, operators, and function</h2><h3 id=control-statements>Control statements</h3><p>Awk has the usual loops and conditionals familiar from C. Braces are optional for single nested statements</p><pre class=language-bash><code class=language-bash><span class="token comment"># braces are optional for single statements</span>
+<span class="token keyword">for</span> <span class="token punctuation">(</span>name <span class="token keyword">in</span> list_of_names<span class="token punctuation">)</span>
+  print name
+
+<span class="token keyword">for</span> <span class="token punctuation">(</span>capital_city <span class="token keyword">in</span> country<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  print capital_city
+<span class="token punctuation">}</span>
+
+<span class="token comment"># but needed for multiple statements</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span>NR % <span class="token number">2</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token variable">$2</span> <span class="token operator">=</span> <span class="token variable">$1</span> * <span class="token number">2</span>
+  print <span class="token variable">$0</span>
+<span class="token punctuation">}</span>
+</code></pre><h4 id=if-else>if-else</h4><p>Awk doesn&#x2019;t have booleans. Instead it treats the number 0 or the empty string &#x201C;&#x201D; as false, and any other value (including the string &#x201C;0&#x201D;) as true. The comparison operators are the familiar ones, with double equal sign for equality, plus the tilde ~ and !~ for regular expression matching, and &#x201C;in&#x201D; for array existence</p><pre class=language-bash><code class=language-bash><span class="token punctuation">{</span> <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$1</span> <span class="token operator">==</span> <span class="token string">&quot;full&quot;</span><span class="token punctuation">)</span> <span class="token punctuation">..</span>. <span class="token punctuation">}</span>
+<span class="token punctuation">{</span> <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$2</span> <span class="token operator">&lt;</span> <span class="token number">0.5</span><span class="token punctuation">)</span> <span class="token punctuation">..</span>. <span class="token punctuation">}</span>
+<span class="token punctuation">{</span> <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$0</span> ~ /Republican/<span class="token punctuation">)</span> print <span class="token variable">$0</span> <span class="token punctuation">}</span> <span class="token punctuation">..</span>. <span class="token comment"># matches regexp</span>
+<span class="token punctuation">{</span> <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$1</span> <span class="token operator">!</span>~ /Completed/<span class="token punctuation">)</span> print <span class="token variable">$0</span> <span class="token punctuation">}</span> <span class="token punctuation">..</span>. <span class="token comment"># rejects regexp</span>
+<span class="token punctuation">{</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>capital_city <span class="token keyword">in</span> country<span class="token punctuation">)</span> print country<span class="token punctuation">[</span><span class="token string">&quot;capital_city&quot;</span><span class="token punctuation">]</span> <span class="token punctuation">}</span>
+</code></pre><h4 id=loops>loops</h4><p>Awk has both for and while loops (including do-while). Additionally, there is the for-in loop for sparse arrays</p><pre class=language-bash><code class=language-bash><span class="token comment"># assume file</span>
+<span class="token number">1</span> <span class="token number">10</span> <span class="token number">100</span>
+<span class="token number">2</span> <span class="token number">20</span> <span class="token number">200</span>
+
+<span class="token comment"># both these programs will print each line with fields back-to-front</span>
+<span class="token comment"># while loop version...</span>
+<span class="token punctuation">{</span> i <span class="token operator">=</span> NF
+  line <span class="token operator">=</span> <span class="token string">&quot;&quot;</span>
+  <span class="token keyword">while</span> <span class="token punctuation">(</span>i<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    line <span class="token operator">=</span>  line <span class="token string">&quot; &quot;</span> <span class="token variable">$i</span>
+    i--
+  <span class="token punctuation">}</span>
+  print line
+<span class="token punctuation">}</span>
+<span class="token comment"># for loop version</span>
+<span class="token punctuation">{</span> line <span class="token operator">=</span> <span class="token string">&quot;&quot;</span>
+  <span class="token keyword">for</span> <span class="token punctuation">(</span>i<span class="token operator">=</span>NF<span class="token punctuation">;</span> i<span class="token operator">&gt;</span><span class="token number">0</span><span class="token punctuation">;</span> i--<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    line <span class="token operator">=</span>  line <span class="token string">&quot; &quot;</span> <span class="token variable">$i</span>
+  <span class="token punctuation">}</span>
+  print line
+<span class="token punctuation">}</span>
+-<span class="token operator">&gt;</span> <span class="token number">100</span> <span class="token number">10</span> <span class="token number">1</span>
+  <span class="token number">200</span> <span class="token number">20</span> <span class="token number">2</span>
+
+<span class="token comment"># puts each line of input into the array</span>
+<span class="token punctuation">{</span> lines<span class="token punctuation">[</span><span class="token variable">$NR</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token variable">$0</span> <span class="token punctuation">}</span>
+<span class="token comment"># at end prints all the lines</span>
+END <span class="token punctuation">{</span>
+  <span class="token keyword">for</span> <span class="token punctuation">(</span>line <span class="token keyword">in</span> lines<span class="token punctuation">)</span>
+    print line
+<span class="token punctuation">}</span>
+</code></pre><p><code>break</code> and <code>continue</code> statements are available to exit a loop prematurely or skipping an iteration respectively.</p><h4 id=next>next</h4><p><code>next</code> is used to stop precessing a record and moving on to the next</p><pre class=language-bash><code class=language-bash><span class="token punctuation">{</span> <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$5</span> <span class="token operator">==</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">)</span> next <span class="token punctuation">}</span>
+    <span class="token punctuation">{</span> print <span class="token variable">$5</span> <span class="token variable">$4</span> <span class="token punctuation">}</span>
+</code></pre><h3 id=awk-numeric-operators>Awk numeric operators</h3><p>The usual maths operators can be used: +, -, /, * , ++, &#x2013; plus % for modulus, ^ for exponentiation. Unary + converts to a number</p><pre class=language-bash><code class=language-bash><span class="token builtin class-name">echo</span> <span class="token string">&quot;1
+&gt; 2
+&gt; 3
+&gt; 4&quot;</span> <span class="token operator">|</span> <span class="token function">awk</span> <span class="token string">&apos;{print <span class="token variable">$1</span> ^ 2}&apos;</span>
+<span class="token number">1</span>
+<span class="token number">4</span>
+<span class="token number">9</span>
+<span class="token number">16</span>
+</code></pre><h3 id=string-concatenation>String concatenation</h3><p>Concatenating string in awk is slightly weird. There is no string concatenation operator; just put the strings next to each other. Because of that it is recommended to use parenthesis except for trivial cases. Alternatively, <code>print</code> can take multiple comma separated arguments - and they will be printed with a space separating them</p><pre class=language-bash><code class=language-bash><span class="token comment"># assume this file</span>
+<span class="token number">1</span>
+<span class="token number">2</span>
+<span class="token number">3</span>
+<span class="token number">4</span>
+
+<span class="token comment"># the strings ($1..) and &quot;a&quot; are concatenated</span>
+<span class="token comment"># (no space between them) and</span>
+<span class="token comment"># the resulting string is passed to print</span>
+<span class="token punctuation">{</span>print <span class="token punctuation">(</span><span class="token variable">$1</span>+2<span class="token punctuation">)</span> <span class="token string">&quot;a&quot;</span><span class="token punctuation">}</span>
+3a
+4a
+5a
+6a
+
+<span class="token comment"># two separate strings are passed to print:</span>
+<span class="token comment"># a space is put between them</span>
+<span class="token punctuation">{</span>print <span class="token punctuation">(</span><span class="token variable">$1</span>+2<span class="token punctuation">)</span>, <span class="token string">&quot;a&quot;</span><span class="token punctuation">}</span>
+<span class="token number">3</span> a
+<span class="token number">4</span> a
+<span class="token number">5</span> a
+<span class="token number">6</span> a
+
+<span class="token comment"># string concatenation works for variables too</span>
+<span class="token punctuation">{</span> something <span class="token operator">=</span> <span class="token variable">$1</span> <span class="token string">&quot;--&quot;</span>
+  print something <span class="token punctuation">}</span>
+<span class="token number">1</span>--
+<span class="token number">2</span>--
+<span class="token number">3</span>--
+<span class="token number">4</span>--
+</code></pre><h3 id=built-in-functions>Built in functions</h3><p>There are a number of built in functions: numeric ones like cosine, square root, random; string functions like print or string length; time functions and bitwise functions. You can easily find out what they are by looking at the output of <code>man awk</code>.</p><p>Worth nothing that besides <code>print</code> awk also offers <code>printf</code>, i.e. &#x201C;print formatted&#x201D;. Printf is common to many Unix tools and languages. You give a string with some placeholders and rules, and then you pass variables to &#x201C;plug in&#x201D; those placeholders. The important thing is the rules, which control things like right alignment, decimal precision, zero padding for numbers, etc. A statement looks like this:</p><pre class=language-bash><code class=language-bash><span class="token punctuation">{</span> <span class="token builtin class-name">printf</span> <span class="token string">&quot;%-10s %04.3f%% <span class="token entity" title=\n>\n</span>&quot;</span>, <span class="token variable">$1</span>, <span class="token variable">$2</span> <span class="token punctuation">}</span>
+<span class="token comment"># placeholders start with %</span>
+<span class="token comment"># %-10s is a string (s), and is left aligned (-)</span>
+<span class="token comment"># within a field 10 spaces wide (10)</span>
+<span class="token comment"># %07.3f is a decimal number or float (f), the toal</span>
+<span class="token comment"># length has to be at least 7 characters (7) and is</span>
+<span class="token comment"># padded with zeroes if too small (0) and has</span>
+<span class="token comment"># 3 decimals (3) and minimum 3 in the integer part</span>
+<span class="token comment"># (7 - 3 decimals - the point)</span>
+<span class="token comment"># %% if you want to print an actual %, you need to type it twice %%</span>
+<span class="token comment"># \n you need to supply the new line manually</span>
+</code></pre><p><a href=http://www.math.utah.edu/docs/info/gawk_7.html#SEC61>More information on printf</a>.</p><h3 id=user-defined-functions>User defined functions</h3><p>You can define functions anywhere in your code, outside actions. They are pretty similar to Javascript</p><pre class=language-bash><code class=language-bash><span class="token comment"># define funtion outside rules</span>
+<span class="token comment"># could be at the bottom of file</span>
+<span class="token keyword">function</span> my_func<span class="token punctuation">(</span>field_content<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  print <span class="token string">&quot;FIELD: &quot;</span> field_content
+<span class="token punctuation">}</span>
+
+<span class="token comment"># now use in rules</span>
+<span class="token punctuation">{</span>my_func<span class="token punctuation">(</span><span class="token variable">$1</span><span class="token punctuation">)</span><span class="token punctuation">}</span>
+</code></pre><h2 id=patterns>Patterns</h2><p>Previously I described an awk program as a series of actions, with the special case of BEGIN and END. That&#x2019;s not entirely correct. An awk program consists of a sequence of actions and optional <em>patterns</em>; BEGIN and END are two special patterns. Incidentally, there is also a BEGINFILE and ENDFILE, for when processing more than one file at the time.</p><p>BEGIN and END are special because they identify actions which are not executed for every line of input, but before or after the whole program is run. The other patterns are used on every line to determine whether the action should be run for that particular line or not. Patterns are espressions that return false (i.e., 0 or &#x201C;&#x201D;) or true (anything else). When the pattern returns true, the rules is executed.</p><h3 id=regular-expression-patterns>Regular expression patterns</h3><p>Regular expressions can be used as pattern; they match the entire line. An exclamation mark reverses the match. Boolean operators can be used to combine patterns</p><pre class=language-bash><code class=language-bash><span class="token comment"># print lines with an email address</span>
+<span class="token comment"># (very lazy match</span>
+<span class="token comment"># will only work if all email addresses are well formed)</span>
+/@/ <span class="token punctuation">{</span> print <span class="token variable">$3</span><span class="token punctuation">}</span>
+
+<span class="token comment"># prints all lines except those with a gmail address</span>
+<span class="token operator">!</span> /@gmail<span class="token punctuation">\</span>./ <span class="token punctuation">{</span> print <span class="token variable">$0</span> <span class="token punctuation">}</span>
+
+<span class="token comment"># prints lines with an @ and the sequence 0160</span>
+/@/ <span class="token operator">&amp;&amp;</span> /0160/ <span class="token punctuation">{</span> print <span class="token punctuation">}</span>
+</code></pre><p>The regular expressions above are a shortcut for <code>$0 ~ /pattern/</code>, i.e. &#x201C;apply the regexp to whole line&#x201D;. Similar rules can be made for individual fields&#x2026;</p><pre class=language-bash><code class=language-bash><span class="token comment"># matches only the regx on one field</span>
+<span class="token variable">$1</span> ~ /Anthony/ <span class="token punctuation">{</span> print <span class="token punctuation">}</span>
+</code></pre><p>..and all expressions seen so far</p><pre class=language-bash><code class=language-bash><span class="token comment"># print even lines</span>
+NR % <span class="token number">2</span> <span class="token operator">==</span> <span class="token number">0</span> <span class="token punctuation">{</span> print <span class="token punctuation">}</span>
+
+<span class="token comment"># print only if length of 1st field is greater than 3</span>
+<span class="token comment"># length is a string function mentioned above</span>
+length<span class="token punctuation">(</span><span class="token variable">$1</span><span class="token punctuation">)</span> <span class="token operator">&gt;</span> <span class="token number">3</span> <span class="token punctuation">{</span> print <span class="token punctuation">}</span>
+</code></pre><p>The reason we have been able to run program without patterns is because there is a special pattern, the empty pattern, which matches every line. In fact we could have a program which is just a pattern; the default action <code>{print}</code> would be executed.</p><pre class=language-bash><code class=language-bash><span class="token comment"># prints whole line, default action</span>
+<span class="token variable">$1</span> <span class="token operator">==</span> <span class="token string">&quot;complete&quot;</span>
+</code></pre><h2 id=splitting-records-and-fields-differently-from-default>Splitting records and fields differently from default</h2><p>By default awk treats each line as a record. In reality what it does is to split the input by a record separator, stored in the variable RS, which happens to be the new line character. You can change that in an awk program.</p><pre class=language-bash><code class=language-bash><span class="token comment"># separate records by semicolon</span>
+<span class="token operator">&gt;</span> <span class="token builtin class-name">echo</span> <span class="token string">&quot;1 2 3;4 5 6;7 8 9&quot;</span> <span class="token operator">|</span> <span class="token function">awk</span> <span class="token string">&apos;BEGIN {RS = &quot;;&quot; }
+&gt;                                 {print}&apos;</span>
+<span class="token number">1</span> <span class="token number">2</span> <span class="token number">3</span>
+<span class="token number">4</span> <span class="token number">5</span> <span class="token number">6</span>
+<span class="token number">7</span> <span class="token number">8</span> <span class="token number">9</span>
+</code></pre><p>Something similar is possible with the field separator, which is stored in the variable FS. By default it is equal to the regexp <code>[ \t\n]+</code>, i.e. any number of consectuve spaces of any type. Note that in reality awk cheats - leaving FS default doesn&#x2019;t just mean setting it to <code>[ \t\n]+</code>, but also trimming $0 of leading and trailing empty space before processing it.</p><pre class=language-bash><code class=language-bash><span class="token comment"># separate fields by comma</span>
+<span class="token operator">&gt;</span> <span class="token builtin class-name">echo</span> <span class="token string">&quot;1,2,3
+4,5,6
+7,8,9&quot;</span> <span class="token operator">|</span> <span class="token function">awk</span> <span class="token string">&apos;BEGIN {FS = &quot;,&quot; }
+&gt;             {print}&apos;</span>
+<span class="token number">1,2</span>,3
+<span class="token number">4,5</span>,6
+<span class="token number">7,8</span>,9
+</code></pre><p>You can combine the two together if, for example, your data has one field per line and records are separated by multiple lines - an empty RS means &#x201C;any number of consecutive \n &#x201C;&#x201D;</p><pre class=language-bash><code class=language-bash><span class="token comment"># assume this data</span>
+homer simpson
+dad
+
+marge simpson
+mum
+
+<span class="token comment"># separate records by any number of newlines,</span>
+<span class="token comment"># and have one field per line</span>
+BEGIN <span class="token punctuation">{</span>RS<span class="token operator">=</span><span class="token string">&quot;&quot;</span><span class="token punctuation">;</span> <span class="token assign-left variable">FS</span><span class="token operator">=</span><span class="token string">&quot;<span class="token entity" title=\n>\n</span>&quot;</span><span class="token punctuation">}</span>
+<span class="token punctuation">{</span> print <span class="token variable">$1</span> <span class="token string">&quot; (&quot;</span> <span class="token variable">$2</span> <span class="token string">&quot;)&quot;</span> <span class="token punctuation">}</span>
+
+-<span class="token operator">&gt;</span> homer simpson <span class="token punctuation">(</span>dad<span class="token punctuation">)</span>
+  marge simpson <span class="token punctuation">(</span>mum<span class="token punctuation">)</span>
+</code></pre><h2 id=passing-option-to-awk>Passing option to awk</h2><p>A field separator (but not a record separator) can be also passed to an awk program in two ways. First of all, awk has a special option for it, -F (note that there is no space between it and the separator). And awk allow passing of variables with the -v syntax, so you could just pass FS that way.</p><pre class=language-bash><code class=language-bash><span class="token comment"># change separator from within program</span>
+BEGIN <span class="token punctuation">{</span>FS <span class="token operator">=</span> <span class="token string">&quot;,&quot;</span> <span class="token punctuation">}</span>
+
+<span class="token comment"># pass separator with special option -F</span>
+<span class="token comment"># note that you don&apos;t need quotes</span>
+<span class="token operator">&gt;</span> <span class="token builtin class-name">echo</span> <span class="token string">&quot;1,2,3
+&gt; 4,5,6&quot;</span> <span class="token operator">|</span> <span class="token function">awk</span> -F, <span class="token string">&apos;{print}&apos;</span>
+<span class="token number">1,2</span>,3
+<span class="token number">4,5</span>,6
+
+<span class="token comment"># pass separator as external var with -v</span>
+<span class="token operator">&gt;</span> <span class="token builtin class-name">echo</span> <span class="token string">&quot;1,2,3
+&gt; 4,5,6&quot;</span> <span class="token operator">|</span> <span class="token function">awk</span> -v <span class="token assign-left variable">FS</span><span class="token operator">=</span><span class="token string">&quot;,&quot;</span> <span class="token string">&apos;{print}&apos;</span>
+<span class="token number">1,2</span>,3
+<span class="token number">4,5</span>,6i
+
+<span class="token comment"># in fact you can pass any variable of your choice with -v</span>
+<span class="token operator">&gt;</span> <span class="token builtin class-name">echo</span> <span class="token string">&quot;&quot;</span> <span class="token operator">|</span> <span class="token function">awk</span> -v <span class="token assign-left variable">WHAT</span><span class="token operator">=</span><span class="token string">&quot;grow up&quot;</span> <span class="token string">&apos;{print &quot;All children, except one, &quot; WHAT}&apos;</span>
+All children, except one, grow up
+</code></pre><h2 id=reading-csv-files-in-awk>Reading CSV files in awk</h2><p>The naive approach would be to simply set FS=&#x201D;,&#x201D; - but that doesn&#x2019;t cover the fact that some fields are surrounded by quotation marks and others aren&#x2019;t, and sometimes you have newlines and / or commas inside a field. <a href=http://www.linuxquestions.org/questions/programming-9/awk-with-csv-files-881103/ >Here are some examples scripts</a> people have put together to solve the issues. They are also good examples of fairly complex awk scripts.</p><p>Personally I think that&#x2019;s taking things too far - if you have to force awk to create arrays to store manipulated record fragments you may as well use a fully fledged scripting language.</p><p>Another approach is to use gawk, and <a href=https://www.gnu.org/software/gawk/manual/gawk.html#Splitting-By-Content>its FPAT variable</a></p><h2 id=learning-more-about-awk>Learning more about awk</h2><p>With that all the main awk topics were touched on. If you want to go deeper I recomend <a href=http://www.staff.science.uu.nl/~oostr102/docs/nawk/nawk_toc.html>The AWK Manual</a>, or <a href=http://shop.oreilly.com/product/9780596000707.do>one of the O&#x2019;Reilly books</a></p></section></article></div><footer><div class=content><nav class=flat-nav><div itemscope itemtype=http://schema.org/Person class="vcard group-of-links"><a href=https://github.com/gotofritz>github</a> <a href=https://twitter.com/gotofritz>twitter</a> <a href=https://www.linkedin.com/in/gotofritz>linkedin</a> <a href=/feed.xml>rss</a></div></nav></div><div class=content>All content by Fritz Stelluto. I have been a developer and technical manager in the digital media industry since the 90s. I relocated a few years ago from London to Berlin.</div><div class=content>All content under <a href=http://creativecommons.org/licenses/by-nc-sa/2.0/de/ >creative commons</a> and code under <a href=http://mit-license.org/ >MIT license</a>.</div></footer></main></div></body></html>
