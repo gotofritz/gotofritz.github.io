@@ -26,10 +26,10 @@
 <url> <loc>https://gotofritz.net/blog/os-x-extended-attibutes/</loc> </url>
 <url> <loc>https://gotofritz.net/blog/install-specific-version-homebrew/</loc> </url>
 <url> <loc>https://gotofritz.net/blog/storing-bash-profile-and-so-on-on-github/</loc> </url>
-<url> <loc>https://gotofritz.net/blog/jstestdriver-boilerplate/</loc> </url>
 <url> <loc>https://gotofritz.net/blog/directory-listings-in-apache-2-4/</loc> </url>
-<url> <loc>https://gotofritz.net/blog/os-x-dns-lookups-too-slow-for-local-hosts/</loc> </url>
+<url> <loc>https://gotofritz.net/blog/jstestdriver-boilerplate/</loc> </url>
 <url> <loc>https://gotofritz.net/blog/why-pipe-echo-doesnt-work/</loc> </url>
+<url> <loc>https://gotofritz.net/blog/os-x-dns-lookups-too-slow-for-local-hosts/</loc> </url>
 <url> <loc>https://gotofritz.net/blog/back-to-the-classics-awk/</loc> </url>
 <url> <loc>https://gotofritz.net/blog/a-selection-of-akw-scripts/</loc> </url>
 <url> <loc>https://gotofritz.net/blog/os-x-software-update-from-command-line/</loc> </url>
@@ -41,11 +41,13 @@
 <url> <loc>https://gotofritz.net/blog/css-selectors/</loc> </url>
 <url> <loc>https://gotofritz.net/blog/xss-cross-site-scripting/</loc> </url>
 <url> <loc>https://gotofritz.net/blog/simplest-react-loader/</loc> </url>
-<url> <loc>https://gotofritz.net/blog/countdown-clock-state-machine-requestanimationframe-vanilla-js/</loc> </url>
 <url> <loc>https://gotofritz.net/blog/countdown-clock-requestanimationframe-react-hooks/</loc> </url>
-<url> <loc>https://gotofritz.net/blog/setting-css-values-dynamically-in-svelte/</loc> </url>
+<url> <loc>https://gotofritz.net/blog/countdown-clock-state-machine-requestanimationframe-vanilla-js/</loc> </url>
 <url> <loc>https://gotofritz.net/blog/autoformatting-svelte-files-in-vscode/</loc> </url>
+<url> <loc>https://gotofritz.net/blog/setting-css-values-dynamically-in-svelte/</loc> </url>
 <url> <loc>https://gotofritz.net/blog/when-mysterious-tabs-case-conflicts-in-git-rebases/</loc> </url>
 <url> <loc>https://gotofritz.net/blog/setting-up-a-logitech-vertical-mx-mouse-osx/</loc> </url>
+<url> <loc>https://gotofritz.net/blog/accessing-the-wikipedia-api/</loc> </url>
+<url> <loc>https://gotofritz.net/blog/using-say-command-to-make-os-x-talk-and-fixing-it/</loc> </url>
 <url> <loc>https://gotofritz.net/blog/</loc> </url>
 </urlset>
