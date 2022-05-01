@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <link href="../favicon.ico" rel="shortcut icon">
+  <link rel="icon" href="../favicon.gif" type="image/gif" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-K0CMFHZ2N0"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    dataLayer.push('js', new Date());
+    dataLayer.push('config', 'G-K0CMFHZ2N0');
+  </script>
+  <meta http-equiv="content-security-policy" content=""><title>Using the &#39;Say&#39; command to make OS X talk, and fixing it when it gets stuck || gotofritz</title><meta name="description" content="Fritz Stelluto has been a developer and engineering manager in the digital industry since the 90s. He lives in Berlin." data-svelte="svelte-ugxg7c">
+	<link rel="stylesheet" href="/_app/assets/pages/__layout.svelte-e730745d.css">
+	<link rel="stylesheet" href="/_app/assets/_post-6b79a17e.css">
+	<link rel="modulepreload" href="/_app/start-ac6701ee.js">
+	<link rel="modulepreload" href="/_app/chunks/index-889cf753.js">
+	<link rel="modulepreload" href="/_app/pages/__layout.svelte-c3bb9f47.js">
+	<link rel="modulepreload" href="/_app/pages/blog/using-say-command-to-make-os-x-talk-and-fixing-it.md-d5d43cf1.js">
+	<link rel="modulepreload" href="/_app/chunks/_post-5ef2f492.js">
+	<link rel="modulepreload" href="/_app/chunks/Header-15607706.js">
+</head>
+
+<body>
+  <div class="gradient-container">
+    
+
+
+<main class="panel-container svelte-y2j27e"><div class="content svelte-y2j27e">
+
+<nav class="flat-nav"><div itemscope itemtype="http://schema.org/Person" class="vcard group-of-links"><a href="setting-up-a-logitech-vertical-mx-mouse-osx">previous post</a>
+      <a href="/">home</a>
+      <a href="setting-up-thunderbird-for-gmail-on-os-x">next post</a>
+    <form class="search" action="https://google.com/search" method="get"><input type="text" id="search-str" name="q" results="0" placeholder="search" aria-label="search">
+      <input type="hidden" name="q" value="site:gotofritz.net"></form></div>
+</nav>
+<article class="content-post svelte-1r1v8if"><section class="intro svelte-1r1v8if"><div class="post-meta"><time datetime="2020-06-16T00:00:00.000Z">2020-06-16</time>
+      //
+      <div class="tags"><a href="/tags/os x">os x</a></div></div>
+    <h1 class="svelte-1r1v8if">Using the &#39;Say&#39; command to make OS X talk, and fixing it when it gets stuck</h1>
+    <h2 class="svelte-1r1v8if"><!-- HTML_TAG_START -->One can easily make OS X read out text from the CLI with the <a href="https://ss64.com/osx/say.html">say</a> command. But what to do when it gets stuck and stops working?<!-- HTML_TAG_END --></h2></section>
+  <section class="post-content"><h2>What OS X’s say command can do</h2>
+<p><code>Say</code> can be quite useful to mess about with synthesized voices; I can’t do any better than refer you to the <a href="https://ss64.com/osx/say.html" rel="nofollow">concise and informative command reference on the wonderful SS64.com</a>, but in short you can have it read text from other commands, from text file, and you can even save the result to a sound file or send it to the local network.</p>
+<h2>Killing OS X’s Say when it gets stuck</h2>
+<p>Sometimes <code>say</code> does get stuck though and stops making sounds (without actually throwing any errors). In those cases, you can simply kill the process with</p>
+<pre class="language-bash"><!-- HTML_TAG_START --><code class="language-bash"><span class="token function">pkill</span> speechsynthesisd say</code><!-- HTML_TAG_END --></pre>
+<h2>And now for something utterly pointless…</h2>
+<p>Did you ever want to have random Wikipedia pages read to you by a synthesised voice? Well, now with this bash command you can! I have picked Luca and it.wikipedia because for some reason the Italian synthetic voice sounds much more realistic then the English ones. To change language just change the wikipedia subdomain and the voice…</p>
+<pre class="language-bash"><!-- HTML_TAG_START --><code class="language-bash"><span class="token keyword">while</span> <span class="token builtin class-name">:</span><span class="token punctuation">;</span> <span class="token keyword">do</span> <span class="token function">curl</span> -L <span class="token punctuation"></span>
+  <span class="token string">'http://it.wikipedia.org/w/api.php?action=query&amp;format=json&amp;prop=extracts&amp;generator=random&amp;exlimit=max&amp;exintro=1&amp;explaintext=1&amp;clshow=!hidden&amp;cllimit=max&amp;grnnamespace=0&amp;grnfilterredir=nonredirects&amp;grnlimit=1'</span> <span class="token operator">|</span> <span class="token punctuation"></span>
+  jq <span class="token string">".query.pages | values[].extract"</span> <span class="token operator">|</span> <span class="token punctuation"></span>
+  say -v <span class="token string">"Luca"</span><span class="token punctuation">;</span> <span class="token function">sleep</span> <span class="token number">1</span><span class="token punctuation">;</span> <span class="token punctuation"></span>
+  <span class="token keyword">done</span></code><!-- HTML_TAG_END --></pre>
+<h2>jq is a very useful CLI tool for transforming and searching through JSON</h2>
+<p>Oh yes, for the command above to work you need to install jq with <code>brew install jq</code>… In case you are not familiar with it, jq is a great must-have tool for developers, it’s worth installing it and getting familiar with it. For example, you can easily find out the version number inside a project’s package.json with</p>
+<pre class="language-bash"><!-- HTML_TAG_START --><code class="language-bash"><span class="token function">cat</span> package.json <span class="token operator">|</span> jq <span class="token string">".version"</span></code><!-- HTML_TAG_END --></pre>
+<p>And that’s that for today, all the best.</p></section>
+</article></div>
+  <footer class="svelte-tqiyh5"><div class="content svelte-tqiyh5"><nav class="flat-nav svelte-tqiyh5"><div itemscope itemtype="http://schema.org/Person" class="vcard group-of-links svelte-tqiyh5"><a href="https://github.com/gotofritz" class="svelte-tqiyh5">github</a><a href="https://twitter.com/gotofritz" class="svelte-tqiyh5">twitter</a><a href="https://www.linkedin.com/in/gotofritz" class="svelte-tqiyh5">linkedin</a><a href="/feed.xml" class="svelte-tqiyh5">rss</a></div></nav></div>
+  
+  <div class="content svelte-tqiyh5">All content under <a href="http://creativecommons.org/licenses/by-nc-sa/2.0/de/" class="svelte-tqiyh5">creative commons</a>
+    and code under <a href="http://mit-license.org/" class="svelte-tqiyh5">MIT license</a>.
+  </div>
+</footer>
+</main>
+
+
+		<script type="module" data-hydrate="vdv5">
+		import { start } from "/_app/start-ac6701ee.js";
+		start({
+			target: document.querySelector('[data-hydrate="vdv5"]').parentNode,
+			paths: {"base":"","assets":""},
+			session: {},
+			route: true,
+			spa: false,
+			trailing_slash: "never",
+			hydrate: {
+				status: 200,
+				error: null,
+				nodes: [
+					import("/_app/pages/__layout.svelte-c3bb9f47.js"),
+						import("/_app/pages/blog/using-say-command-to-make-os-x-talk-and-fixing-it.md-d5d43cf1.js")
+				],
+				params: {},
+				routeId: "blog/using-say-command-to-make-os-x-talk-and-fixing-it"
+			}
+		});
+	</script>
+  </div>
+</body>
+
+</html>

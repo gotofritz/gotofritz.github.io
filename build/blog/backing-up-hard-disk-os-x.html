@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <link href="../favicon.ico" rel="shortcut icon">
+  <link rel="icon" href="../favicon.gif" type="image/gif" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-K0CMFHZ2N0"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    dataLayer.push('js', new Date());
+    dataLayer.push('config', 'G-K0CMFHZ2N0');
+  </script>
+  <meta http-equiv="content-security-policy" content=""><title>Backing up a hard disk to another in OS X || gotofritz</title><meta name="description" content="Fritz Stelluto has been a developer and engineering manager in the digital industry since the 90s. He lives in Berlin." data-svelte="svelte-ugxg7c">
+	<link rel="stylesheet" href="/_app/assets/pages/__layout.svelte-e730745d.css">
+	<link rel="stylesheet" href="/_app/assets/_post-6b79a17e.css">
+	<link rel="modulepreload" href="/_app/start-ac6701ee.js">
+	<link rel="modulepreload" href="/_app/chunks/index-889cf753.js">
+	<link rel="modulepreload" href="/_app/pages/__layout.svelte-c3bb9f47.js">
+	<link rel="modulepreload" href="/_app/pages/blog/backing-up-hard-disk-os-x.md-54d376e1.js">
+	<link rel="modulepreload" href="/_app/chunks/_post-5ef2f492.js">
+	<link rel="modulepreload" href="/_app/chunks/Header-15607706.js">
+</head>
+
+<body>
+  <div class="gradient-container">
+    
+
+
+<main class="panel-container svelte-y2j27e"><div class="content svelte-y2j27e">
+
+<nav class="flat-nav"><div itemscope itemtype="http://schema.org/Person" class="vcard group-of-links"><a href="stop-chrome-navigating-back-when-swiping-horizontally">previous post</a>
+      <a href="/">home</a>
+      <a href="osx-apps">next post</a>
+    <form class="search" action="https://google.com/search" method="get"><input type="text" id="search-str" name="q" results="0" placeholder="search" aria-label="search">
+      <input type="hidden" name="q" value="site:gotofritz.net"></form></div>
+</nav>
+<article class="content-post svelte-1r1v8if"><section class="intro svelte-1r1v8if"><div class="post-meta"><time datetime="2016-01-16 22:44">2016-01-16</time>
+      //
+      <div class="tags"><a href="/tags/backup">backup</a>, <a href="/tags/os x">os x</a></div></div>
+    <h1 class="svelte-1r1v8if">Backing up a hard disk to another in OS X</h1>
+    <h2 class="svelte-1r1v8if"><!-- HTML_TAG_START --><a href="https://en.wikipedia.org/wiki/Time_Machine_(OS_X)">Time Machine</a> does its own backup magic, but sometimes you just simply want two identical copies of the same hard disk. For that <a href="https://en.wikipedia.org/wiki/Rsync">rsync</a> is the way to go<!-- HTML_TAG_END --></h2></section>
+  <section class="post-content"><p>rsync is a utility you run by typing commands in Terminal. It was designed exactly for doing that one job: keeping folders or devices in sync (in Unix everything is a file or a folder, even an external hard disk). rsyinc looks at one source folder and all its subfolders, finds all the files in there, then looks at the destination folder and copies over only what needs to be copied, making it very fast. It’s got a ton of options and can become very involved. But all you need is to find that one command that works for you and use it again and again as needed.</p>
+<h2>Syncing two hard disks with rsync</h2>
+<p>Let’s say you have two hard disks, “ORIGINAL” and “BACKUP DISK”. For the first transfer, you may as well copy manually all the files from ORIGINAL to BACKUP DISK by dragging them, rsync doesn’t do it any better or faster. From then on, whenever you want to backup the disk (every day, every week, whatever) you can start with this command:</p>
+<pre class="language-bash"><!-- HTML_TAG_START --><code class="language-bash"><span class="token operator">></span> <span class="token function">rsync</span> -aS --delete --progress <span class="token punctuation"></span>
+    /Volumes/ORIGINAL/ /Volumes/BACKUP<span class="token punctuation"></span> DISK/</code><!-- HTML_TAG_END --></pre>
+<p>The command breaks down as follows:</p>
+<dl class="code-breakdown"><dt>rsync</dt><dd>calls the utility</dd><dt>-a</dt><dd>turns on archive mode, which basically ensures all subfolders, permissions and files parameters are copied </dd><dt>S</dt><dd>if there wasn&#39;t already a dash for -a, this would be -S. This compacts sparse files for efficiency </dd><dt>--delete</dt><dd>this ensures that any files in the destination that were not there in the source will be deleted</dd><dt>/Volumes/ORIGINAL</dt><dd>the original</dd><dt>/Volumes/BACKUP\ DISK</dt><dd>the destination. Note that I have typed a backslash before the space after BACKUP, BACKUP\ DISK - that tells Terminal that the word isn&#39;t finish yet, and the space is part of the word</dd></dl>
+<h3>Excluding files from rsync</h3>
+<p>If you want to skip some files or folders, you can add their paths to the command:</p>
+<pre class="language-bash"><!-- HTML_TAG_START --><code class="language-bash"><span class="token operator">></span> <span class="token function">rsync</span> -aS --delete --progress --exclude *.Trash* <span class="token punctuation"></span>
+    --exclude /that_file.txt --exclude /other_file.jpg <span class="token punctuation"></span>
+    /Volumes/ORIGINAL/ /Volumes/BACKUP<span class="token punctuation"></span> DISK/</code><!-- HTML_TAG_END --></pre>
+<p>Note that you have one <code>--exclude</code> options for every patter you want to exclude. Also note the <code>*</code> wildcards, which basically means “anything here”</p>
+<h3>Creating a list of files to exclude from rsync</h3>
+<p>If you have a lot of excludes it makes sense to put the list in a file, and then tell rsync to use that. It makes sense even if you only have a few files, because then you can easily add and remove things from there without having to change the command - as you start playing with rsync you soon find out there are a few system folders you don’t want to backup, like Spotlight indices and so on.</p>
+<pre class="language-bash"><!-- HTML_TAG_START --><code class="language-bash"><span class="token operator">></span> <span class="token function">rsync</span> -aS --delete --progress <span class="token punctuation"></span>
+    --exclude-from ~/.rsync_exclude_list <span class="token punctuation"></span>
+    /Volumes/ORIGINAL/ /Volumes/BACKUP<span class="token punctuation"></span> DISK/</code><!-- HTML_TAG_END --></pre>
+<p>and .rsync_exclude_list can have all the patterns in there, one per line. The file can be named whatever you want - I have put it in the home folder (that’s what ~/ at the beginning means) and used a name that starts with a dot because it works well with my <a href="/blog/storing-bash-profile-and-so-on-on-github/">dotfiles</a>.</p>
+<pre class="language-bash"><!-- HTML_TAG_START --><code class="language-bash"><span class="token comment"># list of files not to be included when running alias backupext</span>
+*.Trash*
+.TemporaryItems*
+.DocumentRevisions-*
+.Spotlight-*</code><!-- HTML_TAG_END --></pre>
+<h2>Making things easier with an alias</h2>
+<p>Instead of trying to remember that command every time you need to back up, you can create an alias, i.e. a shortcut to the command. Depending on your setup, you can just add it to your <code>.bash_profile</code> file. If you use <a href="/blog/storing-bash-profile-and-so-on-on-github/">dotfiles</a>, just add it to the .alias file and then run bootstrap.sh again.</p>
+<pre class="language-bash"><!-- HTML_TAG_START --><code class="language-bash"><span class="token comment"># this will create it if it doesn't exist. Nano is a</span>
+<span class="token comment"># text editor that runs inside</span>
+<span class="token comment"># Terminal. It's simple and it shows the shortcuts at</span>
+<span class="token comment"># the bottom (^ = control key)</span>
+<span class="token function">nano</span> ~/.bash_profile
+
+<span class="token comment"># or if you use vscode...</span>
+code ~/.bash_profile
+
+<span class="token comment"># then type this anywhere in the file, in a sincle line</span>
+<span class="token builtin class-name">alias</span> <span class="token assign-left variable">backupext</span><span class="token operator">=</span><span class="token string">"rsync -aS --delete --progress <span class="token entity" title="\">\</span>
+  --exclude-from ~/.rsync_exclude_list <span class="token entity" title="\">\</span>
+  /Volumes/ORIGINAL/ /Volumes/BACKUP DISK/"</span>
+
+<span class="token comment"># to save and quit in nano press CTRL-X:</span>
+<span class="token comment"># it will ask you to save the file</span></code><!-- HTML_TAG_END --></pre></section>
+</article></div>
+  <footer class="svelte-tqiyh5"><div class="content svelte-tqiyh5"><nav class="flat-nav svelte-tqiyh5"><div itemscope itemtype="http://schema.org/Person" class="vcard group-of-links svelte-tqiyh5"><a href="https://github.com/gotofritz" class="svelte-tqiyh5">github</a><a href="https://twitter.com/gotofritz" class="svelte-tqiyh5">twitter</a><a href="https://www.linkedin.com/in/gotofritz" class="svelte-tqiyh5">linkedin</a><a href="/feed.xml" class="svelte-tqiyh5">rss</a></div></nav></div>
+  
+  <div class="content svelte-tqiyh5">All content under <a href="http://creativecommons.org/licenses/by-nc-sa/2.0/de/" class="svelte-tqiyh5">creative commons</a>
+    and code under <a href="http://mit-license.org/" class="svelte-tqiyh5">MIT license</a>.
+  </div>
+</footer>
+</main>
+
+
+		<script type="module" data-hydrate="198e3w">
+		import { start } from "/_app/start-ac6701ee.js";
+		start({
+			target: document.querySelector('[data-hydrate="198e3w"]').parentNode,
+			paths: {"base":"","assets":""},
+			session: {},
+			route: true,
+			spa: false,
+			trailing_slash: "never",
+			hydrate: {
+				status: 200,
+				error: null,
+				nodes: [
+					import("/_app/pages/__layout.svelte-c3bb9f47.js"),
+						import("/_app/pages/blog/backing-up-hard-disk-os-x.md-54d376e1.js")
+				],
+				params: {},
+				routeId: "blog/backing-up-hard-disk-os-x"
+			}
+		});
+	</script>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <link href="../favicon.ico" rel="shortcut icon">
+  <link rel="icon" href="../favicon.gif" type="image/gif" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-K0CMFHZ2N0"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    dataLayer.push('js', new Date());
+    dataLayer.push('config', 'G-K0CMFHZ2N0');
+  </script>
+  <meta http-equiv="content-security-policy" content=""><title>A Trello-like CRM tool with Google Apps Script || gotofritz</title><meta name="description" content="Fritz Stelluto has been a developer and engineering manager in the digital industry since the 90s. He lives in Berlin." data-svelte="svelte-ugxg7c">
+	<link rel="stylesheet" href="/_app/assets/pages/__layout.svelte-e730745d.css">
+	<link rel="stylesheet" href="/_app/assets/_post-6b79a17e.css">
+	<link rel="modulepreload" href="/_app/start-ac6701ee.js">
+	<link rel="modulepreload" href="/_app/chunks/index-889cf753.js">
+	<link rel="modulepreload" href="/_app/pages/__layout.svelte-c3bb9f47.js">
+	<link rel="modulepreload" href="/_app/pages/blog/trello-like-crm-tool-with-google-apps-script.md-6c6b0c49.js">
+	<link rel="modulepreload" href="/_app/chunks/_post-5ef2f492.js">
+	<link rel="modulepreload" href="/_app/chunks/Header-15607706.js">
+</head>
+
+<body>
+  <div class="gradient-container">
+    
+
+
+<main class="panel-container svelte-y2j27e"><div class="content svelte-y2j27e">
+
+<nav class="flat-nav"><div itemscope itemtype="http://schema.org/Person" class="vcard group-of-links">
+      <a href="/">home</a>
+      
+    <form class="search" action="https://google.com/search" method="get"><input type="text" id="search-str" name="q" results="0" placeholder="search" aria-label="search">
+      <input type="hidden" name="q" value="site:gotofritz.net"></form></div>
+</nav>
+<article class="content-post svelte-1r1v8if"><section class="intro svelte-1r1v8if"><div class="post-meta"><time datetime="2021-11-06T00:00:00.000Z">2021-11-06</time>
+      //
+      <div class="tags"><a href="/tags/google apps script">google apps script</a></div></div>
+    <h1 class="svelte-1r1v8if">A Trello-like CRM tool with Google Apps Script</h1>
+    <h2 class="svelte-1r1v8if"><!-- HTML_TAG_START -->Keeping track of all the leads and processes when freelancing or now that I have just been laid off and am job hunting, can be a daunting task. I have built a simple tool in Google Apps Script to make the process easier<!-- HTML_TAG_END --></h2></section>
+  <section class="post-content"><h2>Why not just use …?</h2>
+<p><em>Why not just use a real CRM</em>? The issues with CRMs is that the whole problem area is quite broad, and CRM software needs to be general enough to appeal to all types of users. As a result the software is often difficult to learn and fiddly to adapt to your own particular workflow. This time investment is probably worth if you work in sales and a CRM is your main tool, but that’s not my case. I tried <a href="https://capsulecrm.com/" rel="nofollow">Capsule</a>, but I found I spent way to much time wrestling with it rather than doing what I needed to do.</p>
+<p><em>Why not just use Trello</em>? Trello is great for teams using Kanban-like workflows, but I found entering and editing data far too laborious for my taste. You always need several clicks to get where you want. Also, I couln’t find ways to reorder or archive steps. Finally, I prefer to arrange processes top to bottom rather than horizontally.</p>
+<h2>Google Sheets with Apps Script is a great tool for quick tools and prototypes</h2>
+<h2>Tips on using Google Apps Script</h2>
+<h3>Lazy loading vs trying to build a SPA</h3>
+<h3>Start with the data and use abastractions</h3>
+<h3>OOP for modeling problem, FP for shared functionality</h3>
+<h3>Testing is not a solved problem</h3>
+<h2>Coding the App</h2>
+<h3>Setup and menu</h3>
+<h3>Iterating without programming to reach an initial MVP</h3>
+<h3>Modelling the data</h3>
+<h4>Generic Atom component</h4>
+<h4>Derived components: Step, Current, Meta</h4>
+<h4>A Sequence of Steps</h4>
+<h4>There must be a better way to provide input…</h4>
+<h4>Bringing it All Together: Store</h4>
+<h4>Conclusion and potential next steps</h4>
+<p>I have used this app for a while and does the job quite well, with a minimum of fuss. And what is more, it was usable from day 1 - with a lot of manual data entry at the beginning, which became less and less as I automated more and more steps. Obviously it’s not as slick as a SPA put together by a team of UX and FE devs, but then it costed rather less in term of efforts. I find Google Apps Script great for knocking together quick prototypes like this.</p>
+<p>I am not going to take this any further as my basic needs are met. But should I want to, it would be possible, for example to</p>
+<ul><li>integrate with email to automatically generate steps from incoming messages, or generate emails from steps</li>
+<li>integrate with calendar to generate appointments and set reminders</li>
+<li>all of the above, to automatically generate emails with a list of available slots from my calendar.</li></ul>
+<p>This would actually be quite usefaul, and who knows, I may well tackle it one of these days.</p></section>
+</article></div>
+  <footer class="svelte-tqiyh5"><div class="content svelte-tqiyh5"><nav class="flat-nav svelte-tqiyh5"><div itemscope itemtype="http://schema.org/Person" class="vcard group-of-links svelte-tqiyh5"><a href="https://github.com/gotofritz" class="svelte-tqiyh5">github</a><a href="https://twitter.com/gotofritz" class="svelte-tqiyh5">twitter</a><a href="https://www.linkedin.com/in/gotofritz" class="svelte-tqiyh5">linkedin</a><a href="/feed.xml" class="svelte-tqiyh5">rss</a></div></nav></div>
+  
+  <div class="content svelte-tqiyh5">All content under <a href="http://creativecommons.org/licenses/by-nc-sa/2.0/de/" class="svelte-tqiyh5">creative commons</a>
+    and code under <a href="http://mit-license.org/" class="svelte-tqiyh5">MIT license</a>.
+  </div>
+</footer>
+</main>
+
+
+		<script type="module" data-hydrate="5y3idx">
+		import { start } from "/_app/start-ac6701ee.js";
+		start({
+			target: document.querySelector('[data-hydrate="5y3idx"]').parentNode,
+			paths: {"base":"","assets":""},
+			session: {},
+			route: true,
+			spa: false,
+			trailing_slash: "never",
+			hydrate: {
+				status: 200,
+				error: null,
+				nodes: [
+					import("/_app/pages/__layout.svelte-c3bb9f47.js"),
+						import("/_app/pages/blog/trello-like-crm-tool-with-google-apps-script.md-6c6b0c49.js")
+				],
+				params: {},
+				routeId: "blog/trello-like-crm-tool-with-google-apps-script"
+			}
+		});
+	</script>
+  </div>
+</body>
+
+</html>

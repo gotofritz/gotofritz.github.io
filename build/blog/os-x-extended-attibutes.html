@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <link href="../favicon.ico" rel="shortcut icon">
+  <link rel="icon" href="../favicon.gif" type="image/gif" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-K0CMFHZ2N0"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    dataLayer.push('js', new Date());
+    dataLayer.push('config', 'G-K0CMFHZ2N0');
+  </script>
+  <meta http-equiv="content-security-policy" content=""><title>Dealing with extended attributes on OS X || gotofritz</title><meta name="description" content="Fritz Stelluto has been a developer and engineering manager in the digital industry since the 90s. He lives in Berlin." data-svelte="svelte-ugxg7c">
+	<link rel="stylesheet" href="/_app/assets/pages/__layout.svelte-e730745d.css">
+	<link rel="stylesheet" href="/_app/assets/_post-6b79a17e.css">
+	<link rel="modulepreload" href="/_app/start-ac6701ee.js">
+	<link rel="modulepreload" href="/_app/chunks/index-889cf753.js">
+	<link rel="modulepreload" href="/_app/pages/__layout.svelte-c3bb9f47.js">
+	<link rel="modulepreload" href="/_app/pages/blog/os-x-extended-attibutes.md-eceb379d.js">
+	<link rel="modulepreload" href="/_app/chunks/_post-5ef2f492.js">
+	<link rel="modulepreload" href="/_app/chunks/Header-15607706.js">
+</head>
+
+<body>
+  <div class="gradient-container">
+    
+
+
+<main class="panel-container svelte-y2j27e"><div class="content svelte-y2j27e">
+
+<nav class="flat-nav"><div itemscope itemtype="http://schema.org/Person" class="vcard group-of-links"><a href="simple-voice-recording-mac">previous post</a>
+      <a href="/">home</a>
+      <a href="copying-files-matching-pattern-cpio">next post</a>
+    <form class="search" action="https://google.com/search" method="get"><input type="text" id="search-str" name="q" results="0" placeholder="search" aria-label="search">
+      <input type="hidden" name="q" value="site:gotofritz.net"></form></div>
+</nav>
+<article class="content-post svelte-1r1v8if"><section class="intro svelte-1r1v8if"><div class="post-meta"><time datetime="2012-08-25 13:55">2012-08-25</time>
+      //
+      <div class="tags"><a href="/tags/bash">bash</a>, <a href="/tags/os x">os x</a></div></div>
+    <h1 class="svelte-1r1v8if">Dealing with extended attributes on OS X</h1>
+    <h2 class="svelte-1r1v8if"><!-- HTML_TAG_START -->Extended attributes store extra information about files in OS X. They replaced resource forks. Sometimes those extra hidden files confuse peripherals (e.g. mp3 players) that were not setup to deal with them. Here are some terminal commands to handle them.<!-- HTML_TAG_END --></h2></section>
+  <section class="post-content"><pre class="language-bash"><!-- HTML_TAG_START --><code class="language-bash"><span class="token operator">></span> <span class="token function">ls</span> -al
+-rw-r--r--@   <span class="token number">1</span> me  staff     <span class="token number">962</span> <span class="token number">22</span> Aug <span class="token number">22</span>:06 .bash_profile
+drwxr-xr-x  <span class="token number">119</span> me  staff    <span class="token number">4046</span> <span class="token number">28</span> Jul <span class="token number">19</span>:03 Bluetooth
+drwx------+  <span class="token number">14</span> me  staff     <span class="token number">476</span> <span class="token number">25</span> Aug <span class="token number">12</span>:18 Desktop
+drwx------+  <span class="token number">14</span> me  staff     <span class="token number">476</span> <span class="token number">25</span> Aug 09:42 Documents
+drwx------+   <span class="token number">7</span> me  staff     <span class="token number">238</span> <span class="token number">25</span> Aug 09:42 Downloads
+drwx------@  <span class="token number">20</span> me  staff     <span class="token number">680</span> <span class="token number">25</span> Aug 09:42 Dropbox
+drwxr-xr-x@  <span class="token number">20</span> me  staff     <span class="token number">680</span> <span class="token number">25</span> Aug 09:42 Google Drive</code><!-- HTML_TAG_END --></pre>
+<p>The @ sign you get in the listing with the -l option tells you that that file or folder has some extended properties.</p>
+<pre class="language-bash"><!-- HTML_TAG_START --><code class="language-bash"><span class="token operator">></span> <span class="token function">ls</span> -al@
+-rw-r--r--@   <span class="token number">1</span> me  staff     <span class="token number">962</span> <span class="token number">22</span> Aug <span class="token number">22</span>:06 .bash_profile
+com.apple.FinderInfo      <span class="token number">32</span>
+com.apple.TextEncoding      <span class="token number">15</span>
+drwxr-xr-x  <span class="token number">119</span> me  staff    <span class="token number">4046</span> <span class="token number">28</span> Jul <span class="token number">19</span>:03 Bluetooth
+drwx------+  <span class="token number">14</span> me  staff     <span class="token number">476</span> <span class="token number">25</span> Aug <span class="token number">12</span>:18 Desktop
+drwx------+  <span class="token number">14</span> me  staff     <span class="token number">476</span> <span class="token number">25</span> Aug 09:42 Documents
+drwx------+   <span class="token number">7</span> me  staff     <span class="token number">238</span> <span class="token number">25</span> Aug 09:42 Downloads
+drwx------@  <span class="token number">20</span> me  staff     <span class="token number">680</span> <span class="token number">25</span> Aug 09:42 Dropbox
+com.apple.FinderInfo      <span class="token number">32</span>
+drwxr-xr-x@  <span class="token number">20</span> me  staff     <span class="token number">680</span> <span class="token number">25</span> Aug 09:42 Google Drive
+com.apple.FinderInfo      <span class="token number">32</span></code><!-- HTML_TAG_END --></pre>
+<p>On OS X the ls command has an @ option, which lists the extended property for each entry, if any.</p>
+<pre class="language-bash"><!-- HTML_TAG_START --><code class="language-bash"><span class="token operator">></span> xattr *
+Dropbox: com.apple.FinderInfo
+Google Drive: com.apple.FinderInfo</code><!-- HTML_TAG_END --></pre>
+<p>The xattr command lets you interact with the extended attributes. Just running it by itself it will list them all, Note that it doesn’t handle hidden files though.</p>
+<pre class="language-bash"><!-- HTML_TAG_START --><code class="language-bash"><span class="token operator">></span> xattr -l *
+Dropbox: com.apple.FinderInfo:
+00000000  00 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00  <span class="token operator">|</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token operator">|</span>
+00000010  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  <span class="token operator">|</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token operator">|</span>
+00000020
+Google Drive: com.apple.FinderInfo:
+00000000  00 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00  <span class="token operator">|</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token operator">|</span>
+00000010  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  <span class="token operator">|</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token operator">|</span>
+00000020</code><!-- HTML_TAG_END --></pre>
+<p>The -l flag lets shows the content for all extended properties for a file. They are not always hex data.</p>
+<pre class="language-bash"><!-- HTML_TAG_START --><code class="language-bash"><span class="token operator">></span> xattr -p com.apple.TextEncoding .bash_profile
+UTF-8<span class="token punctuation">;</span><span class="token number">134217984</span></code><!-- HTML_TAG_END --></pre>
+<p>The -p flag lists the content of a specific extended attribute (in this case, com.apple.TextEncoding) for a specific file (in this case .bash_profile). This particular attribute is a string.</p>
+<pre class="language-bash"><!-- HTML_TAG_START --><code class="language-bash"><span class="token operator">></span> xattr -w <span class="token builtin class-name">test</span> <span class="token string">"what is this"</span> .bash_profile
+<span class="token operator">></span> xattr -l .bash_profile
+com.apple.FinderInfo:
+00000000  <span class="token number">54</span> <span class="token number">45</span> <span class="token number">58</span> <span class="token number">54</span> 00 00 00 00 00 00 00 00 00 00 00 00  <span class="token operator">|</span>TEXT<span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token operator">|</span>
+00000010  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  <span class="token operator">|</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token operator">|</span>
+00000020
+com.apple.TextEncoding: UTF-8<span class="token punctuation">;</span><span class="token number">134217984</span>
+test: what is this</code><!-- HTML_TAG_END --></pre>
+<p>-w allows you create your own extended attributes. Here one is written and then read out.</p>
+<pre class="language-bash"><!-- HTML_TAG_START --><code class="language-bash"><span class="token operator">></span> xattr -d <span class="token builtin class-name">test</span> .bash_profile
+<span class="token operator">></span> xattr -l .bash_profile
+com.apple.FinderInfo:
+00000000  <span class="token number">54</span> <span class="token number">45</span> <span class="token number">58</span> <span class="token number">54</span> 00 00 00 00 00 00 00 00 00 00 00 00  <span class="token operator">|</span>TEXT<span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token operator">|</span>
+00000010  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  <span class="token operator">|</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token operator">|</span>
+00000020
+com.apple.TextEncoding: UTF-8<span class="token punctuation">;</span><span class="token number">134217984</span></code><!-- HTML_TAG_END --></pre>
+<p>-d complements -w by allowing one to delete an extended attribute.</p>
+<pre class="language-bash"><!-- HTML_TAG_START --><code class="language-bash"><span class="token operator">></span> xattr -d com.apple.FinderInfo *</code><!-- HTML_TAG_END --></pre>
+<p>This allows you to delete all the com.apple.FinderInfo extended attributes from all the files in a folder</p></section>
+</article></div>
+  <footer class="svelte-tqiyh5"><div class="content svelte-tqiyh5"><nav class="flat-nav svelte-tqiyh5"><div itemscope itemtype="http://schema.org/Person" class="vcard group-of-links svelte-tqiyh5"><a href="https://github.com/gotofritz" class="svelte-tqiyh5">github</a><a href="https://twitter.com/gotofritz" class="svelte-tqiyh5">twitter</a><a href="https://www.linkedin.com/in/gotofritz" class="svelte-tqiyh5">linkedin</a><a href="/feed.xml" class="svelte-tqiyh5">rss</a></div></nav></div>
+  
+  <div class="content svelte-tqiyh5">All content under <a href="http://creativecommons.org/licenses/by-nc-sa/2.0/de/" class="svelte-tqiyh5">creative commons</a>
+    and code under <a href="http://mit-license.org/" class="svelte-tqiyh5">MIT license</a>.
+  </div>
+</footer>
+</main>
+
+
+		<script type="module" data-hydrate="18isplq">
+		import { start } from "/_app/start-ac6701ee.js";
+		start({
+			target: document.querySelector('[data-hydrate="18isplq"]').parentNode,
+			paths: {"base":"","assets":""},
+			session: {},
+			route: true,
+			spa: false,
+			trailing_slash: "never",
+			hydrate: {
+				status: 200,
+				error: null,
+				nodes: [
+					import("/_app/pages/__layout.svelte-c3bb9f47.js"),
+						import("/_app/pages/blog/os-x-extended-attibutes.md-eceb379d.js")
+				],
+				params: {},
+				routeId: "blog/os-x-extended-attibutes"
+			}
+		});
+	</script>
+  </div>
+</body>
+
+</html>

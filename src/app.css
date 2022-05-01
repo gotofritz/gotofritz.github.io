@@ -1,0 +1,335 @@
+a,
+a:hover,
+a:link,
+a:visited {
+  text-decoration: none;
+}
+html {
+  box-sizing: border-box;
+  background: rgba(247, 92, 3, 1);
+  -webkit-font-smoothing: antialiased;
+  font-size: 15px;
+  height: 100%;
+  margin: 0;
+}
+*,
+*:after,
+*:before {
+  box-sizing: inherit;
+}
+body {
+  align-items: center;
+  color: #384150;
+  display: flex;
+  flex-direction: column;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+    "Helvetica Neue", sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  justify-content: center;
+  margin: 0;
+  min-height: 100vh;
+}
+.flat-nav label,
+a {
+  cursor: pointer;
+  margin: -4px;
+  padding: 4px;
+}
+a,
+a:link,
+a:visited {
+  color: rgba(107, 5, 4, 1);
+}
+.flat-nav label {
+  color: rgba(107, 5, 4, 1);
+}
+a:hover,
+.flat-nav label:hover {
+  border-bottom: 4px solid rgba(107, 5, 4, 1);
+}
+.gradient-container {
+  align-items: center;
+  background-image: linear-gradient(
+    60deg,
+    hsla(45, 69%, 65%, 1),
+    hsla(22, 98%, 49%, 1)
+  );
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  width: 100%;
+}
+.flat-nav {
+  align-items: center;
+  display: flex;
+  justify-content: flex-end;
+}
+.group-of-links form {
+  display: inline;
+}
+.group-of-links a:last-of-type {
+  margin-right: 33px;
+}
+.group-of-links a:not(:last-of-type) {
+  margin-right: 40px;
+}
+.flat-nav input[type="text"]:focus,
+.flat-nav input[type="text"]:active {
+  width: 300px;
+}
+h1 {
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 36px;
+  margin-bottom: 0;
+}
+.post-content h3,
+h2 {
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 1.4;
+}
+.content-post .post-content h2 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 2rem 0 1rem;
+}
+.content-post .post-content h3,
+.content-post .post-content h4 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 2rem;
+}
+.content-post .post-content h3 ~ p,
+.content-post .post-content h4 ~ p {
+  margin-top: 0;
+  top: 0;
+}
+.labelled-row {
+  align-items: baseline;
+  display: flex;
+  gap: 0.8rem;
+  justify-content: space-between;
+  margin-bottom: 56px;
+}
+.labelled-row > * {
+  position: relative;
+  top: 8px;
+}
+.content-post .post-meta,
+.row-label {
+  color: rgba(107, 5, 4, 1);
+  font-family: Andale Mono, Consolas;
+  font-size: 13px;
+  font-weight: 300;
+  -webkit-font-smoothing: subpixel-antialiased;
+  letter-spacing: 0.5px;
+  margin: 0;
+  text-transform: uppercase;
+}
+.row-label time {
+  display: block;
+  color: rgba(107, 5, 4, 1);
+  line-height: 0;
+}
+.row-content {
+  flex: 0 1 autol
+  line-height: 1.5;
+  max-width: 500px;
+}
+@media (min-width: 769px) {
+  .row-content {
+    width: 500px;
+  }
+}
+.links .row-content a:not(:last-of-type):after {
+  content: ", ";
+}
+.post-content h2,
+.post-content h3 {
+  margin: 1rem 0 2px;
+}
+.post-content p {
+  margin-bottom: 1rem;
+  position: relative;
+  top: 8px;
+}
+.post-content li p {
+  top: auto;
+}
+.code-breakdown {
+  display: grid;
+  grid-template-columns: auto 1fr;
+}
+.code-breakdown dd,
+.code-breakdown dt {
+  padding: 0.2rem 0.4rem;
+  margin-bottom: 0.3rem;
+  margin-inline-start: 0;
+}
+code:not([class]) {
+  background: rgb(245, 242, 240);
+  border-radius: 0.3em;
+  padding: 0.2rem 0.4rem;
+}
+.code-breakdown dt {
+  background: rgb(245, 242, 240);
+  border-radius: 0.3em;
+  margin-right: 0.8rem;
+  text-align: right;
+}
+.code-breakdown dd {
+}
+.content-post time,
+.tags {
+  display: inline;
+}
+code[class*="language-"],
+pre[class*="language-"] {
+  background: none;
+  color: #f8f8f2;
+  display: block;
+  font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
+  line-height: 1.5;
+  text-align: left;
+  text-shadow: 0 1px rgba(0, 0, 0, 0.3);
+  white-space: pre;
+  word-break: normal;
+  word-spacing: normal;
+  word-wrap: normal;
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  tab-size: 4;
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+pre[class*="language-"] {
+  padding: 1em;
+  margin: 0 0 1rem;
+  overflow: auto;
+  border-radius: 0.3em;
+}
+p ~ pre[class*="language-"] {
+  margin-top: 1rem;
+}
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+  background: #272822;
+}
+:not(pre) > code[class*="language-"] {
+  padding: 0.5em;
+  border-radius: 0.3em;
+  white-space: normal;
+}
+.token.cdata,
+.token.comment,
+.token.doctype,
+.token.prolog {
+  color: slategray;
+}
+.token.punctuation {
+  color: #f8f8f2;
+}
+.namespace {
+  opacity: 0.7;
+}
+.token.constant,
+.token.deleted,
+.token.property,
+.token.symbol,
+.token.tag {
+  color: #f92672;
+}
+.token.boolean,
+.token.number {
+  color: #ae81ff;
+}
+.token.attr-name,
+.token.builtin,
+.token.char,
+.token.inserted,
+.token.selector,
+.token.string {
+  color: #a6e22e;
+}
+.language-css .token.string,
+.style .token.string,
+.token.entity,
+.token.operator,
+.token.url,
+.token.variable {
+  color: #f8f8f2;
+}
+.token.atrule,
+.token.attr-value,
+.token.class-name,
+.token.function {
+  color: #e6db74;
+}
+.token.keyword {
+  color: #66d9ef;
+}
+.token.important,
+.token.regex {
+  color: #fd971f;
+}
+.token.bold,
+.token.important {
+  font-weight: bold;
+}
+.token.italic {
+  font-style: italic;
+}
+.token.entity {
+  cursor: help;
+}
+.deleted {
+  text-decoration: line-through;
+}
+.readable-list dd {
+  margin-bottom: 1.4rem;
+}
+@media (max-width: 768px) {
+  .content,
+  footer {
+    max-width: 600px;
+    padding: 1.3333rem;
+    margin: 0 auto;
+  }
+  .labelled-row {
+    flex-direction: column;
+  }
+  .row-label time {
+    display: inline;
+  }
+  .group-of-links {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .group-of-links a:last-of-type,
+  .group-of-links a:not(:last-of-type) {
+    margin-right: 12px;
+  }
+  .group-of-links a:last-of-type {
+    flex-shrink: 0;
+  }
+  form {
+    flex-grow: 1;
+  }
+  form label {
+    display: none;
+  }
+  .flat-nav input[type="text"],
+  .flat-nav input[type="text"]:focus,
+  .flat-nav input[type="text"]:active {
+    padding: 4px;
+    width: 100%;
+    visibility: visible;
+  }
+}
