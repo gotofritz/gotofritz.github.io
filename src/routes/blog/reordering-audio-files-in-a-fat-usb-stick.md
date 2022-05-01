@@ -4,7 +4,7 @@ date: 2022-04-01
 published: true
 archived: false
 prev: fixing-autoformatting-django-templates-in-visual-studio-code
-next: building-blog-with-sveltekit
+next: blog-with-sveltekit-and-markdown
 title: Reordering audio files in a FAT USB stick
 tags:
   - tools
