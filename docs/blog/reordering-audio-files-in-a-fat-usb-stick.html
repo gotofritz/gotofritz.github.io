@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <link href="../favicon.ico" rel="shortcut icon">
+  <link rel="icon" href="../favicon.gif" type="image/gif" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-K0CMFHZ2N0"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    dataLayer.push('js', new Date());
+    dataLayer.push('config', 'G-K0CMFHZ2N0');
+  </script>
+  <meta http-equiv="content-security-policy" content=""><title>Reordering audio files in a FAT USB stick || gotofritz</title><meta name="description" content="Fritz Stelluto has been a developer and engineering manager in the digital industry since the 90s. He lives in Berlin." data-svelte="svelte-ugxg7c">
+	<link rel="stylesheet" href="/_app/assets/pages/__layout.svelte-e730745d.css">
+	<link rel="stylesheet" href="/_app/assets/_post-6b79a17e.css">
+	<link rel="modulepreload" href="/_app/start-8b6ecabb.js">
+	<link rel="modulepreload" href="/_app/chunks/index-889cf753.js">
+	<link rel="modulepreload" href="/_app/pages/__layout.svelte-c3bb9f47.js">
+	<link rel="modulepreload" href="/_app/pages/blog/reordering-audio-files-in-a-fat-usb-stick.md-6452381b.js">
+	<link rel="modulepreload" href="/_app/chunks/_post-5ef2f492.js">
+	<link rel="modulepreload" href="/_app/chunks/Header-15607706.js">
+</head>
+
+<body>
+  <div class="gradient-container">
+    
+
+
+<main class="panel-container svelte-y2j27e"><div class="content svelte-y2j27e">
+
+<nav class="flat-nav"><div itemscope itemtype="http://schema.org/Person" class="vcard group-of-links"><a href="fixing-autoformatting-django-templates-in-visual-studio-code">previous post</a>
+      <a href="/">home</a>
+      <a href="building-blog-with-sveltekit">next post</a>
+    <form class="search" action="https://google.com/search" method="get"><input type="text" id="search-str" name="q" results="0" placeholder="search" aria-label="search">
+      <input type="hidden" name="q" value="site:gotofritz.net"></form></div>
+</nav>
+<article class="content-post svelte-1r1v8if"><section class="intro svelte-1r1v8if"><div class="post-meta"><time datetime="2022-04-01T00:00:00.000Z">2022-04-01</time>
+      //
+      <div class="tags"><a href="/tags/tools">tools</a></div></div>
+    <h1 class="svelte-1r1v8if">Reordering audio files in a FAT USB stick</h1>
+    <h2 class="svelte-1r1v8if"><!-- HTML_TAG_START -->I copy audiobooks from CDs to USB sticks to play them in cars and random device like old radios. But often those devices play the files out of order. Reordering files in <abbr title="File Allocation Table">FAT</abbr> USB sticks is harder than I thought. Luckily, a chap by the name of Boris Leidner has written a useful tool for that.<!-- HTML_TAG_END --></h2></section>
+  <section class="post-content"><h2>FAT formatting</h2>
+<p>I use Macs, and have no use for the FAT system. But it is the most widely supported by consumer devices like my SONY CD/MP3 player, for example. So i have no choice.</p>
+<p>Those devices play back songs in date creation order. That would be the creation time on the stick; i.e., the time one started transferring them to the stick. Your typical laptop copies a few of these files in parallel. So one never knows what those creation times might be. This is why they get jumbled up.</p>
+<p>One solution could be to write a little script to change those times after copying those files. It could traverse the directory structure of the stick, and use the bash command <code>touch</code>. Or its python version. But it turns out neither works well on FAT. The python version of touch, <code>os.utime</code>, doesn’t handle creation time. There are extensions which seem would work well, like <code>pywintypes</code>, <code>win32file</code>, <code>wintypes</code> or <code>win32-setctime</code>. But they rely on C executables that only run on Windows.</p>
+<p>A better solution would be to write a script that copies the files one at the time. With a little pause to make sure the creation times are in order. That should work. But it would make copying files last much longer.</p>
+<h2>Enter fatsort</h2>
+<p>Luckily there is a C utility that does the job quite well. And there is a precompiled version for homebrew, the standard installer for OS X.</p>
+<h3>Step 1: install it</h3>
+<p>Your typical homebrew installation</p>
+<pre class="language-bash"><!-- HTML_TAG_START --><code class="language-bash"><span class="token operator">></span> brew <span class="token function">install</span> fatsort
+<span class="token operator">==</span><span class="token operator">></span> Downloading https://ghcr.io/v2/homebrew/core/help2man/manifests/1.49.1
+<span class="token punctuation">..</span>.</code><!-- HTML_TAG_END --></pre>
+<h3>Step 2: find out where the drive is mounted</h3>
+<p>The first instinct is to run it on the drive as it appears in Finder, i.e. <code>/Volumes/--SOMETHING--</code>. So for my USB stick, called <code>DIE_DREI</code>, it would be like in the command below. But that turns out to be too easy</p>
+<pre class="language-bash"><!-- HTML_TAG_START --><code class="language-bash"><span class="token operator">></span> fatsort /Volumes/DIE_DREI
+device_open: Is a directory<span class="token operator">!</span>
+openFileSystem: Is a directory<span class="token operator">!</span>
+sortFileSystem: Failed to <span class="token function">open</span> <span class="token function">file</span> system<span class="token operator">!</span>
+main: Failed to <span class="token function">sort</span> <span class="token function">file</span> system<span class="token operator">!</span></code><!-- HTML_TAG_END --></pre>
+<p>Instead I needed to find out what directory the USB device is <em>mounted to</em>. There is a handy command for that, <code>mount</code>. So step 2 goes</p>
+<pre class="language-bash"><!-- HTML_TAG_START --><code class="language-bash"><span class="token operator">></span> <span class="token function">mount</span>
+ /dev/disk1s5s1 on / <span class="token punctuation">(</span>apfs, sealed, local, read-only, journaled<span class="token punctuation">)</span>
+devfs on /dev <span class="token punctuation">(</span>devfs, local, nobrowse<span class="token punctuation">)</span>
+/dev/disk1s2 on /System/Volumes/Preboot <span class="token punctuation">(</span>apfs, local, journaled, nobrowse<span class="token punctuation">)</span>
+<span class="token punctuation">..</span>.
+/dev/disk5s1 on /Volumes/DIE_DREI <span class="token punctuation">(</span>msdos, local, nodev, nosuid, noowners<span class="token punctuation">)</span></code><!-- HTML_TAG_END --></pre>
+<p>It’s <code>/dev/disk5s1</code> I need to run fatsort on, not /Volumes/DIE_DREI.</p>
+<h3>Step 3: unmount the drive</h3>
+<p><code>fatsort</code> doesn’t work on the USB stick if it’s mounted. I didn’t even know a device’s content would be available even after unmounted! TIL. To unmount and run the next steps I will need <code>sudo</code> to gain superuser permissions</p>
+<pre class="language-bash"><!-- HTML_TAG_START --><code class="language-bash"><span class="token operator">></span>  <span class="token function">sudo</span> diskutil unmount /Volumes/DIE_DREI
+Password:
+ Volume DIE_DREI on disk5s1 unmounted</code><!-- HTML_TAG_END --></pre>
+<h3>Step 4: reorder the files</h3>
+<p>Now I am ready to reorder the files</p>
+<pre class="language-bash"><!-- HTML_TAG_START --><code class="language-bash"><span class="token operator">></span> <span class="token function">sudo</span> fatsort /dev/disk5s
+File system: FAT32.
+
+Sorting directory /
+<span class="token punctuation">..</span>.
+Directory reordered. Writing changes.</code><!-- HTML_TAG_END --></pre>
+<h2>And that was it.</h2>
+<p>It only takes a few seconds. It’s a great little tool. Thanks Boris! If you enter <code>fatsort -h</code> you can <a href="https://fatsort.sourceforge.io/fatsort.1.html" rel="nofollow">see some of the options you can pass to it</a></p>
+<h2>Prior art</h2>
+<ul><li><a href="https://fatsort.sourceforge.io/" rel="nofollow">fatsort homepage</a></li>
+<li>I found <a href="https://unfinishedbitness.info/2014/04/16/alphabetically-sorting-fat-usb-drives-with-mac-osx/" rel="nofollow">useful information about fatsort</a> in a blog called ‘Unfinished Bitness’</li></ul></section>
+</article></div>
+  <footer class="svelte-tqiyh5"><div class="content svelte-tqiyh5"><nav class="flat-nav svelte-tqiyh5"><div itemscope itemtype="http://schema.org/Person" class="vcard group-of-links svelte-tqiyh5"><a href="https://github.com/gotofritz" class="svelte-tqiyh5">github</a><a href="https://twitter.com/gotofritz" class="svelte-tqiyh5">twitter</a><a href="https://www.linkedin.com/in/gotofritz" class="svelte-tqiyh5">linkedin</a><a href="/feed.xml" class="svelte-tqiyh5">rss</a></div></nav></div>
+  
+  <div class="content svelte-tqiyh5">All content under <a href="http://creativecommons.org/licenses/by-nc-sa/2.0/de/" class="svelte-tqiyh5">creative commons</a>
+    and code under <a href="http://mit-license.org/" class="svelte-tqiyh5">MIT license</a>.
+  </div>
+</footer>
+</main>
+
+
+		<script type="module" data-hydrate="1cib30h">
+		import { start } from "/_app/start-8b6ecabb.js";
+		start({
+			target: document.querySelector('[data-hydrate="1cib30h"]').parentNode,
+			paths: {"base":"","assets":""},
+			session: {},
+			route: true,
+			spa: false,
+			trailing_slash: "never",
+			hydrate: {
+				status: 200,
+				error: null,
+				nodes: [
+					import("/_app/pages/__layout.svelte-c3bb9f47.js"),
+						import("/_app/pages/blog/reordering-audio-files-in-a-fat-usb-stick.md-6452381b.js")
+				],
+				params: {},
+				routeId: "blog/reordering-audio-files-in-a-fat-usb-stick"
+			}
+		});
+	</script>
+  </div>
+</body>
+
+</html>
