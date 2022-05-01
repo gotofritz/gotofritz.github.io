@@ -16,238 +16,238 @@
         </url>
 
         <url>
-              <loc>https://gotofritz.net/posts/blog-with-sveltekit-and-markdown</loc>
+              <loc>https://gotofritz.net/blog/blog-with-sveltekit-and-markdown</loc>
               <lastmod
                 >2022-04-22T00:00:00.000Z</lastmod
               >
               <changefreq>monthly</changefreq>
               <priority>1.0</priority>
             </url><url>
-              <loc>https://gotofritz.net/posts/reordering-audio-files-in-a-fat-usb-stick</loc>
+              <loc>https://gotofritz.net/blog/reordering-audio-files-in-a-fat-usb-stick</loc>
               <lastmod
                 >2022-04-01T00:00:00.000Z</lastmod
               >
               <changefreq>monthly</changefreq>
               <priority>1.0</priority>
             </url><url>
-              <loc>https://gotofritz.net/posts/fixing-autoformatting-django-templates-in-visual-studio-code</loc>
+              <loc>https://gotofritz.net/blog/fixing-autoformatting-django-templates-in-visual-studio-code</loc>
               <lastmod
                 >2022-03-24T00:00:00.000Z</lastmod
               >
               <changefreq>monthly</changefreq>
               <priority>1.0</priority>
             </url><url>
-              <loc>https://gotofritz.net/posts/installing-python-on-mac-os-x-in-2022</loc>
+              <loc>https://gotofritz.net/blog/installing-python-on-mac-os-x-in-2022</loc>
               <lastmod
                 >2022-01-04T00:00:00.000Z</lastmod
               >
               <changefreq>monthly</changefreq>
               <priority>1.0</priority>
             </url><url>
-              <loc>https://gotofritz.net/posts/setting-up-thunderbird-for-gmail-on-os-x</loc>
+              <loc>https://gotofritz.net/blog/setting-up-thunderbird-for-gmail-on-os-x</loc>
               <lastmod
                 >2020-08-06T00:00:00.000Z</lastmod
               >
               <changefreq>monthly</changefreq>
               <priority>1.0</priority>
             </url><url>
-              <loc>https://gotofritz.net/posts/using-say-command-to-make-os-x-talk-and-fixing-it</loc>
+              <loc>https://gotofritz.net/blog/using-say-command-to-make-os-x-talk-and-fixing-it</loc>
               <lastmod
                 >2020-06-16T00:00:00.000Z</lastmod
               >
               <changefreq>monthly</changefreq>
               <priority>1.0</priority>
             </url><url>
-              <loc>https://gotofritz.net/posts/setting-up-a-logitech-vertical-mx-mouse-osx</loc>
+              <loc>https://gotofritz.net/blog/setting-up-a-logitech-vertical-mx-mouse-osx</loc>
               <lastmod
                 >2020-05-02T00:00:00.000Z</lastmod
               >
               <changefreq>monthly</changefreq>
               <priority>1.0</priority>
             </url><url>
-              <loc>https://gotofritz.net/posts/setting-css-values-dynamically-in-svelte</loc>
+              <loc>https://gotofritz.net/blog/setting-css-values-dynamically-in-svelte</loc>
               <lastmod
                 >2020-04-09T00:00:00.000Z</lastmod
               >
               <changefreq>monthly</changefreq>
               <priority>1.0</priority>
             </url><url>
-              <loc>https://gotofritz.net/posts/countdown-clock-state-machine-requestanimationframe-vanilla-js</loc>
+              <loc>https://gotofritz.net/blog/countdown-clock-state-machine-requestanimationframe-vanilla-js</loc>
               <lastmod
                 >2020-03-29T00:00:00.000Z</lastmod
               >
               <changefreq>monthly</changefreq>
               <priority>1.0</priority>
             </url><url>
-              <loc>https://gotofritz.net/posts/music-remove-album-ratings-applescript</loc>
+              <loc>https://gotofritz.net/blog/music-remove-album-ratings-applescript</loc>
               <lastmod
                 >2020-03-12T00:00:00.000Z</lastmod
               >
               <changefreq>monthly</changefreq>
               <priority>1.0</priority>
             </url><url>
-              <loc>https://gotofritz.net/posts/osx-apps</loc>
+              <loc>https://gotofritz.net/blog/osx-apps</loc>
               <lastmod
                 >2019-09-09T15:28:00.000Z</lastmod
               >
               <changefreq>monthly</changefreq>
               <priority>1.0</priority>
             </url><url>
-              <loc>https://gotofritz.net/posts/backing-up-hard-disk-os-x</loc>
+              <loc>https://gotofritz.net/blog/backing-up-hard-disk-os-x</loc>
               <lastmod
                 >2016-01-16T21:44:00.000Z</lastmod
               >
               <changefreq>monthly</changefreq>
               <priority>1.0</priority>
             </url><url>
-              <loc>https://gotofritz.net/posts/stop-chrome-navigating-back-when-swiping-horizontally</loc>
+              <loc>https://gotofritz.net/blog/stop-chrome-navigating-back-when-swiping-horizontally</loc>
               <lastmod
                 >2016-01-09T01:07:00.000Z</lastmod
               >
               <changefreq>monthly</changefreq>
               <priority>1.0</priority>
             </url><url>
-              <loc>https://gotofritz.net/posts/how-to-avoid-sudo-npm</loc>
+              <loc>https://gotofritz.net/blog/how-to-avoid-sudo-npm</loc>
               <lastmod
                 >2015-12-14T21:12:00.000Z</lastmod
               >
               <changefreq>monthly</changefreq>
               <priority>1.0</priority>
             </url><url>
-              <loc>https://gotofritz.net/posts/pretty-printing-xml</loc>
+              <loc>https://gotofritz.net/blog/pretty-printing-xml</loc>
               <lastmod
                 >2015-10-20T22:38:00.000Z</lastmod
               >
               <changefreq>monthly</changefreq>
               <priority>1.0</priority>
             </url><url>
-              <loc>https://gotofritz.net/posts/os-x-software-update-from-command-line</loc>
+              <loc>https://gotofritz.net/blog/os-x-software-update-from-command-line</loc>
               <lastmod
                 >2015-08-24T22:41:00.000Z</lastmod
               >
               <changefreq>monthly</changefreq>
               <priority>1.0</priority>
             </url><url>
-              <loc>https://gotofritz.net/posts/os-x-dns-lookups-too-slow-for-local-hosts</loc>
+              <loc>https://gotofritz.net/blog/os-x-dns-lookups-too-slow-for-local-hosts</loc>
               <lastmod
                 >2015-04-24T11:03:00.000Z</lastmod
               >
               <changefreq>monthly</changefreq>
               <priority>1.0</priority>
             </url><url>
-              <loc>https://gotofritz.net/posts/directory-listings-in-apache-2-4</loc>
+              <loc>https://gotofritz.net/blog/directory-listings-in-apache-2-4</loc>
               <lastmod
                 >2015-03-07T22:14:00.000Z</lastmod
               >
               <changefreq>monthly</changefreq>
               <priority>1.0</priority>
             </url><url>
-              <loc>https://gotofritz.net/posts/storing-bash-profile-and-so-on-on-github</loc>
+              <loc>https://gotofritz.net/blog/storing-bash-profile-and-so-on-on-github</loc>
               <lastmod
                 >2013-09-01T14:11:00.000Z</lastmod
               >
               <changefreq>monthly</changefreq>
               <priority>1.0</priority>
             </url><url>
-              <loc>https://gotofritz.net/posts/install-specific-version-homebrew</loc>
+              <loc>https://gotofritz.net/blog/install-specific-version-homebrew</loc>
               <lastmod
                 >2013-07-17T10:40:00.000Z</lastmod
               >
               <changefreq>monthly</changefreq>
               <priority>1.0</priority>
             </url><url>
-              <loc>https://gotofritz.net/posts/copying-files-matching-pattern-cpio</loc>
+              <loc>https://gotofritz.net/blog/copying-files-matching-pattern-cpio</loc>
               <lastmod
                 >2013-03-23T10:23:00.000Z</lastmod
               >
               <changefreq>monthly</changefreq>
               <priority>1.0</priority>
             </url><url>
-              <loc>https://gotofritz.net/posts/os-x-extended-attibutes</loc>
+              <loc>https://gotofritz.net/blog/os-x-extended-attibutes</loc>
               <lastmod
                 >2012-08-25T11:55:00.000Z</lastmod
               >
               <changefreq>monthly</changefreq>
               <priority>1.0</priority>
             </url><url>
-              <loc>https://gotofritz.net/posts/simple-voice-recording-mac</loc>
+              <loc>https://gotofritz.net/blog/simple-voice-recording-mac</loc>
               <lastmod
                 >2012-07-19T16:14:00.000Z</lastmod
               >
               <changefreq>monthly</changefreq>
               <priority>1.0</priority>
             </url><url>
-              <loc>https://gotofritz.net/posts/escaping-in-replace-strings-in-javascript</loc>
+              <loc>https://gotofritz.net/blog/escaping-in-replace-strings-in-javascript</loc>
               <lastmod
                 >2012-03-28T18:52:00.000Z</lastmod
               >
               <changefreq>monthly</changefreq>
               <priority>1.0</priority>
             </url><url>
-              <loc>https://gotofritz.net/posts/change-title-cmd-window</loc>
+              <loc>https://gotofritz.net/blog/change-title-cmd-window</loc>
               <lastmod
                 >2012-03-06T12:11:00.000Z</lastmod
               >
               <changefreq>monthly</changefreq>
               <priority>1.0</priority>
             </url><url>
-              <loc>https://gotofritz.net/posts/combining-images-imagemagick</loc>
+              <loc>https://gotofritz.net/blog/combining-images-imagemagick</loc>
               <lastmod
                 >2011-12-22T11:34:00.000Z</lastmod
               >
               <changefreq>monthly</changefreq>
               <priority>1.0</priority>
             </url><url>
-              <loc>https://gotofritz.net/posts/google-apps-script-boilerplate</loc>
+              <loc>https://gotofritz.net/blog/google-apps-script-boilerplate</loc>
               <lastmod
                 >2011-12-12T12:34:00.000Z</lastmod
               >
               <changefreq>monthly</changefreq>
               <priority>1.0</priority>
             </url><url>
-              <loc>https://gotofritz.net/posts/advanced-evernote-search</loc>
+              <loc>https://gotofritz.net/blog/advanced-evernote-search</loc>
               <lastmod
                 >2011-09-04T11:55:00.000Z</lastmod
               >
               <changefreq>monthly</changefreq>
               <priority>1.0</priority>
             </url><url>
-              <loc>https://gotofritz.net/posts/a-place-for-unix-scripts-osx</loc>
+              <loc>https://gotofritz.net/blog/a-place-for-unix-scripts-osx</loc>
               <lastmod
                 >2011-07-07T11:57:00.000Z</lastmod
               >
               <changefreq>monthly</changefreq>
               <priority>1.0</priority>
             </url><url>
-              <loc>https://gotofritz.net/posts/svn-status-codes</loc>
+              <loc>https://gotofritz.net/blog/svn-status-codes</loc>
               <lastmod
                 >2010-09-22T14:46:00.000Z</lastmod
               >
               <changefreq>monthly</changefreq>
               <priority>1.0</priority>
             </url><url>
-              <loc>https://gotofritz.net/posts/joining-pdf-files-in-os-x-from-the-command-line</loc>
+              <loc>https://gotofritz.net/blog/joining-pdf-files-in-os-x-from-the-command-line</loc>
               <lastmod
                 >2010-07-13T11:05:00.000Z</lastmod
               >
               <changefreq>monthly</changefreq>
               <priority>1.0</priority>
             </url><url>
-              <loc>https://gotofritz.net/posts/finding-files-inside-archive</loc>
+              <loc>https://gotofritz.net/blog/finding-files-inside-archive</loc>
               <lastmod
                 >2009-11-09T18:26:00.000Z</lastmod
               >
               <changefreq>monthly</changefreq>
               <priority>1.0</priority>
             </url><url>
-              <loc>https://gotofritz.net/posts/finding-recently-changed-files-osx-terminal</loc>
+              <loc>https://gotofritz.net/blog/finding-recently-changed-files-osx-terminal</loc>
               <lastmod
                 >2009-11-04T10:53:00.000Z</lastmod
               >
               <changefreq>monthly</changefreq>
               <priority>1.0</priority>
             </url><url>
-              <loc>https://gotofritz.net/posts/batch-unrar-command-line-os-x</loc>
+              <loc>https://gotofritz.net/blog/batch-unrar-command-line-os-x</loc>
               <lastmod
                 >2009-02-12T02:59:00.000Z</lastmod
               >

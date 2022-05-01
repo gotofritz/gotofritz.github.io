@@ -4,7 +4,7 @@
 
 import { getPosts } from "$lib/get-posts";
 
-const postsUrl = `https://gotofritz.net/posts`;
+const postsUrl = `https://gotofritz.net/blog`;
 
 /**
  * @type {import('@sveltejs/kit').RequestHandler}
