@@ -75,6 +75,8 @@ What about svelte stores? They don't really fit in with the SSG workflow. Use th
 
 **routes/feed.xml.js, sitemap.xml.js**: They are both endpoints which produce XML files with file lists. They also use `lib/get-posts.js` etc to fetch data from `/api/posts.json`. [feed.xml](https://gotofritz.net/feed.xml) is for RSS readers, [sitemap.xml](https://gotofritz.net/sitemap.xml) is for search engines.
 
+**routes/tag/[tag].svelte, index.svelte** Some idea as the blog 'pages' - except that the query used to fetch the data from `/api/posts.json` is slightly different.
+
 ### Relatively happy
 
 Once I understood the main idea and stopped wasting time with stores development was relatively easy. Particularly as I had [Matt Jennings's excellent SvelteKit blog template](https://github.com/mattjennings/sveltekit-blog-template) to fall back on when I got stuck. It's definitively a huge improvement on what I had before. I still reserve the right to move to <a href="https://astro.build/">Astro</a> though.

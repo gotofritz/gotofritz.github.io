@@ -15,10 +15,10 @@
   <meta http-equiv="content-security-policy" content=""><title>I rebuilt my website with SvelteKit || gotofritz</title><meta name="description" content="Fritz Stelluto has been a developer and engineering manager in the digital industry since the 90s. He lives in Berlin." data-svelte="svelte-ugxg7c">
 	<link rel="stylesheet" href="/app_/assets/pages/__layout.svelte-e730745d.css">
 	<link rel="stylesheet" href="/app_/assets/_post-6b79a17e.css">
-	<link rel="modulepreload" href="/app_/start-c36720a6.js">
+	<link rel="modulepreload" href="/app_/start-c0ddabfb.js">
 	<link rel="modulepreload" href="/app_/chunks/index-889cf753.js">
 	<link rel="modulepreload" href="/app_/pages/__layout.svelte-c3bb9f47.js">
-	<link rel="modulepreload" href="/app_/pages/blog/blog-with-sveltekit-and-markdown.md-d6d15d6c.js">
+	<link rel="modulepreload" href="/app_/pages/blog/blog-with-sveltekit-and-markdown.md-17054386.js">
 	<link rel="modulepreload" href="/app_/chunks/_post-5ef2f492.js">
 	<link rel="modulepreload" href="/app_/chunks/Header-15607706.js">
 </head>
@@ -84,6 +84,7 @@
 <p><strong>routes/api/posts.json.js</strong>: This is the main entrypoint, the “database” which powers everything. You can see <a href="https://gotofritz.net/api/posts.json" rel="nofollow">the json it returns here</a></p>
 <p><strong>routes/blog/[slug].svelte, index.svelte</strong> They are ‘pages’ in the website, like the one you are reading. They use <code>lib/get-posts.js</code> etc to fetch data from <code>/api/posts.json</code>, and then inject it into the various svelte componenents</p>
 <p><strong>routes/feed.xml.js, sitemap.xml.js</strong>: They are both endpoints which produce XML files with file lists. They also use <code>lib/get-posts.js</code> etc to fetch data from <code>/api/posts.json</code>. <a href="https://gotofritz.net/feed.xml" rel="nofollow">feed.xml</a> is for RSS readers, <a href="https://gotofritz.net/sitemap.xml" rel="nofollow">sitemap.xml</a> is for search engines.</p>
+<p><strong>routes/tag/[tag].svelte, index.svelte</strong> Some idea as the blog ‘pages’ - except that the query used to fetch the data from <code>/api/posts.json</code> is slightly different.</p>
 <h3>Relatively happy</h3>
 <p>Once I understood the main idea and stopped wasting time with stores development was relatively easy. Particularly as I had <a href="https://github.com/mattjennings/sveltekit-blog-template" rel="nofollow">Matt Jennings’s excellent SvelteKit blog template</a> to fall back on when I got stuck. It’s definitively a huge improvement on what I had before. I still reserve the right to move to <a href="https://astro.build/">Astro</a> though.</p>
 <h3>Prior art</h3>
@@ -101,10 +102,10 @@
 </main>
 
 
-		<script type="module" data-hydrate="1hsovm2">
-		import { start } from "/app_/start-c36720a6.js";
+		<script type="module" data-hydrate="12y3b4r">
+		import { start } from "/app_/start-c0ddabfb.js";
 		start({
-			target: document.querySelector('[data-hydrate="1hsovm2"]').parentNode,
+			target: document.querySelector('[data-hydrate="12y3b4r"]').parentNode,
 			paths: {"base":"","assets":""},
 			session: {},
 			route: true,
@@ -115,7 +116,7 @@
 				error: null,
 				nodes: [
 					import("/app_/pages/__layout.svelte-c3bb9f47.js"),
-						import("/app_/pages/blog/blog-with-sveltekit-and-markdown.md-d6d15d6c.js")
+						import("/app_/pages/blog/blog-with-sveltekit-and-markdown.md-17054386.js")
 				],
 				params: {},
 				routeId: "blog/blog-with-sveltekit-and-markdown"
