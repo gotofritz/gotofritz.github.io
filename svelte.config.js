@@ -6,7 +6,7 @@ const dev = process.env.NODE_ENV === "development";
 const config = {
   kit: {
     adapter: adapter({ pages: "docs" }),
-    prerender: { default: true },
+    prerender: { default: true, entries: ["*", "/sitemap.xml"] },
     appDir: "app_",
   },
 
