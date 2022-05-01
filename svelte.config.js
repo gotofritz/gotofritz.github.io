@@ -6,6 +6,7 @@ const config = {
   kit: {
     adapter: adapter({ pages: "docs" }),
     prerender: { default: true },
+    appDir: "app_",
   },
 
   extensions: [".svelte", ".md"],
