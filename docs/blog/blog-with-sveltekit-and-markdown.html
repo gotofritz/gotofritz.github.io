@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <link href="../favicon.ico" rel="shortcut icon">
+  <link rel="icon" href="../favicon.gif" type="image/gif" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-K0CMFHZ2N0"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    dataLayer.push('js', new Date());
+    dataLayer.push('config', 'G-K0CMFHZ2N0');
+  </script>
+  <meta http-equiv="content-security-policy" content=""><title>I rebuilt my website with SvelteKit || gotofritz</title><meta name="description" content="Fritz Stelluto has been a developer and engineering manager in the digital industry since the 90s. He lives in Berlin." data-svelte="svelte-ugxg7c">
+	<link rel="stylesheet" href="/app_/assets/pages/__layout.svelte-e730745d.css">
+	<link rel="stylesheet" href="/app_/assets/_post-6b79a17e.css">
+	<link rel="modulepreload" href="/app_/start-c36720a6.js">
+	<link rel="modulepreload" href="/app_/chunks/index-889cf753.js">
+	<link rel="modulepreload" href="/app_/pages/__layout.svelte-c3bb9f47.js">
+	<link rel="modulepreload" href="/app_/pages/blog/blog-with-sveltekit-and-markdown.md-d6d15d6c.js">
+	<link rel="modulepreload" href="/app_/chunks/_post-5ef2f492.js">
+	<link rel="modulepreload" href="/app_/chunks/Header-15607706.js">
+</head>
+
+<body>
+  <div class="gradient-container">
+    
+
+
+<main class="panel-container svelte-y2j27e"><div class="content svelte-y2j27e">
+
+<nav class="flat-nav"><div itemscope itemtype="http://schema.org/Person" class="vcard group-of-links"><a href="reordering-audio-files-in-a-fat-usb-stick">previous post</a>
+      <a href="/">home</a>
+      
+    <form class="search" action="https://google.com/search" method="get"><input type="text" id="search-str" name="q" results="0" placeholder="search" aria-label="search">
+      <input type="hidden" name="q" value="site:gotofritz.net"></form></div>
+</nav>
+<article class="content-post svelte-1r1v8if"><section class="intro svelte-1r1v8if"><div class="post-meta"><time datetime="2022-04-22T00:00:00.000Z">2022-04-22</time>
+      //
+      <div class="tags"><a href="/tags/svelte">svelte</a>, <a href="/tags/gotofritz">gotofritz</a></div></div>
+    <h1 class="svelte-1r1v8if">I rebuilt my website with SvelteKit</h1>
+    <h2 class="svelte-1r1v8if"><!-- HTML_TAG_START -->Building a static website with <a href="https://kit.svelte.dev/">Sveltekit</a> and markdown is hard going at first. But just when I was about to give up I stumbled on some blog posts and boilerplates that helped me crack it. I may still switch to <a href="https://astro.build/">Astro</a> later though<!-- HTML_TAG_END --></h2></section>
+  <section class="post-content"><h2>Getting used to SvelteKit’s and Vite’s quirks</h2>
+<p>Documentation is still sparse, and SvelteKit is not designed as an <abbr title="Static Site Generator">SSG</abbr>. So at first it was hard to get my head around how it all fits together. Fetching content in templates? Aren’t stores the most logical places for content? But why is it so painful to load async content in stores and fetch it from there? Being forced to put the markdown content inside the <code>routes</code> folder? Do you <em>really</em> have to create an endpoint in JSON and then fetch the data from there? And how do I fix that race condition that makes the content disappear after page load?</p>
+<p>It’s not that I couldn’t fix the issues, but it all felt too flakey. I thought it’d be a risk to commit to SvelteKit. Then I come across a few useful blog posts, but best of all <a href="https://github.com/mattjennings/sveltekit-blog-template" rel="nofollow">Matt Jennings’s excellent SvelteKit blog template</a>. He made all the design decisions I would have made, and ironed out all the issues I also encountered. With that I was able to put together a site I was happy with. Thanks Matt!</p>
+<h2>General ideas for using SvelteKit as a static site generator</h2>
+<p>The heart of the application is the <code>routes</code> folder. You organise things by creating files and folders there. <a href="https://github.com/sveltejs/kit/issues/3021" rel="nofollow">Rich Harris also thinks the name ‘routes’ is confusing</a>, but for now it is what it is.</p>
+<p>There are two types of routes: pages and <a href="https://kit.svelte.dev/docs/routing#endpoints" rel="nofollow">endpoints</a>. To simplify, pages are exactly what they sound like, they get translated into URLs a user can see. Endpoints do “backend stuff”. You can tell them apart because endpoints end with <code>.js</code>, whereas pages end with <code>.svelte</code>. At least by default; plugins can change that. And in the routes folder you will also find templates; they are also <code>.svelte</code> files. But their name starts with underscores.</p>
+<p>As for data sources, I find it easier to think of SvelteKit as Wordpress-like rather than Jekyll-like. As in, there is no magical executable that knows everything about my app. Instead there is a queryable data source which you can use for the same purpose. But it’s not a mysql database - it’s an endpoint (or endpoints). And you have to create them yourself.</p>
+<p>Creating entrypoint(s) is less daunting that it sounds; in the simplest case that would be a 20-30 lines js file. It can use Vite and the mdsvex plugin to collect the frontmatter from all your markdown sources. It can return that list as JSON. But of course entrypoints can get much fancier, the sky’s the limits. Once you have your entrypoint, you then create some reusable utility functions. They would fetch this JSON data and apply some filtering, pagination, or id matching, and so on. Then display the data.</p>
+<p>What about svelte stores? They don’t really fit in with the SSG workflow. Use them, if you need them, as a way to share UI state across pages. But I don’t find them so useful for generating the site itself.</p>
+<h2>Skeleton SvelteKit static site structure</h2>
+<pre class="language-bash"><!-- HTML_TAG_START --><code class="language-bash">├── app.css
+├── app.html
+<span class="token punctuation">..</span>.
+├── lib
+│   ├── components               <span class="token comment"># your typical svelte component</span>
+│   │   ├── Footer.svelte
+│   │   ├── Header.svelte
+│   │   └── PostSummary.svelte
+│   ├── <span class="token punctuation">..</span>.
+│   ├── get-posts.js            <span class="token comment"># some util functions to handle the</span>
+│   └── filter-by.js            <span class="token comment"># data from the entrypoint</span>
+└── routes
+    ├── __layout.svelte         <span class="token comment"># a layout file</span>
+    ├── api
+    │   └── posts.json.js       <span class="token comment"># a single entrypoint for the whole site</span>
+    ├── blog
+    │   ├── _post.svelte        <span class="token comment"># a layout file, for markdown files</span>
+    │   ├── <span class="token punctuation">[</span>slug<span class="token punctuation">]</span>.svelte       <span class="token comment"># this fetches content from /api/posts.json and generates a page</span>
+    │   └── index.svelte        <span class="token comment"># same, but this is the index page</span>
+    ├── feed.xml.js             <span class="token comment"># this is also an entrypoint, for rss</span>
+    ├── index.svelte            <span class="token comment"># the site's homepage</span>
+    ├── sitemap.xml.js          <span class="token comment"># this is also an entrypoint, for google / SEO</span>
+    └── tags                    <span class="token comment"># exactly the same idea as /blog/</span>
+        ├── <span class="token punctuation">[</span>tag<span class="token punctuation">]</span>.svelte
+        └── index.svelte</code><!-- HTML_TAG_END --></pre>
+<p><strong>app.css</strong>: I was converting an existing site, so I just took the generated css and pasted it in <code>/app.css</code>. Obviously not the most flexible way to handle it. But this version of the site is in end of life, I don’t need to maintain it or amend it. This file is imported as is in the main template</p>
+<p><strong>app.html</strong>: The container HTML for all the pages in the site. It has the <code>&lt;head&gt;</code> and <code>&lt;body&gt;</code> tag. You can push stuff into this from svelte files by wrapping them in <code>&lt;svelte:head&gt;</code></p>
+<p><strong>lib/components/</strong>: holds straightforward Svelte components. Nothing SSG specific.</p>
+<p><strong>lib/get-posts.js, etc</strong>: These are utility functions used everywhere else in the site. They interact with the data from <code>/api/posts.json</code></p>
+<p><strong>routes/__layout.svelte</strong>: Svelte default layout. It will sit between the main <code>app.html</code> and the main content being rendered. In my case it has the header and footer.</p>
+<p><strong>routes/api/posts.json.js</strong>: This is the main entrypoint, the “database” which powers everything. You can see <a href="https://gotofritz.net/api/posts.json" rel="nofollow">the json it returns here</a></p>
+<p><strong>routes/blog/[slug].svelte, index.svelte</strong> They are ‘pages’ in the website, like the one you are reading. They use <code>lib/get-posts.js</code> etc to fetch data from <code>/api/posts.json</code>, and then inject it into the various svelte componenents</p>
+<p><strong>routes/feed.xml.js, sitemap.xml.js</strong>: They are both endpoints which produce XML files with file lists. They also use <code>lib/get-posts.js</code> etc to fetch data from <code>/api/posts.json</code>. <a href="https://gotofritz.net/feed.xml" rel="nofollow">feed.xml</a> is for RSS readers, <a href="https://gotofritz.net/sitemap.xml" rel="nofollow">sitemap.xml</a> is for search engines.</p>
+<h3>Relatively happy</h3>
+<p>Once I understood the main idea and stopped wasting time with stores development was relatively easy. Particularly as I had <a href="https://github.com/mattjennings/sveltekit-blog-template" rel="nofollow">Matt Jennings’s excellent SvelteKit blog template</a> to fall back on when I got stuck. It’s definitively a huge improvement on what I had before. I still reserve the right to move to <a href="https://astro.build/">Astro</a> though.</p>
+<h3>Prior art</h3>
+<p>I started following <a href="https://joshcollinsworth.com/blog/build-static-sveltekit-markdown-blog" rel="nofollow">Josh Collinsworth</a> blog post to get started.
+<a href="https://www.davidwparker.com/posts/how-to-make-an-rss-feed-in-sveltekit" rel="nofollow">David Parker</a>’s post was also useful.</p>
+<p>I then stumgled upon <a href="https://mattjennings.io/blog/rewriting-my-website-in-sveltekit" rel="nofollow">Matt Jennings</a> and <a href="https://scottspence.com/posts/make-an-rss-feed-with-sveltekit" rel="nofollow">Scott Spence</a>’s posts, both of which were also super useful.</p>
+<p>Some information was gleaned from <a href="https://mdsvex.pngwn.io/docs#use-it" rel="nofollow">mdsvex repo</a> and of course the <a href="https://kit.svelte.dev/" rel="nofollow">sveltekit repo</a> and issue</p></section>
+</article></div>
+  <footer class="svelte-tqiyh5"><div class="content svelte-tqiyh5"><nav class="flat-nav svelte-tqiyh5"><div itemscope itemtype="http://schema.org/Person" class="vcard group-of-links svelte-tqiyh5"><a href="https://github.com/gotofritz" class="svelte-tqiyh5">github</a><a href="https://twitter.com/gotofritz" class="svelte-tqiyh5">twitter</a><a href="https://www.linkedin.com/in/gotofritz" class="svelte-tqiyh5">linkedin</a><a href="/feed.xml" class="svelte-tqiyh5">rss</a></div></nav></div>
+  
+  <div class="content svelte-tqiyh5">All content under <a href="http://creativecommons.org/licenses/by-nc-sa/2.0/de/" class="svelte-tqiyh5">creative commons</a>
+    and code under <a href="http://mit-license.org/" class="svelte-tqiyh5">MIT license</a>.
+  </div>
+</footer>
+</main>
+
+
+		<script type="module" data-hydrate="1hsovm2">
+		import { start } from "/app_/start-c36720a6.js";
+		start({
+			target: document.querySelector('[data-hydrate="1hsovm2"]').parentNode,
+			paths: {"base":"","assets":""},
+			session: {},
+			route: true,
+			spa: false,
+			trailing_slash: "never",
+			hydrate: {
+				status: 200,
+				error: null,
+				nodes: [
+					import("/app_/pages/__layout.svelte-c3bb9f47.js"),
+						import("/app_/pages/blog/blog-with-sveltekit-and-markdown.md-d6d15d6c.js")
+				],
+				params: {},
+				routeId: "blog/blog-with-sveltekit-and-markdown"
+			}
+		});
+	</script>
+  </div>
+</body>
+
+</html>

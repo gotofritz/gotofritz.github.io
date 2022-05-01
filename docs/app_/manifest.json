@@ -1,6 +1,6 @@
 {
   ".svelte-kit/runtime/client/start.js": {
-    "file": "start-c9f17119.js",
+    "file": "start-c36720a6.js",
     "src": ".svelte-kit/runtime/client/start.js",
     "isEntry": true,
     "imports": [
@@ -14,7 +14,7 @@
       "src/routes/blog/advanced-evernote-search.md",
       "src/routes/blog/backing-up-hard-disk-os-x.md",
       "src/routes/blog/batch-unrar-command-line-os-x.md",
-      "src/routes/blog/building-blog-with-sveltekit.md",
+      "src/routes/blog/blog-with-sveltekit-and-markdown.md",
       "src/routes/blog/change-title-cmd-window.md",
       "src/routes/blog/combining-images-imagemagick.md",
       "src/routes/blog/copying-files-matching-pattern-cpio.md",
@@ -127,9 +127,9 @@
       "_Header-15607706.js"
     ]
   },
-  "src/routes/blog/building-blog-with-sveltekit.md": {
-    "file": "pages/blog/building-blog-with-sveltekit.md-493c373b.js",
-    "src": "src/routes/blog/building-blog-with-sveltekit.md",
+  "src/routes/blog/blog-with-sveltekit-and-markdown.md": {
+    "file": "pages/blog/blog-with-sveltekit-and-markdown.md-d6d15d6c.js",
+    "src": "src/routes/blog/blog-with-sveltekit-and-markdown.md",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
@@ -359,7 +359,7 @@
     ]
   },
   "src/routes/blog/reordering-audio-files-in-a-fat-usb-stick.md": {
-    "file": "pages/blog/reordering-audio-files-in-a-fat-usb-stick.md-6452381b.js",
+    "file": "pages/blog/reordering-audio-files-in-a-fat-usb-stick.md-9803dc43.js",
     "src": "src/routes/blog/reordering-audio-files-in-a-fat-usb-stick.md",
     "isEntry": true,
     "isDynamicEntry": true,
