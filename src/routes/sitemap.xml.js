@@ -2,21 +2,22 @@
 // It's helpful for SEO but does require you to keep it updated to reflect the routes of your website.
 // It is OK to delete this file if you'd rather not bother with it.
 
-import { getPosts } from "$lib/get-posts";
+import { getPosts } from '$lib/get-posts'
+import { website } from '$lib/info'
 
-const postsUrl = `https://gotofritz.net/blog`;
+const postsUrl = `${website}/posts`
 
 /**
  * @type {import('@sveltejs/kit').RequestHandler}
  */
 export async function get() {
   // helper for vscode syntax highlighting
-  const xml = String.raw;
+  const xml = String.raw
 
   return {
     headers: {
-      "Cache-Control": `max-age=0, s-max-age=600`,
-      "Content-Type": "application/xml",
+      'Cache-Control': `max-age=0, s-max-age=600`,
+      'Content-Type': 'application/xml'
     },
     body: xml`<?xml version="1.0" encoding="UTF-8" ?>
       <urlset
@@ -31,7 +32,7 @@ export async function get() {
         xmlns:xhtml="http://www.w3.org/1999/xhtml"
       >
         <url>
-          <loc>https://gotofritz.net/</loc>
+          <loc>${website}</loc>
           <priority>1.0</priority>
         </url>
 
@@ -40,13 +41,17 @@ export async function get() {
             (post) => xml`<url>
               <loc>${postsUrl}/${post.slug}</loc>
               <lastmod
-                >${new Date(post.when).toISOString()}</lastmod
+                >${
+                  post.updated
+                    ? new Date(post.updated).toISOString()
+                    : new Date(post.date).toISOString()
+                }</lastmod
               >
               <changefreq>monthly</changefreq>
               <priority>1.0</priority>
-            </url>`,
+            </url>`
           )
-          .join("")}
-      </urlset>`,
-  };
+          .join('')}
+      </urlset>`
+  }
 }
