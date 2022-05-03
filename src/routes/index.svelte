@@ -1,21 +1,23 @@
 <script context="module">
-  export const prerender = true
+  export const prerender = true;
 
   export const load = async ({ fetch }) => {
     return {
       props: {
-        recentPosts: await fetch('/posts.json?limit=2').then((res) => res.json())
-      }
-    }
-  }
+        recentPosts: await fetch("/posts.json?limit=5").then((res) =>
+          res.json(),
+        ),
+      },
+    };
+  };
 </script>
 
 <script>
-  import ButtonLink from '$lib/components/ButtonLink.svelte'
-  import PostPreview from '$lib/components/PostPreview.svelte'
-  import { name } from '$lib/info.js'
+  import ButtonLink from "$lib/components/ButtonLink.svelte";
+  import PostPreview from "$lib/components/PostPreview.svelte";
+  import { name } from "$lib/info.js";
 
-  export let recentPosts
+  export let recentPosts;
 </script>
 
 <svelte:head>
@@ -25,7 +27,10 @@
 <div class="flex flex-col flex-grow">
   <!-- replace with a bio about you, or something -->
   <div class="flex items-center justify-center text-xl h-40">
-    <ButtonLink size="large" href="https://github.com/mattjennings/sveltekit-blog-template">
+    <ButtonLink
+      size="large"
+      href="https://github.com/mattjennings/sveltekit-blog-template"
+    >
       <slot slot="icon-start">
         <svg
           class="fill-black dark:fill-white h-6 w-6"
@@ -45,11 +50,15 @@
   <!-- recent posts -->
   <h2 class="flex items-baseline gap-4 !mb-2">
     Recent Posts
-    <ButtonLink href="/posts" size="small" raised={false} class="opacity-60">View All</ButtonLink>
+    <ButtonLink href="/posts" size="small" raised={false} class="opacity-60"
+      >View All</ButtonLink
+    >
   </h2>
   <div class="grid gap-4 grid-cols-1 sm:grid-cols-2">
     {#each recentPosts as post}
-      <div class="flex p-4 border border-slate-300 dark:border-slate-700 rounded-lg">
+      <div
+        class="flex p-4 border border-slate-300 dark:border-slate-700 rounded-lg"
+      >
         <PostPreview {post} small />
       </div>
     {/each}

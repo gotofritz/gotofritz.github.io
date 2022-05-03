@@ -1,15 +1,19 @@
 <script>
-  import '../app.css'
-  import '../prism.css'
-  import 'focus-visible'
-  import MoonIcon from 'heroicons-svelte/solid/MoonIcon.svelte'
-  import SunIcon from 'heroicons-svelte/solid/SunIcon.svelte'
-  import { browser } from '$app/env'
-  import { name } from '$lib/info'
+  import "../app.css";
+  import "../prism.css";
+  import "focus-visible";
+  import MoonIcon from "heroicons-svelte/solid/MoonIcon.svelte";
+  import SunIcon from "heroicons-svelte/solid/SunIcon.svelte";
+  import { browser } from "$app/env";
+  import { name } from "$lib/info";
+  import NavHeader from "$lib/components/NavHeader.svelte";
 
-  let prefersLight = browser ? Boolean(JSON.parse(localStorage.getItem('prefersLight'))) : false
+  let prefersLight = browser
+    ? Boolean(JSON.parse(localStorage.getItem("prefersLight")))
+    : false;
 </script>
 
+<NavHeader />
 <div class="flex flex-col min-h-screen">
   <div class="mx-auto flex flex-col flex-grow w-full max-w-4xl">
     <div class="flex h-16 px-4 py-2 justify-between items-center">
@@ -28,13 +32,13 @@
           aria-checked={!prefersLight}
           class="h-4 w-4 sm:h-8 sm:w-8 sm:p-1"
           on:click={() => {
-            prefersLight = !prefersLight
-            localStorage.setItem('prefersLight', prefersLight.toString())
+            prefersLight = !prefersLight;
+            localStorage.setItem("prefersLight", prefersLight.toString());
 
             if (prefersLight) {
-              document.querySelector('html').classList.remove('dark')
+              document.querySelector("html").classList.remove("dark");
             } else {
-              document.querySelector('html').classList.add('dark')
+              document.querySelector("html").classList.add("dark");
             }
           }}
         >
