@@ -55,7 +55,6 @@ const posts = Object.entries(import.meta.globEager("/posts/**/*.md"))
       component: post.default,
       excerpt: post.metadata.excerpt,
     };
-    console.log(metadata);
     return metadata;
   })
   // parse HTML output for content metadata (preview, reading time, toc)

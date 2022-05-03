@@ -1,1 +1,1 @@
-export const POST_PATH = "/posts/**/*.md";
+export const POST_PATH = "/blog/**/*.md";
