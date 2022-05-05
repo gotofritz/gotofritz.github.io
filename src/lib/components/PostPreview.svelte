@@ -1,24 +1,24 @@
 <script>
-  import { format, parseISO } from 'date-fns'
-  import ButtonLink from './ButtonLink.svelte'
+  import { format, parseISO } from "date-fns";
+  import ButtonLink from "./ButtonLink.svelte";
 
-  export let post
-  export let small = false
+  export let post;
+  export let small = false;
 </script>
 
 <div class="flex flex-col">
   <div>
     {#if !small}
-      <h1 class="!mt-0 !mb-2">
+      <h1 class="!mt-0 !mb-2 font-serif">
         <a href={`/blog/${post.slug}`}>{post.title}</a>
       </h1>
     {:else}
-      <h3 class="!mt-0 !mb-2">
+      <h3 class="!mt-0 !mb-2 font-serif">
         <a href={`/blog/${post.slug}`}>{post.title}</a>
       </h3>
     {/if}
     <div class="opacity-70">
-      <time>{format(new Date(parseISO(post.date)), 'MMMM d, yyyy')}</time>
+      <time>{format(new Date(parseISO(post.date)), "MMMM d, yyyy")}</time>
       •
       <span>{post.readingTime}</span>
     </div>
