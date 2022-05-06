@@ -2,6 +2,7 @@
   import MoonIcon from "heroicons-svelte/solid/MoonIcon.svelte";
   import SunIcon from "heroicons-svelte/solid/SunIcon.svelte";
   import SearchIcon from "heroicons-svelte/solid/SearchIcon.svelte";
+  import RssIcon from "heroicons-svelte/solid/RssIcon.svelte";
 
   import { browser } from "$app/env";
 
@@ -38,12 +39,15 @@
           {/if}
         </button>
       {/if}
-      <div class="flex gap-2">
+      <div class="flex gap-1">
         <SearchIcon class="h-3 w-3 sm:h-6 sm:w-6" color="white" />
         <a href="/searc">search </a>
       </div>
       <a href="mailto:info@gotofritz.net">email</a>
       <a href="/fritz-stelluto_resume.pdf">resume</a>
+      <a href="/feed.xml"
+        ><RssIcon class="h-3 w-3 sm:h-6 sm:w-6" color="white" /></a
+      >
     </div>
   </div>
 </nav>
