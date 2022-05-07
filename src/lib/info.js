@@ -5,9 +5,16 @@
 /**
  * Used for the header of the page and in SEO
  */
-export const name = "SvelteKit Blog Template"; // replace with your name
+export const name = "gotofritz"; // replace with your name
 
 /**
  * Used for SEO in /blog/[slug]
  */
-export const website = "https://yourdomain.com";
+export const website = "https://gotofritz.net";
+
+/**
+ * Wraps title with generic strings
+ * @param {str} title
+ * @returns {str}
+ */
+export const makeTitle = (title) => `${title} | gotofritz`;

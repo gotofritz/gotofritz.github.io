@@ -12,8 +12,8 @@
 </script>
 
 <nav class="navigation overflow-hidden relative">
-  <div class="max-w-6xl mx-auto z-50">
-    <div class="min-w-min flex justify-end items-center gap-12 h-24">
+  <div class="max-w-4xl mx-auto z-50">
+    <div class="min-w-min flex justify-end items-center gap-12 h-24 pr-12">
       {#if browser}
         <button
           type="button"

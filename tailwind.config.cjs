@@ -3,8 +3,8 @@ module.exports = {
   content: ["./src/**/*.{html,js,svelte,ts,md,svx}"],
   theme: {
     fontFamily: {
-      sans: "'Libre Franklin', Helvetica, sans-serif",
-      serif: "'Poly', serif",
+      display: "'DM Serif Display', Helvetica, sans-serif",
+      intro: "'Mate', Helvetica, sans-serif",
     },
     extend: {
       typography: ({ theme }) => {

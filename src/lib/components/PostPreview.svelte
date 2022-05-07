@@ -13,7 +13,7 @@
         <a href={`/blog/${post.slug}`}>{post.title}</a>
       </h1>
     {:else}
-      <h3 class="!mt-0 !mb-2 font-serif">
+      <h3 class="!mt-0 !mb-2 font-display text-3xl">
         <a href={`/blog/${post.slug}`}>{post.title}</a>
       </h3>
     {/if}
@@ -30,3 +30,9 @@
     </div>
   </slot>
 </div>
+
+<style>
+  h3 {
+    line-height: 1.1;
+  }
+</style>
