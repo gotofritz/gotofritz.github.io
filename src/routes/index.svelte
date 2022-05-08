@@ -20,6 +20,7 @@
   import LinkedinIcon from "$lib/svgs/LinkedinIcon.svelte";
   import WayfairIcon from "$lib/svgs/WayfairIcon.svelte";
   import BerlinFlag from "$lib/svgs/BerlinFlag.svelte";
+  import GermanFlag from "$lib/svgs/GermanFlag.svelte";
 
   export let recentPosts;
 </script>
@@ -40,7 +41,8 @@
     <div class="info-block">
       <h4 class="title">Location</h4>
       <div class="label">
-        Berlin, Germany <BerlinFlag class="home-icon inline-block" />
+        Berlin <BerlinFlag class="home-icon inline-block" /><br />
+        Germany <GermanFlag class="home-icon inline-block" />
       </div>
     </div>
     <div class="info-block">
@@ -64,11 +66,11 @@
     </div>
     <div class="info-block">
       <h4 class="title">Social</h4>
-      <div class="flex flex-row">
+      <div class="flex flex-row gap-2">
         <a
           aria-label="twitter profile"
           class="inline-block"
-          href="https://twitter.com/gotofirtz"
+          href="https://twitter.com/gotofritz"
           ><TwitterIcon class="home-icon inline-block" /></a
         >
         <a
@@ -86,7 +88,7 @@
       </div>
     </div>
   </section>
-  <section class="posts">
+  <section class="posts pr-8">
     {#each recentPosts as post}
       <div class="flex">
         <PostPreview {post} small />
@@ -97,12 +99,12 @@
 
 <style>
   .home {
-    grid-template-columns: 8rem 38rem auto 9rem;
+    grid-template-columns: 12rem 2rem auto;
     grid-template-areas:
-      "..     header header header"
-      "..     intro  intro  intro"
-      "posts  posts  ..     details"
-      "footer footer footer footer";
+      "header header header"
+      "intro  intro  intro"
+      "details .. posts"
+      "footer footer footer";
   }
   header {
     grid-area: header;

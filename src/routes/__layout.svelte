@@ -7,7 +7,7 @@
 
 <NavHeader />
 <div class="flex flex-col min-h-screen">
-  <div class="mx-auto w-full max-w-5xl">
+  <div class="mx-auto w-full max-w-4xl">
     <slot />
   </div>
 </div>

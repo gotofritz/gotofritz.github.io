@@ -6,42 +6,39 @@
 </script>
 
 <div class=" mb-16">
-  <div class="title ml-32">
+  <div class="title">
     <h3 class="!mt-0 !mb-2 font-display text-3xl">
       <a href={`/blog/${post.slug}`}>{post.title}</a>
     </h3>
   </div>
 
-  <div class="opacity-70 font-summary mb-4 ml-32">
-    <time>{format(new Date(parseISO(post.date)), "MMMM d, yyyy")}</time>
+  <div class="opacity-70 mb-2">
+    <time class="font-summary"
+      >{format(new Date(parseISO(post.date)), "MMMM d, yyyy")}</time
+    >
     •
-    <span>{post.readingTime}</span>
+    <span class="font-summary mr-2">{post.readingTime}</span>
+    {#each post.tags as tag}
+      <div
+        class="rounded-lg bg-gray-200 py-1 px-2 leading-tight mr-4 mb-2 text-center text-gray-600 tag text-xs inline-block"
+      >
+        {tag}
+      </div>
+    {/each}
   </div>
 
-  <div class="flex flex-row">
-    <div class="tags w-32">
-      {#each post.tags as tag}
-        <div
-          class="rounded-lg bg-gray-200 py-1 leading-tight mr-4 mb-2 text-center text-gray-600 block tag"
-        >
-          {tag}
-        </div>
-      {/each}
-    </div>
+  <div class="flex-1 mb-4">
+    <div class="mb-4">{@html post.preview.html}</div>
 
-    <div class="flex-1 mb-4">
-      <div class="mb-4">{@html post.preview.html}</div>
-
-      <div class="justify-start">
-        <a href={`/blog/${post.slug}`} class="group pr-8"
-          >Read More <ArrowRightIcon
-            class="w-4 h-4 invisible inline-block group-hover:visible"
-            height="1rem"
-            width="1rem"
-            hover:inline-block
-          /></a
-        >
-      </div>
+    <div class="justify-start">
+      <a href={`/blog/${post.slug}`} class="group pr-8"
+        >Read More <ArrowRightIcon
+          class="w-4 h-4 invisible inline-block group-hover:visible"
+          height="1rem"
+          width="1rem"
+          hover:inline-block
+        /></a
+      >
     </div>
   </div>
 </div>
