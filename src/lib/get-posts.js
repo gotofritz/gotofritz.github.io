@@ -53,7 +53,10 @@ const posts = Object.entries(import.meta.globEager("/posts/**/*.md"))
 
       // the svelte component
       component: post.default,
+
       excerpt: post.metadata.excerpt,
+
+      tags: post.metadata.tags ?? [],
     };
     return metadata;
   })

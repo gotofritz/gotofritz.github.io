@@ -5,6 +5,7 @@ module.exports = {
     fontFamily: {
       display: "'DM Serif Display', Helvetica, sans-serif",
       intro: "'Mate', Helvetica, sans-serif",
+      summary: "Alegreya SC, Mate, helvetica, sans-serif",
     },
     extend: {
       typography: ({ theme }) => {
