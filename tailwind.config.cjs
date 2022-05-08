@@ -8,6 +8,7 @@ module.exports = {
       summary: "Alegreya SC, Mate, helvetica, sans-serif",
     },
     extend: {
+      visibility: ["group-hover"],
       typography: ({ theme }) => {
         return {
           DEFAULT: {

@@ -97,11 +97,11 @@
 
 <style>
   .home {
-    grid-template-columns: 1rem 38rem auto 9rem;
+    grid-template-columns: 8rem 38rem auto 9rem;
     grid-template-areas:
-      "header header header header"
-      "intro intro intro intro"
-      ".. posts .. details"
+      "..     header header header"
+      "..     intro  intro  intro"
+      "posts  posts  ..     details"
       "footer footer footer footer";
   }
   header {
