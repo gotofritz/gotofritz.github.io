@@ -5,7 +5,7 @@
   export let post;
 </script>
 
-<div class=" mb-16">
+<div class="mb-16">
   <div class="title">
     <h3 class="!mt-0 !mb-2 font-display text-3xl">
       <a href={`/blog/${post.slug}`}>{post.title}</a>
@@ -28,7 +28,7 @@
   </div>
 
   <div class="flex-1 mb-4">
-    <div class="mb-4">{@html post.preview.html}</div>
+    <div class="mb-4 prose">{@html post.preview.html}</div>
 
     <div class="justify-start">
       <a href={`/blog/${post.slug}`} class="group pr-8"

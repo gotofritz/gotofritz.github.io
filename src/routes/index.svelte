@@ -37,7 +37,7 @@
     write short posts about technical stuff
   </main>
 
-  <section class="details mr-8 w-36">
+  <section class="details w-full">
     <div class="info-block">
       <h4 class="title">Location</h4>
       <div class="label">
@@ -99,12 +99,12 @@
 
 <style>
   .home {
-    grid-template-columns: 12rem 2rem auto;
+    grid-template-columns: 8rem 2rem auto 6rem;
     grid-template-areas:
-      "header header header"
-      "intro  intro  intro"
-      "details .. posts"
-      "footer footer footer";
+      "header header header header"
+      "intro  intro  intro intro"
+      "details .. posts .."
+      "footer footer footer footer";
   }
   header {
     grid-area: header;
@@ -130,7 +130,6 @@
 
   .info-block {
     @apply mb-4;
-    width: 140px;
   }
 
   .info-block .title {
