@@ -86,7 +86,7 @@
   <meta name="twitter:image" content={ogImage} />
 </svelte:head>
 
-<article class="relative post grid">
+<article class="relative post grid mb-12">
   <header class="mt-8">
     <h1 class="font-display text-6xl">
       {title}
@@ -110,8 +110,7 @@
       class="hidden xl:block absolute not-prose left-[100%]"
       aria-label="Table of Contents"
     >
-      <div class="fixed z-10 px-4 py-2 ml-8 top-[4.5rem]">
-        <!-- ignore h1 tags as they should only be used for the post title -->
+      <div class="fixed z-10 px-4 py-2 ml-8 top-[6.5rem] w-60 right-0">
         <ToC allowedHeadings={["h2", "h3", "h4", "h5", "h6"]} />
       </div>
     </div>
@@ -119,7 +118,7 @@
 </article>
 
 <div class="pt-12 flex justify-between">
-  <ButtonLink href={`/posts`}>
+  <ButtonLink href={`/blog`}>
     <slot slot="icon-start">
       <ArrowLeftIcon class="h-5 w-5" />
     </slot>
@@ -128,7 +127,6 @@
   </ButtonLink>
 </div>
 
-<!-- next/previous posts -->
 {#if previous || next}
   <hr />
   <div class="grid gap-8 grid-cols-1 sm:grid-cols-2">
@@ -154,22 +152,6 @@
 {/if}
 
 <style lang="postcss">
-  .post-preview {
-    @apply flex p-4 border border-slate-300 rounded-lg;
-  }
-
-  .post-preview-label {
-    @apply mb-2 text-slate-500 uppercase text-base font-medium;
-  }
-
-  :global(.dark) .post-preview {
-    @apply border-slate-700;
-  }
-
-  :global(.dark) .post-preview-label {
-    @apply text-slate-400;
-  }
-
   :global(h2) {
     @apply text-2xl mb-4 font-bold;
   }
@@ -179,17 +161,22 @@
   }
 
   :global(pre[class^="language"]) {
-    margin: 1rem -6rem 1rem -10rem;
+    /* margin: 1rem -6rem 1rem -10rem; */
     overflow-x: scroll;
   }
 
+  :global(pre > code) {
+    /* margin: 1rem -6rem 1rem -10rem; */
+    width: 100%;
+  }
+
   .post {
-    grid-template-columns: 8rem 2rem auto 6rem;
+    grid-template-columns: 4rem 46rem 6rem;
     grid-template-areas:
-      "header header header header"
-      "intro  intro  intro intro"
-      "details .. posts .."
-      "footer footer footer footer";
+      "header header header"
+      "intro  intro  intro "
+      " .. posts .."
+      "footer footer footer ";
   }
 
   header {

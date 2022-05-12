@@ -41,12 +41,12 @@
 
 <style>
   .home {
-    grid-template-columns: 4rem 2rem auto 6rem;
+    grid-template-columns: 4rem auto 6rem;
     grid-template-areas:
-      "header header header header"
-      "intro  intro  intro intro"
-      "details .. posts .."
-      "footer footer footer footer";
+      "header header header"
+      "intro  intro  intro "
+      " .. posts .."
+      "footer footer footer ";
   }
   header {
     grid-area: header;
