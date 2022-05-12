@@ -1,6 +1,7 @@
 <script>
-  import { format, parseISO } from "date-fns";
   import ArrowRightIcon from "heroicons-svelte/solid/ArrowRightIcon.svelte";
+  import PostDate from "$lib/components/PostDate.svelte";
+  import PostTags from "$lib/components/PostTags.svelte";
 
   export let post;
 </script>
@@ -13,18 +14,8 @@
   </div>
 
   <div class="opacity-70 mb-2">
-    <time class="font-summary"
-      >{format(new Date(parseISO(post.date)), "MMMM d, yyyy")}</time
-    >
-    •
-    <span class="font-summary mr-2">{post.readingTime}</span>
-    {#each post.tags as tag}
-      <div
-        class="rounded-lg bg-gray-200 py-1 px-2 leading-tight mr-4 mb-2 text-center text-gray-600 tag text-xs inline-block"
-      >
-        {tag}
-      </div>
-    {/each}
+    <PostDate date={post.date} readingTime={post.readingTime} />
+    <PostTags tags={post.tags} />
   </div>
 
   <div class="flex-1 mb-4">

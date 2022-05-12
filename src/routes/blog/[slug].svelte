@@ -36,8 +36,8 @@
 </script>
 
 <script>
-  import { format, parseISO } from "date-fns";
-  import { page } from "$app/stores";
+  import PostDate from "$lib/components/PostDate.svelte";
+  import PostTags from "$lib/components/PostTags.svelte";
   import ButtonLink from "$lib/components/ButtonLink.svelte";
   import { name, website } from "$lib/info";
   import ToC from "$lib/components/ToC.svelte";
@@ -54,6 +54,8 @@
   export let slug;
   export let next;
   export let previous;
+  export let excerpt;
+  export let tags;
 
   // generated open-graph image for sharing on social media. Visit https://og-image.vercel.app/ to see more options.
   const ogImage = `https://og-image.vercel.app/**${encodeURIComponent(
@@ -84,21 +86,22 @@
   <meta name="twitter:image" content={ogImage} />
 </svelte:head>
 
-<article class="relative">
-  <h1 class="!mt-0 !mb-2">
-    <a class="!font-medium" href={$page.url.pathname}>
+<article class="relative post grid">
+  <header class="mt-8">
+    <h1 class="font-display text-6xl">
       {title}
-    </a>
-  </h1>
-  <div class="opacity-70">
-    <time datetime={new Date(parseISO(date)).toISOString()}
-      >{format(new Date(parseISO(date)), "MMMM d, yyyy")}</time
-    >
-    •
-    <span>{readingTime}</span>
-  </div>
+    </h1>
+  </header>
 
-  <div class="relative">
+  <main class="intro font-intro text-2xl leading-tight">
+    {@html excerpt}
+    <div class="opacity-70 mb-28">
+      <PostDate {date} {readingTime} />
+      <PostTags {tags} />
+    </div>
+  </main>
+
+  <div class="relative post-content">
     <!-- render the post -->
     <svelte:component this={component} />
 
@@ -165,5 +168,42 @@
 
   :global(.dark) .post-preview-label {
     @apply text-slate-400;
+  }
+
+  :global(h2) {
+    @apply text-2xl mb-4 font-bold;
+  }
+
+  :global(h2:not(:first-of-type)) {
+    @apply mt-8;
+  }
+
+  :global(pre[class^="language"]) {
+    margin: 1rem -6rem 1rem -10rem;
+    overflow-x: scroll;
+  }
+
+  .post {
+    grid-template-columns: 8rem 2rem auto 6rem;
+    grid-template-areas:
+      "header header header header"
+      "intro  intro  intro intro"
+      "details .. posts .."
+      "footer footer footer footer";
+  }
+
+  header {
+    grid-area: header;
+  }
+  header h1 {
+    line-height: 1.1;
+  }
+
+  .intro {
+    grid-area: intro;
+  }
+
+  .post-content {
+    grid-area: posts;
   }
 </style>
