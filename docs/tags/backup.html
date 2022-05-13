@@ -6,22 +6,27 @@
   <link href="../favicon.ico" rel="shortcut icon">
   <link rel="icon" href="../favicon.gif" type="image/gif" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-K0CMFHZ2N0"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    dataLayer.push('js', new Date());
-    dataLayer.push('config', 'G-K0CMFHZ2N0');
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'G-K0CMFHZ2N0');
   </script>
   <meta http-equiv="content-security-policy" content=""><title>tag backup || gotofritz</title><meta name="description" content="All the tags used on this site" data-svelte="svelte-mgehsg">
 	<link rel="stylesheet" href="/app_/assets/pages/__layout.svelte-e730745d.css">
 	<link rel="stylesheet" href="/app_/assets/pages/tags/_tag_.svelte-d5dd4b8c.css">
 	<link rel="stylesheet" href="/app_/assets/PostSummary-b6201c06.css">
-	<link rel="modulepreload" href="/app_/start-cb31aa19.js">
-	<link rel="modulepreload" href="/app_/chunks/index-889cf753.js">
-	<link rel="modulepreload" href="/app_/pages/__layout.svelte-c3bb9f47.js">
-	<link rel="modulepreload" href="/app_/pages/tags/_tag_.svelte-dec51e5f.js">
-	<link rel="modulepreload" href="/app_/chunks/Header-15607706.js">
-	<link rel="modulepreload" href="/app_/chunks/PostSummary-e6cc4d31.js">
+	<link rel="modulepreload" href="/app_/start-0147dbb1.js">
+	<link rel="modulepreload" href="/app_/chunks/index-5f3bee99.js">
+	<link rel="modulepreload" href="/app_/pages/__layout.svelte-c6f66827.js">
+	<link rel="modulepreload" href="/app_/pages/tags/_tag_.svelte-8a63deb7.js">
+	<link rel="modulepreload" href="/app_/chunks/Header-5bd94491.js">
+	<link rel="modulepreload" href="/app_/chunks/PostSummary-a05fedd3.js">
 </head>
 
 <body>
@@ -56,7 +61,7 @@
 
 
 		<script type="module" data-hydrate="2wnvsv">
-		import { start } from "/app_/start-cb31aa19.js";
+		import { start } from "/app_/start-0147dbb1.js";
 		start({
 			target: document.querySelector('[data-hydrate="2wnvsv"]').parentNode,
 			paths: {"base":"","assets":""},
@@ -68,8 +73,8 @@
 				status: 200,
 				error: null,
 				nodes: [
-					import("/app_/pages/__layout.svelte-c3bb9f47.js"),
-						import("/app_/pages/tags/_tag_.svelte-dec51e5f.js")
+					import("/app_/pages/__layout.svelte-c6f66827.js"),
+						import("/app_/pages/tags/_tag_.svelte-8a63deb7.js")
 				],
 				params: {tag:"backup"},
 				routeId: "tags/[tag]"
