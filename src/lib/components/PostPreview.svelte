@@ -19,7 +19,9 @@
   </div>
 
   <div class="flex-1 mb-4">
-    <div class="mb-4 prose dark:prose-invert">{@html post.preview.html}</div>
+    <div class="mb-4 prose dark:prose-invert searching:prose-invert">
+      {@html post.preview.html}
+    </div>
 
     <div class="justify-start">
       <a href={`/blog/${post.slug}`} class="group pr-8"

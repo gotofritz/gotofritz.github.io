@@ -15,6 +15,7 @@
 <script>
   import PostPreview from "$lib/components/PostPreview.svelte";
   import { makeTitle } from "$lib/info.js";
+  import { searching } from "$lib/stores/searching";
 
   export let recentPosts;
 </script>
@@ -23,7 +24,12 @@
   <title>{makeTitle("Fritz Stelluto")}</title>
 </svelte:head>
 
-<div class="home grid">
+<div
+  class="home grid"
+  on:click={() => {
+    searching.set(false);
+  }}
+>
   <header class="mt-4"><h1 class="font-display">Fritz Stelluto</h1></header>
   <main class="intro font-intro text-4xl leading-tight mb-28">
     I'm Fritz, an engineer based in Berlin. I currently work in the Machine

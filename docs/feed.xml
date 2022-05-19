@@ -1,0 +1,322 @@
+
+    <rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+  <channel>
+    <title>gotofritz</title>
+    <link>https://gotofritz.net</link>
+    <description>gotofritz's blog</description>
+    <atom:link href="https://gotofritz.net/feed.xml" rel="self" type="application/rss+xml" />
+    
+          <item>
+            <guid>https://gotofritz.net/posts/blog-with-sveltekit-and-markdown</guid>
+            <title>I rebuilt my website with SvelteKit</title>
+            <description>undefined</description>
+            <link>https://gotofritz.net/posts/blog-with-sveltekit-and-markdown</link>
+            <pubDate>Fri, 22 Apr 2022 00:00:00 GMT</pubDate>
+        </item>
+      
+          <item>
+            <guid>https://gotofritz.net/posts/reordering-audio-files-in-a-fat-usb-stick</guid>
+            <title>Reordering audio files in a FAT USB stick</title>
+            <description>undefined</description>
+            <link>https://gotofritz.net/posts/reordering-audio-files-in-a-fat-usb-stick</link>
+            <pubDate>Fri, 01 Apr 2022 00:00:00 GMT</pubDate>
+        </item>
+      
+          <item>
+            <guid>https://gotofritz.net/posts/fixing-autoformatting-django-templates-in-visual-studio-code</guid>
+            <title>Fixing autoformatting Django templates in Visual Studio Co</title>
+            <description>undefined</description>
+            <link>https://gotofritz.net/posts/fixing-autoformatting-django-templates-in-visual-studio-code</link>
+            <pubDate>Wed, 23 Mar 2022 00:00:00 GMT</pubDate>
+        </item>
+      
+          <item>
+            <guid>https://gotofritz.net/posts/getting-started</guid>
+            <title>Getting Started</title>
+            <description>Thanks for checking out my blog template. It’s based on the blog I built for my own website and I hope this is a good starting point for you to start yours.</description>
+            <link>https://gotofritz.net/posts/getting-started</link>
+            <pubDate>Fri, 07 Jan 2022 00:00:00 GMT</pubDate>
+        </item>
+      
+          <item>
+            <guid>https://gotofritz.net/posts/installing-python-on-mac-os-x-in-2022</guid>
+            <title>How I install python on OS X in 2022</title>
+            <description>undefined</description>
+            <link>https://gotofritz.net/posts/installing-python-on-mac-os-x-in-2022</link>
+            <pubDate>Mon, 03 Jan 2022 00:00:00 GMT</pubDate>
+        </item>
+      
+          <item>
+            <guid>https://gotofritz.net/posts/lorem-ipsum</guid>
+            <title>Lorem Ipsum</title>
+            <description>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Et molestie ac feugiat sed lectus. Nisi est sit amet facilisis magna etiam tempor orci. Dolor sed viverra ipsum nunc aliquet.</description>
+            <link>https://gotofritz.net/posts/lorem-ipsum</link>
+            <pubDate>Sat, 01 Jan 2022 00:00:00 GMT</pubDate>
+        </item>
+      
+          <item>
+            <guid>https://gotofritz.net/posts/sharing-thunderbird-message-filters-across-computers</guid>
+            <title>Sharing Thunderbird Message Filters across computers</title>
+            <description>undefined</description>
+            <link>https://gotofritz.net/posts/sharing-thunderbird-message-filters-across-computers</link>
+            <pubDate>Mon, 13 Dec 2021 00:00:00 GMT</pubDate>
+        </item>
+      
+          <item>
+            <guid>https://gotofritz.net/posts/trello-like-crm-tool-with-google-apps-script</guid>
+            <title>A Trello-like CRM tool with Google Apps Script</title>
+            <description>undefined</description>
+            <link>https://gotofritz.net/posts/trello-like-crm-tool-with-google-apps-script</link>
+            <pubDate>Fri, 05 Nov 2021 00:00:00 GMT</pubDate>
+        </item>
+      
+          <item>
+            <guid>https://gotofritz.net/posts/setting-up-thunderbird-for-gmail-on-os-x</guid>
+            <title>Setting up and managing Thunderbird for OS X</title>
+            <description>undefined</description>
+            <link>https://gotofritz.net/posts/setting-up-thunderbird-for-gmail-on-os-x</link>
+            <pubDate>Thu, 06 Aug 2020 00:00:00 GMT</pubDate>
+        </item>
+      
+          <item>
+            <guid>https://gotofritz.net/posts/using-say-command-to-make-os-x-talk-and-fixing-it</guid>
+            <title>Using the 'Say' command to make OS X talk, and fixing it when it gets stuck</title>
+            <description>undefined</description>
+            <link>https://gotofritz.net/posts/using-say-command-to-make-os-x-talk-and-fixing-it</link>
+            <pubDate>Tue, 16 Jun 2020 00:00:00 GMT</pubDate>
+        </item>
+      
+          <item>
+            <guid>https://gotofritz.net/posts/accessing-the-wikipedia-api</guid>
+            <title>Accessing the wikipedia API</title>
+            <description>The Wikipedia API has become much easier to use since last time I used it…https://en.wikipedia.org/wiki/Special:ApiSandbox#action=query&format=json∝=extracts%7Cdescription%7Ccategories&generator=random&exlimit=max&exintro=1&explaintext=1&clshow=!hidden&cllimit=max&grnnamespace=0&grnfilterredir=nonredirects&grnlimit=20</description>
+            <link>https://gotofritz.net/posts/accessing-the-wikipedia-api</link>
+            <pubDate>Sun, 10 May 2020 00:00:00 GMT</pubDate>
+        </item>
+      
+          <item>
+            <guid>https://gotofritz.net/posts/setting-up-a-logitech-vertical-mx-mouse-osx</guid>
+            <title>Setting up a Logitech Vertical MX mouse with a Mac</title>
+            <description>undefined</description>
+            <link>https://gotofritz.net/posts/setting-up-a-logitech-vertical-mx-mouse-osx</link>
+            <pubDate>Sat, 02 May 2020 00:00:00 GMT</pubDate>
+        </item>
+      
+          <item>
+            <guid>https://gotofritz.net/posts/setting-css-values-dynamically-in-svelte</guid>
+            <title>Setting CSS values dynamically in Svelte</title>
+            <description>undefined</description>
+            <link>https://gotofritz.net/posts/setting-css-values-dynamically-in-svelte</link>
+            <pubDate>Thu, 09 Apr 2020 00:00:00 GMT</pubDate>
+        </item>
+      
+          <item>
+            <guid>https://gotofritz.net/posts/countdown-clock-state-machine-requestanimationframe-vanilla-js</guid>
+            <title>A countdown clock using requestAnimationFrame, a state machine, and vanilla JS</title>
+            <description>undefined</description>
+            <link>https://gotofritz.net/posts/countdown-clock-state-machine-requestanimationframe-vanilla-js</link>
+            <pubDate>Sat, 28 Mar 2020 00:00:00 GMT</pubDate>
+        </item>
+      
+          <item>
+            <guid>https://gotofritz.net/posts/music-remove-album-ratings-applescript</guid>
+            <title>Removing album ratings from Apple Music App</title>
+            <description>undefined</description>
+            <link>https://gotofritz.net/posts/music-remove-album-ratings-applescript</link>
+            <pubDate>Wed, 11 Mar 2020 00:00:00 GMT</pubDate>
+        </item>
+      
+          <item>
+            <guid>https://gotofritz.net/posts/osx-apps</guid>
+            <title>OS X Apps I use</title>
+            <description>undefined</description>
+            <link>https://gotofritz.net/posts/osx-apps</link>
+            <pubDate>Mon, 09 Sep 2019 00:00:00 GMT</pubDate>
+        </item>
+      
+          <item>
+            <guid>https://gotofritz.net/posts/backing-up-hard-disk-os-x</guid>
+            <title>Backing up a hard disk to another in OS X</title>
+            <description>undefined</description>
+            <link>https://gotofritz.net/posts/backing-up-hard-disk-os-x</link>
+            <pubDate>Sat, 16 Jan 2016 00:00:00 GMT</pubDate>
+        </item>
+      
+          <item>
+            <guid>https://gotofritz.net/posts/stop-chrome-navigating-back-when-swiping-horizontally</guid>
+            <title>Stop Chrome navigating back when swiping horizontally</title>
+            <description>undefined</description>
+            <link>https://gotofritz.net/posts/stop-chrome-navigating-back-when-swiping-horizontally</link>
+            <pubDate>Sat, 09 Jan 2016 00:00:00 GMT</pubDate>
+        </item>
+      
+          <item>
+            <guid>https://gotofritz.net/posts/how-to-avoid-sudo-npm</guid>
+            <title>How To Avoid sudo npm</title>
+            <description>undefined</description>
+            <link>https://gotofritz.net/posts/how-to-avoid-sudo-npm</link>
+            <pubDate>Mon, 14 Dec 2015 00:00:00 GMT</pubDate>
+        </item>
+      
+          <item>
+            <guid>https://gotofritz.net/posts/pretty-printing-xml</guid>
+            <title>Pretty printing XML</title>
+            <description>undefined</description>
+            <link>https://gotofritz.net/posts/pretty-printing-xml</link>
+            <pubDate>Tue, 20 Oct 2015 00:00:00 GMT</pubDate>
+        </item>
+      
+          <item>
+            <guid>https://gotofritz.net/posts/os-x-software-update-from-command-line</guid>
+            <title>OS X Software Update from the Command Line</title>
+            <description>undefined</description>
+            <link>https://gotofritz.net/posts/os-x-software-update-from-command-line</link>
+            <pubDate>Mon, 24 Aug 2015 00:00:00 GMT</pubDate>
+        </item>
+      
+          <item>
+            <guid>https://gotofritz.net/posts/os-x-dns-lookups-too-slow-for-local-hosts</guid>
+            <title>OS X DNS lookups too slow for local hosts</title>
+            <description>undefined</description>
+            <link>https://gotofritz.net/posts/os-x-dns-lookups-too-slow-for-local-hosts</link>
+            <pubDate>Fri, 24 Apr 2015 00:00:00 GMT</pubDate>
+        </item>
+      
+          <item>
+            <guid>https://gotofritz.net/posts/directory-listings-in-apache-2-4</guid>
+            <title>Directory listings in Apache 2.4</title>
+            <description>undefined</description>
+            <link>https://gotofritz.net/posts/directory-listings-in-apache-2-4</link>
+            <pubDate>Sat, 07 Mar 2015 00:00:00 GMT</pubDate>
+        </item>
+      
+          <item>
+            <guid>https://gotofritz.net/posts/storing-bash-profile-and-so-on-on-github</guid>
+            <title>dotfiles</title>
+            <description>undefined</description>
+            <link>https://gotofritz.net/posts/storing-bash-profile-and-so-on-on-github</link>
+            <pubDate>Sun, 01 Sep 2013 00:00:00 GMT</pubDate>
+        </item>
+      
+          <item>
+            <guid>https://gotofritz.net/posts/install-specific-version-homebrew</guid>
+            <title>Install a specific version of a tool on OS X with Homebrew</title>
+            <description>undefined</description>
+            <link>https://gotofritz.net/posts/install-specific-version-homebrew</link>
+            <pubDate>Wed, 17 Jul 2013 00:00:00 GMT</pubDate>
+        </item>
+      
+          <item>
+            <guid>https://gotofritz.net/posts/copying-files-matching-pattern-cpio</guid>
+            <title>Copying sourcefiles without .git folders with cpio</title>
+            <description>undefined</description>
+            <link>https://gotofritz.net/posts/copying-files-matching-pattern-cpio</link>
+            <pubDate>Sat, 23 Mar 2013 00:00:00 GMT</pubDate>
+        </item>
+      
+          <item>
+            <guid>https://gotofritz.net/posts/os-x-extended-attibutes</guid>
+            <title>Dealing with extended attributes on OS X</title>
+            <description>undefined</description>
+            <link>https://gotofritz.net/posts/os-x-extended-attibutes</link>
+            <pubDate>Sat, 25 Aug 2012 00:00:00 GMT</pubDate>
+        </item>
+      
+          <item>
+            <guid>https://gotofritz.net/posts/simple-voice-recording-mac</guid>
+            <title>Making a simple voice recording on a Mac</title>
+            <description>undefined</description>
+            <link>https://gotofritz.net/posts/simple-voice-recording-mac</link>
+            <pubDate>Thu, 19 Jul 2012 00:00:00 GMT</pubDate>
+        </item>
+      
+          <item>
+            <guid>https://gotofritz.net/posts/escaping-in-replace-strings-in-javascript</guid>
+            <title>Escaping $ in replace strings in Javascript</title>
+            <description>undefined</description>
+            <link>https://gotofritz.net/posts/escaping-in-replace-strings-in-javascript</link>
+            <pubDate>Wed, 28 Mar 2012 00:00:00 GMT</pubDate>
+        </item>
+      
+          <item>
+            <guid>https://gotofritz.net/posts/change-title-cmd-window</guid>
+            <title>Changing title of CMD window</title>
+            <description>undefined</description>
+            <link>https://gotofritz.net/posts/change-title-cmd-window</link>
+            <pubDate>Tue, 06 Mar 2012 00:00:00 GMT</pubDate>
+        </item>
+      
+          <item>
+            <guid>https://gotofritz.net/posts/combining-images-imagemagick</guid>
+            <title>Combining images with ImageMagick</title>
+            <description>undefined</description>
+            <link>https://gotofritz.net/posts/combining-images-imagemagick</link>
+            <pubDate>Thu, 22 Dec 2011 00:00:00 GMT</pubDate>
+        </item>
+      
+          <item>
+            <guid>https://gotofritz.net/posts/google-apps-script-boilerplate</guid>
+            <title>A Google Apps Script boilerplate</title>
+            <description>undefined</description>
+            <link>https://gotofritz.net/posts/google-apps-script-boilerplate</link>
+            <pubDate>Mon, 12 Dec 2011 00:00:00 GMT</pubDate>
+        </item>
+      
+          <item>
+            <guid>https://gotofritz.net/posts/advanced-evernote-search</guid>
+            <title>Advanced Evernote search</title>
+            <description>undefined</description>
+            <link>https://gotofritz.net/posts/advanced-evernote-search</link>
+            <pubDate>Sun, 04 Sep 2011 00:00:00 GMT</pubDate>
+        </item>
+      
+          <item>
+            <guid>https://gotofritz.net/posts/a-place-for-unix-scripts-osx</guid>
+            <title>A good place for scripts in OSX</title>
+            <description>undefined</description>
+            <link>https://gotofritz.net/posts/a-place-for-unix-scripts-osx</link>
+            <pubDate>Thu, 07 Jul 2011 00:00:00 GMT</pubDate>
+        </item>
+      
+          <item>
+            <guid>https://gotofritz.net/posts/svn-status-codes</guid>
+            <title>SVN status codes</title>
+            <description>undefined</description>
+            <link>https://gotofritz.net/posts/svn-status-codes</link>
+            <pubDate>Wed, 22 Sep 2010 00:00:00 GMT</pubDate>
+        </item>
+      
+          <item>
+            <guid>https://gotofritz.net/posts/joining-pdf-files-in-os-x-from-the-command-line</guid>
+            <title>Joining PDF files in OS X from the command line</title>
+            <description>undefined</description>
+            <link>https://gotofritz.net/posts/joining-pdf-files-in-os-x-from-the-command-line</link>
+            <pubDate>Tue, 13 Jul 2010 00:00:00 GMT</pubDate>
+        </item>
+      
+          <item>
+            <guid>https://gotofritz.net/posts/finding-files-inside-archive</guid>
+            <title>Finding files inside an archive with Terminal</title>
+            <description>undefined</description>
+            <link>https://gotofritz.net/posts/finding-files-inside-archive</link>
+            <pubDate>Mon, 09 Nov 2009 00:00:00 GMT</pubDate>
+        </item>
+      
+          <item>
+            <guid>https://gotofritz.net/posts/finding-recently-changed-files-osx-terminal</guid>
+            <title>Finding recently changed files with Terminal</title>
+            <description>undefined</description>
+            <link>https://gotofritz.net/posts/finding-recently-changed-files-osx-terminal</link>
+            <pubDate>Wed, 04 Nov 2009 00:00:00 GMT</pubDate>
+        </item>
+      
+          <item>
+            <guid>https://gotofritz.net/posts/batch-unrar-command-line-os-x</guid>
+            <title>Batch unrar from the command line on Mac OS X</title>
+            <description>undefined</description>
+            <link>https://gotofritz.net/posts/batch-unrar-command-line-os-x</link>
+            <pubDate>Thu, 12 Feb 2009 00:00:00 GMT</pubDate>
+        </item>
+      
+  </channel>
+</rss>

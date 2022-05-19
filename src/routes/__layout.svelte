@@ -12,7 +12,7 @@
 </script>
 
 <NavHeader />
-<div class="flex flex-col min-h-screen">
+<div class="flex flex-col min-h-screen searching:text-gray-300">
   <div class="mx-auto w-full max-w-4xl">
     <slot />
   </div>

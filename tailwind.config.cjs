@@ -1,3 +1,5 @@
+const plugin = require("tailwindcss/plugin");
+
 module.exports = {
   darkMode: "class",
   content: ["./src/**/*.{html,js,svelte,ts,md,svx}"],
@@ -99,5 +101,10 @@ module.exports = {
       },
     },
   },
-  plugins: [require("@tailwindcss/typography")],
+  plugins: [
+    require("@tailwindcss/typography"),
+    plugin(function ({ addVariant }) {
+      addVariant("searching", ".searching &");
+    }),
+  ],
 };
