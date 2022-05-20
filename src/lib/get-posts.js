@@ -34,6 +34,19 @@ export function getPosts({ page = 1, limit, tag } = {}) {
   return postsToReturn;
 }
 
+export function getPostsByTag() {
+  let postsToReturn = Object.entries(postsByTag)
+    .map(([k, v]) => {
+      return {
+        tag: k,
+        count: v.length,
+      };
+    })
+    .sort((a, b) => (a.count > b.count ? -1 : 1));
+
+  return postsToReturn;
+}
+
 // Get all posts and add metadata
 const posts = Object.entries(import.meta.globEager("/posts/**/*.md"))
   .map(([filepath, post]) => {

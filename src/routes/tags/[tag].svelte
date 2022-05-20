@@ -24,7 +24,7 @@
 </script>
 
 <svelte:head>
-  <title>{makeTitle("Fritz Stelluto")}</title>
+  <title>{makeTitle(`tag: ${currentTag}`)}</title>
 </svelte:head>
 
 <div
@@ -34,7 +34,9 @@
   }}
 >
   <header class="mt-4">
-    <h1 class="font-display text-6xl mb-16">tag: {currentTag}</h1>
+    <h1 class="font-display text-6xl mb-16">
+      <a href="./">tag</a>: {currentTag}
+    </h1>
   </header>
   <section class="posts pr-8">
     {#each recentPosts as post}
