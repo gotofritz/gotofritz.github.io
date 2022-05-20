@@ -2,22 +2,22 @@
 // It's helpful for SEO but does require you to keep it updated to reflect the routes of your website.
 // It is OK to delete this file if you'd rather not bother with it.
 
-import { getPosts } from '$lib/get-posts'
-import { website } from '$lib/info'
-
-const postsUrl = `${website}/posts`
+import { getPosts, getPostsByTag } from "$lib/get-posts";
+import { asSitemapSlug } from "$lib/utils/asSitemapSlug";
+import { website } from "$lib/info";
 
 /**
  * @type {import('@sveltejs/kit').RequestHandler}
  */
 export async function get() {
   // helper for vscode syntax highlighting
-  const xml = String.raw
+  const xml = String.raw;
+  const posts = getPosts().concat(getPostsByTag());
 
   return {
     headers: {
-      'Cache-Control': `max-age=0, s-max-age=600`,
-      'Content-Type': 'application/xml'
+      "Cache-Control": `max-age=0, s-max-age=600`,
+      "Content-Type": "application/xml",
     },
     body: xml`<?xml version="1.0" encoding="UTF-8" ?>
       <urlset
@@ -36,10 +36,10 @@ export async function get() {
           <priority>1.0</priority>
         </url>
 
-        ${getPosts()
+        ${posts
           .map(
             (post) => xml`<url>
-              <loc>${postsUrl}/${post.slug}</loc>
+              <loc>${asSitemapSlug(post)}</loc>
               <lastmod
                 >${
                   post.updated
@@ -48,10 +48,10 @@ export async function get() {
                 }</lastmod
               >
               <changefreq>monthly</changefreq>
-              <priority>1.0</priority>
-            </url>`
+              <priority>${post.tag ? "0.8" : "1.0"}</priority>
+            </url>`,
           )
-          .join('')}
-      </urlset>`
-  }
+          .join("")}
+      </urlset>`,
+  };
 }

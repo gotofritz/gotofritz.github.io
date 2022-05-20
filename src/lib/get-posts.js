@@ -3,7 +3,7 @@ import { format } from "date-fns";
 import { parse } from "node-html-parser";
 import readingTime from "reading-time/lib/reading-time.js";
 
-import { asTag } from "$lib/config/asTag";
+import { asTag } from "$lib/utils/asTag";
 
 // we require some server-side APIs to parse all metadata
 if (browser) {
@@ -40,6 +40,7 @@ export function getPostsByTag() {
       return {
         tag: k,
         count: v.length,
+        updated: new Date(),
       };
     })
     .sort((a, b) => (a.count > b.count ? -1 : 1));
