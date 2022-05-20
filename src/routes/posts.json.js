@@ -1,4 +1,4 @@
-import { getPosts } from '$lib/get-posts'
+import { getPosts } from "$lib/get-posts";
 
 /**
  * An endpoint for the getPosts() function. Some of the metadata that gets added
@@ -8,10 +8,15 @@ import { getPosts } from '$lib/get-posts'
  * @type {import('@sveltejs/kit').RequestHandler}
  */
 export async function get({ url: { searchParams } }) {
-  const limit = searchParams.get('limit') ? parseInt(searchParams.get('limit')) : undefined
-  const page = searchParams.get('page') ? parseInt(searchParams.get('page')) : undefined
+  const limit = searchParams.get("limit")
+    ? Number(searchParams.get("limit"))
+    : undefined;
+  const page = searchParams.get("page")
+    ? Number(searchParams.get("page"))
+    : undefined;
+  const tag = searchParams.get("tag") ? searchParams.get("tag") : undefined;
 
   return {
-    body: JSON.stringify(getPosts({ limit, page }))
-  }
+    body: JSON.stringify(getPosts({ limit, page, tag })),
+  };
 }

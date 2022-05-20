@@ -3,6 +3,8 @@ import { format } from "date-fns";
 import { parse } from "node-html-parser";
 import readingTime from "reading-time/lib/reading-time.js";
 
+import { asTag } from "$lib/config/asTag";
+
 // we require some server-side APIs to parse all metadata
 if (browser) {
   throw new Error(
@@ -18,12 +20,18 @@ if (browser) {
  *
  * For getting posts from the client, fetch from the /posts.json endpoint instead
  */
-export function getPosts({ page = 1, limit } = {}) {
+export function getPosts({ page = 1, limit, tag } = {}) {
+  let postsToReturn;
+  if (tag) {
+    tag = asTag(tag);
+  }
+  postsToReturn = tag && tag in postsByTag ? postsByTag[tag] : posts;
+
   if (limit) {
-    return posts.slice((page - 1) * limit, page * limit);
+    return postsToReturn.slice((page - 1) * limit, page * limit);
   }
 
-  return posts;
+  return postsToReturn;
 }
 
 // Get all posts and add metadata
@@ -87,6 +95,25 @@ const posts = Object.entries(import.meta.globEager("/posts/**/*.md"))
     next: allPosts[index - 1],
     previous: allPosts[index + 1],
   }));
+
+const postsByTag = posts.reduce((collected, current) => {
+  const { tags = [] } = current;
+  if (tags.length === 0) {
+    return collected;
+  }
+
+  // you never know...
+  const uniqueTags = new Set(tags);
+  for (let tag of uniqueTags) {
+    const normalizedTag = asTag(tag);
+    if (collected[normalizedTag]) {
+      collected[normalizedTag].push(current);
+    } else {
+      collected[normalizedTag] = [current];
+    }
+    return collected;
+  }
+}, {});
 
 function addTimezoneOffset(date) {
   const offsetInMilliseconds = new Date().getTimezoneOffset() * 60 * 1000;
