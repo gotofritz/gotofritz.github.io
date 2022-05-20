@@ -82,6 +82,7 @@ const posts = Object.entries(import.meta.globEager("/posts/**/*.md"))
     };
     return metadata;
   })
+  .filter((post) => !post.draft)
   // parse HTML output for content metadata (preview, reading time, toc)
   .map((post) => {
     const parsedHtml = parse(post.component.render().html);
