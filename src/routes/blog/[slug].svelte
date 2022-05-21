@@ -93,15 +93,15 @@
     </h1>
   </header>
 
-  <main class="intro font-intro text-2xl leading-tight">
+  <main class="intro font-intro text-2xl leading-snug">
     {@html excerpt}
-    <div class="opacity-70 mb-28">
+    <div class="opacity-70 mb-28 mt-2 prose">
       <PostDate {date} {readingTime} />
       <PostTags {tags} />
     </div>
   </main>
 
-  <div class="relative post-content">
+  <div class="relative post-content text-lg ">
     <!-- render the post -->
     <svelte:component this={component} />
 
@@ -116,16 +116,6 @@
     </div>
   </div>
 </article>
-
-<div class="pt-12 flex justify-between">
-  <ButtonLink href={`/blog`}>
-    <slot slot="icon-start">
-      <ArrowLeftIcon class="h-5 w-5" />
-    </slot>
-    Back to Posts
-    <slot slot="icon-end" />
-  </ButtonLink>
-</div>
 
 {#if previous || next}
   <hr />
@@ -189,5 +179,23 @@
 
   .post-content {
     grid-area: posts;
+  }
+
+  :global(.post-content p) {
+    margin-bottom: 1rem;
+    padding-right: 2rem;
+  }
+
+  :global(.post-content p a) {
+    background-color: #eeeeee;
+    border-bottom: 1px dotted #e9e9e9;
+  }
+
+  :global(.post-content p a:hover) {
+    border-bottom: 1px dotted #666;
+  }
+
+  :global(pre[class*="language-"]) {
+    margin-bottom: 1.5rem;
   }
 </style>

@@ -5,7 +5,9 @@
   export let readingTime;
 </script>
 
-<time class="font-summary" datetime={datetime(date)}>{dateAsString(date)}</time>
+<time class="font-summary text-base" datetime={datetime(date)}
+  >{dateAsString(date)}</time
+>
 {#if readingTime}•
-  <span class="font-summary mr-2">{readingTime}</span>
+  <span class="font-summary mr-2 text-base">{readingTime}</span>
 {/if}
