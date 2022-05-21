@@ -25,20 +25,22 @@
 </svelte:head>
 
 <div
-  class="home grid"
+  class="home lg:grid p-2 l:p-0"
   on:click={() => {
     searching.set(false);
   }}
 >
   <header class="mt-4"><h1 class="font-display">Fritz Stelluto</h1></header>
-  <main class="intro font-intro text-4xl leading-tight mb-28">
+  <main
+    class="intro font-intro text-xl lg:text-4xl w-full leading-tight mb-28  mt-2 lg:mt-0"
+  >
     I'm Fritz, an engineer based in Berlin. I currently work in the Machine
     Learning department at <a href="https://wayfair.de">Wayfair</a>. I tend to
     write short posts about technical stuff
   </main>
-  <section class="posts pr-8">
+  <section class="posts lg:pr-8">
     {#each recentPosts as post}
-      <div class="flex">
+      <div class="lg:flex">
         <PostPreview {post} small />
       </div>
     {/each}
@@ -46,31 +48,40 @@
 </div>
 
 <style>
-  .home {
-    grid-template-columns: 4rem auto 6rem;
-    grid-template-areas:
-      "header header header"
-      "intro  intro  intro "
-      " .. posts .."
-      "footer footer footer ";
-  }
-  header {
-    grid-area: header;
-  }
-  header h1 {
-    font-size: 9.4rem;
-  }
-
   .intro {
-    width: 49ch;
-    grid-area: intro;
+    @apply w-full;
   }
 
-  .posts {
-    grid-area: posts;
+  header h1 {
+    @apply text-5xl;
   }
-  :global(.home-icon) {
-    height: 1rem;
-    width: 1rem;
+
+  @media (min-width: 768px) {
+    .intro {
+      width: 49ch;
+    }
+    header h1 {
+      font-size: 9.4rem;
+    }
+
+    .posts {
+      grid-area: posts;
+    }
+    .home {
+      grid-template-columns: 4rem auto 6rem;
+      grid-template-areas:
+        "header header header"
+        "intro  intro  intro "
+        " .. posts .."
+        "footer footer footer ";
+    }
+
+    .intro {
+      grid-area: intro;
+    }
+
+    header {
+      grid-area: header;
+    }
   }
 </style>

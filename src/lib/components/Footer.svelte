@@ -27,8 +27,8 @@
   });
 </script>
 
-<footer class="bg-slate-800 text-slate-50 py-8">
-  <div class="max-w-4xl mx-auto z-50 grid grid-flow-col">
+<footer class="bg-slate-800 text-slate-50 p-8">
+  <div class="lg:max-w-4xl mx-auto flex flex-col lg:flex-row">
     <div class="info-block">
       <h4 class="title">Location</h4>
       <div class="label">
@@ -94,7 +94,7 @@
 
 <style lang="postcss">
   .info-block {
-    @apply mb-4;
+    @apply mb-4 flex-1;
   }
 
   .info-block .title {

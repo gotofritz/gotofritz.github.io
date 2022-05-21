@@ -18,12 +18,12 @@
     <PostTags tags={post.tags} />
   </div>
 
-  <div class="flex-1 mb-4">
+  <div class="lg:flex-1 mb-4">
     <div class="mb-4 prose dark:prose-invert searching:prose-invert">
       {@html post.preview.html}
     </div>
 
-    <div class="justify-start">
+    <div>
       <a href={`/blog/${post.slug}`} class="group pr-8"
         >Read More <ArrowRightIcon
           class="w-4 h-4 invisible inline-block group-hover:visible"

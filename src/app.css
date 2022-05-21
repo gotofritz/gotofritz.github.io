@@ -36,6 +36,11 @@
   .focus {
     @apply outline-none focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:focus-visible:ring-blue-300;
   }
+
+  .home-icon {
+    height: 1rem;
+    width: 1rem;
+  }
 }
 
 :where(h2, h3, h4, h5, h6) .icon-link {
