@@ -41,6 +41,7 @@
   import { name, website } from "$lib/info";
   import ToC from "$lib/components/ToC.svelte";
   import PostPreview from "$lib/components/PostPreview.svelte";
+  import { searching } from "$lib/stores/searching";
 
   export let component;
 
@@ -84,7 +85,12 @@
   <meta name="twitter:image" content={ogImage} />
 </svelte:head>
 
-<article class="gotofritz-grid relative post lg:grid mb-12 p-2 l:p-0">
+<article
+  class="gotofritz-grid relative post lg:grid mb-12 p-2 l:p-0"
+  on:click={() => {
+    searching.set(false);
+  }}
+>
   <header class="mt-8 mb-4">
     <h1 class="font-display text-5xl lg:text-6xl">
       {title}
