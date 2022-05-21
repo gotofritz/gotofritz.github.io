@@ -1,4 +1,36 @@
 @tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  h1 {
+    @apply text-3xl;
+  }
+  h2 {
+    @apply text-2xl;
+  }
+  h3 {
+    @apply text-xl font-bold;
+  }
+  h4 {
+    @apply text-lg font-bold;
+  }
+
+  ul,
+  ol,
+  dl {
+    @apply my-4;
+  }
+
+  ul {
+    @apply list-inside;
+    list-style-type: square;
+  }
+
+  ol {
+    @apply list-inside list-decimal;
+  }
+}
 
 @layer utilities {
   .focus {
@@ -6,6 +38,24 @@
   }
 }
 
+:where(h2, h3, h4, h5, h6) .icon-link {
+  position: relative;
+}
+
+:where(h2, h3, h4, h5, h6) .icon-link::before {
+  @apply text-slate-500;
+  content: "#";
+  left: -1.5ch;
+  line-height: 1;
+  opacity: 0;
+  position: absolute;
+  text-decoration: none;
+  top: 0.125rem;
+}
+
+:where(h2, h3, h4, h5, h6):hover .icon-link::before {
+  opacity: 1;
+}
 .prose img {
   @apply rounded-md shadow-md dark:shadow-slate-900;
 }
@@ -34,18 +84,6 @@ a {
 
 svg {
   @apply outline-none focus:outline-none;
-}
-
-ul,
-ol,
-dl {
-  margin-top: 1rem;
-}
-
-ul,
-ol {
-  list-style: inherit;
-  margin-left: 1rem;
 }
 
 .readable-list dd {
@@ -95,6 +133,3 @@ pre[class*="language-"] {
 pre > code {
   width: 100%;
 }
-
-@tailwind components;
-@tailwind utilities;

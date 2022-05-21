@@ -1,13 +1,13 @@
-import path from 'path'
-import { visit } from 'unist-util-visit'
-import autolinkHeadings from 'rehype-autolink-headings'
-import slugPlugin from 'rehype-slug'
-import relativeImages from 'mdsvex-relative-images'
+import path from "path";
+import { visit } from "unist-util-visit";
+import autolinkHeadings from "rehype-autolink-headings";
+import slugPlugin from "rehype-slug";
+import relativeImages from "mdsvex-relative-images";
 
 export default {
-  extensions: ['.svx', '.md'],
+  extensions: [".svx", ".md"],
   smartypants: {
-    dashes: 'oldschool'
+    dashes: "oldschool",
   },
   remarkPlugins: [videos, relativeImages],
   rehypePlugins: [
@@ -15,23 +15,23 @@ export default {
     [
       autolinkHeadings,
       {
-        behavior: 'wrap'
-      }
-    ]
-  ]
-}
+        behavior: "prepend",
+      },
+    ],
+  ],
+};
 
 /**
  * Adds support to video files in markdown image links
  */
 function videos() {
-  const extensions = ['mp4', 'webm']
+  const extensions = ["mp4", "webm"];
   return function transformer(tree) {
-    visit(tree, 'image', (node) => {
+    visit(tree, "image", (node) => {
       if (extensions.some((ext) => node.url.endsWith(ext))) {
-        node.type = 'html'
+        node.type = "html";
         node.value = `
-            <video 
+            <video
               src="${node.url}"
               autoplay
               muted
@@ -39,8 +39,8 @@ function videos() {
               loop
               title="${node.alt}"
             />
-          `
+          `;
       }
-    })
-  }
+    });
+  };
 }

@@ -38,11 +38,9 @@
 <script>
   import PostDate from "$lib/components/PostDate.svelte";
   import PostTags from "$lib/components/PostTags.svelte";
-  import ButtonLink from "$lib/components/ButtonLink.svelte";
   import { name, website } from "$lib/info";
   import ToC from "$lib/components/ToC.svelte";
   import PostPreview from "$lib/components/PostPreview.svelte";
-  import ArrowLeftIcon from "$lib/components/ArrowLeftIcon.svelte";
 
   export let component;
 
