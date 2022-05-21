@@ -1,10 +1,10 @@
 {
   ".svelte-kit/build/runtime/internal/start.js": {
-    "file": "start-5ba03911.js",
+    "file": "start-74b7ee5f.js",
     "src": ".svelte-kit/build/runtime/internal/start.js",
     "isEntry": true,
     "imports": [
-      "_vendor-f15b48c1.js",
+      "_vendor-e04e0de5.js",
       "_preload-helper-ec9aa979.js"
     ],
     "dynamicImports": [
@@ -12,58 +12,62 @@
       ".svelte-kit/build/components/error.svelte",
       "src/routes/index.svelte",
       "src/routes/blog/[slug].svelte",
-      "src/routes/blog/[...page].svelte"
+      "src/routes/blog/[...page].svelte",
+      "src/routes/tags/index.svelte",
+      "src/routes/tags/[tag].svelte"
     ],
     "css": [
       "assets/start-d977ffc4.css"
     ]
   },
   "src/routes/__layout.svelte": {
-    "file": "pages/__layout.svelte-75204164.js",
+    "file": "pages/__layout.svelte-4d5c2776.js",
     "src": "src/routes/__layout.svelte",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-f15b48c1.js",
-      "_searching-70159670.js"
+      "_vendor-e04e0de5.js",
+      "_stores-69f52ff6.js",
+      "_searching-5a78c6f7.js"
     ],
     "css": [
-      "assets/pages/__layout.svelte-34b54c95.css"
+      "assets/pages/__layout.svelte-ca607113.css"
     ]
   },
   ".svelte-kit/build/components/error.svelte": {
-    "file": "error.svelte-3c05fe72.js",
+    "file": "error.svelte-d35be70c.js",
     "src": ".svelte-kit/build/components/error.svelte",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-f15b48c1.js"
+      "_vendor-e04e0de5.js"
     ]
   },
   "src/routes/index.svelte": {
-    "file": "pages/index.svelte-8cffc384.js",
+    "file": "pages/index.svelte-10c169cc.js",
     "src": "src/routes/index.svelte",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-f15b48c1.js",
-      "_info-e47bbc57.js",
-      "_searching-70159670.js"
+      "_vendor-e04e0de5.js",
+      "_info-dca1023c.js",
+      "_searching-5a78c6f7.js"
     ],
     "css": [
-      "assets/pages/index.svelte-b0b6daa5.css"
+      "assets/pages/index.svelte-9e324a2b.css",
+      "assets/PostPreview.svelte_svelte_type_style_lang-3686463d.css"
     ]
   },
   "src/routes/blog/[slug].svelte": {
-    "file": "pages/blog/_slug_.svelte-e953ef7c.js",
+    "file": "pages/blog/_slug_.svelte-d6abdc76.js",
     "src": "src/routes/blog/[slug].svelte",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
       "_preload-helper-ec9aa979.js",
-      "_vendor-f15b48c1.js",
-      "_info-e47bbc57.js",
-      "_ArrowLeftIcon-5ed3881b.js"
+      "_vendor-e04e0de5.js",
+      "_info-dca1023c.js",
+      "_stores-69f52ff6.js"
     ],
     "dynamicImports": [
       "posts/blog/a-place-for-unix-scripts-osx.md",
@@ -85,7 +89,6 @@
       "posts/blog/how-to-avoid-sudo-npm.md",
       "posts/blog/install-specific-version-homebrew.md",
       "posts/blog/installing-python-on-mac-os-x-in-2022.md",
-      "posts/blog/lorem-ipsum.md",
       "posts/blog/music-remove-album-ratings-applescript.md",
       "posts/blog/os-x-dns-lookups-too-slow-for-local-hosts.md",
       "posts/blog/os-x-extended-attibutes.md",
@@ -107,363 +110,386 @@
       "posts/blog/joining-pdf-files-in-os-x-from-the-command-line/index.md"
     ],
     "css": [
-      "assets/pages/blog/_slug_.svelte-b587defb.css"
+      "assets/pages/blog/_slug_.svelte-72e77ba7.css",
+      "assets/ButtonLink.svelte_svelte_type_style_lang-316b6f43.css",
+      "assets/PostPreview.svelte_svelte_type_style_lang-3686463d.css"
     ]
   },
   "src/routes/blog/[...page].svelte": {
-    "file": "pages/blog/_...page_.svelte-95e7d472.js",
+    "file": "pages/blog/_...page_.svelte-59abd1d2.js",
     "src": "src/routes/blog/[...page].svelte",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-f15b48c1.js",
-      "_ArrowLeftIcon-5ed3881b.js",
-      "_info-e47bbc57.js"
+      "_vendor-e04e0de5.js",
+      "_info-dca1023c.js"
+    ],
+    "css": [
+      "assets/ButtonLink.svelte_svelte_type_style_lang-316b6f43.css",
+      "assets/PostPreview.svelte_svelte_type_style_lang-3686463d.css"
     ]
   },
-  "_vendor-f15b48c1.js": {
-    "file": "chunks/vendor-f15b48c1.js"
+  "src/routes/tags/index.svelte": {
+    "file": "pages/tags/index.svelte-c5ef7360.js",
+    "src": "src/routes/tags/index.svelte",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_vendor-e04e0de5.js",
+      "_searching-5a78c6f7.js"
+    ],
+    "css": [
+      "assets/pages/tags/index.svelte-5ef618af.css",
+      "assets/PostPreview.svelte_svelte_type_style_lang-3686463d.css"
+    ]
+  },
+  "src/routes/tags/[tag].svelte": {
+    "file": "pages/tags/_tag_.svelte-fa397a66.js",
+    "src": "src/routes/tags/[tag].svelte",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_vendor-e04e0de5.js",
+      "_info-dca1023c.js",
+      "_searching-5a78c6f7.js"
+    ],
+    "css": [
+      "assets/pages/tags/_tag_.svelte-0e82df63.css",
+      "assets/PostPreview.svelte_svelte_type_style_lang-3686463d.css"
+    ]
+  },
+  "_vendor-e04e0de5.js": {
+    "file": "chunks/vendor-e04e0de5.js"
   },
   "_preload-helper-ec9aa979.js": {
     "file": "chunks/preload-helper-ec9aa979.js"
   },
-  "_searching-70159670.js": {
-    "file": "chunks/searching-70159670.js",
+  "_stores-69f52ff6.js": {
+    "file": "chunks/stores-69f52ff6.js",
     "imports": [
-      "_vendor-f15b48c1.js"
+      "_vendor-e04e0de5.js"
     ]
   },
-  "_info-e47bbc57.js": {
-    "file": "chunks/info-e47bbc57.js",
+  "_searching-5a78c6f7.js": {
+    "file": "chunks/searching-5a78c6f7.js",
     "imports": [
-      "_vendor-f15b48c1.js"
-    ],
-    "css": [
-      "assets/info-3d45f474.css"
+      "_vendor-e04e0de5.js"
     ]
   },
-  "_ArrowLeftIcon-5ed3881b.js": {
-    "file": "chunks/ArrowLeftIcon-5ed3881b.js",
+  "_info-dca1023c.js": {
+    "file": "chunks/info-dca1023c.js",
     "imports": [
-      "_vendor-f15b48c1.js"
+      "_vendor-e04e0de5.js"
     ],
     "css": [
-      "assets/ArrowLeftIcon-e43931b6.css"
+      "assets/PostPreview.svelte_svelte_type_style_lang-3686463d.css"
     ]
   },
   "posts/blog/a-place-for-unix-scripts-osx.md": {
-    "file": "chunks/a-place-for-unix-scripts-osx-b6047227.js",
+    "file": "chunks/a-place-for-unix-scripts-osx-586cd19e.js",
     "src": "posts/blog/a-place-for-unix-scripts-osx.md",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-f15b48c1.js"
+      "_vendor-e04e0de5.js"
     ]
   },
   "posts/blog/accessing-the-wikipedia-api.md": {
-    "file": "chunks/accessing-the-wikipedia-api-c011666f.js",
+    "file": "chunks/accessing-the-wikipedia-api-debb8ba7.js",
     "src": "posts/blog/accessing-the-wikipedia-api.md",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-f15b48c1.js"
+      "_vendor-e04e0de5.js"
     ]
   },
   "posts/blog/advanced-evernote-search.md": {
-    "file": "chunks/advanced-evernote-search-67ba8448.js",
+    "file": "chunks/advanced-evernote-search-a50917da.js",
     "src": "posts/blog/advanced-evernote-search.md",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-f15b48c1.js"
+      "_vendor-e04e0de5.js"
     ]
   },
   "posts/blog/backing-up-hard-disk-os-x.md": {
-    "file": "chunks/backing-up-hard-disk-os-x-926a0f1e.js",
+    "file": "chunks/backing-up-hard-disk-os-x-73aab1ec.js",
     "src": "posts/blog/backing-up-hard-disk-os-x.md",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-f15b48c1.js"
+      "_vendor-e04e0de5.js"
     ]
   },
   "posts/blog/batch-unrar-command-line-os-x.md": {
-    "file": "chunks/batch-unrar-command-line-os-x-d6399d39.js",
+    "file": "chunks/batch-unrar-command-line-os-x-39b8b63e.js",
     "src": "posts/blog/batch-unrar-command-line-os-x.md",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-f15b48c1.js"
+      "_vendor-e04e0de5.js"
     ]
   },
   "posts/blog/blog-with-sveltekit-and-markdown.md": {
-    "file": "chunks/blog-with-sveltekit-and-markdown-bde474ba.js",
+    "file": "chunks/blog-with-sveltekit-and-markdown-a51e93ea.js",
     "src": "posts/blog/blog-with-sveltekit-and-markdown.md",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-f15b48c1.js"
+      "_vendor-e04e0de5.js"
     ]
   },
   "posts/blog/change-title-cmd-window.md": {
-    "file": "chunks/change-title-cmd-window-0c2a341e.js",
+    "file": "chunks/change-title-cmd-window-6331fb56.js",
     "src": "posts/blog/change-title-cmd-window.md",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-f15b48c1.js"
+      "_vendor-e04e0de5.js"
     ]
   },
   "posts/blog/combining-images-imagemagick.md": {
-    "file": "chunks/combining-images-imagemagick-5c523634.js",
+    "file": "chunks/combining-images-imagemagick-c8980750.js",
     "src": "posts/blog/combining-images-imagemagick.md",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-f15b48c1.js"
+      "_vendor-e04e0de5.js"
     ]
   },
   "posts/blog/copying-files-matching-pattern-cpio.md": {
-    "file": "chunks/copying-files-matching-pattern-cpio-41fb536c.js",
+    "file": "chunks/copying-files-matching-pattern-cpio-06b3cba4.js",
     "src": "posts/blog/copying-files-matching-pattern-cpio.md",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-f15b48c1.js"
+      "_vendor-e04e0de5.js"
     ]
   },
   "posts/blog/countdown-clock-state-machine-requestanimationframe-vanilla-js.md": {
-    "file": "chunks/countdown-clock-state-machine-requestanimationframe-vanilla-js-d3be35b3.js",
+    "file": "chunks/countdown-clock-state-machine-requestanimationframe-vanilla-js-d24e842d.js",
     "src": "posts/blog/countdown-clock-state-machine-requestanimationframe-vanilla-js.md",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-f15b48c1.js"
+      "_vendor-e04e0de5.js"
     ]
   },
   "posts/blog/directory-listings-in-apache-2-4.md": {
-    "file": "chunks/directory-listings-in-apache-2-4-cc8a44ac.js",
+    "file": "chunks/directory-listings-in-apache-2-4-160550ca.js",
     "src": "posts/blog/directory-listings-in-apache-2-4.md",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-f15b48c1.js"
+      "_vendor-e04e0de5.js"
     ]
   },
   "posts/blog/escaping-in-replace-strings-in-javascript.md": {
-    "file": "chunks/escaping-in-replace-strings-in-javascript-0ce817b2.js",
+    "file": "chunks/escaping-in-replace-strings-in-javascript-51883823.js",
     "src": "posts/blog/escaping-in-replace-strings-in-javascript.md",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-f15b48c1.js"
+      "_vendor-e04e0de5.js"
     ]
   },
   "posts/blog/finding-files-inside-archive.md": {
-    "file": "chunks/finding-files-inside-archive-aa83b868.js",
+    "file": "chunks/finding-files-inside-archive-3e7722d4.js",
     "src": "posts/blog/finding-files-inside-archive.md",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-f15b48c1.js"
+      "_vendor-e04e0de5.js"
     ]
   },
   "posts/blog/finding-recently-changed-files-osx-terminal.md": {
-    "file": "chunks/finding-recently-changed-files-osx-terminal-9bf57519.js",
+    "file": "chunks/finding-recently-changed-files-osx-terminal-76dca345.js",
     "src": "posts/blog/finding-recently-changed-files-osx-terminal.md",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-f15b48c1.js"
+      "_vendor-e04e0de5.js"
     ]
   },
   "posts/blog/fixing-autoformatting-django-templates-in-visual-studio-code.md": {
-    "file": "chunks/fixing-autoformatting-django-templates-in-visual-studio-code-3cb83307.js",
+    "file": "chunks/fixing-autoformatting-django-templates-in-visual-studio-code-9580c009.js",
     "src": "posts/blog/fixing-autoformatting-django-templates-in-visual-studio-code.md",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-f15b48c1.js"
+      "_vendor-e04e0de5.js"
     ]
   },
   "posts/blog/google-apps-script-boilerplate.md": {
-    "file": "chunks/google-apps-script-boilerplate-82a33393.js",
+    "file": "chunks/google-apps-script-boilerplate-ed1027c4.js",
     "src": "posts/blog/google-apps-script-boilerplate.md",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-f15b48c1.js"
+      "_vendor-e04e0de5.js"
     ]
   },
   "posts/blog/how-to-avoid-sudo-npm.md": {
-    "file": "chunks/how-to-avoid-sudo-npm-ee16ce49.js",
+    "file": "chunks/how-to-avoid-sudo-npm-aba8f440.js",
     "src": "posts/blog/how-to-avoid-sudo-npm.md",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-f15b48c1.js"
+      "_vendor-e04e0de5.js"
     ]
   },
   "posts/blog/install-specific-version-homebrew.md": {
-    "file": "chunks/install-specific-version-homebrew-a96bcb19.js",
+    "file": "chunks/install-specific-version-homebrew-59ee50bb.js",
     "src": "posts/blog/install-specific-version-homebrew.md",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-f15b48c1.js"
+      "_vendor-e04e0de5.js"
     ]
   },
   "posts/blog/installing-python-on-mac-os-x-in-2022.md": {
-    "file": "chunks/installing-python-on-mac-os-x-in-2022-b9f77913.js",
+    "file": "chunks/installing-python-on-mac-os-x-in-2022-9267b490.js",
     "src": "posts/blog/installing-python-on-mac-os-x-in-2022.md",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-f15b48c1.js"
-    ]
-  },
-  "posts/blog/lorem-ipsum.md": {
-    "file": "chunks/lorem-ipsum-4355975e.js",
-    "src": "posts/blog/lorem-ipsum.md",
-    "isDynamicEntry": true,
-    "imports": [
-      "_vendor-f15b48c1.js"
+      "_vendor-e04e0de5.js"
     ]
   },
   "posts/blog/music-remove-album-ratings-applescript.md": {
-    "file": "chunks/music-remove-album-ratings-applescript-b73ee295.js",
+    "file": "chunks/music-remove-album-ratings-applescript-eca71ad9.js",
     "src": "posts/blog/music-remove-album-ratings-applescript.md",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-f15b48c1.js"
+      "_vendor-e04e0de5.js"
     ]
   },
   "posts/blog/os-x-dns-lookups-too-slow-for-local-hosts.md": {
-    "file": "chunks/os-x-dns-lookups-too-slow-for-local-hosts-e11a322e.js",
+    "file": "chunks/os-x-dns-lookups-too-slow-for-local-hosts-a5a7adb6.js",
     "src": "posts/blog/os-x-dns-lookups-too-slow-for-local-hosts.md",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-f15b48c1.js"
+      "_vendor-e04e0de5.js"
     ]
   },
   "posts/blog/os-x-extended-attibutes.md": {
-    "file": "chunks/os-x-extended-attibutes-11072dfa.js",
+    "file": "chunks/os-x-extended-attibutes-7fbd1080.js",
     "src": "posts/blog/os-x-extended-attibutes.md",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-f15b48c1.js"
+      "_vendor-e04e0de5.js"
     ]
   },
   "posts/blog/os-x-software-update-from-command-line.md": {
-    "file": "chunks/os-x-software-update-from-command-line-6d029c48.js",
+    "file": "chunks/os-x-software-update-from-command-line-555b2af9.js",
     "src": "posts/blog/os-x-software-update-from-command-line.md",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-f15b48c1.js"
+      "_vendor-e04e0de5.js"
     ]
   },
   "posts/blog/osx-apps.md": {
-    "file": "chunks/osx-apps-1ac47298.js",
+    "file": "chunks/osx-apps-4531580b.js",
     "src": "posts/blog/osx-apps.md",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-f15b48c1.js"
+      "_vendor-e04e0de5.js"
     ]
   },
   "posts/blog/pretty-printing-xml.md": {
-    "file": "chunks/pretty-printing-xml-d10dce75.js",
+    "file": "chunks/pretty-printing-xml-1083c1c0.js",
     "src": "posts/blog/pretty-printing-xml.md",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-f15b48c1.js"
+      "_vendor-e04e0de5.js"
     ]
   },
   "posts/blog/reordering-audio-files-in-a-fat-usb-stick.md": {
-    "file": "chunks/reordering-audio-files-in-a-fat-usb-stick-c6e0e4f2.js",
+    "file": "chunks/reordering-audio-files-in-a-fat-usb-stick-ffd39fad.js",
     "src": "posts/blog/reordering-audio-files-in-a-fat-usb-stick.md",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-f15b48c1.js"
+      "_vendor-e04e0de5.js"
     ]
   },
   "posts/blog/setting-css-values-dynamically-in-svelte.md": {
-    "file": "chunks/setting-css-values-dynamically-in-svelte-55cd6704.js",
+    "file": "chunks/setting-css-values-dynamically-in-svelte-8462bba7.js",
     "src": "posts/blog/setting-css-values-dynamically-in-svelte.md",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-f15b48c1.js"
+      "_vendor-e04e0de5.js"
     ]
   },
   "posts/blog/setting-up-a-logitech-vertical-mx-mouse-osx.md": {
-    "file": "chunks/setting-up-a-logitech-vertical-mx-mouse-osx-2e49ae7b.js",
+    "file": "chunks/setting-up-a-logitech-vertical-mx-mouse-osx-6a528ee5.js",
     "src": "posts/blog/setting-up-a-logitech-vertical-mx-mouse-osx.md",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-f15b48c1.js"
+      "_vendor-e04e0de5.js"
     ]
   },
   "posts/blog/setting-up-thunderbird-for-gmail-on-os-x.md": {
-    "file": "chunks/setting-up-thunderbird-for-gmail-on-os-x-7d833dfa.js",
+    "file": "chunks/setting-up-thunderbird-for-gmail-on-os-x-9a6b4b97.js",
     "src": "posts/blog/setting-up-thunderbird-for-gmail-on-os-x.md",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-f15b48c1.js"
+      "_vendor-e04e0de5.js"
     ]
   },
   "posts/blog/sharing-thunderbird-message-filters-across-computers.md": {
-    "file": "chunks/sharing-thunderbird-message-filters-across-computers-1887fdd5.js",
+    "file": "chunks/sharing-thunderbird-message-filters-across-computers-d20c241f.js",
     "src": "posts/blog/sharing-thunderbird-message-filters-across-computers.md",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-f15b48c1.js"
+      "_vendor-e04e0de5.js"
     ]
   },
   "posts/blog/simple-voice-recording-mac.md": {
-    "file": "chunks/simple-voice-recording-mac-7413f33a.js",
+    "file": "chunks/simple-voice-recording-mac-dd7d2624.js",
     "src": "posts/blog/simple-voice-recording-mac.md",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-f15b48c1.js"
+      "_vendor-e04e0de5.js"
     ]
   },
   "posts/blog/stop-chrome-navigating-back-when-swiping-horizontally.md": {
-    "file": "chunks/stop-chrome-navigating-back-when-swiping-horizontally-0546bf28.js",
+    "file": "chunks/stop-chrome-navigating-back-when-swiping-horizontally-4fc8c351.js",
     "src": "posts/blog/stop-chrome-navigating-back-when-swiping-horizontally.md",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-f15b48c1.js"
+      "_vendor-e04e0de5.js"
     ]
   },
   "posts/blog/storing-bash-profile-and-so-on-on-github.md": {
-    "file": "chunks/storing-bash-profile-and-so-on-on-github-f573a70b.js",
+    "file": "chunks/storing-bash-profile-and-so-on-on-github-b2ccf577.js",
     "src": "posts/blog/storing-bash-profile-and-so-on-on-github.md",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-f15b48c1.js"
+      "_vendor-e04e0de5.js"
     ]
   },
   "posts/blog/svn-status-codes.md": {
-    "file": "chunks/svn-status-codes-c57665e1.js",
+    "file": "chunks/svn-status-codes-7693999d.js",
     "src": "posts/blog/svn-status-codes.md",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-f15b48c1.js"
+      "_vendor-e04e0de5.js"
     ]
   },
   "posts/blog/trello-like-crm-tool-with-google-apps-script.md": {
-    "file": "chunks/trello-like-crm-tool-with-google-apps-script-cc0d8724.js",
+    "file": "chunks/trello-like-crm-tool-with-google-apps-script-78b30b23.js",
     "src": "posts/blog/trello-like-crm-tool-with-google-apps-script.md",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-f15b48c1.js"
+      "_vendor-e04e0de5.js"
     ]
   },
   "posts/blog/using-say-command-to-make-os-x-talk-and-fixing-it.md": {
-    "file": "chunks/using-say-command-to-make-os-x-talk-and-fixing-it-fe2d0dad.js",
+    "file": "chunks/using-say-command-to-make-os-x-talk-and-fixing-it-f6f9ffa4.js",
     "src": "posts/blog/using-say-command-to-make-os-x-talk-and-fixing-it.md",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-f15b48c1.js"
+      "_vendor-e04e0de5.js"
     ]
   },
   "posts/blog/getting-started/index.md": {
-    "file": "chunks/index-703e745c.js",
+    "file": "chunks/index-dc644980.js",
     "src": "posts/blog/getting-started/index.md",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-f15b48c1.js"
+      "_vendor-e04e0de5.js"
     ],
     "assets": [
       "assets/penguins-b7dc7505.mp4"
     ]
   },
   "posts/blog/joining-pdf-files-in-os-x-from-the-command-line/index.md": {
-    "file": "chunks/index-9e172f09.js",
+    "file": "chunks/index-89c3eb7c.js",
     "src": "posts/blog/joining-pdf-files-in-os-x-from-the-command-line/index.md",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-f15b48c1.js"
+      "_vendor-e04e0de5.js"
     ],
     "assets": [
       "assets/joining-pdf-5fb07e75.jpg"

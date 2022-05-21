@@ -8,7 +8,7 @@
     
           <item>
             <guid>https://gotofritz.net/posts/blog-with-sveltekit-and-markdown</guid>
-            <title>I rebuilt my website with SvelteKit</title>
+            <title>I rebuilt this website with SvelteKit</title>
             <description>undefined</description>
             <link>https://gotofritz.net/posts/blog-with-sveltekit-and-markdown</link>
             <pubDate>Fri, 22 Apr 2022 00:00:00 GMT</pubDate>
@@ -24,7 +24,7 @@
       
           <item>
             <guid>https://gotofritz.net/posts/fixing-autoformatting-django-templates-in-visual-studio-code</guid>
-            <title>Fixing autoformatting Django templates in Visual Studio Co</title>
+            <title>Fixing autoformatting Django templates in VS Code</title>
             <description>undefined</description>
             <link>https://gotofritz.net/posts/fixing-autoformatting-django-templates-in-visual-studio-code</link>
             <pubDate>Wed, 23 Mar 2022 00:00:00 GMT</pubDate>
@@ -47,30 +47,6 @@
         </item>
       
           <item>
-            <guid>https://gotofritz.net/posts/lorem-ipsum</guid>
-            <title>Lorem Ipsum</title>
-            <description>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Et molestie ac feugiat sed lectus. Nisi est sit amet facilisis magna etiam tempor orci. Dolor sed viverra ipsum nunc aliquet.</description>
-            <link>https://gotofritz.net/posts/lorem-ipsum</link>
-            <pubDate>Sat, 01 Jan 2022 00:00:00 GMT</pubDate>
-        </item>
-      
-          <item>
-            <guid>https://gotofritz.net/posts/sharing-thunderbird-message-filters-across-computers</guid>
-            <title>Sharing Thunderbird Message Filters across computers</title>
-            <description>undefined</description>
-            <link>https://gotofritz.net/posts/sharing-thunderbird-message-filters-across-computers</link>
-            <pubDate>Mon, 13 Dec 2021 00:00:00 GMT</pubDate>
-        </item>
-      
-          <item>
-            <guid>https://gotofritz.net/posts/trello-like-crm-tool-with-google-apps-script</guid>
-            <title>A Trello-like CRM tool with Google Apps Script</title>
-            <description>undefined</description>
-            <link>https://gotofritz.net/posts/trello-like-crm-tool-with-google-apps-script</link>
-            <pubDate>Fri, 05 Nov 2021 00:00:00 GMT</pubDate>
-        </item>
-      
-          <item>
             <guid>https://gotofritz.net/posts/setting-up-thunderbird-for-gmail-on-os-x</guid>
             <title>Setting up and managing Thunderbird for OS X</title>
             <description>undefined</description>
@@ -84,14 +60,6 @@
             <description>undefined</description>
             <link>https://gotofritz.net/posts/using-say-command-to-make-os-x-talk-and-fixing-it</link>
             <pubDate>Tue, 16 Jun 2020 00:00:00 GMT</pubDate>
-        </item>
-      
-          <item>
-            <guid>https://gotofritz.net/posts/accessing-the-wikipedia-api</guid>
-            <title>Accessing the wikipedia API</title>
-            <description>The Wikipedia API has become much easier to use since last time I used it…https://en.wikipedia.org/wiki/Special:ApiSandbox#action=query&format=json∝=extracts%7Cdescription%7Ccategories&generator=random&exlimit=max&exintro=1&explaintext=1&clshow=!hidden&cllimit=max&grnnamespace=0&grnfilterredir=nonredirects&grnlimit=20</description>
-            <link>https://gotofritz.net/posts/accessing-the-wikipedia-api</link>
-            <pubDate>Sun, 10 May 2020 00:00:00 GMT</pubDate>
         </item>
       
           <item>

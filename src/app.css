@@ -79,7 +79,7 @@ pre[class*="language-"] {
   display: grid;
   grid-template-columns: auto 1fr;
 }
-.code-breakdown dd),
+.code-breakdown dd,
 .code-breakdown dt {
   padding: 0.2rem 0.4rem;
   margin-bottom: 0.3rem;
