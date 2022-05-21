@@ -84,14 +84,14 @@
   <meta name="twitter:image" content={ogImage} />
 </svelte:head>
 
-<article class="relative post grid mb-12">
+<article class="relative post lg:grid mb-12 p-2 l:p-0">
   <header class="mt-8 mb-4">
-    <h1 class="font-display text-6xl">
+    <h1 class="font-display text-5xl lg:text-6xl">
       {title}
     </h1>
   </header>
 
-  <main class="intro font-intro text-2xl leading-snug">
+  <main class="intro font-intro text-xl lg:text-4xl leading-snug">
     {@html excerpt}
     <div class="opacity-70 mb-28 mt-2 prose">
       <PostDate {date} {readingTime} />
@@ -117,55 +117,53 @@
 
 {#if previous || next}
   <hr />
-  <div class="grid gap-8 grid-cols-1 sm:grid-cols-2">
-    {#if previous}
-      <div class="flex flex-col">
-        <h6 class="not-prose post-preview-label">Previous Post</h6>
-        <div class="flex-1 post-preview">
-          <PostPreview post={previous} small />
+  <div class="p-2 lg:p-0">
+    <div class="grid gap-8 grid-cols-1 sm:grid-cols-2">
+      {#if previous}
+        <div class="flex flex-col">
+          <h6 class="not-prose post-preview-label">Previous Post</h6>
+          <div class="flex-1 post-preview">
+            <PostPreview post={previous} small />
+          </div>
         </div>
-      </div>
-    {:else}
-      <div />
-    {/if}
-    {#if next}
-      <div class="flex flex-col">
-        <h6 class="not-prose post-preview-label flex justify-end">Next Post</h6>
-        <div class="flex-1 post-preview">
-          <PostPreview post={next} small />
+      {:else}
+        <div />
+      {/if}
+      {#if next}
+        <div class="flex flex-col">
+          <h6 class="not-prose post-preview-label flex justify-end">
+            Next Post
+          </h6>
+          <div class="flex-1 post-preview">
+            <PostPreview post={next} small />
+          </div>
         </div>
-      </div>
-    {/if}
+      {/if}
+    </div>
   </div>
 {/if}
 
 <style lang="postcss">
-  :global(h2) {
-    @apply text-2xl mb-4 font-bold;
-  }
+  @media (min-width: 768px) {
+    .post {
+      grid-template-columns: 4rem 45rem 6rem;
+      grid-template-areas:
+        "header header header"
+        "intro  intro  intro "
+        " .. posts .."
+        "footer footer footer ";
+    }
 
-  :global(h2:not(:first-of-type)) {
-    @apply mt-8;
-  }
+    header {
+      grid-area: header;
+    }
 
-  .post {
-    grid-template-columns: 4rem 45rem 6rem;
-    grid-template-areas:
-      "header header header"
-      "intro  intro  intro "
-      " .. posts .."
-      "footer footer footer ";
-  }
+    .intro {
+      grid-area: intro;
+    }
 
-  header {
-    grid-area: header;
-  }
-
-  .intro {
-    grid-area: intro;
-  }
-
-  .post-content {
-    grid-area: posts;
+    .post-content {
+      grid-area: posts;
+    }
   }
 </style>
