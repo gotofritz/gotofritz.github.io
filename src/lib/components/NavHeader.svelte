@@ -1,4 +1,5 @@
 <script>
+  import { page } from "$app/stores";
   import MoonIcon from "heroicons-svelte/solid/MoonIcon.svelte";
   import SunIcon from "heroicons-svelte/solid/SunIcon.svelte";
   import SearchIcon from "heroicons-svelte/solid/SearchIcon.svelte";
@@ -23,6 +24,8 @@
       }
     }
   });
+
+  export let isHome = $page.url.pathname === "/";
 </script>
 
 <nav class="navigation overflow-hidden relative" class:isSearching>
@@ -74,6 +77,9 @@
             {/if}
           </button>
         {/if}
+        {#if !isHome}
+          <a href="/">home</a>
+        {/if}
         <div class="flex gap-1">
           <SearchIcon class="h-3 w-3 sm:h-6 sm:w-6" color="white" />
           <button
@@ -84,11 +90,14 @@
             >search
           </button>
         </div>
-        <a href="mailto:info@gotofritz.net">email</a>
-        <a href="/fritz-stelluto_resume.pdf">resume</a>
-        <a href="/feed.xml"
-          ><RssIcon class="h-3 w-3 sm:h-6 sm:w-6" color="white" /></a
-        >{/if}
+        {#if isHome}
+          <a href="mailto:info@gotofritz.net">email</a>
+          <a href="/fritz-stelluto_resume.pdf">resume</a>
+          <a href="/feed.xml"
+            ><RssIcon class="h-3 w-3 sm:h-6 sm:w-6" color="white" /></a
+          >
+        {/if}
+      {/if}
     </div>
   </div>
 </nav>
