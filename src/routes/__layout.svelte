@@ -15,4 +15,7 @@
 <Footer />
 
 <style>
+  :global(header h1) {
+    line-height: 1;
+  }
 </style>

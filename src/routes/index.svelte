@@ -59,7 +59,6 @@
   }
   header h1 {
     font-size: 9.4rem;
-    line-height: 1.1;
   }
 
   .intro {

@@ -57,9 +57,6 @@
   header {
     grid-area: header;
   }
-  header h1 {
-    line-height: 1.1;
-  }
 
   .posts {
     grid-area: posts;

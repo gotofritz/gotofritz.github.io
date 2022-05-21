@@ -87,7 +87,7 @@
 </svelte:head>
 
 <article class="relative post grid mb-12">
-  <header class="mt-8">
+  <header class="mt-8 mb-4">
     <h1 class="font-display text-6xl">
       {title}
     </h1>
@@ -171,7 +171,7 @@
   }
 
   .post {
-    grid-template-columns: 4rem 46rem 6rem;
+    grid-template-columns: 4rem 45rem 6rem;
     grid-template-areas:
       "header header header"
       "intro  intro  intro "
@@ -181,9 +181,6 @@
 
   header {
     grid-area: header;
-  }
-  header h1 {
-    line-height: 1.1;
   }
 
   .intro {
