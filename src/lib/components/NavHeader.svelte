@@ -29,9 +29,9 @@
 </script>
 
 <nav class="navigation overflow-hidden relative" class:isSearching>
-  <div class="max-w-4xl px-2 l:px-0 mx-auto z-50">
+  <div class="max-w-4xl px-2 lg:px-0 mx-auto z-50">
     <div
-      class="min-w-min flex justify-end items-center gap-6 l:gap-12 h-12 md:h-24 pr-12"
+      class="min-w-min flex justify-end items-center gap-6 lg:gap-12 h-12 md:h-24 pr-12"
     >
       {#if isSearching}
         <form
@@ -39,12 +39,12 @@
           method="get"
           class="search w-full h-full"
         >
-          <div class="flex h-12 l:h-full">
-            <SearchIcon class="h-12 w-12 l:h-24 l:w-24" color="white" />
+          <div class="flex h-12 lg:h-full">
+            <SearchIcon class="h-12 w-12 lg:h-24 lg:w-24" color="white" />
             <input
               type="text"
               id="search-str"
-              class="placeholder-white w-full h-full font-display text-black text-2xl l:text-6xl"
+              class="placeholder-white w-full h-full font-display text-black text-2xl lg:text-6xl"
               name="q"
               results="0"
               placeholder="search"

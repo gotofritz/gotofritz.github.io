@@ -15,9 +15,7 @@
 </script>
 
 <script>
-  import PostPreview from "$lib/components/PostPreview.svelte";
   import TagEntry from "$lib/components/TagEntry.svelte";
-  import { makeTitle } from "$lib/info.js";
   import { searching } from "$lib/stores/searching";
 
   export let recentPosts;
@@ -28,7 +26,7 @@
 </svelte:head>
 
 <div
-  class="home grid"
+  class="gotofritz-grid home grid"
   on:click={() => {
     searching.set(false);
   }}
@@ -46,23 +44,4 @@
 </div>
 
 <style>
-  .home {
-    grid-template-columns: 4rem auto 6rem;
-    grid-template-areas:
-      "header header header"
-      "intro  intro  intro "
-      " .. posts .."
-      "footer footer footer ";
-  }
-  header {
-    grid-area: header;
-  }
-
-  .posts {
-    grid-area: posts;
-  }
-  :global(.home-icon) {
-    height: 1rem;
-    width: 1rem;
-  }
 </style>

@@ -25,7 +25,7 @@
 </svelte:head>
 
 <div
-  class="home lg:grid p-2 l:p-0"
+  class="gotofritz-grid home lg:grid p-2 l:p-0"
   on:click={() => {
     searching.set(false);
   }}
@@ -62,26 +62,6 @@
     }
     header h1 {
       font-size: 9.4rem;
-    }
-
-    .posts {
-      grid-area: posts;
-    }
-    .home {
-      grid-template-columns: 4rem auto 6rem;
-      grid-template-areas:
-        "header header header"
-        "intro  intro  intro "
-        " .. posts .."
-        "footer footer footer ";
-    }
-
-    .intro {
-      grid-area: intro;
-    }
-
-    header {
-      grid-area: header;
     }
   }
 </style>

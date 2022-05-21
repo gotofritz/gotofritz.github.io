@@ -5,6 +5,7 @@
 @layer base {
   h1 {
     @apply text-3xl;
+    line-height: 1;
   }
   h2 {
     @apply text-2xl mb-4 font-bold;
@@ -32,6 +33,42 @@
 
   ol {
     @apply list-inside list-decimal;
+  }
+}
+
+@layer components {
+  @media (min-width: 768px) {
+    .intro {
+      width: 49ch;
+    }
+    header h1 {
+      font-size: 9.4rem;
+    }
+
+    .posts {
+      grid-area: posts;
+    }
+
+    .gotofritz-grid {
+      grid-template-columns: 4rem auto 6rem;
+      grid-template-areas:
+        "header header header"
+        "intro  intro  intro "
+        " .. posts .."
+        "footer footer footer ";
+    }
+
+    .intro {
+      grid-area: intro;
+    }
+
+    .post-content {
+      grid-area: posts;
+    }
+
+    header {
+      grid-area: header;
+    }
   }
 }
 

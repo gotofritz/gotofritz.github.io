@@ -84,7 +84,7 @@
   <meta name="twitter:image" content={ogImage} />
 </svelte:head>
 
-<article class="relative post lg:grid mb-12 p-2 l:p-0">
+<article class="gotofritz-grid relative post lg:grid mb-12 p-2 l:p-0">
   <header class="mt-8 mb-4">
     <h1 class="font-display text-5xl lg:text-6xl">
       {title}
@@ -145,25 +145,8 @@
 
 <style lang="postcss">
   @media (min-width: 768px) {
-    .post {
+    .gotofritz-grid {
       grid-template-columns: 4rem 45rem 6rem;
-      grid-template-areas:
-        "header header header"
-        "intro  intro  intro "
-        " .. posts .."
-        "footer footer footer ";
-    }
-
-    header {
-      grid-area: header;
-    }
-
-    .intro {
-      grid-area: intro;
-    }
-
-    .post-content {
-      grid-area: posts;
     }
   }
 </style>
