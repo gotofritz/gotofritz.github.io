@@ -8,6 +8,8 @@ module.exports = {
       display: "'DM Serif Display', Helvetica, sans-serif",
       intro: "'Mate', Helvetica, sans-serif",
       summary: "Alegreya SC, Mate, helvetica, sans-serif",
+      sans:
+        'ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
     },
     extend: {
       visibility: ["group-hover"],

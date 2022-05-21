@@ -36,5 +36,65 @@ svg {
   @apply outline-none focus:outline-none;
 }
 
+ul,
+ol,
+dl {
+  margin-top: 1rem;
+}
+
+ul,
+ol {
+  list-style: inherit;
+  margin-left: 1rem;
+}
+
+.readable-list dd {
+  margin-bottom: 1.4rem;
+}
+
+.readable-list dt {
+  font-weight: bold;
+}
+
+.post-content p {
+  margin-bottom: 1rem;
+  padding-right: 2rem;
+}
+
+.post-content a:not(:only-child) {
+  background-color: #eeeeee;
+  border-bottom: 1px dotted #e9e9e9;
+}
+
+.post-content a:not(:only-child):hover {
+  border-bottom: 1px dotted #666;
+}
+
+pre[class*="language-"] {
+  margin-bottom: 1.5rem;
+  overflow-x: scroll;
+}
+
+.code-breakdown {
+  display: grid;
+  grid-template-columns: auto 1fr;
+}
+.code-breakdown dd),
+.code-breakdown dt {
+  padding: 0.2rem 0.4rem;
+  margin-bottom: 0.3rem;
+  margin-inline-start: 0;
+}
+.code-breakdown dt {
+  background: rgb(245, 242, 240);
+  border-radius: 0.3em;
+  margin-right: 0.8rem;
+  text-align: right;
+}
+
+pre > code {
+  width: 100%;
+}
+
 @tailwind components;
 @tailwind utilities;

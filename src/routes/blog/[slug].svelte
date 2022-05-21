@@ -150,16 +150,6 @@
     @apply mt-8;
   }
 
-  :global(pre[class^="language"]) {
-    /* margin: 1rem -6rem 1rem -10rem; */
-    overflow-x: scroll;
-  }
-
-  :global(pre > code) {
-    /* margin: 1rem -6rem 1rem -10rem; */
-    width: 100%;
-  }
-
   .post {
     grid-template-columns: 4rem 45rem 6rem;
     grid-template-areas:
@@ -179,23 +169,5 @@
 
   .post-content {
     grid-area: posts;
-  }
-
-  :global(.post-content p) {
-    margin-bottom: 1rem;
-    padding-right: 2rem;
-  }
-
-  :global(.post-content p a) {
-    background-color: #eeeeee;
-    border-bottom: 1px dotted #e9e9e9;
-  }
-
-  :global(.post-content p a:hover) {
-    border-bottom: 1px dotted #666;
-  }
-
-  :global(pre[class*="language-"]) {
-    margin-bottom: 1.5rem;
   }
 </style>
