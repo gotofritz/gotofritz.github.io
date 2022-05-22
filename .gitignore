@@ -7,5 +7,6 @@ node_modules
 !.env.example
 .vercel
 .output
-posts/*
-!posts/.gitkeep
+posts/blog/*
+!posts/blog/getting-started
+!posts/blog/lorem-ipsum.md

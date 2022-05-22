@@ -95,9 +95,9 @@
         {#if isHome}
           <a href="mailto:info@gotofritz.net">email</a>
           <a href="/fritz-stelluto_resume.pdf">resume</a>
-          <a href="/feed.xml"
+          <!-- <a href="/feed.xml"
             ><RssIcon class="h-3 w-3 sm:h-6 sm:w-6" color="white" /></a
-          >
+          > -->
         {/if}
       {/if}
     </div>

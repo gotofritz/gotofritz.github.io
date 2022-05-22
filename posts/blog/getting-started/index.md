@@ -1,6 +1,7 @@
 ---
 title: Getting Started
 date: 2022-01-08
+draft: true
 ---
 
 Thanks for checking out my blog template. It's based on the blog I built for my own [website](https://mattjennings.io) and I hope this is a good starting point for you to start yours.
@@ -34,7 +35,7 @@ Make sure your posts have `title` and `date` properties in the front matter:
 ---
 title: My First Post
 date: 2021-07-09
-preview: This text will be used for the preview instead of the first paragraph 
+preview: This text will be used for the preview instead of the first paragraph
 ---
 
 (your content here)
@@ -76,7 +77,7 @@ For code blocks it uses a slightly modified Night Owl theme. You can change the 
 
 ```javascript
 function helloWorld() {
-  return 'Hello World'
+  return "Hello World";
 }
 ```
 
