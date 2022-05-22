@@ -9,7 +9,7 @@
           <item>
             <guid>https://gotofritz.net/blog/removing-lines-matching-patterns-from-all-files-in-dir</guid>
             <title>Remove lines matching some patterns from all files in a dir</title>
-            <description>undefined</description>
+            <description>A CLI task I find myself doing often with sed</description>
             <link>https://gotofritz.net/blog/removing-lines-matching-patterns-from-all-files-in-dir</link>
             <pubDate>Sun, 22 May 2022 00:00:00 GMT</pubDate>
         </item>
@@ -17,7 +17,7 @@
           <item>
             <guid>https://gotofritz.net/blog/how-to-build-blog-with-sveltekit-markdown-tailwind</guid>
             <title>How I built a markdown drive static website with SvelteKit and Tailwind</title>
-            <description>undefined</description>
+            <description>In my last post I ported my existing blog to SvelteKit, to get to used to it. Now I am going to build a new version from scratch, using markdown and tailwind. I will use Matt Jennings's excellent SvelteKit blog template as seed.</description>
             <link>https://gotofritz.net/blog/how-to-build-blog-with-sveltekit-markdown-tailwind</link>
             <pubDate>Tue, 03 May 2022 00:00:00 GMT</pubDate>
         </item>
@@ -25,7 +25,7 @@
           <item>
             <guid>https://gotofritz.net/blog/blog-with-sveltekit-and-markdown</guid>
             <title>I rebuilt my website with SvelteKit</title>
-            <description>undefined</description>
+            <description>Building a static website with Sveltekit and markdown is hard going at first. But just when I was about to give up I stumbled on some blog posts and boilerplates that helped me crack it. I may still switch to Astro later though</description>
             <link>https://gotofritz.net/blog/blog-with-sveltekit-and-markdown</link>
             <pubDate>Fri, 22 Apr 2022 00:00:00 GMT</pubDate>
         </item>
@@ -33,7 +33,7 @@
           <item>
             <guid>https://gotofritz.net/blog/reordering-audio-files-in-a-fat-usb-stick</guid>
             <title>Reordering audio files in a FAT USB stick</title>
-            <description>undefined</description>
+            <description>I copy audiobooks from CDs to USB sticks to play them in cars and random device like old radios. But often those devices play the files out of order. Reordering files in FAT USB sticks is harder than I thought. Luckily, a chap by the name of Boris Leidner has written a useful tool for that.</description>
             <link>https://gotofritz.net/blog/reordering-audio-files-in-a-fat-usb-stick</link>
             <pubDate>Fri, 01 Apr 2022 00:00:00 GMT</pubDate>
         </item>
@@ -41,7 +41,7 @@
           <item>
             <guid>https://gotofritz.net/blog/fixing-autoformatting-django-templates-in-visual-studio-code</guid>
             <title>Fixing autoformatting Django templates in Visual Studio Co</title>
-            <description>undefined</description>
+            <description>Prettier autoformatting screws up Django html templates in Visual Studio Code. For example, it puts tags on the same line when they shouldn't be. The fix is pretty simple and involves a couple of different formatting extension.</description>
             <link>https://gotofritz.net/blog/fixing-autoformatting-django-templates-in-visual-studio-code</link>
             <pubDate>Wed, 23 Mar 2022 00:00:00 GMT</pubDate>
         </item>
@@ -49,7 +49,7 @@
           <item>
             <guid>https://gotofritz.net/blog/installing-python-on-mac-os-x-in-2022</guid>
             <title>How I install python on OS X in 2022</title>
-            <description>undefined</description>
+            <description>There are many different ways of doing it; my favourite involves using pyenv</description>
             <link>https://gotofritz.net/blog/installing-python-on-mac-os-x-in-2022</link>
             <pubDate>Mon, 03 Jan 2022 00:00:00 GMT</pubDate>
         </item>
@@ -57,7 +57,7 @@
           <item>
             <guid>https://gotofritz.net/blog/setting-up-thunderbird-for-gmail-on-os-x</guid>
             <title>Setting up and managing Thunderbird for OS X</title>
-            <description>undefined</description>
+            <description>I have recently switched to Thunderbird from Gyazmail, the obscure mail program I have been using for years. Here are some setup tips that worked for me</description>
             <link>https://gotofritz.net/blog/setting-up-thunderbird-for-gmail-on-os-x</link>
             <pubDate>Thu, 06 Aug 2020 00:00:00 GMT</pubDate>
         </item>
@@ -65,7 +65,7 @@
           <item>
             <guid>https://gotofritz.net/blog/using-say-command-to-make-os-x-talk-and-fixing-it</guid>
             <title>Using the 'Say' command to make OS X talk, and fixing it when it gets stuck</title>
-            <description>undefined</description>
+            <description>One can easily make OS X read out text from the CLI with the say command. But what to do when it gets stuck and stops working?</description>
             <link>https://gotofritz.net/blog/using-say-command-to-make-os-x-talk-and-fixing-it</link>
             <pubDate>Tue, 16 Jun 2020 00:00:00 GMT</pubDate>
         </item>
@@ -73,7 +73,7 @@
           <item>
             <guid>https://gotofritz.net/blog/setting-up-a-logitech-vertical-mx-mouse-osx</guid>
             <title>Setting up a Logitech Vertical MX mouse with a Mac</title>
-            <description>undefined</description>
+            <description>I got myself one of these ergonomic mice, connected it to my Mac and configured the extra buttons. I like it</description>
             <link>https://gotofritz.net/blog/setting-up-a-logitech-vertical-mx-mouse-osx</link>
             <pubDate>Sat, 02 May 2020 00:00:00 GMT</pubDate>
         </item>
@@ -81,7 +81,7 @@
           <item>
             <guid>https://gotofritz.net/blog/setting-css-values-dynamically-in-svelte</guid>
             <title>Setting CSS values dynamically in Svelte</title>
-            <description>undefined</description>
+            <description>If you are used to React's Styled Components, assigning CSS values dynamically in Svelte can be baffling at first.</description>
             <link>https://gotofritz.net/blog/setting-css-values-dynamically-in-svelte</link>
             <pubDate>Thu, 09 Apr 2020 00:00:00 GMT</pubDate>
         </item>
@@ -89,7 +89,7 @@
           <item>
             <guid>https://gotofritz.net/blog/countdown-clock-state-machine-requestanimationframe-vanilla-js</guid>
             <title>A countdown clock using requestAnimationFrame, a state machine, and vanilla JS</title>
-            <description>undefined</description>
+            <description>I wanted to play with state machines and requestAnimationFrame in vanilla JS, so I came up with the idea of a simple countdown clock.</description>
             <link>https://gotofritz.net/blog/countdown-clock-state-machine-requestanimationframe-vanilla-js</link>
             <pubDate>Sat, 28 Mar 2020 00:00:00 GMT</pubDate>
         </item>
@@ -97,7 +97,7 @@
           <item>
             <guid>https://gotofritz.net/blog/music-remove-album-ratings-applescript</guid>
             <title>Removing album ratings from Apple Music App</title>
-            <description>undefined</description>
+            <description>Apple Music / iTunes "helpfully" adds ratings to songs for you, based on the ratings of the other songs in the album. This messes some of my smart playlists up. Only Applescript will get rid of those ratings</description>
             <link>https://gotofritz.net/blog/music-remove-album-ratings-applescript</link>
             <pubDate>Wed, 11 Mar 2020 00:00:00 GMT</pubDate>
         </item>
@@ -105,7 +105,7 @@
           <item>
             <guid>https://gotofritz.net/blog/osx-apps</guid>
             <title>OS X Apps I use</title>
-            <description>undefined</description>
+            <description>All the OS X apps I use - for when I need to reinstall a new machine.</description>
             <link>https://gotofritz.net/blog/osx-apps</link>
             <pubDate>Mon, 09 Sep 2019 00:00:00 GMT</pubDate>
         </item>
@@ -113,7 +113,7 @@
           <item>
             <guid>https://gotofritz.net/blog/backing-up-hard-disk-os-x</guid>
             <title>Backing up a hard disk to another in OS X</title>
-            <description>undefined</description>
+            <description>Time Machine does its own backup magic, but sometimes you just simply want two identical copies of the same hard disk. For that rsync is the way to go</description>
             <link>https://gotofritz.net/blog/backing-up-hard-disk-os-x</link>
             <pubDate>Sat, 16 Jan 2016 00:00:00 GMT</pubDate>
         </item>
@@ -121,7 +121,7 @@
           <item>
             <guid>https://gotofritz.net/blog/stop-chrome-navigating-back-when-swiping-horizontally</guid>
             <title>Stop Chrome navigating back when swiping horizontally</title>
-            <description>undefined</description>
+            <description>If you try to use Google Chrome on a small window on a laptop, perhaps because you are comparing two web pages side by side, swiping left or right doesn't move the page around, but it jumps to the previous or next page. Here's how to prevent that on OS X.</description>
             <link>https://gotofritz.net/blog/stop-chrome-navigating-back-when-swiping-horizontally</link>
             <pubDate>Sat, 09 Jan 2016 00:00:00 GMT</pubDate>
         </item>
@@ -129,7 +129,7 @@
           <item>
             <guid>https://gotofritz.net/blog/how-to-avoid-sudo-npm</guid>
             <title>How To Avoid sudo npm</title>
-            <description>undefined</description>
+            <description>You know the story. You try to do npm install hipster-package on OS X and you get a whole load of errors; the easy way out is to just use sudo npm install. Everyone, however, keep saying how that is bad idea. But how do you make npm work without sudo? It's quite simple actually</description>
             <link>https://gotofritz.net/blog/how-to-avoid-sudo-npm</link>
             <pubDate>Mon, 14 Dec 2015 00:00:00 GMT</pubDate>
         </item>
@@ -137,7 +137,7 @@
           <item>
             <guid>https://gotofritz.net/blog/pretty-printing-xml</guid>
             <title>Pretty printing XML</title>
-            <description>undefined</description>
+            <description>tidy is a command line tool for formatting XML and HTML. Also available as a Visual Studio Code Extension</description>
             <link>https://gotofritz.net/blog/pretty-printing-xml</link>
             <pubDate>Tue, 20 Oct 2015 00:00:00 GMT</pubDate>
         </item>
@@ -145,7 +145,7 @@
           <item>
             <guid>https://gotofritz.net/blog/os-x-software-update-from-command-line</guid>
             <title>OS X Software Update from the Command Line</title>
-            <description>undefined</description>
+            <description>Software updates can be quite tedious - you have to click a lot of buttons, then get into the Apple Store etc. But you can avoid all that by running it from the command line.</description>
             <link>https://gotofritz.net/blog/os-x-software-update-from-command-line</link>
             <pubDate>Mon, 24 Aug 2015 00:00:00 GMT</pubDate>
         </item>
@@ -153,7 +153,7 @@
           <item>
             <guid>https://gotofritz.net/blog/os-x-dns-lookups-too-slow-for-local-hosts</guid>
             <title>OS X DNS lookups too slow for local hosts</title>
-            <description>undefined</description>
+            <description>OS can sometimes take forever to resolve hosts setup on my local machine. Here is how I solved it.</description>
             <link>https://gotofritz.net/blog/os-x-dns-lookups-too-slow-for-local-hosts</link>
             <pubDate>Fri, 24 Apr 2015 00:00:00 GMT</pubDate>
         </item>
@@ -161,7 +161,7 @@
           <item>
             <guid>https://gotofritz.net/blog/directory-listings-in-apache-2-4</guid>
             <title>Directory listings in Apache 2.4</title>
-            <description>undefined</description>
+            <description>Yosemite updates Apache to 2.4. A couple of things stopped working from my previous installation, including autogenerated directory listings. Here's how I got them back.</description>
             <link>https://gotofritz.net/blog/directory-listings-in-apache-2-4</link>
             <pubDate>Sat, 07 Mar 2015 00:00:00 GMT</pubDate>
         </item>
@@ -169,7 +169,7 @@
           <item>
             <guid>https://gotofritz.net/blog/storing-bash-profile-and-so-on-on-github</guid>
             <title>dotfiles</title>
-            <description>undefined</description>
+            <description>Storing your CLI config files (.bash_profile and all the rest) on github makes sense - as a backup, but also to compare and learn.</description>
             <link>https://gotofritz.net/blog/storing-bash-profile-and-so-on-on-github</link>
             <pubDate>Sun, 01 Sep 2013 00:00:00 GMT</pubDate>
         </item>
@@ -177,7 +177,7 @@
           <item>
             <guid>https://gotofritz.net/blog/install-specific-version-homebrew</guid>
             <title>Install a specific version of a tool on OS X with Homebrew</title>
-            <description>undefined</description>
+            <description>Sometimes you need to install an older version of a package with Homebrew. Here's how I installed version 1.7.10 of Subversion</description>
             <link>https://gotofritz.net/blog/install-specific-version-homebrew</link>
             <pubDate>Wed, 17 Jul 2013 00:00:00 GMT</pubDate>
         </item>
@@ -185,7 +185,7 @@
           <item>
             <guid>https://gotofritz.net/blog/copying-files-matching-pattern-cpio</guid>
             <title>Copying sourcefiles without .git folders with cpio</title>
-            <description>undefined</description>
+            <description>Sometimes you need to copy your local version of a project under subversion to a new location, without all the .git stuff. Here's a couple of ways of doing it.</description>
             <link>https://gotofritz.net/blog/copying-files-matching-pattern-cpio</link>
             <pubDate>Sat, 23 Mar 2013 00:00:00 GMT</pubDate>
         </item>
@@ -193,7 +193,7 @@
           <item>
             <guid>https://gotofritz.net/blog/os-x-extended-attibutes</guid>
             <title>Dealing with extended attributes on OS X</title>
-            <description>undefined</description>
+            <description>Extended attributes store extra information about files in OS X. They replaced resource forks. Sometimes those extra hidden files confuse peripherals (e.g. mp3 players) that were not setup to deal with them. Here are some terminal commands to handle them.</description>
             <link>https://gotofritz.net/blog/os-x-extended-attibutes</link>
             <pubDate>Sat, 25 Aug 2012 00:00:00 GMT</pubDate>
         </item>
@@ -201,7 +201,7 @@
           <item>
             <guid>https://gotofritz.net/blog/simple-voice-recording-mac</guid>
             <title>Making a simple voice recording on a Mac</title>
-            <description>undefined</description>
+            <description>To make a quick voice recording with OS X: open Quick Time Player, under the File menu there is a "New. Audio Recording" entry. It automatically saves .mov files in your Movies folder, which you can then open in Audacity or the editor of your choice.</description>
             <link>https://gotofritz.net/blog/simple-voice-recording-mac</link>
             <pubDate>Thu, 19 Jul 2012 00:00:00 GMT</pubDate>
         </item>
@@ -209,7 +209,7 @@
           <item>
             <guid>https://gotofritz.net/blog/escaping-in-replace-strings-in-javascript</guid>
             <title>Escaping $ in replace strings in Javascript</title>
-            <description>undefined</description>
+            <description>To have a $ in your replace strings in Javascript regular expressions, it needs to be escaped with another $</description>
             <link>https://gotofritz.net/blog/escaping-in-replace-strings-in-javascript</link>
             <pubDate>Wed, 28 Mar 2012 00:00:00 GMT</pubDate>
         </item>
@@ -217,7 +217,8 @@
           <item>
             <guid>https://gotofritz.net/blog/change-title-cmd-window</guid>
             <title>Changing title of CMD window</title>
-            <description>undefined</description>
+            <description>title some words will change the title of your cmd shell in Window
+The title will be `some words` instead of `C:\Windows\system32\cmd.exe`. Handy if you have a few of them open and can't tell them apart.</description>
             <link>https://gotofritz.net/blog/change-title-cmd-window</link>
             <pubDate>Tue, 06 Mar 2012 00:00:00 GMT</pubDate>
         </item>
@@ -225,7 +226,7 @@
           <item>
             <guid>https://gotofritz.net/blog/combining-images-imagemagick</guid>
             <title>Combining images with ImageMagick</title>
-            <description>undefined</description>
+            <description>Assorted ImageMagick commands for combining images</description>
             <link>https://gotofritz.net/blog/combining-images-imagemagick</link>
             <pubDate>Thu, 22 Dec 2011 00:00:00 GMT</pubDate>
         </item>
@@ -233,7 +234,7 @@
           <item>
             <guid>https://gotofritz.net/blog/google-apps-script-boilerplate</guid>
             <title>A Google Apps Script boilerplate</title>
-            <description>undefined</description>
+            <description>I used to do a lot of Google Apps Script (GAS) programming, but Google's never seemed to interested in that product so I gave up. Here I document a simple boilerplate project so that I don't forget how to do it.</description>
             <link>https://gotofritz.net/blog/google-apps-script-boilerplate</link>
             <pubDate>Mon, 12 Dec 2011 00:00:00 GMT</pubDate>
         </item>
@@ -241,7 +242,7 @@
           <item>
             <guid>https://gotofritz.net/blog/advanced-evernote-search</guid>
             <title>Advanced Evernote search</title>
-            <description>undefined</description>
+            <description>It isn't immediately obvious, but Evernote offers advanced search operators.</description>
             <link>https://gotofritz.net/blog/advanced-evernote-search</link>
             <pubDate>Sun, 04 Sep 2011 00:00:00 GMT</pubDate>
         </item>
@@ -249,7 +250,8 @@
           <item>
             <guid>https://gotofritz.net/blog/a-place-for-unix-scripts-osx</guid>
             <title>A good place for scripts in OSX</title>
-            <description>undefined</description>
+            <description>Where to put unix based scripts on a Mac without them getting in the way? Simple: create a bin folder in your home directory, and add it to the path:
+export PATH=~/bin:$PATH</description>
             <link>https://gotofritz.net/blog/a-place-for-unix-scripts-osx</link>
             <pubDate>Thu, 07 Jul 2011 00:00:00 GMT</pubDate>
         </item>
@@ -257,7 +259,7 @@
           <item>
             <guid>https://gotofritz.net/blog/svn-status-codes</guid>
             <title>SVN status codes</title>
-            <description>undefined</description>
+            <description>Running the status command in the command line version of subversion returns a list of files with a one letter code in front of each file name. Here's a list of those one letter codes and what they mean.</description>
             <link>https://gotofritz.net/blog/svn-status-codes</link>
             <pubDate>Wed, 22 Sep 2010 00:00:00 GMT</pubDate>
         </item>
@@ -265,7 +267,7 @@
           <item>
             <guid>https://gotofritz.net/blog/joining-pdf-files-in-os-x-from-the-command-line</guid>
             <title>Joining PDF files in OS X from the command line</title>
-            <description>undefined</description>
+            <description>In OS X, PDF files can be concatenated manually using Preview. But if you are happy using Terminal there's an easier way, thanks to a Python script installed by default in /System/Library/Automator</description>
             <link>https://gotofritz.net/blog/joining-pdf-files-in-os-x-from-the-command-line</link>
             <pubDate>Tue, 13 Jul 2010 00:00:00 GMT</pubDate>
         </item>
@@ -273,7 +275,7 @@
           <item>
             <guid>https://gotofritz.net/blog/finding-files-inside-archive</guid>
             <title>Finding files inside an archive with Terminal</title>
-            <description>undefined</description>
+            <description>Looking for files inside an archive, without having to extract them first using Apple's Terminal.</description>
             <link>https://gotofritz.net/blog/finding-files-inside-archive</link>
             <pubDate>Mon, 09 Nov 2009 00:00:00 GMT</pubDate>
         </item>
@@ -281,7 +283,7 @@
           <item>
             <guid>https://gotofritz.net/blog/finding-recently-changed-files-osx-terminal</guid>
             <title>Finding recently changed files with Terminal</title>
-            <description>undefined</description>
+            <description>Finding files that were changed in the last day, sorted by size, using Apple's Terminal</description>
             <link>https://gotofritz.net/blog/finding-recently-changed-files-osx-terminal</link>
             <pubDate>Wed, 04 Nov 2009 00:00:00 GMT</pubDate>
         </item>
@@ -289,7 +291,7 @@
           <item>
             <guid>https://gotofritz.net/blog/batch-unrar-command-line-os-x</guid>
             <title>Batch unrar from the command line on Mac OS X</title>
-            <description>undefined</description>
+            <description>Rar is a popular archive format on the web. When I need to unarchive several rar files at once, I use RarLab's command line tool. Here's how</description>
             <link>https://gotofritz.net/blog/batch-unrar-command-line-os-x</link>
             <pubDate>Thu, 12 Feb 2009 00:00:00 GMT</pubDate>
         </item>

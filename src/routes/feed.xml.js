@@ -17,7 +17,6 @@ export async function get() {
   const xml = String.raw;
 
   const posts = getPosts();
-
   return {
     headers: {
       "Cache-Control": "max-age=0, s-maxage=3600",

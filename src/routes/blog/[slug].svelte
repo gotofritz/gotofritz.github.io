@@ -36,6 +36,7 @@
 </script>
 
 <script>
+  import NavHeader from "$lib/components/NavHeader.svelte";
   import PostDate from "$lib/components/PostDate.svelte";
   import PostTags from "$lib/components/PostTags.svelte";
   import { name, website } from "$lib/info";
@@ -85,69 +86,74 @@
   <meta name="twitter:image" content={ogImage} />
 </svelte:head>
 
-<article
-  class="gotofritz-grid relative post lg:grid mb-12 p-2 l:p-0"
-  on:click={() => {
-    searching.set(false);
-  }}
->
-  <header class="mt-8 mb-4">
-    <h1 class="font-display text-5xl lg:text-6xl">
-      {title}
-    </h1>
-  </header>
-
-  <main class="intro font-intro text-xl lg:text-4xl leading-snug">
-    {@html excerpt}
-    <div class="opacity-70 mb-28 mt-2 prose">
-      <PostDate {date} {readingTime} />
-      <PostTags {tags} />
-    </div>
-  </main>
-
-  <div class="relative post-content text-lg ">
-    <!-- render the post -->
-    <svelte:component this={component} />
-
-    <!-- table of contents -->
-    <div
-      class="hidden xl:block absolute not-prose left-[100%]"
-      aria-label="Table of Contents"
+<NavHeader />
+<div class="flex flex-col min-h-screen searching:text-gray-300">
+  <div class="mx-auto w-full max-w-4xl">
+    <article
+      class="gotofritz-grid relative post lg:grid mb-12 p-2 l:p-0"
+      on:click={() => {
+        searching.set(false);
+      }}
     >
-      <div class="fixed z-10 px-4 py-2 ml-8 top-[6.5rem] w-60 right-0">
-        <ToC allowedHeadings={["h2", "h3", "h4", "h5", "h6"]} />
-      </div>
-    </div>
-  </div>
-</article>
+      <header class="mt-8 mb-4">
+        <h1 class="font-display text-5xl lg:text-6xl">
+          {title}
+        </h1>
+      </header>
 
-{#if previous || next}
-  <hr />
-  <div class="p-2 lg:p-0">
-    <div class="grid gap-8 grid-cols-1 sm:grid-cols-2">
-      {#if previous}
-        <div class="flex flex-col">
-          <h6 class="not-prose post-preview-label">Previous Post</h6>
-          <div class="flex-1 post-preview">
-            <PostPreview post={previous} small />
+      <main class="intro font-intro text-xl lg:text-4xl leading-snug">
+        {@html excerpt}
+        <div class="opacity-70 mb-28 mt-2 prose">
+          <PostDate {date} {readingTime} />
+          <PostTags {tags} />
+        </div>
+      </main>
+
+      <div class="relative post-content text-lg ">
+        <!-- render the post -->
+        <svelte:component this={component} />
+
+        <!-- table of contents -->
+        <div
+          class="hidden xl:block absolute not-prose left-[100%]"
+          aria-label="Table of Contents"
+        >
+          <div class="fixed z-10 px-4 py-2 ml-8 top-[6.5rem] w-60 right-0">
+            <ToC allowedHeadings={["h2", "h3", "h4", "h5", "h6"]} />
           </div>
         </div>
-      {:else}
-        <div />
-      {/if}
-      {#if next}
-        <div class="flex flex-col">
-          <h6 class="not-prose post-preview-label flex justify-end">
-            Next Post
-          </h6>
-          <div class="flex-1 post-preview">
-            <PostPreview post={next} small />
-          </div>
+      </div>
+    </article>
+
+    {#if previous || next}
+      <hr />
+      <div class="p-2 lg:p-0">
+        <div class="grid gap-8 grid-cols-1 sm:grid-cols-2">
+          {#if previous}
+            <div class="flex flex-col">
+              <h6 class="not-prose post-preview-label">Previous Post</h6>
+              <div class="flex-1 post-preview">
+                <PostPreview post={previous} small />
+              </div>
+            </div>
+          {:else}
+            <div />
+          {/if}
+          {#if next}
+            <div class="flex flex-col">
+              <h6 class="not-prose post-preview-label flex justify-end">
+                Next Post
+              </h6>
+              <div class="flex-1 post-preview">
+                <PostPreview post={next} small />
+              </div>
+            </div>
+          {/if}
         </div>
-      {/if}
-    </div>
+      </div>
+    {/if}
   </div>
-{/if}
+</div>
 
 <style lang="postcss">
   @media (min-width: 768px) {

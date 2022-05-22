@@ -88,14 +88,15 @@ const posts = Object.entries(import.meta.globEager("/posts/**/*.md"))
     const parsedHtml = parse(post.component.render().html);
 
     // Use the custom preview in the metadata, if availabe, or the first paragraph of the post for the preview
-    const preview = post.excerpt ? post.excerpt : parsedHtml.querySelector("p");
-
+    const preview = post.excerpt
+      ? parse(post.excerpt)
+      : parsedHtml.querySelector("p");
     return {
       ...post,
       preview: {
         html: preview.toString(),
         // text-only preview (i.e no html elements), used for SEO
-        text: preview.structuredText,
+        text: preview.structuredText ? preview.structuredText : preview,
       },
 
       // get estimated reading time for the post
@@ -126,8 +127,8 @@ const postsByTag = posts.reduce((collected, current) => {
     } else {
       collected[normalizedTag] = [current];
     }
-    return collected;
   }
+  return collected;
 }, {});
 
 function addTimezoneOffset(date) {

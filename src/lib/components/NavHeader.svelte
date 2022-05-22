@@ -1,9 +1,9 @@
 <script>
-  import { page } from "$app/stores";
   import MoonIcon from "heroicons-svelte/solid/MoonIcon.svelte";
   import SunIcon from "heroicons-svelte/solid/SunIcon.svelte";
   import SearchIcon from "heroicons-svelte/solid/SearchIcon.svelte";
   import RssIcon from "heroicons-svelte/solid/RssIcon.svelte";
+  import { onMount } from "svelte";
 
   import { browser } from "$app/env";
   import { searching } from "$lib/stores/searching";
@@ -25,7 +25,7 @@
     }
   });
 
-  export let isHome = $page.url.pathname === "/";
+  export let isHome = false;
 </script>
 
 <nav class="navigation overflow-hidden relative" class:isSearching>
