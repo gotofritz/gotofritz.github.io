@@ -1,6 +1,6 @@
 {
   ".svelte-kit/runtime/client/start.js": {
-    "file": "start-c1374311.js",
+    "file": "start-ba43947c.js",
     "src": ".svelte-kit/runtime/client/start.js",
     "isEntry": true,
     "imports": [
@@ -57,7 +57,7 @@
     ]
   },
   "src/routes/blog/[slug].svelte": {
-    "file": "pages/blog/_slug_.svelte-ebee9c8d.js",
+    "file": "pages/blog/_slug_.svelte-9ef2eafe.js",
     "src": "src/routes/blog/[slug].svelte",
     "isEntry": true,
     "isDynamicEntry": true,
@@ -205,7 +205,7 @@
     ]
   },
   "posts/blog/accessing-the-wikipedia-api.md": {
-    "file": "chunks/accessing-the-wikipedia-api-9d892570.js",
+    "file": "chunks/accessing-the-wikipedia-api-5d4c86b2.js",
     "src": "posts/blog/accessing-the-wikipedia-api.md",
     "isDynamicEntry": true,
     "imports": [
@@ -237,7 +237,7 @@
     ]
   },
   "posts/blog/blog-with-sveltekit-and-markdown.md": {
-    "file": "chunks/blog-with-sveltekit-and-markdown-1612665e.js",
+    "file": "chunks/blog-with-sveltekit-and-markdown-98fcb804.js",
     "src": "posts/blog/blog-with-sveltekit-and-markdown.md",
     "isDynamicEntry": true,
     "imports": [
@@ -309,7 +309,7 @@
     ]
   },
   "posts/blog/fixing-autoformatting-django-templates-in-visual-studio-code.md": {
-    "file": "chunks/fixing-autoformatting-django-templates-in-visual-studio-code-3d271cfb.js",
+    "file": "chunks/fixing-autoformatting-django-templates-in-visual-studio-code-d23e23e7.js",
     "src": "posts/blog/fixing-autoformatting-django-templates-in-visual-studio-code.md",
     "isDynamicEntry": true,
     "imports": [
@@ -333,7 +333,7 @@
     ]
   },
   "posts/blog/how-to-build-blog-with-sveltekit-markdown-tailwind.md": {
-    "file": "chunks/how-to-build-blog-with-sveltekit-markdown-tailwind-9653b425.js",
+    "file": "chunks/how-to-build-blog-with-sveltekit-markdown-tailwind-c1a77777.js",
     "src": "posts/blog/how-to-build-blog-with-sveltekit-markdown-tailwind.md",
     "isDynamicEntry": true,
     "imports": [
@@ -405,7 +405,7 @@
     ]
   },
   "posts/blog/removing-lines-matching-patterns-from-all-files-in-dir.md": {
-    "file": "chunks/removing-lines-matching-patterns-from-all-files-in-dir-95ee41bb.js",
+    "file": "chunks/removing-lines-matching-patterns-from-all-files-in-dir-90d7daa3.js",
     "src": "posts/blog/removing-lines-matching-patterns-from-all-files-in-dir.md",
     "isDynamicEntry": true,
     "imports": [
@@ -421,7 +421,7 @@
     ]
   },
   "posts/blog/setting-css-values-dynamically-in-svelte.md": {
-    "file": "chunks/setting-css-values-dynamically-in-svelte-4f3a19aa.js",
+    "file": "chunks/setting-css-values-dynamically-in-svelte-c3755fb8.js",
     "src": "posts/blog/setting-css-values-dynamically-in-svelte.md",
     "isDynamicEntry": true,
     "imports": [
@@ -445,7 +445,7 @@
     ]
   },
   "posts/blog/sharing-thunderbird-message-filters-across-computers.md": {
-    "file": "chunks/sharing-thunderbird-message-filters-across-computers-1d2e83be.js",
+    "file": "chunks/sharing-thunderbird-message-filters-across-computers-d678775b.js",
     "src": "posts/blog/sharing-thunderbird-message-filters-across-computers.md",
     "isDynamicEntry": true,
     "imports": [
@@ -485,7 +485,7 @@
     ]
   },
   "posts/blog/trello-like-crm-tool-with-google-apps-script.md": {
-    "file": "chunks/trello-like-crm-tool-with-google-apps-script-a0bd6abf.js",
+    "file": "chunks/trello-like-crm-tool-with-google-apps-script-3b03ef3c.js",
     "src": "posts/blog/trello-like-crm-tool-with-google-apps-script.md",
     "isDynamicEntry": true,
     "imports": [
