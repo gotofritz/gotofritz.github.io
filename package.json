@@ -11,8 +11,8 @@
     "sync-to-backup": "source .env; if [[ ! -z $DIR_POSTS_BAK ]]; then rsync -a \"$DIR_POSTS/\" \"$DIR_POSTS_BAK\"; fi"
   },
   "devDependencies": {
-    "@sveltejs/adapter-static": "1.0.0-next.24",
-    "@sveltejs/kit": "1.0.0-next.218",
+    "@sveltejs/adapter-static": "1.0.0-next.31",
+    "@sveltejs/kit": "1.0.0-next.338",
     "@tailwindcss/typography": "^0.5.0",
     "autoprefixer": "^10.4.2",
     "cssnano": "^5.0.15",

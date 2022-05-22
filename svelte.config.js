@@ -18,8 +18,6 @@ const config = {
   ],
 
   kit: {
-    trailingSlash: "never",
-    target: "#svelte",
     adapter: adapter({
       pages: "docs",
     }),
@@ -27,7 +25,8 @@ const config = {
     // if you are not using the static adapter and
     // you don't want prerendering, remove this section
     prerender: {
-      // entries: ["*", "/sitemap.xml", "/feed.xml"],
+      entries: ["*", "/sitemap.xml", "/feed.xml"],
+      default: true,
     },
 
     vite: {
