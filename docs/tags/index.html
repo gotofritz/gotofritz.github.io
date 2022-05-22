@@ -31,7 +31,7 @@
 				session: {},
 				route: true,
 				spa: false,
-				trailing_slash: "always",
+				trailing_slash: "never",
 				hydrate: {
 					status: 200,
 					error: null,
@@ -39,7 +39,7 @@
 						import("/_app/pages/__layout.svelte-cd18c0cf.js"),
 						import("/_app/pages/tags/index.svelte-a59b1191.js")
 					],
-					url: new URL("http://prerender/tags/"),
+					url: new URL("http://prerender/tags"),
 					params: {}
 				}
 			});
@@ -171,7 +171,7 @@
         <a aria-label="linkedin profile" class="inline-block" href="https://linkedin.com/in/gotofritz"><svg stroke="currentColor" fill="currentColor" height="1em" width="1em" class="home-icon inline-block" stroke-width="0" viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"></path></svg></a></div></div></div>
 </footer>
 
-<script type="application/json" data-type="svelte-data" data-url="/posts.json?allTags=true">{"status":200,"statusText":"","headers":{"content-type":"text/plain;charset=UTF-8"},"body":"[{\"tag\":\"os x\",\"count\":8,\"updated\":\"2022-05-22T00:47:05.687Z\"},{\"tag\":\"bash\",\"count\":7,\"updated\":\"2022-05-22T00:47:05.687Z\"},{\"tag\":\"js\",\"count\":3,\"updated\":\"2022-05-22T00:47:05.687Z\"},{\"tag\":\"svelte\",\"count\":2,\"updated\":\"2022-05-22T00:47:05.687Z\"},{\"tag\":\"tools\",\"count\":2,\"updated\":\"2022-05-22T00:47:05.687Z\"},{\"tag\":\"django\",\"count\":1,\"updated\":\"2022-05-22T00:47:05.687Z\"},{\"tag\":\"apple music\",\"count\":1,\"updated\":\"2022-05-22T00:47:05.687Z\"},{\"tag\":\"backup\",\"count\":1,\"updated\":\"2022-05-22T00:47:05.687Z\"},{\"tag\":\"chrome\",\"count\":1,\"updated\":\"2022-05-22T00:47:05.687Z\"},{\"tag\":\"html\",\"count\":1,\"updated\":\"2022-05-22T00:47:05.687Z\"},{\"tag\":\"networks\",\"count\":1,\"updated\":\"2022-05-22T00:47:05.687Z\"},{\"tag\":\"apache\",\"count\":1,\"updated\":\"2022-05-22T00:47:05.687Z\"},{\"tag\":\"windows\",\"count\":1,\"updated\":\"2022-05-22T00:47:05.687Z\"},{\"tag\":\"imagemagick\",\"count\":1,\"updated\":\"2022-05-22T00:47:05.687Z\"},{\"tag\":\"google apps script\",\"count\":1,\"updated\":\"2022-05-22T00:47:05.687Z\"},{\"tag\":\"evernote\",\"count\":1,\"updated\":\"2022-05-22T00:47:05.687Z\"},{\"tag\":\"svn\",\"count\":1,\"updated\":\"2022-05-22T00:47:05.687Z\"}]"}</script></div>
+<script type="application/json" data-type="svelte-data" data-url="/posts.json?allTags=true">{"status":200,"statusText":"","headers":{"content-type":"text/plain;charset=UTF-8"},"body":"[{\"tag\":\"os x\",\"count\":8,\"updated\":\"2022-05-22T00:53:54.498Z\"},{\"tag\":\"bash\",\"count\":7,\"updated\":\"2022-05-22T00:53:54.498Z\"},{\"tag\":\"js\",\"count\":3,\"updated\":\"2022-05-22T00:53:54.498Z\"},{\"tag\":\"svelte\",\"count\":2,\"updated\":\"2022-05-22T00:53:54.498Z\"},{\"tag\":\"tools\",\"count\":2,\"updated\":\"2022-05-22T00:53:54.498Z\"},{\"tag\":\"django\",\"count\":1,\"updated\":\"2022-05-22T00:53:54.498Z\"},{\"tag\":\"apple music\",\"count\":1,\"updated\":\"2022-05-22T00:53:54.498Z\"},{\"tag\":\"backup\",\"count\":1,\"updated\":\"2022-05-22T00:53:54.498Z\"},{\"tag\":\"chrome\",\"count\":1,\"updated\":\"2022-05-22T00:53:54.498Z\"},{\"tag\":\"html\",\"count\":1,\"updated\":\"2022-05-22T00:53:54.498Z\"},{\"tag\":\"networks\",\"count\":1,\"updated\":\"2022-05-22T00:53:54.498Z\"},{\"tag\":\"apache\",\"count\":1,\"updated\":\"2022-05-22T00:53:54.498Z\"},{\"tag\":\"windows\",\"count\":1,\"updated\":\"2022-05-22T00:53:54.498Z\"},{\"tag\":\"imagemagick\",\"count\":1,\"updated\":\"2022-05-22T00:53:54.498Z\"},{\"tag\":\"google apps script\",\"count\":1,\"updated\":\"2022-05-22T00:53:54.498Z\"},{\"tag\":\"evernote\",\"count\":1,\"updated\":\"2022-05-22T00:53:54.498Z\"},{\"tag\":\"svn\",\"count\":1,\"updated\":\"2022-05-22T00:53:54.498Z\"}]"}</script></div>
 
     <!-- this fixes a bug in chrome where animations trigger from unstyled to styled content on page load -->
     <!-- https://stackoverflow.com/a/42969257/6342734 -->

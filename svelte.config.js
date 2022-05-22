@@ -18,7 +18,7 @@ const config = {
   ],
 
   kit: {
-    trailingSlash: "always",
+    trailingSlash: "never",
     target: "#svelte",
     adapter: adapter({
       pages: "docs",
