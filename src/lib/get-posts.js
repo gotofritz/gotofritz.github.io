@@ -1,7 +1,11 @@
 import { browser } from "$app/env";
-import { descByDate, passIfData } from "$lib/utils";
+import { format } from "date-fns";
+import { parse } from "node-html-parser";
+import readingTime from "reading-time/lib/reading-time.js";
 
-// we require some server-side APIs to parse all post.metadata
+import { asTag } from "$lib/utils/asTag";
+
+// we require some server-side APIs to parse all metadata
 if (browser) {
   throw new Error(
     `get-posts.js should not be used on the browser, fetch from /posts.json instead`,
@@ -9,63 +13,124 @@ if (browser) {
 }
 
 /**
- * Gets all of the posts with added post.metadata .
+ * Gets all of the posts with added metadata .
  *
- * This should only be used on the server, as some of the post.metadata we add requires
+ * This should only be used on the server, as some of the metadata we add requires
  * being on node (see `posts` below).
  *
  * For getting posts from the client, fetch from the /posts.json endpoint instead
  */
-export function getPosts({ page = 1, limit } = {}) {
+export function getPosts({ page = 1, limit, tag } = {}) {
+  let postsToReturn;
+  if (tag) {
+    tag = asTag(tag);
+  }
+  postsToReturn = tag && tag in postsByTag ? postsByTag[tag] : posts;
+
   if (limit) {
-    return posts.slice((page - 1) * limit, page * limit);
+    return postsToReturn.slice((page - 1) * limit, page * limit);
   }
 
-  return posts;
+  return postsToReturn;
 }
 
-// Get all posts and add post.metadata
-const rawPosts = Object.entries(
-  import.meta.globEager("/src/routes/blog/**/*.md"),
-);
-const posts = rawPosts
-  .map(([filepath, post]) => {
-    if (!post.metadata.draft) {
+export function getPostsByTag() {
+  let postsToReturn = Object.entries(postsByTag)
+    .map(([k, v]) => {
       return {
-        archived: post.metadata.archived,
-        when: post.metadata.date,
-        excerpt: post.metadata.excerpt,
-        isEmpty: Boolean(post.metadata.is_empty),
-        permalink: "/blog/" + filepath.split("/").pop().slice(0, -3),
-        tags:
-          !Array.isArray(post.metadata.tags) || post.metadata.tags.length === 0
-            ? ["blog"]
-            : post.metadata.tags.map((x) => x.toLowerCase()),
-        title: post.metadata.title,
-
-        // generate the slug from the file path
-        slug: filepath
-          .replace(/(\/index)?\.md/, "")
-          .split("/")
-          .pop(),
-
-        // whether or not this file is `my-post.md` or `my-post/index.md`
-        // (needed to do correct dynamic import in posts/[slug].svelte)
-        isIndexFile: filepath.endsWith("/index.md"),
-
-        // the svelte component
-        component: post.default,
+        tag: k,
+        count: v.length,
+        updated: new Date(),
       };
-    }
+    })
+    .sort((a, b) => (a.count > b.count ? -1 : 1));
+
+  return postsToReturn;
+}
+
+// Get all posts and add metadata
+const posts = Object.entries(import.meta.globEager("/posts/**/*.md"))
+  .map(([filepath, post]) => {
+    const metadata = {
+      ...post.metadata,
+
+      // generate the slug from the file path
+      slug: filepath
+        .replace(/(\/index)?\.md/, "")
+        .split("/")
+        .pop(),
+
+      // whether or not this file is `my-post.md` or `my-post/index.md`
+      // (needed to do correct dynamic import in posts/[slug].svelte)
+      isIndexFile: filepath.endsWith("/index.md"),
+
+      // format date as yyyy-MM-dd
+      date: post.metadata.date
+        ? format(
+            // offset by timezone so that the date is correct
+            addTimezoneOffset(new Date(post.metadata.date)),
+            "yyyy-MM-dd",
+          )
+        : undefined,
+
+      // the svelte component
+      component: post.default,
+
+      excerpt: post.metadata.excerpt,
+
+      tags: post.metadata.tags ?? [],
+    };
+    return metadata;
   })
-  .filter(passIfData)
+  .filter((post) => !post.draft)
+  // parse HTML output for content metadata (preview, reading time, toc)
+  .map((post) => {
+    const parsedHtml = parse(post.component.render().html);
 
+    // Use the custom preview in the metadata, if availabe, or the first paragraph of the post for the preview
+    const preview = post.excerpt ? post.excerpt : parsedHtml.querySelector("p");
+
+    return {
+      ...post,
+      preview: {
+        html: preview.toString(),
+        // text-only preview (i.e no html elements), used for SEO
+        text: preview.structuredText,
+      },
+
+      // get estimated reading time for the post
+      readingTime: readingTime(parsedHtml.structuredText).text,
+    };
+  })
   // sort by date
-  .sort(descByDate)
-
+  .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
   // add references to the next/previous post
   .map((post, index, allPosts) => ({
     ...post,
     next: allPosts[index - 1],
     previous: allPosts[index + 1],
   }));
+
+const postsByTag = posts.reduce((collected, current) => {
+  const { tags = [] } = current;
+  if (tags.length === 0) {
+    return collected;
+  }
+
+  // you never know...
+  const uniqueTags = new Set(tags);
+  for (let tag of uniqueTags) {
+    const normalizedTag = asTag(tag);
+    if (collected[normalizedTag]) {
+      collected[normalizedTag].push(current);
+    } else {
+      collected[normalizedTag] = [current];
+    }
+    return collected;
+  }
+}, {});
+
+function addTimezoneOffset(date) {
+  const offsetInMilliseconds = new Date().getTimezoneOffset() * 60 * 1000;
+  return new Date(new Date(date).getTime() + offsetInMilliseconds);
+}

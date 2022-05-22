@@ -2,9 +2,9 @@
 // It's helpful for SEO but does require you to keep it updated to reflect the routes of your website.
 // It is OK to delete this file if you'd rather not bother with it.
 
-import { getPosts } from "$lib/get-posts";
-
-const postsUrl = `https://gotofritz.net/blog`;
+import { getPosts, getPostsByTag } from "$lib/get-posts";
+import { asSitemapSlug } from "$lib/utils/asSitemapSlug";
+import { website } from "$lib/info";
 
 /**
  * @type {import('@sveltejs/kit').RequestHandler}
@@ -12,6 +12,7 @@ const postsUrl = `https://gotofritz.net/blog`;
 export async function get() {
   // helper for vscode syntax highlighting
   const xml = String.raw;
+  const posts = getPosts().concat(getPostsByTag());
 
   return {
     headers: {
@@ -31,19 +32,23 @@ export async function get() {
         xmlns:xhtml="http://www.w3.org/1999/xhtml"
       >
         <url>
-          <loc>https://gotofritz.net/</loc>
+          <loc>${website}</loc>
           <priority>1.0</priority>
         </url>
 
-        ${getPosts()
+        ${posts
           .map(
             (post) => xml`<url>
-              <loc>${postsUrl}/${post.slug}</loc>
+              <loc>${asSitemapSlug(post)}</loc>
               <lastmod
-                >${new Date(post.when).toISOString()}</lastmod
+                >${
+                  post.updated
+                    ? new Date(post.updated).toISOString()
+                    : new Date(post.date).toISOString()
+                }</lastmod
               >
               <changefreq>monthly</changefreq>
-              <priority>1.0</priority>
+              <priority>${post.tag ? "0.8" : "1.0"}</priority>
             </url>`,
           )
           .join("")}

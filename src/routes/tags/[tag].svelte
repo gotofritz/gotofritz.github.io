@@ -1,48 +1,51 @@
 <script context="module">
-  // @ts-ignore
+  export const prerender = true;
+
   export const load = async ({ fetch, params }) => {
     const currentTag = params.tag;
-    const posts = await fetch("/api/posts.json");
-    const allPosts = await posts.json();
-    // @ts-ignore
-    const tagPosts = allPosts.filter((post) => post.tags.includes(currentTag));
-
     return {
       props: {
-        posts: tagPosts,
         currentTag,
+        recentPosts: await fetch(`/posts.json?tag=${currentTag}`).then((res) =>
+          res.json(),
+        ),
       },
     };
   };
 </script>
 
 <script>
-  import Header from "$lib/Header.svelte";
-  import PostSummary from "$lib/PostSummary.svelte";
+  import PostPreview from "$lib/components/PostPreview.svelte";
+  import { makeTitle } from "$lib/info.js";
+  import { searching } from "$lib/stores/searching";
 
-  /** @type any*/
-  export let posts = [];
+  export let recentPosts;
   export let currentTag = "";
 </script>
 
 <svelte:head>
-  <title>tag {currentTag} || gotofritz</title>
-  <meta name="description" content="All the tags used on this site" />
+  <title>{makeTitle(`tag: ${currentTag}`)}</title>
 </svelte:head>
 
-<Header />
-<section class="intro">
-  <h1>Tag // {currentTag}</h1>
-</section>
-<article class="content-tags">
-  {#each posts as post}
-    <PostSummary {...post} />
-  {/each}
-</article>
+<div
+  class="gotofritz-grid home grid"
+  on:click={() => {
+    searching.set(false);
+  }}
+>
+  <header class="mt-4">
+    <h1 class="font-display text-6xl mb-16">
+      <a href="./">tag</a>: {currentTag}
+    </h1>
+  </header>
+  <section class="posts pr-8">
+    {#each recentPosts as post}
+      <div class="flex">
+        <PostPreview {post} small />
+      </div>
+    {/each}
+  </section>
+</div>
 
 <style>
-  .intro {
-    margin-top: 112px;
-    margin-bottom: 142px;
-  }
 </style>
