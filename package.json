@@ -7,8 +7,8 @@
     "preview": "svelte-kit preview",
     "lint": "prettier --check . && eslint --ignore-path .gitignore .",
     "format": "prettier --write .",
-    "sync-to-here": "source .env; if [[ ! -z $DIR_POSTS_BAK ]]; then rsync -a \"$DIR_POSTS_BAK/\" \"$DIR_POSTS\"; fi",
-    "sync-to-backup": "source .env; if [[ ! -z $DIR_POSTS_BAK ]]; then rsync -a \"$DIR_POSTS/\" \"$DIR_POSTS_BAK\"; fi"
+    "sync-to-here": "source .env; if [[ ! -z $DIR_POSTS_BAK ]]; then rsync -a --delete \"$DIR_POSTS_BAK/\" \"$DIR_POSTS\"; fi",
+    "sync-to-backup": "source .env; if [[ ! -z $DIR_POSTS_BAK ]]; then rsync -a --delete \"$DIR_POSTS/\" \"$DIR_POSTS_BAK\"; fi"
   },
   "devDependencies": {
     "@sveltejs/adapter-static": "1.0.0-next.31",
