@@ -1,4 +1,4 @@
-import { browser } from "$app/env";
+import { browser, dev } from "$app/env";
 import { format } from "date-fns";
 import { parse } from "node-html-parser";
 import readingTime from "reading-time/lib/reading-time.js";
@@ -82,7 +82,7 @@ const posts = Object.entries(import.meta.globEager("/posts/**/*.md"))
     };
     return metadata;
   })
-  .filter((post) => !post.draft)
+  .filter((post) => dev || !post.draft)
   // parse HTML output for content metadata (preview, reading time, toc)
   .map((post) => {
     const parsedHtml = parse(post.component.render().html);
