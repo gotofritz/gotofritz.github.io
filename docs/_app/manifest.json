@@ -1,6 +1,6 @@
 {
   ".svelte-kit/runtime/client/start.js": {
-    "file": "start-35fe6029.js",
+    "file": "start-4eec7a57.js",
     "src": ".svelte-kit/runtime/client/start.js",
     "isEntry": true,
     "imports": [
@@ -29,7 +29,7 @@
       "_index-21d5ca5c.js"
     ],
     "css": [
-      "assets/pages/__layout.svelte-dc5dcf6f.css"
+      "assets/pages/__layout.svelte-55c0ca0d.css"
     ]
   },
   ".svelte-kit/runtime/components/error.svelte": {
@@ -56,7 +56,7 @@
     ]
   },
   "src/routes/blog/[slug].svelte": {
-    "file": "pages/blog/_slug_.svelte-6e97c53b.js",
+    "file": "pages/blog/_slug_.svelte-22de6a11.js",
     "src": "src/routes/blog/[slug].svelte",
     "isEntry": true,
     "isDynamicEntry": true,
@@ -86,7 +86,6 @@
       "posts/blog/fixing-autoformatting-django-templates-in-visual-studio-code.md",
       "posts/blog/google-apps-script-boilerplate.md",
       "posts/blog/how-to-avoid-sudo-npm.md",
-      "posts/blog/how-to-build-blog-with-sveltekit-markdown-tailwind.md",
       "posts/blog/install-specific-version-homebrew.md",
       "posts/blog/installing-python-on-mac-os-x-in-2022.md",
       "posts/blog/music-remove-album-ratings-applescript.md",
@@ -108,6 +107,7 @@
       "posts/blog/trello-like-crm-tool-with-google-apps-script.md",
       "posts/blog/using-say-command-to-make-os-x-talk-and-fixing-it.md",
       "posts/blog/getting-started/index.md",
+      "posts/blog/how-to-build-blog-with-sveltekit-markdown-tailwind/index.md",
       "posts/blog/joining-pdf-files-in-os-x-from-the-command-line/index.md"
     ],
     "css": [
@@ -160,7 +160,7 @@
       "_index-21d5ca5c.js"
     ],
     "css": [
-      "assets/info-3d45f474.css",
+      "assets/pages/tags/index.svelte-27a87f28.css",
       "assets/PostTags.svelte_svelte_type_style_lang-fcb4ce48.css"
     ]
   },
@@ -188,7 +188,7 @@
       "_index-6e518972.js"
     ],
     "css": [
-      "assets/info-3d45f474.css",
+      "assets/pages/tags/index.svelte-27a87f28.css",
       "assets/PostTags.svelte_svelte_type_style_lang-fcb4ce48.css"
     ]
   },
@@ -333,14 +333,6 @@
   "posts/blog/how-to-avoid-sudo-npm.md": {
     "file": "chunks/how-to-avoid-sudo-npm-03215b81.js",
     "src": "posts/blog/how-to-avoid-sudo-npm.md",
-    "isDynamicEntry": true,
-    "imports": [
-      "_index-6e518972.js"
-    ]
-  },
-  "posts/blog/how-to-build-blog-with-sveltekit-markdown-tailwind.md": {
-    "file": "chunks/how-to-build-blog-with-sveltekit-markdown-tailwind-a93e1d11.js",
-    "src": "posts/blog/how-to-build-blog-with-sveltekit-markdown-tailwind.md",
     "isDynamicEntry": true,
     "imports": [
       "_index-6e518972.js"
@@ -515,6 +507,17 @@
     ],
     "assets": [
       "assets/penguins-b7dc7505.mp4"
+    ]
+  },
+  "posts/blog/how-to-build-blog-with-sveltekit-markdown-tailwind/index.md": {
+    "file": "chunks/index-510dc691.js",
+    "src": "posts/blog/how-to-build-blog-with-sveltekit-markdown-tailwind/index.md",
+    "isDynamicEntry": true,
+    "imports": [
+      "_index-6e518972.js"
+    ],
+    "assets": [
+      "assets/docs-50ad1ff9.png"
     ]
   },
   "posts/blog/joining-pdf-files-in-os-x-from-the-command-line/index.md": {
