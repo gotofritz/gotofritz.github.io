@@ -7,6 +7,14 @@
     <atom:link href="https://gotofritz.net/feed.xml" rel="self" type="application/rss+xml" />
     
           <item>
+            <guid>https://gotofritz.net/blog/vscode-cspell-do-not-use-gitignore</guid>
+            <title>Stopping cSpell from using .gitignore</title>
+            <description>cSpell is a spelling plugin for VS Code. Not my favourite, but the only one I found. It isn't particularly well documented though. It avoids spell checking files in .gitignore. To stop that, you need to add "cSpell.useGitignore": false, to your settings</description>
+            <link>https://gotofritz.net/blog/vscode-cspell-do-not-use-gitignore</link>
+            <pubDate>Thu, 26 May 2022 00:00:00 GMT</pubDate>
+        </item>
+      
+          <item>
             <guid>https://gotofritz.net/blog/removing-lines-matching-patterns-from-all-files-in-dir</guid>
             <title>Remove lines matching some patterns from all files in a dir</title>
             <description>A CLI task I find myself doing often with sed</description>

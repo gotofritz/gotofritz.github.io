@@ -1,6 +1,6 @@
 {
   ".svelte-kit/runtime/client/start.js": {
-    "file": "start-4eec7a57.js",
+    "file": "start-f1183302.js",
     "src": ".svelte-kit/runtime/client/start.js",
     "isEntry": true,
     "imports": [
@@ -42,13 +42,13 @@
     ]
   },
   "src/routes/blog/[...page].svelte": {
-    "file": "pages/blog/_...page_.svelte-5a2e85d5.js",
+    "file": "pages/blog/_...page_.svelte-9d17eac6.js",
     "src": "src/routes/blog/[...page].svelte",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
       "_index-6e518972.js",
-      "_info-5b384f1d.js"
+      "_info-e2341b40.js"
     ],
     "css": [
       "assets/pages/blog/_...page_.svelte-d5564242.css",
@@ -56,7 +56,7 @@
     ]
   },
   "src/routes/blog/[slug].svelte": {
-    "file": "pages/blog/_slug_.svelte-22de6a11.js",
+    "file": "pages/blog/_slug_.svelte-9ea133d9.js",
     "src": "src/routes/blog/[slug].svelte",
     "isEntry": true,
     "isDynamicEntry": true,
@@ -64,7 +64,7 @@
       "_preload-helper-e4860ae8.js",
       "_index-6e518972.js",
       "_NavHeader-8723f3bf.js",
-      "_info-5b384f1d.js",
+      "_info-e2341b40.js",
       "_searching-3fc56ee5.js",
       "_index-21d5ca5c.js"
     ],
@@ -106,7 +106,7 @@
       "posts/blog/svn-status-codes.md",
       "posts/blog/trello-like-crm-tool-with-google-apps-script.md",
       "posts/blog/using-say-command-to-make-os-x-talk-and-fixing-it.md",
-      "posts/blog/getting-started/index.md",
+      "posts/blog/vscode-cspell-do-not-use-gitignore.md",
       "posts/blog/how-to-build-blog-with-sveltekit-markdown-tailwind/index.md",
       "posts/blog/joining-pdf-files-in-os-x-from-the-command-line/index.md"
     ],
@@ -116,13 +116,13 @@
     ]
   },
   "src/routes/index.svelte": {
-    "file": "pages/index.svelte-59beb581.js",
+    "file": "pages/index.svelte-000fe007.js",
     "src": "src/routes/index.svelte",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
       "_index-6e518972.js",
-      "_info-5b384f1d.js",
+      "_info-e2341b40.js",
       "_searching-3fc56ee5.js",
       "_NavHeader-8723f3bf.js",
       "_index-21d5ca5c.js"
@@ -133,14 +133,14 @@
     ]
   },
   "src/routes/tags/[tag].svelte": {
-    "file": "pages/tags/_tag_.svelte-7da2962f.js",
+    "file": "pages/tags/_tag_.svelte-90e4004e.js",
     "src": "src/routes/tags/[tag].svelte",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
       "_index-6e518972.js",
       "_NavHeader-8723f3bf.js",
-      "_info-5b384f1d.js",
+      "_info-e2341b40.js",
       "_searching-3fc56ee5.js",
       "_index-21d5ca5c.js"
     ],
@@ -160,7 +160,7 @@
       "_index-21d5ca5c.js"
     ],
     "css": [
-      "assets/pages/tags/index.svelte-27a87f28.css",
+      "assets/info-3d45f474.css",
       "assets/PostTags.svelte_svelte_type_style_lang-fcb4ce48.css"
     ]
   },
@@ -182,13 +182,13 @@
       "_index-21d5ca5c.js"
     ]
   },
-  "_info-5b384f1d.js": {
-    "file": "chunks/info-5b384f1d.js",
+  "_info-e2341b40.js": {
+    "file": "chunks/info-e2341b40.js",
     "imports": [
       "_index-6e518972.js"
     ],
     "css": [
-      "assets/pages/tags/index.svelte-27a87f28.css",
+      "assets/info-3d45f474.css",
       "assets/PostTags.svelte_svelte_type_style_lang-fcb4ce48.css"
     ]
   },
@@ -203,7 +203,7 @@
     ]
   },
   "posts/blog/a-place-for-unix-scripts-osx.md": {
-    "file": "chunks/a-place-for-unix-scripts-osx-21d1f296.js",
+    "file": "chunks/a-place-for-unix-scripts-osx-85516256.js",
     "src": "posts/blog/a-place-for-unix-scripts-osx.md",
     "isDynamicEntry": true,
     "imports": [
@@ -251,7 +251,7 @@
     ]
   },
   "posts/blog/change-title-cmd-window.md": {
-    "file": "chunks/change-title-cmd-window-18efd58b.js",
+    "file": "chunks/change-title-cmd-window-b0c1de35.js",
     "src": "posts/blog/change-title-cmd-window.md",
     "isDynamicEntry": true,
     "imports": [
@@ -451,7 +451,7 @@
     ]
   },
   "posts/blog/simple-voice-recording-mac.md": {
-    "file": "chunks/simple-voice-recording-mac-e5d5054a.js",
+    "file": "chunks/simple-voice-recording-mac-d438465b.js",
     "src": "posts/blog/simple-voice-recording-mac.md",
     "isDynamicEntry": true,
     "imports": [
@@ -483,7 +483,7 @@
     ]
   },
   "posts/blog/trello-like-crm-tool-with-google-apps-script.md": {
-    "file": "chunks/trello-like-crm-tool-with-google-apps-script-2e461d7e.js",
+    "file": "chunks/trello-like-crm-tool-with-google-apps-script-d610145e.js",
     "src": "posts/blog/trello-like-crm-tool-with-google-apps-script.md",
     "isDynamicEntry": true,
     "imports": [
@@ -498,19 +498,16 @@
       "_index-6e518972.js"
     ]
   },
-  "posts/blog/getting-started/index.md": {
-    "file": "chunks/index-5dea7ff4.js",
-    "src": "posts/blog/getting-started/index.md",
+  "posts/blog/vscode-cspell-do-not-use-gitignore.md": {
+    "file": "chunks/vscode-cspell-do-not-use-gitignore-e98cea53.js",
+    "src": "posts/blog/vscode-cspell-do-not-use-gitignore.md",
     "isDynamicEntry": true,
     "imports": [
       "_index-6e518972.js"
-    ],
-    "assets": [
-      "assets/penguins-b7dc7505.mp4"
     ]
   },
   "posts/blog/how-to-build-blog-with-sveltekit-markdown-tailwind/index.md": {
-    "file": "chunks/index-510dc691.js",
+    "file": "chunks/index-6e10787f.js",
     "src": "posts/blog/how-to-build-blog-with-sveltekit-markdown-tailwind/index.md",
     "isDynamicEntry": true,
     "imports": [
