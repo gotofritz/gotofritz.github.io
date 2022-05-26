@@ -35,7 +35,7 @@
     @apply list-inside list-decimal;
   }
 
-  code {
+  :not(pre) > code {
     background: #ebebeb;
     font-size: 0.8rem;
     padding: 4px;
