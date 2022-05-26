@@ -12,7 +12,9 @@ import { website } from "$lib/info";
 export async function get() {
   // helper for vscode syntax highlighting
   const xml = String.raw;
-  const posts = getPosts().concat(getPostsByTag());
+  const posts = getPosts()
+    .filter((post) => !post.is_empty)
+    .concat(getPostsByTag());
 
   return {
     headers: {

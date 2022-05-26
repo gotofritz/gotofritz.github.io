@@ -9,7 +9,11 @@
 <div class="mb-16">
   <div class="title">
     <h3 class="!mt-0 !mb-2 font-display text-3xl">
-      <a href={`/blog/${post.slug}`}>{post.title}</a>
+      {#if post.is_empty}
+        {post.title}
+      {:else}
+        <a href={`/blog/${post.slug}`}>{post.title}</a>
+      {/if}
     </h3>
   </div>
 
@@ -23,16 +27,18 @@
       {@html post.preview.html}
     </div>
 
-    <div>
-      <a href={`/blog/${post.slug}`} class="group pr-8"
-        >Read More <ArrowRightIcon
-          class="w-4 h-4 invisible inline-block group-hover:visible"
-          height="1rem"
-          width="1rem"
-          hover:inline-block
-        /></a
-      >
-    </div>
+    {#if !post.is_empty}
+      <div>
+        <a href={`/blog/${post.slug}`} class="group pr-8"
+          >Read More <ArrowRightIcon
+            class="w-4 h-4 invisible inline-block group-hover:visible"
+            height="1rem"
+            width="1rem"
+            hover:inline-block
+          /></a
+        >
+      </div>
+    {/if}
   </div>
 </div>
 
