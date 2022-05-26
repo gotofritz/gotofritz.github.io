@@ -34,6 +34,13 @@
   ol {
     @apply list-inside list-decimal;
   }
+
+  code {
+    background: #ebebeb;
+    font-size: 0.8rem;
+    padding: 4px;
+    border-radius: 2px;
+  }
 }
 
 @layer components {
