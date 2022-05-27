@@ -30,18 +30,20 @@ export async function get() {
     <description>${websiteDescription}</description>
     <atom:link href="${website}/feed.xml" rel="self" type="application/rss+xml" />
     ${posts
-      .map(
-        (post) =>
-          xml`
+      .map((post) => {
+        const link = post.is_empty
+          ? ""
+          : "<link>" + postsUrl + "/" + post.slug + "</link>";
+        return xml`
           <item>
             <guid>${postsUrl}/${post.slug}</guid>
             <title>${post.title}</title>
             <description>${post.preview.text}</description>
-            <link>${postsUrl}/${post.slug}</link>
+            ${link}
             <pubDate>${new Date(post.date).toUTCString()}</pubDate>
         </item>
-      `,
-      )
+      `;
+      })
       .join("")}
   </channel>
 </rss>`,
