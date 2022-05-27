@@ -1,6 +1,6 @@
 {
   ".svelte-kit/runtime/client/start.js": {
-    "file": "start-62c48996.js",
+    "file": "start-02fc15e2.js",
     "src": ".svelte-kit/runtime/client/start.js",
     "isEntry": true,
     "imports": [
@@ -29,7 +29,7 @@
       "_index-21d5ca5c.js"
     ],
     "css": [
-      "assets/pages/__layout.svelte-81b0f8bf.css"
+      "assets/pages/__layout.svelte-0a753d89.css"
     ]
   },
   ".svelte-kit/runtime/components/error.svelte": {
@@ -56,7 +56,7 @@
     ]
   },
   "src/routes/blog/[slug].svelte": {
-    "file": "pages/blog/_slug_.svelte-3f7981b0.js",
+    "file": "pages/blog/_slug_.svelte-bfc451c7.js",
     "src": "src/routes/blog/[slug].svelte",
     "isEntry": true,
     "isDynamicEntry": true,
@@ -104,11 +104,11 @@
       "posts/blog/stop-chrome-navigating-back-when-swiping-horizontally.md",
       "posts/blog/storing-bash-profile-and-so-on-on-github.md",
       "posts/blog/svn-status-codes.md",
-      "posts/blog/trello-like-crm-tool-with-google-apps-script.md",
       "posts/blog/using-say-command-to-make-os-x-talk-and-fixing-it.md",
       "posts/blog/vscode-cspell-do-not-use-gitignore.md",
       "posts/blog/how-to-build-blog-with-sveltekit-markdown-tailwind/index.md",
-      "posts/blog/joining-pdf-files-in-os-x-from-the-command-line/index.md"
+      "posts/blog/joining-pdf-files-in-os-x-from-the-command-line/index.md",
+      "posts/blog/trello-like-crm-tool-with-google-apps-script/index.md"
     ],
     "css": [
       "assets/pages/blog/_slug_.svelte-5058d39f.css",
@@ -482,14 +482,6 @@
       "_index-6e518972.js"
     ]
   },
-  "posts/blog/trello-like-crm-tool-with-google-apps-script.md": {
-    "file": "chunks/trello-like-crm-tool-with-google-apps-script-e5d25a24.js",
-    "src": "posts/blog/trello-like-crm-tool-with-google-apps-script.md",
-    "isDynamicEntry": true,
-    "imports": [
-      "_index-6e518972.js"
-    ]
-  },
   "posts/blog/using-say-command-to-make-os-x-talk-and-fixing-it.md": {
     "file": "chunks/using-say-command-to-make-os-x-talk-and-fixing-it-937d51ec.js",
     "src": "posts/blog/using-say-command-to-make-os-x-talk-and-fixing-it.md",
@@ -526,6 +518,22 @@
     ],
     "assets": [
       "assets/joining-pdf-5fb07e75.jpg"
+    ]
+  },
+  "posts/blog/trello-like-crm-tool-with-google-apps-script/index.md": {
+    "file": "chunks/index-5e6bfe9b.js",
+    "src": "posts/blog/trello-like-crm-tool-with-google-apps-script/index.md",
+    "isDynamicEntry": true,
+    "imports": [
+      "_index-6e518972.js"
+    ],
+    "assets": [
+      "assets/states-0b97f1cb.png",
+      "assets/stage-2d0e4f28.png",
+      "assets/opportunity-19bbdd25.png",
+      "assets/pool-e2a1bffb.png",
+      "assets/blank-slate-8ce157f3.png",
+      "assets/menu-c4f7bc99.png"
     ]
   }
 }

@@ -10,7 +10,7 @@
             <guid>https://gotofritz.net/blog/vscode-cspell-do-not-use-gitignore</guid>
             <title>Stopping cSpell from using .gitignore</title>
             <description>cSpell is a spelling plugin for VS Code. Not my favourite, but the only one I found. It isn't particularly well documented though. It avoids spell checking files in .gitignore. To stop that, you need to add "cSpell.useGitignore": false, to your settings</description>
-            <link>https://gotofritz.net/blog/vscode-cspell-do-not-use-gitignore</link>
+            
             <pubDate>Thu, 26 May 2022 00:00:00 GMT</pubDate>
         </item>
       
@@ -210,7 +210,7 @@
             <guid>https://gotofritz.net/blog/simple-voice-recording-mac</guid>
             <title>Making a simple voice recording on a Mac</title>
             <description>To make a quick voice recording with OS X: open Quick Time Player, under the File menu there is a "New. Audio Recording" entry. It automatically saves .mov files in your Movies folder, which you can then open in Audacity or the editor of your choice.</description>
-            <link>https://gotofritz.net/blog/simple-voice-recording-mac</link>
+            
             <pubDate>Thu, 19 Jul 2012 00:00:00 GMT</pubDate>
         </item>
       
@@ -227,7 +227,7 @@
             <title>Changing title of CMD window</title>
             <description>title some words will change the title of your cmd shell in Window
 The title will be `some words` instead of `C:\Windows\system32\cmd.exe`. Handy if you have a few of them open and can't tell them apart.</description>
-            <link>https://gotofritz.net/blog/change-title-cmd-window</link>
+            
             <pubDate>Tue, 06 Mar 2012 00:00:00 GMT</pubDate>
         </item>
       
@@ -260,7 +260,7 @@ The title will be `some words` instead of `C:\Windows\system32\cmd.exe`. Handy i
             <title>A good place for scripts in OSX</title>
             <description>Where to put unix based scripts on a Mac without them getting in the way? Simple: create a bin folder in your home directory, and add it to the path:
 export PATH=~/bin:$PATH</description>
-            <link>https://gotofritz.net/blog/a-place-for-unix-scripts-osx</link>
+            
             <pubDate>Thu, 07 Jul 2011 00:00:00 GMT</pubDate>
         </item>
       
