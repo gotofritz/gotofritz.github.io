@@ -40,11 +40,6 @@
     padding: 4px;
     border-radius: 2px;
   }
-
-  code {
-    font-size: 0.8rem;
-    line-height: 1;
-  }
 }
 
 @layer components {
