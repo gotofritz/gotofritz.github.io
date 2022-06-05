@@ -10,7 +10,7 @@
 
   let prefersLight = browser
     ? Boolean(JSON.parse(localStorage.getItem("prefersLight")))
-    : false;
+    : true;
 
   let isSearching = true;
 
