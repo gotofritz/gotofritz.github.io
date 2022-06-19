@@ -40,6 +40,10 @@
     padding: 4px;
     border-radius: 2px;
   }
+
+  a {
+    text-decoration: underline;
+  }
 }
 
 @layer components {
