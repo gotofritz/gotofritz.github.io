@@ -18,7 +18,9 @@ const config = {
   ],
 
   kit: {
-    target: "#svelte",
+    prerender: {
+      default: true,
+    },
     adapter: adapter({
       pages: "docs",
     }),

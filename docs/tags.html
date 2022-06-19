@@ -8,11 +8,11 @@
     <link rel="icon" href="/favicon.ico" />
     <link rel="icon" href="/favicon.gif" />
     <meta http-equiv="content-security-policy" content=""><title>all tags</title>
-	<link rel="stylesheet" href="/_app/assets/pages/__layout.svelte-0a753d89.css">
-	<link rel="stylesheet" href="/_app/assets/pages/tags/index.svelte-27a87f28.css">
+	<link rel="stylesheet" href="/_app/assets/pages/__layout.svelte-7d780bfd.css">
+	<link rel="stylesheet" href="/_app/assets/info-3d45f474.css">
 	<link rel="stylesheet" href="/_app/assets/PostTags.svelte_svelte_type_style_lang-fcb4ce48.css">
 	<link rel="stylesheet" href="/_app/assets/NavHeader-5034f4a3.css">
-	<link rel="modulepreload" href="/_app/start-02fc15e2.js">
+	<link rel="modulepreload" href="/_app/start-9b91c9de.js">
 	<link rel="modulepreload" href="/_app/chunks/index-6e518972.js">
 	<link rel="modulepreload" href="/_app/chunks/index-21d5ca5c.js">
 	<link rel="modulepreload" href="/_app/chunks/preload-helper-e4860ae8.js">
@@ -29,8 +29,8 @@
       localStorage.setItem("prefersLight", prefersLight);
 
       // default to dark mode unless explicitly set preference to light
-      if (prefersLight) {
-        document.querySelector("html").classList.remove("dark");
+      if (!prefersLight) {
+        document.querySelector("html").classList.add("dark");
       }
     </script>
     <script
@@ -103,6 +103,10 @@
           </div><div class="flex"><div class="mb-8"><div class="title"><h3 class="!mt-0 !mb-2 font-display text-3xl svelte-1a35dix"><a href="/tags/python">python</a>
       <span class="font-normal"></span></h3></div>
   <div class="opacity-70 ml-12"><div class="font-summary">2 posts</div></div>
+</div>
+          </div><div class="flex"><div class="mb-8"><div class="title"><h3 class="!mt-0 !mb-2 font-display text-3xl svelte-1a35dix"><a href="/tags/thunderbird">thunderbird</a>
+      <span class="font-normal"></span></h3></div>
+  <div class="opacity-70 ml-12"><div class="font-summary">1 post</div></div>
 </div>
           </div><div class="flex"><div class="mb-8"><div class="title"><h3 class="!mt-0 !mb-2 font-display text-3xl svelte-1a35dix"><a href="/tags/sed">sed</a>
       <span class="font-normal"></span></h3></div>
@@ -189,10 +193,10 @@
 </footer>
 
 
-		<script type="module" data-sveltekit-hydrate="4geeu7">
-		import { start } from "/_app/start-02fc15e2.js";
+		<script type="module" data-sveltekit-hydrate="u8y4ai">
+		import { start } from "/_app/start-9b91c9de.js";
 		start({
-			target: document.querySelector('[data-sveltekit-hydrate="4geeu7"]').parentNode,
+			target: document.querySelector('[data-sveltekit-hydrate="u8y4ai"]').parentNode,
 			paths: {"base":"","assets":""},
 			session: {},
 			route: true,
@@ -209,7 +213,7 @@
 				routeId: "tags"
 			}
 		});
-	</script><script type="application/json" sveltekit:data-type="data" sveltekit:data-url="/posts.json?allTags=true">{"status":200,"statusText":"","headers":{"content-type":"text/plain;charset=UTF-8"},"body":"[{\"tag\":\"os x\",\"count\":20,\"updated\":\"2022-05-27T20:17:12.903Z\"},{\"tag\":\"bash\",\"count\":8,\"updated\":\"2022-05-27T20:17:12.903Z\"},{\"tag\":\"quick tips\",\"count\":4,\"updated\":\"2022-05-27T20:17:12.903Z\"},{\"tag\":\"svelte\",\"count\":3,\"updated\":\"2022-05-27T20:17:12.903Z\"},{\"tag\":\"tools\",\"count\":3,\"updated\":\"2022-05-27T20:17:12.903Z\"},{\"tag\":\"js\",\"count\":3,\"updated\":\"2022-05-27T20:17:12.903Z\"},{\"tag\":\"vscode\",\"count\":2,\"updated\":\"2022-05-27T20:17:12.903Z\"},{\"tag\":\"gotofritz\",\"count\":2,\"updated\":\"2022-05-27T20:17:12.903Z\"},{\"tag\":\"python\",\"count\":2,\"updated\":\"2022-05-27T20:17:12.903Z\"},{\"tag\":\"sed\",\"count\":1,\"updated\":\"2022-05-27T20:17:12.903Z\"},{\"tag\":\"django\",\"count\":1,\"updated\":\"2022-05-27T20:17:12.903Z\"},{\"tag\":\"apple music\",\"count\":1,\"updated\":\"2022-05-27T20:17:12.903Z\"},{\"tag\":\"backup\",\"count\":1,\"updated\":\"2022-05-27T20:17:12.903Z\"},{\"tag\":\"chrome\",\"count\":1,\"updated\":\"2022-05-27T20:17:12.903Z\"},{\"tag\":\"html\",\"count\":1,\"updated\":\"2022-05-27T20:17:12.903Z\"},{\"tag\":\"xml\",\"count\":1,\"updated\":\"2022-05-27T20:17:12.903Z\"},{\"tag\":\"networks\",\"count\":1,\"updated\":\"2022-05-27T20:17:12.903Z\"},{\"tag\":\"apache\",\"count\":1,\"updated\":\"2022-05-27T20:17:12.903Z\"},{\"tag\":\"windows\",\"count\":1,\"updated\":\"2022-05-27T20:17:12.903Z\"},{\"tag\":\"imagemagick\",\"count\":1,\"updated\":\"2022-05-27T20:17:12.903Z\"},{\"tag\":\"google apps script\",\"count\":1,\"updated\":\"2022-05-27T20:17:12.903Z\"},{\"tag\":\"evernote\",\"count\":1,\"updated\":\"2022-05-27T20:17:12.903Z\"},{\"tag\":\"svn\",\"count\":1,\"updated\":\"2022-05-27T20:17:12.903Z\"},{\"tag\":\"pdf\",\"count\":1,\"updated\":\"2022-05-27T20:17:12.903Z\"}]"}</script></div>
+	</script><script type="application/json" sveltekit:data-type="data" sveltekit:data-url="/posts.json?allTags=true">{"status":200,"statusText":"","headers":{"content-type":"text/plain;charset=UTF-8"},"body":"[{\"tag\":\"os x\",\"count\":20,\"updated\":\"2022-06-19T23:06:00.783Z\"},{\"tag\":\"bash\",\"count\":8,\"updated\":\"2022-06-19T23:06:00.783Z\"},{\"tag\":\"quick tips\",\"count\":4,\"updated\":\"2022-06-19T23:06:00.783Z\"},{\"tag\":\"svelte\",\"count\":3,\"updated\":\"2022-06-19T23:06:00.783Z\"},{\"tag\":\"tools\",\"count\":3,\"updated\":\"2022-06-19T23:06:00.783Z\"},{\"tag\":\"js\",\"count\":3,\"updated\":\"2022-06-19T23:06:00.783Z\"},{\"tag\":\"vscode\",\"count\":2,\"updated\":\"2022-06-19T23:06:00.783Z\"},{\"tag\":\"gotofritz\",\"count\":2,\"updated\":\"2022-06-19T23:06:00.783Z\"},{\"tag\":\"python\",\"count\":2,\"updated\":\"2022-06-19T23:06:00.783Z\"},{\"tag\":\"thunderbird\",\"count\":1,\"updated\":\"2022-06-19T23:06:00.783Z\"},{\"tag\":\"sed\",\"count\":1,\"updated\":\"2022-06-19T23:06:00.783Z\"},{\"tag\":\"django\",\"count\":1,\"updated\":\"2022-06-19T23:06:00.783Z\"},{\"tag\":\"apple music\",\"count\":1,\"updated\":\"2022-06-19T23:06:00.783Z\"},{\"tag\":\"backup\",\"count\":1,\"updated\":\"2022-06-19T23:06:00.783Z\"},{\"tag\":\"chrome\",\"count\":1,\"updated\":\"2022-06-19T23:06:00.783Z\"},{\"tag\":\"html\",\"count\":1,\"updated\":\"2022-06-19T23:06:00.783Z\"},{\"tag\":\"xml\",\"count\":1,\"updated\":\"2022-06-19T23:06:00.783Z\"},{\"tag\":\"networks\",\"count\":1,\"updated\":\"2022-06-19T23:06:00.783Z\"},{\"tag\":\"apache\",\"count\":1,\"updated\":\"2022-06-19T23:06:00.783Z\"},{\"tag\":\"windows\",\"count\":1,\"updated\":\"2022-06-19T23:06:00.783Z\"},{\"tag\":\"imagemagick\",\"count\":1,\"updated\":\"2022-06-19T23:06:00.783Z\"},{\"tag\":\"google apps script\",\"count\":1,\"updated\":\"2022-06-19T23:06:00.783Z\"},{\"tag\":\"evernote\",\"count\":1,\"updated\":\"2022-06-19T23:06:00.783Z\"},{\"tag\":\"svn\",\"count\":1,\"updated\":\"2022-06-19T23:06:00.783Z\"},{\"tag\":\"pdf\",\"count\":1,\"updated\":\"2022-06-19T23:06:00.783Z\"}]"}</script></div>
 
     <!-- this fixes a bug in chrome where animations trigger from unstyled to styled content on page load -->
     <!-- https://stackoverflow.com/a/42969257/6342734 -->

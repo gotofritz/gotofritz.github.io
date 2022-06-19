@@ -7,6 +7,14 @@
     <atom:link href="https://gotofritz.net/feed.xml" rel="self" type="application/rss+xml" />
     
           <item>
+            <guid>https://gotofritz.net/blog/migrating-thunderbird-message-filters-from-another-machine</guid>
+            <title>Migrating Thunderbird message filters from another machine</title>
+            <description>Thunderbird doesn't sync message filters. Its roots are from ancient times, before distributed computing was prevalent. If you want to copy your filters from one machine to another you have to do it the old-fashioned way, by copying setting files</description>
+            <link>https://gotofritz.net/blog/migrating-thunderbird-message-filters-from-another-machine</link>
+            <pubDate>Mon, 20 Jun 2022 00:00:00 GMT</pubDate>
+        </item>
+      
+          <item>
             <guid>https://gotofritz.net/blog/vscode-cspell-do-not-use-gitignore</guid>
             <title>Stopping cSpell from using .gitignore</title>
             <description>cSpell is a spelling plugin for VS Code. Not my favourite, but the only one I found. It isn't particularly well documented though. It avoids spell checking files in .gitignore. To stop that, you need to add "cSpell.useGitignore": false, to your settings</description>

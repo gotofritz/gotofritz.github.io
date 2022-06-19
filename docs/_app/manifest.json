@@ -1,6 +1,6 @@
 {
   ".svelte-kit/runtime/client/start.js": {
-    "file": "start-02fc15e2.js",
+    "file": "start-9b91c9de.js",
     "src": ".svelte-kit/runtime/client/start.js",
     "isEntry": true,
     "imports": [
@@ -29,7 +29,7 @@
       "_index-21d5ca5c.js"
     ],
     "css": [
-      "assets/pages/__layout.svelte-0a753d89.css"
+      "assets/pages/__layout.svelte-7d780bfd.css"
     ]
   },
   ".svelte-kit/runtime/components/error.svelte": {
@@ -56,7 +56,7 @@
     ]
   },
   "src/routes/blog/[slug].svelte": {
-    "file": "pages/blog/_slug_.svelte-bfc451c7.js",
+    "file": "pages/blog/_slug_.svelte-3d8e9f36.js",
     "src": "src/routes/blog/[slug].svelte",
     "isEntry": true,
     "isDynamicEntry": true,
@@ -88,6 +88,7 @@
       "posts/blog/how-to-avoid-sudo-npm.md",
       "posts/blog/install-specific-version-homebrew.md",
       "posts/blog/installing-python-on-mac-os-x-in-2022.md",
+      "posts/blog/migrating-thunderbird-message-filters-from-another-machine.md",
       "posts/blog/music-remove-album-ratings-applescript.md",
       "posts/blog/os-x-dns-lookups-too-slow-for-local-hosts.md",
       "posts/blog/os-x-extended-attibutes.md",
@@ -160,7 +161,7 @@
       "_index-21d5ca5c.js"
     ],
     "css": [
-      "assets/pages/tags/index.svelte-27a87f28.css",
+      "assets/info-3d45f474.css",
       "assets/PostTags.svelte_svelte_type_style_lang-fcb4ce48.css"
     ]
   },
@@ -188,7 +189,7 @@
       "_index-6e518972.js"
     ],
     "css": [
-      "assets/pages/tags/index.svelte-27a87f28.css",
+      "assets/info-3d45f474.css",
       "assets/PostTags.svelte_svelte_type_style_lang-fcb4ce48.css"
     ]
   },
@@ -349,6 +350,14 @@
   "posts/blog/installing-python-on-mac-os-x-in-2022.md": {
     "file": "chunks/installing-python-on-mac-os-x-in-2022-9083e728.js",
     "src": "posts/blog/installing-python-on-mac-os-x-in-2022.md",
+    "isDynamicEntry": true,
+    "imports": [
+      "_index-6e518972.js"
+    ]
+  },
+  "posts/blog/migrating-thunderbird-message-filters-from-another-machine.md": {
+    "file": "chunks/migrating-thunderbird-message-filters-from-another-machine-ed4f84da.js",
+    "src": "posts/blog/migrating-thunderbird-message-filters-from-another-machine.md",
     "isDynamicEntry": true,
     "imports": [
       "_index-6e518972.js"
@@ -521,19 +530,27 @@
     ]
   },
   "posts/blog/trello-like-crm-tool-with-google-apps-script/index.md": {
-    "file": "chunks/index-5e6bfe9b.js",
+    "file": "chunks/index-0646cd33.js",
     "src": "posts/blog/trello-like-crm-tool-with-google-apps-script/index.md",
     "isDynamicEntry": true,
     "imports": [
       "_index-6e518972.js"
     ],
     "assets": [
+      "assets/scripts-f3824c42.png",
       "assets/states-0b97f1cb.png",
       "assets/stage-2d0e4f28.png",
       "assets/opportunity-19bbdd25.png",
       "assets/pool-e2a1bffb.png",
       "assets/blank-slate-8ce157f3.png",
-      "assets/menu-c4f7bc99.png"
+      "assets/menu-c4f7bc99.png",
+      "assets/sidebar-d0117bff.png",
+      "assets/select-row-bfbe8722.png",
+      "assets/states-row-56adbf0f.png",
+      "assets/rgb-colours-cb09e018.png",
+      "assets/form-0f3aa912.mp4",
+      "assets/load-from-cell-af09e135.mp4",
+      "assets/add-comment-fc18a449.mp4"
     ]
   }
 }

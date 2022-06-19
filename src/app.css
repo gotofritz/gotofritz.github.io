@@ -41,7 +41,7 @@
     border-radius: 2px;
   }
 
-  a {
+  :not(h3) a {
     text-decoration: underline;
   }
 }
