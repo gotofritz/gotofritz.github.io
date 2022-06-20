@@ -18,9 +18,6 @@ const config = {
   ],
 
   kit: {
-    prerender: {
-      default: true,
-    },
     adapter: adapter({
       pages: "docs",
     }),
@@ -28,6 +25,7 @@ const config = {
     // if you are not using the static adapter and
     // you don't want prerendering, remove this section
     prerender: {
+      default: true,
       entries: ["*", "/sitemap.xml", "/feed.xml"],
     },
 
