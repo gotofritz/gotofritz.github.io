@@ -3,8 +3,8 @@
   import SunIcon from "heroicons-svelte/solid/SunIcon.svelte";
   import SearchIcon from "heroicons-svelte/solid/SearchIcon.svelte";
   import RssIcon from "heroicons-svelte/solid/RssIcon.svelte";
-  import { onMount } from "svelte";
 
+  import DarkLightMode from "$lib/svgs/DarkLightMode.svelte";
   import { browser } from "$app/env";
   import { searching } from "$lib/stores/searching";
 
@@ -72,11 +72,7 @@
               }
             }}
           >
-            {#if prefersLight}
-              <MoonIcon class="text-slate-800" />
-            {:else}
-              <SunIcon class="text-slate-100" />
-            {/if}
+            <DarkLightMode width="1.5rem" height="1.5rem" />
           </button>
         {/if}
         {#if !isHome}

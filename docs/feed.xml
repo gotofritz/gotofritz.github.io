@@ -9,7 +9,7 @@
           <item>
             <guid>https://gotofritz.net/blog/migrating-thunderbird-message-filters-from-another-machine</guid>
             <title>Migrating Thunderbird message filters from another machine</title>
-            <description>Thunderbird doesn't sync message filters. Its roots are from ancient times, before distributed computing was prevalent. If you want to copy your filters from one machine to another you have to do it the old-fashioned way, by copying setting files</description>
+            <description>Thunderbird doesn't sync message filters. Its roots are from ancient times, before distributed computing was prevalent. If you want to copy your filters from one machine to another you have to do it the old-fashioned way, by copying config files</description>
             <link>https://gotofritz.net/blog/migrating-thunderbird-message-filters-from-another-machine</link>
             <pubDate>Mon, 20 Jun 2022 00:00:00 GMT</pubDate>
         </item>
