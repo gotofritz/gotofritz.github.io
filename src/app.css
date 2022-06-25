@@ -41,6 +41,10 @@
     border-radius: 2px;
   }
 
+  code {
+    @apply dark:text-slate-900;
+  }
+
   a {
     text-decoration: underline;
   }
