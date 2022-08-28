@@ -101,7 +101,7 @@
         </h1>
       </header>
 
-      <main class="intro font-intro text-xl lg:text-4xl leading-snug">
+      <main class="intro font-intro text-xl lg:text-2xl leading-relaxed">
         {@html excerpt}
         <div class="opacity-70 mb-28 mt-2 prose">
           <PostDate {date} {readingTime} />

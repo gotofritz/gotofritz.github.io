@@ -7,6 +7,14 @@
     <atom:link href="https://gotofritz.net/feed.xml" rel="self" type="application/rss+xml" />
     
           <item>
+            <guid>https://gotofritz.net/blog/migrating-youtube-playlists-by-adding-videos-via-cli</guid>
+            <title>Adding videos to a youtube playlists via a terminal python script</title>
+            <description>I wanted to duplicate another user's playlist to one of my free google accounts. But it's no longer possible from the web interface. None of the methods described in various SO answers are functional, they are obsolete. But it can be done with a Python script in your terminal.</description>
+            <link>https://gotofritz.net/blog/migrating-youtube-playlists-by-adding-videos-via-cli</link>
+            <pubDate>Tue, 23 Aug 2022 00:00:00 GMT</pubDate>
+        </item>
+      
+          <item>
             <guid>https://gotofritz.net/blog/migrating-thunderbird-message-filters-from-another-machine</guid>
             <title>Migrating Thunderbird message filters from another machine</title>
             <description>Thunderbird doesn't sync message filters. Its roots are from ancient times, before distributed computing was prevalent. If you want to copy your filters from one machine to another you have to do it the old-fashioned way, by copying config files</description>
