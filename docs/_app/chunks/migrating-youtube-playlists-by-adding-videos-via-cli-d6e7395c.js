@@ -88,7 +88,7 @@ FILE_STEM <span class="token operator">=</span> <span class="token string">"data
     <span class="token triple-quoted-string string">"""assume that all files have a timestamp in the name, and hence the
     latest is the last one
     """</span>
-    <span class="token keyword">return</span> <span class="token builtin">list</span><span class="token punctuation">(</span>DATA_DIR<span class="token punctuation">.</span>glob<span class="token punctuation">(</span><span class="token string">"*.csv"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span>pop<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span> <span class="token builtin">sorted</span><span class="token punctuation">(</span>DATA_DIR<span class="token punctuation">.</span>glob<span class="token punctuation">(</span><span class="token string">"*.csv"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span>pop<span class="token punctuation">(</span><span class="token punctuation">)</span>
 
 <span class="token keyword">def</span> <span class="token function">with_timestamp</span><span class="token punctuation">(</span>stem<span class="token punctuation">:</span> <span class="token builtin">str</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> <span class="token builtin">str</span><span class="token punctuation">:</span>
     <span class="token triple-quoted-string string">"""prepend a timestamp to a string. Typically used for filenames"""</span>

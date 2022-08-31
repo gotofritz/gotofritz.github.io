@@ -1,6 +1,6 @@
 {
   ".svelte-kit/runtime/client/start.js": {
-    "file": "start-9c6ba7f8.js",
+    "file": "start-aea4ce12.js",
     "src": ".svelte-kit/runtime/client/start.js",
     "isEntry": true,
     "imports": [
@@ -56,7 +56,7 @@
     ]
   },
   "src/routes/blog/[slug].svelte": {
-    "file": "pages/blog/_slug_.svelte-4d8e64cb.js",
+    "file": "pages/blog/_slug_.svelte-d82cbb09.js",
     "src": "src/routes/blog/[slug].svelte",
     "isEntry": true,
     "isDynamicEntry": true,
@@ -88,7 +88,7 @@
       "posts/blog/how-to-avoid-sudo-npm.md",
       "posts/blog/install-specific-version-homebrew.md",
       "posts/blog/installing-python-on-mac-os-x-in-2022.md",
-      "posts/blog/migrating-from-gmail-to-proton-mail.md",
+      "posts/blog/migrating-away-from-goole-proton-mail-and-other-stories.md",
       "posts/blog/migrating-thunderbird-message-filters-from-another-machine.md",
       "posts/blog/migrating-youtube-playlists-by-adding-videos-via-cli.md",
       "posts/blog/music-remove-album-ratings-applescript.md",
@@ -357,9 +357,9 @@
       "_index-6e518972.js"
     ]
   },
-  "posts/blog/migrating-from-gmail-to-proton-mail.md": {
-    "file": "chunks/migrating-from-gmail-to-proton-mail-fa5c2b76.js",
-    "src": "posts/blog/migrating-from-gmail-to-proton-mail.md",
+  "posts/blog/migrating-away-from-goole-proton-mail-and-other-stories.md": {
+    "file": "chunks/migrating-away-from-goole-proton-mail-and-other-stories-9512ce9a.js",
+    "src": "posts/blog/migrating-away-from-goole-proton-mail-and-other-stories.md",
     "isDynamicEntry": true,
     "imports": [
       "_index-6e518972.js"
@@ -374,7 +374,7 @@
     ]
   },
   "posts/blog/migrating-youtube-playlists-by-adding-videos-via-cli.md": {
-    "file": "chunks/migrating-youtube-playlists-by-adding-videos-via-cli-47644671.js",
+    "file": "chunks/migrating-youtube-playlists-by-adding-videos-via-cli-d6e7395c.js",
     "src": "posts/blog/migrating-youtube-playlists-by-adding-videos-via-cli.md",
     "isDynamicEntry": true,
     "imports": [
