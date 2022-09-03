@@ -7,6 +7,14 @@
     <atom:link href="https://gotofritz.net/feed.xml" rel="self" type="application/rss+xml" />
     
           <item>
+            <guid>https://gotofritz.net/blog/deleting-duplicates-from-youtube-playlists-with-python-script</guid>
+            <title>Removing duplicates from youtube playlists with a Python script</title>
+            <description>Thanks to a bug while copying a youtube playlist with a Python script, I ended up with a lot of duplicates videos in the playlist. Surprisingly, the YouTube interface doesn't let you remove them. So I put together another small Python script</description>
+            <link>https://gotofritz.net/blog/deleting-duplicates-from-youtube-playlists-with-python-script</link>
+            <pubDate>Thu, 01 Sep 2022 00:00:00 GMT</pubDate>
+        </item>
+      
+          <item>
             <guid>https://gotofritz.net/blog/migrating-youtube-playlists-by-adding-videos-via-cli</guid>
             <title>Adding videos to a youtube playlists via a terminal python script</title>
             <description>I wanted to duplicate another user's playlist to one of my free google accounts. But it's no longer possible from the web interface. None of the methods described in various SO answers are functional, they are obsolete. But it can be done with a Python script in your terminal.</description>

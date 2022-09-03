@@ -1,6 +1,6 @@
 {
   ".svelte-kit/runtime/client/start.js": {
-    "file": "start-7c058546.js",
+    "file": "start-31b67ff1.js",
     "src": ".svelte-kit/runtime/client/start.js",
     "isEntry": true,
     "imports": [
@@ -19,7 +19,7 @@
     ]
   },
   "src/routes/__layout.svelte": {
-    "file": "pages/__layout.svelte-3b55d163.js",
+    "file": "pages/__layout.svelte-eec0dda3.js",
     "src": "src/routes/__layout.svelte",
     "isEntry": true,
     "isDynamicEntry": true,
@@ -29,7 +29,7 @@
       "_index-21d5ca5c.js"
     ],
     "css": [
-      "assets/pages/__layout.svelte-4b70778f.css"
+      "assets/pages/__layout.svelte-bf65fab9.css"
     ]
   },
   ".svelte-kit/runtime/components/error.svelte": {
@@ -42,13 +42,13 @@
     ]
   },
   "src/routes/blog/[...page].svelte": {
-    "file": "pages/blog/_...page_.svelte-0d48ccf5.js",
+    "file": "pages/blog/_...page_.svelte-658a8e6f.js",
     "src": "src/routes/blog/[...page].svelte",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
       "_index-6e518972.js",
-      "_info-b33c1a2d.js"
+      "_info-a6fce565.js"
     ],
     "css": [
       "assets/pages/blog/_...page_.svelte-d5564242.css",
@@ -56,7 +56,7 @@
     ]
   },
   "src/routes/blog/[slug].svelte": {
-    "file": "pages/blog/_slug_.svelte-920c5048.js",
+    "file": "pages/blog/_slug_.svelte-72049ac0.js",
     "src": "src/routes/blog/[slug].svelte",
     "isEntry": true,
     "isDynamicEntry": true,
@@ -64,7 +64,7 @@
       "_preload-helper-e4860ae8.js",
       "_index-6e518972.js",
       "_NavHeader-d4d57fe7.js",
-      "_info-b33c1a2d.js",
+      "_info-a6fce565.js",
       "_searching-3fc56ee5.js",
       "_index-21d5ca5c.js"
     ],
@@ -79,6 +79,7 @@
       "posts/blog/combining-images-imagemagick.md",
       "posts/blog/copying-files-matching-pattern-cpio.md",
       "posts/blog/countdown-clock-state-machine-requestanimationframe-vanilla-js.md",
+      "posts/blog/deleting-duplicates-from-youtube-playlists-with-python-script.md",
       "posts/blog/directory-listings-in-apache-2-4.md",
       "posts/blog/escaping-in-replace-strings-in-javascript.md",
       "posts/blog/finding-files-inside-archive.md",
@@ -119,13 +120,13 @@
     ]
   },
   "src/routes/index.svelte": {
-    "file": "pages/index.svelte-783b66fe.js",
+    "file": "pages/index.svelte-a23441b1.js",
     "src": "src/routes/index.svelte",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
       "_index-6e518972.js",
-      "_info-b33c1a2d.js",
+      "_info-a6fce565.js",
       "_searching-3fc56ee5.js",
       "_NavHeader-d4d57fe7.js",
       "_index-21d5ca5c.js"
@@ -136,14 +137,14 @@
     ]
   },
   "src/routes/tags/[tag].svelte": {
-    "file": "pages/tags/_tag_.svelte-966ada02.js",
+    "file": "pages/tags/_tag_.svelte-938d19bf.js",
     "src": "src/routes/tags/[tag].svelte",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
       "_index-6e518972.js",
       "_NavHeader-d4d57fe7.js",
-      "_info-b33c1a2d.js",
+      "_info-a6fce565.js",
       "_searching-3fc56ee5.js",
       "_index-21d5ca5c.js"
     ],
@@ -185,8 +186,8 @@
       "_index-21d5ca5c.js"
     ]
   },
-  "_info-b33c1a2d.js": {
-    "file": "chunks/info-b33c1a2d.js",
+  "_info-a6fce565.js": {
+    "file": "chunks/info-a6fce565.js",
     "imports": [
       "_index-6e518972.js"
     ],
@@ -285,6 +286,14 @@
       "_index-6e518972.js"
     ]
   },
+  "posts/blog/deleting-duplicates-from-youtube-playlists-with-python-script.md": {
+    "file": "chunks/deleting-duplicates-from-youtube-playlists-with-python-script-a1112d3a.js",
+    "src": "posts/blog/deleting-duplicates-from-youtube-playlists-with-python-script.md",
+    "isDynamicEntry": true,
+    "imports": [
+      "_index-6e518972.js"
+    ]
+  },
   "posts/blog/directory-listings-in-apache-2-4.md": {
     "file": "chunks/directory-listings-in-apache-2-4-a6aa405f.js",
     "src": "posts/blog/directory-listings-in-apache-2-4.md",
@@ -374,7 +383,7 @@
     ]
   },
   "posts/blog/migrating-youtube-playlists-by-adding-videos-via-cli.md": {
-    "file": "chunks/migrating-youtube-playlists-by-adding-videos-via-cli-32e6eb94.js",
+    "file": "chunks/migrating-youtube-playlists-by-adding-videos-via-cli-57af6872.js",
     "src": "posts/blog/migrating-youtube-playlists-by-adding-videos-via-cli.md",
     "isDynamicEntry": true,
     "imports": [

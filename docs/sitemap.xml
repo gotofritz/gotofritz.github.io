@@ -16,6 +16,13 @@
         </url>
 
         <url>
+              <loc>https://gotofritz.net/blog/deleting-duplicates-from-youtube-playlists-with-python-script</loc>
+              <lastmod
+                >2022-09-01T00:00:00.000Z</lastmod
+              >
+              <changefreq>monthly</changefreq>
+              <priority>1.0</priority>
+            </url><url>
               <loc>https://gotofritz.net/blog/migrating-youtube-playlists-by-adding-videos-via-cli</loc>
               <lastmod
                 >2022-08-23T00:00:00.000Z</lastmod
@@ -263,189 +270,189 @@
             </url><url>
               <loc>https://gotofritz.net/tags/os%20x</loc>
               <lastmod
-                >2022-08-31T22:34:22.433Z</lastmod
+                >2022-09-03T12:53:26.044Z</lastmod
               >
               <changefreq>monthly</changefreq>
               <priority>0.8</priority>
             </url><url>
               <loc>https://gotofritz.net/tags/bash</loc>
               <lastmod
-                >2022-08-31T22:34:22.433Z</lastmod
-              >
-              <changefreq>monthly</changefreq>
-              <priority>0.8</priority>
-            </url><url>
-              <loc>https://gotofritz.net/tags/quick%20tips</loc>
-              <lastmod
-                >2022-08-31T22:34:22.433Z</lastmod
+                >2022-09-03T12:53:26.044Z</lastmod
               >
               <changefreq>monthly</changefreq>
               <priority>0.8</priority>
             </url><url>
               <loc>https://gotofritz.net/tags/python</loc>
               <lastmod
-                >2022-08-31T22:34:22.433Z</lastmod
+                >2022-09-03T12:53:26.044Z</lastmod
+              >
+              <changefreq>monthly</changefreq>
+              <priority>0.8</priority>
+            </url><url>
+              <loc>https://gotofritz.net/tags/quick%20tips</loc>
+              <lastmod
+                >2022-09-03T12:53:26.044Z</lastmod
               >
               <changefreq>monthly</changefreq>
               <priority>0.8</priority>
             </url><url>
               <loc>https://gotofritz.net/tags/svelte</loc>
               <lastmod
-                >2022-08-31T22:34:22.433Z</lastmod
+                >2022-09-03T12:53:26.044Z</lastmod
               >
               <changefreq>monthly</changefreq>
               <priority>0.8</priority>
             </url><url>
               <loc>https://gotofritz.net/tags/tools</loc>
               <lastmod
-                >2022-08-31T22:34:22.433Z</lastmod
+                >2022-09-03T12:53:26.044Z</lastmod
               >
               <changefreq>monthly</changefreq>
               <priority>0.8</priority>
             </url><url>
               <loc>https://gotofritz.net/tags/js</loc>
               <lastmod
-                >2022-08-31T22:34:22.433Z</lastmod
-              >
-              <changefreq>monthly</changefreq>
-              <priority>0.8</priority>
-            </url><url>
-              <loc>https://gotofritz.net/tags/vscode</loc>
-              <lastmod
-                >2022-08-31T22:34:22.433Z</lastmod
-              >
-              <changefreq>monthly</changefreq>
-              <priority>0.8</priority>
-            </url><url>
-              <loc>https://gotofritz.net/tags/gotofritz</loc>
-              <lastmod
-                >2022-08-31T22:34:22.433Z</lastmod
+                >2022-09-03T12:53:26.044Z</lastmod
               >
               <changefreq>monthly</changefreq>
               <priority>0.8</priority>
             </url><url>
               <loc>https://gotofritz.net/tags/google</loc>
               <lastmod
-                >2022-08-31T22:34:22.433Z</lastmod
+                >2022-09-03T12:53:26.044Z</lastmod
               >
               <changefreq>monthly</changefreq>
               <priority>0.8</priority>
             </url><url>
               <loc>https://gotofritz.net/tags/youtube%20api</loc>
               <lastmod
-                >2022-08-31T22:34:22.433Z</lastmod
+                >2022-09-03T12:53:26.044Z</lastmod
+              >
+              <changefreq>monthly</changefreq>
+              <priority>0.8</priority>
+            </url><url>
+              <loc>https://gotofritz.net/tags/vscode</loc>
+              <lastmod
+                >2022-09-03T12:53:26.044Z</lastmod
+              >
+              <changefreq>monthly</changefreq>
+              <priority>0.8</priority>
+            </url><url>
+              <loc>https://gotofritz.net/tags/gotofritz</loc>
+              <lastmod
+                >2022-09-03T12:53:26.044Z</lastmod
               >
               <changefreq>monthly</changefreq>
               <priority>0.8</priority>
             </url><url>
               <loc>https://gotofritz.net/tags/thunderbird</loc>
               <lastmod
-                >2022-08-31T22:34:22.433Z</lastmod
+                >2022-09-03T12:53:26.044Z</lastmod
               >
               <changefreq>monthly</changefreq>
               <priority>0.8</priority>
             </url><url>
               <loc>https://gotofritz.net/tags/sed</loc>
               <lastmod
-                >2022-08-31T22:34:22.433Z</lastmod
+                >2022-09-03T12:53:26.044Z</lastmod
               >
               <changefreq>monthly</changefreq>
               <priority>0.8</priority>
             </url><url>
               <loc>https://gotofritz.net/tags/django</loc>
               <lastmod
-                >2022-08-31T22:34:22.433Z</lastmod
+                >2022-09-03T12:53:26.044Z</lastmod
               >
               <changefreq>monthly</changefreq>
               <priority>0.8</priority>
             </url><url>
               <loc>https://gotofritz.net/tags/apple%20music</loc>
               <lastmod
-                >2022-08-31T22:34:22.433Z</lastmod
+                >2022-09-03T12:53:26.044Z</lastmod
               >
               <changefreq>monthly</changefreq>
               <priority>0.8</priority>
             </url><url>
               <loc>https://gotofritz.net/tags/backup</loc>
               <lastmod
-                >2022-08-31T22:34:22.433Z</lastmod
+                >2022-09-03T12:53:26.044Z</lastmod
               >
               <changefreq>monthly</changefreq>
               <priority>0.8</priority>
             </url><url>
               <loc>https://gotofritz.net/tags/chrome</loc>
               <lastmod
-                >2022-08-31T22:34:22.433Z</lastmod
+                >2022-09-03T12:53:26.044Z</lastmod
               >
               <changefreq>monthly</changefreq>
               <priority>0.8</priority>
             </url><url>
               <loc>https://gotofritz.net/tags/html</loc>
               <lastmod
-                >2022-08-31T22:34:22.433Z</lastmod
+                >2022-09-03T12:53:26.044Z</lastmod
               >
               <changefreq>monthly</changefreq>
               <priority>0.8</priority>
             </url><url>
               <loc>https://gotofritz.net/tags/xml</loc>
               <lastmod
-                >2022-08-31T22:34:22.433Z</lastmod
+                >2022-09-03T12:53:26.044Z</lastmod
               >
               <changefreq>monthly</changefreq>
               <priority>0.8</priority>
             </url><url>
               <loc>https://gotofritz.net/tags/networks</loc>
               <lastmod
-                >2022-08-31T22:34:22.433Z</lastmod
+                >2022-09-03T12:53:26.044Z</lastmod
               >
               <changefreq>monthly</changefreq>
               <priority>0.8</priority>
             </url><url>
               <loc>https://gotofritz.net/tags/apache</loc>
               <lastmod
-                >2022-08-31T22:34:22.433Z</lastmod
+                >2022-09-03T12:53:26.044Z</lastmod
               >
               <changefreq>monthly</changefreq>
               <priority>0.8</priority>
             </url><url>
               <loc>https://gotofritz.net/tags/windows</loc>
               <lastmod
-                >2022-08-31T22:34:22.433Z</lastmod
+                >2022-09-03T12:53:26.044Z</lastmod
               >
               <changefreq>monthly</changefreq>
               <priority>0.8</priority>
             </url><url>
               <loc>https://gotofritz.net/tags/imagemagick</loc>
               <lastmod
-                >2022-08-31T22:34:22.433Z</lastmod
+                >2022-09-03T12:53:26.044Z</lastmod
               >
               <changefreq>monthly</changefreq>
               <priority>0.8</priority>
             </url><url>
               <loc>https://gotofritz.net/tags/google%20apps%20script</loc>
               <lastmod
-                >2022-08-31T22:34:22.433Z</lastmod
+                >2022-09-03T12:53:26.044Z</lastmod
               >
               <changefreq>monthly</changefreq>
               <priority>0.8</priority>
             </url><url>
               <loc>https://gotofritz.net/tags/evernote</loc>
               <lastmod
-                >2022-08-31T22:34:22.433Z</lastmod
+                >2022-09-03T12:53:26.044Z</lastmod
               >
               <changefreq>monthly</changefreq>
               <priority>0.8</priority>
             </url><url>
               <loc>https://gotofritz.net/tags/svn</loc>
               <lastmod
-                >2022-08-31T22:34:22.433Z</lastmod
+                >2022-09-03T12:53:26.044Z</lastmod
               >
               <changefreq>monthly</changefreq>
               <priority>0.8</priority>
             </url><url>
               <loc>https://gotofritz.net/tags/pdf</loc>
               <lastmod
-                >2022-08-31T22:34:22.433Z</lastmod
+                >2022-09-03T12:53:26.044Z</lastmod
               >
               <changefreq>monthly</changefreq>
               <priority>0.8</priority>

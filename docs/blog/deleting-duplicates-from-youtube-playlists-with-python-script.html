@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="icon" href="/favicon.ico" />
     <link rel="icon" href="/favicon.gif" />
-    <meta http-equiv="content-security-policy" content=""><title>How I built a markdown drive static website with SvelteKit and Tailwind</title><meta name="description" content="In my last post I ported my existing blog to SvelteKit, to get to used to it. Now I am going to build a new version from scratch, using markdown and tailwind. I will use Matt Jennings&#39;s excellent SvelteKit blog template as seed." data-svelte="svelte-xeigh5"><meta name="author" content="gotofritz" data-svelte="svelte-xeigh5"><meta property="og:url" content="https://gotofritz.net/blog/how-to-build-blog-with-sveltekit-markdown-tailwind" data-svelte="svelte-xeigh5"><meta property="og:type" content="website" data-svelte="svelte-xeigh5"><meta property="og:title" content="How I built a markdown drive static website with SvelteKit and Tailwind" data-svelte="svelte-xeigh5"><meta property="og:description" content="In my last post I ported my existing blog to SvelteKit, to get to used to it. Now I am going to build a new version from scratch, using markdown and tailwind. I will use Matt Jennings&#39;s excellent SvelteKit blog template as seed." data-svelte="svelte-xeigh5"><meta property="og:image" content="https://og-image.vercel.app/**How%20I%20built%20a%20markdown%20drive%20static%20website%20with%20SvelteKit%20and%20Tailwind**?theme=light&amp;md=1&amp;fontSize=100px&amp;images=https%3A%2F%2Fassets.vercel.com%2Fimage%2Fupload%2Ffront%2Fassets%2Fdesign%2Fhyper-color-logo.svg" data-svelte="svelte-xeigh5"><meta name="twitter:card" content="summary_large_image" data-svelte="svelte-xeigh5"><meta property="twitter:domain" content="https://gotofritz.net" data-svelte="svelte-xeigh5"><meta property="twitter:url" content="https://gotofritz.net/blog/how-to-build-blog-with-sveltekit-markdown-tailwind" data-svelte="svelte-xeigh5"><meta name="twitter:title" content="How I built a markdown drive static website with SvelteKit and Tailwind" data-svelte="svelte-xeigh5"><meta name="twitter:description" content="In my last post I ported my existing blog to SvelteKit, to get to used to it. Now I am going to build a new version from scratch, using markdown and tailwind. I will use Matt Jennings&#39;s excellent SvelteKit blog template as seed." data-svelte="svelte-xeigh5"><meta name="twitter:image" content="https://og-image.vercel.app/**How%20I%20built%20a%20markdown%20drive%20static%20website%20with%20SvelteKit%20and%20Tailwind**?theme=light&amp;md=1&amp;fontSize=100px&amp;images=https%3A%2F%2Fassets.vercel.com%2Fimage%2Fupload%2Ffront%2Fassets%2Fdesign%2Fhyper-color-logo.svg" data-svelte="svelte-xeigh5">
+    <meta http-equiv="content-security-policy" content=""><title>Removing duplicates from youtube playlists with a Python script</title><meta name="description" content="Thanks to a bug while copying a youtube playlist with a Python script, I ended up with a lot of duplicates videos in the playlist. Surprisingly, the YouTube interface doesn&#39;t let you remove them. So I put together another small Python script" data-svelte="svelte-xeigh5"><meta name="author" content="gotofritz" data-svelte="svelte-xeigh5"><meta property="og:url" content="https://gotofritz.net/blog/deleting-duplicates-from-youtube-playlists-with-python-script" data-svelte="svelte-xeigh5"><meta property="og:type" content="website" data-svelte="svelte-xeigh5"><meta property="og:title" content="Removing duplicates from youtube playlists with a Python script" data-svelte="svelte-xeigh5"><meta property="og:description" content="Thanks to a bug while copying a youtube playlist with a Python script, I ended up with a lot of duplicates videos in the playlist. Surprisingly, the YouTube interface doesn&#39;t let you remove them. So I put together another small Python script" data-svelte="svelte-xeigh5"><meta property="og:image" content="https://og-image.vercel.app/**Removing%20duplicates%20from%20youtube%20playlists%20with%20a%20Python%20script**?theme=light&amp;md=1&amp;fontSize=100px&amp;images=https%3A%2F%2Fassets.vercel.com%2Fimage%2Fupload%2Ffront%2Fassets%2Fdesign%2Fhyper-color-logo.svg" data-svelte="svelte-xeigh5"><meta name="twitter:card" content="summary_large_image" data-svelte="svelte-xeigh5"><meta property="twitter:domain" content="https://gotofritz.net" data-svelte="svelte-xeigh5"><meta property="twitter:url" content="https://gotofritz.net/blog/deleting-duplicates-from-youtube-playlists-with-python-script" data-svelte="svelte-xeigh5"><meta name="twitter:title" content="Removing duplicates from youtube playlists with a Python script" data-svelte="svelte-xeigh5"><meta name="twitter:description" content="Thanks to a bug while copying a youtube playlist with a Python script, I ended up with a lot of duplicates videos in the playlist. Surprisingly, the YouTube interface doesn&#39;t let you remove them. So I put together another small Python script" data-svelte="svelte-xeigh5"><meta name="twitter:image" content="https://og-image.vercel.app/**Removing%20duplicates%20from%20youtube%20playlists%20with%20a%20Python%20script**?theme=light&amp;md=1&amp;fontSize=100px&amp;images=https%3A%2F%2Fassets.vercel.com%2Fimage%2Fupload%2Ffront%2Fassets%2Fdesign%2Fhyper-color-logo.svg" data-svelte="svelte-xeigh5">
 	<link rel="stylesheet" href="/_app/assets/pages/__layout.svelte-bf65fab9.css">
 	<link rel="stylesheet" href="/_app/assets/pages/blog/_slug_.svelte-5058d39f.css">
 	<link rel="stylesheet" href="/_app/assets/PostTags.svelte_svelte_type_style_lang-fcb4ce48.css">
@@ -69,156 +69,147 @@
           </button></div>
         </div></div>
 </nav>
-<div class="flex flex-col min-h-screen searching:text-gray-300"><div class="mx-auto w-full max-w-4xl"><article class="gotofritz-grid relative post lg:grid mb-12 p-2 l:p-0 svelte-axuw0g"><header class="mt-8 mb-4"><h1 class="font-display text-5xl lg:text-6xl">How I built a markdown drive static website with SvelteKit and Tailwind</h1></header>
+<div class="flex flex-col min-h-screen searching:text-gray-300"><div class="mx-auto w-full max-w-4xl"><article class="gotofritz-grid relative post lg:grid mb-12 p-2 l:p-0 svelte-axuw0g"><header class="mt-8 mb-4"><h1 class="font-display text-5xl lg:text-6xl">Removing duplicates from youtube playlists with a Python script</h1></header>
 
-      <main class="intro font-intro text-xl lg:text-2xl leading-relaxed"><!-- HTML_TAG_START -->In <a href="/blog/blog-with-sveltekit-and-markdown">my last post I ported my existing blog to SvelteKit</a>, to get to used to it. Now I am going to build a new version from scratch, using markdown and tailwind. I will use <a href="https://github.com/mattjennings/sveltekit-blog-template">Matt Jennings&#39;s excellent SvelteKit blog template</a> as seed.<!-- HTML_TAG_END -->
-        <div class="opacity-70 mb-28 mt-2 prose"><div class="block lg:inline-block"><time class="font-summary text-base" datetime="2022-05-02T22:00:00.000Z">2022-05-03</time>
+      <main class="intro font-intro text-xl lg:text-2xl leading-relaxed"><!-- HTML_TAG_START -->Thanks to a bug while <a href="/blog/migrating-youtube-playlists-by-adding-videos-via-cli">copying a youtube playlist with a Python script</a>, I ended up with a lot of duplicates videos in the playlist. Surprisingly, the YouTube interface doesn't let you remove them. So I put together another small Python script<!-- HTML_TAG_END -->
+        <div class="opacity-70 mb-28 mt-2 prose"><div class="block lg:inline-block"><time class="font-summary text-base" datetime="2022-08-31T22:00:00.000Z">2022-09-01</time>
   •
-    <span class="font-summary mr-2 text-base">10 min read</span></div>
-          <div class="block lg:inline-block"><div class="rounded-lg bg-gray-200 py-1 px-2 leading-tight mr-4 mb-2 text-center text-gray-600 tag text-xs inline-block "><a href="/tags/svelte" class="no-underline svelte-1bynqgy">svelte</a>
-    </div><div class="rounded-lg bg-gray-200 py-1 px-2 leading-tight mr-4 mb-2 text-center text-gray-600 tag text-xs inline-block "><a href="/tags/gotofritz" class="no-underline svelte-1bynqgy">gotofritz</a>
+    <span class="font-summary mr-2 text-base">8 min read</span></div>
+          <div class="block lg:inline-block"><div class="rounded-lg bg-gray-200 py-1 px-2 leading-tight mr-4 mb-2 text-center text-gray-600 tag text-xs inline-block "><a href="/tags/google" class="no-underline svelte-1bynqgy">google</a>
+    </div><div class="rounded-lg bg-gray-200 py-1 px-2 leading-tight mr-4 mb-2 text-center text-gray-600 tag text-xs inline-block "><a href="/tags/youtube api" class="no-underline svelte-1bynqgy">youtube api</a>
+    </div><div class="rounded-lg bg-gray-200 py-1 px-2 leading-tight mr-4 mb-2 text-center text-gray-600 tag text-xs inline-block "><a href="/tags/python" class="no-underline svelte-1bynqgy">python</a>
     </div>
 </div></div></main>
 
       <div class="relative post-content text-lg ">
-        <h2 id="getting-started"><a aria-hidden="true" tabindex="-1" href="#getting-started"><span class="icon icon-link"></span></a>Getting started</h2>
-<p>I use <a href="https://github.com/Rich-Harris/degit" rel="nofollow">degit, a tool by the SvelteKit’s creator</a>, to reproduce <a href="https://github.com/mattjennings/sveltekit-blog-template" rel="nofollow">Matt Jennings’s excellent SvelteKit blog template</a> in a folder (<code>gotofritz.github.io-redesign/</code>) parallel to my main branch (<code>gotofritz.github.io/</code>)</p>
-<pre class="language-bash"><!-- HTML_TAG_START --><code class="language-bash">$ <span class="token function">mkdir</span> gotofritz.github.io-redesign
-$ <span class="token function">cp</span> -r   gotofritz.github.io/.git gotofritz.github.io-redesign/
-$ <span class="token builtin class-name">cd</span> gotofritz.github.io-redesign/
-$ <span class="token function">git</span> checkout -b svelte-redesign
-Switched to a new branch <span class="token string">'svelte-redesign'</span>
-$ npx degit mattjennings/sveltekit-blog-template --force
-  destination directory is not empty. Using --force, continuing
-  cloned mattjennings/sveltekit-blog-template<span class="token comment">#HEAD</span>
+        <h2 id="google-deprecated-the-button-that-allowed-you-to-remove-duplicate-videos-from-your-playlist"><a aria-hidden="true" tabindex="-1" href="#google-deprecated-the-button-that-allowed-you-to-remove-duplicate-videos-from-your-playlist"><span class="icon icon-link"></span></a>Google deprecated the button that allowed you to remove duplicate videos from your playlist</h2>
+<p>A long time ago (about a year ago), the Youtube interface included <a href="https://webapps.stackexchange.com/questions/130496/how-to-remove-duplicates-from-youtube-playlist" rel="nofollow">a useful button</a>. You clicked on it, and all duplicates videos from the playlist would be removed! That would have been just I needed. But then <a href="https://www.androidpolice.com/2020/09/17/youtube-is-removing-the-button-that-deleted-duplicate-videos-from-playlists/" rel="nofollow">they deprecated it</a>. That made a lot of people very angry, as you can read from the comments in that post. But working in software development myself I understand why they did. They have a lot of products, and during their lifetime features grow exponentially. And old feature don’t just go away - you still need to test them whenever new ones are added. Even if they seem small, the cumulative effort in having to maintain them can make a team unable to work on new features. Regularly pruning away rarely used functionality is a smart move. Although yes, it does upset some users</p>
+<p>Luckily for me, I was able to reproduce the functionality I was after with a Python script</p>
+<h2 id="step-0-set-up-the-python-project"><a aria-hidden="true" tabindex="-1" href="#step-0-set-up-the-python-project"><span class="icon icon-link"></span></a>Step 0: set up the python project</h2>
+<p>I re-used the same setup from the <a href="/blog/migrating-youtube-playlists-by-adding-videos-via-cli">Adding videos to a youtube playlists via a terminal python script</a> post. I simply added a new script to it</p>
+<h2 id="step-2-read-and-manage-csv-files-with-list-of-video-ids-to-add-to-playlist"><a aria-hidden="true" tabindex="-1" href="#step-2-read-and-manage-csv-files-with-list-of-video-ids-to-add-to-playlist"><span class="icon icon-link"></span></a>Step 2: Read and manage csv files with list of video ids to add to playlist</h2>
+<p>The general structure of the script is the same as that of the duplicating playlist one. The main difference is that there is no reading from / writing to CSV files here. The script will be passed one or more playlist_ids, and from them on it will only send calls to the YouTube API. Of course the API call limits still hold, so I will have to set it up in such a way that tomorrow I can pick it up again from where I left off</p>
+<pre class="language-python"><!-- HTML_TAG_START --><code class="language-python"><span class="token comment"># delete_duplicates.py</span>
 
-<span class="token comment"># i like semicolons, thank you very much</span>
-$ <span class="token function">cp</span> <span class="token punctuation">..</span>/gotofritz.github.io/.prettierrc .prettierrc
+<span class="token keyword">import</span> sys
+<span class="token keyword">import</span> os
+<span class="token keyword">from</span> googleapiclient<span class="token punctuation">.</span>discovery <span class="token keyword">import</span> build
+<span class="token keyword">from</span> googleapiclient<span class="token punctuation">.</span>errors <span class="token keyword">import</span> HttpError
+<span class="token keyword">from</span> google_auth_oauthlib<span class="token punctuation">.</span>flow <span class="token keyword">import</span> InstalledAppFlow
 
-<span class="token comment"># Perfect - I also like pnpm. The same would work with npm</span>
-<span class="token comment"># or yarn, of course</span>
-$ <span class="token function">pnpm</span> <span class="token function">install</span>
-Packages: +321
-<span class="token punctuation">..</span>.
+MAX_RESULTS <span class="token operator">=</span> <span class="token number">50</span>
+LABEL_QUOTA_EXCEEDED <span class="token operator">=</span> <span class="token string">"quotaExceeded"</span>
 
-<span class="token comment"># check that it runs</span>
-$ <span class="token function">pnpm</span> run dev
-  sveltekit-blog-template@0.0.1 dev
-  <span class="token punctuation">..</span>.
-  local:   http://localhost:3000
-  network: not exposed
+<span class="token comment"># This scope allows for full read/write</span>
+<span class="token comment"># access to the authenticated user's account</span>
+<span class="token comment"># and requires requests to use an SSL connection.</span>
+SCOPES <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">"https://www.googleapis.com/auth/youtube.force-ssl"</span><span class="token punctuation">]</span>
+API_SERVICE_NAME <span class="token operator">=</span> <span class="token string">"youtube"</span>
+API_VERSION <span class="token operator">=</span> <span class="token string">"v3"</span>
+CLIENT_SECRETS_FILE <span class="token operator">=</span> <span class="token string">"client_secret.json"</span>
 
-  Use --host to expose server to other devices on this network
+<span class="token comment"># exit if at least one playlist id wasn't passed</span>
 
-<span class="token comment"># it does</span>
-  <span class="token operator">&lt;</span>CTRL-C<span class="token operator">></span>
+<span class="token keyword">def</span> <span class="token function">get_authenticated_service</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">"""straight from the YouTube API documentation"""</span>
+    flow <span class="token operator">=</span> InstalledAppFlow<span class="token punctuation">.</span>from_client_secrets_file<span class="token punctuation">(</span>CLIENT_SECRETS_FILE<span class="token punctuation">,</span> SCOPES<span class="token punctuation">)</span>
+    credentials <span class="token operator">=</span> flow<span class="token punctuation">.</span>run_console<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span> build<span class="token punctuation">(</span>API_SERVICE_NAME<span class="token punctuation">,</span> API_VERSION<span class="token punctuation">,</span> credentials<span class="token operator">=</span>credentials<span class="token punctuation">)</span>
 
-$ <span class="token function">git</span> <span class="token function">add</span> <span class="token builtin class-name">.</span>
-$ <span class="token function">git</span> commit -m <span class="token string">"feature: clone mattjennings/sveltekit-blog-template"</span></code><!-- HTML_TAG_END --></pre>
-<h2 id="publishing-the-static-sveltekit-markdown-site-to-github-pages"><a aria-hidden="true" tabindex="-1" href="#publishing-the-static-sveltekit-markdown-site-to-github-pages"><span class="icon icon-link"></span></a>Publishing the static Sveltekit markdown site to GitHub pages</h2>
-<p>The original repo is set up to publish to a <code>/public/</code> folder, but GitHub pages expect either the root folder or a folder called <code>docs/</code>. I went for the latter. A simple change in <code>svelte.config.js</code> made it happen</p>
-<pre class="language-diff"><!-- HTML_TAG_START --><code class="language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> kit: &#123;
-</span><span class="token prefix unchanged"> </span><span class="token line">   target: "#svelte",
-</span><span class="token prefix unchanged"> </span><span class="token line">   adapter: adapter(&#123;
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">      pages: 'public',
-</span><span class="token prefix deleted">-</span><span class="token line">      assets: 'public'
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">     pages: "docs",
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">   &#125;),</span></span></code><!-- HTML_TAG_END --></pre>
-<p>All the other files I needed (the CNAME file, and google confirmation) are already in my static folder</p>
-<p><img src="/_app/assets/docs-50ad1ff9.png" alt="Where to set the docs/ folder as the root for your github pages in the github settings"></p>
-<h2 id="importing-markdown-posts-from-outside-the-sveltekit-project-root"><a aria-hidden="true" tabindex="-1" href="#importing-markdown-posts-from-outside-the-sveltekit-project-root"><span class="icon icon-link"></span></a>Importing markdown posts from outside the SvelteKit project root</h2>
-<p>…cannot be done, at least not in Q2 of 2022. It’s <a href="https://github.com/vitejs/vite/issues/4759" rel="nofollow">a limitation of Vite</a>, the bundler used by SvelteKit. And no, symbolic links don’t help either. Vite is “clever” enough to spot that you are trying to trick it.That is <em>that</em> close to being a deal breaker. I like keeping the posts data and the code completely separate. I also prefer keeping posts in Dropbox, and then manage them with tools like Obsidian. That allows me to easily access them from my mobile phone when I am on the go. I came up with a workaround, but it’s a hack.</p>
-<h2 id="synchronising-posts-inside-sveltekit-with-a-folder-outside-the-project-using-unison"><a aria-hidden="true" tabindex="-1" href="#synchronising-posts-inside-sveltekit-with-a-folder-outside-the-project-using-unison"><span class="icon icon-link"></span></a>Synchronising posts inside SvelteKit with a folder outside the project using unison</h2>
-<p>Since source files cannot exist outside the project in Vite, I only have two options: ignore it, or sync manually. I decided to go for the syncing.</p>
-<h3 id="using-unison-to-sync-folders-before-a-build"><a aria-hidden="true" tabindex="-1" href="#using-unison-to-sync-folders-before-a-build"><span class="icon icon-link"></span></a>Using unison to sync folders before a build</h3>
-<p>My first approach was to add a sync command to <code>package.json</code>, and have it run before building the site. As well as before starting the local dev server. And, of course, manually as needed. This is almost the kind of task you would use <code>rsync</code> for, but not quite. rsync at heart is a <em>backup</em> command; you sync something you care about with a remote location. One is the original, the other the clone. But in the case of blog posts case either could be the original. I may have edited the post at work and the Dropbox copy is the most up to date. Or vice versa. What I need is a tool to keep two folders in sync, updating whichever is less recent. That tool is <a href="https://www.cis.upenn.edu/~bcpierce/unison/" rel="nofollow">unison</a>. Or so I thought.</p>
-<p>The first step was to install unison with brew, <code>brew install unison</code>. Then I created an .env file with the path of the folders to sync to, and from. The file is called <code>.env</code> and there is a version called <code>.env.example</code> in the repo.</p>
-<pre class="language-bash"><!-- HTML_TAG_START --><code class="language-bash"><span class="token assign-left variable">DIR_POSTS</span><span class="token operator">=</span>./posts
-<span class="token assign-left variable">DIR_POSTS_BAK</span><span class="token operator">=~</span>/Dropbox/your site/posts</code><!-- HTML_TAG_END --></pre>
-<p>Then the package.json changes</p>
-<pre class="language-json"><!-- HTML_TAG_START --><code class="language-json">...
-<span class="token property">"scripts"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
-  <span class="token property">"sync"</span><span class="token operator">:</span> <span class="token string">"source .env; if [[ ! -z $DIR_POSTS_BAK ]]; then unison "$DIR_POSTS_BAK" "$DIR_POSTS" -batch; fi"</span><span class="token punctuation">,</span>
-  <span class="token property">"build"</span><span class="token operator">:</span> <span class="token string">"pnpm run sync ; svelte-kit build"</span><span class="token punctuation">,</span>
-  <span class="token property">"dev"</span><span class="token operator">:</span> <span class="token string">"pnpm ryn sync ; svelte-kit dev"</span><span class="token punctuation">,</span>
-  ...
-<span class="token punctuation">&#125;</span>
-  ...</code><!-- HTML_TAG_END --></pre>
-<p>which can be broken down as</p>
-<dl class="code-breakdown"><dt>source .env;</dt><dd>a _very_ basic way to load a .env file into memory. Note that it doesn&#39;t handle comments and a lot of other things. Only suitable for a quick hack</dd><dt>if [[ ! -z $DIR_POSTS_BAK ]]; </dt><dd>only run if I have actually set that variable in the .env file</dd><dt>unison \&quot;$DIR_POSTS_BAK\&quot; \&quot;$DIR_POSTS\&quot; -batch</dt><dd>this is where the syncing happens. `-batch` runs the command without asking the hundreds of impenetrable questions unison tends to ask</dd></dl>
-<dl class="code-breakdown"><dt>pnpm run sync</dt><dd>run this command with pnpm (I prefer it to npm, but either will work)</dd><dt>; </dt><dd>whether the previous command succeeds or not, then...</dd><dt>svelte-kit build</dt><dd>run this script</dd></dl>
-<p>I can now remove the posts from Git (but not the filesystem!) with <code>git rm --cached posts/*</code>. To make sure that folder doesn’t disappear, I add a blank file to it with <code>touch posts/.gitkeep</code>. I then amend the .gitignore file to reflect the latest changes</p>
-<pre class="language-bash"><!-- HTML_TAG_START --><code class="language-bash">posts/*
-<span class="token operator">!</span>posts/.gitkeep</code><!-- HTML_TAG_END --></pre>
-<p>That kind of worked, and I was quite pleased with it. But eventually I got some racing condition between Dropbox syncing the folder with its remote copy and the folder inside the SvelteKit instance. I don’t know exactly how, but unison ended up deleting both copies. Luckily I had another backup somewhere else. I am not sure of the dynamics but in the end it doesn’t matter. The fact it happened once means it can happen again. And life’s too short to waste it worrying about losing your blog posts. I needed another approach.</p>
-<h3 id="back-to-rsync"><a aria-hidden="true" tabindex="-1" href="#back-to-rsync"><span class="icon icon-link"></span></a>Back to rsync</h3>
-<p>I ditched unison and the idea of automatic syncing. I restored the original <code>build</code> and <code>dev</code> scripts and added a couple of rsync ones</p>
-<pre class="language-bash"><!-- HTML_TAG_START --><code class="language-bash">  <span class="token string">"scripts"</span><span class="token builtin class-name">:</span> <span class="token punctuation">&#123;</span>
-    <span class="token punctuation">..</span>.
-    <span class="token string">"sync-to-here"</span><span class="token builtin class-name">:</span> <span class="token string">"source .env; if [[ ! -z <span class="token variable">$DIR_POSTS_BAK</span> ]]; then rsync -a <span class="token entity" title="&quot;">"</span><span class="token variable">$DIR_POSTS_BAK</span>/<span class="token entity" title="&quot;">"</span> <span class="token entity" title="&quot;">"</span><span class="token variable">$DIR_POSTS</span><span class="token entity" title="&quot;">"</span>; fi"</span>,
-    <span class="token string">"sync-to-backup"</span><span class="token builtin class-name">:</span> <span class="token string">"source .env; if [[ ! -z <span class="token variable">$DIR_POSTS_BAK</span> ]]; then rsync -a <span class="token entity" title="&quot;">"</span><span class="token variable">$DIR_POSTS</span>/<span class="token entity" title="&quot;">"</span> <span class="token entity" title="&quot;">"</span><span class="token variable">$DIR_POSTS_BAK</span><span class="token entity" title="&quot;">"</span>; fi"</span>
-  <span class="token punctuation">&#125;</span>,</code><!-- HTML_TAG_END --></pre>
-<p>So now I have to sync manually. Not ideal, but hopefully the SvelteKit team will come up with a workaround.</p>
-<h2 id="adapting-the-boilerplate-to-my-needs"><a aria-hidden="true" tabindex="-1" href="#adapting-the-boilerplate-to-my-needs"><span class="icon icon-link"></span></a>Adapting the boilerplate to my needs</h2>
-<p>I made some changes and adaptations, but mostly small touches here and there. I really like how it is setup, particularly the use of the <a href="https://github.com/mattjennings/mdsvex-relative-images" rel="nofollow">mdsvex-relative-images</a> plugin which lets me create posts as either <code>blog/my-post.md</code> or <code>blog/my-post/index.md</code> which can then fetch images like <code>blog/my-post/an-image.png</code></p>
-<ul><li><p>I changed <code>info.js</code> to include the name of my own blog, and added a simple page title helper to it.</p>
-<pre class="language-js"><!-- HTML_TAG_START --><code class="language-js"><span class="token keyword">export</span> <span class="token keyword">const</span> <span class="token function-variable function">makeTitle</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">title</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token template-string"><span class="token template-punctuation string">&#96;</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>title<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string"> | gotofritz</span><span class="token template-punctuation string">&#96;</span></span><span class="token punctuation">;</span></code><!-- HTML_TAG_END --></pre></li>
-<li><p>Renamed a few routes inside <code>routes/</code>: from <code>posts/</code> to <code>blog/</code>, from <code>rss.xml</code> to <code>feed.xml</code></p></li>
-<li><p>Added my own favicon.ico</p></li>
-<li><p>Changed <code>get-posts.js</code> to cater for the legacy frontmatter in my posts, which is not always the same as Matt is using. One big difference is that I use tags, which is a simple array</p>
-<pre class="language-markdown"><!-- HTML_TAG_START --><code class="language-markdown"><span class="token front-matter-block"><span class="token punctuation">---</span>
-<span class="token front-matter yaml language-yaml">title: How I built a markdown drive static website with SvelteKit and Tailwind
-tags:
-  - svelte
-  - gotofritz</span>
-<span class="token punctuation">---</span></span></code><!-- HTML_TAG_END --></pre></li>
-<li><p>Built my own template with Svelte / Tailwind markup, importing my own fonts (I really like DM Serif Display for the title)</p></li>
-<li><p>Added sitemap to the robots.txt</p></li>
-<li><p>I use google as a search engine for the site, so I added that in the top navbar</p></li>
-<li><p>Created pages for the tag. They are similar to the index page, but they use a variation of <code>get-posts.js</code> to get their content from.</p></li></ul>
-<h3 id="displaying-drafts-in-dev-mode-in-sveltekit-but-excluding-it-from-build"><a aria-hidden="true" tabindex="-1" href="#displaying-drafts-in-dev-mode-in-sveltekit-but-excluding-it-from-build"><span class="icon icon-link"></span></a>Displaying drafts in dev mode in SvelteKit, but excluding it from build</h3>
-<p>I added a field to the frontmatter of the posts I wanted to keep as draft. Adding <code>draft: true</code> rather than, say <code>published: false</code> meant I only needed to add those flags to the posts that were drafts.</p>
-<pre class="language-markdown"><!-- HTML_TAG_START --><code class="language-markdown"><span class="token front-matter-block"><span class="token punctuation">---</span>
-<span class="token front-matter yaml language-yaml">date: 2022-05-03
-updated: 2022-05-25T22:39:29.436714
-draft: true
-title: How I built a markdown drive static website with SvelteKit and Tailwind</span>
-<span class="token punctuation">---</span></span></code><!-- HTML_TAG_END --></pre>
-<p>I then added a filter to the <code>get-posts.js</code> page to only allow those posts in dev mode</p>
-<pre class="language-diff"><!-- HTML_TAG_START --><code class="language-diff"><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line"> import &#123; browser &#125; from "$app/env";
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line"> import &#123; browser, dev &#125; from "$app/env";
-</span></span>...
-const posts = Object.entries(import.meta.globEager('/posts/*_/_.md'))
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> .map(([filepath, post]) => &#123;
-</span><span class="token prefix unchanged"> </span><span class="token line">   return &#123;
-</span><span class="token prefix unchanged"> </span><span class="token line">   ...
-</span></span>&#125;)
-<span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">  .filter((post) => dev || !post.draft)
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> // parse HTML output for content metadata (preview, reading time, toc)
-</span><span class="token prefix unchanged"> </span><span class="token line"> .map((post) => &#123;
-</span><span class="token prefix unchanged"> </span><span class="token line">   const parsedHtml = parse(post.component.render().html)
-</span><span class="token prefix unchanged"> </span><span class="token line">   ...</span></span></code><!-- HTML_TAG_END --></pre>
-<h3 id="upgrading-to-sveltejskit-100-next338"><a aria-hidden="true" tabindex="-1" href="#upgrading-to-sveltejskit-100-next338"><span class="icon icon-link"></span></a>Upgrading to @sveltejs/kit 1.0.0-next.338</h3>
-<p>I was having some routing issues I couldn’t work around, but luckily upgrading to the latest version of SvelteKit solved them. I did need to make a couple of changes to the configuration though</p>
-<pre class="language-diff"><!-- HTML_TAG_START --><code class="language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> ...
-</span><span class="token prefix unchanged"> </span><span class="token line"> kit: &#123;
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">   target: "#svelte",
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">   adapter: adapter(&#123;
-</span><span class="token prefix unchanged"> </span><span class="token line">     pages: "docs",
-</span><span class="token prefix unchanged"> </span><span class="token line">   &#125;),
-</span><span class="token prefix unchanged"> </span><span class="token line"> ...
-</span><span class="token prefix unchanged"> </span><span class="token line"> prerender: &#123;
-</span><span class="token prefix unchanged"> </span><span class="token line">     entries: ["*", "/sitemap.xml", "/feed.xml"],
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">     default: true,
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">   &#125;,
-</span><span class="token prefix unchanged"> </span><span class="token line"> ...</span></span></code><!-- HTML_TAG_END --></pre>
-<h2 id="happy-with-sveltekit-so-far-except-for-two-issues"><a aria-hidden="true" tabindex="-1" href="#happy-with-sveltekit-so-far-except-for-two-issues"><span class="icon icon-link"></span></a>Happy with SvelteKit so far, except for two issues</h2>
-<p>In the end Matt’s work has saved me a lot of time. Thanks! I like Svelte and think it works well. I’d recommend it for any cases where you don’t want to use React (i.e., when design systems are not involved. There is just no beating React when it comes to create, use, and manage design systems!)</p>
-<p>There are only two outstanding issues that bother me</p>
-<ul><li>the fact you can’t put the posts outside the repository root</li>
-<li>some aggressive caching which cannot be turned off. For example the tag pages often need to be reloaded to show their ‘true’ content. I haven’t worked how to fix that yet</li></ul>
-<h2 id="prior-art"><a aria-hidden="true" tabindex="-1" href="#prior-art"><span class="icon icon-link"></span></a>Prior art</h2>
-<ul><li><a href="https://mattjennings.io/blog/rewriting-my-website-in-sveltekit" rel="nofollow">Matt Jennings</a> posts explains a lot of his design choices</li></ul>
+<span class="token keyword">def</span> <span class="token function">delete_video_and_maybe_stop</span><span class="token punctuation">(</span>client<span class="token punctuation">,</span> playlist_item_id<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> <span class="token builtin">bool</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">"""return true if it should stop, false otherwise"""</span>
+
+<span class="token keyword">def</span> <span class="token function">get_videos_to_delete_for_playlist_and_maybe_stop</span><span class="token punctuation">(</span>client<span class="token punctuation">,</span> playlist_id<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">"""return a tuple: true if it should stop, false otherwise; and a list of video ids"""</span>
+
+
+<span class="token keyword">def</span> <span class="token function">main</span><span class="token punctuation">(</span>client<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">for</span> playlist_id <span class="token keyword">in</span> sys<span class="token punctuation">.</span>argv<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">:</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
+        should_stop<span class="token punctuation">,</span> videos_to_delete <span class="token operator">=</span> get_videos_to_delete_for_playlist_and_maybe_stop<span class="token punctuation">(</span>
+            client<span class="token punctuation">,</span> playlist_id
+        <span class="token punctuation">)</span>
+        <span class="token keyword">if</span> should_stop<span class="token punctuation">:</span>
+            <span class="token keyword">break</span>
+        deleted <span class="token operator">=</span> <span class="token number">0</span>
+        <span class="token keyword">for</span> playlist_item_id <span class="token keyword">in</span> videos_to_delete<span class="token punctuation">:</span>
+            should_break <span class="token operator">=</span> delete_video_and_maybe_stop<span class="token punctuation">(</span>client<span class="token punctuation">,</span> playlist_item_id<span class="token punctuation">)</span>
+            <span class="token keyword">if</span> should_break<span class="token punctuation">:</span>
+                <span class="token keyword">break</span>
+            deleted <span class="token operator">+=</span> <span class="token number">1</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span>
+            <span class="token string-interpolation"><span class="token string">f"deleted </span><span class="token interpolation"><span class="token punctuation">&#123;</span>deleted<span class="token punctuation">&#125;</span></span><span class="token string"> videos out of </span><span class="token interpolation"><span class="token punctuation">&#123;</span><span class="token builtin">len</span><span class="token punctuation">(</span>videos_to_delete<span class="token punctuation">)</span><span class="token punctuation">&#125;</span></span><span class="token string"> for playlist </span><span class="token interpolation"><span class="token punctuation">&#123;</span>playlist_id<span class="token punctuation">&#125;</span></span><span class="token string">"</span></span>
+        <span class="token punctuation">)</span>
+
+
+<span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">"__main__"</span><span class="token punctuation">:</span>
+    <span class="token comment"># When running locally, disable OAuthlib's</span>
+    <span class="token comment"># HTTPs verification. When running in production</span>
+    <span class="token comment"># * do not * leave this option enabled.</span>
+    os<span class="token punctuation">.</span>environ<span class="token punctuation">[</span><span class="token string">"OAUTHLIB_INSECURE_TRANSPORT"</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">"1"</span>
+    client <span class="token operator">=</span> get_authenticated_service<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    main<span class="token punctuation">(</span>client<span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"DONE"</span><span class="token punctuation">)</span></code><!-- HTML_TAG_END --></pre>
+<h3 id="getting-a-list-of-videos-from-a-playlist"><a aria-hidden="true" tabindex="-1" href="#getting-a-list-of-videos-from-a-playlist"><span class="icon icon-link"></span></a>Getting a list of videos from a playlist</h3>
+<p>Results are paginated, so you need to fetch all the pages to get the complete list. The maximum page size you can request is 50 items, so that can take a few calls. While doing that, the function keeps track of the videos already seen, and adds any duplicates to a list, which will be returned.</p>
+<p>Note that there are two different IDs at play. One is the <code>video_id</code>, which represents the video file itself. This is the one that appears in the browser bar when viewing the video. The other is the <code>id</code> of the <code>playlistItem</code>. A playlistItem is a specific video, in a specific position playlist. When you remove the clip by <code>video_id</code>, the clip will disappear from anywhere within YouTube. When you remove a playlistItem by <code>id</code>, you are removing a video from a playlist. But the video might still be in other playlists. So duplicate videos will share the same <code>video_id</code>, but each instance in the playlist will have its own <code>id</code>.</p>
+<p>To fetch the playlist, use the <a href="https://developers.google.com/youtube/v3/docs/playlistItems/list" rel="nofollow">playlistItems().list</a> call. The <code>nextPageToken</code> attribute allows you to fetch the next page. Keep doing that until nextPageToken is no longer in the response</p>
+<pre class="language-diff"><!-- HTML_TAG_START --><code class="language-diff">def get_vides_to_delete_for_playlist_and_maybe_stop(client, playlist_id):
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">   """return a tuple: true if it should stop, false otherwise; and a list of video ids"""
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">    videos_already_done = []
+</span><span class="token prefix inserted">+</span><span class="token line">    videos_to_delete = []
+</span><span class="token prefix inserted">+</span><span class="token line">    page_token = ""
+</span><span class="token prefix inserted">+</span><span class="token line">    should_stop = False
+</span><span class="token prefix inserted">+</span><span class="token line">    try:
+</span><span class="token prefix inserted">+</span><span class="token line">        while True:
+</span><span class="token prefix inserted">+</span><span class="token line">            response = (
+</span><span class="token prefix inserted">+</span><span class="token line">                client.playlistItems()
+</span><span class="token prefix inserted">+</span><span class="token line">                .list(
+</span><span class="token prefix inserted">+</span><span class="token line">                    part="snippet,contentDetails",
+</span><span class="token prefix inserted">+</span><span class="token line">                    playlistId=playlist_id,
+</span><span class="token prefix inserted">+</span><span class="token line">                    pageToken=page_token,
+</span><span class="token prefix inserted">+</span><span class="token line">                    maxResults=MAX_RESULTS,
+</span><span class="token prefix inserted">+</span><span class="token line">                )
+</span><span class="token prefix inserted">+</span><span class="token line">                .execute()
+</span><span class="token prefix inserted">+</span><span class="token line">            )
+</span><span class="token prefix inserted">+</span><span class="token line">            for item in response["items"]:
+</span><span class="token prefix inserted">+</span><span class="token line">                if item["contentDetails"]["videoId"] in videos_already_done:
+</span><span class="token prefix inserted">+</span><span class="token line">                    videos_to_delete.append(item["id"])
+</span><span class="token prefix inserted">+</span><span class="token line">                    print(f"found a duplicate: &#123;item['snippet']['title']&#125;")
+</span><span class="token prefix inserted">+</span><span class="token line">                else:
+</span><span class="token prefix inserted">+</span><span class="token line">                    videos_already_done.append(item["contentDetails"]["videoId"])
+</span></span>
+<span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">            if not "nextPageToken" in response:
+</span><span class="token prefix inserted">+</span><span class="token line">                print("that was the last page")
+</span><span class="token prefix inserted">+</span><span class="token line">                break
+</span></span>
+<span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">            page_token = response["nextPageToken"]
+</span><span class="token prefix inserted">+</span><span class="token line">    except HttpError as e:
+</span><span class="token prefix inserted">+</span><span class="token line">        if e.error_details[0]["reason"] == LABEL_QUOTA_EXCEEDED:  # type: ignore
+</span><span class="token prefix inserted">+</span><span class="token line">            print(f">>>> Quota exceeded that was it for today, tray again tomorrow!")
+</span><span class="token prefix inserted">+</span><span class="token line">            should_stop = True
+</span><span class="token prefix inserted">+</span><span class="token line">        else:
+</span><span class="token prefix inserted">+</span><span class="token line">            print(f">>>> ERROR &#123;e.error_details[0]['message']&#125;")
+</span><span class="token prefix inserted">+</span><span class="token line">    return (should_stop, videos_to_delete)</span></span></code><!-- HTML_TAG_END --></pre>
+<h3 id="deleting-a-video-from-a-playlist"><a aria-hidden="true" tabindex="-1" href="#deleting-a-video-from-a-playlist"><span class="icon icon-link"></span></a>Deleting a video from a playlist</h3>
+<p>This is even simpler: it’s a single API call to <code>playlistItems.delete</code>, with a single argument, the <code>id</code>.</p>
+<pre class="language-diff"><!-- HTML_TAG_START --><code class="language-diff">def delete_video_and_maybe_stop(client, playlist_item_id) -> bool:
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">   """return true if it should stop, false otherwise"""
+</span><span class="token prefix unchanged"> </span><span class="token line">   try:
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">        print(f"-> Deleting &#123;playlist_item_id&#125;")
+</span><span class="token prefix inserted">+</span><span class="token line">        (client.playlistItems().delete(id=playlist_item_id)).execute()
+</span><span class="token prefix inserted">+</span><span class="token line">        return False
+</span><span class="token prefix inserted">+</span><span class="token line">    except HttpError as e:
+</span><span class="token prefix inserted">+</span><span class="token line">        if e.error_details[0]["reason"] == LABEL_QUOTA_EXCEEDED:  # type: ignore
+</span><span class="token prefix inserted">+</span><span class="token line">            print(f">>>> Quota exceeded - that was it for today, tray again tomorrow!")
+</span><span class="token prefix inserted">+</span><span class="token line">            return True
+</span><span class="token prefix inserted">+</span><span class="token line">        else:
+</span><span class="token prefix inserted">+</span><span class="token line">            print(f">>>> ERROR &#123;e.error_details[0]['message']&#125;")
+</span><span class="token prefix inserted">+</span><span class="token line">            return False</span></span></code><!-- HTML_TAG_END --></pre>
+<h3 id="conclusion"><a aria-hidden="true" tabindex="-1" href="#conclusion"><span class="icon icon-link"></span></a>Conclusion</h3>
+<p>Given the the project was already set up this was fairly straight forward. The code is <a href="https://github.com/gotofritz/quick_and_dirty/tree/master/youtube_migration" rel="nofollow">available on GitHub</a> if you need it - at your own risk, of course.</p>
+<h3 id="references"><a aria-hidden="true" tabindex="-1" href="#references"><span class="icon icon-link"></span></a>References</h3>
+<ul><li>YouTube API <a href="https://developers.google.com/youtube/v3/docs/playlistItems/list" rel="nofollow">playlistItem.list</a> reference</li>
+<li>YouTube API <a href="https://developers.google.com/youtube/v3/docs/playlistItems/delete" rel="nofollow">playlistItem.delete</a> reference</li></ul>
 
         
         <div class="hidden xl:block absolute not-prose left-[100%]" aria-label="Table of Contents"><div class="fixed z-10 px-4 py-2 ml-8 top-[6.5rem] w-60 right-0">
@@ -231,36 +222,22 @@ const posts = Object.entries(import.meta.globEager('/posts/*_/_.md'))
 
     <hr>
       <div class="p-2 lg:p-0"><div class="grid gap-8 grid-cols-1 sm:grid-cols-2"><div class="flex flex-col"><h6 class="not-prose post-preview-label">Previous Post</h6>
-              <div class="flex-1 post-preview"><div class="mb-16"><div class="title"><h3 class="!mt-0 !mb-2 font-display text-3xl svelte-1a35dix"><a href="/blog/blog-with-sveltekit-and-markdown">I rebuilt my website with SvelteKit</a></h3></div>
+              <div class="flex-1 post-preview"><div class="mb-16"><div class="title"><h3 class="!mt-0 !mb-2 font-display text-3xl svelte-1a35dix"><a href="/blog/migrating-youtube-playlists-by-adding-videos-via-cli">Adding videos to a youtube playlists via a terminal python script</a></h3></div>
 
-  <div class="opacity-70 mb-2"><div class="block lg:inline-block"><time class="font-summary text-base" datetime="2022-04-21T22:00:00.000Z">2022-04-22</time>
+  <div class="opacity-70 mb-2"><div class="block lg:inline-block"><time class="font-summary text-base" datetime="2022-08-22T22:00:00.000Z">2022-08-23</time>
   •
-    <span class="font-summary mr-2 text-base">6 min read</span></div>
-    <div class="block lg:inline-block"><div class="rounded-lg bg-gray-200 py-1 px-2 leading-tight mr-4 mb-2 text-center text-gray-600 tag text-xs inline-block "><a href="/tags/svelte" class="no-underline svelte-1bynqgy">svelte</a>
-    </div><div class="rounded-lg bg-gray-200 py-1 px-2 leading-tight mr-4 mb-2 text-center text-gray-600 tag text-xs inline-block "><a href="/tags/gotofritz" class="no-underline svelte-1bynqgy">gotofritz</a>
+    <span class="font-summary mr-2 text-base">27 min read</span></div>
+    <div class="block lg:inline-block"><div class="rounded-lg bg-gray-200 py-1 px-2 leading-tight mr-4 mb-2 text-center text-gray-600 tag text-xs inline-block "><a href="/tags/google" class="no-underline svelte-1bynqgy">google</a>
+    </div><div class="rounded-lg bg-gray-200 py-1 px-2 leading-tight mr-4 mb-2 text-center text-gray-600 tag text-xs inline-block "><a href="/tags/youtube api" class="no-underline svelte-1bynqgy">youtube api</a>
+    </div><div class="rounded-lg bg-gray-200 py-1 px-2 leading-tight mr-4 mb-2 text-center text-gray-600 tag text-xs inline-block "><a href="/tags/python" class="no-underline svelte-1bynqgy">python</a>
     </div>
 </div></div>
 
-  <div class="lg:flex-1 mb-4"><div class="mb-4 dark:prose-invert searching:prose-invert leading-7"><!-- HTML_TAG_START -->Building a static website with <a href="https://kit.svelte.dev/">Sveltekit</a> and markdown is hard going at first. But just when I was about to give up I stumbled on some blog posts and boilerplates that helped me crack it. I may still switch to <a href="https://astro.build/">Astro</a> later though<!-- HTML_TAG_END --></div>
+  <div class="lg:flex-1 mb-4"><div class="mb-4 dark:prose-invert searching:prose-invert leading-7"><!-- HTML_TAG_START -->I wanted to duplicate another user's playlist to one of my free google accounts. But it's no longer possible from the web interface. None of <a href="https://webapps.stackexchange.com/questions/39686/how-to-copy-youtube-playlist-from-one-account-to-another" title="read those answers in Stack Overflow">the methods described in various SO answers</a> are functional, they are obsolete. But it can be done with a Python script in your terminal.<!-- HTML_TAG_END --></div>
 
-    <div><a href="/blog/blog-with-sveltekit-and-markdown" class="group pr-8 no-underline">Read More <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4 invisible inline-block group-hover:visible" height="1rem" width="1rem" hover:inline-block><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg></a></div></div>
+    <div><a href="/blog/migrating-youtube-playlists-by-adding-videos-via-cli" class="group pr-8 no-underline">Read More <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4 invisible inline-block group-hover:visible" height="1rem" width="1rem" hover:inline-block><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg></a></div></div>
 </div></div></div>
-          <div class="flex flex-col"><h6 class="not-prose post-preview-label flex justify-end">Next Post
-              </h6>
-              <div class="flex-1 post-preview"><div class="mb-16"><div class="title"><h3 class="!mt-0 !mb-2 font-display text-3xl svelte-1a35dix"><a href="/blog/removing-lines-matching-patterns-from-all-files-in-dir">Remove lines matching some patterns from all files in a dir</a></h3></div>
-
-  <div class="opacity-70 mb-2"><div class="block lg:inline-block"><time class="font-summary text-base" datetime="2022-05-21T22:00:00.000Z">2022-05-22</time>
-  •
-    <span class="font-summary mr-2 text-base">3 min read</span></div>
-    <div class="block lg:inline-block"><div class="rounded-lg bg-gray-200 py-1 px-2 leading-tight mr-4 mb-2 text-center text-gray-600 tag text-xs inline-block "><a href="/tags/bash" class="no-underline svelte-1bynqgy">bash</a>
-    </div><div class="rounded-lg bg-gray-200 py-1 px-2 leading-tight mr-4 mb-2 text-center text-gray-600 tag text-xs inline-block "><a href="/tags/sed" class="no-underline svelte-1bynqgy">sed</a>
-    </div>
-</div></div>
-
-  <div class="lg:flex-1 mb-4"><div class="mb-4 dark:prose-invert searching:prose-invert leading-7"><!-- HTML_TAG_START -->A CLI task I find myself doing often with sed<!-- HTML_TAG_END --></div>
-
-    <div><a href="/blog/removing-lines-matching-patterns-from-all-files-in-dir" class="group pr-8 no-underline">Read More <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4 invisible inline-block group-hover:visible" height="1rem" width="1rem" hover:inline-block><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg></a></div></div>
-</div></div></div></div></div></div>
+          </div></div></div>
 </div>
 <footer class="bg-slate-800 text-slate-50 p-8"><div class="lg:max-w-4xl mx-auto flex flex-col lg:flex-row svelte-hjmm9c"><div class="info-block svelte-hjmm9c"><h4 class="title svelte-hjmm9c">Location</h4>
       <div class="label svelte-hjmm9c"><div class="flex align-center svelte-hjmm9c"><div class="svelte-hjmm9c"><svg version="1.1" viewBox="0 0 607.5 364.5" xmlns="http://www.w3.org/2000/svg" height="1.0em" width="1.67em" class="home-icon inline-block mr-2"><title>Berlin</title><rect width="607.5" height="364.5" fill="#e2382a"></rect><rect y="72.9" width="607.5" height="218.7" fill="#fff"></rect><path d="m268.3 84.45-12.2 0.45c-0.6 0.05-1.05 0.35-1.05 1.05 0.05 4.4 0.9 7.25 4.05 9.55-0.4 2.45-0.15 3.7 2.4 5.75 0.25002-2 1.05-2.9 2.3-3.75 0.1 0.05 0.2 0.05 0.25 0.1-0.15 0.9-0.15 1.85 0.05 2.4 0.5 1.4 2.95 1.45 3.6 0.45 0.6 1.45 1.85 1.5 2.85 1.5 1.05 0 1.55-0.75 1.9-1.45 0.59998 0.5 1.2 1.05 1.75 1.75 1.75 2.4 2.05 5.5 2.05 8.45l-1.65 0.15v-1.2c-0.05-1.7-4-2-4.9-0.55-1-1.1-4.1-0.9-4.1 0.85v0.55c-0.7-0.9-1.25-1.85-1.7-2.8-1.25 0.8-2 1.4-1.8 4.25-0.55002 0.05-1.1 0.1-1.6 0.15 0.05 3.3 1.5 4.2 13.3 3.95 0.3 3.3-3 5.15-5.45 6.7-6.4 3.65-13.15 7.65-16.8 14.35-3.05 5.3-3.8 11.6-3.45 17.7l3.5-1.55 0.40002 1.9c-6.3 3-17.8 9.1-25.35 12.6-1.85 0.85-6.65 2.05-7.65 0.35-3.45-5.95-6.2-10.45-10.2-15-2.05-2.35-15.65 8.9-13.15 12.7 5.7 8.65 15 21.05 30.5 21.15 16.05 0.1 30-5.8 33.05-6.7l0.65 2.05c-2.05 0.9-3.85 1.55-6 2.25 2.8 11 6.05 15.3 13.6 22l-1.55 1.15c-1.35-0.8-3.65-3.35-4.9-4.55-16.05 7.6-22.05 15.2-25.9 23.05-4.25 9.45-3.45 20.2-1.65 30.15 0.35 1.65-1.45 2.45-2.8 1.95-3.7-0.85-5.75-4.55-9.3-5.9-1.6-0.7-3.7-1.5-5.45-1.2-2.85 0.5-5.9 14.9-3 16.3 5.4 2.65 11.3 3.2 17.3 6.3 3.95 1.6 7.75 4.2 12.25 3.5 2.55-0.25 5.1-2 5.35-4.7 2.25-9.7 5.4-20 12.8-27 3.55-3.5 8.15-6.3 12.7-8.45-1.8-6.9-3.15-13.8-3-21l2.2-0.1c1.6 27.4 8.9 33.15 21.75 45.9 1.3 1.3 1.2 3.75-0.7 4.5-2.5 1.25-5.45 1.3-8.3 1.45-3.05 0.15-0.75 17.05 3.75 16.9 7.9-0.25 16.1-6.4 20.85-12.45 2-2.5 4.4-5 6.3-7.45 2.35-3.05-0.2-6.6-0.9-9.4-1.95-8-2.85-31-2.95-34.2l2.8 0.05 0.4-5.8c-8.35-10.35-7-26.55-10.45-37-1.35-4.25-2.85-8.65-2.85-13.15 0-6.1 6.9-17.55 6.75-27.75-0.05-4.3-2.45-9.9-2.4-12.45 0.05-7.4 4.3-5.8 4.2-21.2-0.05-4.25-0.55-7.4-1.65-11.75 7.45-7.85-2.8-15.7-8.7-10.8-4.75-1.25-5.35-2.5-14.65-2.5-7.95 0-12.5 2.15-17.45 5.45m-14.4 45.9c-5.25 6.45-8.2 9.7-8 25.35-49.55-28.3-35.05-32.35-45.9-49.25-1.7-2.65 9.35-8.8 12.85-6.2 7.05 5.2 4.45 15 10.3 19.45 5.8 4.4 16.15 6.35 30.75 10.65m30.25-36.35c-0.75 0-2.1-0.4-2.5-0.95-4.35-6.65-5.45-4.25-6.1-1.95-0.55 2.05-2.95 2.1-2.25-0.65 1.75-6.75 6.5-5.8 12.4 3.55m12.75-6.75c1.2-1.6 3.05-3.15 5.05-3.8 2.95-1 4.15 1.4 1.8 2.2-1.95 0.85-3.6 2.05-5 3.45m-40.65 6.8c0.75 0.45 1.8 1 3.35 1.45-0.84998 0.7-1.65 1.7-1.9 2.8-1.35-0.95-1.9-2.7-1.45-4.25m8 2.65c0 0.65-0.15 1.3-0.34998 1.6-0.5 0.8-2.35 0.75-2.75-0.35-0.15-0.45-0.15-1.25 0.05-2 1 0.25 2.05 0.45 3.05 0.75m0.6 0.15c1.35 0.4 2.65 0.85 3.8 1.6-0.25 0.6-0.70002 1.2-1.6 1.2-0.8 0-1.7-0.05-2.2-1-0.25-0.5-0.15-1.2 0-1.8m-5.65 13.25c-0.15-1.4 0-2.6 1.1-3.4 0.55 1 1.15 1.95 1.85 2.8v0.35m0.5-0.025v-1.575c0-1.65 3.5-1.55 3.55 0v1.25m0.45-0.05v-1.4c0-1.65 4.05-1.55 4.05-0.05v1.1"></path></svg></div>
@@ -285,10 +262,10 @@ const posts = Object.entries(import.meta.globEager('/posts/*_/_.md'))
 </footer>
 
 
-		<script type="module" data-sveltekit-hydrate="zddxai">
+		<script type="module" data-sveltekit-hydrate="c3pjkx">
 		import { start } from "/_app/start-31b67ff1.js";
 		start({
-			target: document.querySelector('[data-sveltekit-hydrate="zddxai"]').parentNode,
+			target: document.querySelector('[data-sveltekit-hydrate="c3pjkx"]').parentNode,
 			paths: {"base":"","assets":""},
 			session: {},
 			route: true,
@@ -301,7 +278,7 @@ const posts = Object.entries(import.meta.globEager('/posts/*_/_.md'))
 					import("/_app/pages/__layout.svelte-eec0dda3.js"),
 						import("/_app/pages/blog/_slug_.svelte-72049ac0.js")
 				],
-				params: {slug:"how-to-build-blog-with-sveltekit-markdown-tailwind"},
+				params: {slug:"deleting-duplicates-from-youtube-playlists-with-python-script"},
 				routeId: "blog/[slug]"
 			}
 		});
