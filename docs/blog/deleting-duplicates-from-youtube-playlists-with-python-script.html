@@ -8,18 +8,18 @@
     <link rel="icon" href="/favicon.ico" />
     <link rel="icon" href="/favicon.gif" />
     <meta http-equiv="content-security-policy" content=""><title>Removing duplicates from youtube playlists with a Python script</title><meta name="description" content="Thanks to a bug while copying a youtube playlist with a Python script, I ended up with a lot of duplicates videos in the playlist. Surprisingly, the YouTube interface doesn&#39;t let you remove them. So I put together another small Python script" data-svelte="svelte-xeigh5"><meta name="author" content="gotofritz" data-svelte="svelte-xeigh5"><meta property="og:url" content="https://gotofritz.net/blog/deleting-duplicates-from-youtube-playlists-with-python-script" data-svelte="svelte-xeigh5"><meta property="og:type" content="website" data-svelte="svelte-xeigh5"><meta property="og:title" content="Removing duplicates from youtube playlists with a Python script" data-svelte="svelte-xeigh5"><meta property="og:description" content="Thanks to a bug while copying a youtube playlist with a Python script, I ended up with a lot of duplicates videos in the playlist. Surprisingly, the YouTube interface doesn&#39;t let you remove them. So I put together another small Python script" data-svelte="svelte-xeigh5"><meta property="og:image" content="https://og-image.vercel.app/**Removing%20duplicates%20from%20youtube%20playlists%20with%20a%20Python%20script**?theme=light&amp;md=1&amp;fontSize=100px&amp;images=https%3A%2F%2Fassets.vercel.com%2Fimage%2Fupload%2Ffront%2Fassets%2Fdesign%2Fhyper-color-logo.svg" data-svelte="svelte-xeigh5"><meta name="twitter:card" content="summary_large_image" data-svelte="svelte-xeigh5"><meta property="twitter:domain" content="https://gotofritz.net" data-svelte="svelte-xeigh5"><meta property="twitter:url" content="https://gotofritz.net/blog/deleting-duplicates-from-youtube-playlists-with-python-script" data-svelte="svelte-xeigh5"><meta name="twitter:title" content="Removing duplicates from youtube playlists with a Python script" data-svelte="svelte-xeigh5"><meta name="twitter:description" content="Thanks to a bug while copying a youtube playlist with a Python script, I ended up with a lot of duplicates videos in the playlist. Surprisingly, the YouTube interface doesn&#39;t let you remove them. So I put together another small Python script" data-svelte="svelte-xeigh5"><meta name="twitter:image" content="https://og-image.vercel.app/**Removing%20duplicates%20from%20youtube%20playlists%20with%20a%20Python%20script**?theme=light&amp;md=1&amp;fontSize=100px&amp;images=https%3A%2F%2Fassets.vercel.com%2Fimage%2Fupload%2Ffront%2Fassets%2Fdesign%2Fhyper-color-logo.svg" data-svelte="svelte-xeigh5">
-	<link rel="stylesheet" href="/_app/assets/pages/__layout.svelte-bf65fab9.css">
+	<link rel="stylesheet" href="/_app/assets/pages/__layout.svelte-c269f49b.css">
 	<link rel="stylesheet" href="/_app/assets/pages/blog/_slug_.svelte-5058d39f.css">
 	<link rel="stylesheet" href="/_app/assets/PostTags.svelte_svelte_type_style_lang-fcb4ce48.css">
 	<link rel="stylesheet" href="/_app/assets/NavHeader-5034f4a3.css">
-	<link rel="stylesheet" href="/_app/assets/info-3d45f474.css">
-	<link rel="modulepreload" href="/_app/start-31b67ff1.js">
+	<link rel="stylesheet" href="/_app/assets/pages/tags/index.svelte-27a87f28.css">
+	<link rel="modulepreload" href="/_app/start-24dc91c5.js">
 	<link rel="modulepreload" href="/_app/chunks/index-6e518972.js">
 	<link rel="modulepreload" href="/_app/chunks/index-21d5ca5c.js">
 	<link rel="modulepreload" href="/_app/chunks/preload-helper-e4860ae8.js">
-	<link rel="modulepreload" href="/_app/pages/__layout.svelte-eec0dda3.js">
+	<link rel="modulepreload" href="/_app/pages/__layout.svelte-730847b9.js">
 	<link rel="modulepreload" href="/_app/chunks/searching-3fc56ee5.js">
-	<link rel="modulepreload" href="/_app/pages/blog/_slug_.svelte-72049ac0.js">
+	<link rel="modulepreload" href="/_app/pages/blog/_slug_.svelte-67da592c.js">
 	<link rel="modulepreload" href="/_app/chunks/NavHeader-d4d57fe7.js">
 	<link rel="modulepreload" href="/_app/chunks/info-a6fce565.js">
     <script>
@@ -87,7 +87,7 @@
 <p>Luckily for me, I was able to reproduce the functionality I was after with a Python script</p>
 <h2 id="step-0-set-up-the-python-project"><a aria-hidden="true" tabindex="-1" href="#step-0-set-up-the-python-project"><span class="icon icon-link"></span></a>Step 0: set up the python project</h2>
 <p>I re-used the same setup from the <a href="/blog/migrating-youtube-playlists-by-adding-videos-via-cli">Adding videos to a youtube playlists via a terminal python script</a> post. I simply added a new script to it</p>
-<h2 id="step-2-read-and-manage-csv-files-with-list-of-video-ids-to-add-to-playlist"><a aria-hidden="true" tabindex="-1" href="#step-2-read-and-manage-csv-files-with-list-of-video-ids-to-add-to-playlist"><span class="icon icon-link"></span></a>Step 2: Read and manage csv files with list of video ids to add to playlist</h2>
+<h2 id="step-1-read-and-manage-csv-files-with-list-of-video-ids-to-add-to-playlist"><a aria-hidden="true" tabindex="-1" href="#step-1-read-and-manage-csv-files-with-list-of-video-ids-to-add-to-playlist"><span class="icon icon-link"></span></a>Step 1: Read and manage csv files with list of video ids to add to playlist</h2>
 <p>The general structure of the script is the same as that of the duplicating playlist one. The main difference is that there is no reading from / writing to CSV files here. The script will be passed one or more playlist_ids, and from them on it will only send calls to the YouTube API. Of course the API call limits still hold, so I will have to set it up in such a way that tomorrow I can pick it up again from where I left off</p>
 <pre class="language-python"><!-- HTML_TAG_START --><code class="language-python"><span class="token comment"># delete_duplicates.py</span>
 
@@ -149,9 +149,9 @@ CLIENT_SECRETS_FILE <span class="token operator">=</span> <span class="token str
     client <span class="token operator">=</span> get_authenticated_service<span class="token punctuation">(</span><span class="token punctuation">)</span>
     main<span class="token punctuation">(</span>client<span class="token punctuation">)</span>
     <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"DONE"</span><span class="token punctuation">)</span></code><!-- HTML_TAG_END --></pre>
-<h3 id="getting-a-list-of-videos-from-a-playlist"><a aria-hidden="true" tabindex="-1" href="#getting-a-list-of-videos-from-a-playlist"><span class="icon icon-link"></span></a>Getting a list of videos from a playlist</h3>
+<h2 id="step-2-getting-a-list-of-videos-from-a-playlist"><a aria-hidden="true" tabindex="-1" href="#step-2-getting-a-list-of-videos-from-a-playlist"><span class="icon icon-link"></span></a>Step 2: Getting a list of videos from a playlist</h2>
 <p>Results are paginated, so you need to fetch all the pages to get the complete list. The maximum page size you can request is 50 items, so that can take a few calls. While doing that, the function keeps track of the videos already seen, and adds any duplicates to a list, which will be returned.</p>
-<p>Note that there are two different IDs at play. One is the <code>video_id</code>, which represents the video file itself. This is the one that appears in the browser bar when viewing the video. The other is the <code>id</code> of the <code>playlistItem</code>. A playlistItem is a specific video, in a specific position playlist. When you remove the clip by <code>video_id</code>, the clip will disappear from anywhere within YouTube. When you remove a playlistItem by <code>id</code>, you are removing a video from a playlist. But the video might still be in other playlists. So duplicate videos will share the same <code>video_id</code>, but each instance in the playlist will have its own <code>id</code>.</p>
+<p>Note that there are two different IDs at play. One is the <code>video_id</code>, which represents the original video file someone uploaded to YouTube. This is the id that appears in the browser’s address bar when viewing the video. The other is the <code>id</code> of the <code>playlistItem</code>. A playlistItem holds information about which video is in position x of a playlist. When you remove the clip by <code>video_id</code>, the clip will disappear from everywhere within YouTube. When you remove a playlistItem by <code>id</code>, you are removing a video from a playlist. But the video might still be in other playlists. So duplicate videos will share the same <code>video_id</code>, but each instance in the playlist will have its own <code>id</code>.</p>
 <p>To fetch the playlist, use the <a href="https://developers.google.com/youtube/v3/docs/playlistItems/list" rel="nofollow">playlistItems().list</a> call. The <code>nextPageToken</code> attribute allows you to fetch the next page. Keep doing that until nextPageToken is no longer in the response</p>
 <pre class="language-diff"><!-- HTML_TAG_START --><code class="language-diff">def get_vides_to_delete_for_playlist_and_maybe_stop(client, playlist_id):
 <span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">   """return a tuple: true if it should stop, false otherwise; and a list of video ids"""
@@ -190,7 +190,7 @@ CLIENT_SECRETS_FILE <span class="token operator">=</span> <span class="token str
 </span><span class="token prefix inserted">+</span><span class="token line">        else:
 </span><span class="token prefix inserted">+</span><span class="token line">            print(f">>>> ERROR &#123;e.error_details[0]['message']&#125;")
 </span><span class="token prefix inserted">+</span><span class="token line">    return (should_stop, videos_to_delete)</span></span></code><!-- HTML_TAG_END --></pre>
-<h3 id="deleting-a-video-from-a-playlist"><a aria-hidden="true" tabindex="-1" href="#deleting-a-video-from-a-playlist"><span class="icon icon-link"></span></a>Deleting a video from a playlist</h3>
+<h2 id="step-3-deleting-a-video-from-a-playlist"><a aria-hidden="true" tabindex="-1" href="#step-3-deleting-a-video-from-a-playlist"><span class="icon icon-link"></span></a>Step 3: Deleting a video from a playlist</h2>
 <p>This is even simpler: it’s a single API call to <code>playlistItems.delete</code>, with a single argument, the <code>id</code>.</p>
 <pre class="language-diff"><!-- HTML_TAG_START --><code class="language-diff">def delete_video_and_maybe_stop(client, playlist_item_id) -> bool:
 <span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">   """return true if it should stop, false otherwise"""
@@ -262,10 +262,10 @@ CLIENT_SECRETS_FILE <span class="token operator">=</span> <span class="token str
 </footer>
 
 
-		<script type="module" data-sveltekit-hydrate="c3pjkx">
-		import { start } from "/_app/start-31b67ff1.js";
+		<script type="module" data-sveltekit-hydrate="6lvjv9">
+		import { start } from "/_app/start-24dc91c5.js";
 		start({
-			target: document.querySelector('[data-sveltekit-hydrate="c3pjkx"]').parentNode,
+			target: document.querySelector('[data-sveltekit-hydrate="6lvjv9"]').parentNode,
 			paths: {"base":"","assets":""},
 			session: {},
 			route: true,
@@ -275,8 +275,8 @@ CLIENT_SECRETS_FILE <span class="token operator">=</span> <span class="token str
 				status: 200,
 				error: null,
 				nodes: [
-					import("/_app/pages/__layout.svelte-eec0dda3.js"),
-						import("/_app/pages/blog/_slug_.svelte-72049ac0.js")
+					import("/_app/pages/__layout.svelte-730847b9.js"),
+						import("/_app/pages/blog/_slug_.svelte-67da592c.js")
 				],
 				params: {slug:"deleting-duplicates-from-youtube-playlists-with-python-script"},
 				routeId: "blog/[slug]"

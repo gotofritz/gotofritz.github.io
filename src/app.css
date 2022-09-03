@@ -189,11 +189,20 @@ svg {
   border-bottom: 1px dotted #666;
 }
 
+.dark code:not([class^="language-"]) {
+  background-color: #444;
+  color: inherit;
+}
+
 pre[class*="language-"] {
   border-radius: 0.5rem;
   margin-bottom: 1.5rem;
   padding: 0.5rem;
   overflow-x: scroll;
+}
+
+.dark pre[class*="language-"] {
+  border: 1px dashed rgb(245, 242, 240);
 }
 
 .code-breakdown {
