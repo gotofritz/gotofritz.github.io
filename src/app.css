@@ -47,6 +47,24 @@
 
   a {
     text-decoration: underline;
+    text-underline-offset: 4.5px;
+    text-decoration-color: inherit;
+    text-decoration-style: dotted;
+    transition-property: background-color;
+    transition-duration: 300ms;
+  }
+
+  :where(p, div) > a {
+    padding: 1px 2px;
+  }
+
+  a:hover {
+    background-color: hsl(22, 98%, 76%);
+    border-radius: 2px;
+  }
+
+  .dark a:hover {
+    color: #000;
   }
 
   h3 > a,
@@ -165,11 +183,6 @@ svg {
 
 .post-content li p {
   display: inline;
-}
-
-.post-content a:not(:only-child) {
-  background-color: #eeeeee;
-  border-bottom: 1px dotted #e9e9e9;
 }
 
 .post-content a:not(:only-child):hover {

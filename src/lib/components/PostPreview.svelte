@@ -23,13 +23,13 @@
   </div>
 
   <div class="lg:flex-1 mb-4">
-    <div class="mb-4 prose dark:prose-invert searching:prose-invert">
+    <div class="mb-4 dark:prose-invert searching:prose-invert leading-7">
       {@html post.preview.html}
     </div>
 
     {#if !post.is_empty}
       <div>
-        <a href={`/blog/${post.slug}`} class="group pr-8"
+        <a href={`/blog/${post.slug}`} class="group pr-8 no-underline"
           >Read More <ArrowRightIcon
             class="w-4 h-4 invisible inline-block group-hover:visible"
             height="1rem"
