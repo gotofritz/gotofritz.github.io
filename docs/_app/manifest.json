@@ -1,6 +1,6 @@
 {
   ".svelte-kit/runtime/client/start.js": {
-    "file": "start-24dc91c5.js",
+    "file": "start-821f6f1c.js",
     "src": ".svelte-kit/runtime/client/start.js",
     "isEntry": true,
     "imports": [
@@ -19,7 +19,7 @@
     ]
   },
   "src/routes/__layout.svelte": {
-    "file": "pages/__layout.svelte-730847b9.js",
+    "file": "pages/__layout.svelte-cac86cdd.js",
     "src": "src/routes/__layout.svelte",
     "isEntry": true,
     "isDynamicEntry": true,
@@ -29,7 +29,7 @@
       "_index-21d5ca5c.js"
     ],
     "css": [
-      "assets/pages/__layout.svelte-c269f49b.css"
+      "assets/pages/__layout.svelte-1912f04f.css"
     ]
   },
   ".svelte-kit/runtime/components/error.svelte": {
@@ -56,7 +56,7 @@
     ]
   },
   "src/routes/blog/[slug].svelte": {
-    "file": "pages/blog/_slug_.svelte-67da592c.js",
+    "file": "pages/blog/_slug_.svelte-41d59c03.js",
     "src": "src/routes/blog/[slug].svelte",
     "isEntry": true,
     "isDynamicEntry": true,
@@ -164,7 +164,7 @@
       "_index-21d5ca5c.js"
     ],
     "css": [
-      "assets/pages/tags/index.svelte-27a87f28.css",
+      "assets/info-3d45f474.css",
       "assets/PostTags.svelte_svelte_type_style_lang-fcb4ce48.css"
     ]
   },
@@ -192,7 +192,7 @@
       "_index-6e518972.js"
     ],
     "css": [
-      "assets/pages/tags/index.svelte-27a87f28.css",
+      "assets/info-3d45f474.css",
       "assets/PostTags.svelte_svelte_type_style_lang-fcb4ce48.css"
     ]
   },
@@ -367,7 +367,7 @@
     ]
   },
   "posts/blog/migrating-away-from-goole-proton-mail-and-other-stories.md": {
-    "file": "chunks/migrating-away-from-goole-proton-mail-and-other-stories-9512ce9a.js",
+    "file": "chunks/migrating-away-from-goole-proton-mail-and-other-stories-ebf9eeda.js",
     "src": "posts/blog/migrating-away-from-goole-proton-mail-and-other-stories.md",
     "isDynamicEntry": true,
     "imports": [
@@ -383,7 +383,7 @@
     ]
   },
   "posts/blog/migrating-youtube-playlists-by-adding-videos-via-cli.md": {
-    "file": "chunks/migrating-youtube-playlists-by-adding-videos-via-cli-57af6872.js",
+    "file": "chunks/migrating-youtube-playlists-by-adding-videos-via-cli-1c294135.js",
     "src": "posts/blog/migrating-youtube-playlists-by-adding-videos-via-cli.md",
     "isDynamicEntry": true,
     "imports": [

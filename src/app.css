@@ -31,6 +31,11 @@
     list-style-type: square;
   }
 
+  :where(ul, ol) ul,
+  :where(ul, ol) ol {
+    padding-left: 2ch;
+  }
+
   ol {
     @apply list-inside list-decimal;
   }
