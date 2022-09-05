@@ -1,6 +1,6 @@
 {
   ".svelte-kit/runtime/client/start.js": {
-    "file": "start-9c10b4ee.js",
+    "file": "start-d5240c2f.js",
     "src": ".svelte-kit/runtime/client/start.js",
     "isEntry": true,
     "imports": [
@@ -56,7 +56,7 @@
     ]
   },
   "src/routes/blog/[slug].svelte": {
-    "file": "pages/blog/_slug_.svelte-4c7fa0f1.js",
+    "file": "pages/blog/_slug_.svelte-d31e2e3b.js",
     "src": "src/routes/blog/[slug].svelte",
     "isEntry": true,
     "isDynamicEntry": true,
@@ -164,7 +164,7 @@
       "_index-21d5ca5c.js"
     ],
     "css": [
-      "assets/info-3d45f474.css",
+      "assets/pages/tags/index.svelte-27a87f28.css",
       "assets/PostTags.svelte_svelte_type_style_lang-fcb4ce48.css"
     ]
   },
@@ -192,7 +192,7 @@
       "_index-6e518972.js"
     ],
     "css": [
-      "assets/info-3d45f474.css",
+      "assets/pages/tags/index.svelte-27a87f28.css",
       "assets/PostTags.svelte_svelte_type_style_lang-fcb4ce48.css"
     ]
   },
@@ -367,7 +367,7 @@
     ]
   },
   "posts/blog/migrating-away-from-goole-proton-mail-and-other-stories.md": {
-    "file": "chunks/migrating-away-from-goole-proton-mail-and-other-stories-c1f8a07d.js",
+    "file": "chunks/migrating-away-from-goole-proton-mail-and-other-stories-09d53e65.js",
     "src": "posts/blog/migrating-away-from-goole-proton-mail-and-other-stories.md",
     "isDynamicEntry": true,
     "imports": [
