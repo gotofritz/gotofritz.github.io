@@ -40,6 +40,10 @@
     @apply list-inside list-decimal;
   }
 
+  ol > li {
+    margin: 0.5rem 0;
+  }
+
   :not(pre) > code {
     background: #ebebeb;
     padding: 4px;
