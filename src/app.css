@@ -185,17 +185,18 @@ svg {
   font-weight: bold;
 }
 
-.post-content p,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  margin-bottom: 2.5rem;
+.post-content h1,
+.post-content h2,
+.post-content h3,
+.post-content h4,
+.post-content h5,
+.post-content h6 {
+  margin-bottom: 1.5rem;
+  margin-top: 2.5rem;
 }
 
 .post-content p {
+  margin-bottom: 2.5rem;
   padding-right: 2rem;
 }
 
