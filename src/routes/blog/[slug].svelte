@@ -118,7 +118,9 @@
           class="hidden xl:block absolute not-prose left-[100%]"
           aria-label="Table of Contents"
         >
-          <div class="fixed z-10 px-4 py-2 ml-8 top-[6.5rem] w-60 right-0">
+          <div
+            class="fixed z-10 px-4 py-2 ml-8 top-[6.5rem] w-60 right-0 overflow-y-auto h-[calc(100vh-6.5rem)]"
+          >
             <ToC allowedHeadings={["h2", "h3", "h4", "h5", "h6"]} />
           </div>
         </div>

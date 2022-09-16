@@ -1,6 +1,6 @@
 {
   ".svelte-kit/runtime/client/start.js": {
-    "file": "start-d5240c2f.js",
+    "file": "start-57c8b3f3.js",
     "src": ".svelte-kit/runtime/client/start.js",
     "isEntry": true,
     "imports": [
@@ -19,7 +19,7 @@
     ]
   },
   "src/routes/__layout.svelte": {
-    "file": "pages/__layout.svelte-03538821.js",
+    "file": "pages/__layout.svelte-93f9a295.js",
     "src": "src/routes/__layout.svelte",
     "isEntry": true,
     "isDynamicEntry": true,
@@ -29,7 +29,7 @@
       "_index-21d5ca5c.js"
     ],
     "css": [
-      "assets/pages/__layout.svelte-2f4e8f80.css"
+      "assets/pages/__layout.svelte-eca6ce9d.css"
     ]
   },
   ".svelte-kit/runtime/components/error.svelte": {
@@ -56,7 +56,7 @@
     ]
   },
   "src/routes/blog/[slug].svelte": {
-    "file": "pages/blog/_slug_.svelte-d31e2e3b.js",
+    "file": "pages/blog/_slug_.svelte-cea40836.js",
     "src": "src/routes/blog/[slug].svelte",
     "isEntry": true,
     "isDynamicEntry": true,
@@ -70,7 +70,6 @@
     ],
     "dynamicImports": [
       "posts/blog/a-place-for-unix-scripts-osx.md",
-      "posts/blog/accessing-the-wikipedia-api.md",
       "posts/blog/advanced-evernote-search.md",
       "posts/blog/backing-up-hard-disk-os-x.md",
       "posts/blog/batch-unrar-command-line-os-x.md",
@@ -79,6 +78,8 @@
       "posts/blog/combining-images-imagemagick.md",
       "posts/blog/copying-files-matching-pattern-cpio.md",
       "posts/blog/countdown-clock-state-machine-requestanimationframe-vanilla-js.md",
+      "posts/blog/creating-a-poetry-driven-python-project-template-with-cookiecutter.md",
+      "posts/blog/creating-german-grammar-exercises-with-spacy.md",
       "posts/blog/deleting-duplicates-from-youtube-playlists-with-python-script.md",
       "posts/blog/directory-listings-in-apache-2-4.md",
       "posts/blog/escaping-in-replace-strings-in-javascript.md",
@@ -103,7 +104,6 @@
       "posts/blog/setting-css-values-dynamically-in-svelte.md",
       "posts/blog/setting-up-a-logitech-vertical-mx-mouse-osx.md",
       "posts/blog/setting-up-thunderbird-for-gmail-on-os-x.md",
-      "posts/blog/sharing-thunderbird-message-filters-across-computers.md",
       "posts/blog/simple-voice-recording-mac.md",
       "posts/blog/stop-chrome-navigating-back-when-swiping-horizontally.md",
       "posts/blog/storing-bash-profile-and-so-on-on-github.md",
@@ -164,7 +164,7 @@
       "_index-21d5ca5c.js"
     ],
     "css": [
-      "assets/pages/tags/index.svelte-27a87f28.css",
+      "assets/info-3d45f474.css",
       "assets/PostTags.svelte_svelte_type_style_lang-fcb4ce48.css"
     ]
   },
@@ -192,7 +192,7 @@
       "_index-6e518972.js"
     ],
     "css": [
-      "assets/pages/tags/index.svelte-27a87f28.css",
+      "assets/info-3d45f474.css",
       "assets/PostTags.svelte_svelte_type_style_lang-fcb4ce48.css"
     ]
   },
@@ -209,14 +209,6 @@
   "posts/blog/a-place-for-unix-scripts-osx.md": {
     "file": "chunks/a-place-for-unix-scripts-osx-85516256.js",
     "src": "posts/blog/a-place-for-unix-scripts-osx.md",
-    "isDynamicEntry": true,
-    "imports": [
-      "_index-6e518972.js"
-    ]
-  },
-  "posts/blog/accessing-the-wikipedia-api.md": {
-    "file": "chunks/accessing-the-wikipedia-api-e42d9b8a.js",
-    "src": "posts/blog/accessing-the-wikipedia-api.md",
     "isDynamicEntry": true,
     "imports": [
       "_index-6e518972.js"
@@ -281,6 +273,22 @@
   "posts/blog/countdown-clock-state-machine-requestanimationframe-vanilla-js.md": {
     "file": "chunks/countdown-clock-state-machine-requestanimationframe-vanilla-js-bbd61ee7.js",
     "src": "posts/blog/countdown-clock-state-machine-requestanimationframe-vanilla-js.md",
+    "isDynamicEntry": true,
+    "imports": [
+      "_index-6e518972.js"
+    ]
+  },
+  "posts/blog/creating-a-poetry-driven-python-project-template-with-cookiecutter.md": {
+    "file": "chunks/creating-a-poetry-driven-python-project-template-with-cookiecutter-eab0a0db.js",
+    "src": "posts/blog/creating-a-poetry-driven-python-project-template-with-cookiecutter.md",
+    "isDynamicEntry": true,
+    "imports": [
+      "_index-6e518972.js"
+    ]
+  },
+  "posts/blog/creating-german-grammar-exercises-with-spacy.md": {
+    "file": "chunks/creating-german-grammar-exercises-with-spacy-40e8f6b5.js",
+    "src": "posts/blog/creating-german-grammar-exercises-with-spacy.md",
     "isDynamicEntry": true,
     "imports": [
       "_index-6e518972.js"
@@ -473,14 +481,6 @@
   "posts/blog/setting-up-thunderbird-for-gmail-on-os-x.md": {
     "file": "chunks/setting-up-thunderbird-for-gmail-on-os-x-d0d19b4e.js",
     "src": "posts/blog/setting-up-thunderbird-for-gmail-on-os-x.md",
-    "isDynamicEntry": true,
-    "imports": [
-      "_index-6e518972.js"
-    ]
-  },
-  "posts/blog/sharing-thunderbird-message-filters-across-computers.md": {
-    "file": "chunks/sharing-thunderbird-message-filters-across-computers-53371d31.js",
-    "src": "posts/blog/sharing-thunderbird-message-filters-across-computers.md",
     "isDynamicEntry": true,
     "imports": [
       "_index-6e518972.js"

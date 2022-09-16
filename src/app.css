@@ -245,7 +245,15 @@ pre[class*="language-"] {
   margin-right: 0.8rem;
   text-align: right;
 }
+.dark .code-breakdown dt {
+  background: rgb(46, 67, 88);
+}
 
 pre > code {
   width: 100%;
+}
+
+/* fixes a bug in the TOML implementation */
+.language-toml .table {
+  display: inherit;
 }

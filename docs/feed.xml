@@ -7,6 +7,14 @@
     <atom:link href="https://gotofritz.net/feed.xml" rel="self" type="application/rss+xml" />
     
           <item>
+            <guid>https://gotofritz.net/blog/creating-a-poetry-driven-python-project-template-with-cookiecutter</guid>
+            <title>Creating a Poetry-driven python project template with cookiecutter</title>
+            <description>The python toolchain I use for my small projects doesn't change very often. It makes sense to save it somewhere and the then replicate it whenever I start a project. Or even better, use cookiecutter and a config file to generate it.</description>
+            <link>https://gotofritz.net/blog/creating-a-poetry-driven-python-project-template-with-cookiecutter</link>
+            <pubDate>Mon, 12 Sep 2022 00:00:00 GMT</pubDate>
+        </item>
+      
+          <item>
             <guid>https://gotofritz.net/blog/migrating-away-from-goole-proton-mail-and-other-stories</guid>
             <title>Migrating away from Google: Hello Proton Mail!</title>
             <description>Google informed me they would start charging me for letting me use their mail servers with my gotofritz.net domain. Fair enough, infrastructure costs money. But if I have to pay, why pay them? I'm can shop around. And so I did.</description>
