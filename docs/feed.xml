@@ -8,7 +8,7 @@
     
           <item>
             <guid>https://gotofritz.net/blog/create-fake-dataset-fixtures-testing-with-faker</guid>
-            <title>How I create Faker providers for mocking project specific data</title>
+            <title>Faker providers for project specific data structure fakes, in Python</title>
             <description>I am a big fan of Faker for testing. I find having a random mock data generator keeps tests clean. In fact, I tend to extend Faker with project specific providers. Here's how</description>
             <link>https://gotofritz.net/blog/create-fake-dataset-fixtures-testing-with-faker</link>
             <pubDate>Sat, 24 Sep 2022 00:00:00 GMT</pubDate>
@@ -16,7 +16,7 @@
       
           <item>
             <guid>https://gotofritz.net/blog/creating-a-poetry-driven-python-project-template-with-cookiecutter</guid>
-            <title>Creating a Poetry-driven python project template with cookiecutter</title>
+            <title>Poetry-driven python project template with cookiecutter</title>
             <description>The python toolchain I use for my small projects doesn't change very often. It makes sense to save it somewhere and the then replicate it whenever I start a project. Or even better, use cookiecutter and a config file to generate it.</description>
             <link>https://gotofritz.net/blog/creating-a-poetry-driven-python-project-template-with-cookiecutter</link>
             <pubDate>Mon, 12 Sep 2022 00:00:00 GMT</pubDate>
