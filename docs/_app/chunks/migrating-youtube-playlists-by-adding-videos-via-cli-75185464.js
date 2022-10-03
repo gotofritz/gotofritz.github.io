@@ -1,16 +1,16 @@
 import{S as wi,i as bi,s as Ei,e,t as i,k as u,c as t,a as p,d as n,h as c,m as d,b as r,g as l,I as a,E as lo}from"./index-6e518972.js";function gi(Ll){let m,E,cn,Ce,ta,Vs,Re,pa,g,I,rn,He,oa,js,Ne,la,Us,Fe,ia,as,Al=`<code class="language-bash"><span class="token operator">></span> <span class="token function">mkdir</span> my-project <span class="token operator">&amp;&amp;</span> <span class="token builtin class-name">cd</span> my-project
-<span class="token operator">></span> python -V
+<span class="token operator">></span> python <span class="token parameter variable">-V</span>
 <span class="token number">3.8</span>.5
 <span class="token operator">></span> pyenv <span class="token builtin class-name">local</span> <span class="token number">3.10</span>.1
 <span class="token punctuation">..</span>.
-<span class="token operator">></span> python -V
+<span class="token operator">></span> python <span class="token parameter variable">-V</span>
 <span class="token number">3.10</span>.1
 <span class="token operator">></span> poetry init
 <span class="token punctuation">..</span>. accept all default except <span class="token keyword">for</span>
 <span class="token punctuation">..</span>. <span class="token variable"><span class="token variable">&#96;</span>Would you like to define your main dependencies interactively?<span class="token variable">&#96;</span></span>
 <span class="token operator">></span> poetry shell
-/Users/gotofritz/Library/Caches/pypoetry/virtualenvs/youtube-migration--G8ptBqy-py3.10</code>`,ca,_,Ve,un,je,Ue,dn,Me,Ye,kn,Ge,ra,Ms,Qe,ua,es,Dl='<code class="language-bash"><span class="token operator">></span> poetry <span class="token function">add</span> -D black</code>',da,x,Be,fn,Ze,We,ka,ts,Ol=`<code class="language-bash"> <span class="token comment"># toptal.com offers a free, comprehensive .gitignore generator</span>
- <span class="token operator">></span> <span class="token function">curl</span> -L https://www.toptal.com/developers/gitignore/api/python,visualstudiocode <span class="token operator">></span> .gitignore
+/Users/gotofritz/Library/Caches/pypoetry/virtualenvs/youtube-migration--G8ptBqy-py3.10</code>`,ca,_,Ve,un,je,Ue,dn,Me,Ye,kn,Ge,ra,Ms,Qe,ua,es,Dl='<code class="language-bash"><span class="token operator">></span> poetry <span class="token function">add</span> <span class="token parameter variable">-D</span> black</code>',da,x,Be,fn,Ze,We,ka,ts,Ol=`<code class="language-bash"> <span class="token comment"># toptal.com offers a free, comprehensive .gitignore generator</span>
+ <span class="token operator">></span> <span class="token function">curl</span> <span class="token parameter variable">-L</span> https://www.toptal.com/developers/gitignore/api/python,visualstudiocode <span class="token operator">></span> .gitignore
  <span class="token operator">></span> <span class="token function">git</span> init
  <span class="token punctuation">..</span>. accept all defaults</code>`,fa,Ys,qe,ha,T,P,hn,ze,_a,v,Ke,ps,Je,Xe,_n,$e,st,ya,S,nt,yn,at,et,ma,L,A,mn,tt,va,Gs,pt,wa,D,ot,vn,lt,it,ba,Qs,ct,Ea,os,Cl=`<code class="language-bash"><span class="token operator">></span> poetry <span class="token function">add</span> pandas
 Using version ^1.4.3 <span class="token keyword">for</span> pandas
@@ -68,13 +68,13 @@ reading PLZ6Ih9wLHQ2HDOnRZaKQSWz8R4II0163v.csv
 reading PLZ6Ih9wLHQ2FDvivyW8_xcp6qG4-D45yh.csv
 Created data/20220828T170021_data.csv
 
-\u276F <span class="token function">head</span> -n <span class="token number">3</span> data/20220828T170021_data.csv
+\u276F <span class="token function">head</span> <span class="token parameter variable">-n</span> <span class="token number">3</span> data/20220828T170021_data.csv
 Video ID,Time Added,Status,Playlist ID
 nmdUMwlrezs,2022-05-01 <span class="token number">16</span>:28:50 UTC,,PLZ6Ih9wLHQ2H1u5cOpSWgVGsn8YLWMmdy
 8qIMIAG5Z_E,2022-05-01 <span class="token number">16</span>:31:08 UTC,,PLZ6Ih9wLHQ2H1u5cOpSWgVGsn8YLWMmdy</code>`,La,y,yt,En,mt,vt,gn,wt,bt,In,Et,Aa,rs,Fl=`<code class="language-bash"><span class="token operator">></span> <span class="token function">touch</span> data/.gitkeep
 <span class="token operator">></span> <span class="token builtin class-name">echo</span> <span class="token string">"data/*.csv"</span> <span class="token operator">>></span> .gitignore
-<span class="token operator">></span> <span class="token function">git</span> <span class="token function">add</span> -a <span class="token builtin class-name">.</span>
-<span class="token operator">></span> <span class="token function">git</span> commit -m <span class="token string">"initial commit"</span></code>`,Da,R,H,xn,gt,Oa,k,Tn,us,It,ds,xt,Tt,Pt,Pn,Sn,St,Lt,Ln,An,At,Dt,Dn,On,Ot,Ct,Cn,Rn,Rt,Ht,Hn,N,Nt,Nn,Ft,Vt,Fn,jt,Ut,Vn,jn,Mt,Yt,ks,fs,Gt,Un,Qt,Bt,Zt,Zs,Vl=`<code class="language-bash"> <span class="token operator">></span> <span class="token function">cp</span> ~/Downloads/client<span class="token punctuation">..</span><span class="token punctuation">..</span>json client_secret.json
+<span class="token operator">></span> <span class="token function">git</span> <span class="token function">add</span> <span class="token parameter variable">-a</span> <span class="token builtin class-name">.</span>
+<span class="token operator">></span> <span class="token function">git</span> commit <span class="token parameter variable">-m</span> <span class="token string">"initial commit"</span></code>`,Da,R,H,xn,gt,Oa,k,Tn,us,It,ds,xt,Tt,Pt,Pn,Sn,St,Lt,Ln,An,At,Dt,Dn,On,Ot,Ct,Cn,Rn,Rt,Ht,Hn,N,Nt,Nn,Ft,Vt,Fn,jt,Ut,Vn,jn,Mt,Yt,ks,fs,Gt,Un,Qt,Bt,Zt,Zs,Vl=`<code class="language-bash"> <span class="token operator">></span> <span class="token function">cp</span> ~/Downloads/client<span class="token punctuation">..</span><span class="token punctuation">..</span>json client_secret.json
  <span class="token operator">></span> <span class="token builtin class-name">echo</span> <span class="token string">"client_secret.json"</span> <span class="token operator">>></span> .gitignore</code>`,Ca,F,V,Mn,Wt,Ra,Ws,qt,Ha,hs,jl=`<code class="language-python"><span class="token comment"># uploader.py</span>
 
 <span class="token keyword">import</span> pandas <span class="token keyword">as</span> pd
@@ -111,7 +111,7 @@ FILE_STEM <span class="token operator">=</span> <span class="token string">"data
 <span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">"__main__"</span><span class="token punctuation">:</span>
     main<span class="token punctuation">(</span><span class="token punctuation">)</span>
     <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"DONE"</span><span class="token punctuation">)</span></code>`,Na,qs,zt,Fa,_s,Ul=`<code class="language-bash"><span class="token comment"># see what we've got before starting</span>
-\u276F <span class="token function">ls</span> -1 data
+\u276F <span class="token function">ls</span> <span class="token parameter variable">-1</span> data
 20220828T170021_data.csv
 20220828T172321_data.csv
 
@@ -119,7 +119,7 @@ FILE_STEM <span class="token operator">=</span> <span class="token string">"data
 DONE
 
 <span class="token comment"># we got a new file</span>
-\u276F <span class="token function">ls</span> -1 data
+\u276F <span class="token function">ls</span> <span class="token parameter variable">-1</span> data
 20220828T170021_data.csv
 20220828T172321_data.csv
 20220828T225131_data.csv

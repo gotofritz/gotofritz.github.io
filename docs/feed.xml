@@ -7,6 +7,14 @@
     <atom:link href="https://gotofritz.net/feed.xml" rel="self" type="application/rss+xml" />
     
           <item>
+            <guid>https://gotofritz.net/blog/mypy-found-module-but-no-type-hints-or-library-stubs</guid>
+            <title>mypy: found module but no type hints or library stubs</title>
+            <description>When linting a Python project, I was puzzled the mysterious "found module but no type hints or library stubs" error from mypy. Mysterious because the module was my own and there were Pydantic definitions everywhere. The cause? I was missing __init__.py files in some parent folders.</description>
+            
+            <pubDate>Mon, 03 Oct 2022 00:00:00 GMT</pubDate>
+        </item>
+      
+          <item>
             <guid>https://gotofritz.net/blog/create-fake-dataset-fixtures-testing-with-faker</guid>
             <title>Faker providers for project specific data structure fakes, in Python</title>
             <description>I am a big fan of Faker for testing. I find having a random mock data generator keeps tests clean. In fact, I tend to extend Faker with project specific providers. Here's how</description>

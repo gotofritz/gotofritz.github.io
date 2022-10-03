@@ -1,6 +1,6 @@
 {
   ".svelte-kit/runtime/client/start.js": {
-    "file": "start-cfe1dd72.js",
+    "file": "start-3fe936ac.js",
     "src": ".svelte-kit/runtime/client/start.js",
     "isEntry": true,
     "imports": [
@@ -56,7 +56,7 @@
     ]
   },
   "src/routes/blog/[slug].svelte": {
-    "file": "pages/blog/_slug_.svelte-b5089388.js",
+    "file": "pages/blog/_slug_.svelte-8349f373.js",
     "src": "src/routes/blog/[slug].svelte",
     "isEntry": true,
     "isDynamicEntry": true,
@@ -95,6 +95,7 @@
       "posts/blog/migrating-thunderbird-message-filters-from-another-machine.md",
       "posts/blog/migrating-youtube-playlists-by-adding-videos-via-cli.md",
       "posts/blog/music-remove-album-ratings-applescript.md",
+      "posts/blog/mypy-found-module-but-no-type-hints-or-library-stubs.md",
       "posts/blog/os-x-dns-lookups-too-slow-for-local-hosts.md",
       "posts/blog/os-x-extended-attibutes.md",
       "posts/blog/os-x-software-update-from-command-line.md",
@@ -224,7 +225,7 @@
     ]
   },
   "posts/blog/backing-up-hard-disk-os-x.md": {
-    "file": "chunks/backing-up-hard-disk-os-x-deb1610a.js",
+    "file": "chunks/backing-up-hard-disk-os-x-f58ebd27.js",
     "src": "posts/blog/backing-up-hard-disk-os-x.md",
     "isDynamicEntry": true,
     "imports": [
@@ -232,7 +233,7 @@
     ]
   },
   "posts/blog/batch-unrar-command-line-os-x.md": {
-    "file": "chunks/batch-unrar-command-line-os-x-3b7d8171.js",
+    "file": "chunks/batch-unrar-command-line-os-x-02b245b3.js",
     "src": "posts/blog/batch-unrar-command-line-os-x.md",
     "isDynamicEntry": true,
     "imports": [
@@ -256,7 +257,7 @@
     ]
   },
   "posts/blog/combining-images-imagemagick.md": {
-    "file": "chunks/combining-images-imagemagick-b3e795e2.js",
+    "file": "chunks/combining-images-imagemagick-b64bdf58.js",
     "src": "posts/blog/combining-images-imagemagick.md",
     "isDynamicEntry": true,
     "imports": [
@@ -264,7 +265,7 @@
     ]
   },
   "posts/blog/copying-files-matching-pattern-cpio.md": {
-    "file": "chunks/copying-files-matching-pattern-cpio-01ec7151.js",
+    "file": "chunks/copying-files-matching-pattern-cpio-6e41243d.js",
     "src": "posts/blog/copying-files-matching-pattern-cpio.md",
     "isDynamicEntry": true,
     "imports": [
@@ -288,7 +289,7 @@
     ]
   },
   "posts/blog/creating-a-poetry-driven-python-project-template-with-cookiecutter.md": {
-    "file": "chunks/creating-a-poetry-driven-python-project-template-with-cookiecutter-b9393002.js",
+    "file": "chunks/creating-a-poetry-driven-python-project-template-with-cookiecutter-eff8a550.js",
     "src": "posts/blog/creating-a-poetry-driven-python-project-template-with-cookiecutter.md",
     "isDynamicEntry": true,
     "imports": [
@@ -296,7 +297,7 @@
     ]
   },
   "posts/blog/creating-german-grammar-exercises-with-spacy.md": {
-    "file": "chunks/creating-german-grammar-exercises-with-spacy-04cf96a0.js",
+    "file": "chunks/creating-german-grammar-exercises-with-spacy-b5fba4b7.js",
     "src": "posts/blog/creating-german-grammar-exercises-with-spacy.md",
     "isDynamicEntry": true,
     "imports": [
@@ -328,7 +329,7 @@
     ]
   },
   "posts/blog/finding-files-inside-archive.md": {
-    "file": "chunks/finding-files-inside-archive-b7782c50.js",
+    "file": "chunks/finding-files-inside-archive-b772b78e.js",
     "src": "posts/blog/finding-files-inside-archive.md",
     "isDynamicEntry": true,
     "imports": [
@@ -336,7 +337,7 @@
     ]
   },
   "posts/blog/finding-recently-changed-files-osx-terminal.md": {
-    "file": "chunks/finding-recently-changed-files-osx-terminal-41db7f16.js",
+    "file": "chunks/finding-recently-changed-files-osx-terminal-1f7a65f3.js",
     "src": "posts/blog/finding-recently-changed-files-osx-terminal.md",
     "isDynamicEntry": true,
     "imports": [
@@ -360,7 +361,7 @@
     ]
   },
   "posts/blog/how-to-avoid-sudo-npm.md": {
-    "file": "chunks/how-to-avoid-sudo-npm-03215b81.js",
+    "file": "chunks/how-to-avoid-sudo-npm-9fd8be16.js",
     "src": "posts/blog/how-to-avoid-sudo-npm.md",
     "isDynamicEntry": true,
     "imports": [
@@ -368,7 +369,7 @@
     ]
   },
   "posts/blog/install-specific-version-homebrew.md": {
-    "file": "chunks/install-specific-version-homebrew-415b6cac.js",
+    "file": "chunks/install-specific-version-homebrew-0c050e43.js",
     "src": "posts/blog/install-specific-version-homebrew.md",
     "isDynamicEntry": true,
     "imports": [
@@ -376,7 +377,7 @@
     ]
   },
   "posts/blog/installing-python-on-mac-os-x-in-2022.md": {
-    "file": "chunks/installing-python-on-mac-os-x-in-2022-9083e728.js",
+    "file": "chunks/installing-python-on-mac-os-x-in-2022-bff3277e.js",
     "src": "posts/blog/installing-python-on-mac-os-x-in-2022.md",
     "isDynamicEntry": true,
     "imports": [
@@ -392,7 +393,7 @@
     ]
   },
   "posts/blog/migrating-thunderbird-message-filters-from-another-machine.md": {
-    "file": "chunks/migrating-thunderbird-message-filters-from-another-machine-c631754d.js",
+    "file": "chunks/migrating-thunderbird-message-filters-from-another-machine-5c0b2d4c.js",
     "src": "posts/blog/migrating-thunderbird-message-filters-from-another-machine.md",
     "isDynamicEntry": true,
     "imports": [
@@ -400,7 +401,7 @@
     ]
   },
   "posts/blog/migrating-youtube-playlists-by-adding-videos-via-cli.md": {
-    "file": "chunks/migrating-youtube-playlists-by-adding-videos-via-cli-67796f37.js",
+    "file": "chunks/migrating-youtube-playlists-by-adding-videos-via-cli-75185464.js",
     "src": "posts/blog/migrating-youtube-playlists-by-adding-videos-via-cli.md",
     "isDynamicEntry": true,
     "imports": [
@@ -415,6 +416,14 @@
       "_index-6e518972.js"
     ]
   },
+  "posts/blog/mypy-found-module-but-no-type-hints-or-library-stubs.md": {
+    "file": "chunks/mypy-found-module-but-no-type-hints-or-library-stubs-3a6fef36.js",
+    "src": "posts/blog/mypy-found-module-but-no-type-hints-or-library-stubs.md",
+    "isDynamicEntry": true,
+    "imports": [
+      "_index-6e518972.js"
+    ]
+  },
   "posts/blog/os-x-dns-lookups-too-slow-for-local-hosts.md": {
     "file": "chunks/os-x-dns-lookups-too-slow-for-local-hosts-97506147.js",
     "src": "posts/blog/os-x-dns-lookups-too-slow-for-local-hosts.md",
@@ -424,7 +433,7 @@
     ]
   },
   "posts/blog/os-x-extended-attibutes.md": {
-    "file": "chunks/os-x-extended-attibutes-70982293.js",
+    "file": "chunks/os-x-extended-attibutes-f602ccfe.js",
     "src": "posts/blog/os-x-extended-attibutes.md",
     "isDynamicEntry": true,
     "imports": [
@@ -432,7 +441,7 @@
     ]
   },
   "posts/blog/os-x-software-update-from-command-line.md": {
-    "file": "chunks/os-x-software-update-from-command-line-f33ed526.js",
+    "file": "chunks/os-x-software-update-from-command-line-e5487cc6.js",
     "src": "posts/blog/os-x-software-update-from-command-line.md",
     "isDynamicEntry": true,
     "imports": [
@@ -448,7 +457,7 @@
     ]
   },
   "posts/blog/pretty-printing-xml.md": {
-    "file": "chunks/pretty-printing-xml-52bc2f9b.js",
+    "file": "chunks/pretty-printing-xml-b5d643b4.js",
     "src": "posts/blog/pretty-printing-xml.md",
     "isDynamicEntry": true,
     "imports": [
@@ -456,7 +465,7 @@
     ]
   },
   "posts/blog/removing-lines-matching-patterns-from-all-files-in-dir.md": {
-    "file": "chunks/removing-lines-matching-patterns-from-all-files-in-dir-2c2c58c5.js",
+    "file": "chunks/removing-lines-matching-patterns-from-all-files-in-dir-f8f04ebc.js",
     "src": "posts/blog/removing-lines-matching-patterns-from-all-files-in-dir.md",
     "isDynamicEntry": true,
     "imports": [
@@ -488,7 +497,7 @@
     ]
   },
   "posts/blog/setting-up-thunderbird-for-gmail-on-os-x.md": {
-    "file": "chunks/setting-up-thunderbird-for-gmail-on-os-x-d0d19b4e.js",
+    "file": "chunks/setting-up-thunderbird-for-gmail-on-os-x-4419649b.js",
     "src": "posts/blog/setting-up-thunderbird-for-gmail-on-os-x.md",
     "isDynamicEntry": true,
     "imports": [
@@ -504,7 +513,7 @@
     ]
   },
   "posts/blog/stop-chrome-navigating-back-when-swiping-horizontally.md": {
-    "file": "chunks/stop-chrome-navigating-back-when-swiping-horizontally-60902a1a.js",
+    "file": "chunks/stop-chrome-navigating-back-when-swiping-horizontally-8eb35ba0.js",
     "src": "posts/blog/stop-chrome-navigating-back-when-swiping-horizontally.md",
     "isDynamicEntry": true,
     "imports": [
@@ -512,7 +521,7 @@
     ]
   },
   "posts/blog/storing-bash-profile-and-so-on-on-github.md": {
-    "file": "chunks/storing-bash-profile-and-so-on-on-github-42b9aebb.js",
+    "file": "chunks/storing-bash-profile-and-so-on-on-github-ae3bb17e.js",
     "src": "posts/blog/storing-bash-profile-and-so-on-on-github.md",
     "isDynamicEntry": true,
     "imports": [
@@ -528,7 +537,7 @@
     ]
   },
   "posts/blog/using-say-command-to-make-os-x-talk-and-fixing-it.md": {
-    "file": "chunks/using-say-command-to-make-os-x-talk-and-fixing-it-937d51ec.js",
+    "file": "chunks/using-say-command-to-make-os-x-talk-and-fixing-it-122ee583.js",
     "src": "posts/blog/using-say-command-to-make-os-x-talk-and-fixing-it.md",
     "isDynamicEntry": true,
     "imports": [
@@ -544,7 +553,7 @@
     ]
   },
   "posts/blog/how-to-build-blog-with-sveltekit-markdown-tailwind/index.md": {
-    "file": "chunks/index-0ee1b53d.js",
+    "file": "chunks/index-fe0f1bee.js",
     "src": "posts/blog/how-to-build-blog-with-sveltekit-markdown-tailwind/index.md",
     "isDynamicEntry": true,
     "imports": [
@@ -555,7 +564,7 @@
     ]
   },
   "posts/blog/joining-pdf-files-in-os-x-from-the-command-line/index.md": {
-    "file": "chunks/index-b5bc194c.js",
+    "file": "chunks/index-044388d5.js",
     "src": "posts/blog/joining-pdf-files-in-os-x-from-the-command-line/index.md",
     "isDynamicEntry": true,
     "imports": [

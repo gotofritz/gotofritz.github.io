@@ -62,7 +62,7 @@ devDependencies:
   remark-reading-time: 1.0.1
   svelte: 3.48.0
   svelte-preprocess: 4.10.7_yijg4htcwmckubwfjhmmg35xli
-  tailwindcss: 3.1.4
+  tailwindcss: 3.1.4_postcss@8.4.14
   typescript: 4.7.4
   unist-util-visit: 3.1.0
 
@@ -206,7 +206,7 @@ packages:
       lodash.castarray: 4.4.0
       lodash.isplainobject: 4.0.6
       lodash.merge: 4.6.2
-      tailwindcss: 3.1.4
+      tailwindcss: 3.1.4_postcss@8.4.14
     dev: true
 
   /@trysound/sax/0.2.0:
@@ -1422,7 +1422,7 @@ packages:
     dependencies:
       '@types/unist': 2.0.6
       prism-svelte: 0.4.7
-      prismjs: 1.28.0
+      prismjs: 1.29.0
       svelte: 3.48.0
       vfile-message: 2.0.4
     dev: true
@@ -1980,8 +1980,8 @@ packages:
     resolution: {integrity: sha512-yABh19CYbM24V7aS7TuPYRNMqthxwbvx6FF/Rw920YbyBWO3tnyPIqRMgHuSVsLmuHkkBS1Akyof463FVdkeDQ==}
     dev: true
 
-  /prismjs/1.28.0:
-    resolution: {integrity: sha512-8aaXdYvl1F7iC7Xm1spqSaY/OJBpYW3v+KJ+F17iYxvdc8sfjW194COK5wVhMZX45tGteiBQgdvD/nhxcRwylw==}
+  /prismjs/1.29.0:
+    resolution: {integrity: sha512-Kx/1w86q/epKcmte75LNrEoT+lX8pBpavuAbvJWRXar7Hz8jrtF+e3vY751p0R8H9HdArwaCTNDDzHg/ScJK1Q==}
     engines: {node: '>=6'}
     dev: true
 
@@ -2346,10 +2346,12 @@ packages:
       strip-ansi: 6.0.1
     dev: true
 
-  /tailwindcss/3.1.4:
+  /tailwindcss/3.1.4_postcss@8.4.14:
     resolution: {integrity: sha512-NrxbFV4tYsga/hpWbRyUfIaBrNMXDxx5BsHgBS4v5tlyjf+sDsgBg5m9OxjrXIqAS/uR9kicxLKP+bEHI7BSeQ==}
     engines: {node: '>=12.13.0'}
     hasBin: true
+    peerDependencies:
+      postcss: ^8.0.9
     dependencies:
       arg: 5.0.2
       chokidar: 3.5.3
