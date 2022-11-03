@@ -1,6 +1,6 @@
 {
   ".svelte-kit/runtime/client/start.js": {
-    "file": "start-3fe936ac.js",
+    "file": "start-4a190ec9.js",
     "src": ".svelte-kit/runtime/client/start.js",
     "isEntry": true,
     "imports": [
@@ -19,7 +19,7 @@
     ]
   },
   "src/routes/__layout.svelte": {
-    "file": "pages/__layout.svelte-93f9a295.js",
+    "file": "pages/__layout.svelte-a9d586a4.js",
     "src": "src/routes/__layout.svelte",
     "isEntry": true,
     "isDynamicEntry": true,
@@ -56,7 +56,7 @@
     ]
   },
   "src/routes/blog/[slug].svelte": {
-    "file": "pages/blog/_slug_.svelte-8349f373.js",
+    "file": "pages/blog/_slug_.svelte-72c60add.js",
     "src": "src/routes/blog/[slug].svelte",
     "isEntry": true,
     "isDynamicEntry": true,
@@ -101,6 +101,7 @@
       "posts/blog/os-x-software-update-from-command-line.md",
       "posts/blog/osx-apps.md",
       "posts/blog/pretty-printing-xml.md",
+      "posts/blog/preventing-flake8-errors-importing-modules-in__init__files-in-python.md",
       "posts/blog/removing-lines-matching-patterns-from-all-files-in-dir.md",
       "posts/blog/reordering-audio-files-in-a-fat-usb-stick.md",
       "posts/blog/setting-css-values-dynamically-in-svelte.md",
@@ -289,7 +290,7 @@
     ]
   },
   "posts/blog/creating-a-poetry-driven-python-project-template-with-cookiecutter.md": {
-    "file": "chunks/creating-a-poetry-driven-python-project-template-with-cookiecutter-eff8a550.js",
+    "file": "chunks/creating-a-poetry-driven-python-project-template-with-cookiecutter-ab83496c.js",
     "src": "posts/blog/creating-a-poetry-driven-python-project-template-with-cookiecutter.md",
     "isDynamicEntry": true,
     "imports": [
@@ -459,6 +460,14 @@
   "posts/blog/pretty-printing-xml.md": {
     "file": "chunks/pretty-printing-xml-b5d643b4.js",
     "src": "posts/blog/pretty-printing-xml.md",
+    "isDynamicEntry": true,
+    "imports": [
+      "_index-6e518972.js"
+    ]
+  },
+  "posts/blog/preventing-flake8-errors-importing-modules-in__init__files-in-python.md": {
+    "file": "chunks/preventing-flake8-errors-importing-modules-in__init__files-in-python-bc0c4842.js",
+    "src": "posts/blog/preventing-flake8-errors-importing-modules-in__init__files-in-python.md",
     "isDynamicEntry": true,
     "imports": [
       "_index-6e518972.js"

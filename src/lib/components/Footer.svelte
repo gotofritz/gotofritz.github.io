@@ -1,12 +1,13 @@
 <script>
-  import TwitterIcon from "$lib/svgs/TwitterIcon.svelte";
-  import GithubIcon from "$lib/svgs/GithubIcon.svelte";
-  import LinkedinIcon from "$lib/svgs/LinkedinIcon.svelte";
-  import WayfairIcon from "$lib/svgs/WayfairIcon.svelte";
+  import { browser } from "$app/env";
   import BerlinFlag from "$lib/svgs/BerlinFlag.svelte";
   import GermanFlag from "$lib/svgs/GermanFlag.svelte";
+  import GithubIcon from "$lib/svgs/GithubIcon.svelte";
+  import LinkedinIcon from "$lib/svgs/LinkedinIcon.svelte";
+  import MastodonIcon from "$lib/svgs/MastodonIcon.svelte";
+  import TwitterIcon from "$lib/svgs/TwitterIcon.svelte";
+  import WayfairIcon from "$lib/svgs/WayfairIcon.svelte";
 
-  import { browser } from "$app/env";
   import { searching } from "$lib/stores/searching";
 
   let prefersLight = browser
@@ -74,6 +75,9 @@
           class="inline-block"
           href="https://twitter.com/gotofritz"
           ><TwitterIcon class="home-icon inline-block" /></a
+        >
+        <a rel="me" href="https://mastodon.coffee/@gotofritz"
+          ><MastodonIcon class="home-icon inline-block" /></a
         >
         <a
           aria-label="github profile"
