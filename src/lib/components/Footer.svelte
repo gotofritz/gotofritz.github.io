@@ -5,7 +5,6 @@
   import GithubIcon from "$lib/svgs/GithubIcon.svelte";
   import LinkedinIcon from "$lib/svgs/LinkedinIcon.svelte";
   import MastodonIcon from "$lib/svgs/MastodonIcon.svelte";
-  import TwitterIcon from "$lib/svgs/TwitterIcon.svelte";
   import WayfairIcon from "$lib/svgs/WayfairIcon.svelte";
 
   import { searching } from "$lib/stores/searching";
@@ -70,12 +69,6 @@
     <div class="info-block">
       <h4 class="title">Social</h4>
       <div class="flex flex-row gap-2 social">
-        <a
-          aria-label="twitter profile"
-          class="inline-block"
-          href="https://twitter.com/gotofritz"
-          ><TwitterIcon class="home-icon inline-block" /></a
-        >
         <a rel="me" href="https://mastodon.coffee/@gotofritz"
           ><MastodonIcon class="home-icon inline-block" /></a
         >
