@@ -1,6 +1,6 @@
 {
   ".svelte-kit/runtime/client/start.js": {
-    "file": "start-fdd7ab24.js",
+    "file": "start-a530a9c6.js",
     "src": ".svelte-kit/runtime/client/start.js",
     "isEntry": true,
     "imports": [
@@ -56,7 +56,7 @@
     ]
   },
   "src/routes/blog/[slug].svelte": {
-    "file": "pages/blog/_slug_.svelte-72c60add.js",
+    "file": "pages/blog/_slug_.svelte-1fa5dc03.js",
     "src": "src/routes/blog/[slug].svelte",
     "isEntry": true,
     "isDynamicEntry": true,
@@ -82,6 +82,7 @@
       "posts/blog/creating-a-poetry-driven-python-project-template-with-cookiecutter.md",
       "posts/blog/creating-german-grammar-exercises-with-spacy.md",
       "posts/blog/deleting-duplicates-from-youtube-playlists-with-python-script.md",
+      "posts/blog/deleting-tweets-and-likes-from-twitter.md",
       "posts/blog/directory-listings-in-apache-2-4.md",
       "posts/blog/escaping-in-replace-strings-in-javascript.md",
       "posts/blog/finding-files-inside-archive.md",
@@ -308,6 +309,14 @@
   "posts/blog/deleting-duplicates-from-youtube-playlists-with-python-script.md": {
     "file": "chunks/deleting-duplicates-from-youtube-playlists-with-python-script-1d7eb2a1.js",
     "src": "posts/blog/deleting-duplicates-from-youtube-playlists-with-python-script.md",
+    "isDynamicEntry": true,
+    "imports": [
+      "_index-6e518972.js"
+    ]
+  },
+  "posts/blog/deleting-tweets-and-likes-from-twitter.md": {
+    "file": "chunks/deleting-tweets-and-likes-from-twitter-5d8766d7.js",
+    "src": "posts/blog/deleting-tweets-and-likes-from-twitter.md",
     "isDynamicEntry": true,
     "imports": [
       "_index-6e518972.js"

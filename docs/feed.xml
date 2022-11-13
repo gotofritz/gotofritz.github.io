@@ -7,6 +7,14 @@
     <atom:link href="https://gotofritz.net/feed.xml" rel="self" type="application/rss+xml" />
     
           <item>
+            <guid>https://gotofritz.net/blog/deleting-tweets-and-likes-from-twitter</guid>
+            <title>Deleting tweets and likes from twitter</title>
+            <description>Thanks to Mr. Musk, it is now acceptable for a developer not to have a twitter account. I'll still keep my going, because I like messing with the API from time to time. But I wanted to empty it of all content. "Quiet quitting", I guess you could call it</description>
+            <link>https://gotofritz.net/blog/deleting-tweets-and-likes-from-twitter</link>
+            <pubDate>Sun, 13 Nov 2022 00:00:00 GMT</pubDate>
+        </item>
+      
+          <item>
             <guid>https://gotofritz.net/blog/mypy-found-module-but-no-type-hints-or-library-stubs</guid>
             <title>mypy: found module but no type hints or library stubs</title>
             <description>When linting a Python project, I was puzzled the mysterious "found module but no type hints or library stubs" error from mypy. Mysterious because the module was my own and there were Pydantic definitions everywhere. The cause? I was missing __init__.py files in some parent folders.</description>
