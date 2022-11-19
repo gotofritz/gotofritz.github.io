@@ -69,7 +69,7 @@
     <div class="info-block">
       <h4 class="title">Social</h4>
       <div class="flex flex-row gap-2 social">
-        <a rel="me" href="https://mastodon.coffee/@gotofritz"
+        <a rel="me" href="https://fosstodon.org/@gotofritz"
           ><MastodonIcon class="home-icon inline-block" /></a
         >
         <a
