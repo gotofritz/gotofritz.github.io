@@ -1,6 +1,6 @@
 {
   ".svelte-kit/runtime/client/start.js": {
-    "file": "start-d8e05f26.js",
+    "file": "start-3536bd3c.js",
     "src": ".svelte-kit/runtime/client/start.js",
     "isEntry": true,
     "imports": [
@@ -56,7 +56,7 @@
     ]
   },
   "src/routes/blog/[slug].svelte": {
-    "file": "pages/blog/_slug_.svelte-6c323720.js",
+    "file": "pages/blog/_slug_.svelte-2e1c6671.js",
     "src": "src/routes/blog/[slug].svelte",
     "isEntry": true,
     "isDynamicEntry": true,
@@ -102,7 +102,6 @@
       "posts/blog/os-x-software-update-from-command-line.md",
       "posts/blog/osx-apps.md",
       "posts/blog/pretty-printing-xml.md",
-      "posts/blog/preventing-flake8-errors-importing-modules-in__init__files-in-python.md",
       "posts/blog/removing-lines-matching-patterns-from-all-files-in-dir.md",
       "posts/blog/reordering-audio-files-in-a-fat-usb-stick.md",
       "posts/blog/setting-css-values-dynamically-in-svelte.md",
@@ -168,7 +167,7 @@
       "_index-21d5ca5c.js"
     ],
     "css": [
-      "assets/info-3d45f474.css",
+      "assets/pages/tags/index.svelte-27a87f28.css",
       "assets/PostTags.svelte_svelte_type_style_lang-fcb4ce48.css"
     ]
   },
@@ -196,7 +195,7 @@
       "_index-6e518972.js"
     ],
     "css": [
-      "assets/info-3d45f474.css",
+      "assets/pages/tags/index.svelte-27a87f28.css",
       "assets/PostTags.svelte_svelte_type_style_lang-fcb4ce48.css"
     ]
   },
@@ -283,7 +282,7 @@
     ]
   },
   "posts/blog/create-fake-dataset-fixtures-testing-with-faker.md": {
-    "file": "chunks/create-fake-dataset-fixtures-testing-with-faker-20482564.js",
+    "file": "chunks/create-fake-dataset-fixtures-testing-with-faker-03efc0aa.js",
     "src": "posts/blog/create-fake-dataset-fixtures-testing-with-faker.md",
     "isDynamicEntry": true,
     "imports": [
@@ -291,7 +290,7 @@
     ]
   },
   "posts/blog/creating-a-poetry-driven-python-project-template-with-cookiecutter.md": {
-    "file": "chunks/creating-a-poetry-driven-python-project-template-with-cookiecutter-ab83496c.js",
+    "file": "chunks/creating-a-poetry-driven-python-project-template-with-cookiecutter-9ebb5840.js",
     "src": "posts/blog/creating-a-poetry-driven-python-project-template-with-cookiecutter.md",
     "isDynamicEntry": true,
     "imports": [
@@ -427,7 +426,7 @@
     ]
   },
   "posts/blog/mypy-found-module-but-no-type-hints-or-library-stubs.md": {
-    "file": "chunks/mypy-found-module-but-no-type-hints-or-library-stubs-3a6fef36.js",
+    "file": "chunks/mypy-found-module-but-no-type-hints-or-library-stubs-553e3dc2.js",
     "src": "posts/blog/mypy-found-module-but-no-type-hints-or-library-stubs.md",
     "isDynamicEntry": true,
     "imports": [
@@ -469,14 +468,6 @@
   "posts/blog/pretty-printing-xml.md": {
     "file": "chunks/pretty-printing-xml-b5d643b4.js",
     "src": "posts/blog/pretty-printing-xml.md",
-    "isDynamicEntry": true,
-    "imports": [
-      "_index-6e518972.js"
-    ]
-  },
-  "posts/blog/preventing-flake8-errors-importing-modules-in__init__files-in-python.md": {
-    "file": "chunks/preventing-flake8-errors-importing-modules-in__init__files-in-python-bc0c4842.js",
-    "src": "posts/blog/preventing-flake8-errors-importing-modules-in__init__files-in-python.md",
     "isDynamicEntry": true,
     "imports": [
       "_index-6e518972.js"
