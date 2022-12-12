@@ -7,6 +7,14 @@
     <atom:link href="https://gotofritz.net/feed.xml" rel="self" type="application/rss+xml" />
     
           <item>
+            <guid>https://gotofritz.net/blog/history-of-dance-music-as-jupyter-notebook</guid>
+            <title>History of Disco and Dance Music: a Jupyter notebook</title>
+            <description>I wanted to see how well OpenAI's ChatGPT would work for teaching, so I asked it to design a Jupyter course. The first assignment it gave me was to explore the history of disco and dance music. I need to use both text and images to describe the key developments and important figures in the genre.</description>
+            <link>https://gotofritz.net/blog/history-of-dance-music-as-jupyter-notebook</link>
+            <pubDate>Sun, 11 Dec 2022 00:00:00 GMT</pubDate>
+        </item>
+      
+          <item>
             <guid>https://gotofritz.net/blog/deleting-tweets-and-likes-from-twitter</guid>
             <title>Deleting tweets and likes from twitter</title>
             <description>Thanks to Elon Musk, it's now socially acceptable for developers to ditch their Twitter accounts. While I'm keeping mine because I enjoy tinkering with the API, I recently decided to delete all of my tweets and start fresh. I like to think of it as a "quiet quitting"</description>
