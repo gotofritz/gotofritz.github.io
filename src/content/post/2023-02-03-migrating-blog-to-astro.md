@@ -1,6 +1,6 @@
 ---
 publishDate: 2023-02-03
-draft: true
+draft: false
 title: Migrating My Blog to Astro
 tags:
   - astro
