@@ -188,7 +188,7 @@ export async function get({ params: { slug } }: APIContext) {
 
 ### Adding a custom font to the Tailwind theme
 
-The mastheads use a free Google font. I wanted to host it as part of the site, so I [downloaded  it from google](<https://fonts.google.com/specimen/DM+Serif+Display>), then added font-face to `<astro>/src/styles/global.css`
+The mastheads use a free Google font. I wanted to host it as part of the site, so I [downloaded it from google](https://fonts.google.com/specimen/DM+Serif+Display), then added font-face to `<astro>/src/styles/global.css`
 
 ```css
 @font-face {
@@ -266,7 +266,7 @@ I can think of only two workarounds: either generating each part individually, w
 export function getFormattedDate(
   date: string | number | Date,
   options: Intl.DateTimeFormatOptions = {},
-  locale: Intl.LocalesArgument = "en-GB"
+  locale: Intl.LocalesArgument = "en-GB",
 ) {
   const formatOptions: Intl.DateTimeFormatOptions = {
     day: "2-digit",
@@ -274,7 +274,10 @@ export function getFormattedDate(
     year: "numeric",
     ...options,
   };
-  const dateTimeFormat = new Intl.DateTimeFormat(locale as string, formatOptions);
+  const dateTimeFormat = new Intl.DateTimeFormat(
+    locale as string,
+    formatOptions,
+  );
   const parts = dateTimeFormat.formatToParts(new Date(date));
   const partValues = parts.map((p) => p.value);
 
@@ -294,7 +297,7 @@ Astro has a default component called Fragment, to which [template directives](ht
 <Fragment set:html={post.data.description} />
 ```
 
-When generating the RSS feed and the meta tags, I have the opposite problem - there I don't want any HTML at all. There is no template directive equivalent to `set:html` (there is `set:text`, byt it shows the HTML source). Because the code is generated in Node.js, I can't use the DOM to strip the HTML away for me:
+When generating the RSS feed and the meta tags, I have the opposite problem - there I don't want any HTML at all. There is no template directive equivalent to `set:html` (there is `set:text`, but it shows the HTML source). Because the code is generated in Node.js, I can't use the DOM to strip the HTML away for me:
 
 ```js
 // NOTE: this is not XSS safe
@@ -304,6 +307,7 @@ export function stripHtmlInABrowser(dirtyString = ""): string {
   return div.textContent || div.innerText || "";
 }
 ```
+
 I have to resort to RegExp. A simple one, since my HTML is very simple
 
 ```js
@@ -311,7 +315,6 @@ export function stripHtml(dirtyString = ""): string {
   const re = RegExp(/<[^>]+?>/, "gm");
   return dirtyString.replaceAll(re, "");
 }
-
 ```
 
 ## Next and Previous post links
@@ -339,7 +342,7 @@ import type { CollectionEntry } from "astro:content";
 export function nextAndPrevious(
   post: CollectionEntry<"post">,
   i: number,
-  allPosts: Array<CollectionEntry<"post">>
+  allPosts: Array<CollectionEntry<"post">>,
 ) {
   const newerSlug = (i + 1) % allPosts.length;
   const olderSlug = (i - 1 + allPosts.length) % allPosts.length;
