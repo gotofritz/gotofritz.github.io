@@ -1,0 +1,21 @@
+{
+  "name": "gotofritz.net",
+  "short_name": "gotofritz.net",
+  "description": "Fritz Stelluto's personal site",
+  "icons": [
+    {
+      "src": "/192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#1d1f21",
+  "theme_color": "#2bbc8a",
+  "display": "standalone"
+}

@@ -1,0 +1,60 @@
+---
+import type { IElement } from "@/data/shared";
+import { getFormattedDate } from "@/utils";
+import type { CollectionEntry } from "astro:content";
+
+import Tags from "@/components/blog/Tags";
+interface Props extends IElement {
+  post: CollectionEntry<"post">;
+  withDesc?: boolean;
+  noTags?: boolean;
+  notBold?: boolean;
+}
+
+const {
+  post,
+  as: Element = "div",
+  withDesc = false,
+  noTags = false,
+  notBold = false,
+} = Astro.props;
+const date = new Date(post.data.publishDate);
+const datetime = date.toISOString();
+const postDate = getFormattedDate(date, { month: "short" });
+---
+
+<time
+  datetime={datetime}
+  class="shrink-0 border-dashed border-b-current font-mono text-xs text-gray-400 sm:border-b sm:pr-4"
+  >{postDate}</time
+>
+<div class="min-w-full sm:min-w-0">
+  <Element
+    class="sm:border-b sm:border-t-0 border-t border-t-current sm:border-b-current sm:mt-[-0.25rem]"
+  >
+    <a
+      href={`/blog/${post.slug}`}
+      rel=" prefetch"
+      class:list={{ "font-bold": notBold }}
+    >
+      {post.data.title}
+    </a>
+  </Element>
+  {
+    withDesc && (
+      <p class="mt-2 block ">
+        <Fragment set:html={post.data.description} />
+      </p>
+    )
+  }
+  {
+    !noTags && (
+      <Tags
+        tags={post.data.tags}
+        withoutSeparator
+        withoutIcon
+        additionalClasses={["text-gray-500", "mt-1"]}
+      />
+    )
+  }
+</div>

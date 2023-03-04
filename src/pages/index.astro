@@ -1,0 +1,44 @@
+---
+import PostPreview from "@/components/blog/PostPreview";
+import PageLayout from "@/layouts/Base";
+import { draftsStop, slugRewrite, sortMDByDate } from "@/utils";
+import { getCollection } from "astro:content";
+
+const MAX_POSTS = 16;
+const allPosts = await getCollection("post", draftsStop);
+const allPostsByDate = sortMDByDate(allPosts.map(slugRewrite)).slice(0, MAX_POSTS);
+---
+
+<PageLayout meta={{ title: "Home" }}>
+  <section>
+    <p class="mb-0 mt-0 pr-0 text-xl leading-7 sm:-mt-[3rem] sm:mb-[3rem] sm:pr-[3rem]">
+      Hi, I'm Fritz, an engineer based in Berlin. I tend to write short posts about
+      technical stuff. I currently work in the Data Science department at <a
+        href="https://wayfair.de/"
+        class="cactus-link">Wayfair</a
+      >, creating services and doing ML Ops. Previously I have been a full stack
+      developer and technical manager.
+    </p>
+  </section>
+  <section aria-label="Blog post list" class="mt-16">
+    <h2 class="title mb-4 text-xl">Posts</h2>
+    <ul class="space-y-4 sm:space-y-2">
+      {
+        allPostsByDate.map((p) => (
+          <li class="flex flex-col items-end sm:flex-row">
+            <PostPreview post={p} noTags />
+          </li>
+        ))
+      }
+    </ul>
+    <span class="mt-4 block sm:text-right">
+      <a
+        class="sm:hover:text-accent"
+        href="/blog"
+        aria-label="View all blog categories"
+      >
+        View all →
+      </a>
+    </span>
+  </section>
+</PageLayout>

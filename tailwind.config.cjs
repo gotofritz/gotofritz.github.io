@@ -1,112 +1,133 @@
+const { fontFamily } = require("tailwindcss/defaultTheme");
 const plugin = require("tailwindcss/plugin");
 
+/** @type {import('tailwindcss').Config} */
 module.exports = {
+  content: ["./src/**/*.{astro,html,js,jsx,md,svelte,ts,tsx,vue}"],
   darkMode: "class",
-  content: ["./src/**/*.{html,js,svelte,ts,md,svx}"],
+  corePlugins: {
+    // disable aspect ratio as per docs -> @tailwindcss/aspect-ratio
+    aspectRatio: false,
+    // disable some core plugins as they are included in the css, even when unused
+    touchAction: false,
+    ringOffsetWidth: false,
+    ringOffsetColor: false,
+    scrollSnapType: false,
+    borderOpacity: false,
+    textOpacity: false,
+    fontVariantNumeric: false,
+  },
   theme: {
-    fontFamily: {
-      display: "'DM Serif Display', Helvetica, sans-serif",
-      intro: "'Mate', Helvetica, sans-serif",
-      summary: "Alegreya SC, Mate, helvetica, sans-serif",
-      sans:
-        'ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
-    },
     extend: {
-      visibility: ["group-hover"],
-      typography: ({ theme }) => {
-        return {
-          DEFAULT: {
-            css: {
-              pre: {
-                code: {
-                  padding: "0 !important",
-                  fontSize: theme("fontSize.base")[0],
-                },
-              },
-              code: {
-                borderRadius: theme("borderRadius.md"),
-                paddingTop: theme("spacing.1"),
-                paddingBottom: theme("spacing.1"),
-                paddingLeft: theme("spacing.1"),
-                paddingRight: theme("spacing.1"),
-                fontFamily: "inherit !important",
-                fontWeight: "500 !important",
-                color: theme("colors.slate.900"),
-                backgroundColor: theme("colors.slate.300"),
-              },
-              "code::before": {
-                content: '""',
-              },
-              "code::after": {
-                content: '""',
-              },
-              hr: {
-                borderColor: theme("colors.slate.300"),
-              },
-              ul: {
-                marginTop: "0 !important",
-                marginBottom: "0 !important",
-              },
-              li: {
-                marginTop: "0 !important",
-                marginBottom: "0 !important",
-              },
-              img: {
-                marginLeft: "auto",
-                marginRight: "auto",
-              },
-              "h1,h2,h3,h4,h5,h6": {
-                a: {
-                  color: "inherit",
-                  textDecoration: "none",
-                },
-              },
-            },
-          },
-          sm: {
-            css: {
-              pre: {
-                code: {
-                  fontSize: theme("fontSize.xs")[0],
-                },
-              },
-            },
-          },
-          lg: {
-            css: {
-              h1: {
-                fontSize: theme("fontSize.4xl")[0],
-              },
-            },
-          },
-
-          invert: {
-            css: {
-              hr: {
-                borderColor: theme("colors.slate.700"),
-              },
-              code: {
-                color: theme("colors.slate.300"),
-                backgroundColor: theme("colors.slate.700"),
-              },
-
-              "a code": {
-                color: theme("colors.white"),
-              },
-              "pre, pre code": {
-                color: theme("colors.slate.200"),
-                backgroundColor: theme("colors.slate.800"),
-              },
-            },
-          },
-        };
+      colors: {
+        bgColor: "var(--theme-bg)",
+        textColor: "var(--theme-text)",
+        link: "var(--theme-link)",
+        accent: "var(--theme-accent)",
+        "accent-2": "var(--theme-accent-2)",
       },
+      fontFamily: {
+        // Add any custom fonts here
+        sans: [...fontFamily.sans],
+        serif: [...fontFamily.serif],
+        masthead: ["DM Serif Display", "Helvetica", "sans-serif"],
+      },
+      transitionProperty: {
+        height: "height",
+      },
+      typography: (theme) => ({
+        cactus: {
+          css: {
+            "--tw-prose-body": "var(--theme-text)",
+            "--tw-prose-headings": "var(--theme-accent-2)",
+            "--tw-prose-links": "var(--theme-text)",
+            "--tw-prose-bold": "var(--theme-text)",
+            "--tw-prose-bullets": "var(--theme-text)",
+            "--tw-prose-quotes": "var(--theme-quote)",
+            "--tw-prose-code": "var(--theme-text)",
+            "--tw-prose-hr": "0.5px dashed #666",
+            "--tw-prose-th-borders": "#666",
+          },
+        },
+        DEFAULT: {
+          css: {
+            a: {
+              "@apply cactus-link no-underline": "",
+            },
+            strong: {
+              fontWeight: "700",
+            },
+            code: {
+              border: "1px dotted #666",
+              borderRadius: "4px",
+            },
+            blockquote: {
+              borderLeftWidth: "none",
+            },
+            hr: {
+              borderTopStyle: "dashed",
+            },
+            thead: {
+              borderBottomWidth: "none",
+            },
+            "thead th": {
+              fontWeight: "700",
+              borderBottom: "1px dashed #666",
+            },
+            "tbody tr": {
+              borderBottomWidth: "none",
+            },
+            tfoot: {
+              borderTop: "1px dashed #666",
+            },
+          },
+        },
+        sm: {
+          css: {
+            code: {
+              fontSize: theme("fontSize.sm")[0],
+              fontWeight: "400",
+            },
+          },
+        },
+      }),
     },
   },
   plugins: [
     require("@tailwindcss/typography"),
-    plugin(function ({ addVariant }) {
-      addVariant("searching", ".searching &");
+    require("@tailwindcss/line-clamp"),
+    require("@tailwindcss/aspect-ratio"),
+    plugin(function ({ addComponents }) {
+      addComponents({
+        ".cactus-link": {
+          "@apply bg-[size:100%_6px] bg-bottom bg-repeat-x": {},
+          backgroundImage:
+            "linear-gradient(transparent,transparent 5px,var(--theme-text) 5px,var(--theme-text))",
+          "&:hover": {
+            backgroundImage:
+              "linear-gradient(transparent,transparent 4px,var(--theme-link) 4px,var(--theme-link))",
+          },
+        },
+        ".title": {
+          "@apply text-2xl font-masthead text-accent-2 leading-loose": {},
+        },
+        ".code-breakdown": {
+          "@apply flex flex-wrap gap-2": {},
+        },
+        ".code-breakdown dt": {
+          "@apply basis-[calc(33.3333%-.5rem)] grow shrink-0 text-right py-0 px-2 bg-gray-300":
+            {},
+        },
+        ".code-breakdown dd": {
+          "@apply basis-2/3 grow-0 shrink": {},
+        },
+        ".code-breakdown dt.long-line": {
+          "@apply basis-[calc(66.66%-.5rem)]": {},
+        },
+        ".code-breakdown dd.long-line": {
+          "@apply basis-1/3": {},
+        },
+      });
     }),
   ],
 };

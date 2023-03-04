@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+
+
+<html lang="en-GB">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<!-- Icons / Favicon -->
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="canonical" href="https://gotofritz.net/blog/how-to-build-blog-with-sveltekit-markdown-tailwind/">
+
+<!-- Primary Meta Tags -->
+<title>How I built a markdown drive static website with SvelteKit and Tailwind • gotofritz.net</title>
+<meta name="title" content="How I built a markdown drive static website with SvelteKit and Tailwind • gotofritz.net">
+<meta name="description" content="In my last post I ported my existing blog to SvelteKit, to get to used to it. Now I am going to build a new version from scratch, using markdown and tailwind. I will use Matt Jennings's excellent SvelteKit blog template as seed.">
+<meta name="author" content="Fritz Stelluto">
+
+<!-- Theme Colour -->
+<meta name="theme-color" content="#fafafa">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="How I built a markdown drive static website with SvelteKit and Tailwind">
+<meta property="og:description" content="In my last post I ported my existing blog to SvelteKit, to get to used to it. Now I am going to build a new version from scratch, using markdown and tailwind. I will use Matt Jennings's excellent SvelteKit blog template as seed.">
+<meta property="og:url" content="https://gotofritz.net/blog/how-to-build-blog-with-sveltekit-markdown-tailwind/">
+<meta property="og:site_name" content="gotofritz.net">
+<meta property="og:locale" content="en_GB">
+<meta property="og:image" content="https://gotofritz.net/og-image/how-to-build-blog-with-sveltekit-markdown-tailwind.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="article:author" content="Fritz Stelluto"><meta property="article:published_time" content="2022-05-03T00:00:00.000Z">
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="https://gotofritz.net/blog/how-to-build-blog-with-sveltekit-markdown-tailwind/">
+<meta property="twitter:title" content="How I built a markdown drive static website with SvelteKit and Tailwind">
+<meta property="twitter:description" content="In <a href=&#34;/blog/blog-with-sveltekit-and-markdown&#34;>my last post I ported my existing blog to SvelteKit</a>, to get to used to it. Now I am going to build a new version from scratch, using markdown and tailwind. I will use <a href=&#34;https://github.com/mattjennings/sveltekit-blog-template&#34;>Matt Jennings's excellent SvelteKit blog template</a> as seed.">
+<meta property="twitter:image" content="https://gotofritz.net/og-image/how-to-build-blog-with-sveltekit-markdown-tailwind.png">
+
+<!-- RSS auto-discovery -->
+<link rel="alternate" type="application/rss+xml" title="gotofritz.net" href="/rss.xml">
+    <script>(function(){const siteConfig = {"author":"Fritz Stelluto","title":"gotofritz.net","description":"I'm Fritz, an engineer based in Berlin. I currently work in the Data Science department at Wayfair. I tend to write short posts about technical stuff","lang":"en-GB","ogLocale":"en_GB","themeColorLight":"#fafafa","themeColorDark":"#1d1f21"};
+
+      const root = document.documentElement;
+      const colorThemeMetaTag = document.querySelector("meta[name='theme-color']");
+
+      // get user preference of dark mode, 1st local storage, 2nd browser
+      function getThemePreference() {
+        if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
+          return localStorage.getItem("theme");
+        }
+        return window.matchMedia("(prefers-color-scheme: dark)").matches
+          ? "dark"
+          : "light";
+      }
+
+      const isDark = getThemePreference() === "dark";
+
+      // watch document element class attribute and update user preference when it changes.
+      const observer = new MutationObserver(() => {
+        const rootIsDark = root.classList.contains("dark");
+        // set the meta attribute
+        colorThemeMetaTag.setAttribute(
+          "content",
+          siteConfig[rootIsDark ? "themeColorDark" : "themeColorLight"]
+        );
+        // store user preference
+        if (typeof localStorage !== "undefined") {
+          localStorage.setItem("theme", rootIsDark ? "dark" : "light");
+        }
+      });
+      observer.observe(root, { attributeFilter: ["class"] });
+
+      // initailse root class attribute
+      root.classList.toggle("dark", isDark);
+    })();</script>
+  <link rel="stylesheet" href="/_astro/_...post_.505ba80a.css" /><script type="module" src="/_astro/hoisted.0c2a5be7.js"></script>
+<script type="module" src="/_astro/page.b7cc8384.js"></script></head>
+  <body>
+    <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-1.5 focus:left-1">skip to content
+</a>
+    
+
+<header id="main-header" class="group mb-12 flex flex-wrap items-center justify-start gap-y-8 sm:mb-28 sm:gap-y-0">
+  <a href="/" class="order-1 block grow-0 items-center grayscale hover:filter-none">
+    <svg class="h-10 w-10 rounded-md bg-black dark:bg-white sm:mr-0 sm:h-[4.25rem] sm:w-[4.25rem]" aria-hidden="true" focusable="false" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+      <g>
+        <path id="path-goto" d="M 123.8 88 L 52 88 L 52 194.7 L 87 194.7 L 87 159.6 L 70 159.6 L 70 123.6 L 124 123 L 124 230 L 17 230 C 17 230 17 17 17 52 C 17 52 124 52 124 52 L 124 88 L 123.8 88 Z M 176.25 194.684 C 176.25 194.684 210.52 194.684 210.52 194.684 C 210.52 194.684 211 89 211 89 C 211 89 176 89 176 89 C 176 89 176 195 176 195 L 176.25 194.684 Z M 246 230 L 140 230 C 140 230 140 52 140 52 C 140 52 247 52 247 52 C 247 52 246 230 246 230 Z M 334 230 L 297 230 L 298.27 88.527 L 263.02 88.527 C 263.02 88.527 263 52 263 52 C 263 52 369 52 369 52 C 369 52 369.75 88.527 369.75 88.527 L 334.5 88.527 L 334 230 Z M 422.25 194.684 C 422.25 194.684 456.52 194.684 456.52 194.684 C 456.52 194.684 456 88.79 456 88.79 C 456 88.79 422 88.79 422 88.79 C 422 88.79 422.25 194.684 422.25 194.684 Z M 492 230 L 386 230 C 386 230 386 52 386 52 C 386 52 492 52 492 52 L 492 230 Z" class="fill-white stroke-none dark:fill-black">
+          <title>GOTO</title>
+        </path>
+      </g>
+      <g>
+        <path id="path-fritz" stroke-width="1" d="M 51 461 L 17 461 L 17 294 L 100 294 L 100 327.337 L 51 327.375 L 51 361.722 L 100 361.685 L 100 395.022 L 51 395.06 L 51 461 Z M 150 327.375 C 150 327.375 150 361.722 150 361.722 C 150 361.722 182 361.685 182 361.685 C 182 361.685 182 327.337 182 327.337 C 182 327.337 150 327.375 150 327.375 Z M 150 461 L 116 461 L 116 294 L 199.5 294.037 L 200 311.174 L 216 311.211 L 216 378.859 L 200 378.859 L 200 395.022 L 216 395.022 L 216 461 L 182 461 L 182 395.022 L 150 395.06 L 150 461 Z M 265 461.697 L 231.1 461 L 231 294 L 265 294.037 L 265 461 L 265 461.697 Z M 347 461.697 L 313 461 L 313 327.337 L 280 327.337 L 280 294 L 380 294.037 L 380 327.375 L 347 327.375 L 347 461 L 347 461.697 Z M 495 461.697 L 395 461 L 395 394.517 L 411.58 394.524 L 411.58 377.856 L 428.08 377.856 L 428.08 361.722 L 444.58 361.722 L 444.58 344.549 L 462 344.511 L 461.08 327.375 L 395 327.337 L 395 294 L 495 294.037 L 495 345.559 L 478.5 345.559 L 478.5 361.722 L 462 361.722 L 462 377.886 L 445 377.848 L 445 395.022 L 429 395.06 L 429 429.407 L 495 429.407 L 495 461 L 495 461.697 Z M 462 361.722 L 478 361.685 L 462 361.722 Z M 478.5 345.559 L 495 345.559 L 478 345.521 L 478.5 345.559 Z" class="fill-white stroke-none dark:fill-black">
+          <title>FRITZ</title>
+        </path>
+      </g>
+    </svg></a>
+  
+  
+
+<theme-toggle class="ml-auto order-3 sm:order-3">
+  <button type="button" id="toggle-theme" class="group relative h-10 w-10 rounded-md bg-zinc-200 p-2 ring-zinc-400 transition-all hover:ring-2 dark:bg-zinc-700" aria-label="Toggle Dark Mode">
+    <svg id="sun-svg" class="absolute top-1/2 left-1/2 h-7 w-7 -translate-x-1/2 -translate-y-1/2 scale-0 opacity-0 transition-all group-aria-pressed:scale-100 group-aria-pressed:opacity-100" aria-hidden="true" focusable="false" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 18C15.3137 18 18 15.3137 18 12C18 8.68629 15.3137 6 12 6C8.68629 6 6 8.68629 6 12C6 15.3137 8.68629 18 12 18Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
+      <path d="M22 12L23 12" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
+      <path d="M12 2V1" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
+      <path d="M12 23V22" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
+      <path d="M20 20L19 19" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
+      <path d="M20 4L19 5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
+      <path d="M4 20L5 19" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
+      <path d="M4 4L5 5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
+      <path d="M1 12L2 12" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
+    </svg>
+    <svg id="moon-svg" class="absolute top-1/2 left-1/2 h-7 w-7 -translate-x-1/2 -translate-y-1/2 scale-0 opacity-0 transition-all group-aria-[pressed=false]:scale-100 group-aria-[pressed=false]:opacity-100" aria-hidden="true" focusable="false" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"></circle>
+      <path d="M7.63262 3.06689C8.98567 3.35733 9.99999 4.56025 9.99999 6.00007C9.99999 7.65693 8.65685 9.00007 6.99999 9.00007C5.4512 9.00007 4.17653 7.82641 4.01685 6.31997" stroke="currentColor" stroke-width="1.5"></path>
+      <path d="M22 13.0505C21.3647 12.4022 20.4793 12 19.5 12C17.567 12 16 13.567 16 15.5C16 17.2632 17.3039 18.7219 19 18.9646" stroke="currentColor" stroke-width="1.5"></path>
+      <path d="M14.5 8.51L14.51 8.49889" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
+      <path d="M10 17C11.1046 17 12 16.1046 12 15C12 13.8954 11.1046 13 10 13C8.89543 13 8 13.8954 8 15C8 16.1046 8.89543 17 10 17Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
+    </svg>
+  </button>
+</theme-toggle>
+  <nav id="navigation-menu" class="flex gap-y-4 grow sm:grow-no items-end sm:flex-row sm:flex sm:items-center sm:mt-1 sm:py-0 sm:ml-8 text-accent order-2 sm:order-2 justify-around sm:justify-start" aria-label="Main menu">
+    <a href="/" class="px-2 py-4 sm:py-0 sm:hover:underline" rel="prefetch">
+      Home
+    </a>
+    <a href="/about" class="px-2 py-4 sm:py-0 sm:hover:underline" rel="prefetch">
+      About
+    </a>
+    <a href="/blog" class="px-2 py-4 sm:py-0 sm:hover:underline" rel="prefetch">
+      Blog
+    </a>
+  </nav>
+</header>
+    <main id="main" class="flex-1">
+      <div class="sm:grid sm:grid-cols-4 sm:items-start sm:gap-x-10">
+    <article class="col-span-3 break-words">
+      <div id="blog-hero"><h1 class="title mb-1 text-5xl">How I built a markdown drive static website with SvelteKit and Tailwind</h1>
+<time datetime="2022-05-03T00:00:00.000Z">03 May 2022 </time>
+<div class="before:content-['|'] inline">
+      <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" class="inline-block h-6 w-6" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+          <path d="M7.859 6h-2.834a2.025 2.025 0 0 0 -2.025 2.025v2.834c0 .537 .213 1.052 .593 1.432l6.116 6.116a2.025 2.025 0 0 0 2.864 0l2.834 -2.834a2.025 2.025 0 0 0 0 -2.864l-6.117 -6.116a2.025 2.025 0 0 0 -1.431 -.593z"></path>
+          <path d="M17.573 18.407l2.834 -2.834a2.025 2.025 0 0 0 0 -2.864l-7.117 -7.116"></path>
+          <path d="M6 9h-.01"></path>
+        </svg>
+      <a class="inline-block pr-1" aria-label="View more blogs with the tag svelte" href="/tags/svelte">
+          #svelte
+        </a><a class="inline-block pr-1" aria-label="View more blogs with the tag gotofritz" href="/tags/gotofritz">
+          #gotofritz
+        </a>
+    </div>
+<p class="mt-8 text-xl leading-7">In <a href="/blog/blog-with-sveltekit-and-markdown">my last post I ported my existing blog to SvelteKit</a>, to get to used to it. Now I am going to build a new version from scratch, using markdown and tailwind. I will use <a href="https://github.com/mattjennings/sveltekit-blog-template">Matt Jennings's excellent SvelteKit blog template</a> as seed.</p></div>
+      <div class="prose prose-sm prose-cactus mt-12 prose-headings:font-semibold prose-headings:before:absolute prose-headings:before:-ml-4 prose-headings:before:text-accent prose-headings:before:content-['#'] prose-th:before:content-none">
+        <h2 id="getting-started">Getting started</h2>
+<p>I use <a href="https://github.com/Rich-Harris/degit">degit, a tool by the SvelteKit’s creator</a>, to reproduce <a href="https://github.com/mattjennings/sveltekit-blog-template">Matt Jennings’s excellent SvelteKit blog template</a> in a folder (<code>gotofritz.github.io-redesign/</code>) parallel to my main branch (<code>gotofritz.github.io/</code>)</p>
+<pre is:raw="" class="astro-code" style="background-color: #272822; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #F8F8F2">❯ mkdir gotofritz.github.io-redesign</span></span>
+<span class="line"><span style="color: #F8F8F2">❯ cp -r   gotofritz.github.io/.git gotofritz.github.io-redesign/</span></span>
+<span class="line"><span style="color: #F8F8F2">❯ </span><span style="color: #66D9EF">cd</span><span style="color: #F8F8F2"> gotofritz.github.io-redesign/</span></span>
+<span class="line"><span style="color: #F8F8F2">❯ git checkout -b svelte-redesign</span></span>
+<span class="line"><span style="color: #F8F8F2">Switched to a new branch </span><span style="color: #E6DB74">'svelte-redesign'</span></span>
+<span class="line"><span style="color: #F8F8F2">❯ npx degit mattjennings/sveltekit-blog-template --force</span></span>
+<span class="line"><span style="color: #F8F8F2">  destination directory is not empty. Using --force, continuing</span></span>
+<span class="line"><span style="color: #F8F8F2">  cloned mattjennings/sveltekit-blog-template#HEAD</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #88846F"># i like semicolons, thank you very much</span></span>
+<span class="line"><span style="color: #F8F8F2">❯ cp ../gotofritz.github.io/.prettierrc .prettierrc</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #88846F"># Perfect - I also like pnpm. The same would work with npm</span></span>
+<span class="line"><span style="color: #88846F"># or yarn, of course</span></span>
+<span class="line"><span style="color: #F8F8F2">❯ pnpm install</span></span>
+<span class="line"><span style="color: #F8F8F2">Packages: +321</span></span>
+<span class="line"><span style="color: #F8F8F2">...</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #88846F"># check that it runs</span></span>
+<span class="line"><span style="color: #F8F8F2">❯ pnpm run dev</span></span>
+<span class="line"><span style="color: #F8F8F2">  sveltekit-blog-template@0.0.1 dev</span></span>
+<span class="line"><span style="color: #F8F8F2">  ...</span></span>
+<span class="line"><span style="color: #F8F8F2">  local:   http://localhost:3000</span></span>
+<span class="line"><span style="color: #F8F8F2">  network: not exposed</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #F8F8F2">  Use --host to expose server to other devices on this network</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #88846F"># it does</span></span>
+<span class="line"><span style="color: #F8F8F2">  </span><span style="color: #F92672">&#x3C;</span><span style="color: #F8F8F2">CTRL-C</span><span style="color: #F92672">></span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #F8F8F2">❯ git add </span><span style="color: #66D9EF">.</span></span>
+<span class="line"><span style="color: #F8F8F2">❯ git commit -m </span><span style="color: #E6DB74">"feature: clone mattjennings/sveltekit-blog-template"</span></span></code></pre>
+<h2 id="publishing-the-static-sveltekit-markdown-site-to-github-pages">Publishing the static Sveltekit markdown site to GitHub pages</h2>
+<p>The original repo is set up to publish to a <code>/public/</code> folder, but GitHub pages expect either the root folder or a folder called <code>docs/</code>. I went for the latter. A simple change in <code>svelte.config.js</code> made it happen</p>
+<pre is:raw="" class="astro-code" style="background-color: #272822; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #F8F8F2">  kit: {</span></span>
+<span class="line"><span style="color: #F8F8F2">    target: "#svelte",</span></span>
+<span class="line"><span style="color: #F8F8F2">    adapter: adapter({</span></span>
+<span class="line"><span style="color: #F92672"><span style="user-select: none;">-</span>      pages: 'public',</span></span>
+<span class="line"><span style="color: #F92672"><span style="user-select: none;">-</span>      assets: 'public'</span></span>
+<span class="line"><span style="color: #A6E22E"><span style="user-select: none;">+</span>     pages: "docs",</span></span>
+<span class="line"><span style="color: #F8F8F2">    }),</span></span></code></pre>
+<p>All the other files I needed (the CNAME file, and google confirmation) are already in my static folder</p>
+<p><img src="/assets/how-to-build-blog-with-sveltekit-markdown-tailwind/docs.png" alt="Where to set the docs/ folder as the root for your github pages in the github settings"></p>
+<h2 id="importing-markdown-posts-from-outside-the-sveltekit-project-root">Importing markdown posts from outside the SvelteKit project root</h2>
+<p>…cannot be done, at least not in Q2 of 2022. It’s <a href="https://github.com/vitejs/vite/issues/4759">a limitation of Vite</a>, the bundler used by SvelteKit. And no, symbolic links don’t help either. Vite is “clever” enough to spot that you are trying to trick it.That is <em>that</em> close to being a deal breaker. I like keeping the posts data and the code completely separate. I also prefer keeping posts in Dropbox, and then manage them with tools like Obsidian. That allows me to easily access them from my mobile phone when I am on the go. I came up with a workaround, but it’s a hack.</p>
+<h2 id="synchronising-posts-inside-sveltekit-with-a-folder-outside-the-project-using-unison">Synchronising posts inside SvelteKit with a folder outside the project using unison</h2>
+<p>Since source files cannot exist outside the project in Vite, I only have two options: ignore it, or sync manually. I decided to go for the syncing.</p>
+<h3 id="using-unison-to-sync-folders-before-a-build">Using unison to sync folders before a build</h3>
+<p>My first approach was to add a sync command to <code>package.json</code>, and have it run before building the site. As well as before starting the local dev server. And, of course, manually as needed. This is almost the kind of task you would use <code>rsync</code> for, but not quite. rsync at heart is a <em>backup</em> command; you sync something you care about with a remote location. One is the original, the other the clone. But in the case of blog posts case either could be the original. I may have edited the post at work and the Dropbox copy is the most up to date. Or vice versa. What I need is a tool to keep two folders in sync, updating whichever is less recent. That tool is <a href="https://www.cis.upenn.edu/~bcpierce/unison/">unison</a>. Or so I thought.</p>
+<p>The first step was to install unison with brew, <code>brew install unison</code>. Then I created an .env file with the path of the folders to sync to, and from. The file is called <code>.env</code> and there is a version called <code>.env.example</code> in the repo.</p>
+<pre is:raw="" class="astro-code" style="background-color: #272822; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #F8F8F2">DIR_POSTS=./posts</span></span>
+<span class="line"><span style="color: #F8F8F2">DIR_POSTS_BAK=</span><span style="color: #F92672">~</span><span style="color: #F8F8F2">/Dropbox/your site/posts</span></span></code></pre>
+<p>Then the package.json changes</p>
+<pre is:raw="" class="astro-code" style="background-color: #272822; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #F8F8F2">...</span></span>
+<span class="line"><span style="color: #E6DB74">"scripts"</span><span style="color: #F8F8F2">: {</span></span>
+<span class="line"><span style="color: #F8F8F2">  </span><span style="color: #66D9EF">"sync"</span><span style="color: #F8F8F2">: </span><span style="color: #CFCFC2">"source .env; if [[ ! -z $DIR_POSTS_BAK ]]; then unison </span><span style="color: #AE81FF">\"</span><span style="color: #CFCFC2">$DIR_POSTS_BAK</span><span style="color: #AE81FF">\"</span><span style="color: #CFCFC2"> </span><span style="color: #AE81FF">\"</span><span style="color: #CFCFC2">$DIR_POSTS</span><span style="color: #AE81FF">\"</span><span style="color: #CFCFC2"> -batch; fi"</span><span style="color: #F8F8F2">,</span></span>
+<span class="line"><span style="color: #F8F8F2">  </span><span style="color: #66D9EF">"build"</span><span style="color: #F8F8F2">: </span><span style="color: #CFCFC2">"pnpm run sync ; svelte-kit build"</span><span style="color: #F8F8F2">,</span></span>
+<span class="line"><span style="color: #F8F8F2">  </span><span style="color: #66D9EF">"dev"</span><span style="color: #F8F8F2">: </span><span style="color: #CFCFC2">"pnpm ryn sync ; svelte-kit dev"</span><span style="color: #F8F8F2">,</span></span>
+<span class="line"><span style="color: #F8F8F2">  </span><span style="color: #F44747">...</span></span>
+<span class="line"><span style="color: #F8F8F2">}</span></span>
+<span class="line"><span style="color: #F8F8F2">  ...</span></span></code></pre>
+<p>which can be broken down as</p>
+<dl class="code-breakdown">
+<dt>source .env;</dt>
+<dd>a _very_ basic way to load a .env file into memory. Note that it doesn't handle comments and a lot of other things. Only suitable for a quick hack</dd>
+ <dt>if [[ ! -z $DIR_POSTS_BAK ]]; </dt>
+<dd>only run if I have actually set that variable in the .env file</dd>
+<dt>unison \"$DIR_POSTS_BAK\" \"$DIR_POSTS\" -batch</dt>
+<dd>this is where the syncing happens. `-batch` runs the command without asking the hundreds of impenetrable questions unison tends to ask</dd>
+</dl>
+<dl class="code-breakdown">
+<dt>pnpm run sync</dt>
+<dd>run this command with pnpm (I prefer it to npm, but either will work)</dd>
+<dt> ; </dt>
+<dd>whether the previous command succeeds or not, then...</dd>
+<dt>svelte-kit build</dt>
+<dd>run this script</dd>
+</dl>
+<p>I can now remove the posts from Git (but not the filesystem!) with <code>git rm --cached posts/*</code>. To make sure that folder doesn’t disappear, I add a blank file to it with <code>touch posts/.gitkeep</code>. I then amend the .gitignore file to reflect the latest changes</p>
+<pre is:raw="" class="astro-code" style="background-color: #272822; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #F8F8F2">posts/</span><span style="color: #F92672">*</span></span>
+<span class="line"><span style="color: #F92672">!</span><span style="color: #F8F8F2">posts/.gitkeep</span></span></code></pre>
+<p>That kind of worked, and I was quite pleased with it. But eventually I got some racing condition between Dropbox syncing the folder with its remote copy and the folder inside the SvelteKit instance. I don’t know exactly how, but unison ended up deleting both copies. Luckily I had another backup somewhere else. I am not sure of the dynamics but in the end it doesn’t matter. The fact it happened once means it can happen again. And life’s too short to waste it worrying about losing your blog posts. I needed another approach.</p>
+<h3 id="back-to-rsync">Back to rsync</h3>
+<p>I ditched unison and the idea of automatic syncing. I restored the original <code>build</code> and <code>dev</code> scripts and added a couple of rsync ones</p>
+<pre is:raw="" class="astro-code" style="background-color: #272822; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #F8F8F2">  </span><span style="color: #E6DB74">"scripts"</span><span style="color: #F8F8F2">: {</span></span>
+<span class="line"><span style="color: #F8F8F2">    ...</span></span>
+<span class="line"><span style="color: #F8F8F2">    </span><span style="color: #E6DB74">"sync-to-here"</span><span style="color: #F8F8F2">: </span><span style="color: #E6DB74">"source .env; if [[ ! -z </span><span style="color: #F8F8F2">$DIR_POSTS_BAK</span><span style="color: #E6DB74"> ]]; then rsync -a </span><span style="color: #AE81FF">\"</span><span style="color: #F8F8F2">$DIR_POSTS_BAK</span><span style="color: #E6DB74">/</span><span style="color: #AE81FF">\"</span><span style="color: #E6DB74"> </span><span style="color: #AE81FF">\"</span><span style="color: #F8F8F2">$DIR_POSTS</span><span style="color: #AE81FF">\"</span><span style="color: #E6DB74">; fi"</span><span style="color: #F8F8F2">,</span></span>
+<span class="line"><span style="color: #F8F8F2">    </span><span style="color: #E6DB74">"sync-to-backup"</span><span style="color: #F8F8F2">: </span><span style="color: #E6DB74">"source .env; if [[ ! -z </span><span style="color: #F8F8F2">$DIR_POSTS_BAK</span><span style="color: #E6DB74"> ]]; then rsync -a </span><span style="color: #AE81FF">\"</span><span style="color: #F8F8F2">$DIR_POSTS</span><span style="color: #E6DB74">/</span><span style="color: #AE81FF">\"</span><span style="color: #E6DB74"> </span><span style="color: #AE81FF">\"</span><span style="color: #F8F8F2">$DIR_POSTS_BAK</span><span style="color: #AE81FF">\"</span><span style="color: #E6DB74">; fi"</span></span>
+<span class="line"><span style="color: #F8F8F2">  },</span></span></code></pre>
+<p>So now I have to sync manually. Not ideal, but hopefully the SvelteKit team will come up with a workaround.</p>
+<h2 id="adapting-the-boilerplate-to-my-needs">Adapting the boilerplate to my needs</h2>
+<p>I made some changes and adaptations, but mostly small touches here and there. I really like how it is setup, particularly the use of the <a href="https://github.com/mattjennings/mdsvex-relative-images">mdsvex-relative-images</a> plugin which lets me create posts as either <code>blog/my-post.md</code> or <code>blog/my-post/index.md</code> which can then fetch images like <code>blog/my-post/an-image.png</code></p>
+<ul>
+<li>
+<p>I changed <code>info.js</code> to include the name of my own blog, and added a simple page title helper to it.</p>
+<pre is:raw="" class="astro-code" style="background-color: #272822; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #F92672">export</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">const</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">makeTitle</span><span style="color: #F8F8F2"> </span><span style="color: #F92672">=</span><span style="color: #F8F8F2"> (</span><span style="color: #FD971F">title</span><span style="color: #F8F8F2">) </span><span style="color: #66D9EF">=></span><span style="color: #F8F8F2"> </span><span style="color: #E6DB74">`</span><span style="color: #F92672">${</span><span style="color: #F8F8F2">title</span><span style="color: #F92672">}</span><span style="color: #E6DB74"> | gotofritz`</span><span style="color: #F8F8F2">;</span></span></code></pre>
+</li>
+<li>
+<p>Renamed a few routes inside <code>routes/</code>: from <code>posts/</code> to <code>blog/</code>, from <code>rss.xml</code> to <code>feed.xml</code></p>
+</li>
+<li>
+<p>Added my own favicon.ico</p>
+</li>
+<li>
+<p>Changed <code>get-posts.js</code> to cater for the legacy frontmatter in my posts, which is not always the same as Matt is using. One big difference is that I use tags, which is a simple array</p>
+<pre is:raw="" class="astro-code" style="background-color: #272822; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #F8F8F2">---</span></span>
+<span class="line"><span style="color: #F92672">title</span><span style="color: #F8F8F2">: </span><span style="color: #E6DB74">How I built a markdown drive static website with SvelteKit and Tailwind</span></span>
+<span class="line"><span style="color: #F92672">tags</span><span style="color: #F8F8F2">:</span></span>
+<span class="line"><span style="color: #F8F8F2">  - </span><span style="color: #E6DB74">svelte</span></span>
+<span class="line"><span style="color: #F8F8F2">  - </span><span style="color: #E6DB74">gotofritz</span></span>
+<span class="line"><span style="color: #F8F8F2">---</span></span></code></pre>
+</li>
+<li>
+<p>Built my own template with Svelte / Tailwind markup, importing my own fonts (I really like DM Serif Display for the title)</p>
+</li>
+<li>
+<p>Added sitemap to the robots.txt</p>
+</li>
+<li>
+<p>I use google as a search engine for the site, so I added that in the top navbar</p>
+</li>
+<li>
+<p>Created pages for the tag. They are similar to the index page, but they use a variation of <code>get-posts.js</code> to get their content from.</p>
+</li>
+</ul>
+<h3 id="displaying-drafts-in-dev-mode-in-sveltekit-but-excluding-it-from-build">Displaying drafts in dev mode in SvelteKit, but excluding it from build</h3>
+<p>I added a field to the frontmatter of the posts I wanted to keep as draft. Adding <code>draft: true</code> rather than, say <code>published: false</code> meant I only needed to add those flags to the posts that were drafts.</p>
+<pre is:raw="" class="astro-code" style="background-color: #272822; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #F8F8F2">---</span></span>
+<span class="line"><span style="color: #F92672">publishDate</span><span style="color: #F8F8F2">: </span><span style="color: #AE81FF">2022-05-03</span></span>
+<span class="line"><span style="color: #F92672">updated</span><span style="color: #F8F8F2">: </span><span style="color: #AE81FF">2022-05-25T22:39:29.436714</span></span>
+<span class="line"><span style="color: #F92672">draft</span><span style="color: #F8F8F2">: </span><span style="color: #AE81FF">true</span></span>
+<span class="line"><span style="color: #F92672">title</span><span style="color: #F8F8F2">: </span><span style="color: #E6DB74">How I built a markdown drive static website with SvelteKit and Tailwind</span></span>
+<span class="line"><span style="color: #F8F8F2">---</span></span></code></pre>
+<p>I then added a filter to the <code>get-posts.js</code> page to only allow those posts in dev mode</p>
+<pre is:raw="" class="astro-code" style="background-color: #272822; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #F92672"><span style="user-select: none;">-</span> import { browser } from "$app/env";</span></span>
+<span class="line"><span style="color: #A6E22E"><span style="user-select: none;">+</span> import { browser, dev } from "$app/env";</span></span>
+<span class="line"><span style="color: #F8F8F2">...</span></span>
+<span class="line"><span style="color: #F8F8F2">const posts = Object.entries(import.meta.globEager('/posts/\*_/_.md'))</span></span>
+<span class="line"><span style="color: #F8F8F2">  .map(([filepath, post]) => {</span></span>
+<span class="line"><span style="color: #F8F8F2">    return {</span></span>
+<span class="line"><span style="color: #F8F8F2">    ...</span></span>
+<span class="line"><span style="color: #F8F8F2">})</span></span>
+<span class="line"><span style="color: #A6E22E"><span style="user-select: none;">+</span>  .filter((post) => dev || !post.draft)</span></span>
+<span class="line"><span style="color: #F8F8F2">  // parse HTML output for content metadata (preview, reading time, toc)</span></span>
+<span class="line"><span style="color: #F8F8F2">  .map((post) => {</span></span>
+<span class="line"><span style="color: #F8F8F2">    const parsedHtml = parse(post.component.render().html)</span></span>
+<span class="line"><span style="color: #F8F8F2">    ...</span></span></code></pre>
+<h3 id="upgrading-to-sveltejskit-100-next338">Upgrading to @sveltejs/kit 1.0.0-next.338</h3>
+<p>I was having some routing issues I couldn’t work around, but luckily upgrading to the latest version of SvelteKit solved them. I did need to make a couple of changes to the configuration though</p>
+<pre is:raw="" class="astro-code" style="background-color: #272822; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #F8F8F2">  ...</span></span>
+<span class="line"><span style="color: #F8F8F2">  kit: {</span></span>
+<span class="line"><span style="color: #F92672"><span style="user-select: none;">-</span>   target: "#svelte",</span></span>
+<span class="line"><span style="color: #F8F8F2">    adapter: adapter({</span></span>
+<span class="line"><span style="color: #F8F8F2">      pages: "docs",</span></span>
+<span class="line"><span style="color: #F8F8F2">    }),</span></span>
+<span class="line"><span style="color: #F8F8F2">  ...</span></span>
+<span class="line"><span style="color: #F8F8F2">  prerender: {</span></span>
+<span class="line"><span style="color: #F8F8F2">      entries: ["*", "/sitemap.xml", "/feed.xml"],</span></span>
+<span class="line"><span style="color: #A6E22E"><span style="user-select: none;">+</span>     default: true,</span></span>
+<span class="line"><span style="color: #F8F8F2">    },</span></span>
+<span class="line"><span style="color: #F8F8F2">  ...</span></span></code></pre>
+<h2 id="happy-with-sveltekit-so-far-except-for-two-issues">Happy with SvelteKit so far, except for two issues</h2>
+<p>In the end Matt’s work has saved me a lot of time. Thanks! I like Svelte and think it works well. I’d recommend it for any cases where you don’t want to use React (i.e., when design systems are not involved. There is just no beating React when it comes to create, use, and manage design systems!)</p>
+<p>There are only two outstanding issues that bother me</p>
+<ul>
+<li>the fact you can’t put the posts outside the repository root</li>
+<li>some aggressive caching which cannot be turned off. For example the tag pages often need to be reloaded to show their ‘true’ content. I haven’t worked how to fix that yet</li>
+</ul>
+<h2 id="prior-art">Prior art</h2>
+<ul>
+<li><a href="https://mattjennings.io/blog/rewriting-my-website-in-sveltekit">Matt Jennings</a> posts explains a lot of his design choices</li>
+</ul>
+      </div>
+    </article>
+    <aside class="col-span-1 hidden text-right sm:sticky sm:top-20 sm:block">
+      <nav class="mb-4 flex w-full flex-nowrap justify-end gap-4 text-xs text-gray-600 dark:text-gray-300">
+        
+        <a class="before:content-['<<']" href="/blog/history-of-dance-music-as-jupyter-notebook">
+              older
+            </a>
+        
+        <a class="before:content-['<<<<']" href="/blog/batch-unrar-command-line-os-x">
+              oldest
+            </a>
+      </nav>
+      <h2 class="font-semibold">Table of Contents</h2><ul class="mt-4 space-y-2 text-xs">
+              <li class="line-clamp-2 hover:text-accent">
+                  <a href="#getting-started" aria-label="Scroll to section: Getting started">
+                    <span>&#35;</span> Getting started
+                  </a>
+                </li><li class="line-clamp-2 hover:text-accent">
+                  <a href="#publishing-the-static-sveltekit-markdown-site-to-github-pages" aria-label="Scroll to section: Publishing the static Sveltekit markdown site to GitHub pages">
+                    <span>&#35;</span> Publishing the static Sveltekit markdown site to GitHub pages
+                  </a>
+                </li><li class="line-clamp-2 hover:text-accent">
+                  <a href="#importing-markdown-posts-from-outside-the-sveltekit-project-root" aria-label="Scroll to section: Importing markdown posts from outside the SvelteKit project root">
+                    <span>&#35;</span> Importing markdown posts from outside the SvelteKit project root
+                  </a>
+                </li><li class="line-clamp-2 hover:text-accent">
+                  <a href="#synchronising-posts-inside-sveltekit-with-a-folder-outside-the-project-using-unison" aria-label="Scroll to section: Synchronising posts inside SvelteKit with a folder outside the project using unison">
+                    <span>&#35;</span> Synchronising posts inside SvelteKit with a folder outside the project using unison
+                  </a>
+                </li><li class="line-clamp-2 hover:text-accent">
+                  <a href="#using-unison-to-sync-folders-before-a-build" aria-label="Scroll to section: Using unison to sync folders before a build">
+                    <span>&#35;</span> Using unison to sync folders before a build
+                  </a>
+                </li><li class="line-clamp-2 hover:text-accent">
+                  <a href="#back-to-rsync" aria-label="Scroll to section: Back to rsync">
+                    <span>&#35;</span> Back to rsync
+                  </a>
+                </li><li class="line-clamp-2 hover:text-accent">
+                  <a href="#adapting-the-boilerplate-to-my-needs" aria-label="Scroll to section: Adapting the boilerplate to my needs">
+                    <span>&#35;</span> Adapting the boilerplate to my needs
+                  </a>
+                </li><li class="line-clamp-2 hover:text-accent">
+                  <a href="#displaying-drafts-in-dev-mode-in-sveltekit-but-excluding-it-from-build" aria-label="Scroll to section: Displaying drafts in dev mode in SvelteKit, but excluding it from build">
+                    <span>&#35;</span> Displaying drafts in dev mode in SvelteKit, but excluding it from build
+                  </a>
+                </li><li class="line-clamp-2 hover:text-accent">
+                  <a href="#upgrading-to-sveltejskit-100-next338" aria-label="Scroll to section: Upgrading to @sveltejs/kit 1.0.0-next.338">
+                    <span>&#35;</span> Upgrading to @sveltejs/kit 1.0.0-next.338
+                  </a>
+                </li><li class="line-clamp-2 hover:text-accent">
+                  <a href="#happy-with-sveltekit-so-far-except-for-two-issues" aria-label="Scroll to section: Happy with SvelteKit so far, except for two issues">
+                    <span>&#35;</span> Happy with SvelteKit so far, except for two issues
+                  </a>
+                </li><li class="line-clamp-2 hover:text-accent">
+                  <a href="#prior-art" aria-label="Scroll to section: Prior art">
+                    <span>&#35;</span> Prior art
+                  </a>
+                </li>
+            </ul>
+    </aside>
+  </div><button id="to-top-btn" class="z-90 fixed bottom-8 right-4 flex h-10 w-10 translate-y-28 items-center justify-center rounded-full border-2 border-transparent bg-zinc-200 text-3xl opacity-0 transition-all duration-300 hover:border-zinc-400 data-[show=true]:translate-y-0 data-[show=true]:opacity-100 dark:bg-zinc-700 sm:right-8 sm:h-12 sm:w-12" aria-label="Back to Top" data-show="false"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="h-6 w-6">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5"></path>
+    </svg>
+  </button>
+    </main>
+    <footer class="mt-auto flex w-full flex-col flex-wrap items-center justify-center gap-y-2 pt-20 pb-4 text-center align-top text-gray-500 sm:flex-row sm:justify-between sm:text-xs">
+  <div class="flex flex-wrap items-center gap-x-4 sm:items-center">
+  <p>Find me on</p>
+  <ul class="flex flex-1 items-center gap-x-4 sm:flex-initial">
+    <li>
+      <a class="inline-block p-2 sm:hover:text-link" href="https://github.com/gotofritz" target="_blank" rel="noopener noreferrer">
+        <svg class="h-6 w-6" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+          <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5">
+          </path>
+          <title>Github</title>
+        </svg>
+        <span class="sr-only">Github</span>
+      </a>
+    </li>
+    <li>
+      <a class="inline-block p-2 sm:hover:text-link" href="https://fosstodon.org/@gotofritz" target="_blank" rel="noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+          <path d="M18.648 15.254c-1.816 1.763 -6.648 1.626 -6.648 1.626a18.262 18.262 0 0 1 -3.288 -.256c1.127 1.985 4.12 2.81 8.982 2.475c-1.945 2.013 -13.598 5.257 -13.668 -7.636l-.026 -1.154c0 -3.036 .023 -4.115 1.352 -5.633c1.671 -1.91 6.648 -1.666 6.648 -1.666s4.977 -.243 6.648 1.667c1.329 1.518 1.352 2.597 1.352 5.633s-.456 4.074 -1.352 4.944z"></path>
+          <path d="M12 11.204v-2.926c0 -1.258 -.895 -2.278 -2 -2.278s-2 1.02 -2 2.278v4.722m4 -4.722c0 -1.258 .895 -2.278 2 -2.278s2 1.02 2 2.278v4.722"></path>
+
+          <title>Mastodon</title>
+        </svg>
+        <span class="sr-only">Mastodon</span>
+      </a>
+    </li>
+    <li>
+      <a class="inline-block p-2 sm:hover:text-link" href="https://www.linkedin.com/in/gotofritz/" target="_blank" rel="noopener noreferrer"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" aria-hidden="true" focusable="false" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+          <rect x="4" y="4" width="16" height="16" rx="2"></rect>
+          <line x1="8" y1="11" x2="8" y2="16"></line>
+          <line x1="8" y1="8" x2="8" y2="8.01"></line>
+          <line x1="12" y1="16" x2="12" y2="11"></line>
+          <path d="M16 16v-3a2 2 0 0 0 -4 0"></path>
+          <title>LinkedIn</title>
+        </svg>
+        <span class="sr-only">LinkedIn</span>
+      </a>
+    </li>
+    <li>
+      <a class="inline-block p-2 sm:hover:text-link" href="mailto:info@gotofritz.net">
+        <svg class="h-6 w-6" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+          <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+          <polyline points="3 7 12 13 21 7"></polyline>
+          <title>Email</title>
+        </svg>
+        <span class="sr-only">Email</span>
+      </a>
+    </li>
+    <li>
+      <a class="inline-block p-2 sm:hover:text-link" href="/feed.xml">
+        <svg class="h-6 w-6" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+          <circle cx="5" cy="19" r="1"></circle>
+          <path d="M4 4a16 16 0 0 1 16 16"></path>
+          <path d="M4 11a9 9 0 0 1 9 9"></path>
+          <title>RSS</title>
+        </svg>
+        <span class="sr-only">RSS</span>
+      </a>
+    </li>
+  </ul>
+</div>
+  <nav aria-label="More on this site" class="flex gap-x-2 sm:gap-x-0 sm:divide-x sm:divide-gray-500">
+    <a href="/" class="px-4 py-2 sm:py-0 sm:px-2 sm:hover:text-textColor sm:hover:underline">Home</a>
+    <a href="/about" class="px-4 py-2 sm:py-0 sm:px-2 sm:hover:text-textColor sm:hover:underline">About</a>
+    <a href="/posts" class="py-2 pr-0 pl-4 sm:py-0 sm:pl-2 sm:pr-0 sm:hover:text-textColor sm:hover:underline">Blog</a>
+  </nav>
+  <div class="my-8 mr-0 sm:mr-4">
+    <a href="https://creativecommons.org/licenses/by/4.0/">Licensed under a Creative Commons Attribution 4.0 license</a>
+  </div>
+</footer>
+  </body></html>

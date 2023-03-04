@@ -1,0 +1,18 @@
+---
+import Tags from "@/components/blog/Tags";
+import { getFormattedDate } from "@/utils";
+import type { CollectionEntry } from "astro:content";
+interface Props {
+  content: CollectionEntry<"post">;
+}
+
+const { content } = Astro.props;
+
+const datetime = content.data.publishDate.toISOString();
+const postDate = getFormattedDate(content.data.publishDate);
+---
+
+<h1 class="title mb-1 text-5xl">{content.data.title}</h1>
+<time datetime={datetime}>{postDate}</time>
+<Tags tags={content.data.tags} />
+<p class="mt-8 text-xl leading-7"><Fragment set:html={content.data.description} /></p>
