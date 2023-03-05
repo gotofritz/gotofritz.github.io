@@ -12,9 +12,9 @@ description: I built this site with <a href="https://kit.svelte.dev/" class="cac
 
 ## TL;DR: was it worth it? Is Astro better than SvelteKit?
 
-It depends what you mean by _worth it_... If I was a company and all my time had to productive, then not. Astro is not any better then SvelteKit. The two frameworks share many design choices, and I would put them on a par. But of course it was worth as an exploration of new tech.
+It depends what you mean by _worth it_... If I was a company and all of my time had to productive, then not. Astro is not any better then SvelteKit. The two frameworks share many design choices, and I would put them on a par. But of course it was worth as an exploration of new tech.
 
-Overall Astro feels more suited to generating a static site out of markdown documents, because that is what it's designed for. SvelteKit is a SPA/SSR engine that can be adapted to the task. However Astro seems to be rougher around the edges. I ended up spending more time converting from SvelteKit to Astro than I did migrating to SvelteKit in the first place. More monkey patching, more bugs. So I wouldn't recommend switching from one to the other, unless you have some specific needs (for example, Astro lets you embed components written in various frameworks like React, Vue, Web Components, etc)
+Overall Astro feels more suited to generating a static site out of markdown documents, because that is what it's designed for. It even comes with a GitHub workflow to publish to GIt pages. SvelteKit is a SPA/SSR engine that can be adapted to the task. However Astro seems to be rougher around the edges. I ended up spending more time converting from SvelteKit to Astro than I did migrating to SvelteKit in the first place. More monkey patching, more bugs. So I wouldn't recommend switching from one to the other, unless you have some specific needs (for example, Astro lets you embed components written in various frameworks like React, Vue, Web Components, etc)
 
 ## Wait, you only rebuilt your site last week
 
