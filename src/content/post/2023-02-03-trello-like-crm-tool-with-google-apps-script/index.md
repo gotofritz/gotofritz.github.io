@@ -4,7 +4,7 @@ draft: true
 archived: false
 title: A Trello-like CRM tool with Google Apps Script
 tags:
-  - google apps script
+  - GoogleAppsScript
 description: |-
   Keeping track of all the leads and opportunities when freelancing or now that I have just been laid off and am job hunting, can be a daunting task. I have built a simple tool in Google Apps Script to make the process easier
 ---
@@ -207,7 +207,7 @@ function onOpen() {
     { name: "STAGE", functionName: "noop" },
     null,
     { name: "STATES", functionName: "noop" },
-    null
+    null,
   );
   SS.addMenu("CRM 4.0", menuEntries);
 }
@@ -462,7 +462,14 @@ You can share JS (for validation, for example) and CSS across those documents by
           maxlength="2"
           value=""
         />-
-        <input type="text" name="dd" id="dd" placeholder="dd" size="2" maxlength="2" />
+        <input
+          type="text"
+          name="dd"
+          id="dd"
+          placeholder="dd"
+          size="2"
+          maxlength="2"
+        />
       </div>
       <div>
         <label for="source">Source (Linkedin, Email, etc)</label>
@@ -615,7 +622,7 @@ class StructToUIBridge {
   asPlainText() {
     return this.fields.reduce(
       (accumulator, { value, separator }) => accumulator + value + separator,
-      ""
+      "",
     );
   }
 
@@ -1546,7 +1553,7 @@ function handleEditComment(data) {
     opportunity.updateFieldInStep(
       { comments: data.comments },
       // in this case the id represents the Step, i.e. a col
-      data.id
+      data.id,
     );
     opportunity.updateUI();
   } else {
@@ -1554,7 +1561,7 @@ function handleEditComment(data) {
     pool.updateFieldsInOpportunity(
       { comments: data.comments },
       // in this case the id represents the Opp., i.e. a row
-      data.id
+      data.id,
     );
     pool.updateUI();
   }
@@ -1659,7 +1666,7 @@ function getBgColor(cell) {
     cell.getBackgroundObject().getColorType() === SpreadsheetApp.ColorType.RGB
       ? cell.getBackgroundObject()
       : SS.getSpreadsheetTheme().getConcreteColor(
-          cell.getBackgroundObject().asThemeColor().getThemeColorType()
+          cell.getBackgroundObject().asThemeColor().getThemeColorType(),
         );
   return colorObj.asRgbColor().asHexString();
 }
@@ -1669,7 +1676,7 @@ function getFgColor(cell) {
     cell.getFontColorObject().getColorType() === SpreadsheetApp.ColorType.RGB
       ? cell.getFontColorObject()
       : SS.getSpreadsheetTheme().getConcreteColor(
-          cell.getFontColorObject().asThemeColor().getThemeColorType()
+          cell.getFontColorObject().asThemeColor().getThemeColorType(),
         );
   return colorObj.asRgbColor().asHexString();
 }
@@ -1756,7 +1763,7 @@ class App {
       DATA_ROW_HEADER,
       DATA_COL_STATES_START,
       1,
-      sh.getLastColumn() - DATA_COL_STATES_START
+      sh.getLastColumn() - DATA_COL_STATES_START,
     );
     this.states_.loadStates(range);
   }

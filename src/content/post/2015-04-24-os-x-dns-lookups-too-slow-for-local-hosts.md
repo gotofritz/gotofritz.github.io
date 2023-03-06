@@ -4,8 +4,7 @@ publishDate: 2015-04-24 13:03
 description: OS can sometimes take forever to resolve hosts setup on my local machine. Here is how I solved it.
 draft: false
 tags:
-  - networks
-  - os x
+  - OsX
 ---
 
 I have several local hosts set up on my dev OS X machine in my `/etc/hosts` file . The browser hangs for several seconds while trying to load them. Which doesn't make any sense, since they are local. The solution is to change the hosts file so that all hosts are on one line, the very first line where localhost is defined.

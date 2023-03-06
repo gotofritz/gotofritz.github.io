@@ -5,7 +5,7 @@ draft: false
 archived: false
 title: Setting CSS values dynamically in Svelte
 tags:
-  - svelte
+  - SvelteJS
 ---
 
 CSS-in-JS is not universally popular. In fact many developers, expecially CSS experts, absolutely detest it, as the CSS gets lost in a sea of JS. Although in Svelte CSS _is_ parsed and rendered by JS, the framework actually tries to keep the two separate. You cannot plug JS values into CSS; the following will not work

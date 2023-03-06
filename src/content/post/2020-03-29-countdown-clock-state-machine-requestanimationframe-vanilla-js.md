@@ -5,7 +5,7 @@ archived: false
 description: I wanted to play with state machines and <a href="https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame">requestAnimationFrame</a> in vanilla JS, so I came up with the idea of a simple countdown clock.
 title: A countdown clock using requestAnimationFrame, a state machine, and vanilla JS
 tags:
-  - js
+  - Javascript
 ---
 
 <iframe

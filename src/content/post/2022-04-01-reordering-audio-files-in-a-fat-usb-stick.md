@@ -5,7 +5,7 @@ draft: false
 archived: false
 title: Reordering audio files in a FAT USB stick
 tags:
-  - tools
+  - Tools
 ---
 
 ## FAT formatting

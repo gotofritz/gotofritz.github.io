@@ -3,7 +3,7 @@ description: Running the status command in the command line version of <a href="
 publishDate: 2010-09-22 16:46
 title: SVN status codes
 tags:
-  - svn
+  - SVN
 ---
 
 ## SVN status columns

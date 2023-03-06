@@ -4,7 +4,7 @@ draft: true
 archived: false
 title: A Trello-like CRM tool with Google Apps Script
 tags:
-  - google apps script
+  - GoogleAppsScript
 description: |-
   Keeping track of all the leads and opportunities when freelancing or otherwise job hunting, can be a daunting task. I have built a simple tool in Google Apps Script to make the process easier
 ---

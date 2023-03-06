@@ -5,7 +5,7 @@ draft: false
 archived: false
 title: Using the 'Say' command to make OS X talk, and fixing it when it gets stuck
 tags:
-  - os x
+  - OsX
 ---
 
 ## What OS X's say command can do

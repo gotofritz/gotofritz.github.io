@@ -3,10 +3,9 @@ publishDate: 2023-02-03
 draft: false
 title: Migrating My Blog to Astro
 tags:
-  - astro
-  - blog
-  - gotofritz
-  - svelte
+  - Astro
+  - Gotofritz
+  - SvelteJS
 description: I built this site with <a href="https://kit.svelte.dev/" class="cactus-link">SvelteKit</a> before it was stable, hoping it wouldn't change <i>too</i> much. How naive of me. Of course it did. Faced with the prospect of rebuilding it from scratch, I decided I'd rather try something new. Enter <a href="https://astro.build/" class="cactus-link">Astro</a>
 ---
 

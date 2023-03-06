@@ -4,9 +4,9 @@ publishDate: 2022-08-23
 description: I wanted to duplicate another user's playlist to one of my free google accounts. But it's no longer possible from the web interface. None of <a href="https://webapps.stackexchange.com/questions/39686/how-to-copy-youtube-playlist-from-one-account-to-another" title="read those answers in Stack Overflow">the methods described in various SO answers</a> are functional, they are obsolete. But it can be done with a Python script in your terminal.
 draft: false
 tags:
-  - google
-  - youtube api
-  - python
+  - Google
+  - YouTubeApi
+  - Python
 ---
 
 ## Copying another user's playlist? Why?

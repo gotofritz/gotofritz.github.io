@@ -4,7 +4,7 @@ publishDate: 2012-07-19 18:14
 title: Making a simple voice recording on a Mac
 is_empty: true
 tags:
-  - tools
-  - OS X
-  - quick tips
+  - Tools
+  - OsX
+  - QuickTips
 ---

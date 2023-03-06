@@ -5,8 +5,8 @@ draft: false
 archived: false
 title: Removing album ratings from Apple Music App
 tags:
-  - apple music
-  - os x
+  - AppleMusic
+  - OsX
 ---
 
 ## TL;DR: just give me the code

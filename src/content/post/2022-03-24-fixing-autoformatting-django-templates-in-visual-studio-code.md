@@ -5,9 +5,9 @@ draft: false
 archived: false
 title: Fixing autoformatting Django templates in Visual Studio Co
 tags:
-  - django
-  - python
-  - vscode
+  - Django
+  - Python
+  - VSCode
 ---
 
 This post consolidates the information I got the information from a couple of <abbr title="Stack Overflow">SO</abbr> answers.

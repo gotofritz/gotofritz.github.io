@@ -3,8 +3,8 @@ description: Extended attributes store extra information about files in OS X. Th
 publishDate: 2012-08-25 13:55
 title: Dealing with extended attributes on OS X
 tags:
-  - bash
-  - os x
+  - Bash
+  - OsX
 ---
 
 ```bash

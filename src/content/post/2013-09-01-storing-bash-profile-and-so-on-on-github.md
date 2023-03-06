@@ -4,7 +4,7 @@ publishDate: 2013-09-01 16:11
 description: Storing your CLI config files (.bash_profile and all the rest) on github makes sense - as a backup, but also to compare and learn.
 draft: false
 tags:
-  - bash
+  - Bash
 ---
 
 I first learned about them from [Mathias Bynes](https://github.com/mathiasbynens/dotfiles), of jsPerf fame and so I cloned his project and created [my own dotfiles](https://github.com/gotofritz/dotfiles). Meanwhile [it has become a thing](https://dotfiles.github.io/)

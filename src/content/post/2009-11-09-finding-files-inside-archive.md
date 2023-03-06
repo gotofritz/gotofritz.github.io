@@ -3,8 +3,8 @@ publishDate: 2009-11-09 19:26
 title: Finding files inside an archive with Terminal
 description: Looking for files inside an archive, without having to extract them first using <a href="http://en.wikipedia.org/wiki/Apple_Terminal">Apple&#39;s Terminal</a>.
 tags:
-  - bash
-  - os x
+  - Bash
+  - OsX
 ---
 
 ## find command

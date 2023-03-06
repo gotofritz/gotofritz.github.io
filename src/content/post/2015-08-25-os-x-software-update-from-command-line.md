@@ -3,9 +3,8 @@ title: OS X Software Update from the Command Line
 publishDate: 2015-08-25 00:41
 description: Software updates can be quite tedious - you have to click a lot of buttons, then get into the Apple Store etc. But you can avoid all that by running it from the command line.
 draft: false
-
 tags:
-  - os x
+  - OsX
 ---
 
 ```bash

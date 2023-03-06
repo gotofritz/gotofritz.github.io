@@ -3,10 +3,10 @@ publishDate: 2022-05-03
 updated: 2022-05-25T22:39:29.436714
 draft: false
 archived: false
-title: How I built a markdown drive static website with SvelteKit and Tailwind
+title: How I built a markdown driven static website with SvelteKit and Tailwind
 tags:
-  - svelte
-  - gotofritz
+  - SvelteJS
+  - Gotofritz
 description: In <a href="/blog/blog-with-sveltekit-and-markdown">my last post I ported my existing blog to SvelteKit</a>, to get to used to it. Now I am going to build a new version from scratch, using markdown and tailwind. I will use <a href="https://github.com/mattjennings/sveltekit-blog-template">Matt Jennings's excellent SvelteKit blog template</a> as seed.
 ---
 
@@ -166,8 +166,8 @@ I made some changes and adaptations, but mostly small touches here and there. I 
   ---
   title: How I built a markdown drive static website with SvelteKit and Tailwind
   tags:
-    - svelte
-    - gotofritz
+    - SvelteJS
+    - Gotofritz
   ---
   ```
 

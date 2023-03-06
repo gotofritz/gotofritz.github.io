@@ -4,9 +4,9 @@ publishDate: 2022-09-01
 description: Thanks to a bug while <a href="/blog/migrating-youtube-playlists-by-adding-videos-via-cli">copying a youtube playlist with a Python script</a>, I ended up with a lot of duplicates videos in the playlist. Surprisingly, the YouTube interface doesn't let you remove them. So I put together another small Python script
 draft: false
 tags:
-  - google
-  - youtube api
-  - python
+  - Google
+  - YouTubeApi
+  - Python
 ---
 
 ## Google deprecated the button that allowed you to remove duplicate videos from your playlist

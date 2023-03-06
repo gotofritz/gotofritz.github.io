@@ -5,7 +5,7 @@ draft: false
 archived: false
 title: Setting up a Logitech Vertical MX mouse with a Mac
 tags:
-  - os x
+  - OsX
 ---
 
 <a href="https://www.logitech.com/en-us/product/mx-vertical-ergonomic-mouse" title="Logitech product page for the Vertical MX mouse"><img class="intro-image" src="https://www.logitech.com/assets/65520/10/mx-vertical-pdp.jpg" width="700" height="394" alt="shot of the Logitech Vertical MX mouse"></a>

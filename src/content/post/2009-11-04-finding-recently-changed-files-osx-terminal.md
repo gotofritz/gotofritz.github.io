@@ -3,8 +3,8 @@ publishDate: 2009-11-04 11:53
 title: Finding recently changed files with Terminal
 description: Finding files that were changed in the last day, sorted by size, using <a href="http://en.wikipedia.org/wiki/Apple_Terminal">Apple&#39;s Terminal</a>
 tags:
-  - bash
-  - os x
+  - Bash
+  - OsX
 ---
 
 ## find command

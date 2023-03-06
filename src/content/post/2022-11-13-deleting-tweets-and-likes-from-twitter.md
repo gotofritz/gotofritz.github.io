@@ -1,10 +1,10 @@
 ---
-description: Thanks to Elon Musk, it's now socially acceptable for developers to ditch their Twitter accounts. While I'm keeping mine because I enjoy tinkering with the API, I recently decided to delete all of my tweets and start fresh. I like to think of it as a "quiet quitting"
+description: Thanks to Elon Musk, it's now socially acceptable for developers to ditch their Twitter accounts. While I'm keeping mine to be able to read long threads, I recently decided to delete all of my tweets and start fresh. I like to think of it as a "quiet quitting"
 publishDate: 2022-11-13
-draft: true
+draft: false
 title: Deleting tweets and likes from twitter
 tags:
-  - twitter
+  - Twitter
 ---
 
 ## Deleting it all? Deleting it all

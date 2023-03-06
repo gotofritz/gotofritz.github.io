@@ -5,9 +5,9 @@ draft: true
 archived: false
 title: A simple Python app for German grammar exercises, with SpaCy
 tags:
-  - german
-  - python
-  - spacy
+  - German
+  - Python
+  - Spacy
 ---
 
 ## What I'm trying to do

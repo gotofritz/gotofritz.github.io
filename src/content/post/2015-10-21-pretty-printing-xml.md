@@ -4,9 +4,9 @@ publishDate: 2015-10-21 00:38
 description: <a href="http://www.w3.org/People/Raggett/tidy/">tidy</a> is a command line tool for formatting XML and HTML. Also available as a <a href="http://www.html-tidy.org/">Visual Studio Code Extension</a>
 draft: false
 tags:
-  - html
-  - tools
-  - xml
+  - HTML
+  - Tools
+  - XML
 ---
 
 ## What is tidy?

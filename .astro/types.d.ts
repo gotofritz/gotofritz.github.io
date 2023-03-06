@@ -84,8 +84,8 @@ declare module 'astro:content' {
   collection: "post",
   data: InferEntrySchema<"post">
 },
-"2010-07-13-joining-pdf-files-in-os-x-from-the-command-line/index.md": {
-  id: "2010-07-13-joining-pdf-files-in-os-x-from-the-command-line/index.md",
+"2010-07-13-joining-pdf-files-in-os-x-from-the-command-line.md": {
+  id: "2010-07-13-joining-pdf-files-in-os-x-from-the-command-line.md",
   slug: "2010-07-13-joining-pdf-files-in-os-x-from-the-command-line",
   body: string,
   collection: "post",
@@ -357,15 +357,15 @@ declare module 'astro:content' {
   collection: "post",
   data: InferEntrySchema<"post">
 },
-"2022-12-11-history-of-dance-music-as-jupyter-notebook/index.md": {
-  id: "2022-12-11-history-of-dance-music-as-jupyter-notebook/index.md",
+"2022-12-11-history-of-dance-music-as-jupyter-notebook.md": {
+  id: "2022-12-11-history-of-dance-music-as-jupyter-notebook.md",
   slug: "2022-12-11-history-of-dance-music-as-jupyter-notebook",
   body: string,
   collection: "post",
   data: InferEntrySchema<"post">
 },
-"2022-12-11-how-to-build-blog-with-sveltekit-markdown-tailwind/index.md": {
-  id: "2022-12-11-how-to-build-blog-with-sveltekit-markdown-tailwind/index.md",
+"2022-12-11-how-to-build-blog-with-sveltekit-markdown-tailwind.md": {
+  id: "2022-12-11-how-to-build-blog-with-sveltekit-markdown-tailwind.md",
   slug: "2022-12-11-how-to-build-blog-with-sveltekit-markdown-tailwind",
   body: string,
   collection: "post",
@@ -380,7 +380,7 @@ declare module 'astro:content' {
 },
 "2023-02-03-trello-like-crm-tool-with-google-apps-script/01-intro.md": {
   id: "2023-02-03-trello-like-crm-tool-with-google-apps-script/01-intro.md",
-  slug: "2023-02-03-trello-like-crm-tool-with-google-apps-script/01-intro",
+  slug: "trello-like-crm-tool-with-google-apps-script/01-introduction",
   body: string,
   collection: "post",
   data: InferEntrySchema<"post">

@@ -5,7 +5,7 @@ draft: false
 archived: false
 title: Poetry-driven python project template with cookiecutter
 tags:
-  - python
+  - Python
 ---
 
 ## Creating a python project from scratch? How boring

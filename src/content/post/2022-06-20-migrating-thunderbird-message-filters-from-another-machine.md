@@ -5,7 +5,8 @@ draft: false
 archived: false
 title: Migrating Thunderbird message filters from another machine
 tags:
-  - thunderbird
+  - Email
+  - Thunderbird
 ---
 
 ## Surely syncing profiles is basic functionality which is baked in, right?

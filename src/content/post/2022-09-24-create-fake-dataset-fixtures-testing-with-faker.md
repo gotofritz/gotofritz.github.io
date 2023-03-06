@@ -5,8 +5,8 @@ draft: false
 archived: false
 title: Faker providers for project specific data structure fakes, in Python
 tags:
-  - python
-  - testing
+  - Python
+  - Testing
 ---
 
 ## Use case

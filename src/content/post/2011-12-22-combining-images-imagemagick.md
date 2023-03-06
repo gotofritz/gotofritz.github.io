@@ -3,7 +3,7 @@ publishDate: 2011-12-22 12:34
 title: Combining images with ImageMagick
 description: Assorted <a href="http://www.imagemagick.org/script/index.php">ImageMagick</a> commands for combining images
 tags:
-  - imagemagick
+  - ImageMagick
 ---
 
 ## Combining images vertically with a line separating them

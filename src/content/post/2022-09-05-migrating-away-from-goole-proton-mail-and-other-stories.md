@@ -4,8 +4,9 @@ publishDate: 2022-09-05
 description: Google informed me they would start charging me for letting me use their mail servers with my gotofritz.net domain. Fair enough, infrastructure costs money. But if I have to pay, why pay <i>them</i>? I'm can shop around. And so I did.
 draft: false
 tags:
-  - google
-  - proton mail
+  - Email
+  - Google
+  - ProtonMail
 ---
 
 ## Times are tough, ad revenue is down

@@ -3,7 +3,7 @@ publishDate: 2012-03-28 20:52
 title: Escaping $ in replace strings in Javascript
 description: To have a $ in your replace strings in Javascript regular expressions, it needs to be escaped with another $
 tags:
-  - js
+  - Javascript
 draft: false
 ---
 

@@ -5,7 +5,7 @@ draft: false
 archived: false
 title: Setting up and managing Thunderbird for OS X
 tags:
-  - os x
+  - OsX
 ---
 
 ## Why Thunderbird?

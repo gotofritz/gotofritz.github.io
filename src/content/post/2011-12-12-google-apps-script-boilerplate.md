@@ -3,7 +3,7 @@ description: I used to do a lot of Google Apps Script (GAS) programming, but Goo
 publishDate: 2011-12-12 13:34
 title: A Google Apps Script boilerplate
 tags:
-  - Google Apps Script
+  - GoogleAppsScript
 ---
 
 ## About Google Apps Script

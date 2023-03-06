@@ -2,8 +2,8 @@
 publishDate: 2022-05-22T13:10:12.382129
 title: Remove lines matching some patterns from all files in a dir
 tags:
-  - bash
-  - sed
+  - Bash
+  - Sed
 description: A CLI task I find myself doing often with sed
 is_empty: false
 ---

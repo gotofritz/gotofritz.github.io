@@ -5,8 +5,8 @@ draft: false
 archived: false
 title: How I install python on OS X in 2022
 tags:
-  - os x
-  - python
+  - OsX
+  - Python
 ---
 
 ## Ignore OS X's own python version(s)

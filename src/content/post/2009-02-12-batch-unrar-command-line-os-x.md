@@ -3,8 +3,8 @@ obsolete: true
 publishDate: 2009-02-12 03:59
 title: Batch unrar from the command line on Mac OS X
 tags:
-  - bash
-  - os x
+  - Bash
+  - OsX
 description: Rar is a popular archive format on the web. When I need to unarchive several rar files at once, I use <a href="http://www.rarlab.com/download.htm">RarLab&#39;s command line tool</a>. Here&#39;s how
 ---
 

@@ -4,8 +4,8 @@ publishDate: 2016-01-16 22:44
 draft: false
 description: <a href="https://en.wikipedia.org/wiki/Time_Machine_(OS_X)">Time Machine</a> does its own backup magic, but sometimes you just simply want two identical copies of the same hard disk. For that <a href="https://en.wikipedia.org/wiki/Rsync">rsync</a> is the way to go
 tags:
-  - backup
-  - os x
+  - Backup
+  - OsX
 ---
 
 rsync is a utility you run by typing commands in Terminal. It was designed exactly for doing that one job: keeping folders or devices in sync (in Unix everything is a file or a folder, even an external hard disk). rsyinc looks at one source folder and all its subfolders, finds all the files in there, then looks at the destination folder and copies over only what needs to be copied, making it very fast. It's got a ton of options and can become very involved. But all you need is to find that one command that works for you and use it again and again as needed.

@@ -3,7 +3,7 @@ publishDate: 2013-03-23 11:23
 title: Copying sourcefiles without .git folders with cpio
 draft: false
 tags:
-  - bash
+  - Bash
 description: Sometimes you need to copy your local version of a project under subversion to a new location, without all the .git stuff. Here's a couple of ways of doing it.
 ---
 

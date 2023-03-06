@@ -3,8 +3,8 @@ description: In OS X, PDF files can be concatenated manually using Preview. But 
 publishDate: 2010-07-13 13:05
 title: Joining PDF files in OS X from the command line
 tags:
-  - os x
-  - pdf
+  - OsX
+  - PDF
 ---
 
 ## Combining PDF files manually using Preview

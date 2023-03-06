@@ -4,8 +4,8 @@ draft: false
 archived: false
 title: I rebuilt my website with SvelteKit
 tags:
-  - svelte
-  - gotofritz
+  - SvelteJS
+  - Gotofritz
 description: Building a static website with <a href="https://kit.svelte.dev/">Sveltekit</a> and markdown is hard going at first. But just when I was about to give up I stumbled on some blog posts and boilerplates that helped me crack it. I may still switch to <a href="https://astro.build/">Astro</a> later though
 ---
 

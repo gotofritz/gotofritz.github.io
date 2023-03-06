@@ -6,7 +6,7 @@ draft: false
 archived: false
 title: "mypy: found module but no type hints or library stubs"
 tags:
-  - python
-  - quick tips
+  - Python
+  - QuickTips
 is_empty: true
 ---

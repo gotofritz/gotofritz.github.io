@@ -2,7 +2,7 @@
 publishDate: 2011-09-04 13:55
 title: Advanced Evernote search
 tags:
-  - evernote
+  - Evernote
 description: It isn&#39;t immediately obvious, but <a href="http://evernote.com/">Evernote</a> offers advanced search operators.
 ---
 
