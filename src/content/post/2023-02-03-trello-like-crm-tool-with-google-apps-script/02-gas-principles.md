@@ -13,6 +13,40 @@ description: |-
 
 In these years of using Google Apps Scripts I have collected a couple of principles that helped me well.
 
+### To clasp or not to clasp?
+
+[Clasp](https://github.com/google/clasp) is a Google library for helping develop Google Apps Script projects locally in typescript. Sounds great, right? Well not quite. It's a very minor project at Google, which has already peaked and seems to be in Keep The Lights On mode. There have been four major contributors to it, none of whom is currently at Google (and only one was, to start with). All of them have stopped contributing a couple of years ago. A new Google employee has been pushing a few commits a few months ago, and that was that. My spider sense tells me clasp will keep working until suddenly it doesn't. But then, is that any different from vanilla GAS? or anything Google for that matter? The moment you pick their stack you know the score.
+
+Another objection is the development cycle: write - compile - push. You can't run your scripts locally, of course, you have to bundle them and push them to Google. That is actually the same as if you were using the standard editor. The standard editor also bundles the various files that make up your app into a single js file which is then run by Rhino. The cycle is just invisible to us. One could theoretically set up clasp to do the bundling and pushing automatically on save. Should you choose to.
+
+A bigger risk is that once you start using Clasp you can't go back. You can't get your individual .ts files back. You can't apply a quick fix directly in the editor. If clasp stops working, you'll be left with one big bundled .gs file. If you use comments at the top your individual files to separate them and include their path, it should be possible to recreate them manually later. But it will be ugly transpiled .ts and not "native" GAS / JS.
+
+#### With so many downsides, why bother at all?
+
+It may seem daft to even consider it, given the downsides, but it has some very big advantages IMHO
+
+- **Developer experience and tooling** Tooling is not just the ability to use prettier and eslint, but also basic functionality like global search, which has been broken in the Google Script editor for years with no sign it will ever be fixed.
+- **Tests** Well it would be nice
+- **Third party libraries** working locally with pnpm also allows you to bundle any third party script you fancy, from currency formatters to date handlers, to Ramda, you name it. And that include your own shared libraries, of course
+
+So it's a bit of a risky bet, but all in all a risk I'm willing to take.
+
+[PopGoesTheWza wrote](https://stackoverflow.com/a/66715855/345007):
+
+> Don't rely on @google/clasp for compiling your typescript into .gs
+>
+> Trust me (as a major contributor to clasp) you'll be best by handling the compilation yourself, with clasp only being used to push your compiled files.
+>
+> I have a github template which may get you started: <https://github.com/PopGoesTheWza/ts-gas-project-starter>
+
+## Using clasp
+
+I am going to fork [PopGoesTheWza/ts-gas-project-starter](https://github.com/PopGoesTheWza/ts-gas-project-starter) and use it as starting point, hoping it's not going to become obsolete too soon. The repo is quite old, but it's not as if the Google Apps Script / Clasp space is abuzz with activity. I could updated it to the current (Q12023) version of Typescript, so it can't be that bad.
+
+### Simplifying the clasp starter
+
+PopGoesTheWza's repo is designed to be a centralised platform from which to publish separate GAS projects. I'd rather keep the projects separate, so first of all I will simplify that part.
+
 ### 1. Don't try and model the app's state. A spreadsheet _is_ already a state manager, just read it
 
 Google are super cautious when it comes to security with GAS. They limit a lot of functionality. Trying to build a fully fledged <abbr title="Single Page Application">SPA</abbr> with it is going to run into walls pretty quick. You can't detect when a user is selecting a cell or interacting with the UI. I am talking about things like automatically reordering a list when a user edits or deletes an item in it. My suggestion is to save yourself some frustration and not even try.

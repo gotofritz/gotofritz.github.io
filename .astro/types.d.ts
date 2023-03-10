@@ -399,9 +399,16 @@ declare module 'astro:content' {
   collection: "post",
   data: InferEntrySchema<"post">
 },
-"2023-02-03-trello-like-crm-tool-with-google-apps-script/index.md": {
-  id: "2023-02-03-trello-like-crm-tool-with-google-apps-script/index.md",
-  slug: "2023-02-03-trello-like-crm-tool-with-google-apps-script",
+"2023-02-03-trello-like-crm-tool-with-google-apps-script/04-with-clasp.md": {
+  id: "2023-02-03-trello-like-crm-tool-with-google-apps-script/04-with-clasp.md",
+  slug: "2023-02-03-trello-like-crm-tool-with-google-apps-script/04-with-clasp",
+  body: string,
+  collection: "post",
+  data: InferEntrySchema<"post">
+},
+"2023-03-10-clasp-template-for-local-google-apps-script-projects-using-copier.md": {
+  id: "2023-03-10-clasp-template-for-local-google-apps-script-projects-using-copier.md",
+  slug: "2023-03-10-clasp-template-for-local-google-apps-script-projects-using-copier",
   body: string,
   collection: "post",
   data: InferEntrySchema<"post">

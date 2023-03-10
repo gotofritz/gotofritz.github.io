@@ -2,7 +2,7 @@
 publishDate: 2023-03-06
 draft: true
 archived: false
-title: "A Trello-like CRM tool with Google Apps Script: 1/ introduction"
+title: "A Trello-like CRM tool with Google Apps Script. Part 1"
 slug: trello-like-crm-tool-with-google-apps-script/01-introduction
 tags:
   - GoogleAppsScript
@@ -18,31 +18,32 @@ description: |-
 
 ## The problem am I trying to solve: keeping track of several hiring processes at once
 
-In the good old zero interest rate days I found I had to juggle several interview processes at once. Each one with multiple steps and several people which you only meet briefly. After a while keeping track of all of those becomes a daunting task. Particularly if you still have a full time job as well. This is where software can help.
+Back in the days of zero interest rates, I had to juggle multiple interview processes simultaneously. Each step involved quick encounters with different people. But keeping track of them all became an overwhelming task, especially while working full-time. This is where software can help.
 
 ### What is CRM software?
 
-<abbr title="Customer Relationship Management">CRM</abbr> software manages sales pipeline - when did you last contact customer X, what was said, what are the changes you'll make a deal, when is the next contact due, etc. If you replace "sale" with "hire" this is very similar to the recruitment process. CRM software treats the process as steps in a progression. It gives you a bird's-eye view of the whole progression, reminds you of overdue steps, among other things. So far so good. But CRM is quite a wide field within Business Administration. CRM software tries to cover it all, and as a result it tends to be complex. It's a time and money investment only worth if you use it daily as your main tool. I don't, therefore I need something simpler.
+<abbr title="Customer Relationship Management">CRM</abbr> software is designed to manage your sales pipeline. It tracks crucial details such as the last time you contacted a customer, the content of the conversation, the changes you'll make to secure a deal, and when the next contact is due. If you substitute "getting hired" for "sale," it pretty much describes the recruitment process. The software treats each step as a progression, providing a bird's-eye view of the entire process and reminding you of overdue tasks. But CRM encompasses a broad field within Business Administration, making it complex and time-consuming. To make it worthwhile, you must use it daily as your primary tool. However, if you are just an occasional user, like me, it may not be the best investment.
 
 ### Why not just use Trello? Or Basecamp? Or Notion? Or ...?
 
-I never understood the appeal of Trello. Yes, it gives you a Kanban-like workflow and the ability to include pretty pictures. But entering and editing data is way too laborious for my taste. You always need several clicks to get where you want. Also, I couldn't find ways to reorder or mark steps as done without archiving them. And the horizontal scroll thing doesn't work for me. It works for physical whiteboards on walls, but not so much for electronic devices, IMHO
+I've never been a fan of Trello. Sure, the Kanban-style flow and pretty pictures are nice, but entering and editing data it's a laborious chore. The endless clicking to get where you want is just painful. And don't get me started on the inability to reorder or mark steps as done without archiving them. Plus, the horizontal scroll is a complete nightmare on electronic devices (it would work quite well on physical whiteboards, though).
 
-Of all the other options, only outliners like Workflowy come close to what I need. But not as close as a spreadsheet. Really, for tasks you do only once in a while, spreadsheets rock.
+Of the other options out there, only as outliners like Workflowy come close for speed of entry, shallow learning curve, and easy access to all the information. But not as close as good old spreadsheets. Let's be real, when it comes to tasks you only do once in a while, spreadsheets are the real deal.
 
-### Google Sheets with Apps Script is a great tool for quick tools and prototypes
+### Google Sheets with Apps Script is a great tool for quick mvps and prototypes
 
 Google Sheets with some Google Apps Scripts (GAS) are quite underrated as prototyping tools. You can quickly put together small "apps" and distribute them around. No installation required. Just send a link and start gathering data and validating ideas.
 
 ## The requirements
 
-Without getting into too many details, here's a bird view of what it needs to do
+This is what the homemade CRM-like, souped up spreadsheet needs to do
 
-1. It lists all the current leads and give me quick visual indication of which look promising, which are overdue, etc
-1. It arranges the processes by date due so that I can tell what is next
-1. It shows me all the details of each steps in a process, including people I have spoken to and bullet points of what was discussed
-1. It applies CRUD operations to steps in a process - create, edit. Steps include a date due
-1. It applies CRUD operations to processes - create, add steps, archive
-1. Data entry has to be quick - one mouse click and tabbing for most actions
+1. It shows me all the ongoing processes in one page, ordered from most urgent to least
+1. It makes it easy to see what I need to do next
+1. It shows me all the processes which have gone cold in another page, ordered by date
+1. It color codes processes to indicate promising, hopeless, cowboys, and a few other categories
+1. Each process is a sequence of steps arranged chronologically
+1. Steps can be created, edited. Every time this is done, the page is reordered
+1. Processes can be created, edited, archived, or have steps added to it
 
-Here's a short video showing the end product
+After experimenting for a while I came up with the UI shown in the video. This series of articles show how it was built
