@@ -100,3 +100,7 @@ I'm not totally convinced myself. It's a bit of a risky bet, but all in all a ri
 The boilerplate I created is based on PopGoesTheWza's own template. I made a few changes and converted to a [Copier](https://copier.readthedocs.io/en/stable/generating/) template. I used Copier because I prefer Python to Node for CLI scripting.
 
 It uses fswatch for automatically pushing files to Google when you save, and of course the clasp tool, but other than that it's standard Node/TS dependencies. Hope it's useful to you.
+
+## Comments?
+
+If you have any comments, join [the discussion on mastodon](https://fosstodon.org/@gotofritz/110004413404712202)

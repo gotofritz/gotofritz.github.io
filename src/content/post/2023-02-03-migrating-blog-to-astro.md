@@ -458,3 +458,7 @@ The [astro sitemap plugin](https://docs.astro.build/en/guides/integrations-guide
 ## Working with Astro
 
 The rest was just minor adjustments, refactoring components, and so on. All in all working with Astro feels nice. There are a lot of quirky design decisions, some bugs, and it doesn't always do what I wanted, but that is _always_ the case: the perfect tool doesn't exist. Thanks Astro team!
+
+## Comments?
+
+If you have any comments, join [the discussion on mastodon](https://fosstodon.org/@gotofritz/109965165114995854)
