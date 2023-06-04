@@ -413,6 +413,13 @@ declare module 'astro:content' {
   collection: "post",
   data: InferEntrySchema<"post">
 },
+"2023-06-04-clearing-history-bash.md": {
+  id: "2023-06-04-clearing-history-bash.md",
+  slug: "2023-06-04-clearing-history-bash",
+  body: string,
+  collection: "post",
+  data: InferEntrySchema<"post">
+},
 },
 
 	};

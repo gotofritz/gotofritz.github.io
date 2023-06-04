@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+
+
+<html lang="en-GB">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<!-- Icons / Favicon -->
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="canonical" href="https://gotofritz.net/blog/migrating-blog-to-astro/">
+
+<!-- Primary Meta Tags -->
+<title>Migrating My Blog to Astro • gotofritz.net</title>
+<meta name="title" content="Migrating My Blog to Astro • gotofritz.net">
+<meta name="description" content="I built this site with SvelteKit before it was stable, hoping it wouldn't change too much. How naive of me. Of course it did. Faced with the prospect of rebuilding it from scratch, I decided I'd rather try something new. Enter Astro">
+<meta name="author" content="Fritz Stelluto">
+
+<!-- Theme Colour -->
+<meta name="theme-color" content="#fafafa">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="Migrating My Blog to Astro">
+<meta property="og:description" content="I built this site with SvelteKit before it was stable, hoping it wouldn't change too much. How naive of me. Of course it did. Faced with the prospect of rebuilding it from scratch, I decided I'd rather try something new. Enter Astro">
+<meta property="og:url" content="https://gotofritz.net/blog/migrating-blog-to-astro/">
+<meta property="og:site_name" content="gotofritz.net">
+<meta property="og:locale" content="en_GB">
+<meta property="og:image" content="https://gotofritz.net/og-image/migrating-blog-to-astro.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="article:author" content="Fritz Stelluto"><meta property="article:published_time" content="2023-02-03T00:00:00.000Z">
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="https://gotofritz.net/blog/migrating-blog-to-astro/">
+<meta property="twitter:title" content="Migrating My Blog to Astro">
+<meta property="twitter:description" content="I built this site with <a href=&#34;https://kit.svelte.dev/&#34; class=&#34;cactus-link&#34;>SvelteKit</a> before it was stable, hoping it wouldn't change <i>too</i> much. How naive of me. Of course it did. Faced with the prospect of rebuilding it from scratch, I decided I'd rather try something new. Enter <a href=&#34;https://astro.build/&#34; class=&#34;cactus-link&#34;>Astro</a>">
+<meta property="twitter:image" content="https://gotofritz.net/og-image/migrating-blog-to-astro.png">
+
+<!-- RSS auto-discovery -->
+<link rel="alternate" type="application/rss+xml" title="gotofritz.net" href="/rss.xml">
+    <script>(function(){const siteConfig = {"author":"Fritz Stelluto","title":"gotofritz.net","description":"I'm Fritz, an engineer based in Berlin. I currently work in the Data Science department at Wayfair. I tend to write short posts about technical stuff","lang":"en-GB","ogLocale":"en_GB","themeColorLight":"#fafafa","themeColorDark":"#1d1f21"};
+
+      const root = document.documentElement;
+      const colorThemeMetaTag = document.querySelector("meta[name='theme-color']");
+
+      // get user preference of dark mode, 1st local storage, 2nd browser
+      function getThemePreference() {
+        if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
+          return localStorage.getItem("theme");
+        }
+        return window.matchMedia("(prefers-color-scheme: dark)").matches
+          ? "dark"
+          : "light";
+      }
+
+      const isDark = getThemePreference() === "dark";
+
+      // watch document element class attribute and update user preference when it changes.
+      const observer = new MutationObserver(() => {
+        const rootIsDark = root.classList.contains("dark");
+        // set the meta attribute
+        colorThemeMetaTag.setAttribute(
+          "content",
+          siteConfig[rootIsDark ? "themeColorDark" : "themeColorLight"]
+        );
+        // store user preference
+        if (typeof localStorage !== "undefined") {
+          localStorage.setItem("theme", rootIsDark ? "dark" : "light");
+        }
+      });
+      observer.observe(root, { attributeFilter: ["class"] });
+
+      // initailse root class attribute
+      root.classList.toggle("dark", isDark);
+    })();</script>
+  <link rel="stylesheet" href="/_astro/_...post_.de1bd2a8.css" /><script type="module" src="/_astro/hoisted.0c2a5be7.js"></script>
+<script type="module" src="/_astro/page.b7cc8384.js"></script></head>
+  <body>
+    <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-1.5 focus:left-1">skip to content
+</a>
+    
+
+<header id="main-header" class="group mb-12 flex flex-wrap items-center justify-start gap-y-8 sm:mb-28 sm:gap-y-0">
+  <a href="/" class="order-1 block grow-0 items-center grayscale hover:filter-none">
+    <svg class="h-10 w-10 rounded-md bg-black dark:bg-white sm:mr-0 sm:h-[4.25rem] sm:w-[4.25rem]" aria-hidden="true" focusable="false" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+      <g>
+        <path id="path-goto" d="M 123.8 88 L 52 88 L 52 194.7 L 87 194.7 L 87 159.6 L 70 159.6 L 70 123.6 L 124 123 L 124 230 L 17 230 C 17 230 17 17 17 52 C 17 52 124 52 124 52 L 124 88 L 123.8 88 Z M 176.25 194.684 C 176.25 194.684 210.52 194.684 210.52 194.684 C 210.52 194.684 211 89 211 89 C 211 89 176 89 176 89 C 176 89 176 195 176 195 L 176.25 194.684 Z M 246 230 L 140 230 C 140 230 140 52 140 52 C 140 52 247 52 247 52 C 247 52 246 230 246 230 Z M 334 230 L 297 230 L 298.27 88.527 L 263.02 88.527 C 263.02 88.527 263 52 263 52 C 263 52 369 52 369 52 C 369 52 369.75 88.527 369.75 88.527 L 334.5 88.527 L 334 230 Z M 422.25 194.684 C 422.25 194.684 456.52 194.684 456.52 194.684 C 456.52 194.684 456 88.79 456 88.79 C 456 88.79 422 88.79 422 88.79 C 422 88.79 422.25 194.684 422.25 194.684 Z M 492 230 L 386 230 C 386 230 386 52 386 52 C 386 52 492 52 492 52 L 492 230 Z" class="fill-white stroke-none dark:fill-black">
+          <title>GOTO</title>
+        </path>
+      </g>
+      <g>
+        <path id="path-fritz" stroke-width="1" d="M 51 461 L 17 461 L 17 294 L 100 294 L 100 327.337 L 51 327.375 L 51 361.722 L 100 361.685 L 100 395.022 L 51 395.06 L 51 461 Z M 150 327.375 C 150 327.375 150 361.722 150 361.722 C 150 361.722 182 361.685 182 361.685 C 182 361.685 182 327.337 182 327.337 C 182 327.337 150 327.375 150 327.375 Z M 150 461 L 116 461 L 116 294 L 199.5 294.037 L 200 311.174 L 216 311.211 L 216 378.859 L 200 378.859 L 200 395.022 L 216 395.022 L 216 461 L 182 461 L 182 395.022 L 150 395.06 L 150 461 Z M 265 461.697 L 231.1 461 L 231 294 L 265 294.037 L 265 461 L 265 461.697 Z M 347 461.697 L 313 461 L 313 327.337 L 280 327.337 L 280 294 L 380 294.037 L 380 327.375 L 347 327.375 L 347 461 L 347 461.697 Z M 495 461.697 L 395 461 L 395 394.517 L 411.58 394.524 L 411.58 377.856 L 428.08 377.856 L 428.08 361.722 L 444.58 361.722 L 444.58 344.549 L 462 344.511 L 461.08 327.375 L 395 327.337 L 395 294 L 495 294.037 L 495 345.559 L 478.5 345.559 L 478.5 361.722 L 462 361.722 L 462 377.886 L 445 377.848 L 445 395.022 L 429 395.06 L 429 429.407 L 495 429.407 L 495 461 L 495 461.697 Z M 462 361.722 L 478 361.685 L 462 361.722 Z M 478.5 345.559 L 495 345.559 L 478 345.521 L 478.5 345.559 Z" class="fill-white stroke-none dark:fill-black">
+          <title>FRITZ</title>
+        </path>
+      </g>
+    </svg></a>
+  
+  
+
+<theme-toggle class="ml-auto order-3 sm:order-3">
+  <button type="button" id="toggle-theme" class="group relative h-10 w-10 rounded-md bg-zinc-200 p-2 ring-zinc-400 transition-all hover:ring-2 dark:bg-zinc-700" aria-label="Toggle Dark Mode">
+    <svg id="sun-svg" class="absolute top-1/2 left-1/2 h-7 w-7 -translate-x-1/2 -translate-y-1/2 scale-0 opacity-0 transition-all group-aria-pressed:scale-100 group-aria-pressed:opacity-100" aria-hidden="true" focusable="false" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 18C15.3137 18 18 15.3137 18 12C18 8.68629 15.3137 6 12 6C8.68629 6 6 8.68629 6 12C6 15.3137 8.68629 18 12 18Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
+      <path d="M22 12L23 12" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
+      <path d="M12 2V1" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
+      <path d="M12 23V22" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
+      <path d="M20 20L19 19" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
+      <path d="M20 4L19 5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
+      <path d="M4 20L5 19" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
+      <path d="M4 4L5 5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
+      <path d="M1 12L2 12" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
+    </svg>
+    <svg id="moon-svg" class="absolute top-1/2 left-1/2 h-7 w-7 -translate-x-1/2 -translate-y-1/2 scale-0 opacity-0 transition-all group-aria-[pressed=false]:scale-100 group-aria-[pressed=false]:opacity-100" aria-hidden="true" focusable="false" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"></circle>
+      <path d="M7.63262 3.06689C8.98567 3.35733 9.99999 4.56025 9.99999 6.00007C9.99999 7.65693 8.65685 9.00007 6.99999 9.00007C5.4512 9.00007 4.17653 7.82641 4.01685 6.31997" stroke="currentColor" stroke-width="1.5"></path>
+      <path d="M22 13.0505C21.3647 12.4022 20.4793 12 19.5 12C17.567 12 16 13.567 16 15.5C16 17.2632 17.3039 18.7219 19 18.9646" stroke="currentColor" stroke-width="1.5"></path>
+      <path d="M14.5 8.51L14.51 8.49889" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
+      <path d="M10 17C11.1046 17 12 16.1046 12 15C12 13.8954 11.1046 13 10 13C8.89543 13 8 13.8954 8 15C8 16.1046 8.89543 17 10 17Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
+    </svg>
+  </button>
+</theme-toggle>
+  <nav id="navigation-menu" class="flex gap-y-4 grow sm:grow-no items-end sm:flex-row sm:flex sm:items-center sm:mt-1 sm:py-0 sm:ml-8 text-accent order-2 sm:order-2 justify-around sm:justify-start" aria-label="Main menu">
+    <a href="/" class="px-2 py-4 sm:py-0 sm:hover:underline" rel="prefetch">
+      Home
+    </a>
+    <a href="/about" class="px-2 py-4 sm:py-0 sm:hover:underline" rel="prefetch">
+      About
+    </a>
+    <a href="/blog" class="px-2 py-4 sm:py-0 sm:hover:underline" rel="prefetch">
+      Blog
+    </a>
+  </nav>
+</header>
+    <main id="main" class="flex-1">
+      <div class="sm:grid sm:grid-cols-4 sm:items-start sm:gap-x-10">
+    <article class="col-span-3 break-words">
+      <div id="blog-hero"><h1 class="title mb-1 text-5xl">Migrating My Blog to Astro</h1>
+<time datetime="2023-02-03T00:00:00.000Z">03 Feb 2023 </time>
+<div class="before:content-['|'] inline">
+      <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" class="inline-block h-6 w-6" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+          <path d="M7.859 6h-2.834a2.025 2.025 0 0 0 -2.025 2.025v2.834c0 .537 .213 1.052 .593 1.432l6.116 6.116a2.025 2.025 0 0 0 2.864 0l2.834 -2.834a2.025 2.025 0 0 0 0 -2.864l-6.117 -6.116a2.025 2.025 0 0 0 -1.431 -.593z"></path>
+          <path d="M17.573 18.407l2.834 -2.834a2.025 2.025 0 0 0 0 -2.864l-7.117 -7.116"></path>
+          <path d="M6 9h-.01"></path>
+        </svg>
+      <a class="inline-block pr-1" aria-label="View more blogs with the tag Astro" href="/tags/Astro">
+          #Astro
+        </a><a class="inline-block pr-1" aria-label="View more blogs with the tag Gotofritz" href="/tags/Gotofritz">
+          #Gotofritz
+        </a><a class="inline-block pr-1" aria-label="View more blogs with the tag SvelteJS" href="/tags/SvelteJS">
+          #SvelteJS
+        </a>
+    </div>
+<p class="mt-8 text-xl leading-7">I built this site with <a href="https://kit.svelte.dev/" class="cactus-link">SvelteKit</a> before it was stable, hoping it wouldn't change <i>too</i> much. How naive of me. Of course it did. Faced with the prospect of rebuilding it from scratch, I decided I'd rather try something new. Enter <a href="https://astro.build/" class="cactus-link">Astro</a></p></div>
+      <div class="prose prose-sm prose-cactus mt-12 prose-headings:font-semibold prose-headings:before:absolute prose-headings:before:-ml-4 prose-headings:before:text-accent prose-headings:before:content-['#'] prose-th:before:content-none">
+        <h2 id="tldr-was-it-worth-it-is-astro-better-than-sveltekit">TL;DR: was it worth it? Is Astro better than SvelteKit?</h2>
+<p>It depends what you mean by <em>worth it</em>… If I was a company and all of my time had to productive, then not. Astro is not any better then SvelteKit. The two frameworks share many design choices, and I would put them on a par. But of course it was worth as an exploration of new tech.</p>
+<p>Overall Astro feels more suited to generating a static site out of markdown documents, because that is what it’s designed for. It even comes with a GitHub workflow to publish to GIt pages. SvelteKit is a SPA/SSR engine that can be adapted to the task. However Astro seems to be rougher around the edges. I ended up spending more time converting from SvelteKit to Astro than I did migrating to SvelteKit in the first place. More monkey patching, more bugs. So I wouldn’t recommend switching from one to the other, unless you have some specific needs (for example, Astro lets you embed components written in various frameworks like React, Vue, Web Components, etc)</p>
+<h2 id="wait-you-only-rebuilt-your-site-last-week">Wait, you only rebuilt your site last week</h2>
+<p>Yes, sometimes it feels like the only posts on my blog are of the “I migrated my blog from {old} to {new}” where <em>old</em> and <em>new</em> have been:</p>
+<ol>
+<li>SSIs, XSLTs (don’t ask)</li>
+<li>XSLTs, Wordpress</li>
+<li>Wordpress, Jekyll</li>
+<li>Jekyll, Metalsmith</li>
+<li>Metalsmith, Hexo (draft)</li>
+<li>Metalsmith, Gatsby (draft)</li>
+<li>Metalsmith, SvelteKit</li>
+<li>SvelteKit, Astro</li>
+</ol>
+<p>I didn’t exactly have a choice this time around thanks to the breaking changes in SvelteKit. But honestly, it always felt a bit hacky to me. I had to create my own endpoints and wrap my head around the convoluted caching mechanism. For instance, the tags page would only filter by the tag in the URL if I hit refresh. Not exactly the best choice for a static site generator powered by MD(X).</p>
+<p>That said, Astro isn’t without its quirks either.</p>
+<ul>
+<li>posts don’t have a default layout</li>
+<li>svg components are way too laborious</li>
+<li>images cannot live in the same folder where the post is</li>
+<li>draft posts are still published</li>
+<li>sitemaps are a mess</li>
+</ul>
+<p>But the developer experience was much better.</p>
+<h2 id="astro-posts-dont-have-a-default-layout-document">Astro posts don’t have a default layout document</h2>
+<p>I started with the excellent step by step official tutorial, and immediately hit a snag. Astro doesn’t have an easy way to provide a default layout for your pages. Either you add one to each document’s frontmatter, or the engine will crash. What an odd design choice. I could easily add a layout to each page with <abbr title="Streaming EDitor, a classic unix command line tool">sed</abbr>, but that’s not the point. I want to keep rendering information separate from the post content. Ideally I should be able to drop the markdown documents in another static site generator and it should just work. It never happens of course, but still.</p>
+<p>There is <a href="https://github.com/withastro/astro/issues/397">an endless discussion about default layouts on github</a>. Incidentally, loooong discussions about technical issues seem a staple feature of Astro-world. Luckily after a couple of years someone posted <a href="https://docs.astro.build/en/guides/markdown-content/#modifying-frontmatter-programmatically">a link to a workaround</a> (only 5 days ago!). It’s the kind of hacky solution I didn’t like about SvelteKit and Metalsmith before it, but I really shouldn’t complain given this is all free code</p>
+<h3 id="a-simple-remark-plugin-to-add-a-default-layout-to-astro-markdown-documents">A simple remark plugin to add a default ‘layout’ to Astro markdown documents</h3>
+<p>The remark plugin is super simple - it adds a property ‘layout’ to the frontmatter if one wasn’t defined.</p>
+<pre is:raw="" class="astro-code" style="background-color: #272822; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #88846F">// src/plugins/remark-frontmatter.mjs</span></span>
+<span class="line"><span style="color: #F92672">export</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">function</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">remarkFrontmatter</span><span style="color: #F8F8F2">() {</span></span>
+<span class="line"><span style="color: #F8F8F2">  </span><span style="color: #F92672">return</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">function</span><span style="color: #F8F8F2"> (</span><span style="color: #FD971F">tree</span><span style="color: #F8F8F2">, </span><span style="color: #FD971F">file</span><span style="color: #F8F8F2">) {</span></span>
+<span class="line"><span style="color: #F8F8F2">    </span><span style="color: #F92672">if</span><span style="color: #F8F8F2"> (</span><span style="color: #F92672">!</span><span style="color: #F8F8F2">file.data.astro.frontmatter.layout) {</span></span>
+<span class="line"><span style="color: #F8F8F2">      file.data.astro.frontmatter.layout </span><span style="color: #F92672">=</span><span style="color: #F8F8F2"> </span><span style="color: #E6DB74">`</span><span style="color: #F92672">${</span><span style="color: #F8F8F2">file.cwd</span><span style="color: #F92672">}</span><span style="color: #E6DB74">/src/layouts/Layout.astro`</span><span style="color: #F8F8F2">;</span></span>
+<span class="line"><span style="color: #F8F8F2">    }</span></span>
+<span class="line"><span style="color: #F8F8F2">  };</span></span>
+<span class="line"><span style="color: #F8F8F2">}</span></span></code></pre>
+<p>And then added the plugin to the config</p>
+<pre is:raw="" class="astro-code" style="background-color: #272822; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #88846F">// astro.config.mjs</span></span>
+<span class="line"><span style="color: #F92672">import</span><span style="color: #F8F8F2"> { defineConfig } </span><span style="color: #F92672">from</span><span style="color: #F8F8F2"> </span><span style="color: #E6DB74">"astro/config"</span><span style="color: #F8F8F2">;</span></span>
+<span class="line"><span style="color: #F92672">import</span><span style="color: #F8F8F2"> { remarkFrontmatter } </span><span style="color: #F92672">from</span><span style="color: #F8F8F2"> </span><span style="color: #E6DB74">"./src/plugins/remark-frontmatter.mjs"</span><span style="color: #F8F8F2">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #F92672">export</span><span style="color: #F8F8F2"> </span><span style="color: #F92672">default</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">defineConfig</span><span style="color: #F8F8F2">({</span></span>
+<span class="line"><span style="color: #F8F8F2">  markdown: {</span></span>
+<span class="line"><span style="color: #F8F8F2">    </span><span style="color: #88846F">// Applied to .md and .mdx files</span></span>
+<span class="line"><span style="color: #F8F8F2">    remarkPlugins: [remarkFrontmatter],</span></span>
+<span class="line"><span style="color: #F8F8F2">  },</span></span>
+<span class="line"><span style="color: #F8F8F2">});</span></span></code></pre>
+<p>That was the only change I neded to make the bulk of the site work. In the sense that all the pages are rendered and the engine doesn’t crash. Now the tedious work of ironing out the small kinks</p>
+<h2 id="converting-svgs-to-a-generic-astro-component">Converting SVGs to a generic Astro component</h2>
+<p>The footer has a bunch of SVGs in it. In my SvelteKit blog they were Svelte components, now I need to convert them to Astro ones. <a href="https://ellodave.dev/blog/article/using-svgs-as-astro-components-and-inline-css/">David Warrington’s blog post was very helpful</a>. I got it working, but it was far too much work for simply showing some SVGs. And that was only a minor step! I still hadn’t done listing blog posts, tags pages, etc. It’s going to take me a while. Time to pivot!</p>
+<h2 id="pivoting-to-astro-cactus-a-pre-built-astro-theme">Pivoting to Astro Cactus, a pre-built Astro theme</h2>
+<p>I decided to reduce the pain with a pre-built theme. I picked the excellent <a href="https://astro.build/themes/details/astro-cactus/">Astro Cactus</a></p>
+<h3 id="installing-astro-cactus">Installing Astro Cactus</h3>
+<p>The standard installations worked out of the box</p>
+<ol>
+<li>I <a href="https://github.com/chrismwilliams/astro-theme-cactus/generate">generated a copy of the theme repo on github</a></li>
+<li>cloned it to my local machine with <code>gh repo clone gotofritz/xxx</code></li>
+<li><code>pnpm install</code> and <code>pnpm run dev</code> to start it up</li>
+</ol>
+<h3 id="changing-indentation-from-tabs-to-spaces-in-astro">Changing indentation from tabs to spaces in Astro</h3>
+<p>The Astro dev team, just as the Svelte team, are committed to indenting the code with tabs. I thought it was an odd choice, the industry standard is spaces (except for Makefiles, of course). I mean YAML will not even validate if written with tabs. But then I came across <a href="https://github.com/withastro/astro/pull/2253">a Github discussion where they put forward a good argument for tabs</a> (spoiler: it’s because of accessibility). For the first time in decades I am reconsidering my choices. Still, for my personal blog I’d rater stick to the known and trusted; and that means spaces.</p>
+<p>It took me a while to find out how - the <code>.prettierrc.js</code> config file <em>does</em> have spaces, but astro didn’t honour it. Turns out the <code>.eslintrc.js</code> plugin file ignored that setting. I made sure it didn’t</p>
+<pre is:raw="" class="astro-code" style="background-color: #272822; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #F8F8F2">  </span><span style="color: #E6DB74">"prettier/prettier"</span><span style="color: #F8F8F2">: [</span></span>
+<span class="line"><span style="color: #F8F8F2">    </span><span style="color: #E6DB74">"off"</span><span style="color: #F8F8F2">,</span></span>
+<span class="line"><span style="color: #F8F8F2">    {},</span></span>
+<span class="line"><span style="color: #F8F8F2">    {</span></span>
+<span class="line"><span style="color: #F8F8F2">      usePrettierrc: </span><span style="color: #AE81FF">true</span><span style="color: #F8F8F2">,</span></span>
+<span class="line"><span style="color: #F8F8F2">    },</span></span>
+<span class="line"><span style="color: #F8F8F2">  ],</span></span></code></pre>
+<h3 id="validating-post-schema-with-zod">Validating post schema with zod</h3>
+<p>A nice touch with this theme is that it uses <a href="https://zod.dev/">zod</a> to validate the schema of the front matter of each document. I like that - it ensures consistency. But it forces a bit of a cleanup of my existing posts. Nothing major, but I <em>did</em> hit a minor snag. The schema expects <code>publishDate</code> to be a string, which it then converts to a date. My <code>publishDate</code> <em>are</em> strings, but in the format <code>yyyy-mm-dd (hh:mm)?</code> which the frontmatter plugin somehow converts to dates.</p>
+<p>So I change the schema validator to</p>
+<pre is:raw="" class="astro-code" style="background-color: #272822; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #F8F8F2">// src/content/config.ts</span></span>
+<span class="line"><span style="color: #F92672"><span style="user-select: none;">-</span> publishDate: z.string().transform((str) => new Date(str)),</span></span>
+<span class="line"><span style="color: #A6E22E"><span style="user-select: none;">+</span> publishDate: z.coerce.date(),</span></span></code></pre>
+<h3 id="images-cannot-live-in-the-same-folder-as-the-posts-in-astro">Images cannot live in the same folder as the posts in Astro</h3>
+<p>Astro doesn’t allow images to be stored in the same folder as the markdown files. Bummer. Why do all frameworks do that 🙄. That’s one thing SvelteKit did better. To be fair, things are beginning to move - there is <a href="https://github.com/withastro/roadmap/discussions/376">a long discussion from a few months ago</a> and a <a href="https://github.com/withastro/roadmap/discussions/468">new RFC from yesterday</a>. But for now I’m stuck with putting everything in the public folder. Or was it src? It’s unclear where they should go. Luckily I only had a handful of images, which I could manually move over to public/assets. Not too happy about it, but it is what it is.</p>
+<h3 id="nesting-post-folders-with-astro-cactus">Nesting post folders with Astro Cactus</h3>
+<p>The theme didn’t allow nested folders within <code>posts/my-post</code>. That was an easy fix, I just needed to rename <code>src/pages/posts/[post].astro</code> to <code>src/pages/posts/[...post].astro</code></p>
+<p>Actually not <em>that</em> easy, I discovered the og png generator broke in ways that are not entirely clear. But the following code fixes that</p>
+<pre is:raw="" class="astro-code" style="background-color: #272822; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #F8F8F2">// src/pages/og-image/[slug].png.ts</span></span>
+<span class="line"><span style="color: #F8F8F2">export async function getStaticPaths(): Promise&#x3C;GetStaticPathsResult> {</span></span>
+<span class="line"><span style="color: #F8F8F2">  const posts = await getCollection("post");</span></span>
+<span class="line"><span style="color: #F92672"><span style="user-select: none;">-</span> const allPosts = posts.map(slugRewrite);</span></span>
+<span class="line"><span style="color: #A6E22E"><span style="user-select: none;">+</span> const allPosts = posts.map(slugRewrite).map((p) => {</span></span>
+<span class="line"><span style="color: #A6E22E"><span style="user-select: none;">+</span>   return {</span></span>
+<span class="line"><span style="color: #A6E22E"><span style="user-select: none;">+</span>     ...p,</span></span>
+<span class="line"><span style="color: #A6E22E"><span style="user-select: none;">+</span>     slug: p.slug.replace(/^.*\/([^/]+)$/, "$1"),</span></span>
+<span class="line"><span style="color: #A6E22E"><span style="user-select: none;">+</span>   };</span></span>
+<span class="line"><span style="color: #A6E22E"><span style="user-select: none;">+</span> });</span></span>
+<span class="line"><span style="color: #F8F8F2">  return allPosts</span></span>
+<span class="line"><span style="color: #F8F8F2">    .filter(({ data }) => !data.ogImage)</span></span>
+<span class="line"><span style="color: #F8F8F2">    .map(({ slug }) => ({ params: { slug } }));</span></span>
+<span class="line"><span style="color: #F8F8F2">}</span></span></code></pre>
+<h3 id="prepend-post-filename-with-date-and-remove-it-when-generating-posts">Prepend post filename with date, and remove it when generating posts</h3>
+<p>One thing I really liked about jekyll was the ability to prepend the date to the markdown filename, and have jekyll remove that. So that <code>posts/2010-01-23-my-great-post.md</code> would be accessible as <code>posts/my-great-post</code>. The benefit is that posts are ordered by date in my IDE. I first I noticed that adding <code>slug: my-great-post</code> manually to a post would work. But how to do it automatically? After a bit of experimentation I created a function in <code>src/utils/slugRewrite.ts</code></p>
+<pre is:raw="" class="astro-code" style="background-color: #272822; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #F92672">import</span><span style="color: #F8F8F2"> </span><span style="color: #F92672">type</span><span style="color: #F8F8F2"> { CollectionEntry } </span><span style="color: #F92672">from</span><span style="color: #F8F8F2"> </span><span style="color: #E6DB74">"astro:content"</span><span style="color: #F8F8F2">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #F92672">export</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">function</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">slugRewrite</span><span style="color: #F8F8F2">(</span><span style="color: #FD971F">post</span><span style="color: #F92672">:</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E; font-weight: bold">CollectionEntry</span><span style="color: #F8F8F2">&#x3C;</span><span style="color: #E6DB74">"post"</span><span style="color: #F8F8F2">>) {</span></span>
+<span class="line"><span style="color: #F8F8F2">  </span><span style="color: #F92672">return</span><span style="color: #F8F8F2"> {</span></span>
+<span class="line"><span style="color: #F8F8F2">    </span><span style="color: #F92672">...</span><span style="color: #F8F8F2">post,</span></span>
+<span class="line"><span style="color: #F8F8F2">    slug: post.slug.</span><span style="color: #A6E22E">replace</span><span style="color: #F8F8F2">(</span><span style="color: #E6DB74">/</span><span style="color: #F92672">^</span><span style="color: #AE81FF">\d</span><span style="color: #F92672">{4}</span><span style="color: #E6DB74">-</span><span style="color: #AE81FF">\d</span><span style="color: #F92672">{2}</span><span style="color: #E6DB74">-</span><span style="color: #AE81FF">\d</span><span style="color: #F92672">{2}</span><span style="color: #E6DB74">-/</span><span style="color: #F8F8F2">, </span><span style="color: #E6DB74">""</span><span style="color: #F8F8F2">),</span></span>
+<span class="line"><span style="color: #F8F8F2">  } </span><span style="color: #F92672">as</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E; font-weight: bold">CollectionEntry</span><span style="color: #F8F8F2">&#x3C;</span><span style="color: #E6DB74">"post"</span><span style="color: #F8F8F2">>;</span></span>
+<span class="line"><span style="color: #F8F8F2">}</span></span></code></pre>
+<p>and then use it in the <code>getStaticPath</code> function in both <code>[...page].astro</code> and <code>[...post.astro]</code></p>
+<pre is:raw="" class="astro-code" style="background-color: #272822; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #F8F8F2">export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {</span></span>
+<span class="line"><span style="color: #F8F8F2">  const allPosts = await getCollection("post");</span></span>
+<span class="line"><span style="color: #A6E22E"><span style="user-select: none;">+</span> const mapped = allPosts.map(slugRewrite);</span></span>
+<span class="line"><span style="color: #F8F8F2">  const allPostsByDate = sortMDByDate(mapped);</span></span></code></pre>
+<p>I had to apply that function in a few pages across the site - wherever <code>getCollection</code> or <code>getEntryBySlug</code> where called. For example, I changed the code in the page that generates social media previews:</p>
+<pre is:raw="" class="astro-code" style="background-color: #272822; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #F8F8F2">// &#x3C;astro>/src/pages/og-image/[slug].png.ts</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #F8F8F2">export async function get({ params: { slug } }: APIContext) {</span></span>
+<span class="line"><span style="color: #F92672"><span style="user-select: none;">-</span> const post = await getEntryBySlug("post", slug!);</span></span>
+<span class="line"><span style="color: #A6E22E"><span style="user-select: none;">+</span> const allPosts = await getCollection("post", draftsStop);</span></span>
+<span class="line"><span style="color: #A6E22E"><span style="user-select: none;">+</span> const mappedPosts = allPosts.map(slugRewrite);</span></span>
+<span class="line"><span style="color: #A6E22E"><span style="user-select: none;">+</span> const post = mappedPosts.find((p) => p.slug === slug!);</span></span></code></pre>
+<h3 id="adding-a-custom-font-to-the-tailwind-theme">Adding a custom font to the Tailwind theme</h3>
+<p>The mastheads use a free Google font. I wanted to host it as part of the site, so I <a href="https://fonts.google.com/specimen/DM+Serif+Display">downloaded it from google</a>, then added font-face to <code>&#x3C;astro>/src/styles/global.css</code></p>
+<pre is:raw="" class="astro-code" style="background-color: #272822; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #F92672">@font-face</span><span style="color: #F8F8F2"> {</span></span>
+<span class="line"><span style="color: #F8F8F2">  </span><span style="color: #66D9EF">font-family</span><span style="color: #F8F8F2">: </span><span style="color: #E6DB74">"DM Serif Display"</span><span style="color: #F8F8F2">;</span></span>
+<span class="line"><span style="color: #F8F8F2">  </span><span style="color: #66D9EF">src</span><span style="color: #F8F8F2">: </span><span style="color: #66D9EF">url</span><span style="color: #F8F8F2">(</span><span style="color: #E6DB74">"/fonts/DM_Serif_Display/DMSerifDisplay-Regular.ttf"</span><span style="color: #F8F8F2">);</span></span>
+<span class="line"><span style="color: #F8F8F2">  </span><span style="color: #66D9EF">font-weight</span><span style="color: #F8F8F2">: </span><span style="color: #66D9EF">normal</span><span style="color: #F8F8F2">;</span></span>
+<span class="line"><span style="color: #F8F8F2">  </span><span style="color: #66D9EF">font-style</span><span style="color: #F8F8F2">: </span><span style="color: #66D9EF">normal</span><span style="color: #F8F8F2">;</span></span>
+<span class="line"><span style="color: #F8F8F2">  </span><span style="color: #66D9EF">font-display</span><span style="color: #F8F8F2">: </span><span style="color: #66D9EF">swap</span><span style="color: #F8F8F2">;</span></span>
+<span class="line"><span style="color: #F8F8F2">}</span></span></code></pre>
+<p>I added the <em>masthead</em> definition to <code>&#x3C;astro>/tailwind.config.cjs</code></p>
+<pre is:raw="" class="astro-code" style="background-color: #272822; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #F8F8F2">  fontFamily: {</span></span>
+<span class="line"><span style="color: #F8F8F2">    // Add any custom fonts here</span></span>
+<span class="line"><span style="color: #F8F8F2">    sans: [...fontFamily.sans],</span></span>
+<span class="line"><span style="color: #F8F8F2">    serif: [...fontFamily.serif],</span></span>
+<span class="line"><span style="color: #A6E22E"><span style="user-select: none;">+</span>   masthead: ["DM Serif Display", "Helvetica", "sans-serif"],</span></span>
+<span class="line"><span style="color: #F8F8F2">  },</span></span></code></pre>
+<p>and then used it in an existing style in the same file</p>
+<pre is:raw="" class="astro-code" style="background-color: #272822; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #F8F8F2">    plugin(function ({ addComponents }) {</span></span>
+<span class="line"><span style="color: #F8F8F2">      addComponents({</span></span>
+<span class="line"><span style="color: #F8F8F2">        ".cactus-link": {</span></span>
+<span class="line"><span style="color: #F8F8F2">          ...</span></span>
+<span class="line"><span style="color: #F8F8F2">          },</span></span>
+<span class="line"><span style="color: #F8F8F2">        },</span></span>
+<span class="line"><span style="color: #F8F8F2">        ".title": {</span></span>
+<span class="line"><span style="color: #F92672"><span style="user-select: none;">-</span>         "@apply text-2xl text-accent-2": {},</span></span>
+<span class="line"><span style="color: #A6E22E"><span style="user-select: none;">+</span>         "@apply text-2xl text-accent-2 font-masthead": {},</span></span>
+<span class="line"><span style="color: #F8F8F2">        },</span></span>
+<span class="line"><span style="color: #F8F8F2">      });</span></span>
+<span class="line"><span style="color: #F8F8F2">    }),</span></span>
+<span class="line"><span style="color: #F8F8F2">  ],</span></span>
+<span class="line"><span style="color: #F8F8F2">};</span></span></code></pre>
+<h2 id="creating-an-svg-logo-with-gimp">Creating an SVG logo. With Gimp</h2>
+<p>Astro Cactus has a lovely minecrafty logo, I decided to replace it with one of my own. Nothing fancy, just a simple square with the name of the site in a chunky pixelated font. Being an SVG, it would also double as favicon, something I hadn’t gotten around in previous versions of the site</p>
+<p>First I downloaded and installed the <a href="https://www.1001fonts.com/fff-forward-font.html">free font FFF Forward</a>. Then I tried to download Inkscape to use it and… disaster. Inkscape doesn’t support OS X 13 (Ventura). Need a plan B. Luckily Gimp has primitive tooling to export SVGs. Should be enough for my primitive logo.</p>
+<p>So I created the image in Gimp using the Forward font, then CTRL-clicked on the text layer and selected “Text to Path”. I opened the Paths toolbox, CTRL-clicked on the newly created path, selected “Export to SVG” from the menu. There is my SVG! But it had strange artefacts at the corners (I guess that’s why it’s a free font). Still, it’s a starting point.</p>
+<p>To clean up the artefacts, I used <a href="https://boxy-svg.com/">a free online svg editor</a>. Boxy-SVG is not brilliant, and it forces you to create an account, but for a quick one off job once every blue moon it’s good enough. Well almost - the logo is not crisp at all, but I am happy waiting for Inkscape to be compatible with OS X for the last mile</p>
+<p>I added the logo to <code>&#x3C;astro>/src/pages/og-image/[slug].png.ts</code> (it generates the preview you see when you post, say, a link to a post on mastodon), to <code>&#x3C;astro>/src/components/layout/Header.astro</code>, and <code>&#x3C;astro>/public/icon.svg</code></p>
+<h2 id="forcing-a-format-for-intldatetimeformatoptions">Forcing a format for Intl.DateTimeFormatOptions</h2>
+<p>I changed the font of the date in the post list to monospace, so that it would align nicely. But the date formatter shows some months as 3 letters (Jan, Feb) and some as 4 (Sept). That is no good, it screws up the alignment. It turns out it’s incredibly complicated to fix.</p>
+<p>The date uses Javascript’s <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat">Intl.DateTimeFormat</a> object:</p>
+<pre is:raw="" class="astro-code" style="background-color: #272822; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #66D9EF">const</span><span style="color: #F8F8F2"> formatOptions</span><span style="color: #F92672">:</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E; font-weight: bold">Intl</span><span style="color: #F8F8F2">.</span><span style="color: #A6E22E; font-weight: bold">DateTimeFormatOptions</span><span style="color: #F8F8F2"> </span><span style="color: #F92672">=</span><span style="color: #F8F8F2"> {</span></span>
+<span class="line"><span style="color: #F8F8F2">  day: </span><span style="color: #E6DB74">"numeric"</span><span style="color: #F8F8F2">,</span></span>
+<span class="line"><span style="color: #F8F8F2">  month: </span><span style="color: #E6DB74">"long"</span><span style="color: #F8F8F2">,</span></span>
+<span class="line"><span style="color: #F8F8F2">  year: </span><span style="color: #E6DB74">"numeric"</span><span style="color: #F8F8F2">,</span></span>
+<span class="line"><span style="color: #F8F8F2">  </span><span style="color: #F92672">...</span><span style="color: #F8F8F2">options,</span></span>
+<span class="line"><span style="color: #F8F8F2">};</span></span>
+<span class="line"><span style="color: #F92672">return</span><span style="color: #F8F8F2"> </span><span style="color: #F92672">new</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">Date</span><span style="color: #F8F8F2">(date).</span><span style="color: #A6E22E">toLocaleDateString</span><span style="color: #F8F8F2">(</span><span style="color: #E6DB74">"en-GB"</span><span style="color: #F8F8F2">, formatOptions);</span></span></code></pre>
+<p>To show the day as as 01 instead of 1 just change <code>day: "numeric"</code> to <code>day: "2-digit"</code>. To change <code>Sept</code> to <code>Sep</code> however is not so easy. Long story short, the TC39 people do not want <code>Intl.DateTimeFormat</code> or the newer <code>Temporal</code> to be a flexible data formatter like every other language (<a href="https://github.com/tc39/ecma402/issues/554">exhibit 1</a>, <a href="https://github.com/js-temporal/proposal-temporal-v2/issues/5">exhibit 2</a>). They have decided <code>Sept</code> is how Brits write the abbreviation for September, and that is that. But only in the UK; the “en-US” locale will use <code>Sep</code>. I am sure that is news to most Brits or Americans, but that is that. Switching to a US locale is out of the question of course, it would also change the order of the other parts to the ghastly month-first format they use in the States <code>Sep 01, 2022</code>.</p>
+<p>I can think of only two workarounds: either generating each part individually, with different locales, and then joining them together. Or use the formatToParts method to get the individual parts, and massage the month name. They are both equally clunky, I went for the second approach</p>
+<pre is:raw="" class="astro-code" style="background-color: #272822; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #F92672">export</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">function</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">getFormattedDate</span><span style="color: #F8F8F2">(</span></span>
+<span class="line"><span style="color: #F8F8F2">  </span><span style="color: #FD971F">date</span><span style="color: #F92672">:</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">string</span><span style="color: #F8F8F2"> </span><span style="color: #F92672">|</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">number</span><span style="color: #F8F8F2"> </span><span style="color: #F92672">|</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E; font-weight: bold">Date</span><span style="color: #F8F8F2">,</span></span>
+<span class="line"><span style="color: #F8F8F2">  </span><span style="color: #FD971F">options</span><span style="color: #F92672">:</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E; font-weight: bold">Intl</span><span style="color: #F8F8F2">.</span><span style="color: #A6E22E; font-weight: bold">DateTimeFormatOptions</span><span style="color: #F8F8F2"> </span><span style="color: #F92672">=</span><span style="color: #F8F8F2"> {},</span></span>
+<span class="line"><span style="color: #F8F8F2">  </span><span style="color: #FD971F">locale</span><span style="color: #F92672">:</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E; font-weight: bold">Intl</span><span style="color: #F8F8F2">.</span><span style="color: #A6E22E; font-weight: bold">LocalesArgument</span><span style="color: #F8F8F2"> </span><span style="color: #F92672">=</span><span style="color: #F8F8F2"> </span><span style="color: #E6DB74">"en-GB"</span><span style="color: #F8F8F2">,</span></span>
+<span class="line"><span style="color: #F8F8F2">) {</span></span>
+<span class="line"><span style="color: #F8F8F2">  </span><span style="color: #66D9EF">const</span><span style="color: #F8F8F2"> formatOptions</span><span style="color: #F92672">:</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E; font-weight: bold">Intl</span><span style="color: #F8F8F2">.</span><span style="color: #A6E22E; font-weight: bold">DateTimeFormatOptions</span><span style="color: #F8F8F2"> </span><span style="color: #F92672">=</span><span style="color: #F8F8F2"> {</span></span>
+<span class="line"><span style="color: #F8F8F2">    day: </span><span style="color: #E6DB74">"2-digit"</span><span style="color: #F8F8F2">,</span></span>
+<span class="line"><span style="color: #F8F8F2">    month: </span><span style="color: #E6DB74">"short"</span><span style="color: #F8F8F2">,</span></span>
+<span class="line"><span style="color: #F8F8F2">    year: </span><span style="color: #E6DB74">"numeric"</span><span style="color: #F8F8F2">,</span></span>
+<span class="line"><span style="color: #F8F8F2">    </span><span style="color: #F92672">...</span><span style="color: #F8F8F2">options,</span></span>
+<span class="line"><span style="color: #F8F8F2">  };</span></span>
+<span class="line"><span style="color: #F8F8F2">  </span><span style="color: #66D9EF">const</span><span style="color: #F8F8F2"> dateTimeFormat </span><span style="color: #F92672">=</span><span style="color: #F8F8F2"> </span><span style="color: #F92672">new</span><span style="color: #F8F8F2"> Intl.</span><span style="color: #A6E22E">DateTimeFormat</span><span style="color: #F8F8F2">(</span></span>
+<span class="line"><span style="color: #F8F8F2">    locale </span><span style="color: #F92672">as</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">string</span><span style="color: #F8F8F2">,</span></span>
+<span class="line"><span style="color: #F8F8F2">    formatOptions,</span></span>
+<span class="line"><span style="color: #F8F8F2">  );</span></span>
+<span class="line"><span style="color: #F8F8F2">  </span><span style="color: #66D9EF">const</span><span style="color: #F8F8F2"> parts </span><span style="color: #F92672">=</span><span style="color: #F8F8F2"> dateTimeFormat.</span><span style="color: #A6E22E">formatToParts</span><span style="color: #F8F8F2">(</span><span style="color: #F92672">new</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">Date</span><span style="color: #F8F8F2">(date));</span></span>
+<span class="line"><span style="color: #F8F8F2">  </span><span style="color: #66D9EF">const</span><span style="color: #F8F8F2"> partValues </span><span style="color: #F92672">=</span><span style="color: #F8F8F2"> parts.</span><span style="color: #A6E22E">map</span><span style="color: #F8F8F2">((</span><span style="color: #FD971F">p</span><span style="color: #F8F8F2">) </span><span style="color: #66D9EF">=></span><span style="color: #F8F8F2"> p.value);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #F8F8F2">  </span><span style="color: #F92672">return</span><span style="color: #F8F8F2"> </span><span style="color: #E6DB74">`</span><span style="color: #F92672">${</span><span style="color: #F8F8F2">partValues[</span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">]</span><span style="color: #F92672">}</span><span style="color: #E6DB74"> </span><span style="color: #F92672">${</span><span style="color: #F8F8F2">partValues[</span><span style="color: #AE81FF">2</span><span style="color: #F8F8F2">]?.</span><span style="color: #A6E22E">substring</span><span style="color: #F8F8F2">(</span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">, </span><span style="color: #AE81FF">3</span><span style="color: #F8F8F2">)</span><span style="color: #F92672">}</span><span style="color: #E6DB74"> </span><span style="color: #F92672">${</span><span style="color: #F8F8F2">partValues[</span><span style="color: #AE81FF">4</span><span style="color: #F8F8F2">]</span><span style="color: #F92672">}</span><span style="color: #E6DB74"> `</span><span style="color: #F8F8F2">;</span></span>
+<span class="line"><span style="color: #F8F8F2">}</span></span></code></pre>
+<p>All of that to show a date 🙄</p>
+<h2 id="rendering-frontmatter-strings-with-html-in-them">Rendering frontmatter strings with HTML in them</h2>
+<p>My posts are written in Markdown files with frontmatter. The initial paragraph, the description, is actually in the frontmatter, not in the markdown body. This is because it is used, for example, when generating the RSS feed. By default frontmatter is plain text, and any HTML in the description will be simply printed out. How to render it as HTML instead?</p>
+<p>Astro has a default component called Fragment, to which <a href="https://docs.astro.build/en/reference/directives-reference/#sethtml">template directives</a> can be added exactly for that purpose. In the example below, <code>post</code> is the variable that holds my post, and <code>data.description</code> are its properties and <code>set:html</code> is the template directive</p>
+<pre is:raw="" class="astro-code" style="background-color: #272822; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #F8F8F2">&#x3C;</span><span style="color: #66D9EF">Fragment</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">set:html</span><span style="color: #F8F8F2">=</span><span style="color: #F92672">{</span><span style="color: #F8F8F2">post.data.description</span><span style="color: #F92672">}</span><span style="color: #F8F8F2"> /></span></span></code></pre>
+<p>When generating the RSS feed and the meta tags, I have the opposite problem - there I don’t want any HTML at all. There is no template directive equivalent to <code>set:html</code> (there is <code>set:text</code>, but it shows the HTML source). Because the code is generated in Node.js, I can’t use the DOM to strip the HTML away for me:</p>
+<pre is:raw="" class="astro-code" style="background-color: #272822; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #88846F">// NOTE: this is not XSS safe</span></span>
+<span class="line"><span style="color: #F92672">export</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">function</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">stripHtmlInABrowser</span><span style="color: #F8F8F2">(</span><span style="color: #FD971F">dirtyString</span><span style="color: #F8F8F2"> </span><span style="color: #F92672">=</span><span style="color: #F8F8F2"> </span><span style="color: #E6DB74">""</span><span style="color: #F8F8F2">)</span><span style="color: #F92672">:</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">string</span><span style="color: #F8F8F2"> {</span></span>
+<span class="line"><span style="color: #F8F8F2">  </span><span style="color: #66D9EF">const</span><span style="color: #F8F8F2"> div </span><span style="color: #F92672">=</span><span style="color: #F8F8F2"> document.</span><span style="color: #A6E22E">createElement</span><span style="color: #F8F8F2">(</span><span style="color: #E6DB74">"div"</span><span style="color: #F8F8F2">);</span></span>
+<span class="line"><span style="color: #F8F8F2">  div.innerHTML </span><span style="color: #F92672">=</span><span style="color: #F8F8F2"> dirtyString;</span></span>
+<span class="line"><span style="color: #F8F8F2">  </span><span style="color: #F92672">return</span><span style="color: #F8F8F2"> div.textContent </span><span style="color: #F92672">||</span><span style="color: #F8F8F2"> div.innerText </span><span style="color: #F92672">||</span><span style="color: #F8F8F2"> </span><span style="color: #E6DB74">""</span><span style="color: #F8F8F2">;</span></span>
+<span class="line"><span style="color: #F8F8F2">}</span></span></code></pre>
+<p>I have to resort to RegExp. A simple one, since my HTML is very simple</p>
+<pre is:raw="" class="astro-code" style="background-color: #272822; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #F92672">export</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">function</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">stripHtml</span><span style="color: #F8F8F2">(</span><span style="color: #FD971F">dirtyString</span><span style="color: #F8F8F2"> </span><span style="color: #F92672">=</span><span style="color: #F8F8F2"> </span><span style="color: #E6DB74">""</span><span style="color: #F8F8F2">)</span><span style="color: #F92672">:</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">string</span><span style="color: #F8F8F2"> {</span></span>
+<span class="line"><span style="color: #F8F8F2">  </span><span style="color: #66D9EF">const</span><span style="color: #F8F8F2"> re </span><span style="color: #F92672">=</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">RegExp</span><span style="color: #F8F8F2">(</span><span style="color: #E6DB74">/&#x3C;</span><span style="color: #AE81FF">[</span><span style="color: #F92672">^</span><span style="color: #AE81FF">>]</span><span style="color: #F92672">+?</span><span style="color: #E6DB74">>/</span><span style="color: #F8F8F2">, </span><span style="color: #E6DB74">"gm"</span><span style="color: #F8F8F2">);</span></span>
+<span class="line"><span style="color: #F8F8F2">  </span><span style="color: #F92672">return</span><span style="color: #F8F8F2"> dirtyString.</span><span style="color: #A6E22E">replaceAll</span><span style="color: #F8F8F2">(re, </span><span style="color: #E6DB74">""</span><span style="color: #F8F8F2">);</span></span>
+<span class="line"><span style="color: #F8F8F2">}</span></span></code></pre>
+<h2 id="next-and-previous-post-links">Next and Previous post links</h2>
+<p>I like being able to navigate chronologically to the next and previous posts in my blog, without having to go back to the homepage. I am not sure how useful it is to readers - I get so few it’s hard to tell. But it helps <em>me</em> going through all the posts when I’m doing some site-wide changes, and that is a good enough reason. The theme I am using doesn’t offer that functionality, but it’s pretty easy to add it in. First I added two new properties to the post metadata schemas</p>
+<pre is:raw="" class="astro-code" style="background-color: #272822; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #F8F8F2">// src/content/config.ts</span></span>
+<span class="line"><span style="color: #F8F8F2"> const post = defineCollection({</span></span>
+<span class="line"><span style="color: #F8F8F2">   schema: z.object({</span></span>
+<span class="line"><span style="color: #F8F8F2">    ...</span></span>
+<span class="line"><span style="color: #A6E22E"><span style="user-select: none;">+</span>    newerSlug: z.string().optional(),</span></span>
+<span class="line"><span style="color: #A6E22E"><span style="user-select: none;">+</span>    olderSlug: z.string().optional(),</span></span>
+<span class="line"><span style="color: #F8F8F2">    ...</span></span>
+<span class="line"><span style="color: #F8F8F2">   }),</span></span>
+<span class="line"><span style="color: #F8F8F2"> });</span></span></code></pre>
+<p>Then I create a small util plugin, similar to the <code>slugRewrite</code> I had created earlier. The links will cycle through the whole list of posts without ending, they just silently go back to the beginning when at the end.</p>
+<pre is:raw="" class="astro-code" style="background-color: #272822; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #88846F">// src/utils/nextAndPrevious.ts</span></span>
+<span class="line"><span style="color: #F92672">import</span><span style="color: #F8F8F2"> </span><span style="color: #F92672">type</span><span style="color: #F8F8F2"> { CollectionEntry } </span><span style="color: #F92672">from</span><span style="color: #F8F8F2"> </span><span style="color: #E6DB74">"astro:content"</span><span style="color: #F8F8F2">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #F92672">export</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">function</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">nextAndPrevious</span><span style="color: #F8F8F2">(</span></span>
+<span class="line"><span style="color: #F8F8F2">  </span><span style="color: #FD971F">post</span><span style="color: #F92672">:</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E; font-weight: bold">CollectionEntry</span><span style="color: #F8F8F2">&#x3C;</span><span style="color: #E6DB74">"post"</span><span style="color: #F8F8F2">>,</span></span>
+<span class="line"><span style="color: #F8F8F2">  </span><span style="color: #FD971F">i</span><span style="color: #F92672">:</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">number</span><span style="color: #F8F8F2">,</span></span>
+<span class="line"><span style="color: #F8F8F2">  </span><span style="color: #FD971F">allPosts</span><span style="color: #F92672">:</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E; font-weight: bold">Array</span><span style="color: #F8F8F2">&#x3C;</span><span style="color: #A6E22E; font-weight: bold">CollectionEntry</span><span style="color: #F8F8F2">&#x3C;</span><span style="color: #E6DB74">"post"</span><span style="color: #F8F8F2">>>,</span></span>
+<span class="line"><span style="color: #F8F8F2">) {</span></span>
+<span class="line"><span style="color: #F8F8F2">  </span><span style="color: #66D9EF">const</span><span style="color: #F8F8F2"> newerSlug </span><span style="color: #F92672">=</span><span style="color: #F8F8F2"> (i </span><span style="color: #F92672">+</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">1</span><span style="color: #F8F8F2">) </span><span style="color: #F92672">%</span><span style="color: #F8F8F2"> allPosts.length;</span></span>
+<span class="line"><span style="color: #F8F8F2">  </span><span style="color: #66D9EF">const</span><span style="color: #F8F8F2"> olderSlug </span><span style="color: #F92672">=</span><span style="color: #F8F8F2"> (i </span><span style="color: #F92672">-</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">1</span><span style="color: #F8F8F2"> </span><span style="color: #F92672">+</span><span style="color: #F8F8F2"> allPosts.length) </span><span style="color: #F92672">%</span><span style="color: #F8F8F2"> allPosts.length;</span></span>
+<span class="line"><span style="color: #F8F8F2">  </span><span style="color: #F92672">return</span><span style="color: #F8F8F2"> {</span></span>
+<span class="line"><span style="color: #F8F8F2">    </span><span style="color: #F92672">...</span><span style="color: #F8F8F2">post,</span></span>
+<span class="line"><span style="color: #F8F8F2">    data: {</span></span>
+<span class="line"><span style="color: #F8F8F2">      </span><span style="color: #F92672">...</span><span style="color: #F8F8F2">post.data,</span></span>
+<span class="line"><span style="color: #F8F8F2">      newerSlug: </span><span style="color: #E6DB74">`/blog/</span><span style="color: #F92672">${</span><span style="color: #F8F8F2">allPosts[newerSlug]?.slug</span><span style="color: #F92672">}</span><span style="color: #E6DB74">`</span><span style="color: #F8F8F2">,</span></span>
+<span class="line"><span style="color: #F8F8F2">      olderSlug: </span><span style="color: #E6DB74">`/blog/</span><span style="color: #F92672">${</span><span style="color: #F8F8F2">allPosts[olderSlug]?.slug</span><span style="color: #F92672">}</span><span style="color: #E6DB74">`</span><span style="color: #F8F8F2">,</span></span>
+<span class="line"><span style="color: #F8F8F2">    },</span></span>
+<span class="line"><span style="color: #F8F8F2">  };</span></span>
+<span class="line"><span style="color: #F8F8F2">}</span></span></code></pre>
+<p>This hardcodes the links to <code>/blog/</code>, but that’s exactly how the rest of the theme is built. Yes, best practices dictate that is made configurable, but I will defer to the spirit of <abbr title="You Aint Gonna Need It, one of eXtreme Programming&#x27;s principle">YAGNI</abbr> here. This also relies on the array of posts being sorted, but because the filenames start with the date I know they <em>are</em> sorted.</p>
+<p>The plugin is then added to the util index for easier import</p>
+<pre is:raw="" class="astro-code" style="background-color: #272822; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #F8F8F2">// /src/utils/index.ts</span></span>
+<span class="line"><span style="color: #75715E">@@ -1,4 +1,5 @@</span></span>
+<span class="line"><span style="color: #F8F8F2">...</span></span>
+<span class="line"><span style="color: #F8F8F2"> export { elementHasClass, toggleClass } from "./domElement";</span></span>
+<span class="line"><span style="color: #A6E22E"><span style="user-select: none;">+</span>export { nextAndPrevious } from "./nextAndPrevious";</span></span>
+<span class="line"><span style="color: #F8F8F2"> export { getUniqueTags, getUniqueTagsWithCount, sortMDByDate } from "./post";</span></span>
+<span class="line"><span style="color: #F8F8F2">...</span></span></code></pre>
+<p>Then add the plugin to the posts page</p>
+<pre is:raw="" class="astro-code" style="background-color: #272822; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #F8F8F2">// src/pages/blog/[...post].astro</span></span>
+<span class="line"><span style="color: #F8F8F2"> ---</span></span>
+<span class="line"><span style="color: #F8F8F2"> import PostLayout from "@/layouts/BlogPost";</span></span>
+<span class="line"><span style="color: #F92672"><span style="user-select: none;">-</span>import { slugRewrite } from "@/utils";</span></span>
+<span class="line"><span style="color: #A6E22E"><span style="user-select: none;">+</span>import { nextAndPrevious, slugRewrite } from "@/utils";</span></span>
+<span class="line"><span style="color: #F8F8F2">...</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #F8F8F2"> export async function getStaticPaths(): Promise&#x3C;GetStaticPathsResult> {</span></span>
+<span class="line"><span style="color: #F8F8F2">   const posts: CollectionEntry&#x3C;"post">[] = await getCollection("post");</span></span>
+<span class="line"><span style="color: #F92672"><span style="user-select: none;">-</span>  const mapped = posts.map(slugRewrite);</span></span>
+<span class="line"><span style="color: #A6E22E"><span style="user-select: none;">+</span>  const mapped = posts.map(slugRewrite).map(nextAndPrevious);</span></span></code></pre>
+<p>And finally use it in the BlogPost layout. I’ve added the links above the Table of contents on the top right (only visible on desktops). I didn’t know where else to put it quite frankly.</p>
+<pre is:raw="" class="astro-code" style="background-color: #272822; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #F8F8F2">// src/layouts/BlogPost.astro</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #F8F8F2"> const { post } = Astro.props;</span></span>
+<span class="line"><span style="color: #F8F8F2"> const {</span></span>
+<span class="line"><span style="color: #F92672"><span style="user-select: none;">-</span>  data: { title, description, ogImage, publishDate },</span></span>
+<span class="line"><span style="color: #A6E22E"><span style="user-select: none;">+</span>  data: { title, description, ogImage, publishDate, newerSlug, olderSlug },</span></span>
+<span class="line"><span style="color: #F8F8F2">   slug,</span></span>
+<span class="line"><span style="color: #F8F8F2"> } = post;</span></span>
+<span class="line"><span style="color: #F8F8F2">...</span></span>
+<span class="line"><span style="color: #F8F8F2">     &#x3C;aside class="hidden text-right sm:sticky sm:top-20 sm:block"></span></span>
+<span class="line"><span style="color: #A6E22E"><span style="user-select: none;">+</span>      &#x3C;nav class="flex w-full flex-nowrap justify-between"></span></span>
+<span class="line"><span style="color: #A6E22E"><span style="user-select: none;">+</span>        &#x3C;a class="before:content-['&#x3C;&#x3C;']" href={olderSlug}>previous&#x3C;/a></span></span>
+<span class="line"><span style="color: #A6E22E"><span style="user-select: none;">+</span>        &#x3C;a class="after:content-['>>']" href={newerSlug}>next&#x3C;/a></span></span>
+<span class="line"><span style="color: #A6E22E"><span style="user-select: none;">+</span>      &#x3C;/nav></span></span>
+<span class="line"><span style="color: #F8F8F2">       &#x3C;h2 class="font-semibold">Table of Contents&#x3C;/h2></span></span>
+<span class="line"><span style="color: #F8F8F2">...</span></span>
+<span class="line"></span></code></pre>
+<h2 id="preventing-the-main-content-area-from-expanding-when-the-content-is-too-wide">Preventing the main content area from expanding when the content is too wide</h2>
+<p>There was a bug whereby the main content area would expand if the content was too wide. That was very noticeable once I added the next/previous navigation links above the content navigation area to the right. The reason was that main content of posts were defined as a grid with autogenerated columns <code>3fr 1fr</code>. But that is equivalent to <code>minmax(auto, 3fr) 1fr</code>. It’s that <code>auto</code> that prevents the column from being smaller than the largest unit of content (image, longest word, whatever). In Tailwind one could declare custom widths with <code>sm:grid-cols-[minmax(0,3fr)_1fr]</code> but that is not very elegant. I opted for changing the layout to 4 columns (which use the <code>minmax(0, 1fr)</code> trick) instead. I also submitted a fix upstream in a PR</p>
+<pre is:raw="" class="astro-code" style="background-color: #272822; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #F8F8F2">- &#x3C;</span><span style="color: #F92672">div</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">class</span><span style="color: #F8F8F2">=</span><span style="color: #E6DB74">"sm:grid sm:grid-cols-[3fr_1fr] sm:items-start sm:gap-x-10"</span><span style="color: #F8F8F2">></span></span>
+<span class="line"><span style="color: #F8F8F2">-  &#x3C;</span><span style="color: #F92672">article</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">class</span><span style="color: #F8F8F2">=</span><span style="color: #E6DB74">"break-words"</span><span style="color: #F8F8F2">></span></span>
+<span class="line"><span style="color: #F8F8F2">+ &#x3C;</span><span style="color: #F92672">div</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">class</span><span style="color: #F8F8F2">=</span><span style="color: #E6DB74">"sm:grid sm:grid-cols-4 sm:items-start sm:gap-x-10"</span><span style="color: #F8F8F2">></span></span>
+<span class="line"><span style="color: #F8F8F2">+  &#x3C;</span><span style="color: #F92672">article</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">class</span><span style="color: #F8F8F2">=</span><span style="color: #E6DB74">"sm:col-span-3 break-words"</span><span style="color: #F8F8F2">></span></span></code></pre>
+<h2 id="astro-doesnt-respect-the-draft-flag-in-the-frontmatter-for-collections">Astro doesn’t respect the <em>draft</em> flag in the frontmatter for collections</h2>
+<p>Astro has a concept of <em>pages</em> and <em>collections</em>. They both are units of contents which correspond to .astro or .md(x) document. The two are distinguished by their location in the filesystem - <code>&#x3C;astro>/src/pages</code> and <code>&#x3C;astro>/src/content</code> (why content and not collections? good question). The only difference between them is that collections can have a schema for their frontmatter, which is very useful. That’s the theory anyway.</p>
+<p>In reality there is another difference: pages with <code>draft: true</code> in their frontmatter will be rendered when running <code>pnpm run dev</code> but not published when you run <code>pnpm run build</code>. Which makes sense - you want to see your draft when you work on them, but not publish them until they are ready. The same mechanism, sadly, doesn’t work for collections. I am not sure if it’s a bug or a feature. I filed <a href="https://github.com/withastro/astro/issues/6400">a bug on github</a>, but the way the documentation is written, where they mention you should create your own filter function, makes me think it’s a feature. Oh dear, if it is it’d be a daft idea on so many levels.</p>
+<p>Regardless of <em>why</em> it happens, I need a workaround. It will have to be applied to all instances of <code>getCollection</code>, the function which generates lists of posts in your index pages. Conveniently, the function takes a filtering function as second argument, which is exactly what I need. The only issue is that it gets called seven times across the site - manual replacement of so many instances is often error prone. A common workaround would be to wrap it with a function which has the filter built in. But I’ll leave that for the next iteration.</p>
+<p>The filter function itself is quite simple. It needs to run only when running the <code>pnpm run build</code> command, not <code>pnpm run dev</code>. Astro makes that information available with the global <code>import.meta.env.PROD</code> (for build) and <code>import.meta.env.DEV</code> (for dev). I called the function <code>draftsStop</code> - I tend to call filter functions <code>xxxStop</code> or <code>xxxPass</code>, as a nod to synthesisers filters.</p>
+<pre is:raw="" class="astro-code" style="background-color: #272822; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #88846F">// src/utils/draftsStop.ts</span></span>
+<span class="line"><span style="color: #F92672">import</span><span style="color: #F8F8F2"> </span><span style="color: #F92672">type</span><span style="color: #F8F8F2"> { CollectionEntry } </span><span style="color: #F92672">from</span><span style="color: #F8F8F2"> </span><span style="color: #E6DB74">"astro:content"</span><span style="color: #F8F8F2">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #F92672">export</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">function</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">draftsStop</span><span style="color: #F8F8F2">({ </span><span style="color: #FD971F">data</span><span style="color: #F8F8F2"> }</span><span style="color: #F92672">:</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E; font-weight: bold">CollectionEntry</span><span style="color: #F8F8F2">&#x3C;</span><span style="color: #E6DB74">"post"</span><span style="color: #F8F8F2">>) {</span></span>
+<span class="line"><span style="color: #F8F8F2">  </span><span style="color: #F92672">return</span><span style="color: #F8F8F2"> </span><span style="color: #F92672">import</span><span style="color: #F8F8F2">.meta.env.DEV </span><span style="color: #F92672">||</span><span style="color: #F8F8F2"> </span><span style="color: #F92672">!</span><span style="color: #F8F8F2">data?.draft;</span></span>
+<span class="line"><span style="color: #F8F8F2">}</span></span></code></pre>
+<p>And then change it everywhere it’s used</p>
+<pre is:raw="" class="astro-code" style="background-color: #272822; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #F8F8F2">...</span></span>
+<span class="line"><span style="color: #F92672"><span style="user-select: none;">-</span>import { slugRewrite, sortMDByDate } from "@/utils";</span></span>
+<span class="line"><span style="color: #A6E22E"><span style="user-select: none;">+</span>import { draftsStop, slugRewrite, sortMDByDate } from "@/utils";</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #F8F8F2">const MAX_POSTS = 20;</span></span>
+<span class="line"><span style="color: #F92672"><span style="user-select: none;">-</span>const allPosts = await getCollection("post");</span></span>
+<span class="line"><span style="color: #A6E22E"><span style="user-select: none;">+</span>const allPosts = await getCollection("post", draftsStop);</span></span>
+<span class="line"><span style="color: #F8F8F2">...</span></span></code></pre>
+<h2 id="fixing-the-sitemap-with-astro">Fixing the sitemap with Astro</h2>
+<p>The <a href="https://docs.astro.build/en/guides/integrations-guide/sitemap/">astro sitemap plugin</a> is quite messy. It doesn’t respect drafts and it allows a filter function, but only based on the url, not the frontmatter. Also it doesn’t integrate with the robots.txt, and has a strange arrangement with a sitemap-index sitemap-0 files. There is no way of fixing it. Luckily the rss feed can be used as sitemap, so I’ll just removed the plugin from the theme.</p>
+<h2 id="working-with-astro">Working with Astro</h2>
+<p>The rest was just minor adjustments, refactoring components, and so on. All in all working with Astro feels nice. There are a lot of quirky design decisions, some bugs, and it doesn’t always do what I wanted, but that is <em>always</em> the case: the perfect tool doesn’t exist. Thanks Astro team!</p>
+<h2 id="comments">Comments?</h2>
+<p>If you have any comments, join <a href="https://fosstodon.org/@gotofritz/109965165114995854">the discussion on mastodon</a></p>
+      </div>
+    </article>
+    <aside class="col-span-1 hidden text-right sm:sticky sm:top-20 sm:block">
+      <nav class="mb-4 flex w-full flex-nowrap justify-end gap-4 text-xs text-gray-600 dark:text-gray-300">
+        
+        <a class="before:content-['<<']" href="/blog/how-to-build-blog-with-sveltekit-markdown-tailwind">
+              older
+            </a>
+        <a class="after:content-['>>']" href="/blog/clasp-template-for-local-google-apps-script-projects-using-copier">
+              newer
+            </a>
+        
+      </nav>
+      <h2 class="font-semibold">Table of Contents</h2><ul class="mt-4 space-y-2 text-xs">
+              <li class="line-clamp-2 hover:text-accent">
+                  <a href="#tldr-was-it-worth-it-is-astro-better-than-sveltekit" aria-label="Scroll to section: TL;DR: was it worth it? Is Astro better than SvelteKit?">
+                    <span>&#35;</span> TL;DR: was it worth it? Is Astro better than SvelteKit?
+                  </a>
+                </li><li class="line-clamp-2 hover:text-accent">
+                  <a href="#wait-you-only-rebuilt-your-site-last-week" aria-label="Scroll to section: Wait, you only rebuilt your site last week">
+                    <span>&#35;</span> Wait, you only rebuilt your site last week
+                  </a>
+                </li><li class="line-clamp-2 hover:text-accent">
+                  <a href="#astro-posts-dont-have-a-default-layout-document" aria-label="Scroll to section: Astro posts don’t have a default layout document">
+                    <span>&#35;</span> Astro posts don’t have a default layout document
+                  </a>
+                </li><li class="line-clamp-2 hover:text-accent">
+                  <a href="#a-simple-remark-plugin-to-add-a-default-layout-to-astro-markdown-documents" aria-label="Scroll to section: A simple remark plugin to add a default ‘layout’ to Astro markdown documents">
+                    <span>&#35;</span> A simple remark plugin to add a default ‘layout’ to Astro markdown documents
+                  </a>
+                </li><li class="line-clamp-2 hover:text-accent">
+                  <a href="#converting-svgs-to-a-generic-astro-component" aria-label="Scroll to section: Converting SVGs to a generic Astro component">
+                    <span>&#35;</span> Converting SVGs to a generic Astro component
+                  </a>
+                </li><li class="line-clamp-2 hover:text-accent">
+                  <a href="#pivoting-to-astro-cactus-a-pre-built-astro-theme" aria-label="Scroll to section: Pivoting to Astro Cactus, a pre-built Astro theme">
+                    <span>&#35;</span> Pivoting to Astro Cactus, a pre-built Astro theme
+                  </a>
+                </li><li class="line-clamp-2 hover:text-accent">
+                  <a href="#installing-astro-cactus" aria-label="Scroll to section: Installing Astro Cactus">
+                    <span>&#35;</span> Installing Astro Cactus
+                  </a>
+                </li><li class="line-clamp-2 hover:text-accent">
+                  <a href="#changing-indentation-from-tabs-to-spaces-in-astro" aria-label="Scroll to section: Changing indentation from tabs to spaces in Astro">
+                    <span>&#35;</span> Changing indentation from tabs to spaces in Astro
+                  </a>
+                </li><li class="line-clamp-2 hover:text-accent">
+                  <a href="#validating-post-schema-with-zod" aria-label="Scroll to section: Validating post schema with zod">
+                    <span>&#35;</span> Validating post schema with zod
+                  </a>
+                </li><li class="line-clamp-2 hover:text-accent">
+                  <a href="#images-cannot-live-in-the-same-folder-as-the-posts-in-astro" aria-label="Scroll to section: Images cannot live in the same folder as the posts in Astro">
+                    <span>&#35;</span> Images cannot live in the same folder as the posts in Astro
+                  </a>
+                </li><li class="line-clamp-2 hover:text-accent">
+                  <a href="#nesting-post-folders-with-astro-cactus" aria-label="Scroll to section: Nesting post folders with Astro Cactus">
+                    <span>&#35;</span> Nesting post folders with Astro Cactus
+                  </a>
+                </li><li class="line-clamp-2 hover:text-accent">
+                  <a href="#prepend-post-filename-with-date-and-remove-it-when-generating-posts" aria-label="Scroll to section: Prepend post filename with date, and remove it when generating posts">
+                    <span>&#35;</span> Prepend post filename with date, and remove it when generating posts
+                  </a>
+                </li><li class="line-clamp-2 hover:text-accent">
+                  <a href="#adding-a-custom-font-to-the-tailwind-theme" aria-label="Scroll to section: Adding a custom font to the Tailwind theme">
+                    <span>&#35;</span> Adding a custom font to the Tailwind theme
+                  </a>
+                </li><li class="line-clamp-2 hover:text-accent">
+                  <a href="#creating-an-svg-logo-with-gimp" aria-label="Scroll to section: Creating an SVG logo. With Gimp">
+                    <span>&#35;</span> Creating an SVG logo. With Gimp
+                  </a>
+                </li><li class="line-clamp-2 hover:text-accent">
+                  <a href="#forcing-a-format-for-intldatetimeformatoptions" aria-label="Scroll to section: Forcing a format for Intl.DateTimeFormatOptions">
+                    <span>&#35;</span> Forcing a format for Intl.DateTimeFormatOptions
+                  </a>
+                </li><li class="line-clamp-2 hover:text-accent">
+                  <a href="#rendering-frontmatter-strings-with-html-in-them" aria-label="Scroll to section: Rendering frontmatter strings with HTML in them">
+                    <span>&#35;</span> Rendering frontmatter strings with HTML in them
+                  </a>
+                </li><li class="line-clamp-2 hover:text-accent">
+                  <a href="#next-and-previous-post-links" aria-label="Scroll to section: Next and Previous post links">
+                    <span>&#35;</span> Next and Previous post links
+                  </a>
+                </li><li class="line-clamp-2 hover:text-accent">
+                  <a href="#preventing-the-main-content-area-from-expanding-when-the-content-is-too-wide" aria-label="Scroll to section: Preventing the main content area from expanding when the content is too wide">
+                    <span>&#35;</span> Preventing the main content area from expanding when the content is too wide
+                  </a>
+                </li><li class="line-clamp-2 hover:text-accent">
+                  <a href="#astro-doesnt-respect-the-draft-flag-in-the-frontmatter-for-collections" aria-label="Scroll to section: Astro doesn’t respect the draft flag in the frontmatter for collections">
+                    <span>&#35;</span> Astro doesn’t respect the draft flag in the frontmatter for collections
+                  </a>
+                </li><li class="line-clamp-2 hover:text-accent">
+                  <a href="#fixing-the-sitemap-with-astro" aria-label="Scroll to section: Fixing the sitemap with Astro">
+                    <span>&#35;</span> Fixing the sitemap with Astro
+                  </a>
+                </li><li class="line-clamp-2 hover:text-accent">
+                  <a href="#working-with-astro" aria-label="Scroll to section: Working with Astro">
+                    <span>&#35;</span> Working with Astro
+                  </a>
+                </li><li class="line-clamp-2 hover:text-accent">
+                  <a href="#comments" aria-label="Scroll to section: Comments?">
+                    <span>&#35;</span> Comments?
+                  </a>
+                </li>
+            </ul>
+    </aside>
+  </div><button id="to-top-btn" class="z-90 fixed bottom-8 right-4 flex h-10 w-10 translate-y-28 items-center justify-center rounded-full border-2 border-transparent bg-zinc-200 text-3xl opacity-0 transition-all duration-300 hover:border-zinc-400 data-[show=true]:translate-y-0 data-[show=true]:opacity-100 dark:bg-zinc-700 sm:right-8 sm:h-12 sm:w-12" aria-label="Back to Top" data-show="false"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="h-6 w-6">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5"></path>
+    </svg>
+  </button>
+    </main>
+    <footer class="mt-auto flex w-full flex-col flex-wrap items-center justify-center gap-y-2 pt-20 pb-4 text-center align-top text-gray-500 sm:flex-row sm:justify-between sm:text-xs">
+  <div class="flex flex-wrap items-center gap-x-4 sm:items-center">
+  <p>Find me on</p>
+  <ul class="flex flex-1 items-center gap-x-4 sm:flex-initial">
+    <li>
+      <a class="inline-block p-2 sm:hover:text-link" href="https://github.com/gotofritz" target="_blank" rel="noopener noreferrer">
+        <svg class="h-6 w-6" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+          <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5">
+          </path>
+          <title>Github</title>
+        </svg>
+        <span class="sr-only">Github</span>
+      </a>
+    </li>
+    <li>
+      <a class="inline-block p-2 sm:hover:text-link" href="https://fosstodon.org/@gotofritz" target="_blank" rel="noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+          <path d="M18.648 15.254c-1.816 1.763 -6.648 1.626 -6.648 1.626a18.262 18.262 0 0 1 -3.288 -.256c1.127 1.985 4.12 2.81 8.982 2.475c-1.945 2.013 -13.598 5.257 -13.668 -7.636l-.026 -1.154c0 -3.036 .023 -4.115 1.352 -5.633c1.671 -1.91 6.648 -1.666 6.648 -1.666s4.977 -.243 6.648 1.667c1.329 1.518 1.352 2.597 1.352 5.633s-.456 4.074 -1.352 4.944z"></path>
+          <path d="M12 11.204v-2.926c0 -1.258 -.895 -2.278 -2 -2.278s-2 1.02 -2 2.278v4.722m4 -4.722c0 -1.258 .895 -2.278 2 -2.278s2 1.02 2 2.278v4.722"></path>
+
+          <title>Mastodon</title>
+        </svg>
+        <span class="sr-only">Mastodon</span>
+      </a>
+    </li>
+    <li>
+      <a class="inline-block p-2 sm:hover:text-link" href="https://www.linkedin.com/in/gotofritz/" target="_blank" rel="noopener noreferrer"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" aria-hidden="true" focusable="false" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+          <rect x="4" y="4" width="16" height="16" rx="2"></rect>
+          <line x1="8" y1="11" x2="8" y2="16"></line>
+          <line x1="8" y1="8" x2="8" y2="8.01"></line>
+          <line x1="12" y1="16" x2="12" y2="11"></line>
+          <path d="M16 16v-3a2 2 0 0 0 -4 0"></path>
+          <title>LinkedIn</title>
+        </svg>
+        <span class="sr-only">LinkedIn</span>
+      </a>
+    </li>
+    <li>
+      <a class="inline-block p-2 sm:hover:text-link" href="mailto:info@gotofritz.net">
+        <svg class="h-6 w-6" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+          <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+          <polyline points="3 7 12 13 21 7"></polyline>
+          <title>Email</title>
+        </svg>
+        <span class="sr-only">Email</span>
+      </a>
+    </li>
+    <li>
+      <a class="inline-block p-2 sm:hover:text-link" href="/feed.xml">
+        <svg class="h-6 w-6" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+          <circle cx="5" cy="19" r="1"></circle>
+          <path d="M4 4a16 16 0 0 1 16 16"></path>
+          <path d="M4 11a9 9 0 0 1 9 9"></path>
+          <title>RSS</title>
+        </svg>
+        <span class="sr-only">RSS</span>
+      </a>
+    </li>
+  </ul>
+</div>
+  <nav aria-label="More on this site" class="flex gap-x-2 sm:gap-x-0 sm:divide-x sm:divide-gray-500">
+    <a href="/" class="px-4 py-2 sm:py-0 sm:px-2 sm:hover:text-textColor sm:hover:underline">Home</a>
+    <a href="/about" class="px-4 py-2 sm:py-0 sm:px-2 sm:hover:text-textColor sm:hover:underline">About</a>
+    <a href="/posts" class="py-2 pr-0 pl-4 sm:py-0 sm:pl-2 sm:pr-0 sm:hover:text-textColor sm:hover:underline">Blog</a>
+  </nav>
+  <div class="my-8 mr-0 sm:mr-4">
+    <a href="https://creativecommons.org/licenses/by/4.0/">Licensed under a Creative Commons Attribution 4.0 license</a>
+  </div>
+</footer>
+  </body></html>
