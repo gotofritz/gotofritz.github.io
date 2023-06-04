@@ -15,8 +15,8 @@
 <link rel="canonical" href="https://gotofritz.net/blog/clearing-history-bash/">
 
 <!-- Primary Meta Tags -->
-<title>Clearing commands and other history tales in bash • gotofritz.net</title>
-<meta name="title" content="Clearing commands and other history tales in bash • gotofritz.net">
+<title>Clearing commands list, and other tales of bash history • gotofritz.net</title>
+<meta name="title" content="Clearing commands list, and other tales of bash history • gotofritz.net">
 <meta name="description" content="Clearing the command history is good practice when, for example, one has mistakenly pasted sensitive info.❯ history -c will do the trick. More details inside.">
 <meta name="author" content="Fritz Stelluto">
 
@@ -25,7 +25,7 @@
 
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content="article">
-<meta property="og:title" content="Clearing commands and other history tales in bash">
+<meta property="og:title" content="Clearing commands list, and other tales of bash history">
 <meta property="og:description" content="Clearing the command history is good practice when, for example, one has mistakenly pasted sensitive info.❯ history -c will do the trick. More details inside.">
 <meta property="og:url" content="https://gotofritz.net/blog/clearing-history-bash/">
 <meta property="og:site_name" content="gotofritz.net">
@@ -38,7 +38,7 @@
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image">
 <meta property="twitter:url" content="https://gotofritz.net/blog/clearing-history-bash/">
-<meta property="twitter:title" content="Clearing commands and other history tales in bash">
+<meta property="twitter:title" content="Clearing commands list, and other tales of bash history">
 <meta property="twitter:description" content="Clearing the command history is good practice when, for example, one has mistakenly pasted sensitive info.<br><code>❯ history -c</code> will do the trick. More details inside.">
 <meta property="twitter:image" content="https://gotofritz.net/og-image/clearing-history-bash.png">
 
@@ -140,7 +140,7 @@
     <main id="main" class="flex-1">
       <div class="sm:grid sm:grid-cols-4 sm:items-start sm:gap-x-10">
     <article class="col-span-3 break-words">
-      <div id="blog-hero"><h1 class="title mb-1 text-5xl">Clearing commands and other history tales in bash</h1>
+      <div id="blog-hero"><h1 class="title mb-1 text-5xl">Clearing commands list, and other tales of bash history</h1>
 <time datetime="2023-06-04T00:00:00.000Z">04 Jun 2023 </time>
 <div class="before:content-['|'] inline">
       <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" class="inline-block h-6 w-6" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -158,9 +158,20 @@
 <p class="mt-8 text-xl leading-7">Clearing the command history is good practice when, for example, one has mistakenly pasted sensitive info.<br><code>❯ history -c</code> will do the trick. More details inside.</p></div>
       <div class="prose prose-sm prose-cactus mt-12 prose-headings:font-semibold prose-headings:before:absolute prose-headings:before:-ml-4 prose-headings:before:text-accent prose-headings:before:content-['#'] prose-th:before:content-none">
         <h2 id="bash-command-history-file">Bash command history file</h2>
-<p>Bash saves a list of the commands run in a session into the <code>.bash_history</code> file in the home directory. You can view its contents by symply typing <code>❯ history</code> in the terminal. Another way to clear the history is simply to delete this file.</p>
+<p>Bash saves a list of the commands run in a session into the <code>.bash_history</code> file in the home directory. You can view its contents by symply typing in the terminal</p>
+<pre is:raw="" class="astro-code" style="background-color: #272822; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #F8F8F2">❯ </span><span style="color: #66D9EF">history</span></span></code></pre>
+<p>Btw, another way to clear the history is simply to delete this file.</p>
 <h2 id="delete-just-a-command-or-a-range-of-commands">Delete just a command, or a range of commands</h2>
-<p>Besides <code>❯ history -c</code> to delete the complete history, there is also a <code>❯ history -s N</code> and <code>❯ history -s N:M</code> to delete command N, or all commands between N and M, inclusive. N and M can be absolute numbers (the one you get next to each command when you run <code>❯ history</code>) or relative, but I avoid the relative ones. I never need the extra complexity. Talking of complex edge case I’ve never needed, you can also <em>write</em> to the history file with a few different variations. Here’s <a href="https://www.gnu.org/software/bash/manual/html_node/Bash-History-Builtins.html">a good reference from the GNU manual</a></p>
+<p>Besides the <code>-c</code> option to delete the complete history, there is also a the <code>-s</code> to delete specific entries in the list</p>
+<pre is:raw="" class="astro-code" style="background-color: #272822; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #88846F"># whole history</span></span>
+<span class="line"><span style="color: #F8F8F2">❯ </span><span style="color: #66D9EF">history</span><span style="color: #F8F8F2"> -c</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #88846F"># command 123 in the history</span></span>
+<span class="line"><span style="color: #F8F8F2">❯ </span><span style="color: #66D9EF">history</span><span style="color: #F8F8F2"> -s 123</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #88846F"># commands 123, 124. , 125</span></span>
+<span class="line"><span style="color: #F8F8F2">❯ </span><span style="color: #66D9EF">history</span><span style="color: #F8F8F2"> -s 123:125</span></span></code></pre>
+<p>N and M can be absolute numbers or relative. The absolute numbers you can get by running <code>history</code>, which prints them out next to the command. As for the relative ones I have never needed the extra complexity so I avoid them. Talking of complex edge case I’ve never needed, you can also <em>write</em> to the history file with a few different variations. Here’s <a href="https://www.gnu.org/software/bash/manual/html_node/Bash-History-Builtins.html">a good reference from the GNU manual</a></p>
 <h2 id="cycling-through-only-the-commands-starting-with-a-certain-string">Cycling through only the commands starting with a certain string</h2>
 <p>If you press the up arrow key at the start of a command line prompt, bash will cycle backwards through all the commands you typed previously.
 Pressing the up arrow cycles through <em>all</em> the commands, which can be tedious if the one you are after is far away. But if you know how the command started, you can type the start and then the up / down arrow to limit your search only to the commands starting with that string. To enable that you need to add these two lines to your <code>.inputrc</code> file (if the file doesn’t exist, just create it):</p>
@@ -183,14 +194,35 @@ Pressing the up arrow cycles through <em>all</em> the commands, which can be ted
 </ol>
 <h2 id="prevent-certain-commands-from-getting-into-the-history-in-the-first-place">Prevent certain commands from getting into the history in the first place</h2>
 <p>It can also be useful to prevent certain commands from getting into the history in the first place. There are two different approaches.</p>
-<p>To keep your history file size down, you can ignore sequential duplicates with the <code>export HISTCONTROL=ignoredups</code> line in your <code>.bash_profile</code>. Another trick, to allow you to bail out of history on a command by command basis, is to ignore commands that start with a blank character. That is achieved with <code>export HISTCONTROL=ignorespace</code>. If you want both, combine them with a colon - mine, for example is <code>export HISTCONTROL=ignoredups:ignorespace</code></p>
-<p>Another useful setting is a list of commands (or regexes) you don’t want to go in the history. These are typically generic commands that don’t add any value to the history, like looking up a man page. The variable to set is <code>HISTIGNORE</code>, and again, the separator is the colon. For example mine is <code>export HISTIGNORE="ls:cd:cd -:pwd:exit:date:* --help:man *:la:history"</code></p>
+<p>To keep your history file size down, you can ignore sequential duplicates with the <code>export HISTCONTROL=ignoredups</code> line in your <code>.bash_profile</code>. Another trick, to allow you to bail out of history on a command by command basis, is to ignore commands that start with a blank character. That is achieved with <code>export HISTCONTROL=ignorespace</code>. Then if you want to run a command without it being recorded in the history, just type a blank space and then the command. If you want both options, combine them with a colon - mine, for example is <code>export HISTCONTROL=ignoredups:ignorespace</code></p>
+<p>Another useful setting is a list of commands (wildcards work) you don’t want to go in the history. These are typically generic commands that don’t add any value to the history, like looking up a man page, or, indeed, <code>history</code>. The variable to set is <code>HISTIGNORE</code>, and again, the separator is the colon. For example mine is <code>export HISTIGNORE="ls:cd:cd -:pwd:exit:date:* --help:man *:la:history"</code></p>
 <h2 id="change-how-many-commands-bash-remembers-in-its-history">Change how many commands bash remembers in its history</h2>
 <p>The <strong>number of commands</strong> saved by bash is controlled by the environmental variable <code>HISTSIZE</code>, which is by default 500. You can add <code>export HISTSIZE=XXX</code>, where XXX is another number, as a new line to <code>.bash_profile</code> if you want to change that. I have a large one, 32768.</p>
 <h2 id="dont-use-a-history-file-at-all">Don’t use a history file at all</h2>
 <p>Or you can avoid having a history file at all by deleting HISTSIZE altogether. That can be achieved by adding the line <code>unset HISTSIZE</code> to your <code>.bash_profile</code>. Or alternatively, setting it to 0, it does the same thing. This may be useful on shared server environments.</p>
+<h2 id="summary-all-the-options-mentioned-in-the-post">Summary: all the options mentioned in the post</h2>
+<p>Here are the options mentioned in the post. This would be added to your <code>.bash_profile</code> or <code>.bashrc</code> in your home directory.</p>
+<pre is:raw="" class="astro-code" style="background-color: #272822; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #88846F"># no history</span></span>
+<span class="line"><span style="color: #F92672">export</span><span style="color: #F8F8F2"> HISTSIZE=0</span></span>
+<span class="line"><span style="color: #88846F"># or</span></span>
+<span class="line"><span style="color: #66D9EF">unset</span><span style="color: #F8F8F2"> HISTSIZE</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #88846F"># larger history than default</span></span>
+<span class="line"><span style="color: #F92672">export</span><span style="color: #F8F8F2"> HISTSIZE=32768</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #88846F"># ignore sequential duplicates</span></span>
+<span class="line"><span style="color: #F92672">export</span><span style="color: #F8F8F2"> HISTCONTROL=ignoredups</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #88846F"># ignore lines that start with a space</span></span>
+<span class="line"><span style="color: #F92672">export</span><span style="color: #F8F8F2"> HISTCONTROL=ignoredspace</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #88846F"># both of the above</span></span>
+<span class="line"><span style="color: #F92672">export</span><span style="color: #F8F8F2"> HISTCONTROL=ignoredups:ignorespace</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #88846F"># don't put the commands between the colons in the history</span></span>
+<span class="line"><span style="color: #F92672">export</span><span style="color: #F8F8F2"> HISTIGNORE=</span><span style="color: #E6DB74">"ls:cd:cd -:pwd:exit:date:* --help:man *:la:history"</span></span></code></pre>
 <h2 id="comments">Comments?</h2>
-<p>I haven’t got around adding a comment section to my blog, but <a href="https://fosstodon.org/@gotofritz">there is a companion post on mastodon</a> if you fancy adding a comment.</p>
+<p>I haven’t got around adding a comment section to my blog, but <a href="https://fosstodon.org/@gotofritz/110485701539527441">there is a companion post on mastodon</a> if you fancy adding a comment.</p>
       </div>
     </article>
     <aside class="col-span-1 hidden text-right sm:sticky sm:top-20 sm:block">
@@ -232,6 +264,10 @@ Pressing the up arrow cycles through <em>all</em> the commands, which can be ted
                 </li><li class="line-clamp-2 hover:text-accent">
                   <a href="#dont-use-a-history-file-at-all" aria-label="Scroll to section: Don’t use a history file at all">
                     <span>&#35;</span> Don’t use a history file at all
+                  </a>
+                </li><li class="line-clamp-2 hover:text-accent">
+                  <a href="#summary-all-the-options-mentioned-in-the-post" aria-label="Scroll to section: Summary: all the options mentioned in the post">
+                    <span>&#35;</span> Summary: all the options mentioned in the post
                   </a>
                 </li><li class="line-clamp-2 hover:text-accent">
                   <a href="#comments" aria-label="Scroll to section: Comments?">
