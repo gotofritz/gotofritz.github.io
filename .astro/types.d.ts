@@ -420,6 +420,13 @@ declare module 'astro:content' {
   collection: "post",
   data: InferEntrySchema<"post">
 },
+"2023-10-20-using-gh-to-generate-a-new-repo.md": {
+  id: "2023-10-20-using-gh-to-generate-a-new-repo.md",
+  slug: "2023-10-20-using-gh-to-generate-a-new-repo",
+  body: string,
+  collection: "post",
+  data: InferEntrySchema<"post">
+},
 },
 
 	};

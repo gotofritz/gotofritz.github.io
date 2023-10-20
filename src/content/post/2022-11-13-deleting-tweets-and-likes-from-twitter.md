@@ -9,7 +9,7 @@ tags:
 
 ## Deleting it all? Deleting it all
 
-I'm not going to waste your time with the reasons I left Twitter. I never used it much anyway. But now that I've moved to Mastodon ([@gotofritz@fosstodon.org](https://fosstodon.org/@gotofritz)), I don't want my old Twitter account to have any trace of me. So I deleted everything: tweets, retweets, media, likes. My bookmarks are private, so they're safe. And I deleted my direct messages manually because there were so few of them. Now I'm starting fresh on Mastodon.
+I'm not going to waste your time with the reasons I left Twitter. I never used it much anyway. But now I moved on, and I don't want my old Twitter account to have any trace of me. So I deleted everything: tweets, retweets, media, likes. My bookmarks are private, so they're safe. And I deleted my direct messages manually because there were so few of them.
 
 ## Deleting all tweets, retweets and media with delete tweet
 

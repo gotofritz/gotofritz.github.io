@@ -12,12 +12,12 @@
 <link rel="icon" href="/icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="manifest" href="/manifest.webmanifest">
-<link rel="canonical" href="https://gotofritz.net/blog/installing-python-on-mac-os-x-in-2022/">
+<link rel="canonical" href="https://gotofritz.net/blog/using-gh-to-generate-a-new-repo/">
 
 <!-- Primary Meta Tags -->
-<title>How I install python on OS X in 2022 • gotofritz.net</title>
-<meta name="title" content="How I install python on OS X in 2022 • gotofritz.net">
-<meta name="description" content="There are many different ways of doing it; my favourite involves using pyenv">
+<title>Using GH to generate a new repo • gotofritz.net</title>
+<meta name="title" content="Using GH to generate a new repo • gotofritz.net">
+<meta name="description" content="gh is a lovely CLI tool from GitHub that lets you manage your repos from Terminal, including downloading license and .gitignore files.">
 <meta name="author" content="Fritz Stelluto">
 
 <!-- Theme Colour -->
@@ -25,22 +25,22 @@
 
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content="article">
-<meta property="og:title" content="How I install python on OS X in 2022">
-<meta property="og:description" content="There are many different ways of doing it; my favourite involves using pyenv">
-<meta property="og:url" content="https://gotofritz.net/blog/installing-python-on-mac-os-x-in-2022/">
+<meta property="og:title" content="Using GH to generate a new repo">
+<meta property="og:description" content="gh is a lovely CLI tool from GitHub that lets you manage your repos from Terminal, including downloading license and .gitignore files.">
+<meta property="og:url" content="https://gotofritz.net/blog/using-gh-to-generate-a-new-repo/">
 <meta property="og:site_name" content="gotofritz.net">
 <meta property="og:locale" content="en_GB">
-<meta property="og:image" content="https://gotofritz.net/og-image/installing-python-on-mac-os-x-in-2022.png">
+<meta property="og:image" content="https://gotofritz.net/og-image/using-gh-to-generate-a-new-repo.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="article:author" content="Fritz Stelluto"><meta property="article:published_time" content="2022-01-04T00:00:00.000Z">
+<meta property="article:author" content="Fritz Stelluto"><meta property="article:published_time" content="2023-10-20T00:00:00.000Z">
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image">
-<meta property="twitter:url" content="https://gotofritz.net/blog/installing-python-on-mac-os-x-in-2022/">
-<meta property="twitter:title" content="How I install python on OS X in 2022">
-<meta property="twitter:description" content="There are many different ways of doing it; my favourite involves using pyenv">
-<meta property="twitter:image" content="https://gotofritz.net/og-image/installing-python-on-mac-os-x-in-2022.png">
+<meta property="twitter:url" content="https://gotofritz.net/blog/using-gh-to-generate-a-new-repo/">
+<meta property="twitter:title" content="Using GH to generate a new repo">
+<meta property="twitter:description" content="<a href=&#34;https://github.com/cli/cli&#34; class=&#34;underline&#34;>gh</a> is a lovely CLI tool from GitHub that lets you manage your repos from Terminal, including downloading license and .gitignore files.">
+<meta property="twitter:image" content="https://gotofritz.net/og-image/using-gh-to-generate-a-new-repo.png">
 
 <!-- RSS auto-discovery -->
 <link rel="alternate" type="application/rss+xml" title="gotofritz.net" href="/rss.xml">
@@ -138,8 +138,8 @@
     <main id="main" class="flex-1">
       <div class="sm:grid sm:grid-cols-4 sm:items-start sm:gap-x-10">
     <article class="col-span-3 break-words">
-      <div id="blog-hero"><h1 class="title mb-1 text-5xl">How I install python on OS X in 2022</h1>
-<time datetime="2022-01-04T00:00:00.000Z">04 Jan 2022 </time>
+      <div id="blog-hero"><h1 class="title mb-1 text-5xl">Using GH to generate a new repo</h1>
+<time datetime="2023-10-20T00:00:00.000Z">20 Oct 2023 </time>
 <div class="before:content-['|'] inline">
       <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" class="inline-block h-6 w-6" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
           <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -147,129 +147,115 @@
           <path d="M17.573 18.407l2.834 -2.834a2.025 2.025 0 0 0 0 -2.864l-7.117 -7.116"></path>
           <path d="M6 9h-.01"></path>
         </svg>
-      <a class="inline-block pr-1" aria-label="View more blogs with the tag OsX" href="/tags/OsX">
-          #OsX
-        </a><a class="inline-block pr-1" aria-label="View more blogs with the tag Python" href="/tags/Python">
-          #Python
+      <a class="inline-block pr-1" aria-label="View more blogs with the tag Bash" href="/tags/Bash">
+          #Bash
+        </a><a class="inline-block pr-1" aria-label="View more blogs with the tag Tips" href="/tags/Tips">
+          #Tips
+        </a><a class="inline-block pr-1" aria-label="View more blogs with the tag GitHub" href="/tags/GitHub">
+          #GitHub
         </a>
     </div>
-<p class="mt-8 text-xl leading-7">There are many different ways of doing it; my favourite involves using pyenv</p></div>
+<p class="mt-8 text-xl leading-7"><a href="https://github.com/cli/cli" class="underline">gh</a> is a lovely CLI tool from GitHub that lets you manage your repos from Terminal, including downloading license and .gitignore files.</p></div>
       <div class="prose prose-sm prose-cactus mt-12 prose-headings:font-semibold prose-headings:before:absolute prose-headings:before:-ml-4 prose-headings:before:text-accent prose-headings:before:content-['#'] prose-th:before:content-none">
-        <h2 id="ignore-os-xs-own-python-versions">Ignore OS X’s own python version(s)</h2>
-<p>Mac OS X comes with its own version of python; one which is deprecated since 2020. Given its age, it’s better ignored; I treat it as an internal system tool, nothing to do with me. OS X also comes with python 3, which is available with the command <code>$ python3</code>. I ignore that too</p>
-<h2 id="homebrew-can-manage-python-versions">Homebrew can manage python versions</h2>
-<p>You can also use homebrew to install python, with <code>brew install python</code>. But I found aliasing different versions for different projects always tricky when doing it that way</p>
-<h2 id="using-pyenv-to-manage-different-versions-of-python">Using pyenv to manage different versions of python</h2>
-<p>Pyenv is very versatile and simple. I install the main version with the following commands in Terminal</p>
-<pre is:raw="" class="astro-code" style="background-color: #272822; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #88846F"># homebrew is still involved</span></span>
-<span class="line"><span style="color: #F8F8F2">❯ brew install pyenv</span></span>
-<span class="line"></span>
-<span class="line"><span style="color: #88846F"># check which versions are available</span></span>
-<span class="line"><span style="color: #F8F8F2">❯ pyenv install -l</span></span>
-<span class="line"><span style="color: #F8F8F2">Available versions:</span></span>
-<span class="line"><span style="color: #F8F8F2">  2.1.3</span></span>
-<span class="line"><span style="color: #F8F8F2">  2.2.3</span></span>
+        <h2 id="tldr-create-a-blank-repo-with-a-license-file-a-readme-and-a-visualstudio-gitignore">TL;DR Create a blank repo with a LICENSE file, a README and a VisualStudio .gitignore</h2>
+<pre is:raw="" class="astro-code" style="background-color: #272822; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #F8F8F2">❯ gh repo create YOUR_REPO \</span></span>
+<span class="line"><span style="color: #F8F8F2"> -d </span><span style="color: #E6DB74">"ADD A DESCRIPTION"</span><span style="color: #F8F8F2"> \</span></span>
+<span class="line"><span style="color: #F8F8F2"> --add-readme --disable-wiki --private \</span></span>
+<span class="line"><span style="color: #F8F8F2"> --gitignore VisualStudio -l MIT</span></span></code></pre>
+<h2 id="gh-is-a-great-time-saver">gh is a great time saver</h2>
+<p>On its own it gh may not seem <em>that</em> useful. But I use <code>gh pr create -d</code>, <code>gh pr ready</code>, <code>gh pr view --web</code> hundreds of times a week, and not having to stop what I’m doing and switch to a browser is great. I knew you could create repos with it, but I have only just learned a couple of new tricks</p>
+<h2 id="using-gh-to-get-a-list-of-github-licenses">Using GH to get a list of GitHub licenses</h2>
+<p>You can query GitHub’s GraphQL or rest endpoints without having to add auth tokens (you login via <code>gh</code> itself with <code>gh auth login</code>). The help screen has a lot of useful samples, for example</p>
+<pre is:raw="" class="astro-code" style="background-color: #272822; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #F8F8F2">❯ gh api -h</span></span>
+<span class="line"><span style="color: #F8F8F2">  Makes an authenticated HTTP request to the GitHub API and prints the response.</span></span>
 <span class="line"><span style="color: #F8F8F2">  ...</span></span>
-<span class="line"><span style="color: #F8F8F2">  stackless-3.7.5</span></span>
 <span class="line"></span>
-<span class="line"><span style="color: #88846F"># the latest at the time of writing</span></span>
-<span class="line"><span style="color: #F8F8F2">❯ pyenv install 3.10.1</span></span>
+<span class="line"><span style="color: #F8F8F2">  </span><span style="color: #88846F"># post an issue comment</span></span>
+<span class="line"><span style="color: #F8F8F2">  $ gh api repos/{owner}/{repo}/issues/123/comments -f body=</span><span style="color: #E6DB74">'Hi from CLI'</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #F8F8F2">  </span><span style="color: #88846F"># list releases with GraphQL</span></span>
+<span class="line"><span style="color: #F8F8F2">  $ gh api graphql -F owner=</span><span style="color: #E6DB74">'{owner}'</span><span style="color: #F8F8F2"> -F name=</span><span style="color: #E6DB74">'{repo}'</span><span style="color: #F8F8F2"> -f query=</span><span style="color: #E6DB74">'</span></span>
+<span class="line"><span style="color: #E6DB74">    ...</span></span></code></pre>
+<p>To get a list of licenses just use the <code>licenses</code> built-in endpoint. Helpfully, gh is shipped with <a href="https://github.com/jqlang/jq">jq</a> - you can summon itby passing the -q option</p>
+<pre is:raw="" class="astro-code" style="background-color: #272822; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #F8F8F2">❯ gh api licenses -q </span><span style="color: #E6DB74">'.[].name'</span></span>
+<span class="line"><span style="color: #F8F8F2">GNU Affero General Public License v3.0</span></span>
+<span class="line"><span style="color: #F8F8F2">Apache License 2.0</span></span>
+<span class="line"><span style="color: #F8F8F2">BSD 2-Clause </span><span style="color: #E6DB74">"Simplified"</span><span style="color: #F8F8F2"> License</span></span>
+<span class="line"><span style="color: #F8F8F2">BSD 3-Clause </span><span style="color: #E6DB74">"New"</span><span style="color: #F8F8F2"> or </span><span style="color: #E6DB74">"Revised"</span><span style="color: #F8F8F2"> License</span></span>
+<span class="line"><span style="color: #F8F8F2">Boost Software License 1.0</span></span>
+<span class="line"><span style="color: #F8F8F2">Creative Commons Zero v1.0 Universal</span></span>
+<span class="line"><span style="color: #F8F8F2">Eclipse Public License 2.0</span></span>
+<span class="line"><span style="color: #F8F8F2">GNU General Public License v2.0</span></span>
+<span class="line"><span style="color: #F8F8F2">GNU General Public License v3.0</span></span>
+<span class="line"><span style="color: #F8F8F2">GNU Lesser General Public License v2.1</span></span>
+<span class="line"><span style="color: #F8F8F2">MIT License</span></span>
+<span class="line"><span style="color: #F8F8F2">Mozilla Public License 2.0</span></span>
+<span class="line"><span style="color: #F8F8F2">The Unlicense</span></span></code></pre>
+<h2 id="using-gh-to-get-gitignore-files">Using GH to get .gitignore files</h2>
+<p>Github doesn’t have a similar .gitignore endpoint. But it has a special repo for .gitignore files, <a href="https://github.com/github/gitignore">github/gitignore</a>, and you can use the normal api command to get files from it</p>
+<pre is:raw="" class="astro-code" style="background-color: #272822; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #88846F"># get the list of available .gitignores</span></span>
+<span class="line"><span style="color: #F8F8F2">❯ gh api /gitignore/templates -q </span><span style="color: #E6DB74">".[]"</span></span>
+<span class="line"><span style="color: #F8F8F2">AL</span></span>
+<span class="line"><span style="color: #F8F8F2">Actionscript</span></span>
+<span class="line"><span style="color: #F8F8F2">Ada</span></span>
+<span class="line"><span style="color: #F8F8F2">Agda</span></span>
+<span class="line"><span style="color: #F8F8F2">Android</span></span>
+<span class="line"><span style="color: #F8F8F2">AppEngine</span></span>
 <span class="line"><span style="color: #F8F8F2">...</span></span>
 <span class="line"></span>
-<span class="line"><span style="color: #88846F"># make it the default version</span></span>
-<span class="line"><span style="color: #F8F8F2">❯ pyenv global 3.10.1</span></span></code></pre>
-<p>Then I need to update my $PATH. I use the <a href="/blog/storing-bash-profile-and-so-on-on-github/">dotfiles</a> concept to manage my CLI defaults. The <a href="https://github.com/gotofritz/dotfiles/blob/master/.path">.path</a> file from that project handles the $PATH variable. I made changes to it:</p>
-<pre is:raw="" class="astro-code" style="background-color: #272822; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #F8F8F2">❯ </span><span style="color: #F92672">if</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">command</span><span style="color: #F8F8F2"> -v pyenv </span><span style="color: #F92672">1></span><span style="color: #F8F8F2">/dev/null </span><span style="color: #F92672">2>&#x26;1;</span><span style="color: #F8F8F2"> </span><span style="color: #F92672">then</span></span>
-<span class="line"><span style="color: #F8F8F2">  </span><span style="color: #66D9EF">eval</span><span style="color: #F8F8F2"> </span><span style="color: #E6DB74">"$(pyenv init -)"</span></span>
-<span class="line"><span style="color: #F92672">fi</span></span>
+<span class="line"><span style="color: #88846F"># get the one you want</span></span>
+<span class="line"><span style="color: #F8F8F2">❯ gh api /gitignore/templates/VisualStudio -q </span><span style="color: #E6DB74">".source"</span></span>
+<span class="line"><span style="color: #88846F">## Ignore Visual Studio temporary files, build results, and</span></span>
+<span class="line"><span style="color: #88846F">## files generated by popular Visual Studio add-ons.</span></span>
+<span class="line"><span style="color: #88846F">##</span></span>
+<span class="line"><span style="color: #88846F">## Get latest from https://github.com/github/gitignore/blob/main/VisualStudio.gitignore</span></span>
+<span class="line"><span style="color: #F8F8F2">...</span></span></code></pre>
+<h2 id="creating-a-repo-with-a-gitignore-and-a-license-file">Creating a repo with a gitignore and a License file</h2>
+<p>The <code>git repo create NAME</code> command comes with a few useful flags, and that include the license and gitignore as above. Sadly you can only add a single .gitignore, if your repo uses multiple languages, you’ll have to add the others later</p>
+<pre is:raw="" class="astro-code" style="background-color: #272822; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #F8F8F2">❯ gh repo create YOUR_REPO \</span></span>
+<span class="line"><span style="color: #F8F8F2"> -d </span><span style="color: #E6DB74">"ADD A DESCRIPTION"</span><span style="color: #F8F8F2"> \</span></span>
+<span class="line"><span style="color: #F8F8F2"> --add-readme --disable-wiki --private \</span></span>
+<span class="line"><span style="color: #F8F8F2"> --gitignore VisualStudio -l MIT</span></span>
+<span class="line"><span style="color: #F8F8F2"> ✓ Created repository YOU/YOUR_REPO on GitHub</span></span>
 <span class="line"></span>
-<span class="line"><span style="color: #88846F"># This is actually a simplified version of what's in my .path file</span></span>
-<span class="line"><span style="color: #F92672">export</span><span style="color: #F8F8F2"> PATH=</span><span style="color: #E6DB74">"$(pyenv root)/shims:..OTHER STUFF...:</span><span style="color: #F8F8F2">$PATH</span><span style="color: #E6DB74">"</span></span></code></pre>
-<p>The important part is the <code>$(pyenv root)/shims</code> in the $PATH. This is what makes the terminal load the pyenv version on the CLI instead of the standard OS X one. To prove it works, open a new terminal window and type</p>
-<pre is:raw="" class="astro-code" style="background-color: #272822; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #F8F8F2">❯ python -V</span></span>
-<span class="line"><span style="color: #F8F8F2">3.10.1</span></span></code></pre>
-<h2 id="install-pipenv">Install pipenv</h2>
-<p>I use pipenv to manage python versions in my projects; for those coming from node, it’s kind of a mixture of nvm and yarn. That is installed with a simple pip command. Installing python also installs pip, so it should be already on your system</p>
-<pre is:raw="" class="astro-code" style="background-color: #272822; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #F8F8F2">❯ pip install --user pipenv</span></span>
-<span class="line"><span style="color: #F8F8F2">Collecting pipenv</span></span>
-<span class="line"><span style="color: #F8F8F2">  Downloading pipenv-2021.11.23-py2.py3-none-any.whl (3.6 MB)</span></span>
-<span class="line"><span style="color: #F8F8F2">  ...</span></span>
-<span class="line"><span style="color: #F8F8F2">  WARNING: The script virtualenv-clone is installed </span><span style="color: #F92672">in</span><span style="color: #F8F8F2"> </span><span style="color: #E6DB74">'/Users/fritz/.local/bin'</span><span style="color: #F8F8F2"> which is not on PATH.</span></span>
-<span class="line"><span style="color: #F8F8F2">  Consider adding this directory to PATH or, </span><span style="color: #F92672">if</span><span style="color: #F8F8F2"> you prefer to suppress this warning, use --no-warn-script-location.</span></span>
-<span class="line"><span style="color: #F8F8F2">  WARNING: The script virtualenv is installed </span><span style="color: #F92672">in</span><span style="color: #F8F8F2"> </span><span style="color: #E6DB74">'/Users/fritz/.local/bin'</span><span style="color: #F8F8F2"> which is not on PATH.</span></span>
-<span class="line"><span style="color: #F8F8F2">  Consider adding this directory to PATH or, </span><span style="color: #F92672">if</span><span style="color: #F8F8F2"> you prefer to suppress this warning, use --no-warn-script-location.</span></span>
-<span class="line"><span style="color: #F8F8F2">  WARNING: The scripts pipenv and pipenv-resolver are installed </span><span style="color: #F92672">in</span><span style="color: #F8F8F2"> </span><span style="color: #E6DB74">'/Users/fritz/.local/bin'</span><span style="color: #F8F8F2"> which is not on PATH.</span></span>
-<span class="line"><span style="color: #F8F8F2">  Consider adding this directory to PATH or, </span><span style="color: #F92672">if</span><span style="color: #F8F8F2"> you prefer to suppress this warning, use --no-warn-script-location.</span></span>
-<span class="line"><span style="color: #F8F8F2">  Successfully installed certi...etc</span></span></code></pre>
-<p>And yes, it creates yet another config directory, and I need to add that to the path too. I could move all the files to the <code>~/bin</code>directory, where I keep all this kind of stuff. But the benefits are minimal, compared to the risks when upgrading pipenv. So I do what pipenv asks and add the directory to the path.</p>
-<pre is:raw="" class="astro-code" style="background-color: #272822; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #88846F"># This is the .path file from my dotfile repo again</span></span>
-<span class="line"><span style="color: #F92672">export</span><span style="color: #F8F8F2"> PATH=</span><span style="color: #E6DB74">"</span><span style="color: #F8F8F2">$HOME</span><span style="color: #E6DB74">/.local/bin:$(pyenv root)/shims:..OTHER STUFF...:</span><span style="color: #F8F8F2">$PATH</span><span style="color: #E6DB74">"</span></span></code></pre>
-<h2 id="trying-to-prevent-python-issues-when-installing-node-gyp">Trying to prevent python issues when installing node-gyp</h2>
-<p>I have had all sort of troubles trying to run node 17 on Mac OS X Monterey. <code>node-gyp</code>, which has always been tricky, seems to be acting up again. It must be hard for those open source contributors to keep up with all the new versions of al the OSes… I don’t envy them. To avoid issues, <a href="https://github.com/nodejs/node-gyp#configuring-python-dependency">they suggest setting the path to the Python executable in the npm config</a>. I do that in the same .path file, in the pyenv block created during the pyenv installation</p>
-<pre is:raw="" class="astro-code" style="background-color: #272822; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #88846F"># .path</span></span>
-<span class="line"><span style="color: #F8F8F2">if command -v pyenv 1>/dev/null 2>&#x26;1; then</span></span>
-<span class="line"><span style="color: #F8F8F2">  eval "$(pyenv init -)"</span></span>
-<span class="line"><span style="color: #A6E22E"><span style="user-select: none;">+</span>  if command -v npm 1>/dev/null 2>&#x26;1; then</span></span>
-<span class="line"><span style="color: #A6E22E"><span style="user-select: none;">+</span>    eval "$(npm config set python $(pyenv root)/shims/python)"</span></span>
-<span class="line"><span style="color: #A6E22E"><span style="user-select: none;">+</span>  fi</span></span>
-<span class="line"><span style="color: #F8F8F2">fi</span></span></code></pre>
-<p>I reload the dotfiles and the .npmrc file does indeed contain the Python path</p>
-<pre is:raw="" class="astro-code" style="background-color: #272822; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #88846F"># this creates a new .bash_profile out of my dotfiles</span></span>
-<span class="line"><span style="color: #F8F8F2">❯ ./bootstrap -f</span></span>
-<span class="line"><span style="color: #F8F8F2">From github.com:gotofritz/dotfiles</span></span>
-<span class="line"><span style="color: #F8F8F2"> </span><span style="color: #F92672">*</span><span style="color: #F8F8F2"> branch            master     -</span><span style="color: #F92672">></span><span style="color: #F8F8F2"> FETCH_HEAD</span></span>
-<span class="line"><span style="color: #F8F8F2">Already up to date.</span></span>
-<span class="line"><span style="color: #F8F8F2">building file list ... </span><span style="color: #F92672">done</span></span>
+<span class="line"><span style="color: #F8F8F2">❯ gh api /gitignore/templates/Python -q </span><span style="color: #E6DB74">".source"</span><span style="color: #F8F8F2"> </span><span style="color: #F92672">>></span><span style="color: #F8F8F2"> .gitignore</span></span>
 <span class="line"></span>
-<span class="line"><span style="color: #F8F8F2">sent 402 bytes  received 20 bytes  844.00 bytes/sec</span></span>
-<span class="line"><span style="color: #F8F8F2">total size is 80123  speedup is 189.86</span></span>
-<span class="line"></span>
-<span class="line"><span style="color: #88846F"># did it work?</span></span>
-<span class="line"><span style="color: #F8F8F2">❯ cat </span><span style="color: #F92672">~</span><span style="color: #F8F8F2">/.nprmc</span></span>
-<span class="line"><span style="color: #F8F8F2">python=/Users/fritz/.pyenv/shims/python</span></span></code></pre>
-<h2 id="prior-art">Prior art</h2>
-<p>I found these posts helpful:</p>
-<p><a href="https://opensource.com/article/20/4/pyenv">opensource.com/article/20/4/pyenv</a>
-<a href="https://opensource.com/article/19/5/python-3-default-mac">opensource.com/article/19/5/python-3-default-mac</a>
-<a href="https://www.freecodecamp.org/news/python-version-on-mac-update/">www.freecodecamp.org/news/python-version-on-mac-update/</a>
-<a href="https://github.com/nodejs/node-gyp">github.com/nodejs/node-gyp</a></p>
+<span class="line"><span style="color: #88846F"># "Node" is the .gitignore for JS and TS too</span></span>
+<span class="line"><span style="color: #F8F8F2">❯ gh api /gitignore/templates/Node -q </span><span style="color: #E6DB74">".source"</span><span style="color: #F8F8F2"> </span><span style="color: #F92672">>></span><span style="color: #F8F8F2"> .gitignore</span></span></code></pre>
+<p>I don’t create that many repos, but if I did it wouldn’t be too hard to wrap the above sequence of commands in a bash function.</p>
       </div>
     </article>
     <aside class="col-span-1 hidden text-right sm:sticky sm:top-20 sm:block">
       <nav class="mb-4 flex w-full flex-nowrap justify-end gap-4 text-xs text-gray-600 dark:text-gray-300">
         
-        <a class="before:content-['<<']" href="/blog/setting-up-thunderbird-for-gmail-on-os-x">
+        <a class="before:content-['<<']" href="/blog/clearing-history-bash">
               older
             </a>
-        <a class="after:content-['>>']" href="/blog/fixing-autoformatting-django-templates-in-visual-studio-code">
-              newer
-            </a>
         
+        <a class="before:content-['<<<<']" href="/blog/batch-unrar-command-line-os-x">
+              oldest
+            </a>
       </nav>
       <h2 class="font-semibold">Table of Contents</h2><ul class="mt-4 space-y-2 text-xs">
               <li class="line-clamp-2 hover:text-accent">
-                  <a href="#ignore-os-xs-own-python-versions" aria-label="Scroll to section: Ignore OS X’s own python version(s)">
-                    <span>&#35;</span> Ignore OS X’s own python version(s)
+                  <a href="#tldr-create-a-blank-repo-with-a-license-file-a-readme-and-a-visualstudio-gitignore" aria-label="Scroll to section: TL;DR Create a blank repo with a LICENSE file, a README and a VisualStudio .gitignore">
+                    <span>&#35;</span> TL;DR Create a blank repo with a LICENSE file, a README and a VisualStudio .gitignore
                   </a>
                 </li><li class="line-clamp-2 hover:text-accent">
-                  <a href="#homebrew-can-manage-python-versions" aria-label="Scroll to section: Homebrew can manage python versions">
-                    <span>&#35;</span> Homebrew can manage python versions
+                  <a href="#gh-is-a-great-time-saver" aria-label="Scroll to section: gh is a great time saver">
+                    <span>&#35;</span> gh is a great time saver
                   </a>
                 </li><li class="line-clamp-2 hover:text-accent">
-                  <a href="#using-pyenv-to-manage-different-versions-of-python" aria-label="Scroll to section: Using pyenv to manage different versions of python">
-                    <span>&#35;</span> Using pyenv to manage different versions of python
+                  <a href="#using-gh-to-get-a-list-of-github-licenses" aria-label="Scroll to section: Using GH to get a list of GitHub licenses">
+                    <span>&#35;</span> Using GH to get a list of GitHub licenses
                   </a>
                 </li><li class="line-clamp-2 hover:text-accent">
-                  <a href="#install-pipenv" aria-label="Scroll to section: Install pipenv">
-                    <span>&#35;</span> Install pipenv
+                  <a href="#using-gh-to-get-gitignore-files" aria-label="Scroll to section: Using GH to get .gitignore files">
+                    <span>&#35;</span> Using GH to get .gitignore files
                   </a>
                 </li><li class="line-clamp-2 hover:text-accent">
-                  <a href="#trying-to-prevent-python-issues-when-installing-node-gyp" aria-label="Scroll to section: Trying to prevent python issues when installing node-gyp">
-                    <span>&#35;</span> Trying to prevent python issues when installing node-gyp
-                  </a>
-                </li><li class="line-clamp-2 hover:text-accent">
-                  <a href="#prior-art" aria-label="Scroll to section: Prior art">
-                    <span>&#35;</span> Prior art
+                  <a href="#creating-a-repo-with-a-gitignore-and-a-license-file" aria-label="Scroll to section: Creating a repo with a gitignore and a License file">
+                    <span>&#35;</span> Creating a repo with a gitignore and a License file
                   </a>
                 </li>
             </ul>

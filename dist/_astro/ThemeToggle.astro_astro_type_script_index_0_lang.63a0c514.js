@@ -1,0 +1,1 @@
+class n extends HTMLElement{constructor(){super();const e=this.querySelector("button");function t(s){document.documentElement.classList.toggle("dark",s),e.setAttribute("aria-pressed",String(s))}e.addEventListener("click",()=>t(!this.isDark())),t(this.isDark())}isDark(){return document.documentElement.classList.contains("dark")}}customElements.define("theme-toggle",n);

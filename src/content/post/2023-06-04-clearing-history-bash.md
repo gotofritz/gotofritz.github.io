@@ -100,7 +100,3 @@ export HISTCONTROL=ignoredups:ignorespace
 # don't put the commands between the colons in the history
 export HISTIGNORE="ls:cd:cd -:pwd:exit:date:* --help:man *:la:history"
 ```
-
-## Comments?
-
-I haven't got around adding a comment section to my blog, but [there is a companion post on mastodon](https://fosstodon.org/@gotofritz/110485701539527441) if you fancy adding a comment.
