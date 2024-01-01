@@ -1,7 +1,7 @@
 export function getFormattedDate(
   date: string | number | Date,
   options: Intl.DateTimeFormatOptions = {},
-  locale: Intl.LocalesArgument = "en-GB"
+  locale: Intl.LocalesArgument = "en-GB",
 ) {
   const formatOptions: Intl.DateTimeFormatOptions = {
     day: "2-digit",
@@ -9,7 +9,10 @@ export function getFormattedDate(
     year: "numeric",
     ...options,
   };
-  const dateTimeFormat = new Intl.DateTimeFormat(locale as string, formatOptions);
+  const dateTimeFormat = new Intl.DateTimeFormat(
+    locale as string,
+    formatOptions,
+  );
   const parts = dateTimeFormat.formatToParts(new Date(date));
   const partValues = parts.map((p) => p.value);
 

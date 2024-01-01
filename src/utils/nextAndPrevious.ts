@@ -10,7 +10,7 @@ type nextAndPreviousDict = {
 export function nextAndPrevious(
   post: CollectionEntry<"post">,
   i: number,
-  allPosts: Array<CollectionEntry<"post">>
+  allPosts: Array<CollectionEntry<"post">>,
 ) {
   const nextAndPreviousLinks: nextAndPreviousDict = {};
   if (i + 1 >= allPosts.length) {
@@ -19,7 +19,9 @@ export function nextAndPrevious(
     nextAndPreviousLinks.newerSlug = `/blog/${allPosts[i + 1]?.slug}`;
   }
   if (i - 1 < 0) {
-    nextAndPreviousLinks.newestSlug = `/blog/${allPosts[allPosts.length - 1]?.slug}`;
+    nextAndPreviousLinks.newestSlug = `/blog/${
+      allPosts[allPosts.length - 1]?.slug
+    }`;
   } else {
     nextAndPreviousLinks.olderSlug = `/blog/${allPosts[i - 1]?.slug}`;
   }

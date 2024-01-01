@@ -427,6 +427,13 @@ declare module 'astro:content' {
   collection: "post",
   data: InferEntrySchema<"post">
 },
+"2024-01-01-pygraphviz-woes-on-m1-mac-docker-to-the-rescue.md": {
+  id: "2024-01-01-pygraphviz-woes-on-m1-mac-docker-to-the-rescue.md",
+  slug: "2024-01-01-pygraphviz-woes-on-m1-mac-docker-to-the-rescue",
+  body: string,
+  collection: "post",
+  data: InferEntrySchema<"post">
+},
 },
 
 	};

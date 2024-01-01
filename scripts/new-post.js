@@ -13,7 +13,10 @@ function generateDate() {
 }
 
 function generateSlug(title) {
-  return slugify(title, { lower: true });
+  return slugify(title, {
+    lower: true,
+    remove: /[^\w\s$*_+.()\-]+/,
+  }).replaceAll(/-.(?=-)/g, "");
 }
 
 function generateFilePath(title) {
