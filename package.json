@@ -8,7 +8,8 @@
 		"sync": "astro sync",
 		"build": "astro build",
 		"preview": "astro preview",
-		"format": "prettier -w ./src ./src/**/*.astro"
+		"format": "prettier -w ./src ./src/**/*.astro",
+    "new-post": "node scripts/new-post.js "
 	},
 	"devDependencies": {
 		"@astrojs/image": "0.13.0",
@@ -49,6 +50,7 @@
 		"astro": "2.0.2",
 		"satori": "0.1.2",
 		"satori-html": "^0.3.2",
-		"sharp": "^0.31.3"
+		"sharp": "^0.31.3",
+		"slugify": "^1.6.6"
 	}
 }
