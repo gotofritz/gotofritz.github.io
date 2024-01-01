@@ -434,6 +434,13 @@ declare module 'astro:content' {
   collection: "post",
   data: InferEntrySchema<"post">
 },
+"2024-01-01-runnin-typescript-in-jupyter-notebooks-with-deno.md": {
+  id: "2024-01-01-runnin-typescript-in-jupyter-notebooks-with-deno.md",
+  slug: "2024-01-01-runnin-typescript-in-jupyter-notebooks-with-deno",
+  body: string,
+  collection: "post",
+  data: InferEntrySchema<"post">
+},
 },
 
 	};
