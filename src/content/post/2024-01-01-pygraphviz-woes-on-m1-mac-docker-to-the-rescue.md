@@ -72,4 +72,5 @@ After that I can finally run `pip install pygraphviz` and it just works.
 
 ## The Dev Container extension for VSCode is quite good
 
-Working with docker and VSCode on the M1 laptop is quite nice. The machine has enough power and disk space you forget you are working with docker. The only gripe, when you reopen an editor associated with a docker project it nags you to start docker if it isn't running, and there is no "go away" button. Nevertheless, it seems Docker for local development has earned its second chance.
+Working with docker and VSCode on the M1 laptop is quite nice. The machine has enough power and disk space you forget you are working with docker. The only gripe, when you reopen an editor associated with a docker project it nags you to start docker if it isn't running, and there is no "go away" button.
+Nevertheless, it seems Docker for local development has earned its second chance.
