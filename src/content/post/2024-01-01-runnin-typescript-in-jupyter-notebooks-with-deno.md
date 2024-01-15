@@ -2,7 +2,7 @@
 publishDate: 2024-01-02
 draft: false
 archived: false
-title: "Runnin typescript in Jupyter notebooks with deno"
+title: "Running typescript in Jupyter notebooks with deno"
 tags:
   - Jupyter
   - Typescript

@@ -6,17 +6,23 @@ import { getCollection } from "astro:content";
 
 const MAX_POSTS = 16;
 const allPosts = await getCollection("post", draftsStop);
-const allPostsByDate = sortMDByDate(allPosts.map(slugRewrite)).slice(0, MAX_POSTS);
+const allPostsByDate = sortMDByDate(allPosts.map(slugRewrite)).slice(
+  0,
+  MAX_POSTS,
+);
 ---
 
 <PageLayout meta={{ title: "Home" }}>
   <section>
-    <p class="mb-0 mt-0 pr-0 text-xl leading-7 sm:-mt-[3rem] sm:mb-[3rem] sm:pr-[3rem]">
-      Greetings. I'm Fritz, a seasoned engineer located in Berlin. Presently, I contribute my
-      expertise to the Data Science department at <a
+    <p
+      class="mb-0 mt-0 pr-0 text-xl leading-7 sm:-mt-[3rem] sm:mb-[3rem] sm:pr-[3rem]"
+    >
+      Hello, I'm Fritz, an experienced engineer based in Berlin. Currently, I
+      bring my expertise to the Data Science department at <a
         href="https://wayfair.de/"
-        class="cactus-link">Wayfair</a>, specializing in service development and ML Ops. In my professional
-        journey, I have thrived both as a proficient full-stack developer and as a skilled technical manager.
+        class="cactus-link">Wayfair</a
+      >, focusing on service development and ML Ops. Throughout my career, I
+      have excelled as both a full-stack developer and a technical manager.
     </p>
   </section>
   <section aria-label="Blog post list" class="mt-16">
