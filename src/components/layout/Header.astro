@@ -8,7 +8,6 @@ interface Props {
 const { withoutName = false } = Astro.props;
 ---
 
-
 <header
   id="main-header"
   class="group mb-12 flex flex-wrap items-center justify-start gap-y-8 sm:mb-28 sm:gap-y-0"
@@ -126,5 +125,16 @@ const { withoutName = false } = Astro.props;
     >
       Blog
     </a>
+    <a
+      href="/fritz-stelluto_resume.pdf"
+      class:list={[
+        withoutName ? "px-2" : "pr-4",
+        "py-4",
+        "sm:py-0",
+        "sm:hover:underline",
+        "hidden",
+        "sm:block",
+      ]}>Resume</a
+    >
   </nav>
 </header>
