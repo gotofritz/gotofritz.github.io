@@ -2,8 +2,8 @@ const siteMeta = {
   author: "Fritz Stelluto",
   title: "gotofritz.net",
   description:
-    `I'm Fritz, an engineer based in Berlin. I currently work in the Data Science ` +
-    `department at Wayfair. I tend to write short posts about technical stuff`,
+    `Hello, I'm Fritz, an experienced engineer based in Berlin. Currently I am ` +
+    `working at Trawa, focusing on service development and ML Ops.`,
   lang: "en-GB",
   ogLocale: "en_GB",
   themeColorLight: "#fafafa",
