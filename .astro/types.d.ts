@@ -441,6 +441,13 @@ declare module 'astro:content' {
   collection: "post",
   data: InferEntrySchema<"post">
 },
+"2024-05-05-changing-python-version-in-running-vscode-project.md": {
+  id: "2024-05-05-changing-python-version-in-running-vscode-project.md",
+  slug: "2024-05-05-changing-python-version-in-running-vscode-project",
+  body: string,
+  collection: "post",
+  data: InferEntrySchema<"post">
+},
 },
 
 	};

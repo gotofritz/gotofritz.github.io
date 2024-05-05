@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+
+
 <html lang="en-GB">
   <head>
     <meta charset="utf-8">
@@ -10,35 +12,35 @@
 <link rel="icon" href="/icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="manifest" href="/manifest.webmanifest">
-<link rel="canonical" href="https://gotofritz.net/">
+<link rel="canonical" href="https://gotofritz.net/blog/changing-python-version-in-running-vscode-project/">
 
 <!-- Primary Meta Tags -->
-<title>Home • gotofritz.net</title>
-<meta name="title" content="Home • gotofritz.net">
-<meta name="description" content="I'm Fritz, an engineer based in Berlin. I currently work in the Data Science department at Wayfair. I tend to write short posts about technical stuff">
+<title>Changing python version in a running VSCode project • gotofritz.net</title>
+<meta name="title" content="Changing python version in a running VSCode project • gotofritz.net">
+<meta name="description" content="I was working on a python project with 3.11, and then found out I needed to upgrade to 3.12. Tried to deactivate my current venv, but VScode wouldn't let me - it threw a &#34;Permission denied&#34; error. The solution was pretty straightforward.">
 <meta name="author" content="Fritz Stelluto">
 
 <!-- Theme Colour -->
 <meta name="theme-color" content="#fafafa">
 
 <!-- Open Graph / Facebook -->
-<meta property="og:type" content="website">
-<meta property="og:title" content="Home">
-<meta property="og:description" content="I'm Fritz, an engineer based in Berlin. I currently work in the Data Science department at Wayfair. I tend to write short posts about technical stuff">
-<meta property="og:url" content="https://gotofritz.net/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Changing python version in a running VSCode project">
+<meta property="og:description" content="I was working on a python project with 3.11, and then found out I needed to upgrade to 3.12. Tried to deactivate my current venv, but VScode wouldn't let me - it threw a &#34;Permission denied&#34; error. The solution was pretty straightforward.">
+<meta property="og:url" content="https://gotofritz.net/blog/changing-python-version-in-running-vscode-project/">
 <meta property="og:site_name" content="gotofritz.net">
 <meta property="og:locale" content="en_GB">
-<meta property="og:image" content="https://gotofritz.net/social-card.png">
+<meta property="og:image" content="https://gotofritz.net/og-image/changing-python-version-in-running-vscode-project.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-
+<meta property="article:author" content="Fritz Stelluto"><meta property="article:published_time" content="2024-05-05T00:00:00.000Z">
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image">
-<meta property="twitter:url" content="https://gotofritz.net/">
-<meta property="twitter:title" content="Home">
-<meta property="twitter:description" content="I'm Fritz, an engineer based in Berlin. I currently work in the Data Science department at Wayfair. I tend to write short posts about technical stuff">
-<meta property="twitter:image" content="https://gotofritz.net/social-card.png">
+<meta property="twitter:url" content="https://gotofritz.net/blog/changing-python-version-in-running-vscode-project/">
+<meta property="twitter:title" content="Changing python version in a running VSCode project">
+<meta property="twitter:description" content="I was working on a python project with 3.11, and then found out I needed to upgrade to 3.12. Tried to deactivate my current venv, but VScode wouldn't let me - it threw a &#34;Permission denied&#34; error. The solution was pretty straightforward.">
+<meta property="twitter:image" content="https://gotofritz.net/og-image/changing-python-version-in-running-vscode-project.png">
 
 <!-- RSS auto-discovery -->
 <link rel="alternate" type="application/rss+xml" title="gotofritz.net" href="/rss.xml">
@@ -77,13 +79,13 @@
       // initailse root class attribute
       root.classList.toggle("dark", isDark);
     })();</script>
-  <link rel="stylesheet" href="/_astro/_...post_.afbe0fa4.css" /><script type="module" src="/_astro/hoisted.ddbdf600.js"></script>
+  <link rel="stylesheet" href="/_astro/_...post_.afbe0fa4.css" /><script type="module" src="/_astro/hoisted.99e77f46.js"></script>
 <script type="module" src="/_astro/page.b7cc8384.js"></script></head>
   <body>
     <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-1.5 focus:left-1">skip to content
 </a>
     <header id="main-header" class="group mb-12 flex flex-wrap items-center justify-start gap-y-8 sm:mb-28 sm:gap-y-0">
-  <a href="/" class="sm:order-1 order-3 block grow-0 items-center grayscale hover:filter-none" aria-current="page">
+  <a href="/" class="order-1 block grow-0 items-center grayscale hover:filter-none">
     <svg class="h-10 w-10 rounded-md bg-black dark:bg-white sm:mr-0 sm:h-[4.25rem] sm:w-[4.25rem]" aria-hidden="true" focusable="false" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
       <g>
         <path id="path-goto" d="M 123.8 88 L 52 88 L 52 194.7 L 87 194.7 L 87 159.6 L 70 159.6 L 70 123.6 L 124 123 L 124 230 L 17 230 C 17 230 17 17 17 52 C 17 52 124 52 124 52 L 124 88 L 123.8 88 Z M 176.25 194.684 C 176.25 194.684 210.52 194.684 210.52 194.684 C 210.52 194.684 211 89 211 89 C 211 89 176 89 176 89 C 176 89 176 195 176 195 L 176.25 194.684 Z M 246 230 L 140 230 C 140 230 140 52 140 52 C 140 52 247 52 247 52 C 247 52 246 230 246 230 Z M 334 230 L 297 230 L 298.27 88.527 L 263.02 88.527 C 263.02 88.527 263 52 263 52 C 263 52 369 52 369 52 C 369 52 369.75 88.527 369.75 88.527 L 334.5 88.527 L 334 230 Z M 422.25 194.684 C 422.25 194.684 456.52 194.684 456.52 194.684 C 456.52 194.684 456 88.79 456 88.79 C 456 88.79 422 88.79 422 88.79 C 422 88.79 422.25 194.684 422.25 194.684 Z M 492 230 L 386 230 C 386 230 386 52 386 52 C 386 52 492 52 492 52 L 492 230 Z" class="fill-white stroke-none dark:fill-black">
@@ -96,14 +98,10 @@
         </path>
       </g>
     </svg></a>
-  <a href="/" class="order-4 grow items-center grayscale hover:filter-none sm:order-2 sm:inline-block" aria-current="page">
-        <span class="title ml-4 text-[2rem] font-bold leading-[1] sm:text-6xl">
-          Fritz Stelluto
-        </span>
-      </a>
+  
   
 
-<theme-toggle class="ml-auto order-2 sm:order-3">
+<theme-toggle class="ml-auto order-3 sm:order-3">
   <button type="button" id="toggle-theme" class="group relative h-10 w-10 rounded-md bg-zinc-200 p-2 ring-zinc-400 transition-all hover:ring-2 dark:bg-zinc-700" aria-label="Toggle Dark Mode">
     <svg id="sun-svg" class="absolute top-1/2 left-1/2 h-7 w-7 -translate-x-1/2 -translate-y-1/2 scale-0 opacity-0 transition-all group-aria-pressed:scale-100 group-aria-pressed:opacity-100" aria-hidden="true" focusable="false" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M12 18C15.3137 18 18 15.3137 18 12C18 8.68629 15.3137 6 12 6C8.68629 6 6 8.68629 6 12C6 15.3137 8.68629 18 12 18Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -125,182 +123,99 @@
     </svg>
   </button>
 </theme-toggle>
-  <nav id="navigation-menu" class="flex gap-y-4 grow sm:grow-no items-end sm:flex-row sm:flex sm:items-center sm:mt-1 sm:py-0 sm:ml-[5.375rem] text-accent basis-[80%] sm:basis-[90%] order-1 sm:order-4 end" aria-label="Main menu">
-    <a href="/" class="pr-4 py-4 sm:py-0 sm:hover:underline" aria-current="page" rel="prefetch">
+  <nav id="navigation-menu" class="flex gap-y-4 grow sm:grow-no items-end sm:flex-row sm:flex sm:items-center sm:mt-1 sm:py-0 sm:ml-8 text-accent order-2 sm:order-2 justify-around sm:justify-start" aria-label="Main menu">
+    <a href="/" class="px-2 py-4 sm:py-0 sm:hover:underline" rel="prefetch">
       Home
     </a>
-    <a href="/about" class="pr-4 py-4 sm:py-0 sm:hover:underline" rel="prefetch">
+    <a href="/about" class="px-2 py-4 sm:py-0 sm:hover:underline" rel="prefetch">
       About
     </a>
-    <a href="/blog" class="pr-4 py-4 sm:py-0 sm:hover:underline" rel="prefetch">
+    <a href="/blog" class="px-2 py-4 sm:py-0 sm:hover:underline" rel="prefetch">
       Blog
     </a>
-    <a href="/fritz-stelluto_resume.pdf" class="pr-4 py-4 sm:py-0 sm:hover:underline hidden sm:block">Resume</a>
+    <a href="/fritz-stelluto_resume.pdf" class="px-2 py-4 sm:py-0 sm:hover:underline hidden sm:block">Resume</a>
   </nav>
 </header>
     <main id="main" class="flex-1">
-      <section>
-    <p class="mb-0 mt-0 pr-0 text-xl leading-7 sm:-mt-[3rem] sm:mb-[3rem] sm:pr-[3rem]">
-      Hello, I'm Fritz, an experienced engineer based in Berlin. Currently, I
-      bring my expertise to the Data Science department at <a href="https://wayfair.de/" class="cactus-link">Wayfair</a>, focusing on service development and ML Ops. Throughout my career, I
-      have plied my trade as both a full-stack developer and a technical
-      manager.
-    </p>
-  </section><section aria-label="Blog post list" class="mt-16">
-    <h2 class="title mb-4 text-xl">Posts</h2>
-    <ul class="space-y-4 sm:space-y-2">
-      <li class="flex flex-col items-end sm:flex-row">
-            <time datetime="2024-05-05T00:00:00.000Z" class="shrink-0 border-dashed border-b-current font-mono text-xs text-gray-400 sm:border-b sm:pr-4">05 May 2024 </time>
-<div class="min-w-full sm:min-w-0">
-  <div class="sm:border-b sm:border-t-0 border-t border-t-current sm:border-b-current sm:mt-[-0.25rem]"><a href="/blog/changing-python-version-in-running-vscode-project" rel=" prefetch">
-      Changing python version in a running VSCode project
-    </a></div>
-  
-  
-</div>
-          </li><li class="flex flex-col items-end sm:flex-row">
-            <time datetime="2024-01-02T00:00:00.000Z" class="shrink-0 border-dashed border-b-current font-mono text-xs text-gray-400 sm:border-b sm:pr-4">02 Jan 2024 </time>
-<div class="min-w-full sm:min-w-0">
-  <div class="sm:border-b sm:border-t-0 border-t border-t-current sm:border-b-current sm:mt-[-0.25rem]"><a href="/blog/runnin-typescript-in-jupyter-notebooks-with-deno" rel=" prefetch">
-      Running typescript in Jupyter notebooks with deno
-    </a></div>
-  
-  
-</div>
-          </li><li class="flex flex-col items-end sm:flex-row">
-            <time datetime="2024-01-01T00:00:00.000Z" class="shrink-0 border-dashed border-b-current font-mono text-xs text-gray-400 sm:border-b sm:pr-4">01 Jan 2024 </time>
-<div class="min-w-full sm:min-w-0">
-  <div class="sm:border-b sm:border-t-0 border-t border-t-current sm:border-b-current sm:mt-[-0.25rem]"><a href="/blog/pygraphviz-woes-on-m1-mac-docker-to-the-rescue" rel=" prefetch">
-      Pygraphviz Woes on M1 Mac: Docker to the Rescue
-    </a></div>
-  
-  
-</div>
-          </li><li class="flex flex-col items-end sm:flex-row">
-            <time datetime="2023-10-20T00:00:00.000Z" class="shrink-0 border-dashed border-b-current font-mono text-xs text-gray-400 sm:border-b sm:pr-4">20 Oct 2023 </time>
-<div class="min-w-full sm:min-w-0">
-  <div class="sm:border-b sm:border-t-0 border-t border-t-current sm:border-b-current sm:mt-[-0.25rem]"><a href="/blog/using-gh-to-generate-a-new-repo" rel=" prefetch">
-      Using GH to generate a new repo
-    </a></div>
-  
-  
-</div>
-          </li><li class="flex flex-col items-end sm:flex-row">
-            <time datetime="2023-06-04T00:00:00.000Z" class="shrink-0 border-dashed border-b-current font-mono text-xs text-gray-400 sm:border-b sm:pr-4">04 Jun 2023 </time>
-<div class="min-w-full sm:min-w-0">
-  <div class="sm:border-b sm:border-t-0 border-t border-t-current sm:border-b-current sm:mt-[-0.25rem]"><a href="/blog/clearing-history-bash" rel=" prefetch">
-      Clearing commands list, and other tales of bash history
-    </a></div>
-  
-  
-</div>
-          </li><li class="flex flex-col items-end sm:flex-row">
-            <time datetime="2023-03-10T00:00:00.000Z" class="shrink-0 border-dashed border-b-current font-mono text-xs text-gray-400 sm:border-b sm:pr-4">10 Mar 2023 </time>
-<div class="min-w-full sm:min-w-0">
-  <div class="sm:border-b sm:border-t-0 border-t border-t-current sm:border-b-current sm:mt-[-0.25rem]"><a href="/blog/clasp-template-for-local-google-apps-script-projects-using-copier" rel=" prefetch">
-      A Clasp template for local Google Apps Script projects, using copier
-    </a></div>
-  
-  
-</div>
-          </li><li class="flex flex-col items-end sm:flex-row">
-            <time datetime="2023-02-03T00:00:00.000Z" class="shrink-0 border-dashed border-b-current font-mono text-xs text-gray-400 sm:border-b sm:pr-4">03 Feb 2023 </time>
-<div class="min-w-full sm:min-w-0">
-  <div class="sm:border-b sm:border-t-0 border-t border-t-current sm:border-b-current sm:mt-[-0.25rem]"><a href="/blog/migrating-blog-to-astro" rel=" prefetch">
-      Migrating My Blog to Astro
-    </a></div>
-  
-  
-</div>
-          </li><li class="flex flex-col items-end sm:flex-row">
-            <time datetime="2022-12-11T00:00:00.000Z" class="shrink-0 border-dashed border-b-current font-mono text-xs text-gray-400 sm:border-b sm:pr-4">11 Dec 2022 </time>
-<div class="min-w-full sm:min-w-0">
-  <div class="sm:border-b sm:border-t-0 border-t border-t-current sm:border-b-current sm:mt-[-0.25rem]"><a href="/blog/history-of-dance-music-as-jupyter-notebook" rel=" prefetch">
-      History of Disco and Dance Music: a Jupyter notebook
-    </a></div>
-  
-  
-</div>
-          </li><li class="flex flex-col items-end sm:flex-row">
-            <time datetime="2022-11-13T00:00:00.000Z" class="shrink-0 border-dashed border-b-current font-mono text-xs text-gray-400 sm:border-b sm:pr-4">13 Nov 2022 </time>
-<div class="min-w-full sm:min-w-0">
-  <div class="sm:border-b sm:border-t-0 border-t border-t-current sm:border-b-current sm:mt-[-0.25rem]"><a href="/blog/deleting-tweets-and-likes-from-twitter" rel=" prefetch">
-      Deleting tweets and likes from twitter
-    </a></div>
-  
-  
-</div>
-          </li><li class="flex flex-col items-end sm:flex-row">
-            <time datetime="2022-10-03T00:00:00.000Z" class="shrink-0 border-dashed border-b-current font-mono text-xs text-gray-400 sm:border-b sm:pr-4">03 Oct 2022 </time>
-<div class="min-w-full sm:min-w-0">
-  <div class="sm:border-b sm:border-t-0 border-t border-t-current sm:border-b-current sm:mt-[-0.25rem]"><a href="/blog/mypy-found-module-but-no-type-hints-or-library-stubs" rel=" prefetch">
-      mypy: found module but no type hints or library stubs
-    </a></div>
-  
-  
-</div>
-          </li><li class="flex flex-col items-end sm:flex-row">
-            <time datetime="2022-09-24T00:00:00.000Z" class="shrink-0 border-dashed border-b-current font-mono text-xs text-gray-400 sm:border-b sm:pr-4">24 Sep 2022 </time>
-<div class="min-w-full sm:min-w-0">
-  <div class="sm:border-b sm:border-t-0 border-t border-t-current sm:border-b-current sm:mt-[-0.25rem]"><a href="/blog/create-fake-dataset-fixtures-testing-with-faker" rel=" prefetch">
-      Faker providers for project specific data structure fakes, in Python
-    </a></div>
-  
-  
-</div>
-          </li><li class="flex flex-col items-end sm:flex-row">
-            <time datetime="2022-09-24T00:00:00.000Z" class="shrink-0 border-dashed border-b-current font-mono text-xs text-gray-400 sm:border-b sm:pr-4">24 Sep 2022 </time>
-<div class="min-w-full sm:min-w-0">
-  <div class="sm:border-b sm:border-t-0 border-t border-t-current sm:border-b-current sm:mt-[-0.25rem]"><a href="/blog/creating-a-poetry-driven-python-project-template-with-cookiecutter" rel=" prefetch">
-      Poetry-driven python project template with cookiecutter
-    </a></div>
-  
-  
-</div>
-          </li><li class="flex flex-col items-end sm:flex-row">
-            <time datetime="2022-09-05T00:00:00.000Z" class="shrink-0 border-dashed border-b-current font-mono text-xs text-gray-400 sm:border-b sm:pr-4">05 Sep 2022 </time>
-<div class="min-w-full sm:min-w-0">
-  <div class="sm:border-b sm:border-t-0 border-t border-t-current sm:border-b-current sm:mt-[-0.25rem]"><a href="/blog/migrating-away-from-goole-proton-mail-and-other-stories" rel=" prefetch">
-      Migrating away from Google: Hello Proton Mail!
-    </a></div>
-  
-  
-</div>
-          </li><li class="flex flex-col items-end sm:flex-row">
-            <time datetime="2022-09-01T00:00:00.000Z" class="shrink-0 border-dashed border-b-current font-mono text-xs text-gray-400 sm:border-b sm:pr-4">01 Sep 2022 </time>
-<div class="min-w-full sm:min-w-0">
-  <div class="sm:border-b sm:border-t-0 border-t border-t-current sm:border-b-current sm:mt-[-0.25rem]"><a href="/blog/deleting-duplicates-from-youtube-playlists-with-python-script" rel=" prefetch">
-      Removing duplicates from youtube playlists with a Python script
-    </a></div>
-  
-  
-</div>
-          </li><li class="flex flex-col items-end sm:flex-row">
-            <time datetime="2022-08-23T00:00:00.000Z" class="shrink-0 border-dashed border-b-current font-mono text-xs text-gray-400 sm:border-b sm:pr-4">23 Aug 2022 </time>
-<div class="min-w-full sm:min-w-0">
-  <div class="sm:border-b sm:border-t-0 border-t border-t-current sm:border-b-current sm:mt-[-0.25rem]"><a href="/blog/migrating-youtube-playlists-by-adding-videos-via-cli" rel=" prefetch">
-      Adding videos to a youtube playlists via a terminal python script
-    </a></div>
-  
-  
-</div>
-          </li><li class="flex flex-col items-end sm:flex-row">
-            <time datetime="2022-06-20T00:00:00.000Z" class="shrink-0 border-dashed border-b-current font-mono text-xs text-gray-400 sm:border-b sm:pr-4">20 Jun 2022 </time>
-<div class="min-w-full sm:min-w-0">
-  <div class="sm:border-b sm:border-t-0 border-t border-t-current sm:border-b-current sm:mt-[-0.25rem]"><a href="/blog/migrating-thunderbird-message-filters-from-another-machine" rel=" prefetch">
-      Migrating Thunderbird message filters from another machine
-    </a></div>
-  
-  
-</div>
-          </li>
-    </ul>
-    <span class="mt-4 block sm:text-right">
-      <a class="sm:hover:text-accent" href="/blog" aria-label="View all blog categories">
-        View all →
-      </a>
-    </span>
-  </section>
+      <div class="sm:grid sm:grid-cols-4 sm:items-start sm:gap-x-10">
+    <article class="col-span-3 break-words">
+      <div id="blog-hero"><h1 class="title mb-1 text-5xl">Changing python version in a running VSCode project</h1>
+<time datetime="2024-05-05T00:00:00.000Z">05 May 2024 </time>
+<div class="before:content-['|'] inline">
+      <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" class="inline-block h-6 w-6" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+          <path d="M7.859 6h-2.834a2.025 2.025 0 0 0 -2.025 2.025v2.834c0 .537 .213 1.052 .593 1.432l6.116 6.116a2.025 2.025 0 0 0 2.864 0l2.834 -2.834a2.025 2.025 0 0 0 0 -2.864l-6.117 -6.116a2.025 2.025 0 0 0 -1.431 -.593z"></path>
+          <path d="M17.573 18.407l2.834 -2.834a2.025 2.025 0 0 0 0 -2.864l-7.117 -7.116"></path>
+          <path d="M6 9h-.01"></path>
+        </svg>
+      <a class="inline-block pr-1" aria-label="View more blogs with the tag Python" href="/tags/Python">
+          #Python
+        </a><a class="inline-block pr-1" aria-label="View more blogs with the tag VSCode" href="/tags/VSCode">
+          #VSCode
+        </a>
+    </div>
+<p class="mt-8 text-xl leading-7">I was working on a python project with 3.11, and then found out I needed to upgrade to 3.12. Tried to deactivate my current venv, but VScode wouldn't let me - it threw a "Permission denied" error. The solution was pretty straightforward.</p></div>
+      <div class="prose prose-sm prose-cactus mt-12 prose-headings:font-semibold prose-headings:before:absolute prose-headings:before:-ml-4 prose-headings:before:text-accent prose-headings:before:content-['#'] prose-th:before:content-none">
+        <p>VSCode is doing some fancy background work to automatically activate virtual environments, (see: <a href="https://github.com/microsoft/vscode-python/wiki/Activate-Environments-in-Terminal-Using-Environment-Variables">Activate Environments in Terminal Using Environment Variables</a>). That approach has a limitation though: it prevents deactivate from working. Luckily it can be easily fixed</p>
+<h2 id="why-im-still-using-venv-instead-of-poetry-or-pipenv">Why I’m still using venv instead of poetry or pipenv</h2>
+<p>I tried using both poetry and pipenv in the past. But I went back to vanilla venv because quite frankly I don’t see the great improvements the alternatives offer. Changing a running virtual environment or disabling it is painful in all of them. Dependencies conflicts are just as hard to solve in all of them (it’s a problem with python itself, not the package manager). Yes it’s nice to have all the settings in a single pyproject file, but it’s a very minor issue not worth the extra dependencies IMHO. And flake8 doesn’t support it anyway. In the absence of measurable benefits, I prefer to stick to the simplest and most standard approach that doesn’t require extra dependencies. And that would be good old venv.</p>
+<h2 id="changing-python-version-from-311-to-312-using-venv-in-vscode">Changing python version from 3.11 to 3.12 using venv in VScode</h2>
+<p>I had my project running with python 3.11 and venv on OS X, and decided to switch to 3.12. When trying to deactivate the running environment, VSCode refused with the error</p>
+<pre is:raw="" class="astro-code" style="background-color: #272822; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #F8F8F2">bash: /Users/fritz/.vscode-insiders/extensions/ms-python.python-2024.6.0/python_files/deactivate/bash/deactivate: Permission denied</span></span></code></pre>
+<p>Luckily <a href="https://github.com/microsoft/vscode-python/wiki/Fixing-%22deactivate%22-command-for-Virtual-Environments">the fix is documented in the wiki</a>. With that information, I could easily switch using <a href="https://github.com/pyenv/pyenv?tab=readme-ov-file#installation">pyenv</a></p>
+<pre is:raw="" class="astro-code" style="background-color: #272822; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #88846F"># stop the current running venv and nuke it</span></span>
+<span class="line"><span style="color: #F8F8F2">❯ </span><span style="color: #66D9EF">source</span><span style="color: #F8F8F2"> /Users/fritz/.vscode-insiders/extensions/ms-python.python-2024.6.0/python_files/deactivate/bash/deactivate</span></span>
+<span class="line"><span style="color: #F8F8F2">grep: /bin/envVars.txt: No such file or directory</span></span>
+<span class="line"><span style="color: #F8F8F2">grep: /bin/envVars.txt: No such file or directory</span></span>
+<span class="line"><span style="color: #F8F8F2">grep: /bin/envVars.txt: No such file or directory</span></span>
+<span class="line"><span style="color: #F8F8F2">❯ rm -rf venv</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #88846F"># install python 3.12 and make it default for the project</span></span>
+<span class="line"><span style="color: #F8F8F2">❯ pyenv install 3.12.2</span></span>
+<span class="line"><span style="color: #F8F8F2">❯ pyenv </span><span style="color: #F92672">local</span><span style="color: #F8F8F2"> 3.12.2</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #88846F"># create a new pyenv</span></span>
+<span class="line"><span style="color: #F8F8F2">❯ python -m venv venv</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #88846F"># reinstall the dependencies</span></span>
+<span class="line"><span style="color: #F8F8F2">❯ pip install -r requirements.txt</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #88846F"># activate the new environment</span></span>
+<span class="line"><span style="color: #F8F8F2">❯ </span><span style="color: #66D9EF">source</span><span style="color: #F8F8F2"> venv/bin/activate</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #88846F"># confirm it works</span></span>
+<span class="line"><span style="color: #F8F8F2">❯ python -V</span></span>
+<span class="line"><span style="color: #F8F8F2">Python 3.12.3</span></span></code></pre>
+<p>Then restarted VSCode, to make sure the changes were picked up, and bingo.</p>
+      </div>
+    </article>
+    <aside class="col-span-1 hidden text-right sm:sticky sm:top-20 sm:block">
+      <nav class="mb-4 flex w-full flex-nowrap justify-end gap-4 text-xs text-gray-600 dark:text-gray-300">
+        
+        <a class="before:content-['<<']" href="/blog/runnin-typescript-in-jupyter-notebooks-with-deno">
+              older
+            </a>
+        
+        <a class="before:content-['<<<<']" href="/blog/batch-unrar-command-line-os-x">
+              oldest
+            </a>
+      </nav>
+      <h2 class="font-semibold">Table of Contents</h2><ul class="mt-4 space-y-2 text-xs">
+              <li class="line-clamp-2 hover:text-accent">
+                  <a href="#why-im-still-using-venv-instead-of-poetry-or-pipenv" aria-label="Scroll to section: Why I’m still using venv instead of poetry or pipenv">
+                    <span>&#35;</span> Why I’m still using venv instead of poetry or pipenv
+                  </a>
+                </li><li class="line-clamp-2 hover:text-accent">
+                  <a href="#changing-python-version-from-311-to-312-using-venv-in-vscode" aria-label="Scroll to section: Changing python version from 3.11 to 3.12 using venv in VScode">
+                    <span>&#35;</span> Changing python version from 3.11 to 3.12 using venv in VScode
+                  </a>
+                </li>
+            </ul>
+    </aside>
+  </div><button id="to-top-btn" class="z-90 fixed bottom-8 right-4 flex h-10 w-10 translate-y-28 items-center justify-center rounded-full border-2 border-transparent bg-zinc-200 text-3xl opacity-0 transition-all duration-300 hover:border-zinc-400 data-[show=true]:translate-y-0 data-[show=true]:opacity-100 dark:bg-zinc-700 sm:right-8 sm:h-12 sm:w-12" aria-label="Back to Top" data-show="false"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="h-6 w-6">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5"></path>
+    </svg>
+  </button>
     </main>
     <footer class="mt-auto flex w-full flex-col flex-wrap items-center justify-center gap-y-2 pt-20 pb-4 text-center align-top text-gray-500 sm:flex-row sm:justify-between sm:text-xs">
   <div class="flex flex-wrap items-center gap-x-4 sm:items-center">
