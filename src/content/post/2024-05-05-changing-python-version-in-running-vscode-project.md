@@ -9,7 +9,7 @@ tags:
 description: I was working on a python project with 3.11, and then found out I needed to upgrade to 3.12. Tried to deactivate my current venv, but VScode wouldn't let me - it threw a "Permission denied" error. The solution was pretty straightforward.
 ---
 
-VSCode is doing some fancy background work to automatically activate virtual environments, (see: [Activate Environments in Terminal Using Environment Variables](https://github.com/microsoft/vscode-python/wiki/Activate-Environments-in-Terminal-Using-Environment-Variables)). That approach has a limitation though: it prevents deactivate from working. Luckily it can be easily fixed
+VSCode is doing some fancy background work to automatically activate virtual environments, (see: [Activate Environments in Terminal Using Environment Variables](https://github.com/microsoft/vscode-python/wiki/Activate-Environments-in-Terminal-Using-Environment-Variables)). That approach has a limitation though: it prevents `deactivate` from working. Luckily it can be easily fixed
 
 ## Why I'm still using venv instead of poetry or pipenv
 
@@ -48,7 +48,7 @@ grep: /bin/envVars.txt: No such file or directory
 
 # confirm it works
 ❯ python -V
-Python 3.12.3
+Python 3.12.2
 ```
 
 Then restarted VSCode, to make sure the changes were picked up, and bingo.
