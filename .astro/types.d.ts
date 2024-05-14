@@ -448,6 +448,13 @@ declare module 'astro:content' {
   collection: "post",
   data: InferEntrySchema<"post">
 },
+"2024-05-14-disabling-djlint-on-non-django-projects.md": {
+  id: "2024-05-14-disabling-djlint-on-non-django-projects.md",
+  slug: "2024-05-14-disabling-djlint-on-non-django-projects",
+  body: string,
+  collection: "post",
+  data: InferEntrySchema<"post">
+},
 },
 
 	};
