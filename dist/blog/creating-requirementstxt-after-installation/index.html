@@ -12,12 +12,12 @@
 <link rel="icon" href="/icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="manifest" href="/manifest.webmanifest">
-<link rel="canonical" href="https://gotofritz.net/blog/disabling-djlint-on-non-django-projects/">
+<link rel="canonical" href="https://gotofritz.net/blog/creating-requirementstxt-after-installation/">
 
 <!-- Primary Meta Tags -->
-<title>Disabling DJLint on non-Django projects • gotofritz.net</title>
-<meta name="title" content="Disabling DJLint on non-Django projects • gotofritz.net">
-<meta name="description" content="Finally found out how to stop the annoying &#34;djLint is not installed for the current active Python interpreter&#34; modal window on VSCode.">
+<title>Creating a requirements.txt after installation • gotofritz.net</title>
+<meta name="title" content="Creating a requirements.txt after installation • gotofritz.net">
+<meta name="description" content="pip freeze > requirements.txt is the canonical way to capture all the packages you have installed in a Python project. I am not sure why; it doesn't do what you expect.">
 <meta name="author" content="Fritz Stelluto">
 
 <!-- Theme Colour -->
@@ -25,22 +25,22 @@
 
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content="article">
-<meta property="og:title" content="Disabling DJLint on non-Django projects">
-<meta property="og:description" content="Finally found out how to stop the annoying &#34;djLint is not installed for the current active Python interpreter&#34; modal window on VSCode.">
-<meta property="og:url" content="https://gotofritz.net/blog/disabling-djlint-on-non-django-projects/">
+<meta property="og:title" content="Creating a requirements.txt after installation">
+<meta property="og:description" content="pip freeze > requirements.txt is the canonical way to capture all the packages you have installed in a Python project. I am not sure why; it doesn't do what you expect.">
+<meta property="og:url" content="https://gotofritz.net/blog/creating-requirementstxt-after-installation/">
 <meta property="og:site_name" content="gotofritz.net">
 <meta property="og:locale" content="en_GB">
-<meta property="og:image" content="https://gotofritz.net/og-image/disabling-djlint-on-non-django-projects.png">
+<meta property="og:image" content="https://gotofritz.net/og-image/creating-requirementstxt-after-installation.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="article:author" content="Fritz Stelluto"><meta property="article:published_time" content="2024-05-14T00:00:00.000Z">
+<meta property="article:author" content="Fritz Stelluto"><meta property="article:published_time" content="2024-05-24T00:00:00.000Z">
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image">
-<meta property="twitter:url" content="https://gotofritz.net/blog/disabling-djlint-on-non-django-projects/">
-<meta property="twitter:title" content="Disabling DJLint on non-Django projects">
-<meta property="twitter:description" content="Finally found out how to stop the annoying &#34;djLint is not installed for the current active Python interpreter&#34; modal window on VSCode.">
-<meta property="twitter:image" content="https://gotofritz.net/og-image/disabling-djlint-on-non-django-projects.png">
+<meta property="twitter:url" content="https://gotofritz.net/blog/creating-requirementstxt-after-installation/">
+<meta property="twitter:title" content="Creating a requirements.txt after installation">
+<meta property="twitter:description" content="<code>pip freeze > requirements.txt</code> is the canonical way to capture all the packages you have installed in a Python project. I am not sure why; it doesn't do what you expect.">
+<meta property="twitter:image" content="https://gotofritz.net/og-image/creating-requirementstxt-after-installation.png">
 
 <!-- RSS auto-discovery -->
 <link rel="alternate" type="application/rss+xml" title="gotofritz.net" href="/rss.xml">
@@ -139,8 +139,8 @@
     <main id="main" class="flex-1">
       <div class="sm:grid sm:grid-cols-4 sm:items-start sm:gap-x-10">
     <article class="col-span-3 break-words">
-      <div id="blog-hero"><h1 class="title mb-1 text-5xl">Disabling DJLint on non-Django projects</h1>
-<time datetime="2024-05-14T00:00:00.000Z">14 May 2024 </time>
+      <div id="blog-hero"><h1 class="title mb-1 text-5xl">Creating a requirements.txt after installation</h1>
+<time datetime="2024-05-24T00:00:00.000Z">24 May 2024 </time>
 <div class="before:content-['|'] inline">
       <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" class="inline-block h-6 w-6" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
           <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -148,49 +148,53 @@
           <path d="M17.573 18.407l2.834 -2.834a2.025 2.025 0 0 0 0 -2.864l-7.117 -7.116"></path>
           <path d="M6 9h-.01"></path>
         </svg>
-      <a class="inline-block pr-1" aria-label="View more blogs with the tag Django" href="/tags/Django">
-          #Django
-        </a><a class="inline-block pr-1" aria-label="View more blogs with the tag VSCode" href="/tags/VSCode">
-          #VSCode
+      <a class="inline-block pr-1" aria-label="View more blogs with the tag python" href="/tags/python">
+          #python
         </a>
     </div>
-<p class="mt-8 text-xl leading-7">Finally found out how to stop the annoying "djLint is not installed for the current active Python interpreter" modal window on VSCode.</p></div>
+<p class="mt-8 text-xl leading-7"><code>pip freeze > requirements.txt</code> is the canonical way to capture all the packages you have installed in a Python project. I am not sure why; it doesn't do what you expect.</p></div>
       <div class="prose prose-sm prose-cactus mt-12 prose-headings:font-semibold prose-headings:before:absolute prose-headings:before:-ml-4 prose-headings:before:text-accent prose-headings:before:content-['#'] prose-th:before:content-none">
-        <h2 id="what-is-djlint">What is DJLint?</h2>
-<p><a href="https://djlint.com/">DJLint</a> is a useful little tool to lint HTML templates in DJango projects. It does a great job and I recommend it.</p>
-<h2 id="a-little-annoyance">A little annoyance</h2>
-<p>I didn’t install DJLint globally, I prefer each project to be self contained. And only a small percentage of the projects I work on are DJango projects. The issue is that DJLint attempts to lint <em>all</em> the HTML files, regardless of whether they are part of a Django project or not. And then you get the annoying toaster message which you have to stop what you are doing to get rid of</p>
-<p><img src="/assets/disabling-djlint-on-non-django-projects/annoying-djlint-toaster.png" alt="VSCode toaster displaying message &#x27;djLint is not installed for the current active Python interpreter&#x27;"></p>
-<h2 id="finally-found-the-setting-to-turn-it-off">Finally found the setting to turn it off</h2>
-<p>The <a href="https://marketplace.visualstudio.com/items?itemName=batisteo.vscode-django">Django extension</a> adds the “django-html” association to VScode, and that should be good enough to keep HTML files in the two stacks separate. But DJLint decides that all *.html files are Django files. To disable this, you can change this in your settings:</p>
-<pre is:raw="" class="astro-code" style="background-color: #272822; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #F8F8F2">  </span><span style="color: #E6DB74">"[html]"</span><span style="color: #F8F8F2">: {</span></span>
-<span class="line"><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">"djlint.enableLinting"</span><span style="color: #F8F8F2">: </span><span style="color: #AE81FF">false</span></span>
-<span class="line"><span style="color: #F8F8F2">  },</span></span></code></pre>
+        <h2 id="laughs-in-javascript">Laughs in Javascript</h2>
+<p>Coming from Javascript I am still amazed by how primitive the DX in python feels in comparison. If you use pip, there is no <code>pnpm add PACKAGE</code> or <code>npm i PACKAGE --save</code> to install a package <em>and</em> save a reference into the <code>requirements.txt</code>. Of course poetry creates lock files automatically, but pip is the standard python package manager, it should do the right thing. Instead, after installing packages with <code>pip install PACKAGEA  PACKAGEB ...</code> one has to capture the installed packages with <code>pip freeze > requirements.txt</code>. At least that’s what popular search engines tell you to do.</p>
+<p>In reality, <code>pip install PACKAGEA  PACKAGEB</code> followed by <code>pip freeze > requirements.txt</code> can potentially generate a requirements.txt which is quite long. That’s because <code>freeze</code> is giving you a snapshot of the packages installed in your environment, not the one you <em>meant</em> to install. When pip installs <code>PACKAGEA  PACKAGEB</code>, it also installs all of their dependencies. All of these dependencies will then be listed in your <code>requirements.txt</code>. But what you <em>really</em> want to do is just have a requirements like</p>
+<pre is:raw="" class="astro-code" style="background-color: #272822; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #F8F8F2">PACKAGEA==4.0.1</span></span>
+<span class="line"><span style="color: #F8F8F2">PACKAGEB==1.0.3</span></span></code></pre>
+<p>For that you need to install a separate tool.</p>
+<h2 id="enter-pipreqs">Enter pipreqs</h2>
+<p>There are actually different tools for doing this; in my experience they are interchangeable, and I wouldn’t agonise about which one to choose. I picked <code>pipreqs</code> because it was the first I came across, but <code>pip-compile</code> works just as well. I installed it with <code>pipx</code> so that is available globally. Of course, I had to install pipx first</p>
+<pre is:raw="" class="astro-code" style="background-color: #272822; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #F8F8F2">❯ brew install pipx</span></span>
+<span class="line"><span style="color: #F8F8F2">==</span><span style="color: #F92672">></span><span style="color: #F8F8F2"> Auto-updating Homebrew...</span></span>
+<span class="line"><span style="color: #F8F8F2">...</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #F8F8F2">❯ pipx install pipreqs</span></span>
+<span class="line"><span style="color: #F8F8F2">installed package pipreqs 0.5.0, installed using Python 3.12.3</span></span>
+<span class="line"><span style="color: #F8F8F2">...</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #F8F8F2">❯ pipreqs </span><span style="color: #66D9EF">.</span><span style="color: #F8F8F2"> --force</span></span>
+<span class="line"><span style="color: #F8F8F2">...</span></span>
+<span class="line"><span style="color: #F8F8F2">INFO: Successfully saved requirements file </span><span style="color: #F92672">in</span><span style="color: #F8F8F2"> ./requirements.txt</span></span></code></pre>
+<p>And that’s the gist of it.</p>
       </div>
     </article>
     <aside class="col-span-1 hidden text-right sm:sticky sm:top-20 sm:block">
       <nav class="mb-4 flex w-full flex-nowrap justify-end gap-4 text-xs text-gray-600 dark:text-gray-300">
         
-        <a class="before:content-['<<']" href="/blog/changing-python-version-in-running-vscode-project">
+        <a class="before:content-['<<']" href="/blog/disabling-djlint-on-non-django-projects">
               older
             </a>
-        <a class="after:content-['>>']" href="/blog/creating-requirementstxt-after-installation">
-              newer
-            </a>
         
+        <a class="before:content-['<<<<']" href="/blog/batch-unrar-command-line-os-x">
+              oldest
+            </a>
       </nav>
       <h2 class="font-semibold">Table of Contents</h2><ul class="mt-4 space-y-2 text-xs">
               <li class="line-clamp-2 hover:text-accent">
-                  <a href="#what-is-djlint" aria-label="Scroll to section: What is DJLint?">
-                    <span>&#35;</span> What is DJLint?
+                  <a href="#laughs-in-javascript" aria-label="Scroll to section: Laughs in Javascript">
+                    <span>&#35;</span> Laughs in Javascript
                   </a>
                 </li><li class="line-clamp-2 hover:text-accent">
-                  <a href="#a-little-annoyance" aria-label="Scroll to section: A little annoyance">
-                    <span>&#35;</span> A little annoyance
-                  </a>
-                </li><li class="line-clamp-2 hover:text-accent">
-                  <a href="#finally-found-the-setting-to-turn-it-off" aria-label="Scroll to section: Finally found the setting to turn it off">
-                    <span>&#35;</span> Finally found the setting to turn it off
+                  <a href="#enter-pipreqs" aria-label="Scroll to section: Enter pipreqs">
+                    <span>&#35;</span> Enter pipreqs
                   </a>
                 </li>
             </ul>

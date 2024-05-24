@@ -37,7 +37,7 @@ grep: /bin/envVars.txt: No such file or directory
 ❯ pyenv install 3.12.2
 ❯ pyenv local 3.12.2
 
-# create a new pyenv
+# create a new virtual env
 ❯ python -m venv venv
 
 # reinstall the dependencies
