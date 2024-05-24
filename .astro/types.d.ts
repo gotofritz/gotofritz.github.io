@@ -455,6 +455,13 @@ declare module 'astro:content' {
   collection: "post",
   data: InferEntrySchema<"post">
 },
+"2024-05-24-creating-requirements.txt-after-installation.md": {
+  id: "2024-05-24-creating-requirements.txt-after-installation.md",
+  slug: "2024-05-24-creating-requirementstxt-after-installation",
+  body: string,
+  collection: "post",
+  data: InferEntrySchema<"post">
+},
 },
 
 	};
