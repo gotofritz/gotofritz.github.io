@@ -39,7 +39,7 @@ module.exports = {
         cactus: {
           css: {
             "--tw-prose-body": "var(--theme-text)",
-            "--tw-prose-headings": "var(--theme-accent-2)",
+            "--tw-prose-headings": "var(--theme-accent-2); ",
             "--tw-prose-links": "var(--theme-text)",
             "--tw-prose-bold": "var(--theme-text)",
             "--tw-prose-bullets": "var(--theme-text)",
@@ -127,6 +127,7 @@ module.exports = {
         ".code-breakdown dd.long-line": {
           "@apply basis-1/3": {},
         },
+        "h2, h2, h3, h4, h5, h6": { textTransform: "capitalize" },
       });
     }),
   ],

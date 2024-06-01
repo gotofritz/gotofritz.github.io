@@ -462,6 +462,13 @@ declare module 'astro:content' {
   collection: "post",
   data: InferEntrySchema<"post">
 },
+"2024-06-01-git-interactive-rebase-and-get-logs-for-branch-with-the-cli.md": {
+  id: "2024-06-01-git-interactive-rebase-and-get-logs-for-branch-with-the-cli.md",
+  slug: "2024-06-01-git-interactive-rebase-and-get-logs-for-branch-with-the-cli",
+  body: string,
+  collection: "post",
+  data: InferEntrySchema<"post">
+},
 },
 
 	};
