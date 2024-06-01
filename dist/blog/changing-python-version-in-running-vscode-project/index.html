@@ -79,7 +79,7 @@
       // initailse root class attribute
       root.classList.toggle("dark", isDark);
     })();</script>
-  <link rel="stylesheet" href="/_astro/_...post_.4fe5bb21.css" /><script type="module" src="/_astro/hoisted.99e77f46.js"></script>
+  <link rel="stylesheet" href="/_astro/_...post_.3353b40d.css" /><script type="module" src="/_astro/hoisted.99e77f46.js"></script>
 <script type="module" src="/_astro/page.b7cc8384.js"></script></head>
   <body>
     <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-1.5 focus:left-1">skip to content
@@ -155,7 +155,7 @@
         </a>
     </div>
 <p class="mt-8 text-xl leading-7">I was working on a python project with 3.11, and then found out I needed to upgrade to 3.12. Tried to deactivate my current venv, but VScode wouldn't let me - it threw a "Permission denied" error. The solution was pretty straightforward.</p></div>
-      <div class="prose prose-sm prose-cactus mt-12 prose-headings:font-semibold prose-headings:before:absolute prose-headings:before:-ml-4 prose-headings:before:text-accent prose-headings:before:content-['#'] prose-th:before:content-none">
+      <div class="prose prose-l prose-cactus mt-12 prose-headings:font-semibold prose-headings:before:absolute prose-headings:before:-ml-4 prose-headings:before:text-accent prose-headings:before:content-['#'] prose-th:before:content-none">
         <p>VSCode is doing some fancy background work to automatically activate virtual environments, (see: <a href="https://github.com/microsoft/vscode-python/wiki/Activate-Environments-in-Terminal-Using-Environment-Variables">Activate Environments in Terminal Using Environment Variables</a>). That approach has a limitation though: it prevents <code>deactivate</code> from working. Luckily it can be easily fixed</p>
 <h2 id="why-im-still-using-venv-instead-of-poetry-or-pipenv">Why I’m still using venv instead of poetry or pipenv</h2>
 <p>I tried using both poetry and pipenv in the past. But I went back to vanilla venv because quite frankly I don’t see the great improvements the alternatives offer. Changing a running virtual environment or disabling it is painful in all of them. Dependencies conflicts are just as hard to solve in all of them (it’s a problem with python itself, not the package manager). Yes it’s nice to have all the settings in a single pyproject file, but it’s a very minor issue not worth the extra dependencies IMHO. And flake8 doesn’t support it anyway. In the absence of measurable benefits, I prefer to stick to the simplest and most standard approach that doesn’t require extra dependencies. And that would be good old venv.</p>

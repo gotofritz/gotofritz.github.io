@@ -79,7 +79,7 @@
       // initailse root class attribute
       root.classList.toggle("dark", isDark);
     })();</script>
-  <link rel="stylesheet" href="/_astro/_...post_.4fe5bb21.css" /><script type="module" src="/_astro/hoisted.99e77f46.js"></script>
+  <link rel="stylesheet" href="/_astro/_...post_.3353b40d.css" /><script type="module" src="/_astro/hoisted.99e77f46.js"></script>
 <script type="module" src="/_astro/page.b7cc8384.js"></script></head>
   <body>
     <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-1.5 focus:left-1">skip to content
@@ -153,39 +153,69 @@
         </a>
     </div>
 <p class="mt-8 text-xl leading-7">Asking Git to display all the logs for a given branch, or to squash commits within a branch, is not as straightforward as you might expect if you've never tried it before.</p></div>
-      <div class="prose prose-sm prose-cactus mt-12 prose-headings:font-semibold prose-headings:before:absolute prose-headings:before:-ml-4 prose-headings:before:text-accent prose-headings:before:content-['#'] prose-th:before:content-none">
+      <div class="prose prose-l prose-cactus mt-12 prose-headings:font-semibold prose-headings:before:absolute prose-headings:before:-ml-4 prose-headings:before:text-accent prose-headings:before:content-['#'] prose-th:before:content-none">
         <h2 id="tldr">TL;DR</h2>
 <p>Assuming the branch was created from main:</p>
 <pre is:raw="" class="astro-code" style="background-color: #272822; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #F8F8F2">git rebase -i </span><span style="color: #E6DB74">$(git merge-base HEAD main)</span></span>
 <span class="line"><span style="color: #F8F8F2">git log --oneline </span><span style="color: #E6DB74">$(git merge-base HEAD main)</span><span style="color: #F8F8F2">..HEAD</span></span></code></pre>
 <h2 id="the-nine-circles-of-git">The Nine Circles of Git</h2>
-<p>If you have never bothered with Git’s internals, you might expect a command like <code>git log BRANCH</code> to display all the log messages for <code>BRANCH</code>, and <code>git rebase -i BRANCH</code> to do an interactive rebase for the branch. That would make sense, right? After all that’s how you work in the file system. <code>ls SIMPSONS/</code> gives you the file listing in <code>SIMPSONS/</code>, but <code>ls SIMPSONS/HOMER/</code> restricts the listing. But git isn’t that straightforward. Under the hood, it is a much more complex piece of software than one may think.</p>
+<p>If you have never bothered with Git’s internals, you might expect a command like <code>git log BRANCH</code> to display all the log messages for <code>BRANCH</code>, and <code>git rebase -i BRANCH</code> to do an interactive rebase for the branch. That would make sense, right? After all that’s how you work in the file system. You create a folder <code>mkdir FOLDER</code>, and then all the files you put in that folders are just there, you can list them with <code>ls FOLDER/</code>. But git isn’t that straightforward. Under the hood, it is a much more complex piece of software than one may think.</p>
 <h2 id="git-is-a-wonder-of-technology">Git is a Wonder of Technology</h2>
-<p>Git is essentially a single list of commits that keep growing as teams append to it. Pretty much like a blockchain. Each commit has a link to its parent commit, and that’s how Git can track the commit history. Branches may feel like directories, but they are much more abstract. They are pointers to ‘fork in the roads’, so to speak. They signal to Git that ‘at commit xyz, a branch was created’.</p>
-<p>It’s similar to how forms in bureaucracy work. When you have to fill out a form for a mortgage or a medical procedure, you typically start at page 1. At some point the form might say “if your earnings for the past year are below €20000 turn to page 5”. Git does the same; it goes down the commit history and when it encounters a branch pointer it’s equivalent to “if you are looking for the history of branch X, turn to commit c53806e”. Some commits can exist in multiple branches. And an extra complication is that unlike blockchains, which are immutable, git commit histories are rewritten all the time.</p>
+<p>Git is essentially a single list of commits that keep growing as teams append to it. Each commit has a link to its parent commit, and that’s how Git can track the commit history. Different teams can work on different branches, but all the commits end in the same history, all mixed together. They just point to a different parent. It’s like a very busy chat where there are several conversations going on at once, and people are replying to a message posted two comments ago and ignoring those posted in between.</p>
+<p>Branches are really just pointers to ‘fork in the roads’, so to speak. They signal to Git that ‘at commit xyz a new branch started’. Then of course, a branch could branch off from another branch, and then you can merge the main branch into it, until explaining what “all the commits in this branch” mean becomes quite fuzzy.</p>
 <p>If you start digging into how it is all implemented, it is quite mind-blowing that the whole thing works at all with hardly any glitches, to be honest.</p>
 <h2 id="but-why-arent-there-commands-to-make-the-common-jobs-easier">But why aren’t There Commands to Make the “Common Jobs” easier?</h2>
-<p>But does a user need to know all this? After all we don’t need to understand how video codecs and streaming across a distributed network work when we watch a video on YouTube, we just click “play” or “next”. Indeed there are Git clients that shield you from all the complexity and allow you to treat branches as if they were folders, and do just that. The command line version, though, follows the Unix philosophy: a limited set of powerful, configurable commands that can be combined together to handle most scenarios. That keeps the maintenance and learning burden reasonably low. Git was created by the same person who created Linux, after all, and it is a tool for software developers. It tends to give you only the raw ingredients.</p>
+<p>But does a user need to know all this? After all we don’t need to understand how video codecs and streaming across a distributed network work when we watch a video on YouTube, we just click “play” or “next”. Indeed there are Git clients that shield you from all the complexity and allow you to treat branches as if they were folders.</p>
+<p>The command line version of Git, instead, follows the Unix philosophy: a limited set of powerful, configurable commands that can be combined together to handle most scenarios. That keeps the maintenance and learning burden reasonably low. Git was created by the same person who created Linux, after all, and it is a tool for software developers. It tends to give you only the raw building blocks.</p>
 <h2 id="enter-git-merge-base">Enter <code>git merge-base</code></h2>
-<p>So, the objective “give me all the commits messages for branch X” can be achieved by combining the commands (give me all the commits messages for…) and (the commit were the history branches off into X). And “rebase the branch interactively” could be achieved with (start an interactive rebase from), (the commit were the history branches off into X) and (the current commit). The command for “the commit were the history branches off into X” is <a href="https://git-scm.com/docs/git-merge-base">merge-base</a></p>
+<p>So, the task “give me all the commits messages for branch X” has to be broken down into simpler commands, and similarly for “rebase the branch interactively”. These are some commands you could use</p>
+<ul>
+<li>
+<p><a href="https://git-scm.com/docs/git-log">log</a>, “get the commit messages between A and B”</p>
+<pre is:raw="" class="astro-code" style="background-color: #272822; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #F8F8F2">❯ git log A..B</span></span></code></pre>
+</li>
+<li>
+<p><a href="https://git-scm.com/book/en/v2/Git-Internals-Git-References#ref_the_ref">HEAD</a>, not really a command, but a reference to the latest commit</p>
+<pre is:raw="" class="astro-code" style="background-color: #272822; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #F8F8F2">❯ cat .git/HEAD</span></span>
+<span class="line"><span style="color: #88846F"># HEAD gets translated by git</span></span>
+<span class="line"><span style="color: #88846F"># into the content of a file</span></span>
+<span class="line"><span style="color: #88846F"># like this</span></span>
+<span class="line"><span style="color: #F8F8F2">ref: refs/heads/32-new-post</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #F8F8F2">❯ cat .git/refs/heads/32-new-post</span></span>
+<span class="line"><span style="color: #88846F"># i.e., a commit hash</span></span>
+<span class="line"><span style="color: #F8F8F2">d367d70df9361e993e84fa89a2854254fd816d53</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #F8F8F2">❯ ls -1 .git/refs/heads/</span></span>
+<span class="line"><span style="color: #88846F"># every branch has its HEAD</span></span>
+<span class="line"><span style="color: #F8F8F2">main</span></span>
+<span class="line"><span style="color: #F8F8F2">32-new-post</span></span>
+<span class="line"><span style="color: #F8F8F2">54-another-post</span></span>
+<span class="line"><span style="color: #F8F8F2">fix/and-so-on</span></span></code></pre>
+</li>
+<li>
+<p><a href="https://git-scm.com/docs/git-merge-base">merge-base</a>, “starting from COMMIT, go back in history until you find the commit which is is also in BRANCH, i.e. the point where history split”</p>
+<pre is:raw="" class="astro-code" style="background-color: #272822; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #F8F8F2">❯ git merge-base COMMIT BRANCH</span></span></code></pre>
+</li>
+</ul>
 <h3 id="git-log-all-the-commit-messages-for-the-branch">Git log all the commit messages for the branch</h3>
-<p>This will give you a result similar to</p>
-<pre is:raw="" class="astro-code" style="background-color: #272822; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #F8F8F2">❯ git log --oneline </span><span style="color: #E6DB74">$(git merge-base HEAD main)</span><span style="color: #F8F8F2">..HEAD</span></span>
-<span class="line"><span style="color: #F8F8F2">ac470ac gotofritz      2024-06-01 17:39:59.. added some more </span><span style="color: #66D9EF">test</span></span>
-<span class="line"><span style="color: #F8F8F2">0b4b095 gotofritz      2024-06-01 17:34:27.. added some </span><span style="color: #66D9EF">test</span></span>
+<p>Putting it all together</p>
+<pre is:raw="" class="astro-code" style="background-color: #272822; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #F8F8F2">❯ git log --pretty=short --oneline </span><span style="color: #E6DB74">$(git merge-base HEAD main)</span><span style="color: #F8F8F2">..HEAD</span></span>
+<span class="line"><span style="color: #F8F8F2">ac470ac added some more </span><span style="color: #66D9EF">test</span></span>
+<span class="line"><span style="color: #F8F8F2">0b4b095 added some </span><span style="color: #66D9EF">test</span></span>
 <span class="line"><span style="color: #F8F8F2">...</span></span>
-<span class="line"><span style="color: #F8F8F2">48bac73 gotofritz      2024-05-14 22:53:55.. created branch</span></span></code></pre>
+<span class="line"><span style="color: #F8F8F2">48bac73 created branch</span></span></code></pre>
 <dl class="code-breakdown">
 <dt>git</dt>
 <dd>launches the Git command-line tool</dd>
 <dt>log</dt>
 <dd>displays the commit history of the repository</dd>
-<dt>--oneline</dt>
-<dd>condenses the output to one line per commit. This flag simplifies the display but is just one of e <a href="https://git-scm.com/docs/git-log">many available</a></dd>
+<dt class="long-line">--pretty=short --oneline</dt>
+<dd class="long-line">condenses the output to one line per commit. These flags simplify the display, but they are just a few of <a href="https://git-scm.com/docs/git-log">many available</a></dd>
 <dt>$(</dt>
 <dd>starts a subshell to execute a command and use its output in the git log command</dd>
 <dt>git</dt>
-<dd>it's gits all the way down</dd>
+<dd>this is another git command, running separately</dd>
 <dt>merge-base</dt>
 <dd>find the commit which is parent to both...</dd>
 <dt>HEAD</dt>
@@ -193,7 +223,7 @@
 <dt>main</dt>
 <dd>...and a branch called 'main' (adapt as needed)</dd>
 <dt>)</dt>
-<dd>ends the subshell command, passes the commit it found to the git log command</dd>
+<dd>ends the subshell command, i.e. the 'A' in `git log A..B`</dd>
 <dt>..</dt>
 <dd>indicates that we are passing a range of commits to git log, which ends at...</dd>
 <dt>HEAD</dt>
@@ -201,7 +231,7 @@
 </dl>
 <h3 id="interactively-rebase-all-the-commits">Interactively rebase all the commits</h3>
 <p>An interactive rebase opens an editor where you can decide what to do with each commit in the history. If you write <code>pick</code> next to a commit it will stay; if you write <code>squash</code> or <code>fixup</code> it will be merged with the next commit that stays (there must be at least one that stays). <code>squash</code> lets you rewrite the commit message of the merged commit, and <code>fixup</code> just merges without changing the messages.</p>
-<p>The commit history has the oldest commit at the top and the most recent below it. To squash, you want to <code>pick</code> one commit, and <code>fixup</code> all the others:</p>
+<p>The commit history has the oldest commit at the top and the most recent below it. To squash, you want to <code>pick</code> the first commit, and <code>fixup</code> all the others:</p>
 <pre is:raw="" class="astro-code" style="background-color: #272822; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #F8F8F2">❯ git rebase --i </span><span style="color: #E6DB74">$(git merge-base HEAD main)</span></span>
 <span class="line"><span style="color: #F8F8F2">------ INSIDE THE EDITOR -----------------------</span></span>
 <span class="line"><span style="color: #F8F8F2">pick cdcd2a9 post(new): git interactive rebase</span></span>
@@ -228,7 +258,7 @@
 <dt>rebase</dt>
 <dd>puts the commits from the current branch into a temporary area, updates the commit history, then moves the current commits back</dd>
 <dt>-i</dt>
-<dd>makes the rebase interactive, i.e., before putting the commits back, it opens an editor window where you can decide what to do with each commit. It's the only way you can squash them, as there is no built-in option that does it for you.</dd>
+<dd>makes the rebase interactive, i.e., before putting the commits back, it opens an editor window where you can decide what to do with each commit. It's the only way you can squash them, sadly you can't simply tell Git "squash them all".</dd>
 <dt>$(</dt>
 <dd>starts a subshell to execute a command and use its output in the git log command</dd>
 <dt>git</dt>
@@ -248,8 +278,8 @@
 <span class="line"><span style="color: #F8F8F2">    git rebase -i </span><span style="color: #E6DB74">$(git merge-base HEAD main)</span></span></code></pre>
 <p><code>GIT_SEQUENCE_EDITOR</code> is an environmental variable that can contain a command or editor program to replace the editor you get when running git rebase -i. So you can put a tiny script there, that does what you want.</p>
 <dl class="code-breakdown">
-<dt style="flex-basis: calc(45% - .5rem);">GIT_SEQUENCE_EDITOR='</dt>
-<dd style="flex-basis: calc(55% - .5rem);">put a tiny script into this variable. Note that we use ' instead of " because there is a ! later on, and bash gets all confused when it finds ! inside "</dd>
+<dt style="flex-basis: calc(35% - .5rem);">GIT_SEQUENCE_EDITOR='</dt>
+<dd style="flex-basis: 100%;">put a tiny script into this variable. Note that we use ' instead of " because there is a ! later on, and bash gets all confused when it finds ! inside "</dd>
 <dt>sed</dt>
 <dd>the tiny script is a standard Unix text editor which...</dd>
 <dt>-i</dt>
@@ -263,11 +293,11 @@
 <dt>"'</dt>
 <dd>get me out of here</dd>
 <dt>git</dt>
-<dd>now the actual command start. It's our old friend, the Git command-line tool</dd>
+<dd>now the actual command starts. It's our old friend, the Git command-line tool</dd>
 <dt>rebase</dt>
 <dd>puts the commits from the current branch into a temporary area, updates the commit history, then move the current commits back</dd>
 <dt>-i</dt>
-<dd>make the rebase interactive, i.e. open an editor window where you can decide what to do with each commit. It's the only way you can squash them, there is no built-in option that does it for you</dd>
+<dd>make the rebase interactive, but before opening the editor it checks whether GIT_SEQUENCE_EDITOR has somehing ini it. In this case it does, so it uses it without further feedback</dd>
 <dt>$(</dt>
 <dd>start a command inside the command, so that you can use its output</dd>
 <dt>git</dt>
@@ -282,11 +312,10 @@
 <dd>end of sub command, use the result in the git log command</dd>
 </dl>
 <h2 id="am-i-supposed-to-remember-all-that">Am I supposed to remember all that??</h2>
-<p>Actually not. The beauty of the command line is that you can create <em>aliases</em> of complex commands like these, and then you can just fire it up by typing a few letters. In this case, there are two ways of doing this - you can create a Git alias in the global Git configuration, or a generic command alias in whatever CLI you use (for me it’s bash). The benefit of a git alias is that it works regardless of what shell you are in; however if you use different Git configs for different environments (e.g. work / home) then it’s a pain to keep them synchronised. I already have a few Git commands in my <a href="/blog/storing-bash-profile-and-so-on-on-github/">dotfiles</a>, so I’ll just add them there</p>
-<p>Actually not. The beauty of the command line is that you can create aliases of complex commands like these, and then you can just fire it up by typing a few letters. In this case, there are two ways of doing this - you can create a Git alias in the global Git configuration, or an alias in whatever CLI you use (for me it’s Bash). The benefit of a Git alias is that it works regardless of what shell you are in; however, if you use different Git configs for different environments (e.g., work/home) then it’s a pain to keep them synchronized. I already have a few Git commands in my dotfiles, so I’ll just add them there:</p>
+<p>Actually not. The beauty of the command line is that you can create <em>aliases</em> of complex commands like these, and then you can just fire them up by typing a few letters. In this case, there are two ways of doing this - you can create a Git alias in the global Git configuration, or a generic command alias in whatever CLI you use (for me it’s bash). The benefit of a git alias is that it works regardless of what shell you are in; however if you use different Git configs for different environments (e.g. work / home) then it’s a pain to keep them synchronised. I already have a few Git commands in my <a href="/blog/storing-bash-profile-and-so-on-on-github/">dotfiles</a>, so I’ll just add them there</p>
 <pre is:raw="" class="astro-code" style="background-color: #272822; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #88846F"># glog is an existing alias which has a lot of formatting options</span></span>
 <span class="line"><span style="color: #66D9EF">alias</span><span style="color: #F8F8F2"> glogb=</span><span style="color: #E6DB74">'glog $(git merge-base HEAD main)..HEAD'</span></span>
-<span class="line"><span style="color: #66D9EF">alias</span><span style="color: #F8F8F2"> gsqb=</span><span style="color: #E6DB74">'GIT_SEQUENCE_EDITOR="sed -i -e '</span><span style="color: #AE81FF">\'</span><span style="color: #E6DB74">'1\!s/pick/fixup/'</span><span style="color: #AE81FF">\'</span><span style="color: #E6DB74">'" git rebase -i $(git merge-base HEAD main)'</span></span></code></pre>
+<span class="line"><span style="color: #66D9EF">alias</span><span style="color: #F8F8F2"> gsqb=</span><span style="color: #E6DB74">'GIT_SEQUENCE_EDITOR="sed -i -e ''1!s/pick/fixup/''" git rebase -i $(git merge-base HEAD main)'</span></span></code></pre>
 <p>So now I can just type <code>glogb</code> or <code>gsqb</code> without having to remember those long commands.</p>
       </div>
     </article>
