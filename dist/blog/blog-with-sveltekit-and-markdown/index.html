@@ -79,7 +79,7 @@
       // initailse root class attribute
       root.classList.toggle("dark", isDark);
     })();</script>
-  <link rel="stylesheet" href="/_astro/_...post_.4fe5bb21.css" /><script type="module" src="/_astro/hoisted.99e77f46.js"></script>
+  <link rel="stylesheet" href="/_astro/_...post_.3353b40d.css" /><script type="module" src="/_astro/hoisted.99e77f46.js"></script>
 <script type="module" src="/_astro/page.b7cc8384.js"></script></head>
   <body>
     <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-1.5 focus:left-1">skip to content
@@ -155,7 +155,7 @@
         </a>
     </div>
 <p class="mt-8 text-xl leading-7">Building a static website with <a href="https://kit.svelte.dev/">Sveltekit</a> and markdown is hard going at first. But just when I was about to give up I stumbled on some blog posts and boilerplates that helped me crack it. I may still switch to <a href="https://astro.build/">Astro</a> later though</p></div>
-      <div class="prose prose-sm prose-cactus mt-12 prose-headings:font-semibold prose-headings:before:absolute prose-headings:before:-ml-4 prose-headings:before:text-accent prose-headings:before:content-['#'] prose-th:before:content-none">
+      <div class="prose prose-l prose-cactus mt-12 prose-headings:font-semibold prose-headings:before:absolute prose-headings:before:-ml-4 prose-headings:before:text-accent prose-headings:before:content-['#'] prose-th:before:content-none">
         <h2 id="getting-used-to-sveltekits-and-vites-quirks">Getting used to SvelteKit’s and Vite’s quirks</h2>
 <p>Documentation is still sparse, and SvelteKit is not designed as an <abbr title="Static Site Generator">SSG</abbr>. So at first it was hard to get my head around how it all fits together. Fetching content in templates? Aren’t stores the most logical places for content? But why is it so painful to load async content in stores and fetch it from there? Being forced to put the markdown content inside the <code>routes</code> folder? Do you <em>really</em> have to create an endpoint in JSON and then fetch the data from there? And how do I fix that race condition that makes the content disappear after page load?</p>
 <p>It’s not that I couldn’t fix the issues, but it all felt too flakey. I thought it’d be a risk to commit to SvelteKit. Then I come across a few useful blog posts, but best of all <a href="https://github.com/mattjennings/sveltekit-blog-template">Matt Jennings’s excellent SvelteKit blog template</a>. He made all the design decisions I would have made, and ironed out all the issues I also encountered. With that I was able to put together a site I was happy with. Thanks Matt!</p>

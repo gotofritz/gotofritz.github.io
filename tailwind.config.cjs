@@ -115,7 +115,7 @@ module.exports = {
           "@apply flex flex-wrap gap-2": {},
         },
         ".code-breakdown dt": {
-          "@apply basis-[calc(33.3333%-.5rem)] grow shrink-0 text-right py-0 px-2 bg-gray-300":
+          "@apply basis-[calc(33.3333%-.5rem)] grow shrink-0 text-right py-0 px-2 bg-gray-300 dark:bg-[#272822] text-accent-2":
             {},
         },
         ".code-breakdown dd": {

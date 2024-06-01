@@ -53,7 +53,7 @@ const { headings } = await post.render();
     <article class="col-span-3 break-words">
       <div id="blog-hero"><BlogHero content={post} /></div>
       <div
-        class="prose prose-sm prose-cactus mt-12 prose-headings:font-semibold prose-headings:before:absolute prose-headings:before:-ml-4 prose-headings:before:text-accent prose-headings:before:content-['#'] prose-th:before:content-none"
+        class="prose prose-l prose-cactus mt-12 prose-headings:font-semibold prose-headings:before:absolute prose-headings:before:-ml-4 prose-headings:before:text-accent prose-headings:before:content-['#'] prose-th:before:content-none"
       >
         <slot />
       </div>
@@ -98,7 +98,10 @@ const { headings } = await post.render();
             <ul class="mt-4 space-y-2 text-xs">
               {headings.map(({ slug, text }) => (
                 <li class="line-clamp-2 hover:text-accent">
-                  <a href={`#${slug}`} aria-label={`Scroll to section: ${text}`}>
+                  <a
+                    href={`#${slug}`}
+                    aria-label={`Scroll to section: ${text}`}
+                  >
                     <span>&#35;</span> {text}
                   </a>
                 </li>

@@ -19,34 +19,69 @@ git log --oneline $(git merge-base HEAD main)..HEAD
 
 ## The Nine Circles of Git
 
-If you have never bothered with Git's internals, you might expect a command like `git log BRANCH` to display all the log messages for `BRANCH`, and `git rebase -i BRANCH` to do an interactive rebase for the branch. That would make sense, right? After all that's how you work in the file system. `ls SIMPSONS/` gives you the file listing in `SIMPSONS/`, but `ls SIMPSONS/HOMER/` restricts the listing. But git isn't that straightforward. Under the hood, it is a much more complex piece of software than one may think.
+If you have never bothered with Git's internals, you might expect a command like `git log BRANCH` to display all the log messages for `BRANCH`, and `git rebase -i BRANCH` to do an interactive rebase for the branch. That would make sense, right? After all that's how you work in the file system. You create a folder `mkdir FOLDER`, and then all the files you put in that folders are just there, you can list them with `ls FOLDER/`. But git isn't that straightforward. Under the hood, it is a much more complex piece of software than one may think.
 
 ## Git is a Wonder of Technology
 
-Git is essentially a single list of commits that keep growing as teams append to it. Pretty much like a blockchain. Each commit has a link to its parent commit, and that's how Git can track the commit history. Branches may feel like directories, but they are much more abstract. They are pointers to 'fork in the roads', so to speak. They signal to Git that 'at commit xyz, a branch was created'.
+Git is essentially a single list of commits that keep growing as teams append to it. Each commit has a link to its parent commit, and that's how Git can track the commit history. Different teams can work on different branches, but all the commits end in the same history, all mixed together. They just point to a different parent. It's like a very busy chat where there are several conversations going on at once, and people are replying to a message posted two comments ago and ignoring those posted in between.
 
-It's similar to how forms in bureaucracy work. When you have to fill out a form for a mortgage or a medical procedure, you typically start at page 1. At some point the form might say "if your earnings for the past year are below €20000 turn to page 5". Git does the same; it goes down the commit history and when it encounters a branch pointer it's equivalent to "if you are looking for the history of branch X, turn to commit c53806e". Some commits can exist in multiple branches. And an extra complication is that unlike blockchains, which are immutable, git commit histories are rewritten all the time.
+Branches are really just pointers to 'fork in the roads', so to speak. They signal to Git that 'at commit xyz a new branch started'. Then of course, a branch could branch off from another branch, and then you can merge the main branch into it, until explaining what "all the commits in this branch" mean becomes quite fuzzy.
 
 If you start digging into how it is all implemented, it is quite mind-blowing that the whole thing works at all with hardly any glitches, to be honest.
 
 ## But why aren't There Commands to Make the "Common Jobs" easier?
 
-But does a user need to know all this? After all we don't need to understand how video codecs and streaming across a distributed network work when we watch a video on YouTube, we just click "play" or "next". Indeed there are Git clients that shield you from all the complexity and allow you to treat branches as if they were folders, and do just that. The command line version, though, follows the Unix philosophy: a limited set of powerful, configurable commands that can be combined together to handle most scenarios. That keeps the maintenance and learning burden reasonably low. Git was created by the same person who created Linux, after all, and it is a tool for software developers. It tends to give you only the raw ingredients.
+But does a user need to know all this? After all we don't need to understand how video codecs and streaming across a distributed network work when we watch a video on YouTube, we just click "play" or "next". Indeed there are Git clients that shield you from all the complexity and allow you to treat branches as if they were folders.
+
+The command line version of Git, instead, follows the Unix philosophy: a limited set of powerful, configurable commands that can be combined together to handle most scenarios. That keeps the maintenance and learning burden reasonably low. Git was created by the same person who created Linux, after all, and it is a tool for software developers. It tends to give you only the raw building blocks.
 
 ## Enter `git merge-base`
 
-So, the objective "give me all the commits messages for branch X" can be achieved by combining the commands (give me all the commits messages for...) and (the commit were the history branches off into X). And "rebase the branch interactively" could be achieved with (start an interactive rebase from), (the commit were the history branches off into X) and (the current commit). The command for "the commit were the history branches off into X" is [merge-base](https://git-scm.com/docs/git-merge-base)
+So, the task "give me all the commits messages for branch X" has to be broken down into simpler commands, and similarly for "rebase the branch interactively". These are some commands you could use
+
+- [log](https://git-scm.com/docs/git-log), "get the commit messages between A and B"
+
+  ```bash
+  ❯ git log A..B
+  ```
+
+- [HEAD](https://git-scm.com/book/en/v2/Git-Internals-Git-References#ref_the_ref), not really a command, but a reference to the latest commit
+
+  ```bash
+  ❯ cat .git/HEAD
+  # HEAD gets translated by git
+  # into the content of a file
+  # like this
+  ref: refs/heads/32-new-post
+
+  ❯ cat .git/refs/heads/32-new-post
+  # i.e., a commit hash
+  d367d70df9361e993e84fa89a2854254fd816d53
+
+  ❯ ls -1 .git/refs/heads/
+  # every branch has its HEAD
+  main
+  32-new-post
+  54-another-post
+  fix/and-so-on
+  ```
+
+- [merge-base](https://git-scm.com/docs/git-merge-base), "starting from COMMIT, go back in history until you find the commit which is is also in BRANCH, i.e. the point where history split"
+
+  ```bash
+  ❯ git merge-base COMMIT BRANCH
+  ```
 
 ### Git log all the commit messages for the branch
 
-This will give you a result similar to
+Putting it all together
 
 ```bash
-❯ git log --oneline $(git merge-base HEAD main)..HEAD
-ac470ac gotofritz      2024-06-01 17:39:59.. added some more test
-0b4b095 gotofritz      2024-06-01 17:34:27.. added some test
+❯ git log --pretty=short --oneline $(git merge-base HEAD main)..HEAD
+ac470ac added some more test
+0b4b095 added some test
 ...
-48bac73 gotofritz      2024-05-14 22:53:55.. created branch
+48bac73 created branch
 ```
 
 <dl class="code-breakdown">
@@ -56,14 +91,14 @@ ac470ac gotofritz      2024-06-01 17:39:59.. added some more test
 <dt>log</dt>
 <dd>displays the commit history of the repository</dd>
 
-<dt>--oneline</dt>
-<dd>condenses the output to one line per commit. This flag simplifies the display but is just one of e <a href="https://git-scm.com/docs/git-log">many available</a></dd>
+<dt class="long-line">--pretty=short --oneline</dt>
+<dd class="long-line">condenses the output to one line per commit. These flags simplify the display, but they are just a few of <a href="https://git-scm.com/docs/git-log">many available</a></dd>
 
 <dt>$(</dt>
 <dd>starts a subshell to execute a command and use its output in the git log command</dd>
 
 <dt>git</dt>
-<dd>it's gits all the way down</dd>
+<dd>this is another git command, running separately</dd>
 
 <dt>merge-base</dt>
 <dd>find the commit which is parent to both...</dd>
@@ -75,7 +110,7 @@ ac470ac gotofritz      2024-06-01 17:39:59.. added some more test
 <dd>...and a branch called 'main' (adapt as needed)</dd>
 
 <dt>)</dt>
-<dd>ends the subshell command, passes the commit it found to the git log command</dd>
+<dd>ends the subshell command, i.e. the 'A' in `git log A..B`</dd>
 
 <dt>..</dt>
 <dd>indicates that we are passing a range of commits to git log, which ends at...</dd>
@@ -88,7 +123,7 @@ ac470ac gotofritz      2024-06-01 17:39:59.. added some more test
 
 An interactive rebase opens an editor where you can decide what to do with each commit in the history. If you write `pick` next to a commit it will stay; if you write `squash` or `fixup` it will be merged with the next commit that stays (there must be at least one that stays). `squash` lets you rewrite the commit message of the merged commit, and `fixup` just merges without changing the messages.
 
-The commit history has the oldest commit at the top and the most recent below it. To squash, you want to `pick` one commit, and `fixup` all the others:
+The commit history has the oldest commit at the top and the most recent below it. To squash, you want to `pick` the first commit, and `fixup` all the others:
 
 ```bash
 ❯ git rebase --i $(git merge-base HEAD main)
@@ -121,7 +156,7 @@ fixup fd894c7 even more text changes
 <dd>puts the commits from the current branch into a temporary area, updates the commit history, then moves the current commits back</dd>
 
 <dt>-i</dt>
-<dd>makes the rebase interactive, i.e., before putting the commits back, it opens an editor window where you can decide what to do with each commit. It's the only way you can squash them, as there is no built-in option that does it for you.</dd>
+<dd>makes the rebase interactive, i.e., before putting the commits back, it opens an editor window where you can decide what to do with each commit. It's the only way you can squash them, sadly you can't simply tell Git "squash them all".</dd>
 
 <dt>$(</dt>
 <dd>starts a subshell to execute a command and use its output in the git log command</dd>
@@ -154,8 +189,8 @@ I understand the Unix philosophy, and combining simple commands to achieve compl
 `GIT_SEQUENCE_EDITOR` is an environmental variable that can contain a command or editor program to replace the editor you get when running git rebase -i. So you can put a tiny script there, that does what you want.
 
 <dl class="code-breakdown">
-<dt style="flex-basis: calc(45% - .5rem);">GIT_SEQUENCE_EDITOR='</dt>
-<dd style="flex-basis: calc(55% - .5rem);">put a tiny script into this variable. Note that we use ' instead of " because there is a ! later on, and bash gets all confused when it finds ! inside "</dd>
+<dt style="flex-basis: calc(35% - .5rem);">GIT_SEQUENCE_EDITOR='</dt>
+<dd style="flex-basis: 100%;">put a tiny script into this variable. Note that we use ' instead of " because there is a ! later on, and bash gets all confused when it finds ! inside "</dd>
 
 <dt>sed</dt>
 <dd>the tiny script is a standard Unix text editor which...</dd>
@@ -176,13 +211,13 @@ I understand the Unix philosophy, and combining simple commands to achieve compl
 <dd>get me out of here</dd>
 
 <dt>git</dt>
-<dd>now the actual command start. It's our old friend, the Git command-line tool</dd>
+<dd>now the actual command starts. It's our old friend, the Git command-line tool</dd>
 
 <dt>rebase</dt>
 <dd>puts the commits from the current branch into a temporary area, updates the commit history, then move the current commits back</dd>
 
 <dt>-i</dt>
-<dd>make the rebase interactive, i.e. open an editor window where you can decide what to do with each commit. It's the only way you can squash them, there is no built-in option that does it for you</dd>
+<dd>make the rebase interactive, but before opening the editor it checks whether GIT_SEQUENCE_EDITOR has somehing ini it. In this case it does, so it uses it without further feedback</dd>
 
 <dt>$(</dt>
 <dd>start a command inside the command, so that you can use its output</dd>
@@ -205,9 +240,7 @@ I understand the Unix philosophy, and combining simple commands to achieve compl
 
 ## Am I supposed to remember all that??
 
-Actually not. The beauty of the command line is that you can create _aliases_ of complex commands like these, and then you can just fire it up by typing a few letters. In this case, there are two ways of doing this - you can create a Git alias in the global Git configuration, or a generic command alias in whatever CLI you use (for me it's bash). The benefit of a git alias is that it works regardless of what shell you are in; however if you use different Git configs for different environments (e.g. work / home) then it's a pain to keep them synchronised. I already have a few Git commands in my [dotfiles](/blog/storing-bash-profile-and-so-on-on-github/), so I'll just add them there
-
-Actually not. The beauty of the command line is that you can create aliases of complex commands like these, and then you can just fire it up by typing a few letters. In this case, there are two ways of doing this - you can create a Git alias in the global Git configuration, or an alias in whatever CLI you use (for me it’s Bash). The benefit of a Git alias is that it works regardless of what shell you are in; however, if you use different Git configs for different environments (e.g., work/home) then it’s a pain to keep them synchronized. I already have a few Git commands in my dotfiles, so I’ll just add them there:
+Actually not. The beauty of the command line is that you can create _aliases_ of complex commands like these, and then you can just fire them up by typing a few letters. In this case, there are two ways of doing this - you can create a Git alias in the global Git configuration, or a generic command alias in whatever CLI you use (for me it's bash). The benefit of a git alias is that it works regardless of what shell you are in; however if you use different Git configs for different environments (e.g. work / home) then it's a pain to keep them synchronised. I already have a few Git commands in my [dotfiles](/blog/storing-bash-profile-and-so-on-on-github/), so I'll just add them there
 
 ```bash
 # glog is an existing alias which has a lot of formatting options

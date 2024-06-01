@@ -79,7 +79,7 @@
       // initailse root class attribute
       root.classList.toggle("dark", isDark);
     })();</script>
-  <link rel="stylesheet" href="/_astro/_...post_.4fe5bb21.css" /><script type="module" src="/_astro/hoisted.99e77f46.js"></script>
+  <link rel="stylesheet" href="/_astro/_...post_.3353b40d.css" /><script type="module" src="/_astro/hoisted.99e77f46.js"></script>
 <script type="module" src="/_astro/page.b7cc8384.js"></script></head>
   <body>
     <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-1.5 focus:left-1">skip to content
@@ -153,7 +153,7 @@
         </a>
     </div>
 <p class="mt-8 text-xl leading-7"><code>pip freeze > requirements.txt</code> is the canonical way to capture all the packages you have installed in a Python project. I am not sure why; it doesn't do what you expect.</p></div>
-      <div class="prose prose-sm prose-cactus mt-12 prose-headings:font-semibold prose-headings:before:absolute prose-headings:before:-ml-4 prose-headings:before:text-accent prose-headings:before:content-['#'] prose-th:before:content-none">
+      <div class="prose prose-l prose-cactus mt-12 prose-headings:font-semibold prose-headings:before:absolute prose-headings:before:-ml-4 prose-headings:before:text-accent prose-headings:before:content-['#'] prose-th:before:content-none">
         <h2 id="laughs-in-javascript">Laughs in Javascript</h2>
 <p>Coming from Javascript I am still amazed by how primitive the DX in python feels in comparison. If you use pip, there is no <code>pnpm add PACKAGE</code> or <code>npm i PACKAGE --save</code> to install a package <em>and</em> save a reference into the <code>requirements.txt</code>. Of course poetry creates lock files automatically, but pip is the standard python package manager, it should do the right thing. Instead, after installing packages with <code>pip install PACKAGEA  PACKAGEB ...</code> one has to capture the installed packages with <code>pip freeze > requirements.txt</code>. At least that’s what popular search engines tell you to do.</p>
 <p>In reality, <code>pip install PACKAGEA  PACKAGEB</code> followed by <code>pip freeze > requirements.txt</code> can potentially generate a requirements.txt which is quite long. That’s because <code>freeze</code> is giving you a snapshot of the packages installed in your environment, not the one you <em>meant</em> to install. When pip installs <code>PACKAGEA  PACKAGEB</code>, it also installs all of their dependencies. All of these dependencies will then be listed in your <code>requirements.txt</code>. But what you <em>really</em> want to do is just have a requirements like</p>
