@@ -469,6 +469,13 @@ declare module 'astro:content' {
   collection: "post",
   data: InferEntrySchema<"post">
 },
+"2024-11-06-converting-ogg-files-to-mp3-in-anki.md": {
+  id: "2024-11-06-converting-ogg-files-to-mp3-in-anki.md",
+  slug: "2024-11-06-converting-ogg-files-to-mp3-in-anki",
+  body: string,
+  collection: "post",
+  data: InferEntrySchema<"post">
+},
 },
 
 	};
