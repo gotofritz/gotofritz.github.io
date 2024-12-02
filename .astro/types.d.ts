@@ -476,6 +476,13 @@ declare module 'astro:content' {
   collection: "post",
   data: InferEntrySchema<"post">
 },
+"2024-12-02-migrating-python-projects-to-uv.md": {
+  id: "2024-12-02-migrating-python-projects-to-uv.md",
+  slug: "2024-12-02-migrating-python-projects-to-uv",
+  body: string,
+  collection: "post",
+  data: InferEntrySchema<"post">
+},
 },
 
 	};
