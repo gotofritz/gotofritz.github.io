@@ -1,1 +1,0 @@
-import"./ThemeToggle.astro_astro_type_script_index_0_lang.63a0c514.js";const e=document.getElementById("to-top-btn"),n=document.getElementById("blog-hero");function c(t){t.forEach(o=>{e.dataset.show=(!o.isIntersecting).toString()})}e.addEventListener("click",()=>{document.documentElement.scrollTo({top:0,behavior:"smooth"})});const r=new IntersectionObserver(c);r.observe(n);
