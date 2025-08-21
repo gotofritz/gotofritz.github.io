@@ -1,0 +1,10 @@
+<a href="{{ "" | relURL }}"> Home </a>
+{{ with .Site.GetPage "/about" }}
+  <a href="/about" class="" rel="prefetch"> About </a>
+{{ end }}
+{{ with .Site.GetPage "/blog" }}
+  <a href="/blog" class="" rel="prefetch"> Blog </a>
+{{ end }}
+{{ with resources.Get "fritz-stelluto_resume.pdf" }}
+  <a href="{{ .RelPermalink }}" class="">Resume</a>
+{{ end }}

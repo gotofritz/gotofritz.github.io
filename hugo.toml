@@ -1,0 +1,26 @@
+languageCode = 'en-gb'
+title = 'Fritz Stelluto'
+theme = 'hugo-bearblog'
+
+# to use --- for frontmatter
+metaDataFormat = "yaml"
+
+[params]
+archetype = "default"
+defaultType = "post"
+
+[markup]
+  [markup.goldmark]
+	renderer.unsafe = true
+
+[minify]
+  disableCSS = false
+  disableHTML = false
+  disableJS = false
+  disableJSON = false
+  disableSVG = false
+	minifyOutput = true
+
+[caches]
+  [caches.images]
+    dir = ':cacheDir/images'
