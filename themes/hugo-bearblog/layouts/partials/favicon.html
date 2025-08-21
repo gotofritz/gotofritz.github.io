@@ -1,2 +1,9 @@
 {{ with .Site.Params.favicon }}
-<link rel="shortcut icon" href="{{ . | absURL }}" />{{ end }}
+	<link rel="shortcut icon" href="{{ . | relURL }}" type="image/svg+xml" />
+{{ end }}
+{{ with .Site.Params.faviconLegacy }}
+	<link rel="shortcut icon" href="{{ . | relURL }}" />
+{{ end }}
+{{ with .Site.Params.faviconAppleTouch }}
+	<link rel="apple-touch-icon" href="{{ . | relURL }}" type="image/svg+xml" />
+{{ end }}

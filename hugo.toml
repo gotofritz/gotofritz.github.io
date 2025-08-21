@@ -8,6 +8,9 @@ metaDataFormat = "yaml"
 [params]
 archetype = "default"
 defaultType = "post"
+favicon = "icon.svg"
+faviconLegacy = "favicon.ico"
+faviconAppleTouch = "apple-touch-icon.png"
 
 [markup]
   [markup.goldmark]

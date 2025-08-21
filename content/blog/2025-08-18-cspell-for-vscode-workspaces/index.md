@@ -1,10 +1,10 @@
 ---
 title: Code spell checker for VScode multiple folder workspaces
-date: '2025-08-18T22:37:25+02:00'
+date: "2025-08-18T22:37:25+02:00"
 
 description: The [code spell checker plugin](https://github.com/streetsidesoftware/vscode-spell-checker/), formerly cspell, works well for "normal" vscode project, but wasn't doing anything for a workspace based project.
 
-tags: ['cspell', 'vscode']
+tags: ["cspell", "vscode"]
 ---
 
 ## ...a "normal" project?
