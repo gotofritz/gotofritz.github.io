@@ -1,0 +1,33 @@
+{{ define "main" }}
+	<section class="hero">
+		Hello, I'm <b>Fritz</b>, an experienced engineer based in Berlin.
+		Currently I am working at
+		<a href="https://www.trawa.de/" class="inverted">Trawa</a> as
+		<b>ML Engineering Manager</b> - our team is responsible for predictions,
+		data ingestions, and running data related services, including
+		monitoring.
+		<br />
+		My journey started as a full stack developer back in the day.
+	</section>
+
+	<div class="main-posts">
+		<h2>
+			<span><a href="/blog">See all</a></span> Latest Posts
+		</h2>
+	</div>
+
+	<ul class="blog-posts">
+		{{ $pages := where .Site.RegularPages.ByDate.Reverse "Section" "blog" }}
+		{{ $paginator := .Paginate $pages 5 }}
+		{{ range $paginator.Pages }}
+			{{- partial
+				"blog_posts.html" .
+			-}}
+		{{ end }}
+		<li>
+			<div class="blog-posts__summary">
+				<span><a href="/blog">See older posts</a></span>
+			</div>
+		</li>
+	</ul>
+{{ end }}

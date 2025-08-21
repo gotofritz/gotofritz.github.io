@@ -1,0 +1,18 @@
+<style>
+	/*
+		 solarized light theme, colors from
+		 https://ethanschoonover.com/solarized/#features
+		 */
+	{{ with resources.Get "fonts/DM_Serif_Display/DMSerifDisplay-Regular.ttf" }}
+	 @font-face {
+		 font-family: "DM Serif Display";
+		 src: url({{ .RelPermalink }}) format("truetype");
+			 format("truetype");
+		 font-weight: 400;
+		 font-style: normal;
+		 font-display: swap;
+	 }
+	 {{ end }}
+</style> {{ with resources.Get "css/main.css"| resources.Minify }}
+	<link rel="stylesheet" href="{{ .RelPermalink }}" />
+{{ end }}

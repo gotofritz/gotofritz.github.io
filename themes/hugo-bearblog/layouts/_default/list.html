@@ -1,0 +1,29 @@
+{{ define "main" }}
+	<content>
+		{{ $pages := where .Site.Pages.ByDate.Reverse "Section" "blog" }}
+		{{ if .Data.Singular }}
+			{{ $targetTag := .Data.Term }}
+			{{ $filteredPages := slice }}
+			{{ range $pages }}
+				{{ if in .Params.tags $targetTag }}
+					{{ $filteredPages = $filteredPages | append . }}
+				{{ end }}
+			{{ end }}
+			{{ $pages = $filteredPages }}
+			<h3 style="margin-bottom:0">
+				Showing post for tag for
+				#{{ $targetTag }}
+			</h3>
+			<small>
+				<a href="{{ "blog" | relURL }}">Remove filter</a>
+			</small>
+		{{ end }}
+		<ul class="blog-posts">
+			{{ range $pages }}
+				{{ if and (ne .Kind "section") (not .Params.Archived) }}
+					{{- partial "blog_posts.html" . -}}
+				{{ end }}
+			{{ end }}
+		</ul>
+	</content>
+{{ end }}

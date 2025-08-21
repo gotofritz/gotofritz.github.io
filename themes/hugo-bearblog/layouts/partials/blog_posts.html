@@ -1,0 +1,22 @@
+<li>
+	<div class="blog-posts__top">
+		<time datetime='{{ .Date.Format "02 Jan 2006" }}'>
+			{{ .Date.Format (default "02 Jan 2006" .Site.Params.dateFormat) }}
+		</time>
+		<h2>
+			<a href="{{ .Permalink }}" rel="prefetch">{{ .Title }}</a>
+		</h2>
+	</div>
+	<div class="blog-posts__summary">
+		<p class="blog-posts__excerpt">{{ .Description | markdownify }}</p>
+		<div class="blog-posts__tags">
+			{{ range .Params.tags }}
+			<a
+				aria-label="View more blogs with the tag {{ . }}"
+				href="/tags/{{ . | urlize }}"
+				>#{{ . }}</a
+			>
+			{{ end }}
+		</div>
+	</div>
+</li>
