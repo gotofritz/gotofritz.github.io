@@ -1,0 +1,27 @@
+# Allow search engines
+User-agent: Googlebot
+User-agent: Bingbot
+User-agent: Slurp
+User-agent: DuckDuckBot
+User-agent: Qwantify
+Allow: /
+Disallow: /fritz-stelluto_resume.pdf
+
+# Block intrusive/unwanted bots
+User-agent: SemrushBot
+User-agent: AhrefsBot
+User-agent: MJ12bot
+User-agent: DotBot
+User-agent: GPTBot
+User-agent: ChatGPT-User
+User-agent: CCBot
+User-agent: Claude-Web
+Disallow: /
+
+
+# Default for all others
+User-agent: *
+Allow: /
+Disallow: /fritz-stelluto_resume.pdf
+
+Sitemap: {{ "sitemap.xml" | absURL }}

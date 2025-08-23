@@ -10,13 +10,15 @@
 				{{ end }}
 			{{ end }}
 			{{ $pages = $filteredPages }}
-			<h3 style="margin-bottom:0">
-				Showing post for tag for
-				#{{ $targetTag }}
-			</h3>
-			<small>
-				<a href="{{ "blog" | relURL }}">Remove filter</a>
-			</small>
+			<div class="blog-posts__filters">
+				<h3 style="margin-bottom:0">
+					Showing post for tag for
+					#{{ $targetTag }}
+				</h3>
+				<small>
+					<a href="{{ "blog" | relURL }}">Remove filter</a>
+				</small>
+			</div>
 		{{ end }}
 		<ul class="blog-posts">
 			{{ range $pages }}
