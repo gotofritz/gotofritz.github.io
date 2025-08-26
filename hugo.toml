@@ -5,6 +5,8 @@ theme = 'hugo-bearblog'
 # to use --- for frontmatter
 metaDataFormat = "yaml"
 
+enableRobotsTXT = true
+
 [params]
 archetype = "default"
 defaultType = "post"
