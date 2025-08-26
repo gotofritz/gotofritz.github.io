@@ -29,7 +29,15 @@
 	</head>
 
 	<body>
-		<header>{{- partial "header.html" . -}}</header>
+		{{ $navclass := "" }}
+		{{ if and (not .IsPage) (.IsNode) }}
+			{{ $navclass = "blog-listing" }}
+		{{ else }}
+			{{ $navclass = "blog-post" }}
+		{{ end }}
+
+
+		<header class="{{ $navclass }}">{{- partial "header.html" . -}}</header>
 		<main>
 			{{- block "main" . }}{{- end }}
 

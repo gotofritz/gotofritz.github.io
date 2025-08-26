@@ -27,7 +27,9 @@
 		</g>
 	</svg>
 </a>
-<a href="/" class="masthead" aria-current="page">
-	<span class=""> {{ .Site.Title }} </span>
-</a>
+{{ if and (not .IsPage) (.IsNode) }}
+	<a href="/" class="masthead" aria-current="page">
+		<span class=""> {{ .Site.Title }} </span>
+	</a>
+{{ end }}
 <nav>{{- partial "nav.html" . -}}</nav>
