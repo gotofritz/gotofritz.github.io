@@ -1,0 +1,15 @@
+/* THE HUMAN */
+Name: Fritz Stelluto
+Site: https://gotofritz.net/
+Github: https://github.com/gotofritz
+Mastodon: https://hachyderm.io/@gotofritz
+LinkedIn: https://www.linkedin.com/in/gotofritz/
+
+/* THE SITE */
+Language: English
+RSS: http://localhost:1313/blog/index.xml
+Site engine: Hugo
+Theme: a butchered version of hugo-bearblog
+IDE: VS Code
+Hosted: GitHub pages
+
