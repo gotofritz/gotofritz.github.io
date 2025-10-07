@@ -6,6 +6,7 @@ description: |-
   I have started using [Continue](https://docs.continue.dev/) with [Ollama](https://ollama.com/) to have a local llm assist my coding. It's no [Cursor](https://cursor.com/), but then again it's free.
 
 tags: ["llm","vscode"]
+mastodon: https://hachyderm.io/@gotofritz/115283032572469459
 ---
 
 
@@ -38,7 +39,3 @@ Here's a typical interaction
 ```
 
 I found myself still reaching out for Claude if I wanted to do some extreme refactoring. But it's still early days, I need to play with it more.
-
-<hr>
-
-Got thoughts on this post? Join the conversation on [mastodon](https://hachyderm.io/@gotofritz/115283032572469459)!

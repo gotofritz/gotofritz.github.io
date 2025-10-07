@@ -5,6 +5,7 @@ date: "2025-08-18T22:37:25+02:00"
 description: The [code spell checker plugin](https://github.com/streetsidesoftware/vscode-spell-checker/), formerly cspell, works well for "normal" vscode project, but wasn't doing anything for a workspace based project.
 
 tags: ["cspell", "vscode"]
+mastodon: https://hachyderm.io/@gotofritz/115335237907258113
 ---
 
 ## ...a "normal" project?
@@ -36,7 +37,3 @@ If you whitelist even a single word for the folder, the whitelist for the whole 
 ## The solution
 
 The solution is to manually copy the whitelist from the folder's `.vscode/settings.json` to the one in the workspace's `.vscode/settings.json`, then delete the former.
-
-<hr>
-
-Got thoughts on this post? Join the conversation on [mastodon](https://hachyderm.io/@gotofritz/115335237907258113)!
