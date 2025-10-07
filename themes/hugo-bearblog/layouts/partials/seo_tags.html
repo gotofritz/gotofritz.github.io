@@ -10,10 +10,10 @@
 <meta
 	name="description"
 	content="{{ with .Description }}
-		{{ . }}
+		{{ . | markdownify }}
 	{{ else }}
 		{{ if .IsPage }}
-			{{ .Summary }}
+			{{ .Summary | markdownify }}
 		{{ else }}
 			{{ with .Site.Params.description }}{{ . }}{{ end }}
 		{{ end }}
