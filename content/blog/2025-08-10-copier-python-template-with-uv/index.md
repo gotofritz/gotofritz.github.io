@@ -107,4 +107,3 @@ It'll merge the improvements into your project and let you deal with any conflic
 
 When starting up a new project the last thing I want is to be bogged down with setting up the project scaffolding. Reusing a project structure I am familiar saves me tons of time.
 
-<https://gotofritz.net/blog/2025-08-10-copier-python-template-with-uv/>
