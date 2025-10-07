@@ -72,6 +72,13 @@
 			{{ if or (eq .Type "page") (eq .Type "blog") }}
 				<content>
 					{{ .Content }}
+
+
+                {{ with .Params.mastodon }}
+                <hr />
+                Got thoughts on this post? Join the conversation on <a href="{{.}}">Mastodon!</a>
+                {{ end }}
+
 				</content>
 			{{ end }}
 		</div>

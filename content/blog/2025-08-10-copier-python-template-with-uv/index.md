@@ -5,6 +5,7 @@ date: '2025-08-10T22:20:52+02:00'
 description: Here's a copier project template that sets up everything I need for a modern Python CLI project in about 30 seconds.
 
 tags: ['copier', 'python', 'uv', 'vscode']
+mastodon: https://hachyderm.io/@gotofritz/115335490987115077
 ---
 
 The template is available at [github.com/gotofritz/copier-python-template](https://github.com/gotofritz/copier-python-template) should you want to fork it and try it out. Just make sure you replace all occurrences of "gotofritz" from your fork.
@@ -105,3 +106,5 @@ It'll merge the improvements into your project and let you deal with any conflic
 ## Why This Approach
 
 When starting up a new project the last thing I want is to be bogged down with setting up the project scaffolding. Reusing a project structure I am familiar saves me tons of time.
+
+<https://gotofritz.net/blog/2025-08-10-copier-python-template-with-uv/>
