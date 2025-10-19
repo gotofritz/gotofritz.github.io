@@ -6,6 +6,7 @@ description: |-
   The CLI utility [gh](https://cli.github.com/) allows you to create a branch associated with an issue, even if in another repository.
 
 tags: ["github"]
+mastodon: https://hachyderm.io/@gotofritz/115401940724676022
 ---
 
 ## TL;DR
