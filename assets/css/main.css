@@ -168,6 +168,12 @@ header .masthead {
   text-decoration: none;
 }
 
+@media (prefers-color-scheme: dark) {
+  header .masthead {
+    color: var(--base3);
+  }
+}
+
 @media (min-width: 640px) {
   header .masthead {
     font-size: 3.75rem;
@@ -307,9 +313,9 @@ header.blog-post {
 }
 
 @media (min-width: 640px) {
-header.blog-post {
-  margin: 0 2rem 3rem 0;
-}
+  header.blog-post {
+    margin: 0 2rem 3rem 0;
+  }
 }
 
 header.blog-post .logo {
@@ -487,6 +493,12 @@ header nav a {
   }
 }
 
+@media (prefers-color-scheme: dark) {
+  .blog-posts__top time {
+    color: var(--base2);
+  }
+}
+
 .blog-posts__top h2 {
   border-top-color: currentColor;
   border-top-width: 1px;
@@ -518,6 +530,15 @@ header nav a {
   .blog-posts__summary {
     margin-bottom: 0;
     padding-left: 6.25rem;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .blog-posts__older a {
+    background-color: var(--green);
+    color: var(--base3);
+    padding: 0.25rem 0.5rem;
+    text-decoration: none;
   }
 }
 
@@ -562,6 +583,13 @@ header nav a {
   padding-right: 0.25rem;
   text-decoration: none;
 }
+
+@media (prefers-color-scheme: dark) {
+  .blog-posts__tags a {
+    color: var(--green);
+  }
+}
+
 footer {
   background-color: var(--magenta);
   color: var(--base2);
@@ -570,6 +598,12 @@ footer {
   justify-content: center;
   padding: 3rem 1rem 1rem;
   width: 100%;
+}
+
+@media (prefers-color-scheme: dark) {
+  footer {
+    background-color: var(--cyan);
+  }
 }
 
 footer a {
@@ -691,6 +725,11 @@ footer a {
   color: var(--base01);
   text-decoration: none;
 }
+@media (prefers-color-scheme: dark) {
+  .main-post__nav a {
+    color: var(--base2);
+  }
+}
 .main-post__prev-link {
   display: inline-block;
   text-align: left;
@@ -709,6 +748,12 @@ footer a {
   font-size: 3rem;
   line-height: 1;
   margin-bottom: 0.25rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  .main-post h1 {
+    color: var(--base3);
+  }
 }
 
 .main-post time {
