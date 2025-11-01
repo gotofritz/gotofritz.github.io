@@ -6,6 +6,7 @@ description: |-
   I have started using [Continue](https://docs.continue.dev/) with [Ollama](https://ollama.com/) to have a local llm assist my coding. Initially it was too slow to be of real use, but since adopting [GLM4](https://ollama.com/library/glm4), it now rivals [Cursor](https://cursor.com/) in performance.
 
 tags: ["llm", "vscode"]
+mastodon: https://hachyderm.io/@gotofritz/115474841757576615
 ---
 
 ## Installation
