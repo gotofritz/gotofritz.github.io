@@ -1,13 +1,12 @@
 ---
-title: 'Using Continue and Ollama Locally'
+title: "Using Continue and Ollama Locally, for free"
 date: "2025-09-28T18:38:35+02:00"
 
 description: |-
-  I have started using [Continue](https://docs.continue.dev/) with [Ollama](https://ollama.com/) to have a local llm assist my coding. It's no [Cursor](https://cursor.com/), but then again it's free.
+  I have started using [Continue](https://docs.continue.dev/) with [Ollama](https://ollama.com/) to have a local llm assist my coding. Initially it was too slow to be of real use, but since adopting [GLM4](https://ollama.com/library/glm4), it now rivals [Cursor](https://cursor.com/) in performance.
 
-tags: ["llm","vscode"]
+tags: ["llm", "vscode"]
 ---
-
 
 ## Installation
 
@@ -38,3 +37,7 @@ Here's a typical interaction
 ```
 
 I found myself still reaching out for Claude if I wanted to do some extreme refactoring. But it's still early days, I need to play with it more.
+
+## Enter GLM4
+
+Well, that was true until I installed [GLM4](https://ollama.com/library/glm4) from [Zhipu.ai](https://www.zhipuai.cn/en/), a Beijing-based company spun out of Tsinghua University. It's the first model I've been able to run on my MacBook Pro with an Apple M1 Max chip which compares favourably to any other paid-for options available.
