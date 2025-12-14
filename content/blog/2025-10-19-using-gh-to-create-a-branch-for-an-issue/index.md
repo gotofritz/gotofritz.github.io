@@ -1,5 +1,5 @@
 ---
-title: 'Using Gh to Create a Branch for an Issue'
+title: "Using Gh to Create a Branch for an Issue"
 date: "2025-10-19T17:01:23+02:00"
 
 description: |-
@@ -28,7 +28,7 @@ Github Projects is a substandard tool for managing issues - mostly because featu
 There are a few commands that you can use with the `gh` CLI utility:
 
 - [`gh issue`](https://cli.github.com/manual/cli-issue)
-- [`gh pr`](<https://cli.github>)
+- [`gh pr`](https://cli.github)
 
 Here are a couple I use all the time
 

@@ -1,86 +1,57 @@
-# Hugo ʕ•ᴥ•ʔ Bear Blog ![Test](https://github.com/janraasch/hugo-bearblog/workflows/CI/badge.svg?branch=master&event=push)
+# My Hugo Bear Blog
 
-🧸 A [Hugo](https://gohugo.io/)-theme based on [Bear Blog](https://bearblog.dev).
+This is a static website built with the [Hugo Bear Blog](https://github.com/janraasch/hugo-bearblog) theme.
 
-> Free, no-nonsense, super-fast blogging.
+## Theme Information
 
-## Demo
+This theme is based on [Bear Blog](https://bearblog.dev), a free, no-nonsense, super-fast blogging platform created by Herman.
 
-For a current & working demo of this theme, please check out https://janraasch.github.io/hugo-bearblog/ 🎯.
+## Creating New Content
 
-## Screenshots
-
-⬜️ [Light][light-screenshot]
-
-⬛️ [Dark][dark-screenshot]
-
-When the user's browser is running »dark mode«, the dark color scheme will be used automatically. The default is the light/white color scheme. Check out the [`style.html`](https://github.com/janraasch/hugo-bearblog/blob/master/layouts/partials/style.html)-file for the implementation.
-
-## Installation
-
-If you already have a Hugo site on your machine, you can simply add this theme via
-
-```bash
-git submodule add https://github.com/janraasch/hugo-bearblog.git themes/hugo-bearblog
-```
-
-Then, adjust the `hugo.toml` as detailed below.
-
-For more information, read the official [setup guide][hugo-setup-guide] of Hugo.
-
-## Adjust configuration / hugo.toml
-
-Please check out the [hugo.toml](https://github.com/janraasch/hugo-bearblog/blob/master/exampleSite/hugo.toml) included in the [exampleSite](https://github.com/janraasch/hugo-bearblog/tree/master/exampleSite) of this theme.
-
-## Content & structure
-
-### Starting fresh
-
-If you are starting fresh, simply copy over the contents of the `exampleSite`-directory included in this theme to your source directory. That should give you a good idea about how things work, and then you can go on from there to make the site your own.
-
-### Adding / editing content
-
-#### Index-Page
-
-The contents of the `index`-page may be changed by editing your `content/_index.md`-file.
-
-#### Page
-
-You can add **a new page** via running
+To create a new page, run:
 
 ```bash
 hugo new my-new-page.md
 ```
 
-#### Blog-Post
-
-You can add **a new blog-post** via running
+To create a new blog post, run:
 
 ```bash
-hugo new blog/my-new-post.md
+hugo new blog/$(date +%Y-%m-%d)-a-title/index.md
 ```
 
-### Adding your branding / colors / css
+For a more convenient workflow, you can add the scripts directory to your PATH:
 
-Add a `custom_head.html`-file to your `layouts/partials`-directory. In there you may add a `<style>`-tag, *or* you may add a `<link>`-tag referencing your own `custom.css` (in case you prefer to have a separate `.css`-file). Check out the [`style.html`](https://github.com/janraasch/hugo-bearblog/blob/master/layouts/partials/style.html)-file to find out which CSS-styles are applied by default.
+```bash
+export PATH="$PATH:./scripts"
+```
 
-## Issues / Feedback / Contributing
-Please use [GitHub issues](https://github.com/janraasch/hugo-bearblog/issues) and [Pull Requests](https://github.com/janraasch/hugo-bearblog/pulls).
+Then you can use the custom `hugo-new` script:
+
+```bash
+hugo-new "Your Blog Post Title"
+```
+
+This script will:
+
+- Create a new blog post with a date-prefixed filename
+- Automatically select a random image from `/Users/fritz/Documents/frames` and use it as the feature image
 
 ## Development
-Run the `exampleSite` locally via
+
+To run the development server:
 
 ```bash
 hugo server --source ./exampleSite --themesDir ../..
 ```
 
-## Special Thanks 🎁
+## Deployment
 
-A special thank you goes out to [Herman](https://herman.bearblog.dev), for creating the original [ʕ•ᴥ•ʔ Bear Blog](https://bearblog.dev/).
+To deploy to GitHub Pages:
 
-## License
-[MIT License](http://en.wikipedia.org/wiki/MIT_License) © [Jan Raasch](https://www.janraasch.com)
+1. Build the site: `hugo --source ./exampleSite --themesDir ../..`
+2. Commit and push to your GitHub repository
 
-[hugo-setup-guide]: https://gohugo.io/getting-started/installing
-[light-screenshot]: https://raw.githubusercontent.com/janraasch/hugo-bearblog/master/images/screenshot.png
-[dark-screenshot]: https://raw.githubusercontent.com/janraasch/hugo-bearblog/master/images/screenshot-dark.png
+## Special Thanks
+
+Special thanks to Herman for creating the original Bear Blog platform, and to Jan Raasch for creating the Hugo theme.
