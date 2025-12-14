@@ -1,0 +1,46 @@
+#!/bin/bash
+
+# Check if TITLE is provided
+if [ -z "$1" ]; then
+  echo "Usage: $0 \"Your Title Here\""
+  exit 1
+fi
+
+TITLE="$1"
+
+# URLize the title (convert to lowercase, replace spaces with hyphens)
+URLIZED_TITLE=$(echo "$TITLE" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-zA-Z0-9-]/-/g' | sed 's/-*$//')
+
+# Create the blog post
+hugo new "blog/$(date +%Y-%m-%d)-$URLIZED_TITLE/index.md"
+
+# Pick a random MP4 from the directory tree (macOS-friendly)
+INPUT=$(find /Users/fritz/.yarkie/videos -type f -name "*.mp4" | sort -R | head -n 1)
+
+# Get video width, height, and duration
+WIDTH=$(ffprobe -v error -select_streams v:0 -show_entries stream=width -of csv=p=0 "$INPUT")
+HEIGHT=$(ffprobe -v error -select_streams v:0 -show_entries stream=height -of csv=p=0 "$INPUT")
+DURATION=$(ffprobe -v error -select_streams v:0 -show_entries format=duration -of csv=p=0 "$INPUT")
+
+# Pick a random split in the central square (clamped between 1/4 and 3/4 of width)
+SPLIT=$(awk -v w=$WIDTH 'BEGIN{srand(); print int(w/4 + (w/2)*rand())}')
+
+# Determine final square size
+SQUARE=$(( WIDTH < HEIGHT ? WIDTH : HEIGHT ))
+
+# Pick a random time between 20% and 80% of duration
+SS=$(awk -v dur=$DURATION 'BEGIN{srand(); print dur*0.2 + dur*0.6*rand()}')
+
+ffmpeg -y -ss $SS -i "$INPUT" -filter_complex "
+[0:v]crop=w=iw/2:h=ih/2:x=iw/4:y=ih/4[center];
+
+[center]split=3[base][left][right];
+
+[left]crop=w=$((SPLIT - WIDTH/4)):h=ih:x=0:y=0,shufflepixels,transpose=1,shufflepixels,transpose=2[leftglitch];
+[right]crop=w=$((3*WIDTH/4 - SPLIT)):h=ih:x=$((SPLIT - WIDTH/4)):y=0,shufflepixels,transpose=2,shufflepixels,transpose=1[rightglitch];
+
+[base][leftglitch]overlay=0:0[tmp];
+[tmp][rightglitch]overlay=x=$((SPLIT - WIDTH/4)):y=0[glitched];
+
+[glitched]scale=iw*2:ih*2,crop=$SQUARE:$SQUARE
+" -frames:v 1 -update 1 "./content/blog/$(date +%Y-%m-%d)-$URLIZED_TITLE/feature.png"

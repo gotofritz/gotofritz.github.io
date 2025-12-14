@@ -3,7 +3,6 @@ description: If you are used to React's Styled Components, assigning CSS values 
 archived: true
 publishdate: 2020-04-09
 draft: false
-archived: false
 title: Setting CSS values dynamically in Svelte
 tags:
   - SvelteJS
