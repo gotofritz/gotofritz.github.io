@@ -5,6 +5,7 @@ date: "2025-12-14T01:25:16+01:00"
 description: A quick script to create a page bundle with a glitch preview image and scaffolding for a blog post in Hugo
 
 tags: ["hugo"]
+mastodon: https://hachyderm.io/@gotofritz/115715362905127852
 ---
 
 ## Introduction
