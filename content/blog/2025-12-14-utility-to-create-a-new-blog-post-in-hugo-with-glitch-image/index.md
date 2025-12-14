@@ -29,7 +29,7 @@ hugo new "blog/$(date +%Y-%m-%d)-hello-world/index.md"
 
 I like to create preview images for my posts because I publish them to Mastodon to allow comments. Without a preview image, posts look broken. So I needed an extra step after post creation.
 
-Finally, if my post is called "Hello, world!", I want a command that lets me type `[command] 'Hello world!'` and have it automatically figure out the URL, rather than the other way around. That's why I created a bash script.
+Finally, if my post is called "Hello, world!", I want a command that lets me type `[command] 'Hello world!'` and have it automatically figure out the URL, rather than the other way around. That's why I created [a bash script](https://github.com/gotofritz/gotofritz.github.io/blob/main/scripts/hugo-new).
 
 ## The set up
 
