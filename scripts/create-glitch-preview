@@ -79,10 +79,10 @@ apply_displacement() {
   local DISPLACEMENT_MAP="$2"
   local OUTPUT_IMAGE="$3"
 
-  # FFmpeg displace filter: [0] is input, [1] is displacement map for both X and Y
+  # FFmpeg displace filter: [0] is input image, [1][1] uses the same map for X and Y displacement
   ffmpeg -y -i "$INPUT_IMAGE" -i "$DISPLACEMENT_MAP" \
     -filter_complex "[0][1][1]displace" \
-    -frames:v 1 "$OUTPUT_IMAGE"
+    -frames:v 1 "$OUTPUT_IMAGE" 2>/dev/null
 }
 
 # Apply blur to image using a mask
@@ -90,7 +90,7 @@ apply_blur_with_mask() {
   local INPUT_IMAGE="$1"
   local MASK_IMAGE="$2"
   local OUTPUT_IMAGE="$3"
-  local BLUR_AMOUNT="${4:-0x5}"
+  local BLUR_AMOUNT="${4:-0x20}"
 
   magick "$INPUT_IMAGE" \
     \( +clone -blur $BLUR_AMOUNT \) \
