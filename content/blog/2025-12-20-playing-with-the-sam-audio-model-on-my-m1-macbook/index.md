@@ -33,7 +33,7 @@ ERROR: No matching distribution found for decord
 
 ## What worked: Installing SAM-Audio on macOS
 
-I used Conda, as recommended by pereception_models, to get it all to work. Conda is package and environment manager geared towards data science and machine learning. I’ll be honest: I am not a big fan of Conda. It invariably clashes with pyenv, creating a mess that takes days to clean up. However, when working with high-end research code like SAM-Audio, Conda’s ability to manage C++ binaries and linked libraries makes it the only viable choice.
+I used Conda, as recommended by perception_models, to get it all to work. Conda is package and environment manager geared towards data science and machine learning. I’ll be honest: I am not a big fan of Conda. It invariably clashes with pyenv, creating a mess that takes days to clean up. However, when working with high-end research code like SAM-Audio, Conda’s ability to manage C++ binaries and linked libraries makes it the only viable choice.
 
 ### Installing miniconda on macOS
 
@@ -62,7 +62,7 @@ I create a folder to contain all the dependences I need to fiddle with, and init
 
 # Create a fresh virtual environment
 # -n name of the environment
-# -y always anwser 'yes' to all prompts
+# -y always answer 'yes' to all prompts
 ❯ conda create -n sam-audio python=3.12 -y
 ❯ conda activate sam-audio
 
@@ -185,7 +185,7 @@ Then the same here
 +    fmha = None
 ```
 
-And finally remove the sentencepiece duplicate and make it and nympy more lenient, and remove decord
+And finally remove the sentencepiece duplicate and make it and numpy more lenient, and remove decord
 
 ```bash
 ❯ nvim ./requirements.txt
@@ -224,7 +224,7 @@ Now I can install the package. Note that I have already tweaked [the official in
 Before moving on, a little clean up
 
 ```bash
-# installation created an egg directory; make sure it's not commited
+# installation created an egg directory; make sure it's not committed
 ❯ echo 'perception_models.egg-info/' >> .gitignore
 
 # commit all changes
@@ -404,7 +404,7 @@ Of the hard coded files, one is an announcer speaking over a clapping audience, 
 
 Both came out well; although I originally passed `predict_spans=True` to the separate call, and then the model missed some of the popped bass notes. The logs showed `[INFO] Using mps device`, so the M1 GPU is actually being used!
 
-## Making eht environmental variable sticky
+## Making the environmental variable sticky
 
 `conda env config vars set HF_DATASETS_OFFLINE=1` does the job but it's not permanent. There is a long [section in the conda documentation on how to handle env configurations](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#setting-environment-variables), but the least problematic one is to create [activation scripts](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#macos-and-linux) like `$CONDA_PREFIX/etc/conda/activate.d/env_vars.sh`. It's not so elegant to distribute in repos, which is why I have wrapped it in [a bash script](https://github.com/gotofritz/audio-playground/blob/main/setup_conda_env_variables.sh) to be run after checkout.
 
