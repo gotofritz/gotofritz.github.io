@@ -6,6 +6,7 @@ description: |-
   There are times when you need unique branch names or commit messages. This is easy to do directly from the command line.
 
 tags: ["git", "github", "bash", "cli"]
+mastodon: https://hachyderm.io/@gotofritz/115782847352458008
 ---
 
 If you use GitHub workflows, GitHub can get confused when a branch name is reused after it has already been merged. This often happens with generic branch names like fix-typo. The same problem comes up when troubleshooting code that requires many merges, such as infrastructure code or workflow changes.
