@@ -1,144 +1,23 @@
 #!/bin/bash
 
-# Get video metadata (width, height, duration)
-get_video_info() {
-  local SOURCE_MOVIE="$1"
-  local WIDTH=$(ffprobe -v error -select_streams v:0 -show_entries stream=width -of csv=p=0 "$SOURCE_MOVIE")
-  local HEIGHT=$(ffprobe -v error -select_streams v:0 -show_entries stream=height -of csv=p=0 "$SOURCE_MOVIE")
-  local DURATION=$(ffprobe -v error -select_streams v:0 -show_entries format=duration -of csv=p=0 "$SOURCE_MOVIE")
+# Check if TITLE is provided
+if [ -z "$1" ]; then
+  echo "Usage: $0 \"Your Title Here\""
+  exit 1
+fi
 
-  echo "$WIDTH $HEIGHT $DURATION"
-}
+TITLE="$1"
 
-# Generate random parameters for glitch effect
-generate_random_params() {
-  local WIDTH="$1"
-  local HEIGHT="$2"
-  local DURATION="$3"
+# URLize the title (convert to lowercase, replace spaces with hyphens)
+URLIZED_TITLE=$(echo "$TITLE" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-zA-Z0-9-]/-/g' | sed 's/-*$//')
 
-  # Pick a random split in the central square (clamped between 1/4 and 3/4 of width)
-  local SPLIT=$(awk -v w=$WIDTH 'BEGIN{srand(); print int(w/4 + (w/2)*rand())}')
+PATH_TO_POST="content/blog/$(date +%Y-%m-%d)-$URLIZED_TITLE"
 
-  # Determine final square size
-  local SQUARE=$(( WIDTH < HEIGHT ? WIDTH : HEIGHT ))
+# Create the blog post
+hugo new "$PATH_TO_POST/index.md"
 
-  # Pick a random time between 20% and 80% of duration
-  local SS=$(awk -v dur=$DURATION 'BEGIN{srand(); print dur*0.2 + dur*0.6*rand()}')
+echo ""
+echo "To create a different image:"
+echo "create-glitch-preview \"$PATH_TO_POST/feature.png\""
 
-  echo "$SPLIT $SQUARE $SS"
-}
-
-# Extract original frame (unglitched) and scale to final dimensions
-extract_original_frame() {
-  local SOURCE_MOVIE="$1"
-  local OUTPUT_PATH="$2"
-  local SQUARE="$3"
-  local SS="$4"
-
-  ffmpeg -y -ss $SS -i "$SOURCE_MOVIE" -filter_complex "
-[0:v]crop=w=iw/2:h=ih/2:x=iw/4:y=ih/4[center];
-[center]scale=$SQUARE:$SQUARE
-" -frames:v 1 "$OUTPUT_PATH" 2>/dev/null
-}
-
-# Create glitched frame with pixel shuffling effect
-create_glitched_frame() {
-  local SOURCE_MOVIE="$1"
-  local OUTPUT_PATH="$2"
-  local WIDTH="$3"
-  local SPLIT="$4"
-  local SQUARE="$5"
-  local SS="$6"
-
-  ffmpeg -y -ss $SS -i "$SOURCE_MOVIE" -filter_complex "
-[0:v]crop=w=iw/2:h=ih/2:x=iw/4:y=ih/4[center];
-
-[center]split=3[base][left][right];
-
-[left]crop=w=$((SPLIT - WIDTH/4)):h=ih:x=0:y=0,shufflepixels,transpose=1,shufflepixels,transpose=2[leftglitch];
-[right]crop=w=$((3*WIDTH/4 - SPLIT)):h=ih:x=$((SPLIT - WIDTH/4)):y=0,shufflepixels,transpose=2,shufflepixels,transpose=1[rightglitch];
-
-[base][leftglitch]overlay=0:0[tmp];
-[tmp][rightglitch]overlay=x=$((SPLIT - WIDTH/4)):y=0[glitched];
-
-[glitched]scale=iw*2:ih*2,crop=$SQUARE:$SQUARE
-" -frames:v 1 "$OUTPUT_PATH" 2>/dev/null
-}
-
-# Preprocess mask: convert to grayscale and normalize
-preprocess_mask() {
-  local MASK_IMAGE="$1"
-  local OUTPUT_PATH="$2"
-
-  magick "$MASK_IMAGE" -colorspace Gray -normalize "$OUTPUT_PATH"
-}
-
-# Apply displacement map to image using FFmpeg
-apply_displacement() {
-  local INPUT_IMAGE="$1"
-  local DISPLACEMENT_MAP="$2"
-  local OUTPUT_IMAGE="$3"
-
-  # FFmpeg displace filter: [0] is input, [1] is displacement map for both X and Y
-  ffmpeg -y -i "$INPUT_IMAGE" -i "$DISPLACEMENT_MAP" \
-    -filter_complex "[0][1][1]displace" \
-    -frames:v 1 "$OUTPUT_IMAGE"
-}
-
-# Apply blur to image using a mask
-apply_blur_with_mask() {
-  local INPUT_IMAGE="$1"
-  local MASK_IMAGE="$2"
-  local OUTPUT_IMAGE="$3"
-  local BLUR_AMOUNT="${4:-0x5}"
-
-  magick "$INPUT_IMAGE" \
-    \( +clone -blur $BLUR_AMOUNT \) \
-    "$MASK_IMAGE" \
-    -compose Blend -composite "$OUTPUT_IMAGE"
-}
-
-# Main orchestration function
-create_glitch_feature() {
-  local FEATURE_DEST="${1:-./feature_dest.png}"
-  local SOURCE_MOVIE="${2:-$(find /Users/fritz/.yarkie/videos -type f -name "*.mp4" | sort -R | head -n 1)}"
-  local BLUR_AMOUNT="${3:-0x5}"
-
-  # Create temporary directory for intermediate files
-  local TEMP_DIR=$(mktemp -d)
-  trap "rm -rf $TEMP_DIR" EXIT
-
-  local ORIGINAL_FRAME="$TEMP_DIR/original_frame.png"
-  local PROCESSED_MASK="$TEMP_DIR/processed_mask.png"
-  local GLITCHED_FRAME="$TEMP_DIR/glitched_frame.png"
-  local DISPLACED_FRAME="$TEMP_DIR/displaced_frame.png"
-
-  # Get video metadata
-  read -r WIDTH HEIGHT DURATION < <(get_video_info "$SOURCE_MOVIE")
-
-  # Generate random parameters
-  read -r SPLIT SQUARE SS < <(generate_random_params "$WIDTH" "$HEIGHT" "$DURATION")
-
-  # Extract original frame
-  extract_original_frame "$SOURCE_MOVIE" "$ORIGINAL_FRAME" "$SQUARE" "$SS"
-
-  # Preprocess mask once (grayscale + normalize)
-  preprocess_mask "$ORIGINAL_FRAME" "$PROCESSED_MASK"
-
-  # Create glitched frame
-  create_glitched_frame "$SOURCE_MOVIE" "$GLITCHED_FRAME" "$WIDTH" "$SPLIT" "$SQUARE" "$SS"
-
-  # Apply displacement to glitched frame using processed mask
-  apply_displacement "$GLITCHED_FRAME" "$PROCESSED_MASK" "$DISPLACED_FRAME"
-
-  # Apply blur with mask to displaced frame using processed mask
-  apply_blur_with_mask "$DISPLACED_FRAME" "$PROCESSED_MASK" "$FEATURE_DEST" "$BLUR_AMOUNT"
-}
-
-# Usage examples:
-# create_glitch_feature                                          # Uses all defaults
-# create_glitch_feature "./output.png"                           # Custom output
-# create_glitch_feature "./output.png" "/path/to/video.mp4"      # Custom output and video
-# create_glitch_feature "./output.png" "/path/to/video.mp4" 0x10 # Custom blur amount
-
-create_glitch_feature "$@"
+create-glitch-preview "$PATH_TO_POST/feature.png"
