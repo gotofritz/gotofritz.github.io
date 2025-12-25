@@ -7,6 +7,7 @@ description: |-
 
 tags: ["audio", "llm", "macos", "conda", "python"]
 draft: false
+mastodon: https://hachyderm.io/@gotofritz/115781342044764240
 ---
 
 ## Getting access to the model
@@ -56,8 +57,6 @@ Miniconda is the minimal package installer version of it, Anaconda being the com
 
 I create a folder to contain all the dependences I need to fiddle with, and initialised a conda environment in it. All the SAM-Audio related dependencies will sit here.
 
-pip by default will complain and fail if you try to install anything without a virtualenv. That is a good idea in general, but pip doesn't understand that conda _is_ a virtualenv and complains when it shouldn't. Another nice functionality of conda is that you can set env vars once and they become part of the virtual env next time you activate it.
-
 ```bash
 ❯ mkdir sam-audio-playground
 
@@ -67,6 +66,15 @@ pip by default will complain and fail if you try to install anything without a v
 ❯ conda create -n sam-audio python=3.12 -y
 ❯ conda activate sam-audio
 
+```
+
+### Adding conf vars to the conda environment
+
+pip by default will complain and fail if you try to install anything without a virtualenv. That is a good idea in general, but pip doesn't understand that conda _is_ a virtualenv and complains anyway. Luckily this is something that can be changed by setting the correct environmental variable, `PIP_REQUIRE_VIRTUALENV`.
+
+For now I will set it up up with this command; at the end of the post I'll create a couple of scripts to make all the env variable permanent within the env
+
+```bash
 # stop pip complaining about virtual env
 ❯ conda env config vars set PIP_REQUIRE_VIRTUALENV=false
 
@@ -389,10 +397,16 @@ Of the hard coded files, one is an announcer speaking over a clapping audience, 
 # not downloaded at every run
 ❯ conda env config vars set HF_DATASETS_OFFLINE=1
 ❯ conda env config vars set TRANSFORMERS_OFFLINE=1
+# reactivate to make it sticky
+❯ conda activate sam-audio
 ❯ audio-playground test-run
 ```
 
 Both came out well; although I originally passed `predict_spans=True` to the separate call, and then the model missed some of the popped bass notes. The logs showed `[INFO] Using mps device`, so the M1 GPU is actually being used!
+
+## Making eht environmental variable sticky
+
+`conda env config vars set HF_DATASETS_OFFLINE=1` does the job but it's not permanent. There is a long [section in the conda documentation on how to handle env configurations](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#setting-environment-variables), but the least problematic one is to create [activation scripts](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#macos-and-linux) like `$CONDA_PREFIX/etc/conda/activate.d/env_vars.sh`. It's not so elegant to distribute in repos, which is why I have wrapped it in [a bash script](https://github.com/gotofritz/audio-playground/blob/main/setup_conda_env_variables.sh) to be run after checkout.
 
 ## Next
 

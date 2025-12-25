@@ -15,7 +15,7 @@
 		{{ if .IsPage }}
 			{{ .Summary | markdownify }}
 		{{ else }}
-			{{ with .Site.Params.description }}{{ . }}{{ end }}
+			{{ with .Site.Params.description }}{{ markdownify }}{{ end }}
 		{{ end }}
 	{{ end }}"
 />
