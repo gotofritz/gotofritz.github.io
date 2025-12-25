@@ -184,7 +184,9 @@ header .masthead {
 
 main {
   flex: 1 1 0%;
+  min-width: 0;
   padding: 0 2rem;
+  width: 100%;
 }
 
 @media (min-width: 640px) {
@@ -233,6 +235,11 @@ pre code {
   padding: 20px;
   white-space: pre-wrap;
   font-size: 14px;
+  overflow-x: auto;
+}
+
+div.highlight {
+  max-width: 100%;
   overflow-x: auto;
 }
 
