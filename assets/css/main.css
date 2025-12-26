@@ -851,3 +851,11 @@ footer a {
 .code-breakdown dd.long-line {
   flex-basis: 33.333333%;
 }
+
+th {
+  border-bottom: 2px solid var(--base02);
+}
+
+tr:nth-child(2n) {
+  background-color: var(--base4);
+}
