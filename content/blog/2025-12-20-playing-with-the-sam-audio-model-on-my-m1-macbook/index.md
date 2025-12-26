@@ -139,7 +139,7 @@ SAM-Audio requires several Meta research modules. I installed these in order:
 
 ## Making Meta's perception_models work on a Mac
 
-As mentioned at the start of the post, I needed to strip out the Linux-only dependencies [decord](https://github.com/dmlc/decord) and [xformer](https://github.com/facebookresearch/xformers); luckily xformer is just optimisation, and decord is not used much by SAM-audio.
+As mentioned at the start of the post, I needed to strip out the Linux-only dependencies [decord](https://github.com/dmlc/decord) and [xformer](https://github.com/facebookresearch/xformers). Fortunately, xformer is only used for optimization, and decord is not used much by SAM-audio. For that I followed the instructions provided by [@chikim](https://mastodon.social/@chikim) in a [github issue](https://github.com/facebookresearch/sam-audio/issues/29#issuecomment-3686543925)
 
 ```bash
 # start from the parent folder
@@ -399,6 +399,7 @@ Of the hard coded files, one is an announcer speaking over a clapping audience, 
 ❯ conda env config vars set TRANSFORMERS_OFFLINE=1
 # reactivate to make it sticky
 ❯ conda activate sam-audio
+❯ pip install -e .
 ❯ audio-playground test-run
 ```
 
@@ -421,7 +422,20 @@ EOF
 
 The downside is that it's not so elegant to distribute in repos, which is why I have wrapped it in [a bash script](https://github.com/gotofritz/audio-playground/blob/main/setup_conda_env_variables.sh) to be run after checkout.
 
+## How well does it run?
+
+The bad news is that on my M1 (Apple M1 Max chip, 64Gb RAM) it cannot really handle clips longer than 15 secs
+
+| Clip length, s | Processing time, s        | Processing time, mins |
+| -------------- | ------------------------- | --------------------- |
+| 4.77           | 57.8                      | ~ 1                   |
+| 9.54           | 144.4                     | ~ 2.5                 |
+| 14.32          | 258.76                    | ~ 4.5                 |
+| 23.86          | 704.31                    | ~ 12                  |
+| 38.17          | MPS backend out of memory |                       |
+
 ## Next
 
-Now that I have a basic setup that works, I can start playing with longer files and more complex usage.
-I pushed the code I worked so far to [gotofritz/audio-playground](https://github.com/gotofritz/audio-playground)
+The next step is to determine whether splitting a sound file into short segments, processing each segment individually, and then concatenating them back together is feasible.
+
+I pushed the code I worked on so far to [gotofritz/audio-playground](https://github.com/gotofritz/audio-playground).
