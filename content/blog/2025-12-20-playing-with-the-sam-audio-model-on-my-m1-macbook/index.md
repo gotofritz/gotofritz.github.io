@@ -68,7 +68,7 @@ I create a folder to contain all the dependences I need to fiddle with, and init
 
 ```
 
-### Adding conf vars to the conda environment
+### Adding environmental vars via conda
 
 pip by default will complain and fail if you try to install anything without a virtualenv. That is a good idea in general, but pip doesn't understand that conda _is_ a virtualenv and complains anyway. Luckily this is something that can be changed by setting the correct environmental variable, `PIP_REQUIRE_VIRTUALENV`.
 
@@ -194,7 +194,7 @@ And finally remove the sentencepiece duplicate and make it and numpy more lenien
 ```diff
 # line 1
 -numpy==2.1.2
-+numpy
++numpy<2.0.0
 omegaconf==2.3.0
 msgspec==0.19.0
 rouge-score==0.1.2
@@ -406,7 +406,20 @@ Both came out well; although I originally passed `predict_spans=True` to the sep
 
 ## Making the environmental variable sticky
 
-`conda env config vars set HF_DATASETS_OFFLINE=1` does the job but it's not permanent. There is a long [section in the conda documentation on how to handle env configurations](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#setting-environment-variables), but the least problematic one is to create [activation scripts](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#macos-and-linux) like `$CONDA_PREFIX/etc/conda/activate.d/env_vars.sh`. It's not so elegant to distribute in repos, which is why I have wrapped it in [a bash script](https://github.com/gotofritz/audio-playground/blob/main/setup_conda_env_variables.sh) to be run after checkout.
+`conda env config vars set HF_DATASETS_OFFLINE=1` does the job but the env vars are not permament; you'll need to recreate them next time you activate the environment. There are a few ways to handle this, as you can read in the long [section on env variables in the conda documentation](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#setting-environment-variables). But one way or another they get involved quite quickly. As far as I'm concerned, the easiest to handle are [activation scripts](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#macos-and-linux), which look like this. Basically a shell script run on activate (and another on deactivate)
+
+```bash
+❯ mkdir -p "$CONDA_PREFIX/etc/conda/activate.d"
+❯ cat <<EOF > $CONDA_PREFIX/etc/conda/activate.d/env_vars.sh
+#!/bin/sh
+
+export HF_DATASETS_OFFLINE=1
+export TRANSFORMERS_OFFLINE=1
+export PIP_REQUIRE_VIRTUALENV=false
+EOF
+```
+
+The downside is that it's not so elegant to distribute in repos, which is why I have wrapped it in [a bash script](https://github.com/gotofritz/audio-playground/blob/main/setup_conda_env_variables.sh) to be run after checkout.
 
 ## Next
 
