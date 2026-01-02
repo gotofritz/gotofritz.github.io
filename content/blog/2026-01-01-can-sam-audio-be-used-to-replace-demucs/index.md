@@ -3,7 +3,7 @@ title: Can SAM Audio Be Used for Stem Separation, Like Demucs?
 date: "2026-01-01T22:46:16+01:00"
 
 description: |-
-  Getting SAM Audio to work on my Mac Laptop was laborious, but now I can finally play with it and discover just how useful it is. Meta advertises it as a professional grade tool, but is it?
+  Now I can finally play with SAM Audio and discover just how useful it is. Meta advertises it as a professional grade tool, but is it?
 
 tags: ["audio", "llm", "macos", sam-audio"]
 ---
@@ -14,7 +14,7 @@ No.
 
 ## Some limitations of SAM Audio (run locally)
 
-Some of the limitations arise because I run the model on a macOS laptop. With more firepower I could probably wring more out of it. But macOS laptops are very common in audio processing, so this is not an unrealistic setup. Here are some of my findings. For the record, I use a machine with an M1 Max chip, which has an integrated GPU, and 64 GB of RAM.
+[Getting SAM Audio to work on my Mac Laptop](/blog/2025-12-20-playing-with-the-sam-audio-model-on-my-m1-macbook/) was laborious, and the performance is not amazing. Some of the limitations arise because I run the model on a macOS laptop. With more firepower I could probably wring more out of it. But macOS laptops are very common in audio processing, so this is not an unrealistic setup. Here are some of my findings. For the record, I use a machine with an M1 Max chip, which has an integrated GPU, and 64 GB of RAM.
 
 ### 1. It cannot handle whole tracks; 10-second segments are suggested
 

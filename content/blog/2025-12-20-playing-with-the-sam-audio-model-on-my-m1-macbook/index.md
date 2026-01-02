@@ -436,6 +436,6 @@ The bad news is that on my M1 (Apple M1 Max chip, 64Gb RAM) it cannot really han
 
 ## Next
 
-The next step is to determine whether splitting a sound file into short segments, processing each segment individually, and then concatenating them back together is feasible.
+The next step is to determine whether splitting a sound file into short segments, processing each segment individually, and then concatenating them back together is feasible. See "[Can SAM Audio Be Used for Stem Separation, Like Demucs?](/blog/2026-01-01-can-sam-audio-be-used-to-replace-demucs/)"
 
 I pushed the code I worked on so far to [gotofritz/audio-playground](https://github.com/gotofritz/audio-playground).
