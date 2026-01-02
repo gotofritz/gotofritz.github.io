@@ -5,7 +5,7 @@ date: "2025-12-20T13:50:43+01:00"
 description: |-
   Meta recently released [SAM-Audio](https://about.fb.com/news/2025/12/our-new-sam-audio-model-transforms-audio-editing/), an exciting new audio LLM capable of separating sounds from complex mixtures using text or visual prompts. Like many research models, it isn't installable out of the box for macOS users. To get it running on my M1 Mac was a bit of an adventure, but I managed in the end.
 
-tags: ["audio", "llm", "macos", "conda", "python"]
+tags: ["audio", "llm", "macos", "conda", "python", "sam-audio"]
 draft: false
 mastodon: https://hachyderm.io/@gotofritz/115781342044764240
 ---
@@ -436,6 +436,6 @@ The bad news is that on my M1 (Apple M1 Max chip, 64Gb RAM) it cannot really han
 
 ## Next
 
-The next step is to determine whether splitting a sound file into short segments, processing each segment individually, and then concatenating them back together is feasible.
+The next step is to determine whether splitting a sound file into short segments, processing each segment individually, and then concatenating them back together is feasible. See "[Can SAM Audio Be Used for Stem Separation, Like Demucs?](/blog/2026-01-01-can-sam-audio-be-used-to-replace-demucs/)"
 
 I pushed the code I worked on so far to [gotofritz/audio-playground](https://github.com/gotofritz/audio-playground).
