@@ -6,6 +6,7 @@ description: |-
   Now I can finally play with SAM Audio and discover just how useful it is. Meta advertises it as a professional grade tool, but is it?
 
 tags: ["audio", "llm", "macos", sam-audio"]
+mastodon: https://hachyderm.io/@gotofritz/115823139121839360
 ---
 
 ## TL;DR
