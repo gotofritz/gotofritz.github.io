@@ -1,0 +1,6 @@
+{{ with .Page.Resources.Get (.Get "src") }}
+	<audio controls>
+		<source src="{{ .RelPermalink }}" type="audio/mpeg" />
+		Your browser does not support the audio element.
+	</audio>
+{{ end }}
