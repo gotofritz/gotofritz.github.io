@@ -133,7 +133,7 @@ SAM Audio does a much better job than Demucs, but again, the residual chain (i.e
 **Sam Audio Small**: decent<br>
 {{<audio src=./stevie/bass-sam-small.mp3 >}}
 
-👍🏽**Sam Audio Large**: decent, can hear articulation<br>
+**Sam Audio Large**: decent, can hear articulation<br>
 {{<audio src=./stevie/bass-sam-large.mp3 >}}
 
 <b>Other</b><br>
