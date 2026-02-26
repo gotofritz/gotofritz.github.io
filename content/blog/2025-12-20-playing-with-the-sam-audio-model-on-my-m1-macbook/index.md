@@ -65,7 +65,28 @@ I create a folder to contain all the dependences I need to fiddle with, and init
 # -y always answer 'yes' to all prompts
 ❯ conda create -n sam-audio python=3.12 -y
 ❯ conda activate sam-audio
+```
 
+### Nuking the conda environment when it all goes wrong
+
+It took me several attempts at getting this right, and in between I had to nuke everything and start again. That was tricky too, because Conda and pip both helpfully cache things for you.
+
+```bash
+# purge the cache while pip is still conda's
+❯ pip cache purge
+
+# these are the standard commands
+❯ conda deactivate
+❯ conda env remove -n sam-audio
+
+# try and remove everything that was cached
+❯ conda clean -a -y
+
+# find the env, if still there and really kill it
+❯ rm -rf /opt/homebrew/Caskroom/miniconda/base/envs/sam-audio
+
+# for extra safety, also purge the global non-conda pip cache
+❯ pip cache purge
 ```
 
 ### Adding environmental vars via conda
@@ -119,7 +140,6 @@ On macOS, `PyAV` (a dependency for many audio-video models) often fails with an 
 ❯ cd ~/work/sam-audio-playground
 ❯ conda activate sam-audio
 # Force-build PyAV from source
-❯ pip uninstall av -y
 ❯ pip install av --no-binary av
 
 ```
