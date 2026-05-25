@@ -108,7 +108,7 @@ For now I will set it up up with this command; at the end of the post I'll creat
 ffmpeg is the essential building block most video or audio processing is based on. I have a global version I keep up to date with `brew upgrade ffmpeg`, but I needed a version specific to this project. This is where conda shines, handling binaries in addition to python packages.
 
 ```bash
-❯ cd ~/work/sam-audio-playground
+❯ cd ~/work/gotofritz/sam-audio-playground
 ❯ conda activate sam-audio
 ❯ conda install -c conda-forge ffmpeg=7.1 -y
 ```
@@ -124,7 +124,7 @@ Note that I use a different `--index-url` from the one recommended in the percep
 Note that order matters. If you install torchcodec before the nightly torch, pip might try to pull in the stable version of PyTorch as a dependency, which can cause version-mismatch hell.
 
 ```bash
-❯ cd ~/work/sam-audio-playground
+❯ cd ~/work/gotofritz/sam-audio-playground
 ❯ conda activate sam-audio
 ❯ pip install --pre torch torchvision torchaudio \
   --force-reinstall \
@@ -137,7 +137,7 @@ Note that order matters. If you install torchcodec before the nightly torch, pip
 On macOS, `PyAV` (a dependency for many audio-video models) often fails with an `ImportError: Symbol not found: _iconv`. I fixed this by forcing a local build that respects the Conda environment's library paths.
 
 ```bash
-❯ cd ~/work/sam-audio-playground
+❯ cd ~/work/gotofritz/sam-audio-playground
 ❯ conda activate sam-audio
 # Force-build PyAV from source
 ❯ pip install av --no-binary av
@@ -149,7 +149,7 @@ On macOS, `PyAV` (a dependency for many audio-video models) often fails with an 
 SAM-Audio requires several Meta research modules. I installed these in order:
 
 ```bash
-❯ cd ~/work/sam-audio-playground
+❯ cd ~/work/gotofritz/sam-audio-playground
 ❯ conda activate sam-audio
 ❯ pip install git+https://github.com/facebookresearch/ImageBind.git
 ❯ pip install git+https://github.com/facebookresearch/dacvae.git
@@ -163,7 +163,7 @@ As mentioned at the start of the post, I needed to strip out the Linux-only depe
 
 ```bash
 # start from the parent folder
-❯ cd ~/work/sam-audio-playground
+❯ cd ~/work/gotofritz/sam-audio-playground
 ❯ conda activate sam-audio
 ❯ gh repo clone facebookresearch/perception_models
 
@@ -257,7 +257,7 @@ Before installing SAM-Audio, I changed the pyproject.toml to point it to the loc
 
 ```bash
 # start from the parent folder
-❯ cd ~/work/sam-audio-playground
+❯ cd ~/work/gotofritz/sam-audio-playground
 ❯ conda activate sam-audio
 ❯ gh repo clone facebookresearch/sam-audio
 
@@ -271,7 +271,7 @@ Before installing SAM-Audio, I changed the pyproject.toml to point it to the loc
 ```diff
 # line 24
 -    "perception-models@git+https://github.com/facebookresearch/perception_models@unpin-deps"
-+    "perception-models@file:///Users/fritz/work/sam-audio-playground/perception_models",
++    "perception-models@file:///Users/fritz/work/gotofritz/sam-audio-playground/perception_models",
 ```
 
 And then on with the installation, again with the `-e` flag
@@ -291,7 +291,7 @@ Because the template is based on uv, and uv doesn't play nicely with conda (noth
 
 ```bash
 # start from the parent folder
-❯ cd ~/work/sam-audio-playground
+❯ cd ~/work/gotofritz/sam-audio-playground
 ❯ conda activate sam-audio
 
 # create project scaffolding from copier
@@ -315,7 +315,7 @@ dependencies = [
   "pydantic-settings>=2.6.1",
   "click>=8.1.7",
   "rich>=14",
-+  "sam-audio@file:///Users/fritz/work/sam-audio-playground/sam-audio",
++  "sam-audio@file:///Users/fritz/work/gotofritz/sam-audio-playground/sam-audio",
 +  "torch",
 +  "torchaudio",
 ]
@@ -367,7 +367,7 @@ def test_run(
         )
 
         # Load and process
-        audio_path = "/Users/fritz/work/sam-audio-playground/wav/"
+        audio_path = "/Users/fritz/work/gotofritz/sam-audio-playground/wav/"
         source_path = audio_path + "sources/"
         dest_path = audio_path + "processed/"
 
