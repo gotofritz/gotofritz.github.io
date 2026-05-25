@@ -5,6 +5,7 @@ date: "2026-05-25T17:30:43+02:00"
 description: I tend to use LLM coding agents in the cloud, and then [roborev](https://www.roborev.io/) locally to assess the code. This bash command pulls from git, and runs roborev only if changes were pulled
 
 tags: ["coding agents"]
+mastodon: https://hachyderm.io/@gotofritz/116636040815963177
 ---
 
 ```bash
