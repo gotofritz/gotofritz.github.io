@@ -5,6 +5,7 @@ date: "2026-07-11T17:30:03+02:00"
 description: |-
     When I'm making music in the evenings, I like a little creative nudge. So I built a self-hosted system that sends me a daily [Oblique Strategy](https://en.wikipedia.org/wiki/Oblique_Strategies) quote on WhatsApp while I play - free to run and using WhatsApp Web directly from my machine. Here's how it works.
 
+mastodon: https://hachyderm.io/@gotofritz/116902832122853266
 tags: ["cli","osx"]
 
 ---
