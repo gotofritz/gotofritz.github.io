@@ -5,7 +5,7 @@ date: "2026-01-01T22:46:16+01:00"
 description: |-
   Now I can finally play with my local SAM Audio installation and discover just how useful it really is. Meta advertises it as a professional-grade tool, but is it?
 
-tags: ["audio", "llm", "macos", sam-audio"]
+tags: ["audio", "llm", "macos", "sam-audio"]
 mastodon: https://hachyderm.io/@gotofritz/115823139121839360
 ---
 
