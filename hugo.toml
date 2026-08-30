@@ -1,4 +1,4 @@
-languageCode = 'en-gb'
+locale = 'en-gb'
 title = 'gotofritz'
 theme = 'hugo-bearblog'
 
