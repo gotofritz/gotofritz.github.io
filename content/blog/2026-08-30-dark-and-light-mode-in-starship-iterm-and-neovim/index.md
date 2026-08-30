@@ -5,6 +5,7 @@ date: "2026-08-30T16:25:15+02:00"
 description: As I go deeper into programming on the CLI without using VSCode or other IDEs, I came across the issue that some of my tools don't handle light / dark mode elegantly, and I had to do a bit of hacking.
 
 tags: ["cli","neovim", "starship", "iterm"]
+mastodon: https://hachyderm.io/@gotofritz/117186261577758811
 ---
 
 ## The problem I am trying to solve
@@ -43,13 +44,13 @@ It's very configurable, but in a quirky, unintuitive, undocumented way which end
 
 ## neovim
 
-Since I started writing this post, there have been some [bizarre goings-on in the neovim world](https://hachyderm.io/@davidculley/117180221746840524), so I am actually writing the post with [Helix](https://helix-editor.com/). But until a few days ago I was using [neovim](https://neovim.io/) with the [solarized theme](https://github.com/maxmx03/solarized.nvim) 
+Since I started writing this post, there have been some [bizarre goings-on in the neovim world](https://hachyderm.io/@davidculley/117180221746840524), so I am actually writing the post with [Helix](https://helix-editor.com/). But until a few days ago I was using [neovim](https://neovim.io/) with the [solarized theme](https://github.com/maxmx03/solarized.nvim)
 
 ### The issue with neovim and solarized
 
 Neovim with the solarized theme gets its cursor settings from the terminal. I used solarized light, which would fire off even on a dark terminal. This didn't bother me too much, except that sometimes the dark cursor on the light theme became invisible because it had the same colour as the background.
 
-## Hack to have light and dark mode in Starship 
+## Hack to have light and dark mode in Starship
 
 The only way to have dark and light mode seems to be to have two config files. I took the original one I use, starship.toml, then fed it to Claude Code to turn it into something suitable for dark mode, fine-tuned it, and then saved it as starship-dark.toml. Now the trick is to switch config file depending on the profile.
 
