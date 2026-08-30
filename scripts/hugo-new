@@ -9,8 +9,7 @@ fi
 TITLE="$1"
 
 # URLize the title (convert to lowercase, replace spaces with hyphens)
-URLIZED_TITLE=$(echo "$TITLE" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-zA-Z0-9-]/-/g' | sed 's/-*$//')
-
+URLIZED_TITLE=$(echo "$TITLE" | tr '[:upper:]' '[:lower:]' | sed -E 's/[^a-z0-9-]+/-/g; s/^-+|-+$//g')
 PATH_TO_POST="content/blog/$(date +%Y-%m-%d)-$URLIZED_TITLE"
 
 # Create the blog post
