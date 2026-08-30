@@ -5,6 +5,7 @@ date: "2026-08-29T12:29:18+02:00"
 description: "My Mac updated itself to 26.6, and git stopped working. I found a fix on the internets."
 
 tags: ["osx"]
+mastodon: https://hachyderm.io/@gotofritz/117181084747819605
 ---
 
 ## TL;DR the fix
@@ -32,5 +33,3 @@ sh: line 1: 52117 Abort trap: 6           /Applications/Xcode.app/Contents/Devel
 git: error: sh -c '/Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild -sdk /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk -find git 2> /dev/null' failed with exit code 34304: (null) (errno=Invalid argument)
 xcode-select: Failed to locate 'git', requesting installation of command line developer tools.
 ```
-
-
