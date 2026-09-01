@@ -1,6 +1,6 @@
 ---
 title: 'Migrating From Neovim to Helix'
-date: "2026-09-01T22:41:18+02:00"
+date: "2026-09-01T12:41:18+02:00"
 
 description: |-
   It's a shame it took [some weirdness in neovim world](https://hachyderm.io/@davidculley/117180221746840524) to make me switch editor to helix. I much prefer it.
