@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Target dimensions for the generated preview image
+TARGET_WIDTH=565
+TARGET_HEIGHT=296
+
 # Get video metadata (width, height, duration)
 get_video_info() {
   local SOURCE_MOVIE="$1"
@@ -13,31 +17,26 @@ get_video_info() {
 # Generate random parameters for glitch effect
 generate_random_params() {
   local WIDTH="$1"
-  local HEIGHT="$2"
-  local DURATION="$3"
+  local DURATION="$2"
 
   # Pick a random split in the central square (clamped between 1/4 and 3/4 of width)
   local SPLIT=$(awk -v w=$WIDTH 'BEGIN{srand(); print int(w/4 + (w/2)*rand())}')
 
-  # Determine final square size
-  local SQUARE=$(( WIDTH < HEIGHT ? WIDTH : HEIGHT ))
-
   # Pick a random time between 20% and 80% of duration
   local SS=$(awk -v dur=$DURATION 'BEGIN{srand(); print dur*0.2 + dur*0.6*rand()}')
 
-  echo "$SPLIT $SQUARE $SS"
+  echo "$SPLIT $SS"
 }
 
 # Extract original frame (unglitched) and scale to final dimensions
 extract_original_frame() {
   local SOURCE_MOVIE="$1"
   local OUTPUT_PATH="$2"
-  local SQUARE="$3"
-  local SS="$4"
+  local SS="$3"
 
   ffmpeg -y -ss $SS -i "$SOURCE_MOVIE" -filter_complex "
 [0:v]crop=w=iw/2:h=ih/2:x=iw/4:y=ih/4[center];
-[center]scale=$SQUARE:$SQUARE
+[center]scale=$TARGET_WIDTH:$TARGET_HEIGHT
 " -frames:v 1 "$OUTPUT_PATH" 2>/dev/null
 }
 
@@ -47,8 +46,7 @@ create_glitched_frame() {
   local OUTPUT_PATH="$2"
   local WIDTH="$3"
   local SPLIT="$4"
-  local SQUARE="$5"
-  local SS="$6"
+  local SS="$5"
 
   ffmpeg -y -ss $SS -i "$SOURCE_MOVIE" -filter_complex "
 [0:v]crop=w=iw/2:h=ih/2:x=iw/4:y=ih/4[center];
@@ -61,7 +59,7 @@ create_glitched_frame() {
 [base][leftglitch]overlay=0:0[tmp];
 [tmp][rightglitch]overlay=x=$((SPLIT - WIDTH/4)):y=0[glitched];
 
-[glitched]scale=iw*2:ih*2,crop=$SQUARE:$SQUARE
+[glitched]scale=iw*2:ih*2,crop=$TARGET_WIDTH:$TARGET_HEIGHT
 " -frames:v 1 "$OUTPUT_PATH" 2>/dev/null
 }
 
@@ -117,16 +115,16 @@ create_glitch_feature() {
   read -r WIDTH HEIGHT DURATION < <(get_video_info "$SOURCE_MOVIE")
 
   # Generate random parameters
-  read -r SPLIT SQUARE SS < <(generate_random_params "$WIDTH" "$HEIGHT" "$DURATION")
+  read -r SPLIT SS < <(generate_random_params "$WIDTH" "$DURATION")
 
   # Extract original frame
-  extract_original_frame "$SOURCE_MOVIE" "$ORIGINAL_FRAME" "$SQUARE" "$SS"
+  extract_original_frame "$SOURCE_MOVIE" "$ORIGINAL_FRAME" "$SS"
 
   # Preprocess mask once (grayscale + normalize)
   preprocess_mask "$ORIGINAL_FRAME" "$PROCESSED_MASK"
 
   # Create glitched frame
-  create_glitched_frame "$SOURCE_MOVIE" "$GLITCHED_FRAME" "$WIDTH" "$SPLIT" "$SQUARE" "$SS"
+  create_glitched_frame "$SOURCE_MOVIE" "$GLITCHED_FRAME" "$WIDTH" "$SPLIT" "$SS"
 
   # Apply displacement to glitched frame using processed mask
   apply_displacement "$GLITCHED_FRAME" "$PROCESSED_MASK" "$DISPLACED_FRAME"
