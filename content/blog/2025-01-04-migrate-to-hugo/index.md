@@ -1,6 +1,6 @@
 ---
-title: 'I migrated to Hugo'
-date: '2025-01-04T13:45:09+01:00'
+title: "I migrated to Hugo"
+date: "2025-01-04T13:45:09+01:00"
 slug: migrate-to-hugo
 
 description: Once again my Javascript-based blog became victim of bit rot after only a few months. So I ditched it and moved to [Hugo](https://gohugo.io/).
@@ -13,7 +13,7 @@ tags:
 
 ## Javascript is not sustainable
 
-JavaScript was my first love, but I have to admit defeat. With JS it is no longer feasible to have projects you only touch occasionally. Everything moves so fast, bit rot happens after only a few months. For example, my [Astro](https://astro.build/) blog was completely broken after only two months of me building it. And I had moved to Astro from [SvelteKit](https://svelte.dev/) after that version also became broken because of bit rot. That's why I have no intention to try [Next.js](https://nextjs.org/), [Remix](https://remix.run/), or any of the other React-based frameworks.
+JavaScript was my first love, but I have to admit defeat. With JS it is no longer feasible to have projects you only touch occasionally. Everything moves so fast, bit rot happens after only a few months. For example, my [Astro](https://astro.build/) blog was completely broken after only two months of me building it. And I had moved to Astro from [SvelteKit](https://svelte.dev/) after that version also became broken because of bit rot. That's why I have no intention of trying [Next.js](https://nextjs.org/), [Remix](https://remix.run/), or any of the other React-based frameworks.
 
 ## The Javascript ecosystem is not interested in static site generators (SSGs)
 
@@ -136,18 +136,18 @@ And then I created a `.prettierrc` file at the root of the project with
 
 ```json
 {
-	"plugins": ["prettier-plugin-go-template"],
-	"overrides": [
-		{
-			"files": ["*.html"],
-			"options": {
-				"parser": "go-template",
-				"tabWidth": 4,
-				"useTabs": true,
-				"singleQuote": true
-			}
-		}
-	]
+  "plugins": ["prettier-plugin-go-template"],
+  "overrides": [
+    {
+      "files": ["*.html"],
+      "options": {
+        "parser": "go-template",
+        "tabWidth": 4,
+        "useTabs": true,
+        "singleQuote": true
+      }
+    }
+  ]
 }
 ```
 
@@ -159,12 +159,12 @@ Next / Prev buttons are useful to me when I check the website. This is one thing
 
 ```twig
 {{ with $pages.Next . }}
-	<a
-		href="{{ .Permalink }}"
-		rel="prev"
-		class="main-post__prev-link"
-		>{{ .Title }} &gt;&gt;</a
-	>
+ <a
+  href="{{ .Permalink }}"
+  rel="prev"
+  class="main-post__prev-link"
+  >{{ .Title }} &gt;&gt;</a
+ >
 {{ end }}
 ```
 
@@ -174,7 +174,7 @@ CSS minification is no longer a thing in 2025, still, it doesn't hurt. Comes out
 
 ```twig
 {{ with resources.Get "css/main.css"| resources.Minify }}
-	<link rel="stylesheet" href="{{ .RelPermalink }}" />
+ <link rel="stylesheet" href="{{ .RelPermalink }}" />
 {{ end }}
 ```
 

@@ -51,13 +51,13 @@ Package Software into Standardized Units for Development, Shipment and Deploymen
 <dd>Essential, if nothing else because I share Alfred settings with it</dd>
 
 <dt><a href="https://www.mozilla.org/" title="Firefox download page">Firefox</a></dt>
-<dd>It's no longer my main browser since they <a href="https://discourse.mozilla.org/t/certificate-issue-causing-add-ons-to-be-disabled-or-fail-to-install/39047">messed up the signing certificate expiry</a> some time ago, but it still has some useful tools</dd>
+<dd>My main browser</dd>
 
 <dt><a href="http://www.gimp.org/" title="Gimp download page">Gimp</a> <span role="img" aria-label="essential app" title="essential app">⭐️<span></dt>
 <dd>These days Gimp got simpler. Even my mum uses it for image processing</dd>
 
 <dt><a href="https://www.google.com/drive/download/" title="Google Drive download page">Google Drive</a> <span role="img" aria-label="essential app" title="essential app">⭐️<span></dt>
-<dd>Useful to share all sort of stuff you don't mind Google to read</dd>
+<dd>Useful to share all sort of stuff you don't mind being indexed by Google</dd>
 
 <dt><a href="http://handbrake.fr/" title="Handbrake download page">Handbrake</a></dt>
 <dd>The best for video transcoder for Macs, comes with a CLI version as well</dd>
