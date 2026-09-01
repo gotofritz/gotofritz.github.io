@@ -36,7 +36,7 @@ There are a few differences, but overall the general gist is the same: `<ESC>` t
 
 4. <b>[File Pickers](https://github.com/helix-editor/helix/wiki/7.-Tutorial:-Pickers)</b> are great, but it took me a while to work out how to go up and down the list (it's [<CTRL+N> and <CTRL+P>](https://docs.helix-editor.com/keymap.html#picker))
 
-5. <b>Copying and pasting</b> from/to the clipboard into Helix took me some figuring out. It's <SPACE-y>for copy (yank) and <SPACE-p> for paste
+5. <b>Copying and pasting</b> from/to the clipboard into Helix took me some figuring out. It's &lt;SPACE-y&gt; for copy (yank) and &lt;SPACE-p&gt; for paste. It's got to do with [space mode](https://docs.helix-editor.com/keymap.html#space-mode)
 
 ## I would recommend Helix over Neovim
 
