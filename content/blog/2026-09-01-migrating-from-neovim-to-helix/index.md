@@ -5,6 +5,7 @@ date: "2026-09-01T12:41:18+02:00"
 description: |-
   It's a shame it took [some weirdness in neovim world](https://hachyderm.io/@davidculley/117180221746840524) to make me switch editor to helix. I much prefer it.
 
+mastodon: https://hachyderm.io/@gotofritz/117197601815496998
 tags: ["helix","neovim"]
 ---
 
@@ -12,7 +13,7 @@ tags: ["helix","neovim"]
 
 I "learned" vi in college, but refused to use it, opting for the much simpler [nano](https://en.wikipedia.org/wiki/GNU_nano). Professionally I went for various IDEs as they came in and out of fashion, with Visual Studio Code being the latest (current) one. Eventually I noticed that more and more engineers I knew could get quite a lot done with CLI tools, and over the last year I slowly started migrating to neovim, but falling back on VSCode whenever I got stuck.
 
-I liked the power of neovim, but found getting into it quite a chore. The mountain of options are bewilderiung to a beginners. The best approach is to start with a distribution that sets things up for you. There are plenty of those; I followed [Pawel's advice](https://pawelgrzybek.com/from-helix-to-neovim/) and picked [Kickstart](https://github.com/nvim-lua/kickstart.nvim)
+ I liked the power of neovim, but found getting into it quite a chore. The mountain of options are bewilderiung to a beginners. The best approach is to start with a distribution that sets things up for you. There are plenty of those; that's right, even the easy option requires choosing between a dozen beginner packages. I followed [Pawel's advice](https://pawelgrzybek.com/from-helix-to-neovim/) and picked [Kickstart](https://github.com/nvim-lua/kickstart.nvim)
 
 ![One Doesn't simply "start using neovim"](./feature.png)
 
@@ -35,7 +36,7 @@ There are a few differences, but overall the general gist is the same: `<ESC>` t
 
 4. <b>[File Pickers](https://github.com/helix-editor/helix/wiki/7.-Tutorial:-Pickers)</b> are great, but it took me a while to work out how to go up and down the list (it's [<CTRL+N> and <CTRL+P>](https://docs.helix-editor.com/keymap.html#picker))
 
-
+5. <b>Copying and pasting</b> from/to the clipboard into Helix took me some figuring out. It's <SPACE-y>for copy (yank) and <SPACE-p> for paste
 
 ## I would recommend Helix over Neovim
 
