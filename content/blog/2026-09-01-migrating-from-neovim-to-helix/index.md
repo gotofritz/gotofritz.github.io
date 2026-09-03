@@ -9,7 +9,7 @@ mastodon: https://hachyderm.io/@gotofritz/117197601815496998
 tags: ["helix","neovim"]
 ---
 
-[Neovim](https://neovim.io/) is a CLI tool which evolved from the ancient [vi](https://en.wikipedia.org/wiki/Vi_(text_editor)) (created 50 years ago this year!) via the slightly less ancient [vim](https://en.wikipedia.org/wiki/Vim_(text_editor)) (25 years old this year!). It's super configurable, battle tested and has been around for ages.
+[Neovim](https://neovim.io/) is a CLI tool which evolved from the ancient [vi](https://en.wikipedia.org/wiki/Vi_(text_editor)) (created 50 years ago this year!) via the slightly less ancient [vim](https://en.wikipedia.org/wiki/Vim_(text_editor)) (35 years old this year!). It's super configurable, battle tested and has been around for ages.
 
 I "learned" vi in college, but refused to use it, opting for the much simpler [nano](https://en.wikipedia.org/wiki/GNU_nano). Professionally I went for various IDEs as they came in and out of fashion, with Visual Studio Code being the latest (current) one. Eventually I noticed that more and more engineers I knew could get quite a lot done with CLI tools, and over the last year I slowly started migrating to neovim, but falling back on VSCode whenever I got stuck.
 
