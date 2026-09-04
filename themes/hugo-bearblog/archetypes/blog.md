@@ -4,7 +4,12 @@ date: "{{ .Date }}"
 
 description: ""
 
-tags: [{{ range $plural, $terms := .Site.Taxonomies }}{{ range $term, $val := $terms }}"{{ printf "%s" $term }}",{{ end }}{{ end }}]
+tags: [
+{{- range $term, $val := .Site.Taxonomies.tags }}
+  "{{ $term }},"
+{{- end }}
+]
+
 ---
 
 This is a page about »{{ replace .Name "-" " " | title }}«.
