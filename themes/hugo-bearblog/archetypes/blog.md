@@ -6,7 +6,7 @@ description: ""
 
 tags: [
 {{- range $term, $val := .Site.Taxonomies.tags }}
-  "{{ $term }},"
+ "{{ $term }}",
 {{- end }}
 ]
 
