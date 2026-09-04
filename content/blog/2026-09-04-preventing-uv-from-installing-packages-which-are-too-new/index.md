@@ -9,6 +9,7 @@ tags: [
   "uv"
 ]
 
+mastodon: https://hachyderm.io/@gotofritz/117209863088594371
 ---
 
 [uv](https://docs.astral.sh/uv/reference/settings/#exclude-newer) can prevent packages newer than a fixed date. This is to prevent installation of malicious packages; a few days buffer should be enough for the PyPI admins to remove any offending packages from the registry.
