@@ -3,7 +3,7 @@ title: 'Using Youtube Movie Fragments as Macos Wallpaper'
 date: "2026-10-20T00:45:38+02:00"
 
 description: |-
- I like Apple laptops, but that sels-satisfied "Made in California"
+ I like Apple laptops, but that self-satisfied "Made in California"
  vibe is just too much. When they started forcing people to watch aerial
  shots of the Sonoma valley every time they log in, I decided enough was enough.
  Eventually it developed into a CLI tool which I use to replace their cheesy
