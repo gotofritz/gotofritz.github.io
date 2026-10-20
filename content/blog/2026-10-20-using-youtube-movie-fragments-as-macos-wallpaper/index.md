@@ -14,7 +14,7 @@ tags: [
  "osx",
 ]
 
-
+mastodon: https://hachyderm.io/@gotofritz/117475478845319842
 ---
 
 ### TL;DR
