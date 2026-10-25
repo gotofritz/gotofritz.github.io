@@ -10,6 +10,8 @@ tags: [
  "cli",
 ]
 
+mastodon: https://hachyderm.io/@gotofritz/117498562229556816
+
 ---
 
 ## TL;DR
