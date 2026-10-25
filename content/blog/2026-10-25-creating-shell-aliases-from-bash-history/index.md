@@ -10,11 +10,13 @@ tags: [
  "cli",
 ]
 
+mastodon: https://hachyderm.io/@gotofritz/117498562229556816
+
 ---
 
 ## TL;DR
 
-I have [a script called gen_folder_aliases](https://gist.github.com/gotofritz/e4d961b6e902b19f67d689f41b335131) that cureates a dotfile containing aliases for most of the directories I cd into, in the form `goh`, `gotw`, `gowuw` and so on. I can edit the file by hand and change aliases I don't like or no longer need. There is also a `gohelp` command that prints the list so I can remind myself what each alias does. Simple but effective.
+I have [a script called gen_folder_aliases](https://gist.github.com/gotofritz/e4d961b6e902b19f67d689f41b335131) that curates a dotfile containing aliases for the directories I cd into most often, in the form `goh`, `gotw`, `gowuw` and so on. I can edit the file by hand and change aliases I don't like or no longer need. There is also a `gohelp` command that prints the list so I can remind myself what each alias does. Simple but effective.
 
 ## The idea
 
@@ -24,7 +26,7 @@ I am not the first person to have had this idea. Other tools, such as [zoxide](h
 
 ## The bluntness of history
 
-The bash command history is a very blunt instrument. For example, I have multiple terminal sessions and it's unclear which ones get recorded, and how they influence each other. Just because there are two entries `cd work` followed by `cd ..`, doesn't mean thy are in the same session. Also my history is quite long, so old projects where I moved around folder trees that I no longer use still pollute the list. That's why the more established tools actually listen to where you are in the cli tree. But with all the limitations, it does a decent job. And I can always clear up the aliases files by hand; it's the kind of jobs I will run twice a year or so.
+The bash command history is a very blunt instrument. For example, I have multiple terminal sessions and it's unclear which ones get recorded, and how they influence each other. Just because there are two entries `cd work` followed by `cd ..`, doesn't mean they are in the same session. Also my history is quite long, so old projects where I moved around folder trees that I no longer use still pollute the list. That's why the more established tools actually listen to where you are in the cli tree. But with all the limitations, it does a decent job. And I can always clear up the aliases files by hand; it's the kind of job I will run twice a year or so.
 
 ## How it works
 
@@ -36,6 +38,27 @@ I run the script every few months to update the file, then open it and make any 
 
 The nice touch is that once an alias makes it into the file, it stays there. The script only adds aliases for new directories, so I don't have to relearn my shortcuts.
 
+The script is written for Python 3.14 and uses [uv](https://docs.astral.sh/uv/)'s inline script metadata, so `uv run --script` (which the shebang line invokes for you) fetches the right interpreter on first run. There is nothing to install.
+
+### Options
+
+The script prints a report of every directory it found in the history, with its visit count, so I can see why a directory did or didn't get an alias. The alias file itself stays free of that noise. Each line in the report starts with a status:
+
+- `kept`: already in the alias file, left untouched
+- `new`: gets a new alias
+- `skipped`: visited too few times to deserve an alias
+- `no-alias`: popular enough, but no free short name was left
+
+Two options control the behaviour:
+
+- `--min N` sets how many times a directory must have been visited before it gets an alias. The default is 2, which keeps one-off visits out of the file. It is set by `MIN_VISITS` at the top of the script, if you'd rather change the default than pass the flag.
+- `--dry-run` only prints the report and doesn't touch `~/.folder_aliases`. It's handy for checking what a different `--min` would do before committing to it.
+
+```bash
+# See what would happen if I only wanted directories visited 5+ times
+gen_folder_aliases --dry-run --min 5
+```
+
 ```bash
 # One-off: copy the gist into a file in your PATH
 pbpaste > ~/bin/gen_folder_aliases
@@ -45,10 +68,12 @@ chmod +x ~/bin/gen_folder_aliases
 
 # Run it
 gen_folder_aliases
-Reading /Users/fritz/.bash_history
-Wrote /Users/fritz/.folder_aliases
-Kept 20 existing directory aliases.
-Generated 8 new/home aliases
+kept     gow      41 visits  /Users/fritz/work
+new      gotw      6 visits  /Users/fritz/work/tw
+skipped  -         1 visits  /Users/fritz/old/project
+...
+
+Wrote /Users/fritz/.folder_aliases (20 kept, 8 new)
 
 # Optionally, adjust ~/.folder_aliases
 
@@ -61,8 +86,8 @@ gow
 
 # Print the aliases
 gohelp
-# Generated automatically by gen_folder_aliases
-# Source this file from ~/.bashrc
+# Generated automatically by gen_folder_aliases.py
+# Existing directory aliases are kept stable.
 
 alias goh='cd -- "$HOME"'
 alias gow='cd -- /Users/fritz/work'
