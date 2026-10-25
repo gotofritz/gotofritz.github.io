@@ -38,7 +38,7 @@ I run the script every few months to update the file, then open it and make any 
 
 The nice touch is that once an alias makes it into the file, it stays there. The script only adds aliases for new directories, so I don't have to relearn my shortcuts.
 
-The script is written for Python 3.15 and uses [uv](https://docs.astral.sh/uv/)'s inline script metadata, so `uv run --script` (which the shebang line invokes for you) fetches the right interpreter on first run. There is nothing to install.
+The script is written for Python 3.14 and uses [uv](https://docs.astral.sh/uv/)'s inline script metadata, so `uv run --script` (which the shebang line invokes for you) fetches the right interpreter on first run. There is nothing to install.
 
 ### Options
 
