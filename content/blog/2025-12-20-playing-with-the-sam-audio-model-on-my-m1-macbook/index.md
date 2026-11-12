@@ -10,6 +10,8 @@ draft: false
 mastodon: https://hachyderm.io/@gotofritz/115781342044764240
 ---
 
+_**Update, November 2026:** after a macOS update the setup below broke with a scipy `ImportError`. The fix is a one-liner, see [Fixing scipy after a macOS update](#update-november-2026-fixing-scipy-after-a-macos-update)._
+
 ## Getting access to the model
 
 The model is gated. You must fill out [Meta's access form](https://huggingface.co/facebook/sam-audio-large-tv). I received approval within 48 hours.
@@ -453,6 +455,44 @@ The bad news is that on my M1 (Apple M1 Max chip, 64Gb RAM) it cannot really han
 | 14.32          | 258.76                    | ~ 4.5                 |
 | 23.86          | 704.31                    | ~ 12                  |
 | 38.17          | MPS backend out of memory |                       |
+
+## Update, November 2026: fixing scipy after a macOS update
+
+After updating macOS in November 2026, the extraction that had been working happily for months suddenly refused to start:
+
+```bash
+ImportError: dlopen(.../scipy/sparse/linalg/_propack/_spropack.cpython-312-darwin.so, 0x0002):
+  ... section '__DATA/__thread_bss' has a zero-fill section type, but offset field is not zero
+```
+
+The traceback was long, but the chain was `sam_audio` → `transformers` → `sklearn` → `scipy`. Nothing in SAM-Audio itself was broken. The culprit is scipy 1.15.2, the exact version pinned in perception_models' `requirements.txt` and installed via pip. One of its compiled binaries has a section layout that the newer macOS dynamic loader (`dyld`) is stricter about, and it simply refuses to load it.
+
+The fix is to replace that scipy with a newer build. `--force-reinstall` makes sure the broken binary is actually replaced, and `--no-deps` stops pip from dragging numpy and friends along for the ride, which would undo some of the careful version juggling from earlier in the post.
+
+```bash
+❯ conda activate sam-audio
+❯ pip install --upgrade --force-reinstall --no-deps scipy
+
+# check that the module which failed now loads
+❯ python -c "import scipy.sparse.linalg; print('ok')"
+ok
+```
+
+pip will grumble that perception-models wants `scipy==1.15.2`. That warning is safe to ignore. To make it go away for good, relax the pin in the `changed-by-me` branch of perception_models:
+
+```diff
+# perception_models/requirements.txt
+-scipy==1.15.2
++scipy>=1.15.2
+```
+
+If scikit-learn fails to load in the same way, it can be reinstalled with the same trick:
+
+```bash
+❯ pip install --upgrade --force-reinstall --no-deps scikit-learn
+```
+
+After that, `audio-playground` ran exactly as before.
 
 ## Next
 
